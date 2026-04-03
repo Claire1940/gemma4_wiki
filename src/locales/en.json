@@ -1,13 +1,13 @@
 {
   "seo": {
     "home": {
-      "title": "Lucid Blocks Wiki - Crafting, Biomes & Achievements",
-      "description": "Lucid Blocks Wiki covers crafting, biomes, creatures, items, achievements, endings, and survival tips for the surreal voxel sandbox adventure on Steam.",
-      "keywords": "Lucid Blocks, Lucid Blocks wiki, crafting, biomes, achievements, survival, Steam",
-      "ogTitle": "Lucid Blocks Wiki - Crafting, Biomes & Achievements",
-      "ogDescription": "Lucid Blocks Wiki covers crafting, biomes, creatures, items, achievements, endings, and survival tips for the surreal voxel sandbox adventure on Steam.",
-      "twitterTitle": "Lucid Blocks Wiki - Crafting, Biomes & Achievements",
-      "twitterDescription": "Lucid Blocks Wiki covers crafting, biomes, creatures, items, achievements, and survival tips for the surreal voxel sandbox on Steam."
+      "title": "Gemma 4 Wiki - Models, Benchmarks & Local Deployment",
+      "description": "Gemma 4 Wiki covers model sizes, benchmarks, prompting, deployment, fine-tuning, and multimodal workflows for developers using Google's open models.",
+      "keywords": "Gemma 4, Google AI, open model, benchmarks, local deployment, function calling, fine-tuning",
+      "ogTitle": "Gemma 4 Wiki - Models, Benchmarks & Local Deployment",
+      "ogDescription": "Gemma 4 Wiki covers model sizes, benchmarks, prompting, deployment, fine-tuning, and multimodal workflows for developers using Google's open models.",
+      "twitterTitle": "Gemma 4 Wiki - Models, Benchmarks & Local Deployment",
+      "twitterDescription": "Gemma 4 Wiki covers model sizes, benchmarks, prompting, local deployment, and multimodal workflows for developers."
     }
   },
   "nav": {
@@ -33,27 +33,27 @@
     "readMore": "Read More"
   },
   "hero": {
-    "badge": "Surreal Voxel Survival Sandbox",
-    "title": "Lucid Blocks Wiki",
-    "description": "Explore dreamlike biomes, fuse items with Apotheosis, build freely, and survive strange creatures in this surreal open-world sandbox on Steam.",
-    "getFreeCodesCTA": "Explore Crafting Guide",
-    "playOnSteamCTA": "Play on Steam",
+    "badge": "Open Multimodal Model Family",
+    "title": "Gemma 4 Wiki",
+    "description": "Track Gemma 4 model sizes, benchmarks, prompting, function calling, multimodal input, local deployment, and fine-tuning across the official Google ecosystem.",
+    "getFreeCodesCTA": "Compare Models",
+    "playOnRobloxCTA": "Official Site",
     "stats": {
       "stat1": {
-        "value": "1,325",
-        "label": "Players Online"
+        "value": "400M+",
+        "label": "Total Downloads"
       },
       "stat2": {
-        "value": "1,986",
-        "label": "Peak CCU"
+        "value": "100K+",
+        "label": "Community Variants"
       },
       "stat3": {
-        "value": "97%",
-        "label": "Positive Reviews"
+        "value": "140+",
+        "label": "Languages"
       },
       "stat4": {
-        "value": "Mar 12, 2026",
-        "label": "Release Date"
+        "value": "256K",
+        "label": "Max Context"
       }
     }
   },
@@ -784,26 +784,26 @@
     ]
   },
   "cta": {
-    "title": "Ready to Explore Lucid Blocks?",
-    "description": "Join the Lucid Blocks community on Discord for guides, updates, and discussions!",
+    "title": "Ready to Explore Gemma 4?",
+    "description": "Join the Google Developer Community on Discord for Gemma guides, model updates, and developer discussions!",
     "joinCommunity": "Join Discord",
-    "joinGame": "Play on Steam"
+    "joinGame": "Official Site"
   },
   "footer": {
-    "title": "Lucid Blocks Wiki",
-    "description": "Your complete resource hub for Lucid Blocks crafting, biomes, creatures, achievements, and survival guides.",
+    "title": "Gemma 4 Wiki",
+    "description": "Your complete resource hub for Gemma 4 model sizes, benchmarks, prompting, local deployment, function calling, and fine-tuning guides.",
     "resources": "Resources",
     "community": "Community",
     "legal": "Legal",
     "discord": "Discord",
     "twitter": "X / Twitter",
-    "steamCommunity": "Steam Community",
-    "steamStore": "Steam Store",
+    "huggingFace": "Hugging Face",
+    "officialDocs": "Official Docs",
     "about": "About",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "copyrightNotice": "Copyright",
-    "copyright": "© 2026 Lucid Blocks Wiki. Not affiliated with the developers of Lucid Blocks.",
+    "copyright": "© 2026 Gemma 4 Wiki. Not affiliated with Google or Google DeepMind.",
     "disclaimer": "Unofficial fan-made resource website."
   },
   "pages": {
