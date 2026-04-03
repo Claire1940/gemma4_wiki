@@ -14,46 +14,46 @@ interface ArticleWithType extends ContentItem {
 
 // Module sub-field mapping: moduleKey -> { field, nameKey }
 const MODULE_FIELDS: Record<string, { field: string; nameKey: string }> = {
-  lucidBlocksBeginnerGuide: { field: 'steps', nameKey: 'title' },
-  lucidBlocksApotheosisCrafting: { field: 'cards', nameKey: 'name' },
-  lucidBlocksToolsAndWeapons: { field: 'items', nameKey: 'name' },
-  lucidBlocksStorageAndInventory: { field: 'solutions', nameKey: 'name' },
-  lucidBlocksQualiaAndBaseBuilding: { field: 'cards', nameKey: 'name' },
-  lucidBlocksWorldRegions: { field: 'regions', nameKey: 'name' },
-  lucidBlocksCreaturesAndEnemies: { field: 'creatures', nameKey: 'name' },
-  lucidBlocksMobilityGear: { field: 'items', nameKey: 'name' },
-  lucidBlocksFarmingAndGrowth: { field: 'sections', nameKey: 'name' },
-  lucidBlocksBestEarlyUnlocks: { field: 'priorities', nameKey: 'name' },
-  lucidBlocksAchievementTracker: { field: 'groups', nameKey: 'name' },
-  lucidBlocksSingleplayerAndPlatformFAQ: { field: 'faqs', nameKey: 'question' },
-  lucidBlocksSteamDeckAndController: { field: 'faqs', nameKey: 'question' },
-  lucidBlocksSettingsAndAccessibility: { field: 'settings', nameKey: 'name' },
-  lucidBlocksUpdatesAndPatchNotes: { field: 'entries', nameKey: 'title' },
-  lucidBlocksCrashFixAndTroubleshooting: { field: 'steps', nameKey: 'title' },
+  gemma4Tutorial: { field: 'steps', nameKey: 'title' },
+  gemma4OllamaSetup: { field: 'steps', nameKey: 'title' },
+  gemma4ApiGuide: { field: 'steps', nameKey: 'title' },
+  gemma4HuggingFaceDownload: { field: 'cards', nameKey: 'name' },
+  gemma4ModelSizes: { field: 'models', nameKey: 'model' },
+  gemma4SpecsContext: { field: 'specs', nameKey: 'feature' },
+  gemma4Benchmarks: { field: 'benchmarks', nameKey: 'benchmark' },
+  gemma4FineTuning: { field: 'steps', nameKey: 'title' },
+  gemma4PromptGuide: { field: 'items', nameKey: 'title' },
+  gemma4ThinkingMode: { field: 'steps', nameKey: 'title' },
+  gemma4FunctionCalling: { field: 'steps', nameKey: 'title' },
+  gemma4MultimodalGuide: { field: 'items', nameKey: 'title' },
+  gemma4GgufQuantization: { field: 'items', nameKey: 'topic' },
+  gemma4PytorchGuide: { field: 'steps', nameKey: 'title' },
+  gemma4MobileDeployment: { field: 'steps', nameKey: 'title' },
+  gemma4VsGemma3: { field: 'items', nameKey: 'dimension' },
 }
 
 // Extra semantic keywords per module to boost matching for h2 titles
 // These supplement the module title text when matching against articles
 const MODULE_EXTRA_KEYWORDS: Record<string, string[]> = {
-  lucidBlocksBeginnerGuide: ['guide', 'mastering', 'progression', 'crafting', 'starter'],
-  lucidBlocksApotheosisCrafting: ['apotheosis', 'fusion', 'essence'],
-  lucidBlocksToolsAndWeapons: ['crafting recipes', 'frost pick', 'osmium', 'azrael', 'faith wand'],
-  lucidBlocksStorageAndInventory: ['chest', 'cache cube', 'cabinet', 'storage'],
-  lucidBlocksQualiaAndBaseBuilding: ['qualia', 'clonaqualia', 'personal dimensions'],
-  lucidBlocksWorldRegions: ['tiamana', 'leyline', 'biomes', 'regions'],
-  lucidBlocksCreaturesAndEnemies: ['survival', 'combat', 'surreal creatures'],
-  lucidBlocksMobilityGear: ['bee glider', 'hookshot', 'glider', 'movement'],
-  lucidBlocksFarmingAndGrowth: ['seed', 'farming', 'growth', 'material', 'progression', 'crafting'],
-  lucidBlocksBestEarlyUnlocks: ['early', 'osmium', 'frost pick', 'starter', 'progression'],
-  lucidBlocksAchievementTracker: ['achievement', 'tiamana', 'leyline'],
-  lucidBlocksSingleplayerAndPlatformFAQ: ['multiplayer', 'platform', 'co op'],
-  lucidBlocksSteamDeckAndController: ['steam deck', 'controller', 'proton'],
-  lucidBlocksSettingsAndAccessibility: ['full screen', 'controls', 'display'],
-  lucidBlocksUpdatesAndPatchNotes: ['update', 'patch', 'fix'],
-  lucidBlocksCrashFixAndTroubleshooting: ['crash', 'vulkan', 'troubleshooting', 'full screen', 'controls', 'gameplay'],
+  gemma4Tutorial: ['tutorial', 'getting started', 'beginner', 'setup', 'intro'],
+  gemma4OllamaSetup: ['ollama', 'local', 'install', 'run', 'laptop'],
+  gemma4ApiGuide: ['api', 'gemini', 'hosted', 'inference', 'endpoint'],
+  gemma4HuggingFaceDownload: ['hugging face', 'download', 'checkpoint', 'weights'],
+  gemma4ModelSizes: ['model size', 'hardware', 'memory', 'requirements', 'vram'],
+  gemma4SpecsContext: ['specs', 'context window', 'multimodal', 'architecture'],
+  gemma4Benchmarks: ['benchmark', 'performance', 'reasoning', 'coding', 'evaluation'],
+  gemma4FineTuning: ['fine-tune', 'finetune', 'training', 'lora', 'adapter'],
+  gemma4PromptGuide: ['prompt', 'format', 'system', 'instruction', 'template'],
+  gemma4ThinkingMode: ['thinking', 'reasoning', 'chain of thought', 'cot'],
+  gemma4FunctionCalling: ['function calling', 'tool use', 'structured output', 'tools'],
+  gemma4MultimodalGuide: ['multimodal', 'image', 'vision', 'audio', 'video'],
+  gemma4GgufQuantization: ['gguf', 'quantization', 'llama.cpp', 'quantize', 'memory'],
+  gemma4PytorchGuide: ['pytorch', 'transformers', 'python', 'local setup'],
+  gemma4MobileDeployment: ['mobile', 'android', 'phone', 'deployment', 'edge'],
+  gemma4VsGemma3: ['vs gemma 3', 'comparison', 'upgrade', 'difference'],
 }
 
-const FILLER_WORDS = ['lucid', 'blocks', '2026', '2025', 'complete', 'the', 'and', 'for', 'how', 'with', 'our', 'this', 'your', 'all', 'from', 'learn', 'master']
+const FILLER_WORDS = ['gemma', '2026', '2025', 'complete', 'the', 'and', 'for', 'how', 'with', 'our', 'this', 'your', 'all', 'from', 'learn', 'master']
 
 function normalize(text: string): string {
   return text
@@ -77,9 +77,9 @@ function matchScore(queryText: string, article: ArticleWithType, extraKeywords?:
 
   let score = 0
 
-  // Exact phrase match in title (stripped of "Lucid Blocks")
-  const strippedQuery = normalizedQuery.replace(/lucid blocks?\s*/g, '').trim()
-  const strippedTitle = normalizedTitle.replace(/lucid blocks?\s*/g, '').trim()
+  // Exact phrase match in title (stripped of "Gemma 4")
+  const strippedQuery = normalizedQuery.replace(/gemma\s*4?\s*/g, '').trim()
+  const strippedTitle = normalizedTitle.replace(/gemma\s*4?\s*/g, '').trim()
   if (strippedQuery.length > 3 && strippedTitle.includes(strippedQuery)) {
     score += 100
   }
