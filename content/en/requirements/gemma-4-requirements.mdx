@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Gemma 4 Requirements: Hardware and Software Guide 2026",
+  description: "Explore the official gemma 4 requirements for Workstation and Edge models. Learn about VRAM needs, GPU compatibility, and deployment tips.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Requirements+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+Google has fundamentally shifted the landscape of open-weights artificial intelligence with the release of the Gemma 4 model family. Built on the cutting-edge Gemini 3 research, these models introduce native multimodality, including vision and audio, alongside a sophisticated "thinking" reasoning chain. However, before you can harness the power of these 128-expert Mixture of Experts (MoE) or high-density models, understanding the specific **gemma 4 requirements** is essential for a smooth deployment. Whether you are a developer looking to integrate function calling into an agentic workflow or a researcher fine-tuning a local coding assistant, meeting the **gemma 4 requirements** ensures optimal latency and output quality across various hardware tiers.
+
+The Gemma 4 ecosystem is divided into two primary categories: Workstation models for heavy-duty tasks and Edge models for localized, low-power devices. This guide breaks down the hardware specifications, software dependencies, and optimization techniques needed to run these models effectively in 2026.
+
+## Gemma 4 Model Family Overview
+
+Before diving into the technical specifications, it is important to identify which version of Gemma 4 suits your project. The family consists of four distinct models, each with varying computational footprints. The Workstation tier includes a 31 billion (31B) parameter dense model and a 26 billion (26B) Mixture of Experts (MoE) model. The Edge tier focuses on efficiency with the E2B and E4B models, designed for mobile and embedded systems.
+
+| Model Tier | Model Name | Architecture | Context Window | Primary Use Case |
+|---|---|---|---|---|
+| **Workstation** | Gemma 4 31B | Dense | **256K** | Coding, IDE Copilots, Servers |
+| **Workstation** | Gemma 4 26B | MoE (3.8B Active) | **256K** | High-efficiency Reasoning |
+| **Edge** | Gemma 4 E4B | Small Dense | **128K** | High-end Laptops/Mobile |
+| **Edge** | Gemma 4 E2B | Tiny Dense | **128K** | Raspberry Pi, Jetson Nano |
+
+> **💡 Pro Tip:** If you require the highest reasoning capabilities but have limited compute, the 26B MoE model is the sweet spot, as it only activates 3.8 billion parameters per token while maintaining the intelligence of a much larger model.
+
+## Workstation Tier: Gemma 4 Requirements
+
+The Workstation models are designed for professional environments where high-fidelity reasoning and long-context processing are required. The 31B dense model, in particular, features meaningful architectural upgrades like value normalization and a refined attention mechanism optimized for its massive 256K context window.
+
+### GPU and VRAM Specifications
+Running these models without quantization requires significant Video RAM (VRAM). For the 31B model at 16-bit precision, you will need a GPU setup with at least 80GB of VRAM, such as an NVIDIA H100 or an A100. However, most local users will opt for 4-bit or 8-bit quantization to fit the model on consumer hardware.
+
+| Quantization Level | VRAM Needed (31B/26B) | Recommended GPU |
+|---|---|---|
+| **FP16 (Uncompressed)** | ~65GB - 72GB | **NVIDIA H100 / RTX 6000 Pro** |
+| **8-bit (INT8)** | ~35GB - 40GB | **2x RTX 3090/4090 (NVLink)** |
+| **4-bit (GGUF/EXL2)** | ~18GB - 22GB | **Single RTX 3090 / 4090** |
+
+To meet the **gemma 4 requirements** for the 26B MoE model, the VRAM needs are slightly lower for active inference, but the full weights still need to reside in memory. Use Quantization-Aware Training (QAT) checkpoints provided by Google to maintain high quality even at lower bitrates.
+
+### CPU and System RAM
+While the GPU does the heavy lifting, your system RAM must be able to handle the model loading process. A minimum of 64GB of System RAM is recommended for the Workstation tier to prevent bottlenecks during model handoffs and long-context processing.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Edge Tier: Optimized for Local Performance
+
+The E2B and E4B models represent a breakthrough in on-device AI. These models are unique because they include native audio support and a dramatically compressed vision encoder. The vision encoder has been reduced from 350 million parameters in previous versions to just 150 million in Gemma 4, making it significantly faster for OCR and document understanding.
+
+### Hardware for Edge Deployment
+The **gemma 4 requirements** for the Edge tier are much more accessible. These models are designed to run on devices with limited thermal envelopes and memory bandwidth.
+
+*   **Mobile Devices:** High-end Android and iOS devices with at least 8GB of RAM.
+*   **Single Board Computers:** Raspberry Pi 5 (8GB) or NVIDIA Jetson Nano.
+*   **Laptops:** Standard MacBooks (M2/M3 chips) or Windows laptops with entry-level discrete GPUs (RTX 3050/4050).
+
+### Audio and Vision Processing
+The E2B model features a 50% smaller audio encoder compared to the Gemma 3N series. This reduction in disk space (from 390MB to 87MB) allows for extremely low-latency transcription and speech-to-translated-text tasks directly on the device.
+
+> **⚠️ Warning:** When running audio tasks on the Edge models, ensure your device has a modern NPU or GPU, as the frame duration has been shortened to 40ms for higher responsiveness, which increases the frequency of inference cycles.
+
+## Software and License Requirements
+
+One of the most significant updates in Gemma 4 is the transition to the **Apache 2.0 License**. Unlike previous custom licenses, this allows for unrestricted commercial use, modification, and distribution. To get started with the software implementation, you will need the following:
+
+1.  **Python Environment:** Python 3.10 or higher.
+2.  **Libraries:** A specialized version of the `transformers` library (until the main branch is updated) or the latest `accelerate` and `bitsandbytes` for quantization.
+3.  **Drivers:** NVIDIA CUDA Toolkit 12.2+ for GPU acceleration.
+4.  **Inference Engines:** Support is available via Ollama, LM Studio, and Google Cloud Run for serverless deployments.
+
+For serverless environments, Google Cloud Run now supports G4 GPUs (NVIDIA RTX Pro 6000), which provides 96GB of VRAM. This is an excellent way to fulfill **gemma 4 requirements** for the 31B model without investing in physical hardware.
+
+## Advanced Reasoning: The "Thinking" Feature
+
+Gemma 4 introduces a native "Long Chain of Thought" reasoning capability. This can be toggled via the chat template by setting `enable_thinking=True`. While this improves the quality of complex answers, it does increase the token count and total inference time.
+
+| Feature | Impact on Requirements | Recommended Tier |
+|---|---|---|
+| **Thinking Enabled** | Higher Compute/Time | Workstation 31B |
+| **Multi-Image Input** | Higher VRAM Usage | Workstation 26B MoE |
+| **Native Audio** | Low Impact (Optimized) | Edge E2B / E4B |
+| **Function Calling** | Minimal Impact | All Tiers |
+
+When using the thinking feature, the model performs internal reasoning before providing the final output. This is particularly useful for coding and mathematical tasks where accuracy is paramount.
+
+## Deployment Steps for Local Users
+
+To successfully fulfill the **gemma 4 requirements** on a local machine, follow these steps:
+
+1.  **Verify VRAM:** Use `nvidia-smi` to check your available memory.
+2.  **Download Weights:** Pull the model from Hugging Face or Kaggle.
+3.  **Apply Quantization:** If you have less than 40GB of VRAM, use the 4-bit GGUF or QAT versions.
+4.  **Configure Context:** Set your context window limits. While the models support up to 256K, setting a lower limit (e.g., 8K or 32K) will significantly save VRAM.
+5.  **Initialize Processor:** Use the `AutoProcessor` for multimodal inputs to ensure audio and image tokens are handled correctly.
+
+The architecture of Gemma 4 is designed to be "future-proof," meaning it converges on the mechanisms that work best for long-context and agentic flows. By meeting the hardware and software benchmarks outlined above, you can leverage one of the most powerful open-weights models available in 2026.
+
+For more information on the latest AI models and documentation, visit the [Google AI Blog](https://ai.google/blog/) or check the official Hugging Face repositories.
+
+## FAQ
+
+**Q: What are the minimum gemma 4 requirements for a standard home PC?**
+
+A: For the smallest model (E2B), you can run it on almost any modern PC with 8GB of RAM. For the more capable 26B MoE model, you will ideally need an NVIDIA GPU with at least 24GB of VRAM (like an RTX 3090 or 4090) to run it with 4-bit quantization.
+
+**Q: Can Gemma 4 run on a Mac?**
+
+A: Yes, Gemma 4 is highly compatible with Apple Silicon. Using tools like LM Studio or Ollama, you can run the Edge models (E2B/E4B) on a base M2/M3 MacBook. For the Workstation models, an M2 Ultra or M3 Max with unified memory is recommended.
+
+**Q: Does Gemma 4 require an internet connection?**
+
+A: No. One of the primary benefits of meeting the local **gemma 4 requirements** is that the model runs entirely on your hardware. This ensures privacy and allows for use in environments without web access, such as during flights or in secure facilities.
+
+**Q: Is the 31B model better than the 26B MoE model?**
+
+A: It depends on your hardware. The 31B dense model is generally more robust for complex code generation and long-form writing but requires more constant compute. The 26B MoE model offers similar intelligence with much lower active compute costs, making it faster for real-time chat applications.

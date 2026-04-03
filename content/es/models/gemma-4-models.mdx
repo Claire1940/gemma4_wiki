@@ -1,0 +1,128 @@
+export const metadata = {
+  title: "Modelos Gemma 4: Guía completa de la IA abierta de Google 2026",
+  description: "Explora todas las capacidades de los modelos Gemma 4. Conoce las variantes 26B MoE y 31B Dense, sus aplicaciones en juegos y pruebas de rendimiento.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Models+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado drásticamente con el lanzamiento de los **modelos gemma 4**. Desarrollada por los equipos de investigación de élite de Google DeepMind, esta nueva familia de pesos abiertos proporciona una inteligencia de nivel de frontera que puede ejecutarse directamente en hardware de consumo. Ya seas un desarrollador que busca crear flujos de trabajo agénticos complejos o un jugador interesado en la generación procedimental de mundos, los **modelos gemma 4** ofrecen una base versátil para la próxima era de la informática. Construidos sobre la misma arquitectura tecnológica que Gemini 3, estos modelos están diseñados para la "era agéntica", priorizando la planificación de múltiples pasos, la lógica compleja y el uso eficiente de tokens.
+
+Con más de 400 millones de descargas en versiones anteriores, el ecosistema que rodea a estas herramientas es masivo. El lanzamiento de Gemma 4 en 2026 marca un hito significativo, ya que es la primera vez que Google publica estos modelos bajo la permisiva licencia Apache 2.0. Este cambio permite una libertad sin precedentes para que creadores, investigadores y aficionados implementen IA en sus entornos locales sin necesidad de conectividad constante a la nube.
+
+## Descripción general de la familia de modelos Gemma 4
+
+La línea Gemma 4 se categoriza en cuatro tamaños distintos, atendiendo a diferentes limitaciones de hardware y requisitos de rendimiento. En la parte superior de la escala se encuentran los modelos de alto rendimiento diseñados para ordenadores de sobremesa y estaciones de trabajo, mientras que la serie "Effective" está optimizada para dispositivos móviles e IoT.
+
+| Nombre del modelo | Recuento de parámetros | Tipo | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | 31 mil millones | Denso | Máxima calidad de salida, razonamiento complejo |
+| **Gemma 4 26B** | 26 mil millones | MoE (3.8B Activos) | Razonamiento local de alta velocidad, flujos de codificación |
+| **Gemma 4 E4B** | 4.5 mil millones | Effective | Integración en apps móviles, tareas de visión eficientes |
+| **Gemma 4 E2B** | 2.3 mil millones | Effective | Dispositivos IoT, procesamiento de audio/visión en tiempo real |
+
+El modelo 31B Dense es la potencia de la familia, optimizado para usuarios que priorizan la precisión y el razonamiento profundo sobre la velocidad de generación bruta. Por el contrario, el modelo 26B Mixture of Experts (MoE) utiliza una arquitectura dispersa donde solo 3.8 mil millones de parámetros están activos en un momento dado. Esto permite que la versión 26B proporcione una inteligencia cercana al nivel de frontera a velocidades que antes eran imposibles para modelos de este tamaño.
+
+## Especificaciones técnicas y la era agéntica
+
+Google ha diseñado específicamente los **modelos gemma 4** para manejar las demandas de los flujos de trabajo "agénticos". Esto significa que los modelos no están diseñados solo para chatear, sino para actuar como agentes que pueden planificar, usar herramientas y navegar por interfaces complejas. Esto se apoya en una enorme ventana de contexto de hasta 250,000 tokens para los modelos más grandes, lo que les permite ingerir bases de código completas o documentación extensa para un análisis en tiempo real.
+
+> **💡 Consejo:** Al crear agentes, el modelo 26B MoE suele ser la mejor opción debido a su alta velocidad de inferencia, lo cual es crucial para la planificación de múltiples turnos donde la latencia puede romper la experiencia del usuario.
+
+### Características clave de Gemma 4:
+*   **Licencia Apache 2.0:** Plena libertad para uso comercial y modificación.
+*   **Soporte multimodal:** Capacidades nativas para ver y oír el mundo a través del procesamiento integrado de visión y audio.
+*   **Dominio multilingüe:** Soporte nativo para más de 140 idiomas, incluyendo tareas agénticas complejas en prompts que no están en inglés.
+*   **Uso de herramientas:** Soporte integrado para llamar a funciones externas e interactuar con entornos de software.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Juegos y generación de contenido procedimental
+
+Una de las aplicaciones más emocionantes para los **modelos gemma 4** se encuentra en el ámbito del desarrollo de juegos y la generación de contenido en tiempo real. Debido a que estos modelos pueden ejecutarse localmente en GPUs de gama alta, los desarrolladores pueden usarlos para generar escenas 3D, escribir lógica de juego e incluso actuar como el "cerebro" para NPCs avanzados sin incurrir en costes de nube.
+
+En pruebas recientes, el modelo 26B MoE demostró una capacidad notable para generar prototipos de juegos funcionales a partir de prompts sencillos. Por ejemplo, al encargársele la creación de un shooter en primera persona "Subway Survivor" usando JavaScript, el modelo implementó con éxito:
+1.  **Lógica de movimiento 3D:** Controles WASD estándar y funcionalidad de vista con el ratón.
+2.  **Mecánicas de armas:** Modelos de armas procedimentales con animaciones de retroceso y destellos de disparo.
+3.  **IA de enemigos:** Lógica básica de aparición y movimiento hacia el jugador.
+4.  **Controles de iluminación:** Deslizadores de brillo en tiempo real que interactúan con los shaders de la escena.
+
+Si bien el modelo 31B Dense proporciona activos visuales más pulidos y una lógica más compleja, la variante 26B es sumamente capaz para el prototipado rápido. Los desarrolladores pueden usar esencialmente estos modelos como un "copiloto" para el diseño de juegos, iterando sobre mecánicas en segundos en lugar de horas.
+
+## Pruebas de rendimiento: 26B vs. 31B
+
+Al elegir entre los dos modelos insignia de **gemma 4**, a menudo se trata de un equilibrio entre velocidad (tokens por segundo) y profundidad cualitativa. El modelo 31B está diseñado para rivalizar con modelos propietarios mucho más grandes como GLM5, pero requiere una VRAM significativa para ejecutarse en niveles de cuantización altos.
+
+| Característica | 26B MoE (Local Q8) | 31B Dense (Cloud/NIM) |
+| :--- | :--- | :--- |
+| **Velocidad de inferencia** | **Alta** (20-30 t/s) | **Media** (5-8 t/s) |
+| **Lógica/Razonamiento** | Muy buena | **Excelente** |
+| **Calidad de codificación** | Equilibrada | **Superior** |
+| **Requisito de VRAM** | ~24GB - 32GB | ~48GB+ (sin cuantizar) |
+
+El modelo 26B MoE es particularmente impresionante porque su recuento de parámetros "activos" es muy bajo. Esto le permite ejecutarse con facilidad en hardware como el NVIDIA DGX Spark o tarjetas de consumo de gama alta 4090. En pruebas de escritura creativa, como la generación de esquemas de capítulos para un thriller psicológico basado en una sola imagen, ambos modelos mostraron comportamientos emergentes, eligiendo a menudo nombres de personajes y temas similares, lo que sugiere una base de entrenamiento compartida en estructura narrativa.
+
+## Visión multimodal y diseño de IU
+
+Las capacidades de visión de Gemma 4 le permiten interpretar datos visuales complejos, como wireframes dibujados a mano o diagramas de circuitos. Por ejemplo, puedes proporcionar un boceto de un diseño de sitio web y el modelo puede generar un portafolio CSS/HTML totalmente funcional y estéticamente agradable basado en ese boceto.
+
+### Rendimiento en tareas de visión:
+*   **Transposición de IU:** El modelo 26B MoE ha mostrado una ventaja sorprendente en el diseño estético, creando elementos de IU modernos y translúcidos con efectos de hover que a menudo superan las interpretaciones más literales del modelo 31B.
+*   **Identificación de componentes:** Ambos modelos pueden identificar componentes de hardware como Arduinos y motores paso a paso a partir de fotos, aunque ocasionalmente pueden tener dificultades con números de modelo específicos a menos que se solicite un análisis profundo.
+*   **Reconstrucción web:** Dada una foto de referencia de diseño, Gemma 4 puede reconstruir toda la estructura del sitio, incluyendo secciones hero, gráficos de datos y pies de página, con alta fidelidad.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Cómo empezar con Gemma 4
+
+Para comenzar a usar los **modelos gemma 4**, puedes descargar los pesos desde repositorios oficiales como Hugging Face o usar motores de inferencia optimizados como NVIDIA NIM y LM Studio. Debido a que los modelos tienen licencia Apache 2.0, puedes integrarlos en tus propias aplicaciones sin preocuparte por términos de servicio restrictivos.
+
+### Configuración recomendada para uso local:
+1.  **Hardware:** Se recomienda una GPU NVIDIA con al menos 16GB de VRAM para los modelos 2B y 4B. Para las variantes 26B y 31B, lo ideal es de 24GB a 48GB de VRAM para ejecutarlos con cuantización de 4 u 8 bits.
+2.  **Software:** Usa LM Studio u Ollama para una experiencia de chat local fácil de usar. Para desarrolladores, la API de NVIDIA NIM proporciona una arquitectura de microservicios de alto rendimiento.
+3.  **Cuantización:** Para la mayoría de los usuarios, las cuantizaciones **Q4_K_M** o **Q8_0** ofrecen el mejor equilibrio entre la inteligencia del modelo y el uso de memoria.
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B Dense con una cuantización alta en hardware de gama baja puede resultar en "alucinaciones" o una salida de caracteres entrecortada si la VRAM está sobreasignada. Supervisa siempre los recursos de tu sistema durante las pruebas iniciales.
+
+## Resumen del impacto de Gemma 4
+
+El lanzamiento de estos modelos representa una gran victoria para la comunidad de código abierto. Al proporcionar razonamiento de nivel de frontera, visión multimodal y enormes ventanas de contexto en un paquete que puede ejecutarse en un ordenador personal, Google ha reducido la barrera de entrada para la innovación impulsada por la IA. Ya sea que estés codificando un simulador de vuelo 3D o construyendo un agente de servicio al cliente multilingüe, Gemma 4 proporciona las herramientas necesarias para competir con soluciones propietarias basadas en la nube.
+
+Para las últimas actualizaciones y variantes impulsadas por la comunidad, visita la [página oficial de Google DeepMind Gemma](https://ai.google.dev/gemma) o explora las miles de versiones ajustadas disponibles en los centros de modelos públicos.
+
+## FAQ
+
+**P: ¿Los modelos gemma 4 son completamente gratuitos?**
+
+R: Sí, se publican bajo la licencia Apache 2.0. Esto significa que puedes usarlos para proyectos comerciales, modificar los pesos y distribuir tus versiones sin pagar regalías a Google.
+
+**P: ¿Cuál es la diferencia entre las versiones "Dense" y "MoE" de Gemma 4?**
+
+R: El modelo 31B Dense utiliza todos sus parámetros para cada cálculo, lo que resulta en una mayor calidad pero velocidades más lentas. El modelo 26B MoE (Mixture of Experts) solo activa 3.8 mil millones de parámetros por token, lo que lo hace significativamente más rápido y fácil de ejecutar en hardware de consumo manteniendo una alta inteligencia.
+
+**P: ¿Puede Gemma 4 ejecutarse en un teléfono móvil?**
+
+R: Los modelos "Effective" 2B y 4B están diseñados específicamente para dispositivos móviles e IoT. Están optimizados para la máxima eficiencia de memoria y admiten el procesamiento de audio y visión en tiempo real en hardware de borde.
+
+**P: ¿Cómo se compara la ventana de contexto en Gemma 4 con otros modelos?**
+
+R: Los **modelos gemma 4** más grandes cuentan con una ventana de contexto de hasta 256,000 tokens. Esto es significativamente mayor que muchos otros modelos de código abierto, lo que les permite "recordar" y analizar cantidades mucho mayores de datos en una sola sesión.

@@ -1,0 +1,122 @@
+export const metadata = {
+  title: "Gemma 4 Linux: 로컬 설치 및 설정 가이드 2026",
+  description: "Linux 배포판에서 Gemma 4를 설치하고 최적화하는 방법을 알아보세요. Ollama 통합, 하드웨어 요구 사항 및 성능 튜닝을 위한 단계별 가이드입니다.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Linux+Setup",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+2026년에는 고성능 대규모 언어 모델을 로컬에서 실행하는 것이 개발자, 게이머, 개인정보 보호 옹호자들에게 표준이 되었습니다. 만약 **gemma 4 linux** 환경을 구축하려는 경우, 오픈 소스 OS만이 제공할 수 있는 타의 추종을 불허하는 커스터마이징과 속도를 원하실 것입니다. 현대적인 컨테이너화와 로컬 추론 엔진 덕분에 **gemma 4 linux** 설치 프로세스가 크게 간소화되어 사용자가 클라우드 의존형 AI에서 벗어날 수 있게 되었습니다.
+
+이 종합 가이드에서는 Google의 최신 모델을 사용자 시스템에서 실행하는 데 필요한 전제 조건, 설치 단계 및 최적화 기술을 살펴봅니다. AI 기반 게임 개발을 위한 워크스테이션을 사용하든 단순한 개인 디지털 비서를 원하든, 이 워크플로우를 따르면 안정적이고 반응이 빠른 경험을 보장할 수 있습니다. 종속성 관리부터 GPU 가속 구성까지, 로컬 AI 프런티어를 마스터하기 위해 알아야 할 모든 것이 여기 있습니다.
+
+## Gemma 4 시스템 요구 사항
+
+다운로드를 시작하기 전에 하드웨어가 2026년형 최신 AI 모델의 계산 부하를 감당할 수 있는지 확인하는 것이 중요합니다. Gemma 4는 다양한 파라미터 크기로 제공되지만, 표준 로컬 버전은 수용 가능한 초당 토큰 수(TPS)를 유지하기 위해 상당한 VRAM과 시스템 메모리를 필요로 합니다.
+
+| 구성 요소 | 최소 요구 사항 | 권장 사양 |
+|---|---|---|
+| **운영 체제** | Ubuntu 22.04+, Fedora 39+, Arch | **Linux Kernel 6.5+** |
+| **프로세서** | 4코어 CPU (AVX2 지원) | **8코어 이상 (AMD Ryzen 7/Intel i7)** |
+| **메모리 (RAM)** | 16 GB | **32 GB 이상** |
+| **그래픽 (GPU)** | 8 GB VRAM (NVIDIA/AMD) | **16 GB+ VRAM (RTX 4090/5080)** |
+| **저장 공간** | 15 GB 여유 공간 | **NVMe SSD (20 GB 이상 예약됨)** |
+
+> **경고:** 시스템 및 비디오 메모리의 합계가 12GB 미만인 시스템에서 Gemma 4를 실행하려고 하면 초기 모델 로딩 단계에서 극심한 시스템 지연이나 커널 패닉이 발생할 수 있습니다.
+
+## 1단계: 추론 엔진(Ollama) 설치
+
+2026년에 **gemma 4 linux** 배포를 관리하는 가장 효율적인 방법은 Ollama를 이용하는 것입니다. 이 도구는 모델 매니페스트를 가져오고 로컬 API 엔드포인트를 관리하는 프로세스를 단순화합니다. 시작하려면 시스템이 최신 상태인지 확인하고 필요한 curl 종속성이 있는지 확인해야 합니다.
+
+1.  터미널을 엽니다 (Ctrl+Alt+T).
+2.  패키지 관리자를 업데이트합니다: `sudo apt update && sudo apt upgrade`.
+3.  공식 2026 설치 스크립트를 사용하여 Ollama를 설치합니다:
+    `curl -fsSL https://ollama.com/install.sh | sh`
+
+설치가 완료되면 버전을 확인하세요. 소스 데이터에 따르면 모델 호환성을 위해 0.1.20 이상의 버전이 필수입니다. 커맨드 라인에 `ollama --version`을 입력하여 확인할 수 있습니다. 서비스가 실행 중이지 않은 경우 systemd를 통해 활성화해야 할 수도 있습니다: `sudo systemctl enable --now ollama`.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/tp4cqCsToKY"
+    title="How to run gemma 4 in Linux"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 2단계: Linux에 Gemma 4 배포
+
+엔진이 준비되면 모델의 실제 배포는 단일 명령으로 이루어집니다. **gemma 4 linux** 패키지는 약 9.6GB이므로 진행하기 전에 안정적인 인터넷 연결을 확인하세요.
+
+### 모델 가져오기 (Pulling)
+다운로드를 시작하려면 다음 명령을 실행하세요:
+`ollama run gemma:4`
+
+이 과정에서 터미널에는 매니페스트 풀링 및 체크섬 확인을 보여주는 진행 표시줄이 나타납니다. "success" 메시지가 나타나면 모델이 활성 RAM/VRAM에 로드되어 상호 작용할 준비가 된 것입니다.
+
+### 초기 상호 작용
+즉시 모델과 채팅을 시작할 수 있습니다. 예를 들어, "Gemma 4가 정확히 무엇인가요?"라고 입력하면 모델이 자신의 핵심 아키텍처와 기능을 식별합니다. 2026년 현재, Gemma 4는 이전 모델들에 비해 향상된 추론 능력과 줄어든 환각 현상으로 인정받고 있습니다.
+
+| 동작 | 명령어 | 결과 |
+|---|---|---|
+| **모델 시작** | `ollama run gemma:4` | 대화형 채팅 프롬프트 열기 |
+| **활성 모델 확인** | `ollama list` | 로컬에 설치된 모든 AI 표시 |
+| **모델 제거** | `ollama rm gemma:4` | 디스크 공간 확보를 위해 모델 삭제 |
+| **채팅 종료** | `/bye` 또는 `Ctrl+D` | 세션을 안전하게 종료 |
+
+## 고급 구성: Arch Linux 및 하드웨어 규칙
+
+Arch Linux 사용자나 AI 지원 로봇 공학을 위해 Adafruit Gemma와 같은 외부 하드웨어를 통합하는 사용자의 경우, 권한 오류를 방지하기 위해 추가적인 "udev" 규칙이 필요할 수 있습니다. 소프트웨어 기반의 **gemma 4 linux** 모델은 보통 루트 권한 없이 실행되지만, 특정 하드웨어 가속 환경에서는 특정 장치 규칙이 필요합니다.
+
+외부 컨트롤러를 통해 모델과 인터페이스를 시도할 때 "입출력(Input/Output)" 오류가 발생하는 경우 규칙 파일을 생성해야 할 수 있습니다:
+
+1.  `/etc/udev/rules.d/` 경로로 이동합니다.
+2.  `50-embedded-devices.rules`라는 파일을 생성합니다.
+3.  하드웨어 제조업체에서 제공하는 적절한 USB tiny ISP 규칙을 추가합니다.
+4.  다음 명령으로 규칙을 다시 로드합니다: `sudo udevadm control --reload && sudo udevadm trigger`.
+
+> **💡 팁:** Arch Linux에서는 최첨단 GPU 드라이버를 위한 최신 패치를 확보하기 위해 AUR에서 `ollama-git` 패키지를 설치하는 것을 강력히 권장합니다.
+
+## 게이머 및 개발자를 위한 성능 최적화
+
+**gemma 4 linux** 설정을 최대한 활용하려면, 특히 절차적 대화를 위해 게임 환경에 통합하는 경우 환경 변수를 최적화해야 합니다.
+
+### GPU 오프로딩
+기본적으로 Ollama는 GPU를 감지하려고 시도합니다. 그러나 응답 속도를 크게 높이려면 VRAM이 완전히 활용되도록 특정 오프로딩을 강제할 수 있습니다. AI와 함께 게임을 실행하는 경우 `OLLAMA_MAX_LOADED_MODELS` 및 `OLLAMA_NUM_PARALLEL` 변수를 설정하면 리소스를 관리하는 데 도움이 될 수 있습니다.
+
+### 모딩 및 통합
+많은 2026년 RPG가 API를 통한 로컬 AI 통합을 지원합니다. 게임의 AI 모드가 로컬 Gemma 인스턴스의 기본 포트인 `http://localhost:11434`를 가리키도록 설정할 수 있습니다. 이를 통해 클라우드 서버의 지연 시간 없이 실시간으로 스크립트되지 않은 NPC 상호 작용이 가능해집니다.
+
+모델 가중치 및 미세 조정에 대한 더 기술적인 문서는 [공식 Google DeepMind 저장소](https://ai.google.dev/gemma)를 방문하여 가중치 뒤에 숨겨진 아키텍처를 살펴보세요.
+
+## 일반적인 문제 해결
+
+간소화된 프로세스에도 불구하고 Linux 사용자는 환경별 장애물에 부딪힐 수 있습니다. 다음은 2026년 커뮤니티에서 가장 자주 보고되는 문제입니다.
+
+| 오류 메시지 | 가능한 원인 | 해결 방법 |
+|---|---|---|
+| **"Error: connection failed"** | Ollama 서비스가 실행 중이지 않음 | `sudo systemctl start ollama` 실행 |
+| **"Illegal instruction"** | CPU가 AVX2를 지원하지 않음 | 모델의 양자화된 "light" 버전 사용 |
+| **"Out of memory"** | 모델 크기에 비해 VRAM 부족 | 브라우저 탭을 닫거나 더 작은 파라미터 모델 사용 |
+| **"Permission denied"** | 사용자가 'render' 그룹에 속해 있지 않음 | 사용자 추가: `sudo usermod -aG render $USER` |
+
+## FAQ
+
+**Q: 전용 GPU가 없는 Linux 노트북에서 Gemma 4를 실행할 수 있나요?**
+
+A: 네, CPU 전용 시스템에서도 **gemma 4 linux**를 실행할 수 있지만 응답 속도는 훨씬 느려집니다. 현대적인 GPU에서의 40+ TPS에 비해 초당 약 1~3개의 토큰을 예상하십시오. 최상의 CPU 전용 경험을 위해 최소 16GB의 고속 DDR5 RAM을 확보하세요.
+
+**Q: Gemma 4는 데비안(Debian) 기반 배포판과 호환되나요?**
+
+A: 물론입니다. Gemma 4는 Debian, Ubuntu, Linux Mint 및 Pop!_OS에서 기본적으로 실행됩니다. Ollama에서 제공하는 설치 스크립트는 이러한 배포판의 종속성 매핑을 자동으로 처리합니다.
+
+**Q: 새 버전이 출시되면 모델을 어떻게 업데이트하나요?**
+
+A: 로컬 인스턴스를 업데이트하려면 `ollama pull gemma:4`를 실행하기만 하면 됩니다. 그러면 업데이트된 매니페스트나 가중치 개선 사항이 있는지 확인하고 로컬 라이브러리에 필요한 변경 사항만 다운로드합니다.
+
+**Q: 모델을 로컬에서 실행하는 데 인터넷 연결이 필요한가요?**
+
+A: 초기 다운로드 시에만 필요합니다. 9.6GB의 매니페스트가 머신에 성공적으로 풀링되면 **gemma 4 linux**를 완전히 오프라인으로 실행할 수 있어 보안 환경이나 원격 게임 설정에 이상적입니다.

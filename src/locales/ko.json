@@ -1,1 +1,11 @@
-{}
+{
+  "nav": {
+    "guide": "가이드",
+    "models": "모델",
+    "requirements": "요구사항",
+    "ollama": "올라마",
+    "install": "설치",
+    "benchmark": "벤치마크",
+    "comparison": "비교"
+  }
+}

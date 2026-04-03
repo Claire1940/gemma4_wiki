@@ -1,0 +1,121 @@
+export const metadata = {
+  title: "Modelos Gemma 4 Ollama: Guía completa de despliegue y rendimiento 2026",
+  description: "Domina el despliegue de los modelos gemma 4 ollama. Conoce las versiones 26B MoE, 31B Dense y las variantes optimizadas para móviles para el rendimiento de IA local en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Ollama+Models",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con el lanzamiento en 2026 de los últimos modelos de pesos abiertos de Google. Para los desarrolladores y entusiastas que buscan aprovechar un razonamiento de alto rendimiento sin depender de la infraestructura en la nube, los **modelos gemma 4 ollama** representan una frontera en eficiencia y potencia. Basada en la investigación revolucionaria que impulsó a Gemini 3, esta nueva familia de modelos está diseñada específicamente para la era agéntica, centrándose en la planificación de múltiples pasos, el uso de herramientas y el razonamiento de contexto largo. Ya sea que utilices una estación de trabajo de gama alta o un portátil, el despliegue de los **modelos gemma 4 ollama** te permite mantener la soberanía total de tus datos mientras accedes a una inteligencia de vanguardia.
+
+En esta guía exhaustiva, exploraremos las arquitecturas específicas de la familia Gemma 4, que van desde el ultrarrápido 26B Mixture of Experts (MoE) hasta el modelo 31B Dense de alta precisión. También profundizaremos en las variantes "Effective" de 2B y 4B, optimizadas para móviles, que llevan capacidades de visión y audio a los dispositivos de borde (edge devices). Al final de este tutorial, comprenderás cómo optimizar estos modelos para tu hardware y casos de uso específicos en 2026.
+
+## La arquitectura de la familia de modelos Gemma 4
+
+El lanzamiento de Gemma 4 en 2026 introduce un enfoque escalonado para la IA local, asegurando que haya un modelo optimizado para cada configuración de hardware posible. A diferencia de las generaciones anteriores, Gemma 4 se publica bajo la **licencia Apache 2.0**, lo que lo hace más accesible que nunca para la innovación comercial y personal.
+
+### Modelos de escritorio de alto rendimiento
+Los modelos insignia de este lanzamiento son las versiones 26B y 31B. Estos están diseñados para usuarios que requieren "inteligencia de frontera" en hardware local.
+
+| Variante del modelo | Arquitectura | Fortaleza clave | Hardware ideal |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 26B MoE** | Mezcla de expertos (MoE) | Alto rendimiento y velocidad | 24GB+ VRAM (RTX 3090/4090) |
+| **Gemma 4 31B Dense** | Transformador denso | Máxima calidad de salida | 32GB+ Memoria unificada / Multi-GPU |
+
+El modelo **26B MoE** es particularmente notable. Aunque tiene 26.000 millones de parámetros totales, solo activa **3.800 millones de parámetros** por token. Esto le permite ejecutarse con la velocidad de un modelo mucho más pequeño, manteniendo al mismo tiempo la profundidad de razonamiento de un sistema a gran escala. Por el contrario, el modelo **31B Dense** es el "estándar de oro" para la codificación y la lógica compleja, donde se utiliza cada parámetro para garantizar la mayor precisión posible.
+
+### Modelos optimizados para móviles e IoT
+Para aquellos que trabajan en dispositivos móviles o sistemas integrados, Google ha introducido la serie "Effective". Estos modelos están diseñados para una máxima eficiencia de memoria sin sacrificar las capacidades "agénticas" que definen la era de Gemma 4.
+
+| Variante del modelo | Soporte de modalidad | Ventana de contexto | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Effective 2B** | Texto, Audio, Visión | 32k Tokens | Apps móviles, sensores IoT |
+| **Effective 4B** | Texto, Audio, Visión | 64k Tokens | Tablets, Chromebooks, Traducción en tiempo real |
+
+> **💡 Consejo profesional:** El modelo Effective 2B es sorprendentemente capaz en tareas multilingües, soportando de forma nativa más de 140 idiomas, lo que lo convierte en la elección perfecta para agentes de traducción en tiempo real en 2026.
+
+## Ejecución local de los modelos Gemma 4 Ollama
+
+La forma más sencilla de empezar con estos pesos es a través de Ollama. La integración de los **modelos gemma 4 ollama** permite el despliegue con un solo comando y la aceleración automática por hardware.
+
+### Pasos de instalación
+
+1.  **Actualizar Ollama:** Asegúrate de estar ejecutando la última versión de 2026 de Ollama para soportar la nueva arquitectura MoE.
+2.  **Descargar el modelo:** Utiliza la línea de comandos para descargar tu variante preferida.
+    *   Para el modelo de velocidad equilibrada: `ollama run gemma4:26b-moe`
+    *   Para la máxima calidad: `ollama run gemma4:31b`
+3.  **Verificar la aceleración:** Revisa tus registros para asegurarte de que el modelo se está descargando en tu GPU (CUDA o Metal).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="Novedades de Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## La era agéntica: uso de herramientas y planificación
+
+Una de las mejoras más significativas en los **modelos gemma 4 ollama** es el soporte nativo para el uso de herramientas y la planificación de múltiples pasos. En años anteriores, los modelos locales a menudo tenían dificultades para "pensar antes de hablar". Gemma 4 cambia esto al incorporar un bucle de razonamiento que permite al modelo analizar una solicitud, planificar los pasos necesarios y ejecutar llamadas a funciones.
+
+### Ventana de contexto de un cuarto de millón de tokens
+Los modelos más grandes cuentan con una ventana de contexto de hasta **250.000 tokens**. Este es un salto masivo para la IA local en 2026, permitiendo varios flujos de trabajo avanzados:
+*   **Análisis completo de código base:** Introduce un repositorio completo en el contexto y solicita refactorización o búsqueda de errores.
+*   **Flujos de trabajo agénticos de varios turnos:** Mantén un largo historial de interacciones sin que el modelo "olvide" las instrucciones iniciales.
+*   **Revisión de documentos legales y de investigación:** Analiza cientos de páginas de texto en un solo prompt.
+
+> **⚠️ Advertencia:** Ejecutar la ventana de contexto completa de 250k requiere una cantidad significativa de RAM del sistema. Si experimentas bloqueos, intenta limitar el tamaño del contexto en tu Modelfile de Ollama usando el parámetro `num_ctx`.
+
+## Capacidades multilingües y multimodales
+
+Gemma 4 no se trata solo de texto. Los modelos "Effective" (2B y 4B) están construidos para "ver y oír el mundo". Esto los hace excepcionalmente adecuados para experiencias de juego interactivas o herramientas de accesibilidad.
+
+### Soporte de idiomas
+Con soporte nativo para más de **140 idiomas**, Gemma 4 es un modelo verdaderamente global. En las pruebas, el modelo Effective 2B ha mostrado una capacidad increíble para cambiar entre idiomas a mitad de la conversación mientras sigue instrucciones complejas. Por ejemplo, puedes pedirle al modelo en francés que busque un restaurante en San Francisco pero solicitar la respuesta final en inglés; el modelo gestiona la lógica multilingüe sin problemas.
+
+### Visión y audio
+La integración de audio y visión directamente en los pesos de 2B y 4B permite:
+1.  **Descripción de imágenes en tiempo real:** Uso de la cámara de un portátil para identificar objetos o leer texto en el mundo físico.
+2.  **Interacción de voz a voz:** Comunicación de menor latencia sin necesidad de una capa de transcripción separada tipo Whisper.
+3.  **Depuración visual:** Mostrar al modelo una captura de pantalla de un error de código para una solución inmediata.
+
+## Seguridad y confianza empresarial
+
+A medida que los modelos abiertos se vuelven centrales para la infraestructura empresarial en 2026, Google DeepMind ha aplicado los mismos protocolos de seguridad rigurosos a Gemma 4 que a sus modelos propietarios Gemini. Esto garantiza que los **modelos gemma 4 ollama** sean resistentes a los jailbreaks comunes y proporcionen una "base de confianza" para los desarrolladores que construyen aplicaciones sensibles.
+
+La licencia Apache 2.0 refuerza aún más esta confianza, permitiendo a las empresas modificar y redistribuir los modelos sin las cláusulas restrictivas de "mirada hacia atrás" presentes en otras licencias de pesos abiertos.
+
+## Requisitos de hardware para 2026
+
+Para sacar el máximo provecho de estos modelos, debes hacer coincidir la variante con tus capacidades de hardware. A continuación se muestra una lista sugerida de niveles de hardware para un rendimiento óptimo.
+
+| Nivel de hardware | Modelo recomendado | Caso de uso |
+| :--- | :--- | :--- |
+| **Estación de trabajo de gama alta** (64GB+ RAM, Dual GPU) | Gemma 4 31B Dense | Codificación profesional y lógica compleja |
+| **PC para juegos** (32GB RAM, RTX 5080/6080) | Gemma 4 26B MoE | Asistente personal de alta velocidad |
+| **Portátil moderno** (16GB RAM, Chip M3/M4) | Gemma 4 4B Effective | Productividad general y resúmenes de documentos |
+| **Móvil/IoT** (8GB RAM o menos) | Gemma 4 2B Effective | Traducción en tiempo real y tareas de visión |
+
+Para más información sobre el lanzamiento oficial y para ver los libros blancos técnicos, visita la [página oficial de Google DeepMind Gemma](https://ai.google.dev/gemma) o consulta la biblioteca de Ollama para las últimas actualizaciones del manifiesto.
+
+## FAQ (Preguntas frecuentes)
+
+**P: ¿Cuál es la principal diferencia entre los modelos gemma 4 ollama 26B MoE y 31B Dense?**
+
+R: El 26B MoE (Mezcla de Expertos) está optimizado para la velocidad; solo utiliza una fracción de sus parámetros (3.8B) para cada cálculo, lo que lo hace muy rápido en hardware de consumo. El modelo 31B Dense utiliza todos sus parámetros para cada tarea, lo que resulta en una mayor calidad y una lógica más fiable para tareas complejas como la programación.
+
+**P: ¿Puedo ejecutar Gemma 4 en mi smartphone?**
+
+R: ¡Sí! Los modelos "Effective 2B" y "Effective 4B" están diseñados específicamente para dispositivos móviles e IoT. Admiten entrada de visión y audio y están optimizados para las restricciones de memoria de los smartphones modernos de 2026.
+
+**P: ¿Soporta Gemma 4 el uso de herramientas (tool use)?**
+
+R: Absolutamente. Gemma 4 cuenta con soporte nativo para el uso de herramientas y llamadas a funciones. Esto te permite construir "agentes" que pueden interactuar con APIs externas, buscar en la web o ejecutar código en tu nombre dentro de un entorno local seguro.
+
+**P: ¿Está disponible la ventana de contexto de 250k en todos los modelos?**
+
+R: Aunque la arquitectura lo soporta, la ventana de contexto de 250k tokens es más efectiva en los modelos 26B y 31B. El uso de un contexto tan grande requiere una memoria RAM sustancial, así que asegúrate de que tu sistema esté equipado para manejar la carga de memoria antes de procesar grandes conjuntos de datos.

@@ -1,0 +1,155 @@
+export const metadata = {
+  title: "Configuración de Gemma 4 en Ollama: Ejecute los modelos abiertos más potentes de Google en 2026",
+  description: "Aprenda a realizar una configuración completa de Gemma 4 en Ollama para ejecutar localmente los últimos modelos de IA de código abierto de Google. Guía detallada sobre hardware, integración con OpenClaw y optimización.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Ollama+Setup",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con el lanzamiento de los últimos pesos de código abierto de Google. Si busca la forma más eficiente de desplegar estos modelos, la **configuración de gemma 4 en ollama** es la solución definitiva para 2026. Esta nueva generación de modelos, lanzada bajo la licencia Apache 2.0, proporciona a desarrolladores y entusiastas una soberanía digital sin precedentes. Al utilizar una **configuración de gemma 4 en ollama**, puede ejecutar agentes de razonamiento altamente sofisticados directamente en su hardware de consumo sin pagar costosos tokens de API ni sacrificar la privacidad de sus datos.
+
+Ya sea un desarrollador que construye flujos de trabajo agénticos o un aficionado que explora los límites de los LLM locales, comprender los matices de la arquitectura de Gemma 4 es esencial. Desde la variante E4B optimizada para el borde hasta el masivo modelo denso de 31B, esta guía cubre todo lo que necesita saber para poner en marcha su entorno local. Siga estos pasos para aprovechar el poder de la innovación "Turbo Quant" de Google, que hace que estos modelos sean hasta seis veces más rápidos que las iteraciones anteriores.
+
+## Comprensión de las variantes del modelo Gemma 4
+
+Antes de sumergirse en la **configuración de gemma 4 en ollama**, es vital elegir el tamaño de modelo adecuado para su hardware específico y caso de uso. Google ha lanzado cuatro variantes distintas de Gemma 4, cada una diseñada para diferentes niveles de disponibilidad de cómputo.
+
+| Variante del modelo | Parámetros | Arquitectura | Mejor caso de uso |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 mil millones (Efectivos) | Optimizado para el borde | Dispositivos móviles, iPhone 6+, chat básico |
+| **Gemma 4 E4B** | 4 mil millones (Efectivos) | Embeddings por capa | Portátiles estándar, MacBook Air, Programación |
+| **Gemma 4 26B** | 26 mil millones | Mezcla de expertos (MoE) | Razonamiento avanzado, Escritura creativa |
+| **Gemma 4 31B** | 31 mil millones | Denso | Investigación, Lógica compleja, GPUs de gama alta |
+
+La "E" en E2B y E4B significa parámetros "Efectivos". Por ejemplo, el modelo E4B en realidad contiene 8 mil millones de parámetros totales, pero solo activa 4 mil millones efectivos durante la inferencia. Esto se logra mediante embeddings por capa: tablas de búsqueda dedicadas para cada token que proporcionan el conocimiento de un modelo mucho más grande sin la carga masiva de memoria.
+
+## Requisitos de hardware para Gemma 4
+
+Para garantizar una **configuración de gemma 4 en ollama** fluida, su hardware debe cumplir con los requisitos de VRAM y RAM del modelo específico que pretende ejecutar. Si bien los modelos más pequeños son increíblemente eficientes, las variantes más grandes de 26B y 31B requieren recursos más significativos.
+
+| Tamaño del modelo | RAM/VRAM mínima | Hardware recomendado |
+|---|---|---|
+| **E2B / E4B** | 4GB - 8GB | MacBook Air, PC con 8GB de RAM |
+| **26B MoE** | 16GB - 24GB | Mac Mini (16GB+), RTX 3090/4090 |
+| **31B Dense** | 32GB - 64GB | Nvidia H100, Dual RTX 3090s, Mac Studio |
+
+> **💡 Consejo:** Si carece de la VRAM para ejecutar el modelo 31B, considere usar la versión 26B de Mezcla de Expertos (MoE). Ofrece capacidades de razonamiento comparables con una huella de memoria significativamente menor durante la inferencia activa.
+
+## Configuración de Gemma 4 en Ollama paso a paso
+
+Las siguientes instrucciones asumen que está trabajando en un sistema operativo moderno (Ubuntu, macOS o Windows). Ollama sigue siendo la herramienta más simplificada para gestionar los ciclos de vida de los modelos locales en 2026.
+
+### 1. Instalar Ollama
+Si aún no lo ha hecho, descargue la última versión de Ollama desde el sitio web oficial. Para los usuarios de Linux, un simple comando curl suele ser suficiente:
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+### 2. Obtener el modelo Gemma 4
+Una vez instalado Ollama, puede iniciar la **configuración de gemma 4 en ollama** descargando la variante de modelo específica que necesite. Para la mayoría de los usuarios, el modelo E4B proporciona el mejor equilibrio entre velocidad e inteligencia.
+
+```bash
+ollama pull gemma4:e4b
+```
+
+Si tiene hardware de gama alta y desea el mejor rendimiento absoluto, descargue la versión densa:
+
+```bash
+ollama pull gemma4:31b
+```
+
+### 3. Verificar la instalación
+Ejecute el siguiente comando para asegurarse de que el modelo esté cargado y listo para la interacción:
+
+```bash
+ollama list
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/NB9zRquoeI0"
+    title="Gemma 4 E4B + Ollama + OpenClaw — Run It Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Integración avanzada: OpenClaw y flujos de trabajo agénticos
+
+Una **configuración de gemma 4 en ollama** estándar es potente, pero integrarla con un arnés agéntico como OpenClaw (o Hermes) desbloquea todo su potencial. OpenClaw permite que Gemma 4 interactúe con su sistema de archivos local, ejecute código y mantenga una memoria a largo plazo.
+
+### Configuración de OpenClaw con Ollama
+1. **Instalar Node.js**: OpenClaw requiere un entorno Node para ejecutar su pasarela persistente.
+2. **Lanzar OpenClaw**: Ejecute el script de instalación proporcionado en el repositorio de OpenClaw.
+3. **Seleccionar proveedor**: Durante el asistente de configuración, seleccione "Ollama" como su proveedor principal.
+4. **Configuración del endpoint**: Use la IP local predeterminada (`http://127.0.0.1:11434`) para conectarse a su instancia de Ollama.
+5. **Selección del modelo**: Elija el `gemma4:e4b` (o su variante preferida) de la lista de modelos disponibles.
+
+> **⚠️ Advertencia:** Al usar flujos de trabajo agénticos, revise siempre el código que el modelo pretende ejecutar. Aunque Gemma 4 es muy capaz, la ejecución local de scripts no verificados puede suponer riesgos de seguridad para su sistema.
+
+## Rendimiento y Benchmarking
+
+El lanzamiento de Gemma 4 en 2026 introduce "Turbo Quant", un avance en la cuantización que permite que los modelos sean ocho veces más pequeños y seis veces más rápidos sin una pérdida significativa de precisión. En pruebas prácticas, la **configuración de gemma 4 en ollama** ha mostrado resultados notables en tareas de programación y multilingües.
+
+### Capacidades de programación
+En una prueba de simulación reciente que involucraba una compleja simulación de colonia de hormigas en HTML5/JavaScript, el modelo Gemma 4 E4B fue capaz de:
+*   Leer e interpretar más de 500 líneas de código existente.
+*   Añadir un deslizador de control de velocidad funcional.
+*   Implementar un interruptor manual de día/noche.
+*   Generar un gráfico de población en tiempo real.
+
+El modelo realizó estas "ediciones quirúrgicas" al código sin romper la lógica existente, una tarea anteriormente reservada para modelos mucho más grandes como GPT-4 o Claude 3.5.
+
+### Soporte multilingüe
+Gemma 4 ha ampliado sus datos de entrenamiento para incluir idiomas de bajos recursos. Durante las pruebas, el modelo tradujo con éxito oraciones filosóficas complejas al afrikáans, twi (Ghana) e incluso gutnish (un antiguo dialecto sueco).
+
+| Idioma | Precisión de traducción | Retención de matices |
+|---|---|---|
+| **Inglés** | 99% | Excelente |
+| **Español** | 95% | Alta |
+| **Twi** | 82% | Moderada |
+| **Gutnish** | 78% | En desarrollo |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5AF0I1B6Lx4"
+    title="Gemma 4 + Openclaw = Free AGI (Full Setup)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimización de su entorno local
+
+Para aprovechar al máximo su **configuración de gemma 4 en ollama**, considere estas estrategias de optimización:
+
+1.  **Ajuste de la caché KV**: Si tiene exceso de VRAM, aumentar el tamaño de la caché KV puede acelerar significativamente las conversaciones de varios turnos.
+2.  **Descarga a GPU (GPU Offloading)**: Asegúrese de que Ollama esté utilizando correctamente sus capas de GPU. Puede comprobarlo ejecutando `nvidia-smi` durante la generación de un modelo.
+3.  **Modelos Turbo Quant**: Busque modelos etiquetados específicamente con `turbo-quant` en la biblioteca de Ollama. Estos están optimizados para la inferencia más rápida posible en hardware de consumo.
+4.  **Pasarela persistente**: Use una herramienta como Atomic Bot en macOS para mantener su agente OpenClaw ejecutándose en segundo plano, lo que permite una asistencia de IA instantánea.
+
+La combinación de la brillantez arquitectónica de Google y la facilidad de uso proporcionada por Ollama hace que 2026 sea el mejor año hasta ahora para la IA local. Al seguir esta guía, ahora está equipado para ejecutar inteligencia de clase mundial bajo sus propios términos.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Es gratuita la configuración de Gemma 4 en Ollama?**
+
+R: Sí, tanto Ollama como los pesos del modelo Gemma 4 son gratuitos y de código abierto bajo la licencia Apache 2.0. Solo paga por la electricidad utilizada por su hardware.
+
+**P: ¿Puedo ejecutar Gemma 4 en un portátil sin una GPU dedicada?**
+
+R: Sí, los modelos E2B y E4B están diseñados para ejecutarse en CPUs y gráficos integrados (como los chips de la serie M de Apple). Sin embargo, una GPU dedicada mejorará significativamente la tasa de tokens por segundo (TPS).
+
+**P: ¿Cómo se compara Gemma 4 con Llama 3?**
+
+R: Si bien Llama 3 es excelente, Gemma 4 a menudo lo supera en tareas "agénticas" específicas y programación debido a su arquitectura de embedding por capa y a los benchmarks mejorados de seguimiento de instrucciones.
+
+**P: ¿Qué debo hacer si Ollama no puede encontrar el modelo Gemma 4?**
+
+R: Asegúrese de haber actualizado Ollama a la última versión. La **configuración de gemma 4 en ollama** requiere la actualización de 2026 para reconocer los nuevos manifiestos de modelos y tipos de arquitectura.

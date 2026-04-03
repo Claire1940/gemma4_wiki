@@ -1,0 +1,124 @@
+export const metadata = {
+  title: "Gemma 4 E4B: Google 엣지 AI 모델 완전 가이드 2026",
+  description: "Google의 최신 엣지 AI 혁신인 Gemma 4 E4B 모델을 살펴보세요. 2026년을 위한 효과적인 파라미터, PLE 아키텍처 및 에이전트 기능에 대해 알아봅니다.",
+  category: "가이드",
+  image: "https://placehold.co/800x400/4285f4/fff?text=Gemma+4+E4B+Guide",
+  date: "2026-04-03",
+  author: "Gemma 위키 팀"
+}
+
+로컬 인공지능의 지형은 Google의 최신 오픈 가중치(open-weight) 제품군 출시와 함께 극적으로 변화했습니다. **gemma 4 e4b**는 이러한 혁명의 최전선에 서 있으며, 엣지 기기와 모바일 하드웨어에 최적화된 "Effective 4B" 아키텍처를 제공합니다. 소비자용 칩에서 메모리 오버헤드로 어려움을 겪는 기존의 밀집(dense) 모델과 달리, **gemma 4 e4b**는 고급 레이어별 임베딩(Per-Layer Embeddings, PLE)을 활용하여 파라미터당 지능을 극대화합니다. 이는 대규모 클라우드 클러스터에 의존하지 않고 로컬 환경에서 정교한 추론, 시각 및 오디오 처리를 직접 통합하려는 개발자와 애호가들에게 이상적인 선택입니다.
+
+차세대 AI 기반 NPC를 제작하는 개발자든, 에이전트 워크플로우를 최적화하는 연구자든, 이 모델 제품군이 어떻게 작동하는지 이해하는 것은 필수적입니다. 이 가이드에서는 Gemma 4 생태계의 E4B 변체와 그 형제 모델들에 대한 기술 사양, 성능 벤치마크 및 배포 전략을 자세히 설명합니다.
+
+## Gemma 4 모델 제품군 개요
+
+Google DeepMind는 광범위한 하드웨어 성능에 대응하기 위해 Gemma 라인업을 확장했습니다. 대규모 31B 및 26B 모델이 데스크톱 워크스테이션과 고성능 GPU를 겨냥하는 반면, "Effective" 시리즈(특히 **gemma 4 e4b**)는 휴대폰, IoT 기기, 라즈베리 파이와 같은 싱글 보드 컴퓨터에서 최대의 효율을 내도록 설계되었습니다.
+
+처음으로 이 모델들은 Apache 2.0 라이선스로 출시되어 상업적 및 개인적 용도로 전례 없는 자유를 제공합니다. 이러한 변화는 오픈 소스 커뮤니티에 중요한 이정표가 되었으며, 다양한 소프트웨어 스택에 더 깊이 통합될 수 있는 길을 열어주었습니다.
+
+| 모델 변체 | 파라미터 수 | 유형 | 주요 사용 사례 |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | 310억 개 | Dense | 최첨단 추론 및 품질 |
+| **Gemma 4 26B** | 260억 개 (3.8B 활성) | MoE | 빠른 로컬 추론 및 코딩 |
+| **Gemma 4 E4B** | 40억 개 효과(Effective) | PLE Dense | 모바일 및 엣지 배포 |
+| **Gemma 4 E2B** | 20억 개 효과(Effective) | PLE Dense | 초저전력 IoT 기기 |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Gemma 4 E4B 아키텍처 탐구
+
+**gemma 4 e4b**에서 "E"는 "Effective(효과적인)"를 의미합니다. 이 용어는 레이어별 임베딩(Per-Layer Embeddings, PLE)으로 알려진 독특한 아키텍처 선택을 가리킵니다. 단순히 레이어를 추가하여 모델을 확장(계산 부담과 RAM 사용량 증가)하는 대신, PLE는 각 디코더 레이어에 모든 토큰에 대한 자체 소형 임베딩 테이블을 부여합니다.
+
+이 임베딩 테이블은 크지만 추론 중에 빠른 조회(lookup) 기능을 수행합니다. 이를 통해 모델은 훨씬 더 큰 모델에서나 볼 수 있는 지능을 제공하면서도 활성 파라미터 점유 공간을 훨씬 작게 유지할 수 있습니다.
+
+### PLE 아키텍처의 주요 이점:
+*   **메모리 효율성:** 추론 중 활성 파라미터 수를 줄여 모바일 기기의 RAM과 배터리 수명을 보존합니다.
+*   **멀티모달 지원:** E4B 변체는 오디오와 시각을 기본적으로 지원하여 모델이 실시간으로 세상을 "보고 들을" 수 있게 합니다.
+*   **다국어 숙련도:** 140개 이상의 언어를 기본적으로 지원하여 현지화된 애플리케이션을 위한 진정한 글로벌 도구가 됩니다.
+
+> **⚠️ 경고:** 모바일 배포 시, 활성 파라미터 수는 적더라도 PLE 조회 테이블을 고려하여 기기에 최소 8GB의 RAM이 있는지 확인하십시오.
+
+## 에이전트 워크플로우 및 도구 사용
+
+Gemma 4는 Google이 명명한 "에이전트 시대"를 위해 구축되었습니다. 이는 모델이 단순한 채팅 상호작용을 넘어 행동하도록 설계되었음을 의미합니다. **gemma 4 e4b**는 자율 에이전트 구축에 필수적인 네이티브 함수 호출(function calling)과 구조화된 JSON 출력을 지원합니다.
+
+이러한 에이전트는 다단계 계획을 처리하고 외부 API와 상호작용하여 복잡한 작업을 실행할 수 있습니다. 예를 들어, 게임 개발자는 E4B 모델을 사용하여 자신의 인벤토리를 확인하고, 지도를 가로지르는 경로를 계획하며, 자연어로 플레이어의 질문에 응답하는 NPC를 구현할 수 있습니다. 이 모든 과정은 플레이어의 하드웨어에서 로컬로 실행됩니다.
+
+| 기능 | 역량 | 이점 |
+| :--- | :--- | :--- |
+| **컨텍스트 윈도우** | 128K 토큰 | 긴 대화 및 데이터 처리 가능 |
+| **도구 사용** | 네이티브 함수 호출 | 외부 소프트웨어 및 API와 통합 |
+| **로직** | 다단계 계획 | 복잡하고 다층적인 문제 해결 |
+| **출력** | 구조화된 JSON | 앱을 위한 안정적인 데이터 파싱 보장 |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BrJdGP21B5g"
+    title="Google just dropped Gemma 4... (WOAH)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 벤치마크 및 성능 지표
+
+오픈 가중치 모델의 경쟁적인 세계에서 Gemma 4는 파라미터당 지능의 새로운 기준을 세웠습니다. 31B 모델은 현재 전 세계 상위권 오픈 모델 중 하나로 평가받고 있으며, **gemma 4 e4b** 역시 소형 모델 카테고리에서 두 배 크기의 모델들을 압도하는 성능을 보여줍니다.
+
+MMLU 및 GPQA와 같은 업계 표준 테스트에서 Gemma 4 제품군은 이전 모델들에 비해 수학, 추론 및 지시 이행 능력이 크게 향상되었음을 보여줍니다.
+
+| 벤치마크 | Gemma 4 31B | Gemma 4 E4B | 경쟁 모델 (유사 크기) |
+| :--- | :--- | :--- | :--- |
+| **Arena AI Text** | 1452 | 1280 | 1210 (Llama 3 8B) |
+| **MMLU (다국어)** | 85.2% | 74.5% | 70.1% (Mistral 7B) |
+| **GPQA Diamond** | 84.3% | 62.1% | 55.4% (Qwen 2 7B) |
+| **Tool Call 15** | 100% | 92.5% | 88.0% (다양함) |
+
+이 점수들은 소형 모델인 **gemma 4 e4b**조차도 복잡한 지시를 따르고 높은 정확도로 도구 기반 작업을 실행할 수 있는 능력이 매우 뛰어나다는 것을 나타냅니다.
+
+## Gemma 4 E4B 로컬 배포 방법
+
+Gemma 4 출시의 가장 큰 장점 중 하나는 다양한 플랫폼에서의 광범위한 가용성입니다. 오늘 바로 가중치를 다운로드하여 자신의 하드웨어에서 실험을 시작할 수 있습니다.
+
+### 권장 배포 도구:
+1.  **Ollama:** macOS, Linux 또는 Windows에서 단일 명령으로 Gemma 4를 실행하는 가장 쉬운 방법입니다.
+2.  **LM Studio:** 로컬 LLM을 쉽게 찾고 실행할 수 있는 GUI 기반 도구입니다.
+3.  **Llama.cpp:** 특정 하드웨어 구성에 맞게 모델을 최적화하려는 고급 사용자를 위한 도구입니다.
+4.  **Hugging Face:** 커뮤니티의 원본 가중치 및 미세 조정(fine-tuned) 변체에 액세스하세요.
+
+> **💡 팁:** Windows에서 가장 빠른 성능을 얻으려면 [NVIDIA NIM](https://www.nvidia.com/en-us/ai-data-science/generative-ai/nim/) 통합을 사용하여 RTX GPU에서 TensorRT 가속을 활용하십시오.
+
+## 보안 및 기업 준비성
+
+Google DeepMind에서 개발한 **gemma 4 e4b**는 독점 Gemini 모델과 유사한 엄격한 보안 프로토콜을 거칩니다. 이는 기업이 신뢰하고 구축할 수 있는 토대를 제공합니다. Apache 2.0 라이선스를 통해 기업은 제한적인 라이선스나 제3자 제공업체로의 데이터 유출 걱정 없이 독점 데이터로 모델을 미세 조정할 수 있습니다.
+
+모델을 완전히 오프라인으로 실행할 수 있다는 점은 개인정보 보호가 중요한 산업에 큰 이점입니다. 민감한 코드베이스를 분석하든 모바일 기기에서 개인 사용자 데이터를 처리하든, Gemma 4는 데이터가 제어된 환경 내에 머물도록 보장합니다.
+
+## 자주 묻는 질문 (FAQ)
+
+**Q: Gemma 4 E4B와 31B 모델의 주요 차이점은 무엇인가요?**
+
+A: 31B 모델은 최고 품질의 출력과 복잡한 추론에 최적화된 밀집 모델로, 상당한 VRAM이 필요합니다. 반면 **gemma 4 e4b**는 모바일 및 엣지 기기를 위해 설계된 "Effective" 모델로, 레이어별 임베딩을 사용하여 훨씬 적은 메모리와 배터리 소모로 높은 지능을 제공합니다.
+
+**Q: Gemma 4를 상업적 프로젝트에 사용할 수 있나요?**
+
+A: 네, 가능합니다. Gemma 4는 Apache 2.0 라이선스로 출시되었으며, 이는 상업적으로 허용되는 라이선스입니다. Google에 로열티를 지불하지 않고도 자신의 제품에서 모델을 사용, 수정 및 배포할 수 있습니다.
+
+**Q: E4B 모델을 실행하려면 어떤 하드웨어가 필요한가요?**
+
+A: **gemma 4 e4b**는 최신 스마트폰(Google Pixel 또는 iPhone 등), 라즈베리 파이, 보급형 NVIDIA Jetson 모듈에서 실행되도록 설계되었습니다. PC 사용자의 경우, 최신 CPU 또는 6-8GB 이상의 VRAM을 갖춘 GPU만 있으면 거의 즉각적인 응답 속도를 얻을 수 있습니다.
+
+**Q: Gemma 4 E4B는 멀티모달 입력을 지원하나요?**
+
+A: 네, E4B 및 E2B 모델은 오디오 및 시각 입력을 네이티브로 지원하여 기기에서 직접 음성 인식 및 이미지 이해가 가능합니다.

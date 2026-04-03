@@ -1,0 +1,131 @@
+export const metadata = {
+  title: "Actualización de Gemma 4 para Ollama: Cómo ejecutar los nuevos modelos abiertos de Google 2026",
+  description: "Explora la masiva actualización de Gemma 4 para Ollama. Aprende a instalar los modelos 31B, 26B MoE y Effective 4B localmente para flujos de trabajo agénticos y programación.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Ollama+Update",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con la última **actualización de gemma 4 para ollama**. Google ha lanzado oficialmente su próxima generación de modelos abiertos, Gemma 4, construidos sobre la misma investigación innovadora que Gemini 3. Por primera vez en la historia de la serie, estos modelos se lanzan bajo una licencia Apache 2.0 totalmente de código abierto, lo que los hace más accesibles que nunca para desarrolladores, jugadores e investigadores. Esta **actualización de gemma 4 para ollama** trae cuatro variantes distintas de modelos a tu máquina local, que van desde modelos de borde ultra eficientes hasta arquitecturas densas masivas de 31B capaces de un razonamiento complejo. Ya sea que busques potenciar la lógica de NPCs en juegos o analizar bases de código masivas, estos modelos están diseñados para ejecutarse directamente en el hardware que ya posees, incluyendo computadoras de escritorio, laptops e incluso dispositivos móviles.
+
+## La familia de modelos Gemma 4: MoE vs. Denso
+
+El lanzamiento de Gemma 4 no es solo un modelo único; es una familia versátil diseñada para diferentes limitaciones de hardware y casos de uso. La actualización introduce una arquitectura de Mezcla de Expertos (MoE) junto con modelos densos tradicionales para optimizar la velocidad sin sacrificar la inteligencia.
+
+| Variante del Modelo | Arquitectura | Parámetros Totales | Parámetros Activos | Caso de Uso Principal |
+|---|---|---|---|---|
+| **Gemma 4 31B** | Denso | 31 Mil millones | 31 Mil millones | Máxima calidad de salida y razonamiento complejo. |
+| **Gemma 4 26B** | MoE | 26 Mil millones | **3.8 Mil millones** | Razonamiento local de alta velocidad y flujos de programación. |
+| **Gemma 4 E4B** | Effective | 8 Mil millones | **4 Mil millones** | Despliegue en el borde en laptops y móviles de gama alta. |
+| **Gemma 4 E2B** | Effective | 4 Mil millones | **2 Mil millones** | Dispositivos IoT y procesamiento móvil en tiempo real. |
+
+El modelo 26B MoE es particularmente impresionante para los usuarios locales. Debido a que solo activa 3.8 mil millones de parámetros durante cualquier paso de inferencia individual, ofrece la velocidad de un modelo mucho más pequeño mientras mantiene la base de conocimientos de un gigante de 26B de parámetros. Esto lo convierte en un candidato ideal de la **actualización de gemma 4 para ollama** para usuarios con GPUs de gama media.
+
+## Características clave de la actualización Gemma 4
+
+Google ha diseñado Gemma 4 para lo que llaman la "era agéntica". Esto significa que los modelos no están construidos solo para chatear, sino para actuar. Cuentan con soporte nativo para el uso de herramientas, lo que permite a la IA interactuar con APIs externas, navegar por archivos y ejecutar código para resolver problemas de múltiples pasos.
+
+### 1. Ventana de contexto masiva
+Los modelos más grandes de la familia ahora admiten una ventana de contexto de hasta **250,000 tokens**. En términos prácticos, esto te permite alimentar el código fuente completo de un juego o un libro masivo de historia de un RPG al modelo y hacer preguntas específicas y contextuales sin que la IA "olvide" el principio del documento.
+
+### 2. Planificación de múltiples pasos
+Gemma 4 destaca en la lógica compleja. Puede desglosar un objetivo de alto nivel, como "Crear un sistema de misiones procedimentales para un juego de fantasía", en pasos individuales y ejecutables. Este flujo de trabajo agéntico es una mejora significativa respecto a las iteraciones anteriores.
+
+### 3. Soporte multilingüe nativo
+Con soporte nativo para más de 140 idiomas, Gemma 4 es una potencia global. Desde idiomas comunes como el inglés y el francés hasta idiomas de bajos recursos como el twi y el gutnish, el modelo mantiene una alta coherencia a través de diversos conjuntos de datos lingüísticos.
+
+> **💡 Sugerencia:** Al usar el modelo 31B para tareas complejas, asegúrate de tener al menos 64GB de VRAM o RAM del sistema si usas la descarga GGUF, ya que la arquitectura densa requiere mucha memoria.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Cómo instalar Gemma 4 a través de Ollama
+
+Ejecutar Gemma 4 localmente es sencillo gracias a la integración con Ollama. Sigue estos pasos para poner en marcha el modelo "Effective 4B" (E4B) en tu sistema.
+
+1.  **Actualizar Ollama**: Asegúrate de estar ejecutando la última versión de [Ollama](https://ollama.com/) para admitir la nueva arquitectura de Gemma 4.
+2.  **Descargar el modelo**: Abre tu terminal y ejecuta el siguiente comando:
+    `ollama pull gemma4:e4b`
+3.  **Ejecutar el modelo**: Una vez completada la descarga, inicia la sesión con:
+    `ollama run gemma4:e4b`
+4.  **Verificar el uso de hardware**: Utiliza una herramienta como `nvidia-smi` para monitorear tu VRAM. El modelo E4B consume típicamente alrededor de 15GB de VRAM cuando se tiene en cuenta el caché KV y la sobrecarga agéntica.
+
+| Comando del Modelo | VRAM Recomendada | Velocidad (Tokens/seg) |
+|---|---|---|
+| `ollama run gemma4:2b` | **4GB - 6GB** | Ultra rápido |
+| `ollama run gemma4:e4b` | **12GB - 16GB** | Rápido |
+| `ollama run gemma4:26b` | **24GB - 32GB** | Moderado |
+| `ollama run gemma4:31b` | **64GB+** | Lento (Local) |
+
+## Entendiendo los parámetros "Efectivos" (E4B)
+
+Una pregunta común con respecto a la **actualización de gemma 4 para ollama** es qué significa la "E" en E4B. Esto se refiere a parámetros "Efectivos" (Effective). A diferencia de la cuantización estándar, que simplemente reduce el modelo, Google utiliza **incrustaciones por capa** (per-layer embeddings).
+
+En lugar de hacer el modelo más profundo o ancho, a cada capa del decodificador se le asigna su propia pequeña incrustación dedicada para cada token. Estas tablas de búsqueda son rápidas y eficientes en memoria. El resultado es un modelo que se comporta como uno de 4 mil millones de parámetros en términos de velocidad de inferencia y huella de memoria, pero posee la inteligencia y los matices de un modelo de 8 mil millones de parámetros. Esta elección arquitectónica está diseñada específicamente para el despliegue en el borde en dispositivos donde el ancho de banda de la memoria es el principal cuello de botella.
+
+## Rendimiento en programación y lógica
+
+En pruebas del mundo real, Gemma 4 ha mostrado una competencia notable en ediciones quirúrgicas de código. Por ejemplo, al encargársele la modificación de una simulación compleja de colonia de hormigas en HTML5, el modelo E4B fue capaz de:
+*   Leer y comprender la lógica de simulación existente.
+*   Implementar un control deslizante de velocidad.
+*   Añadir un botón de alternancia manual de día/noche.
+*   Aumentar los límites de población manteniendo tasas de fotogramas estables.
+
+Aunque algunas versiones cuantizadas podrían tener dificultades con restricciones numéricas exactas (como limitar una población a exactamente 500), la lógica general y la capacidad "agéntica" para usar herramientas para escribir y guardar archivos siguen siendo lo más destacado de esta actualización.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/NB9zRquoeI0"
+    title="Gemma 4 E4B + Ollama + OpenClaw — Run It Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Recomendaciones de hardware para 2026
+
+Para sacar el máximo provecho de la **actualización de gemma 4 para ollama**, tu configuración de hardware es importante. Mientras que los modelos 2B y 4B son muy permisivos, los modelos 26B MoE y 31B Denso requieren configuraciones más robustas.
+
+*   **Nivel de entrada (Móvil/Laptop):** 16GB de Memoria Unificada (Mac M2/M3) o una RTX 4060 (8GB VRAM). Ideal para Gemma 4 E2B y E4B.
+*   **Gama media (Escritorio):** 32GB de RAM y una RTX 5070 o 4080 (16GB+ VRAM). Perfecto para el modelo 26B MoE.
+*   **Entusiasta/Estación de trabajo:** 128GB de RAM y dual RTX 5090s o GPUs profesionales (A100/H100). Necesario para ejecutar el modelo 31B Denso a precisión completa con un contexto alto.
+
+> **⚠️ Advertencia:** Evita usar versiones altamente cuantizadas (como de 2 o 3 bits) para entornos de producción o tareas de programación complejas. La cuantización puede eliminar vías lógicas importantes, lo que lleva a "alucinaciones" o salidas repetitivas en tareas multilingües.
+
+## Integración de Gemma 4 con OpenClaw
+
+Para los usuarios que desean construir agentes autónomos, Gemma 4 se integra a la perfección con **OpenClaw**, una plataforma agéntica de código abierto. Al conectar Ollama como proveedor, puedes darle a tu modelo Gemma 4 acceso a:
+1.  **Memoria persistente**: Permitiendo que el modelo recuerde interacciones pasadas a través de diferentes sesiones.
+2.  **Arneses de herramientas**: Permitiendo que la IA interactúe con tu sistema de archivos local o navegadores web.
+3.  **Integración de mensajería**: Conectando tu IA local a Discord, Slack o Telegram.
+
+Esta combinación transforma a Gemma de un simple chatbot en un asistente local capaz de gestionar tu flujo de trabajo o actuar como un complejo maestro de juego para simulaciones de mesa.
+
+## FAQ (Preguntas frecuentes)
+
+**P: ¿Es Gemma 4 realmente de código abierto?**
+
+R: Sí, Gemma 4 se lanza bajo la licencia **Apache 2.0**. Esto permite el uso personal y comercial, la modificación y la distribución sin los términos restrictivos de las licencias anteriores de "pesos abiertos".
+
+**P: ¿En qué se diferencia el modelo 26B MoE del modelo 31B Denso?**
+
+R: El 26B MoE (Mezcla de Expertos) solo utiliza 3.8 mil millones de parámetros por token durante la inferencia, lo que lo hace mucho más rápido. El modelo 31B Denso utiliza todos sus parámetros para cada cálculo, lo que resulta en una mayor calidad pero un rendimiento más lento.
+
+**P: ¿Puedo ejecutar la actualización de gemma 4 para ollama en una Mac?**
+
+R: Absolutamente. Ollama tiene un excelente soporte para Apple Silicon. La arquitectura de memoria unificada de los chips de la serie M es particularmente efectiva para los modelos más grandes 26B y 31B, siempre que tengas suficiente RAM.
+
+**P: ¿Admite Gemma 4 entrada de imagen o audio?**
+
+R: Los modelos Effective 2B y 4B cuentan con soporte nativo para el procesamiento de visión y audio, lo que les permite "ver" y "oír" el mundo en tiempo real, lo cual es ideal para aplicaciones móviles e IoT.

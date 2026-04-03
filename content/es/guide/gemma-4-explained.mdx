@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "Gemma 4 explicado: Guía completa de los nuevos modelos de IA de Google 2026",
+  description: "Aprenda todo sobre la serie Gemma 4 de Google. Desde capacidades multimodales hasta requisitos de hardware local, aquí está la guía completa de Gemma 4 explicado.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Explained",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente a principios de 2026, y el último lanzamiento de Google está en el centro de esta revolución. En esta guía completa de **Gemma 4 explicado**, nos sumergimos en la serie de modelos de pesos abiertos más versátil lanzada hasta la fecha. Ya sea que usted sea un desarrollador que busca integrar la IA en sus proyectos de juegos o un entusiasta de la tecnología que ejecuta LLM locales en su escritorio, comprender estos nuevos modelos es crucial. Este resumen de **Gemma 4 explicado** cubre a toda la familia, desde las variantes ligeras E2B hasta los masivos modelos densos de 31B, asegurando que sepa exactamente qué versión se adapta a su hardware y caso de uso.
+
+## La evolución de la IA local: ¿Qué es Gemma 4?
+
+Gemma 4 representa la próxima generación de la iniciativa de modelos abiertos de Google, siguiendo a las exitosas series Gemma 3 y 3N. A diferencia de sus predecesores, que a menudo eran vistos como caballos de batalla experimentales para el ajuste fino, Gemma 4 llega como una familia de modelos de "pensamiento" pulida. El cambio más significativo en 2026 es la adopción de la **licencia Apache 2**. Este cambio simplifica el panorama legal para los creadores, permitiendo a los usuarios bifurcar, modificar y distribuir sus propias versiones del modelo con restricciones mínimas, siempre que otorguen la atribución adecuada.
+
+La serie está diseñada para ser altamente modular, ofreciendo diferentes arquitecturas para adaptarse a varios presupuestos de cómputo. Desde los modelos "E" aptos para dispositivos móviles hasta las variantes de Mezcla de Expertos (MoE) de alta inteligencia, Google ha buscado cubrir todos los nichos posibles en el ecosistema de la IA local.
+
+| Variante del modelo | Parámetros | Tipo | Caso de uso principal |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 mil millones | Ligero | Dispositivos móviles, portátiles de gama baja |
+| **Gemma 4 E4B** | 4 mil millones | Ligero | Asistentes de escritorio, multimodalidad básica |
+| **Gemma 4 MoE** | 26B (4B activos) | Mezcla de expertos | Tareas de alta velocidad y alta inteligencia |
+| **Gemma 4 31B** | 31 mil millones | Denso | Razonamiento avanzado, tareas complejas de VLM |
+
+## Entendiendo la arquitectura de "Pensamiento"
+
+Una de las características destacadas de la serie Gemma 4 es la integración nativa de capacidades de "pensamiento". Estos modelos están entrenados para realizar un razonamiento interno —a menudo denominado cadena de pensamiento— antes de producir una respuesta final. Si bien esto puede conducir a respuestas más precisas en acertijos lógicos complejos o tareas de programación, conlleva la desventaja de ser un "consumidor de tokens".
+
+> **⚠️ Advertencia:** Los modelos de pensamiento pueden ser significativamente más "parlanchines" que los modelos estándar. Si los está utilizando para NPC simples o respuestas de chat rápidas, es posible que desee desactivar la función de pensamiento para ahorrar VRAM y tiempo de procesamiento.
+
+Para los usuarios avanzados, el proceso de pensamiento permite que el modelo detecte sus propios errores y refine su lógica. Esto hace que las variantes 31B y MoE sean particularmente potentes para depurar código o generar historias complejas para sesiones de juegos de mesa.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/Kaq5Ual2ij8"
+    title="Gemma 4 Is Here - Let's Talk About It."
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades multimodales y limitaciones
+
+La familia Gemma 4 introduce entradas multimodales sofisticadas, pero hay un detalle: no todos los modelos son iguales. Los modelos "E" más pequeños (E2B y E4B) son en realidad los más versátiles en términos de entrada sensorial, admitiendo texto, imagen, audio y video. En contraste, los modelos más grandes 31B y MoE están restringidos a la comprensión de texto e imagen.
+
+### Soporte multimodal por tipo de modelo
+
+| Capacidad | E2B / E4B | MoE (26B) | 31B Denso |
+|---|---|---|---|
+| **Texto** | Sí | Sí | Sí |
+| **Imagen** | Sí | Sí | Sí |
+| **Audio** | Sí (Máx 30s) | No | No |
+| **Video** | Sí (Máx 60s) | No | No |
+| **Ventana de contexto** | 128K | 256K | 256K |
+
+### La función "Presupuesto de tokens de imagen"
+Gemma 4 introduce un novedoso sistema de "presupuesto de tokens de imagen". Esto permite que el modelo maneje imágenes de alta resolución sin abrumar necesariamente su VRAM. Al ajustar el presupuesto, puede decidir si el modelo debe centrarse en detalles finos (como OCR en notas escritas a mano) o en una clasificación general (identificar si una foto contiene un objeto específico).
+
+## Detalles técnicos: Límites de audio y video
+
+Al utilizar las funciones multimodales de la serie E, existen varias limitaciones técnicas que los desarrolladores deben tener en cuenta. A diferencia de los modelos especializados como Whisper o Parakeet, el procesamiento de audio y video de Gemma 4 está diseñado para fragmentos de corta duración.
+
+1.  **Segmentos de audio:** La entrada de audio tiene un límite de 30 segundos. Para procesar archivos más largos, debe utilizar la Detección de Actividad de Voz (VAD) para dividir el audio en segmentos antes de enviarlos al modelo.
+2.  **Frecuencia de fotogramas de video:** El video se procesa de forma predeterminada a 1 fotograma por segundo (FPS). Si su tarea requiere analizar movimiento de alta velocidad, deberá extraer fotogramas manualmente y enviarlos como una secuencia de imágenes.
+3.  **Orden de entrada:** Para obtener resultados óptimos, Google recomienda colocar todo el contenido multimodal (imágenes, audio, video) *antes* de su mensaje de texto. No hacerlo puede resultar en un rendimiento significativamente degradado.
+
+> **💡 Consejo:** Al traducir audio localmente, utilice los mensajes específicos de ASR (Reconocimiento Automático de Voz) descritos en la tarjeta oficial del modelo para asegurarse de que el modelo permanezca en "modo de transcripción" en lugar de "modo de conversación".
+
+## Requisitos de hardware y cuantización
+
+Ejecutar la **serie Gemma 4** localmente requiere una sólida comprensión de la gestión de VRAM. Mientras que el modelo E2B puede ejecutarse en un teléfono inteligente moderno, el modelo denso 31B es un peso pesado que exige recursos de GPU significativos.
+
+Para hacer que estos modelos sean accesibles, la mayoría de los usuarios confían en la **cuantización GGUF**. Este proceso comprime los pesos del modelo, permitiéndoles caber en cantidades más pequeñas de VRAM con una pérdida mínima de inteligencia.
+
+| Modelo y Cuantización | Tamaño del archivo (Aprox) | VRAM recomendada |
+|---|---|---|
+| **E2B (Q8)** | 5 GB | 6 GB |
+| **E4B (Q8)** | 8 GB | 10 GB |
+| **MoE (Q8)** | 22 GB | 24 GB |
+| **31B Denso (Q8)** | 35 GB | 40 GB+ |
+
+Para aquellos que utilizan herramientas como LM Studio u Ollama, la cuantización Q4 suele ser la predeterminada, proporcionando un gran equilibrio entre velocidad y rendimiento. Sin embargo, si tiene hardware de sobra, las versiones Q8 (8 bits) ofrecen "lo mejor de ambos mundos" en términos de precisión y optimización. Puede encontrar estas versiones en la [colección oficial de Google en Hugging Face](https://huggingface.co/google) o a través de colaboradores de la comunidad.
+
+## Benchmarks y rendimiento en el mundo real
+
+Sobre el papel, el modelo Gemma 4 E4B supera al modelo 27B de la generación anterior en varios benchmarks clave. Esto sugiere un salto masivo en eficiencia, donde un modelo casi siete veces más pequeño puede mantenerse a la par de sus predecesores.
+
+Sin embargo, los benchmarks rara vez cuentan toda la historia. En tareas de escritura creativa o programación del mundo real, la naturaleza de "pensamiento" de Gemma 4 lo hace sentir más deliberado pero a veces más lento. Los usuarios que tuvieron problemas con la tendencia a alucinar de la serie Gemma 3N probablemente encontrarán en las capacidades de razonamiento de Gemma 4 un soplo de aire fresco.
+
+## Cómo empezar con Gemma 4
+
+Para ejecutar estos modelos hoy, deberá actualizar sus herramientas de inferencia local. Debido a que Gemma 4 utiliza una nueva arquitectura para sus capas multimodales y de pensamiento, es posible que las versiones anteriores de Llama.cpp u Ollama no los admitan de forma nativa.
+
+1.  **Actualice su software:** Asegúrese de tener la última versión de LM Studio, Ollama o su interfaz preferida.
+2.  **Busque modelos "-it":** Busque las variantes "Instruction Tuned" (IT) en Hugging Face, ya que están optimizadas para el chat y siguen las instrucciones mucho mejor que los modelos base.
+3.  **Configure el contexto:** Si está utilizando los modelos 31B o MoE, no olvide ampliar su ventana de contexto a 256K si su hardware lo permite, lo que permite el análisis de documentos masivos.
+
+## FAQ (Preguntas frecuentes)
+
+**P: ¿Es Gemma 4 gratuito para uso comercial?**
+
+R: Sí, Gemma 4 se lanza bajo la licencia Apache 2, que es una de las licencias más permisivas de la industria. Puede usarlo para proyectos comerciales, modificar el código y distribuir sus propias versiones siempre que proporcione la atribución adecuada a Google.
+
+**P: ¿Por qué el modelo 31B no puede procesar audio o video?**
+
+R: En la documentación actual de **Gemma 4 explicado**, los modelos 31B y MoE están optimizados como Modelos de Lenguaje de Visión (VLM). Para mantener el recuento de parámetros manejable y el razonamiento agudo, Google se centró en la comprensión de texto e imagen para los modelos más grandes, dejando la suite multimodal completa para la serie E, que es más eficiente.
+
+**P: ¿Cómo evito que el modelo "piense" demasiado?**
+
+R: La mayoría de los motores de inferencia le permiten ajustar el prompt del sistema o usar un token de parada específico para omitir la fase de pensamiento. Alternativamente, puede buscar ajustes finos de la comunidad que hayan sido entrenados para proporcionar respuestas directas sin el proceso interno de cadena de pensamiento.
+
+**P: ¿Admite Gemma 4 otros idiomas además del inglés?**
+
+R: Sí, Gemma 4 es un modelo multilingüe entrenado en un conjunto de datos diverso. Es particularmente capaz en la traducción de audio y la generación de texto en docenas de los principales idiomas del mundo.

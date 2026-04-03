@@ -11,12 +11,13 @@
     }
   },
   "nav": {
-    "guides": "Anleitungen",
-    "crafting": "Herstellung",
-    "items": "Gegenstände",
-    "biomes": "Biome",
-    "building": "Bauen",
-    "support": "Unterstützung"
+    "guide": "Anleitung",
+    "models": "Modelle",
+    "requirements": "Anforderungen",
+    "ollama": "Ollama",
+    "install": "Installation",
+    "benchmark": "Benchmark",
+    "comparison": "Vergleich"
   },
   "common": {
     "home": "Startseite",

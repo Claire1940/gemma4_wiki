@@ -1,0 +1,122 @@
+export const metadata = {
+  title: "Guía de Gemma 4: Dominando la IA de código abierto de Google en 2026",
+  description: "Aprenda a ejecutar Gemma 4 de Google localmente, explore el vibe-coding en AIventure y optimice el rendimiento para juegos y desarrollo en 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Complete+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado drásticamente con el lanzamiento de la última familia de modelos de Google. Esta **guía de gemma 4** está diseñada para ayudar a jugadores, desarrolladores y entusiastas de la IA a navegar por las complejidades de estos nuevos y potentes pesos. Ya sea que busque integrar NPCs inteligentes en un proyecto de PhaserJS o simplemente desee una alternativa local y privada a los LLM basados en la nube, entender la arquitectura de este lanzamiento es esencial.
+
+A medida que avanzamos en 2026, la capacidad de ejecutar modelos de alto rendimiento en hardware de consumo se ha convertido en una realidad. Esta completa **guía de gemma 4** explora los diferentes tamaños de parámetros, desde la versión ligera de 2B hasta el potente modelo de 31B que actualmente rivaliza con gigantes de billones de parámetros en las tablas de clasificación mundiales. Al final de este artículo, sabrá exactamente cómo configurar su entorno local, utilizar funciones agénticas e incluso participar en el "vibe-coding" para el prototipado rápido de juegos.
+
+## Entendiendo las variantes del modelo Gemma 4
+
+Google ha proporcionado varios "sabores" del modelo para adaptarse a diferentes limitaciones de hardware y casos de uso. Uno de los avances más significativos en esta generación es la arquitectura de parámetros "Efectivos" (Effective), que permite que los modelos más pequeños superen con creces su categoría de peso.
+
+| Tamaño del modelo | Parámetros "Efectivos" | Caso de uso clave | Clasificación Arena.ai (2026) |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 2B** | 4B | Dispositivos móviles y chat básico | Top 50 |
+| **Gemma 4 4B (E4B)** | 8B | Juegos locales y vibe-coding | Top 20 |
+| **Gemma 4 26B** | 40B | Razonamiento complejo y uso de herramientas | Top 10 |
+| **Gemma 4 31B** | 50B+ | Programación profesional e investigación | **#3 General** |
+
+El modelo 31B es particularmente "increíble" porque compite directamente con modelos como GLM5 y Kim 2.5, a pesar de que esos modelos tienen recuentos de parámetros significativamente mayores. Esta eficiencia lo convierte en la opción ideal para los usuarios que tienen la VRAM necesaria para soportarlo pero desean la velocidad de una huella de memoria más pequeña.
+
+> **⚠️ Advertencia:** Al descargar modelos, preste mucha atención al prefijo "E" (por ejemplo, E4B). Esto significa "Efectivo" (Effective), lo que indica que el modelo utiliza una arquitectura de mezcla de expertos o similar para ofrecer la calidad de un modelo 8B mientras solo activa 4B parámetros durante la inferencia.
+
+## Configuración local: Ejecución de Gemma 4 en su ordenador
+
+Ejecutar estos modelos localmente garantiza la privacidad y elimina la latencia de las API en la nube. La forma más popular de empezar en 2026 es a través de [LM Studio](https://lmstudio.ai/), que proporciona una interfaz simplificada para descargar y chatear con modelos de código abierto.
+
+### Instalación paso a paso
+
+1.  **Actualice sus herramientas:** Asegúrese de estar ejecutando la última versión de LM Studio u Ollama. Los entornos de ejecución de 2026 incluyen optimizaciones específicas para la arquitectura Gemma 4 de las que carecen las versiones anteriores.
+2.  **Busque el modelo:** Navegue hasta la barra de búsqueda y escriba "Gemma 4". Verá lanzamientos oficiales de Google, así como cuantizaciones de la comunidad de creadores como Unsloth.
+3.  **Elija su cuantización:** Para la mayoría de los usuarios, una cuantización de 8 bits (Q8_0) o 4 bits (Q4_K_M) es el punto ideal entre el tamaño del archivo y la inteligencia.
+4.  **Verifique su entorno de ejecución:** Compruebe que su motor local esté utilizando los frameworks más recientes. El uso de un framework desactualizado puede dar lugar a una salida de texto "basura" o fallos en la carga.
+5.  **Cargar y chatear:** Seleccione el modelo en el menú superior y espere a que se cargue en la memoria RAM de su sistema o en la VRAM de su GPU.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eS9RJbnYiF0"
+    title="How to Download and Run Google Gemma 4 AI LOCALLY on Your Computer"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Juegos y "Vibe-Coding" con AIventure
+
+Una de las aplicaciones más emocionantes de esta tecnología se encuentra en **AIventure**, un juego educativo creado con Angular y PhaserJS. Este proyecto demuestra cómo los principios de esta **guía de gemma 4** se aplican al desarrollo de software en el mundo real a través de un concepto conocido como "vibe-coding".
+
+### ¿Qué es el Vibe-Coding?
+
+El vibe-coding permite a los desarrolladores describir la "vibración" o funcionalidad de una característica en lenguaje natural, que la IA luego convierte en código funcional. En AIventure, los jugadores encuentran NPCs como un pollo que requiere una aplicación de lista de tareas. En lugar de escribir JavaScript, el jugador le pide a la IA que "cree una lista de tareas para comer y dormir".
+
+| Característica | Programación tradicional | Vibe-Coding con Gemma 4 |
+| :--- | :--- | :--- |
+| **Sintaxis** | Estricta (JS/TypeScript) | Lenguaje natural (Inglés/Multilingüe) |
+| **Iteración** | Depuración manual | Análisis y regeneración impulsados por IA |
+| **Lógica** | Booleana/Condicional | Bucles de "pensamiento" agénticos |
+| **Integración** | Llamadas manuales a la API | Llamada a funciones y acceso a herramientas |
+
+### NPCs agénticos y bucles de pensamiento
+
+Más allá del simple chat, Gemma 4 admite **funciones agénticas**. En un contexto de juego, esto significa que un NPC puede recibir un objetivo —como "encontrar el interruptor al otro lado de la lava"— y entrar en un bucle de búsqueda, movimiento y reevaluación de su entorno hasta que se complete la tarea. Esto es posible gracias a la capacidad del modelo para acceder a herramientas y realizar "llamadas a funciones" localmente.
+
+> **💡 Consejo:** Al implementar NPCs agénticos, use el modelo 31B si es posible. Sus capacidades de razonamiento superiores hacen que sea mucho menos probable que se quede "atascado" en un bucle lógico en comparación con la variante 4B.
+
+## Requisitos de hardware para 2026
+
+Para aprovechar al máximo esta **guía de gemma 4**, debe hacer coincidir el tamaño del modelo con su hardware. Mientras que el modelo 4B puede ejecutarse en un smartphone moderno, el modelo 31B requiere una GPU dedicada para una experiencia fluida.
+
+| Nivel de hardware | Modelo recomendado | RAM/VRAM mínima | Expectativa de rendimiento |
+| :--- | :--- | :--- | :--- |
+| **Nivel de entrada** | Gemma 4 2B / 4B | 8GB RAM | 30-50 tokens/seg |
+| **Gama media** | Gemma 4 4B / 26B | 16GB VRAM | 40-60 tokens/seg |
+| **Gama alta** | Gemma 4 31B | 24GB+ VRAM | 50+ tokens/seg |
+| **Móvil/Tableta** | Gemma 4 2B | 6GB RAM | 15-20 tokens/seg |
+
+Si nota que su hardware tiene dificultades, considere usar un nivel más alto de compresión (cuantización). Una cuantización de 4 bits reduce la huella de memoria en casi un 50% con solo un impacto menor en la precisión de razonamiento del modelo.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/6yjJ7Prt-RI"
+    title="AIventure: Learning about vibe-coding, agents and Gen AI with Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades avanzadas: Visión y audio
+
+A diferencia de las generaciones anteriores, Gemma 4 es nativamente multimodal. Esto significa que no solo "lee" descripciones de imágenes; las "ve". En pruebas que involucraron animales raros como el ualabí blanco, Gemma 4 identificó con éxito la especie incluso cuando el prompt intentaba engañarlo llamándolo hurón.
+
+### Casos de uso multimodales:
+*   **Depuración visual:** Suba una captura de pantalla de la interfaz de usuario de su juego y pida a la IA que identifique problemas de alineación.
+*   **Transcripción de audio:** Entregue al modelo clips de audio para generar subtítulos o traducir diálogos en tiempo real.
+*   **Contexto largo:** Con una ventana de hasta **256,000 tokens**, puede cargar documentos de diseño de juegos completos o bases de código, y el modelo mantendrá el contexto de todo el proyecto.
+
+## FAQ (Preguntas frecuentes)
+
+**P: ¿Es Gemma 4 completamente gratuito?**
+
+R: Sí, Gemma 4 es un modelo de pesos abiertos (open-weight), lo que significa que puede descargarlo y ejecutarlo en su propio hardware sin pagar cuotas de suscripción. Sin embargo, si lo utiliza a través de Google Cloud Vertex AI, se aplicarán los costes estándar de alojamiento en la nube.
+
+**P: ¿Puedo ejecutar este modelo en un Mac?**
+
+R: Absolutamente. LM Studio y Ollama son totalmente compatibles con Apple Silicon (chips M1, M2, M3, M4). La arquitectura de memoria unificada de los Mac es, de hecho, excelente para ejecutar modelos grandes como la variante 31B.
+
+**P: ¿Cuál es la diferencia entre Gemini y Gemma?**
+
+R: Gemini es la familia de modelos de Google de código cerrado y basados en la nube (como GPT-4). Gemma es la versión "abierta" derivada de la misma tecnología, diseñada para uso local y personalización por parte de la comunidad.
+
+**P: ¿Cómo mejoro la velocidad del modelo?**
+
+R: Para aumentar los tokens por segundo, asegúrese de utilizar la aceleración por GPU (Metal en Mac, CUDA en NVIDIA o ROCm en AMD). Además, el uso de una cuantización de menos bits como Q4_K_S puede aumentar significativamente la velocidad en hardware más antiguo, como se detalló anteriormente en esta **guía de gemma 4**.

@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Requisitos de Gemma 4: Guía de Hardware y Software 2026",
+  description: "Explore los requisitos oficiales de Gemma 4 para los modelos Workstation y Edge. Conozca las necesidades de VRAM, la compatibilidad de GPU y consejos de implementación.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Requirements+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+Google ha transformado fundamentalmente el panorama de la inteligencia artificial de pesos abiertos con el lanzamiento de la familia de modelos Gemma 4. Basados en la investigación de vanguardia de Gemini 3, estos modelos introducen multimodalidad nativa, incluyendo visión y audio, junto con una sofisticada cadena de razonamiento de "pensamiento". Sin embargo, antes de que pueda aprovechar el poder de estos modelos de Mezcla de Expertos (MoE) de 128 expertos o de alta densidad, comprender los **requisitos de gemma 4** específicos es esencial para una implementación sin contratiempos. Ya sea que usted sea un desarrollador que busca integrar la llamada a funciones en un flujo de trabajo de agentes o un investigador que realiza el ajuste fino de un asistente de programación local, cumplir con los **requisitos de gemma 4** garantiza una latencia y calidad de salida óptimas en diversos niveles de hardware.
+
+El ecosistema Gemma 4 se divide en dos categorías principales: modelos Workstation para tareas pesadas y modelos Edge para dispositivos localizados de bajo consumo. Esta guía detalla las especificaciones de hardware, las dependencias de software y las técnicas de optimización necesarias para ejecutar estos modelos de manera efectiva en 2026.
+
+## Descripción general de la familia de modelos Gemma 4
+
+Antes de profundizar en las especificaciones técnicas, es importante identificar qué versión de Gemma 4 se adapta a su proyecto. La familia consta de cuatro modelos distintos, cada uno con diferentes huellas computacionales. El nivel Workstation incluye un modelo denso de 31 mil millones (31B) de parámetros y un modelo de Mezcla de Expertos (MoE) de 26 mil millones (26B). El nivel Edge se centra en la eficiencia con los modelos E2B y E4B, diseñados para sistemas móviles y embebidos.
+
+| Nivel del modelo | Nombre del modelo | Arquitectura | Ventana de contexto | Caso de uso principal |
+|---|---|---|---|---|
+| **Workstation** | Gemma 4 31B | Denso | **256K** | Programación, Copilotos de IDE, Servidores |
+| **Workstation** | Gemma 4 26B | MoE (3.8B Activos) | **256K** | Razonamiento de alta eficiencia |
+| **Edge** | Gemma 4 E4B | Denso pequeño | **128K** | Portátiles de gama alta/Móviles |
+| **Edge** | Gemma 4 E2B | Denso diminuto | **128K** | Raspberry Pi, Jetson Nano |
+
+> **💡 Consejo profesional:** Si requiere las capacidades de razonamiento más altas pero tiene computación limitada, el modelo 26B MoE es el punto ideal, ya que solo activa 3.8 mil millones de parámetros por token mientras mantiene la inteligencia de un modelo mucho más grande.
+
+## Nivel Workstation: Requisitos de Gemma 4
+
+Los modelos Workstation están diseñados para entornos profesionales donde se requiere un razonamiento de alta fidelidad y procesamiento de contexto largo. El modelo denso 31B, en particular, presenta mejoras arquitectónicas significativas como la normalización de valores y un mecanismo de atención refinado optimizado para su masiva ventana de contexto de 256K.
+
+### Especificaciones de GPU y VRAM
+Ejecutar estos modelos sin cuantización requiere una memoria de video (VRAM) significativa. Para el modelo 31B con precisión de 16 bits, necesitará una configuración de GPU con al menos 80 GB de VRAM, como una NVIDIA H100 o una A100. Sin embargo, la mayoría de los usuarios locales optarán por la cuantización de 4 u 8 bits para ajustar el modelo en hardware de consumo.
+
+| Nivel de cuantización | VRAM necesaria (31B/26B) | GPU recomendada |
+|---|---|---|
+| **FP16 (Sin comprimir)** | ~65GB - 72GB | **NVIDIA H100 / RTX 6000 Pro** |
+| **8-bit (INT8)** | ~35GB - 40GB | **2x RTX 3090/4090 (NVLink)** |
+| **4-bit (GGUF/EXL2)** | ~18GB - 22GB | **Una sola RTX 3090 / 4090** |
+
+Para cumplir con los **requisitos de gemma 4** para el modelo 26B MoE, las necesidades de VRAM son ligeramente menores para la inferencia activa, pero los pesos completos aún deben residir en la memoria. Utilice los puntos de control de Entrenamiento Consciente de la Cuantización (QAT) proporcionados por Google para mantener una alta calidad incluso con tasas de bits más bajas.
+
+### CPU y RAM del sistema
+Aunque la GPU realiza el trabajo pesado, la RAM de su sistema debe ser capaz de manejar el proceso de carga del modelo. Se recomienda un mínimo de 64 GB de RAM del sistema para el nivel Workstation para evitar cuellos de botella durante las transferencias del modelo y el procesamiento de contextos largos.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Nivel Edge: Optimizado para el rendimiento local
+
+Los modelos E2B y E4B representan un avance en la IA para dispositivos. Estos modelos son únicos porque incluyen soporte de audio nativo y un codificador de visión drásticamente comprimido. El codificador de visión se ha reducido de 350 millones de parámetros en versiones anteriores a solo 150 millones en Gemma 4, lo que lo hace significativamente más rápido para el OCR y la comprensión de documentos.
+
+### Hardware para implementación en el Edge
+Los **requisitos de gemma 4** para el nivel Edge son mucho más accesibles. Estos modelos están diseñados para ejecutarse en dispositivos con envolventes térmicas y ancho de banda de memoria limitados.
+
+*   **Dispositivos móviles:** Dispositivos Android e iOS de gama alta con al menos 8 GB de RAM.
+*   **Computadoras de placa única:** Raspberry Pi 5 (8 GB) o NVIDIA Jetson Nano.
+*   **Portátiles:** MacBooks estándar (chips M2/M3) o portátiles Windows con GPU discretas de nivel de entrada (RTX 3050/4050).
+
+### Procesamiento de audio y visión
+El modelo E2B presenta un codificador de audio un 50% más pequeño en comparación con la serie Gemma 3N. Esta reducción en el espacio de disco (de 390 MB a 87 MB) permite tareas de transcripción y de voz a texto traducido con una latencia extremadamente baja directamente en el dispositivo.
+
+> **⚠️ Advertencia:** Al ejecutar tareas de audio en los modelos Edge, asegúrese de que su dispositivo tenga una NPU o GPU moderna, ya que la duración de la trama se ha acortado a 40 ms para una mayor capacidad de respuesta, lo que aumenta la frecuencia de los ciclos de inferencia.
+
+## Requisitos de software y licencia
+
+Una de las actualizaciones más importantes en Gemma 4 es la transición a la **Licencia Apache 2.0**. A diferencia de las licencias personalizadas anteriores, esta permite el uso comercial, la modificación y la distribución sin restricciones. Para comenzar con la implementación del software, necesitará lo siguiente:
+
+1.  **Entorno Python:** Python 3.10 o superior.
+2.  **Bibliotecas:** Una versión especializada de la biblioteca `transformers` (hasta que se actualice la rama principal) o las últimas versiones de `accelerate` y `bitsandbytes` para la cuantización.
+3.  **Controladores:** NVIDIA CUDA Toolkit 12.2+ para aceleración por GPU.
+4.  **Motores de inferencia:** El soporte está disponible a través de Ollama, LM Studio y Google Cloud Run para implementaciones sin servidor (serverless).
+
+Para entornos sin servidor, Google Cloud Run ahora es compatible con las GPU G4 (NVIDIA RTX Pro 6000), que proporcionan 96 GB de VRAM. Esta es una excelente manera de cumplir con los **requisitos de gemma 4** para el modelo 31B sin invertir en hardware físico.
+
+## Razonamiento avanzado: La función "Pensamiento"
+
+Gemma 4 introduce una capacidad nativa de razonamiento de "Cadena de pensamiento larga" (Long Chain of Thought). Esto se puede activar a través de la plantilla de chat configurando `enable_thinking=True`. Si bien esto mejora la calidad de las respuestas complejas, aumenta el recuento de tokens y el tiempo total de inferencia.
+
+| Función | Impacto en los requisitos | Nivel recomendado |
+|---|---|---|
+| **Pensamiento activado** | Mayor cómputo/tiempo | Workstation 31B |
+| **Entrada de múltiples imágenes** | Mayor uso de VRAM | Workstation 26B MoE |
+| **Audio nativo** | Bajo impacto (Optimizado) | Edge E2B / E4B |
+| **Llamada a funciones** | Impacto mínimo | Todos los niveles |
+
+Al usar la función de pensamiento, el modelo realiza un razonamiento interno antes de proporcionar la salida final. Esto es particularmente útil para tareas de programación y matemáticas donde la precisión es primordial.
+
+## Pasos de implementación para usuarios locales
+
+Para cumplir con éxito los **requisitos de gemma 4** en una máquina local, siga estos pasos:
+
+1.  **Verificar VRAM:** Use `nvidia-smi` para verificar su memoria disponible.
+2.  **Descargar pesos:** Obtenga el modelo de Hugging Face o Kaggle.
+3.  **Aplicar cuantización:** Si tiene menos de 40 GB de VRAM, use las versiones GGUF de 4 bits o QAT.
+4.  **Configurar contexto:** Establezca sus límites de ventana de contexto. Aunque los modelos admiten hasta 256K, establecer un límite inferior (por ejemplo, 8K o 32K) ahorrará significativamente VRAM.
+5.  **Inicializar procesador:** Use el `AutoProcessor` para entradas multimodales para asegurar que los tokens de audio e imagen se manejen correctamente.
+
+La arquitectura de Gemma 4 está diseñada para estar "preparada para el futuro", lo que significa que converge en los mecanismos que funcionan mejor para flujos de trabajo de agentes y contextos largos. Al cumplir con los estándares de hardware y software descritos anteriormente, puede aprovechar uno de los modelos de pesos abiertos más potentes disponibles en 2026.
+
+Para obtener más información sobre los últimos modelos de IA y documentación, visite el [Blog de Google AI](https://ai.google/blog/) o consulte los repositorios oficiales de Hugging Face.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Cuáles son los requisitos mínimos de gemma 4 para un PC doméstico estándar?**
+
+R: Para el modelo más pequeño (E2B), puede ejecutarlo en casi cualquier PC moderno con 8 GB de RAM. Para el modelo 26B MoE más capaz, lo ideal es que necesite una GPU NVIDIA con al menos 24 GB de VRAM (como una RTX 3090 o 4090) para ejecutarlo con cuantización de 4 bits.
+
+**P: ¿Puede Gemma 4 ejecutarse en un Mac?**
+
+R: Sí, Gemma 4 es altamente compatible con Apple Silicon. Usando herramientas como LM Studio u Ollama, puede ejecutar los modelos Edge (E2B/E4B) en un MacBook M2/M3 base. Para los modelos Workstation, se recomienda un M2 Ultra o M3 Max con memoria unificada.
+
+**P: ¿Requiere Gemma 4 una conexión a Internet?**
+
+R: No. Uno de los principales beneficios de cumplir con los **requisitos de gemma 4** locales es que el modelo se ejecuta completamente en su hardware. Esto garantiza la privacidad y permite su uso en entornos sin acceso a la web, como durante vuelos o en instalaciones seguras.
+
+**P: ¿Es el modelo 31B mejor que el modelo 26B MoE?**
+
+R: Depende de su hardware. El modelo denso 31B es generalmente más robusto para la generación de código complejo y la redacción de textos largos, pero requiere un cómputo más constante. El modelo 26B MoE ofrece una inteligencia similar con costos de cómputo activos mucho más bajos, lo que lo hace más rápido para aplicaciones de chat en tiempo real.

@@ -1,0 +1,151 @@
+export const metadata = {
+  title: "Tutorial de Gemma 4: Domina los modelos de IA abiertos de Google 2026",
+  description: "Aprende a desplegar y realizar el ajuste fino de los modelos Gemma 4 de Google. Nuestro tutorial completo cubre la multimodalidad, la arquitectura MoE y la configuración local para 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Tutorial",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la familia de modelos más reciente de Google ha causado un gran impacto en la comunidad de desarrollo, y este **tutorial de gemma 4** está diseñado para ayudarte a navegar por estas potentes herramientas. A diferencia de las iteraciones anteriores, este lanzamiento representa un cambio masivo hacia la verdadera accesibilidad de código abierto, distribuyéndose bajo la permisiva licencia Apache 2.0. Esto significa que los desarrolladores ahora pueden modificar, ajustar y desplegar comercialmente los pesos abiertos más avanzados de Google sin las restrictivas cláusulas de "no competencia" que obstaculizaron las versiones anteriores. Ya sea que estés construyendo un NPC impulsado por IA para un RPG de próxima generación o un asistente de programación local, entender cómo implementar un flujo de trabajo de **tutorial de gemma 4** es esencial para mantenerse a la vanguardia en 2026.
+
+En esta guía, desglosaremos los cuatro niveles distintos de modelos, exploraremos la innovadora arquitectura de Mezcla de Expertos (MoE) y proporcionaremos una guía paso a paso para realizar el ajuste fino de estos modelos en tus propios conjuntos de datos personalizados. Desde los modelos de estación de trabajo de alto rendimiento hasta las versiones Edge ultra eficientes, Gemma 4 ofrece una solución para cada presupuesto computacional.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Google ha estructurado este lanzamiento en dos niveles principales: Workstation (Estación de trabajo) y Edge. Los modelos Workstation están diseñados para tareas pesadas como el razonamiento complejo y la generación de código a gran escala, mientras que los modelos Edge están optimizados para dispositivos con recursos limitados, como smartphones, Raspberry Pis y Jetson Nanos.
+
+| Nivel de modelo | Nombre del modelo | Parámetros | Arquitectura | Ventana de contexto |
+|---|---|---|---|---|
+| **Workstation** | Gemma 4 31B | 31 mil millones | Densa | **256K** |
+| **Workstation** | Gemma 4 26B | 26 mil millones | MoE (3.8B Activos) | **256K** |
+| **Edge** | Gemma 4 E4B | 4 mil millones | Densa / Audio Nativo | **128K** |
+| **Edge** | Gemma 4 E2B | 2 mil millones | Densa / Audio Nativo | **128K** |
+
+El modelo 26B de Mezcla de Expertos (MoE) es particularmente digno de mención. Aunque contiene 26 mil millones de parámetros totales, solo activa aproximadamente 3.8 mil millones por token. Esto le permite ofrecer la inteligencia de un modelo mucho más grande manteniendo la velocidad de inferencia y los costos de cómputo de un modelo 4B. Para los desarrolladores que ejecutan hardware local, esto representa una ganancia de eficiencia masiva.
+
+## Innovaciones arquitectónicas clave en 2026
+
+Gemma 4 no es solo un aumento de parámetros; introduce varias capacidades "nativas" que anteriormente se añadían mediante canalizaciones externas. El cambio más significativo es la integración de la multimodalidad a nivel arquitectónico.
+
+### Multimodalidad Nativa
+En el pasado, si querías que una IA "oyera" o "viera", tenías que usar modelos separados como Whisper para audio a texto o CLIP para visión. Gemma 4 maneja esto de forma nativa.
+*   **Visión:** El nuevo codificador de visión presenta un procesamiento nativo de la relación de aspecto, lo que permite al modelo entender documentos, capturas de pantalla e imágenes complejas sin perder detalles debido a recortes inadecuados.
+*   **Audio:** Los modelos Edge (E2B y E4B) incluyen un codificador ASR (Reconocimiento Automático de Voz) integrado. Esto permite el paso directo de voz a texto e incluso de voz a texto traducido dentro de una sola ejecución del modelo.
+
+### Razonamiento de Cadena de Pensamiento Larga
+Google ha integrado el "pensamiento" directamente en la plantilla de chat. Al habilitar el modo de pensamiento, el modelo puede realizar un razonamiento de cadena de pensamiento (Chain-of-Thought) largo a través de texto, imágenes e incluso audio. Esto aumenta significativamente el rendimiento en benchmarks complejos como MMU Pro y SweetBench Pro.
+
+> **💡 Consejo:** Al usar la librería Transformers, puedes alternar la capacidad de razonamiento configurando `enable_thinking=True` en el procesamiento de tu plantilla de chat.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Tutorial de Gemma 4 paso a paso: Implementación local
+
+Para comenzar con Gemma 4 localmente, necesitarás un entorno de Python moderno y la versión más reciente de la librería Transformers. Debido a que estos modelos son de vanguardia, asegúrate de que tus controladores y librerías estén completamente actualizados para 2026.
+
+### 1. Configuración del entorno
+Primero, crea un entorno virtual para evitar conflictos de dependencias. Si estás usando una GPU, asegúrate de tener al menos 8GB de VRAM para el modelo E2B o más de 24GB para los modelos Workstation.
+
+```bash
+conda create -n gemma4_env python=3.10
+conda activate gemma4_env
+pip install torch transformers accelerate bitsandbytes
+```
+
+### 2. Script de inferencia básico
+Ejecutar el modelo requiere cargar el procesador (que maneja texto, imágenes y audio) y los pesos del modelo. Aquí te mostramos cómo iniciar una sesión básica de razonamiento basada en texto:
+
+```python
+from transformers import AutoModelForCausalLM, AutoProcessor
+
+model_id = "google/gemma-4-e2b-it"
+processor = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto")
+
+# Habilitar modo de razonamiento
+messages = [
+    {"role": "user", "content": "Explica el impacto de la arquitectura MoE en la inferencia de IA local."}
+]
+inputs = processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=True, return_tensors="pt", enable_thinking=True)
+
+outputs = model.generate(**inputs, max_new_tokens=500)
+print(processor.decode(outputs[0]))
+```
+
+## Ajuste fino de Gemma 4 con Unsloth
+
+Para tareas especializadas, como crear un experto en IA sobre la historia de un juego específico o un campo técnico de nicho, es necesario realizar un ajuste fino (fine-tuning). El uso de la librería Unsloth permite un entrenamiento increíblemente rápido con un uso mínimo de VRAM.
+
+### Preparación de datos
+Tu conjunto de datos debe seguir el formato ShareGPT o OpenAI JSONL. Para un **tutorial de gemma 4** enfocado en el ajuste fino, la calidad es mejor que la cantidad. Apunta a tener entre 100 y 500 pares de preguntas y respuestas de alta calidad.
+
+```json
+{"conversations": [{"from": "human", "value": "¿Cuál era la capital del Imperio Kushan?"}, {"from": "gpt", "value": "Las capitales principales fueron Purushapura (la actual Peshawar) y Mathura."}]}
+```
+
+### Configuración del entrenamiento
+El uso de la Adaptación de Bajo Rango (LoRA) es el estándar para 2026. Te permite entrenar una pequeña capa "adaptadora" en lugar de los miles de millones de parámetros completos, ahorrando tiempo y memoria.
+
+| Parámetro | Valor recomendado | Descripción |
+|---|---|---|
+| **Learning Rate** | **2e-4** | Equilibra velocidad y estabilidad. |
+| **Epochs** | **3** | Número de pasadas por los datos. |
+| **Batch Size** | **2** | Número de muestras por pasada de GPU. |
+| **Optimizer** | **AdamW 8-bit** | Alta eficiencia con baja huella de memoria. |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/cHpB0PTRx5A"
+    title="Fine-Tune Gemma-4 on Your Own Dataset Locally: Step-by-Step Tutorial"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Ejecución del ajuste fino
+Una vez que tu script esté listo, puedes ejecutar el entrenamiento. En una NVIDIA H100 o incluso en una RTX 4090 de consumo, un conjunto de datos pequeño puede ajustarse en menos de 5 minutos. Los adaptadores LoRA resultantes son pequeños (a menudo menos de 100MB) y pueden compartirse fácilmente o fusionarse de nuevo con el modelo base.
+
+> **⚠️ Advertencia:** Evita el "sobreajuste" (overfitting) monitoreando tu curva de pérdida. Si la pérdida cae demasiado, es posible que el modelo esté memorizando los datos en lugar de aprender los conceptos.
+
+## Requisitos de hardware para 2026
+
+Aunque Google ha optimizado estos modelos significativamente, aún necesitas el hardware adecuado para ejecutarlos de manera efectiva. La siguiente tabla describe los requisitos para varios escenarios de despliegue.
+
+| Modelo | Tarea | Hardware mín. | Hardware recomendado |
+|---|---|---|---|
+| **E2B (2B)** | Chat básico / Audio | 8GB VRAM (T4) | RTX 4060 / Jetson Orin |
+| **E4B (4B)** | Visión / Traducción | 12GB VRAM | RTX 4070 Ti |
+| **26B MoE** | Razonamiento avanzado | 24GB VRAM | RTX 4090 / RTX 6000 |
+| **31B Dense** | Programación / Multilingüe | 48GB+ VRAM | A100 / H100 |
+
+Para obtener más información sobre los pesos del modelo y la documentación, visita el [repositorio oficial de Hugging Face](https://huggingface.co/google) para descargar los últimos puntos de control (checkpoints).
+
+## FAQ
+
+**P: ¿Es Gemma 4 completamente gratuito para uso comercial?**
+
+R: Sí. Gemma 4 se publica bajo la **licencia Apache 2.0**, que es una de las licencias más permisivas disponibles. Puedes usarlo en productos comerciales, modificar el código y distribuirlo sin pagar regalías a Google.
+
+**P: ¿Puedo ejecutar este tutorial de gemma 4 en un Mac?**
+
+R: Absolutamente. Gemma 4 es compatible a través de MLX y llama.cpp. Para la mejor experiencia en macOS, utiliza un dispositivo con al menos 16GB de memoria unificada (chips M2/M3) para manejar los modelos E2B o E4B con comodidad.
+
+**P: ¿Soporta Gemma 4 otros idiomas además del inglés?**
+
+R: Sí, los modelos son altamente multilingües. Los datos de entrenamiento incluyeron más de 140 idiomas, con un ajuste fino de instrucciones específico para 35 idiomas principales, lo que lo hace excelente para aplicaciones globales.
+
+**P: ¿Cómo funciona el modo "Thinking" (Pensamiento)?**
+
+R: Utiliza una plantilla de prompt especial de "Cadena de pensamiento" (CoT) que anima al modelo a generar pasos de razonamiento intermedios antes de llegar a una respuesta final. Esto es particularmente útil para matemáticas, lógica y problemas complejos de programación.

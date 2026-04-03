@@ -1,0 +1,124 @@
+export const metadata = {
+  title: "Gemma 4 vs Qwen: Guía definitiva de comparación de modelos de IA 2026",
+  description: "Una comparación profunda entre Gemma 4 de Google y Qwen 3.6 Plus de Alibaba. Explora benchmarks, funciones multimodales y consejos de despliegue local para 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+vs+Qwen+Comparison",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de los modelos de lenguaje grandes locales ha cambiado drásticamente a principios de 2026, lo que ha llevado a muchos desarrolladores y entusiastas a evaluar los méritos de **gemma 4 vs qwen**. Con el lanzamiento por parte de Google de la familia Gemma 4 bajo la permisiva licencia Apache 2.0, la barrera de entrada para la IA local de alto rendimiento nunca ha sido tan baja. Simultáneamente, Qwen 3.6 Plus de Alibaba ha surgido como una fuerza dominante en la codificación agéntica y la ingeniería a nivel de repositorio, haciendo que la elección entre estos dos gigantes dependa de los requisitos específicos de cada caso de uso.
+
+Elegir entre **gemma 4 vs qwen** requiere comprender cómo manejan estos modelos las entradas multimodales, sus respectivas ventanas de contexto y sus capacidades de razonamiento puro. Mientras que Gemma 4 introduce variantes innovadoras de "pensamiento" (thinking) y modelos especializados para el borde (edge), Qwen sigue liderando muchas tablas de clasificación de código abierto con su manejo masivo de contexto y operaciones de terminal superiores. Esta guía desglosa las especificaciones técnicas, los resultados de los benchmarks y las estrategias de despliegue que necesitas para optimizar tu pila de IA local en 2026.
+
+## Familia Gemma 4: Versatilidad y computación en el borde
+
+Gemma 4 de Google representa un salto significativo respecto a la generación 3N anterior. La familia está estructurada para ofrecer una solución para cada nivel de hardware, desde dispositivos móviles hasta GPUs de consumo de gama alta. Uno de los cambios más notables en 2026 es el paso a la licencia Apache 2.0, que permite la modificación y el uso comercial sin restricciones, siempre que se mantenga la atribución.
+
+La serie Gemma 4 se categoriza en modelos "Edge" (borde) y modelos "Large" (grandes). Las variantes E2B y E4B están diseñadas para su uso en dispositivos, respaldadas por asociaciones con Qualcomm y MediaTek. Estos modelos más pequeños son sorprendentemente capaces y ofrecen multimodalidad completa, incluyendo comprensión de texto, imagen, audio y video.
+
+| Variante del modelo | Parámetros | Tipo | Caso de uso principal |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 mil millones | Edge | Tareas offline en móviles e IoT |
+| **Gemma 4 E4B** | 4 mil millones | Edge | IA móvil de alto rendimiento |
+| **Gemma 4 26B** | 26 mil millones | MoE | Inferencia rápida (3.8B activos) |
+| **Gemma 4 31B** | 31 mil millones | Denso | Razonamiento de alta calidad y ajuste fino |
+
+> **💡 Consejo:** Si planeas ajustar (fine-tune) un modelo para un nicho específico, el modelo denso de 31B suele ser el mejor punto de partida debido a su densidad de parámetros en comparación con la variante de Mezcla de Expertos (MoE).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/Kaq5Ual2ij8"
+    title="Gemma 4 Is Here - Let's Talk About It."
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Qwen 3.6 Plus: El rey de la codificación agéntica
+
+Qwen 3.6 Plus de Alibaba se ha hecho un hueco como el modelo principal para la "codificación agéntica". A diferencia de los modelos que simplemente autocompletan líneas de código, Qwen 3.6 Plus está diseñado para manejar ingeniería completa a nivel de repositorio. Esto incluye navegar por estructuras de archivos complejas, ejecutar comandos de terminal e iterar sobre su propia salida para corregir errores.
+
+La característica destacada de Qwen 3.6 Plus en 2026 es su ventana de contexto de 1 millón de tokens. Esto permite a los desarrolladores introducir un código fuente completo o un año de registros del sistema en un solo prompt sin depender de complejas canalizaciones de Generación Aumentada por Recuperación (RAG).
+
+### Características clave de Qwen 3.6 Plus:
+*   **Ingeniería a nivel de repositorio:** Capaz de planificación en múltiples pasos a través de docenas de archivos.
+*   **Éxito en Benchmarks de terminal:** Puntuaciones significativamente más altas en pruebas de operación de terminal que modelos competidores como Claude Opus.
+*   **Preservar el pensamiento (Preserve Thinking):** Una nueva función de API que retiene la cadena de razonamiento del modelo a través de múltiples turnos de conversación, asegurando la consistencia en flujos de trabajo largos.
+
+## Gemma 4 vs Qwen: Benchmarks y rendimiento en el mundo real
+
+Al comparar **gemma 4 vs qwen**, la tabla de clasificación de modelos abiertos Arena AI proporciona una visión valiosa del sentimiento de la comunidad y el rendimiento bruto. A partir de abril de 2026, el modelo Gemma 4 31B Dense ha subido al tercer puesto, una hazaña impresionante para un modelo que puede caber en hardware de consumo. Sin embargo, las variantes de Qwen a menudo dominan la parte superior de estas listas, particularmente en tareas de codificación y razonamiento matemático.
+
+| Categoría de Benchmark | Gemma 4 31B | Qwen 3.6 Plus | Ganador |
+|---|---|---|---|
+| **Arena Leaderboard** | #3 General | Top 5 (Varios) | **Gemma 4** |
+| **Codificación (SWE-bench)** | 74.2 | 78.8 | **Qwen 3.6** |
+| **Operaciones de Terminal** | 55.4 | 61.6 | **Qwen 3.6** |
+| **Visión a Código** | 82.1 | 89.5 | **Qwen 3.6** |
+| **Multimodal (Audio/Video)** | Soportado (Edge) | Limitado | **Gemma 4** |
+
+Mientras que Qwen lidera en tareas técnicas y de ingeniería, la fuerza de Gemma 4 reside en su arquitectura de "pensamiento". Todos los modelos Gemma 4 son "modelos de pensamiento" por defecto, aunque los usuarios pueden desactivar esto para ahorrar en costes de tokens. Esta cadena de razonamiento interna ayuda a Gemma 4 a evitar trampas lógicas comunes que suelen afectar a los modelos más pequeños.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/slH-jPY1TgE"
+    title="Google drops Gemma 4, Anthropic's SECRET AI Agent, Qwen 3.6 & MORE!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Matices multimodales y detalles a tener en cuenta
+
+Un área crítica de diferencia en el debate **gemma 4 vs qwen** es cómo manejan las entradas que no son de texto. Gemma 4 introduce un sistema único de "presupuesto de tokens de imagen". Esto permite a los usuarios especificar cuánta memoria debe asignar el modelo a una imagen. Para una clasificación simple (por ejemplo, "¿Es esto un gato?"), un presupuesto bajo es suficiente. Para un OCR complejo o un análisis arquitectónico, un presupuesto alto permite al modelo ver detalles más finos.
+
+Sin embargo, Gemma 4 tiene limitaciones específicas con respecto al audio y el video que los usuarios deben conocer:
+1.  **Duración del audio:** Limitado a segmentos de 30 segundos. Los usuarios deben usar la Detección de Actividad de Voz (VAD) para dividir archivos más largos.
+2.  **Procesamiento de video:** Limitado a 60 segundos y procesado a 1 fotograma por segundo (FPS).
+3.  **Orden de entrada:** Aunque las entradas multimodales se pueden "intercalar", Google recomienda colocar todas las imágenes/audio antes del prompt de texto para obtener los resultados más fiables.
+
+Qwen 3.6 Plus, aunque está menos centrado en el procesamiento nativo de audio/video, destaca en la "codificación visual". Puede tomar una captura de pantalla de una interfaz de usuario o incluso un boceto dibujado a mano y generar código funcional en React o Tailwind, cerrando la brecha entre el diseño y el desarrollo de manera más efectiva que la visión de propósito general de Gemma.
+
+## Requisitos de hardware para el despliegue local
+
+Ejecutar estos modelos localmente en 2026 requiere una consideración cuidadosa de la VRAM. Tanto Google como Alibaba han optimizado sus modelos para la cuantización, permitiéndoles ejecutarse en GPUs de escritorio estándar como las series RTX 50 o 40.
+
+| Tamaño del modelo | VRAM recomendada (Cuant. Q4) | VRAM recomendada (Cuant. Q8) |
+|---|---|---|
+| **Gemma 4 E4B** | 4 GB | 8 GB |
+| **Gemma 4 26B** | 16 GB | 24 GB |
+| **Gemma 4 31B** | 20 GB | 35 GB |
+| **Qwen 3.6 Plus** | 24 GB+ | 48 GB+ |
+
+> **⚠️ Advertencia:** El modelo denso Gemma 4 31B es "robusto". Ejecutar la versión Q8 requiere aproximadamente 35 GB de VRAM, lo que generalmente requiere una configuración de varias GPUs o una tarjeta de estación de trabajo de gama alta como la H100 o A6000.
+
+Para aquellos con hardware limitado, el Gemma 4 E4B cambia las reglas del juego. Supera a los modelos 27B de la generación anterior en varios benchmarks requiriendo una fracción de la potencia, lo que lo convierte en la opción ideal para asistentes locales de uso diario en portátiles o tabletas de gama alta. Puedes encontrar los pesos y archivos de cuantización más recientes en el [hub de modelos oficial de Hugging Face](https://huggingface.co/models) para comenzar tus propias pruebas.
+
+## Resumen de la elección entre Gemma 4 vs Qwen
+
+En última instancia, la decisión entre **gemma 4 vs qwen** se reduce a tu flujo de trabajo principal. Si eres un ingeniero de software que busca un agente que pueda vivir en tu terminal y gestionar repositorios completos, Qwen 3.6 Plus es el estándar actual de la industria. Su ventana de contexto masiva y su entrenamiento especializado en operaciones de terminal lo hacen casi inigualable en la categoría de pesos abiertos.
+
+Por el contrario, si valoras un ecosistema multimodal versátil que pueda ejecutarse en todo, desde tu teléfono hasta tu escritorio, Gemma 4 es la elección superior. Su licencia Apache 2.0 lo convierte en el "motor principal para el ajuste fino" de 2026, y su soporte nativo para audio y video (en modelos edge) abre posibilidades creativas que Qwen actualmente no prioriza.
+
+## FAQ
+
+**P: ¿Qué modelo es mejor para programar, Gemma 4 o Qwen?**
+
+R: Actualmente, Qwen 3.6 Plus mantiene la ventaja en programación, específicamente para tareas a nivel de repositorio y operaciones de terminal. Aunque Gemma 4 es muy capaz, el entrenamiento especializado de Qwen y su ventana de contexto de 1 millón de tokens lo hacen más efectivo para la ingeniería de software compleja.
+
+**P: ¿Puedo ejecutar Gemma 4 vs Qwen en una sola GPU de consumo?**
+
+R: Sí, pero depende de la versión. Gemma 4 E2B, E4B y el 26B MoE pueden ejecutarse fácilmente en una sola RTX 4090 o 5090. Los modelos Qwen 3.6 Plus y Gemma 4 31B Dense pueden requerir una cuantización alta (Q4 o inferior) o configuraciones de doble GPU para caber dentro de los 24 GB de VRAM.
+
+**P: ¿Requiere Gemma 4 una licencia especial para uso comercial?**
+
+R: No. A diferencia de las versiones anteriores, Gemma 4 se publica bajo la licencia Apache 2.0. Esto significa que puedes usar, modificar y distribuir el modelo para fines comerciales siempre que proporciones la atribución adecuada a Google.
+
+**P: ¿Cómo funciona la función de "pensamiento" en Gemma 4?**
+
+R: Los modelos Gemma 4 incluyen una cadena de razonamiento interna donde el modelo "piensa" antes de proporcionar una respuesta. Esto suele resultar en una mayor precisión para problemas de lógica y matemáticas, aunque consume más tokens y aumenta la latencia. Los usuarios pueden desactivar esta función en herramientas como LM Studio u Ollama si la velocidad es una prioridad.

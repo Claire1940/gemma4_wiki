@@ -1,0 +1,118 @@
+export const metadata = {
+  title: "Tamaño de Gemma 4: Guía completa de comparación de modelos y especificaciones 2026",
+  description: "Explora las diferentes opciones de tamaño de Gemma 4, desde modelos listos para dispositivos de borde hasta potentes niveles para estaciones de trabajo. Compara parámetros, requisitos de hardware y funciones multimodales.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Model+Sizes",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+Cuando se trata de seleccionar la inteligencia artificial adecuada para su estación de trabajo local o dispositivo de borde (edge), comprender el **tamaño de gemma 4** es el primer paso hacia la optimización. El último lanzamiento de Google representa un salto masivo en los modelos de pesos abiertos, ofreciendo una gama versátil de parámetros diseñados para adaptarse a diversas limitaciones de hardware. Ya sea que esté operando un servidor empresarial de alta gama o una Raspberry Pi compacta, existe un **tamaño de gemma 4** específico diseñado para proporcionar el equilibrio ideal entre rendimiento y eficiencia.
+
+La familia Gemma 4 presenta cuatro modelos distintos que cubren diferentes niveles de potencia informática. Al pasar a una licencia Apache 2.0, Google ha abierto las puertas para que los desarrolladores ajusten y desplieguen estos modelos comercialmente sin las cláusulas restrictivas de "no competencia" vistas en iteraciones anteriores. En esta guía, desglosaremos las especificaciones técnicas, los requisitos de hardware y las capacidades multimodales de cada tamaño de modelo para ayudarlo a elegir la mejor opción para sus proyectos de 2026.
+
+## Comprendiendo los niveles de los modelos Gemma 4
+
+Google ha categorizado la familia Gemma 4 en dos grupos principales: modelos de Estación de Trabajo (Workstation) y modelos de Borde (Edge). El nivel de Estación de Trabajo está diseñado para tareas pesadas como asistencia de codificación compleja y razonamiento del lado del servidor, mientras que el nivel Edge se centra en aplicaciones de baja latencia en el dispositivo, como asistentes móviles y dispositivos IoT.
+
+| Nombre del modelo | Parámetros totales | Parámetros activos | Ventana de contexto | Mejor caso de uso |
+|---|---|---|---|---|
+| **Gemma 4 31B Dense** | 31 mil millones | 31 mil millones | 256K | Programación, razonamiento complejo |
+| **Gemma 4 26B MoE** | 26 mil millones | 3.8 mil millones | 256K | Estaciones de trabajo de alta eficiencia |
+| **Gemma 4 E4B** | 8 mil millones (con embeddings) | 4.5 mil millones | 128K | Apps móviles, Edge de gama alta |
+| **Gemma 4 E2B** | 5.1 mil millones (con embeddings) | 2.3 mil millones | 128K | IoT, dispositivos de bajo consumo |
+
+Las variaciones del **tamaño de gemma 4** permiten un enfoque granular para el despliegue. Por ejemplo, el modelo 26B Mixture of Experts (MoE) proporciona la inteligencia de un modelo mucho más grande requiriendo solo la potencia de cómputo asociada típicamente con un modelo de 4B parámetros. Esto lo convierte en una opción excepcional para usuarios con GPUs de consumo que aún requieren capacidades de razonamiento de alto nivel.
+
+## Innovaciones técnicas en la arquitectura de Gemma 4
+
+Una de las actualizaciones más significativas en la serie Gemma 4 es la integración nativa de capacidades multimodales. A diferencia de las generaciones anteriores donde los componentes de visión o audio parecían "añadidos a la fuerza", Gemma 4 fue construido desde el nivel de arquitectura para manejar texto, imágenes y audio simultáneamente. Este enfoque nativo garantiza que incluso el **tamaño de gemma 4** más pequeño pueda realizar tareas complejas como razonar a través de entradas de múltiples imágenes entrelazadas o transcribir audio con alta precisión.
+
+### Nivel de estación de trabajo: 31B Dense y 26B MoE
+
+El modelo 31B Dense es la potencia de la familia. Cuenta con menos capas que su predecesor, Gemma 3, pero incluye mejoras significativas como la normalización de valores y un mecanismo de atención refinado optimizado para ventanas de contexto largo. Con una ventana de contexto de 256K, este modelo puede procesar documentos masivos o bases de código completas en una sola pasada.
+
+El modelo 26B MoE utiliza 128 "pequeños expertos", con ocho expertos activados por token. Esta elección arquitectónica permite que el modelo mantenga una alta inteligencia manteniendo bajos los costos operativos. Es particularmente efectivo para flujos de trabajo de agentes donde se requieren múltiples "herramientas" o llamadas a funciones en un solo turno.
+
+> **💡 Consejo:** Si tiene limitaciones de VRAM pero necesita resultados de alta calidad, el modelo 26B MoE es generalmente más eficiente que el modelo 31B Dense para la mayoría de las tareas de propósito general.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Modelos Edge: Capacidades de E2B y E4B
+
+La "E" en E2B y E4B significa Edge (Borde), y estos modelos son donde Google ha mostrado una optimización increíble. Los codificadores de visión y audio se han comprimido drásticamente para garantizar que quepan en dispositivos con almacenamiento limitado. Por ejemplo, el codificador de audio en la serie Gemma 4 Edge es un 50% más pequeño que el de la serie Gemma 3N, pasando de 390 MB a solo 87 MB.
+
+| Característica | Gemma 4 Edge (E2B/E4B) | Serie Gemma 3N | Mejora |
+|---|---|---|---|
+| **Tamaño del codificador de audio** | **305M Parámetros** | 681M Parámetros | 55% de reducción |
+| **Espacio en disco** | **87 MB** | 390 MB | ~77% más pequeño |
+| **Duración de fotograma** | **40 ms** | 160 ms | Mejor capacidad de respuesta |
+| **Codificador de visión** | **150M Parámetros** | 350M Parámetros | Procesamiento más rápido |
+
+Estas optimizaciones significan que un **tamaño de gemma 4** E2B puede ejecutarse en una Raspberry Pi o en un teléfono inteligente moderno con una latencia extremadamente baja. Admite la traducción nativa de voz a texto traducido, lo que permite a un usuario hablar en inglés y recibir una traducción al japonés directamente del modelo sin pasar por un servidor en la nube.
+
+## Requisitos de hardware para despliegue local
+
+Desplegar un modelo localmente requiere una comprensión clara de la VRAM de su hardware y sus capacidades de cómputo. Debido a que Google proporciona puntos de control de Entrenamiento Consciente de Cuantificación (QAT), la calidad de los modelos sigue siendo alta incluso cuando se ejecutan a menor precisión (como cuantificación de 4 u 8 bits).
+
+### Especificaciones de GPU recomendadas
+
+1.  **Gemma 4 E2B / E4B:** Se pueden ejecutar cómodamente en GPUs de nivel de entrada como la NVIDIA T4 o incluso en chipsets móviles de alta gama. 8GB de VRAM suelen ser suficientes para la cuantificación de 8 bits.
+2.  **Gemma 4 26B MoE:** Requiere una GPU de consumo de gama media. Una RTX 3090 o 4090 con 24GB de VRAM es ideal para ejecutar este modelo con alta precisión.
+3.  **Gemma 4 31B Dense:** Este modelo es más exigente. Para ejecutarlo sin una cuantificación significativa, probablemente necesitará una RTX 6000 Ada o una H100 de grado de servidor. Sin embargo, con cuantificación de 4 bits, puede caber dentro de 20-24GB de VRAM.
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B Dense con VRAM insuficiente resultará en una "descarga" masiva a la RAM del sistema, lo que puede ralentizar la generación de tokens a paso de tortuga (menos de 1-2 tokens por segundo).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento y razonamiento
+
+Los modelos Gemma 4 se basan en la investigación de los modelos insignia Gemini 3. Este "efecto goteo" de las innovaciones arquitectónicas ha dado como resultado modelos que superan con creces su categoría de peso. En el LM Arena y otros benchmarks como SweetBench Pro, el modelo 31B Dense ha mostrado niveles de rendimiento comparables a modelos con 30 veces más parámetros.
+
+Una de las características destacadas es el modo "Thinking" (Pensamiento). Al habilitar una plantilla de chat específica, los usuarios pueden forzar al modelo a participar en un largo proceso de razonamiento de cadena de pensamiento antes de proporcionar una respuesta final. Esto es particularmente útil para problemas matemáticos complejos, lógica de programación o análisis financiero. Incluso el **tamaño de gemma 4** más pequeño (E2B) admite este interruptor de pensamiento, lo que lo convierte en un motor de razonamiento muy capaz para su tamaño.
+
+Los desarrolladores que deseen integrar estos modelos en sus aplicaciones pueden encontrarlos en [Hugging Face](https://huggingface.co/google) o desplegarlos a través de Vertex AI de Google Cloud. Para aquellos que buscan un enfoque sin servidor, Cloud Run de Google ahora admite GPUs G4, lo que le permite escalar los modelos 31B y 26B más grandes solo cuando están en uso.
+
+## Casos de uso para jugadores y desarrolladores
+
+El lanzamiento de Gemma 4 tiene implicaciones significativas para las comunidades de juegos y desarrollo. 
+
+*   **Motores de diálogo para NPC:** Los modelos E2B y E4B son lo suficientemente pequeños como para integrarse directamente en los motores de juego para alimentar NPCs dinámicos y multimodales que pueden "ver" las acciones del jugador u "oír" comandos de voz.
+*   **Asistentes de codificación locales:** El modelo 31B Dense sirve como un excelente copiloto de IDE, proporcionando finalización de código y corrección de errores sin enviar código propietario sensible a la nube.
+*   **Traductores en el dispositivo:** Para viajeros o equipos internacionales, la traducción nativa de audio a texto en los modelos edge proporciona una forma privada y fuera de línea de comunicarse en más de 140 idiomas.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Cuál es el mejor tamaño de Gemma 4 para una GPU con 12GB de VRAM?**
+
+R: Para una GPU de 12GB de VRAM, el Gemma 4 E4B es la opción más confiable. También puede ejecutar el modelo 26B MoE si utiliza cuantificación de 4 bits (formatos GGUF o EXL2), aunque el rendimiento puede variar según la longitud del contexto utilizado.
+
+**P: ¿Gemma 4 admite entradas de imagen?**
+
+R: Sí, todos los modelos de la familia Gemma 4 son multimodales. Cuentan con un codificador de visión nativo que maneja varias relaciones de aspecto, lo que los hace excelentes para OCR, comprensión de documentos y razonamiento de imágenes.
+
+**P: ¿Es la licencia Apache 2.0 realmente "sin condiciones"?**
+
+R: Sí, a diferencia de las licencias anteriores de Gemma, la licencia Apache 2.0 utilizada para Gemma 4 permite el uso comercial, la modificación y la distribución sin las cláusulas restrictivas de "no competir con Google" que se encontraban en versiones anteriores.
+
+**P: ¿Puedo ejecutar Gemma 4 en un teléfono móvil?**
+
+R: Los modelos de **tamaño de gemma 4** E2B y E4B están diseñados específicamente para dispositivos de borde. Con la optimización adecuada (como el uso de MediaPipe o TensorFlow Lite), estos modelos pueden ejecutarse en dispositivos Android e iOS modernos para tareas como asistencia de voz y etiquetado de imágenes.

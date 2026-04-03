@@ -1,0 +1,133 @@
+export const metadata = {
+  title: "Guía de Gemma 4 26B: Explorando el poder del modelo abierto de Google 2026",
+  description: "Una guía completa sobre el modelo Mixture of Experts Gemma 4 26B. Conozca su arquitectura, rendimiento local y capacidades agénticas en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+26B+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con el lanzamiento de la última familia de pesos abiertos de Google. El modelo **gemma 4 26b** representa la cúspide de la eficiencia, utilizando una arquitectura de Mezcla de Expertos (MoE) para proporcionar inteligencia de nivel de frontera en hardware de consumo. Construido a partir de la misma investigación y tecnología de clase mundial detrás de Gemini 3, el **gemma 4 26b** está diseñado específicamente para la era agéntica, donde los modelos no solo procesan texto, sino que planifican y ejecutan flujos de trabajo complejos y de múltiples pasos.
+
+Para desarrolladores y entusiastas, este lanzamiento es un momento histórico porque marca la primera vez que Google publica la familia Gemma bajo una licencia de código abierto Apache 2.0. Esto permite una libertad sin precedentes en el ajuste fino (fine-tuning), la integración y el despliegue local sin necesidad de conectividad constante a la nube. Ya sea que esté construyendo un asistente de programación local o un motor de juegos multimodal, comprender los matices de esta potencia de 26 mil millones de parámetros es esencial para mantenerse a la vanguardia en 2026.
+
+## Descripción general de la familia de modelos Gemma 4
+
+El ecosistema Gemma 4 se divide en cuatro tamaños distintos, cada uno diseñado para restricciones de hardware y objetivos de rendimiento específicos. Mientras que los modelos más pequeños se centran en la eficiencia para móviles e IoT, los modelos más grandes están diseñados para rivalizar con sistemas propietarios mientras se ejecutan completamente en una computadora de escritorio o portátil.
+
+| Variante del modelo | Parámetros | Arquitectura | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Effective 2B** | 2.3B (5.1B con embeddings) | Densa | Dispositivos móviles e IoT |
+| **Effective 4B** | 4.5B (8B con embeddings) | Densa | Audio/visión en tiempo real |
+| **Gemma 4 26B** | **26B (3.8B Activos)** | **MoE** | **Razonamiento local y programación** |
+| **Gemma 4 31B** | 31B | Densa | Máxima calidad de respuesta |
+
+El **gemma 4 26b** destaca como el "rey de la velocidad" de los modelos grandes. Al activar solo 3.8 mil millones de parámetros para cualquier token dado, logra velocidades de inferencia que lo hacen sentir significativamente más pequeño de lo que es, manteniendo la profundidad de razonamiento de un modelo denso mucho más grande.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Especificaciones técnicas y arquitectura
+
+El núcleo del **gemma 4 26b** es su diseño de Mezcla de Expertos (MoE). A diferencia de los modelos densos tradicionales donde cada parámetro se utiliza para cada cálculo, un modelo MoE dirige la información a "expertos" especializados. Esto permite que el modelo posea una vasta "base de conocimientos" (los 26B de parámetros completos) mientras solo "piensa" con una fracción de ellos a la vez.
+
+### Métricas clave de rendimiento
+*   **Ventana de contexto:** Hasta 250,000 tokens. Esto permite al modelo ingerir bases de código completas o documentación extensa en un solo prompt.
+*   **Licencia:** Apache 2.0, que otorga plenos derechos de uso comercial y personal.
+*   **Soporte multilingüe:** Soporte nativo para más de 140 idiomas.
+*   **Capacidades multimodales:** Procesamiento de visión y audio integrado, lo que permite al modelo "ver" y "escuchar" el mundo a través de periféricos conectados.
+
+> **💡 Consejo:** Para obtener el mejor rendimiento del modelo 26B MoE de forma local, utilice una cuantización Q8 (8 bits). Esto equilibra el uso de memoria mientras retiene casi toda la inteligencia de los pesos base.
+
+## Capacidades agénticas y uso de herramientas
+
+Google ha optimizado Gemma 4 para flujos de trabajo "agénticos". En 2026, un modelo de IA ya no es solo un chatbot; es un planificador. El **gemma 4 26b** cuenta con soporte nativo para el uso de herramientas, lo que significa que puede generar llamadas estructuradas a APIs externas, bases de datos o incluso funciones del sistema local.
+
+En las pruebas, el modelo ha demostrado la capacidad de:
+1.  **Analizar y navegar:** Puede ver una captura de pantalla de una interfaz de usuario móvil y generar cuadros delimitadores (bounding boxes) para navegar por la interfaz.
+2.  **Planificación de múltiples pasos:** Cuando se le pide resolver un error de código complejo, puede planificar la investigación, escribir los scripts de prueba e implementar la corrección de forma secuencial.
+3.  **Control local:** Debido a que se ejecuta localmente, puede interactuar con su sistema de archivos (con permiso) para organizar datos o administrar entornos de desarrollo local sin que los datos salgan de su máquina.
+
+| Característica | Capacidad de Gemma 4 26B | Beneficio |
+| :--- | :--- | :--- |
+| **Lógica** | Razonamiento complejo de varios pasos | Resuelve acertijos lógicos difíciles |
+| **Planificación** | Soporte de flujo de trabajo agéntico | Automatiza tareas repetitivas |
+| **Contexto** | **Ventana de 256K tokens** | Analiza conjuntos de datos masivos |
+| **Privacidad** | Ejecución 100% local | Seguro para datos empresariales |
+
+## Juegos y generación creativa
+
+Una de las aplicaciones más emocionantes para el **gemma 4 26b** es en el ámbito de la generación procedimental de juegos y la programación creativa. Durante las pruebas de benchmark, el modelo tuvo la tarea de generar entornos 3D funcionales y juegos interactivos utilizando JavaScript y Three.js.
+
+### La prueba "Subway Protocol"
+Cuando se le pidió crear una escena de metro en 3D, el modelo generó con éxito un entorno transitable con texturas procedimentales y controles de iluminación. Aún más impresionante fue su capacidad para transformar ese código en un juego de disparos en primera persona (FPS) funcional.
+
+El juego generado, apodado "Subway Protocol", incluyó:
+*   **Movimiento WASD:** Lógica estándar de vuelo/caminata.
+*   **Mecánicas de armas:** Animaciones de disparo, destellos de cañón y retroceso del arma.
+*   **Generación de enemigos:** Lógica de enemigos infinitos con comportamiento básico de seguimiento.
+*   **Elementos de UI:** Contadores de puntuación y miras.
+
+Aunque los gráficos eran funcionalmente simples, el hecho de que un modelo de 26B de parámetros pueda generar la lógica, la física y el código de renderizado para un juego en una sola pasada es un testimonio de su competencia en programación.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Comparación: 26B MoE vs. 31B Denso
+
+Elegir entre el modelo 26B MoE y el 31B Denso depende enteramente de su hardware y sus objetivos. El modelo 31B Denso está optimizado para la "calidad de respuesta", lo que significa que a menudo produce prosa más matizada y un razonamiento ligeramente más preciso en escenarios de secuencia cero (zero-shot). Sin embargo, es significativamente más exigente en cuanto a VRAM y cómputo.
+
+El **gemma 4 26b**, por otro lado, es el "caballo de batalla". Su arquitectura MoE le permite funcionar a velocidades que suelen ser de 3 a 4 veces más rápidas que el modelo 31B Denso en el mismo hardware. Para tareas como asistencia de programación en tiempo real o agentes interactivos, la variante 26B es casi siempre la mejor opción.
+
+| Métrica | 26B MoE | 31B Denso |
+| :--- | :--- | :--- |
+| **Velocidad de inferencia** | **Alta (Rápida)** | Media (Más lenta) |
+| **Eficiencia de memoria** | Excelente (Parámetros activos) | Estándar |
+| **Profundidad de razonamiento** | Alta | **Muy alta** |
+| **Estabilidad de cuantización** | Muy estable | Variable en lanzamientos iniciales |
+
+> **⚠️ Advertencia:** Algunas cuantizaciones tempranas de 4 bits del modelo 31B Denso han mostrado problemas de "alucinación" o salida de caracteres errónea. Siempre busque archivos GGUF o EXL2 actualizados de miembros confiables de la comunidad.
+
+## Requisitos de hardware para despliegue local
+
+Para ejecutar el **gemma 4 26b** de manera efectiva en 2026, necesita un sistema con suficiente VRAM. Aunque la inferencia solo por CPU es posible a través de llama.cpp, la experiencia es verdaderamente "agéntica" solo cuando se ejecuta en una GPU.
+
+*   **Mínimo (Cuantización de 4 bits):** 16GB VRAM (RTX 4080/5080 o Mac M2/M3 con 24GB de memoria unificada).
+*   **Recomendado (Cuantización de 8 bits):** 24GB VRAM (RTX 3090/4090/5090).
+*   **Ideal (Precisión completa):** 48GB+ VRAM (Configuraciones de doble GPU o Mac Studio).
+
+La capacidad del modelo para ejecutarse en una sola GPU de consumo proporcionando un rendimiento comparable al de modelos 30 veces su tamaño (como los de las clasificaciones de LM Arena) lo convierte en un cambio de juego para la IA privada y local. Puede encontrar más detalles en el [blog oficial de Google DeepMind](https://deepmind.google/technologies/gemma/) sobre informes técnicos y protocolos de seguridad.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Es Gemma 4 26B completamente gratuito?**
+
+R: Sí, se publica bajo la licencia Apache 2.0. Esto significa que puede usarlo para proyectos personales, investigación y aplicaciones comerciales sin pagar regalías a Google, siempre que siga los términos estándar de la licencia.
+
+**P: ¿Requiere el gemma 4 26b una conexión a Internet?**
+
+R: No. Una vez que haya descargado los pesos del modelo (disponibles en plataformas como Hugging Face), el modelo se ejecuta completamente en su hardware local. Esto garantiza la privacidad total de los datos y permite su uso sin conexión.
+
+**P: ¿Cómo beneficia la ventana de contexto de 256K a los jugadores o desarrolladores?**
+
+R: Para los desarrolladores, significa que pueden alimentar al modelo con la carpeta completa de su proyecto para encontrar errores o refactorizar código. Para los jugadores, permite que la IA recuerde grandes cantidades de lore sobre la construcción del mundo o elecciones previas del jugador en un RPG impulsado por IA.
+
+**P: ¿Puedo ejecutar este modelo en una computadora portátil estándar?**
+
+R: Puede ejecutar los modelos más pequeños de 2B y 4B en la mayoría de las laptops modernas. Para ejecutar el **gemma 4 26b**, generalmente necesita una laptop gaming de gama alta con al menos 16GB de memoria de video dedicada o una MacBook con una cantidad elevada de memoria unificada.

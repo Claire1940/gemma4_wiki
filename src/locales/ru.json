@@ -11,12 +11,13 @@
     }
   },
   "nav": {
-    "guides": "Руководства",
-    "crafting": "Крафт",
-    "items": "Предметы",
-    "biomes": "Биомы",
-    "building": "Строительство",
-    "support": "Поддержка"
+    "guide": "Руководство",
+    "models": "Модели",
+    "requirements": "Требования",
+    "ollama": "Ollama",
+    "install": "Установка",
+    "benchmark": "Бенчмарк",
+    "comparison": "Сравнение"
   },
   "common": {
     "home": "Главная",

@@ -11,12 +11,13 @@
     }
   },
   "nav": {
-    "guides": "ガイド",
-    "crafting": "クラフト",
-    "items": "アイテム",
-    "biomes": "バイオーム",
-    "building": "建築",
-    "support": "サポート"
+    "guide": "ガイド",
+    "models": "モデル",
+    "requirements": "動作環境",
+    "ollama": "Ollama",
+    "install": "インストール",
+    "benchmark": "ベンチマーク",
+    "comparison": "比較"
   },
   "common": {
     "home": "ホーム",

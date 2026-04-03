@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "Gemma 4 Explained: Complete Guide to Google's New AI Models 2026",
+  description: "Learn everything about Google's Gemma 4 series. From multimodal capabilities to local hardware requirements, here is the full Gemma 4 explained guide.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Explained",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+The landscape of local artificial intelligence has shifted dramatically in early 2026, and Google’s latest release is at the center of this revolution. In this comprehensive **Gemma 4 explained** guide, we dive into the most versatile series of open-weight models released to date. Whether you are a developer looking to integrate AI into your gaming projects or a tech enthusiast running local LLMs on your desktop, understanding these new models is crucial. This **Gemma 4 explained** overview covers the entire family, from the lightweight E2B variants to the massive 31B dense models, ensuring you know exactly which version fits your hardware and use case.
+
+## The Evolution of Local AI: What is Gemma 4?
+
+Gemma 4 represents the next generation of Google’s open-model initiative, following the successful Gemma 3 and 3N series. Unlike its predecessors, which were often seen as experimental workhorses for fine-tuning, Gemma 4 arrives as a polished, "thinking" model family. The most significant shift in 2026 is the adoption of the **Apache 2 license**. This change simplifies the legal landscape for creators, allowing users to fork, modify, and distribute their own versions of the model with minimal restrictions, provided they give proper attribution.
+
+The series is designed to be highly modular, offering different architectures to suit various compute budgets. From mobile-friendly "E" models to high-intelligence Mixture-of-Experts (MoE) variants, Google has aimed to cover every possible niche in the local AI ecosystem.
+
+| Model Variant | Parameters | Type | Primary Use Case |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 Billion | Lightweight | Mobile devices, low-end laptops |
+| **Gemma 4 E4B** | 4 Billion | Lightweight | Desktop assistants, basic multimodality |
+| **Gemma 4 MoE** | 26B (4B Active) | Mixture-of-Experts | High-speed, high-intelligence tasks |
+| **Gemma 4 31B** | 31 Billion | Dense | Advanced reasoning, complex VLM tasks |
+
+## Understanding the "Thinking" Architecture
+
+One of the standout features of the Gemma 4 series is the native integration of "thinking" capabilities. These models are trained to perform internal reasoning—often referred to as chain-of-thought—before producing a final response. While this can lead to more accurate answers in complex logic puzzles or coding tasks, it does come with a "token burner" trade-off.
+
+> **⚠️ Warning:** Thinking models can be significantly "chattier" than standard models. If you are using these for simple NPCs or quick chat responses, you may want to disable the thinking feature to save on VRAM and processing time.
+
+For power users, the thinking process allows the model to catch its own errors and refine its logic. This makes the 31B and MoE variants particularly powerful for debugging code or generating complex lore for tabletop gaming sessions.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/Kaq5Ual2ij8"
+    title="Gemma 4 Is Here - Let's Talk About It."
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Multimodal Capabilities and Constraints
+
+The Gemma 4 family introduces sophisticated multimodal inputs, but there is a catch: not all models are created equal. The smaller "E" models (E2B and E4B) are actually the most versatile in terms of sensory input, supporting text, image, audio, and video. In contrast, the larger 31B and MoE models are restricted to text and image understanding.
+
+### Multimodal Support by Model Type
+
+| Capability | E2B / E4B | MoE (26B) | 31B Dense |
+|---|---|---|---|
+| **Text** | Yes | Yes | Yes |
+| **Image** | Yes | Yes | Yes |
+| **Audio** | Yes (Max 30s) | No | No |
+| **Video** | Yes (Max 60s) | No | No |
+| **Context Window** | 128K | 256K | 256K |
+
+### The "Image Token Budget" Feature
+Gemma 4 introduces a novel "image token budget" system. This allows the model to handle high-resolution images without necessarily overwhelming your VRAM. By adjusting the budget, you can decide whether the model should focus on fine details (like OCR on handwritten notes) or general classification (identifying if a photo contains a specific object).
+
+## Technical Gotchas: Audio and Video Limits
+
+When using the multimodal features of the E-series, there are several technical limitations that developers must account for. Unlike specialized models like Whisper or Parakeet, Gemma 4’s audio and video processing is designed for short-form snippets.
+
+1.  **Audio Segments:** Audio input is capped at 30 seconds. To process longer files, you must use Voice Activity Detection (VAD) to split the audio into segments before feeding them to the model.
+2.  **Video Frame Rate:** Video is processed at a default of 1 frame per second (FPS). If your task requires analyzing high-speed motion, you will need to manually extract frames and feed them as a sequence of images.
+3.  **Input Order:** For optimal results, Google recommends placing all multimodal content (images, audio, video) *before* your text prompt. Failing to do so can result in significantly degraded performance.
+
+> **💡 Tip:** When translating audio locally, use the specific ASR (Automatic Speech Recognition) prompts outlined in the official model card to ensure the model stays in "transcription mode" rather than "conversation mode."
+
+## Hardware Requirements and Quantization
+
+Running the **Gemma 4 series** locally requires a solid understanding of VRAM management. While the E2B model can run on a modern smartphone, the 31B dense model is a heavyweight that demands significant GPU resources.
+
+To make these models accessible, most users rely on **GGUF quantization**. This process compresses the model weights, allowing them to fit into smaller amounts of VRAM with minimal loss in intelligence.
+
+| Model & Quant | File Size (Approx) | Recommended VRAM |
+|---|---|---|
+| **E2B (Q8)** | 5 GB | 6 GB |
+| **E4B (Q8)** | 8 GB | 10 GB |
+| **MoE (Q8)** | 22 GB | 24 GB |
+| **31B Dense (Q8)** | 35 GB | 40 GB+ |
+
+For those using tools like LM Studio or Ollama, the Q4 quantization is often the default, providing a great balance between speed and performance. However, if you have the hardware to spare, the Q8 (8-bit) versions offer the "best of both worlds" in terms of precision and optimization. You can find these versions on the [official Google collection on Hugging Face](https://huggingface.co/google) or through community contributors.
+
+## Benchmarks and Real-World Performance
+
+On paper, the Gemma 4 E4B model outperforms the previous generation's 27B model in several key benchmarks. This suggests a massive leap in efficiency, where a model nearly seven times smaller can hold its own against its predecessors.
+
+However, benchmarks rarely tell the full story. In real-world creative writing or coding tasks, the "thinking" nature of Gemma 4 makes it feel more deliberate but sometimes slower. Users who struggled with the Gemma 3N series' tendency to hallucinate will likely find the reasoning capabilities of Gemma 4 a breath of fresh air.
+
+## How to Get Started with Gemma 4
+
+To run these models today, you will need to update your local inference tools. Because Gemma 4 uses a new architecture for its multimodal and thinking layers, older versions of Llama.cpp or Ollama may not support them out of the box.
+
+1.  **Update your software:** Ensure you are on the latest release of LM Studio, Ollama, or your preferred UI.
+2.  **Search for "-it" models:** Look for the "Instruction Tuned" (IT) variants on Hugging Face, as these are optimized for chat and follow directions much better than the base models.
+3.  **Configure Context:** If you are using the 31B or MoE models, don't forget to expand your context window to 256K if your hardware permits, allowing for massive document analysis.
+
+## FAQ
+
+**Q: Is Gemma 4 free for commercial use?**
+
+A: Yes, Gemma 4 is released under the Apache 2 license, which is one of the most permissive licenses in the industry. You can use it for commercial projects, modify the code, and distribute your own versions as long as you provide proper attribution to Google.
+
+**Q: Why can't the 31B model process audio or video?**
+
+A: In the current **Gemma 4 explained** documentation, the 31B and MoE models are optimized as Vision-Language Models (VLMs). To keep the parameter count manageable and the reasoning sharp, Google focused on text and image understanding for the larger models, leaving the full multimodal suite to the more efficient E-series.
+
+**Q: How do I stop the model from "thinking" too much?**
+
+A: Most inference engines allow you to adjust the system prompt or use a specific stop token to bypass the thinking phase. Alternatively, you can look for community fine-tunes that have been trained to provide direct answers without the internal chain-of-thought process.
+
+**Q: Does Gemma 4 support languages other than English?**
+
+A: Yes, Gemma 4 is a multilingual model trained on a diverse dataset. It is particularly capable of audio translation and text generation across dozens of major world languages.

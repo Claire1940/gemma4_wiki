@@ -1,0 +1,120 @@
+export const metadata = {
+  title: "Gemma 4 vs Gemma 3: Comparativa de los modelos abiertos de próxima generación de Google 2026",
+  description: "Una inmersión profunda en las diferencias arquitectónicas, las pruebas de rendimiento y las capacidades agénticas de Gemma 4 frente a Gemma 3. Descubre qué modelo se adapta a tu hardware.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+vs+Gemma+3+Comparison",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado drásticamente con el lanzamiento de la última iteración de modelos ligeros de Google. Al evaluar **gemma 4 vs gemma 3**, queda claro que el enfoque se ha desplazado del simple seguimiento de instrucciones al razonamiento complejo y autónomo. Para los desarrolladores y entusiastas que buscan ejecutar inteligencia de nivel de frontera en hardware local, la elección entre estas dos generaciones define la eficiencia de sus flujos de trabajo. El debate de **gemma 4 vs gemma 3** no se trata solo del recuento de parámetros; se trata del cambio fundamental hacia la "era agéntica", donde los modelos están diseñados para planificar, usar herramientas y ejecutar lógica de múltiples pasos sin intervención humana constante.
+
+En esta guía exhaustiva, analizamos las especificaciones principales, los cambios en las licencias y las métricas de rendimiento que distinguen a estas dos familias. Ya sea que estés construyendo un compañero de IA en tiempo real para una aplicación de juegos o un asistente de codificación local, comprender cómo Gemma 4 mejora los cimientos multimodales de Gemma 3 es esencial para optimizar tu pila de IA local en 2026.
+
+## Cambios arquitectónicos: Gemma 4 vs Gemma 3
+
+La desviación más significativa en la comparativa **gemma 4 vs gemma 3** radica en la arquitectura subyacente. Mientras que Gemma 3 introdujo una multimodalidad robusta y refinó el enfoque de transformador denso, Gemma 4 adopta un diseño de Mezcla de Expertos (MoE, por sus siglas en inglés) para sus variantes de alto rendimiento. Esto permite que el modelo MoE de 26B active solo 3.8B de parámetros por token, lo que resulta en velocidades vertiginosas que superan con creces al antiguo modelo denso Gemma 3 27B.
+
+Gemma 4 está específicamente "construido para la era agéntica". Esto significa que el modelo está optimizado para la planificación de múltiples pasos y el uso nativo de herramientas. Mientras que Gemma 3 podía interactuar con herramientas a través de prompts específicos, Gemma 4 cuenta con soporte nativo, lo que le permite actuar como un agente autónomo capaz de analizar bases de código completas gracias a su masiva ventana de contexto de 250,000 tokens.
+
+| Característica | Gemma 3 | Gemma 4 |
+|---|---|---|
+| **Enfoque principal** | Multimodalidad y Texto | **Flujos de trabajo agénticos y lógica** |
+| **Ventana de contexto máx.** | 128k Tokens (Varía) | **250k Tokens** |
+| **Licencia** | Términos de uso de Gemma | **Apache 2.0 (Código Abierto)** |
+| **Arquitectura** | Transformadores densos | **MoE y denso optimizado** |
+| **Soporte de idiomas** | Multilingüe global | **Más de 140 idiomas nativos** |
+
+> **💡 Consejo:** Si tu proyecto requiere una inferencia de alta velocidad en GPUs de consumo, el modelo Gemma 4 26B MoE suele ser superior al Gemma 3 27B debido a su menor recuento de parámetros activos.
+
+## Desglose de la familia de modelos y requisitos de hardware
+
+Elegir el modelo adecuado depende en gran medida de tu entorno local. Gemma 3 ofrecía una amplia gama de tamaños (de 1B a 27B), pero Gemma 4 los ha simplificado en niveles "Effective" de alta eficiencia y niveles "Frontier".
+
+El modelo Gemma 4 31B Dense es el nuevo buque insignia para la calidad de salida, diseñado para computadoras de escritorio de gama alta y servidores de un solo nodo. Por el contrario, el Gemma 3 27B era el estándar de oro anterior para el razonamiento local. Para aquellos en dispositivos móviles o IoT, los modelos Gemma 4 "Effective 2B" y "Effective 4B" proporcionan soporte de visión y audio que supera las capacidades de los modelos Gemma 3 4B y 1B.
+
+### Comparación de tamaños de modelo y casos de uso
+
+| Tamaño del modelo | Mejor hardware | Caso de uso recomendado |
+|---|---|---|
+| **Gemma 4 31B** | Escritorio de gama alta (24GB+ VRAM) | Máxima calidad de razonamiento y lógica. |
+| **Gemma 4 26B MoE** | PC para juegos de gama media (16GB VRAM) | Codificación y planificación rápida y agéntica. |
+| **Gemma 3 27B** | Escritorio de gama alta | Tareas multimodales generales y chat. |
+| **Gemma 4 Effective 4B**| Laptop de gama alta / Móvil | Procesamiento de visión y audio en tiempo real. |
+| **Gemma 3 12B** | Laptop de gama alta | Rendimiento equilibrado para chat local. |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Rendimiento en tareas agénticas y codificación
+
+Gemma 4 representa un salto adelante en la forma en que los modelos manejan la lógica. En los puntos de referencia de rendimiento de **gemma 4 vs gemma 3**, el modelo más nuevo destaca en "casos de uso agénticos de múltiples turnos". Esto es particularmente relevante para los desarrolladores que crean mods de juegos o suites de pruebas automatizadas. Gemma 4 puede mantener un plan coherente a lo largo de varios pasos, mientras que Gemma 3 ocasionalmente perdía el hilo de instrucciones complejas en conversaciones largas.
+
+La ventana de contexto de 250k en Gemma 4 cambia las reglas del juego para la codificación. Mientras que Gemma 3 podía manejar fragmentos o archivos pequeños, Gemma 4 puede ingerir porciones sustanciales de un repositorio, lo que lo convierte en un motor de razonamiento local mucho más efectivo para la ingeniería de software.
+
+1.  **Planificación de múltiples pasos:** Gemma 4 puede desglosar un prompt complejo en subtareas accionables.
+2.  **Uso de herramientas:** La integración nativa permite que el modelo llame a APIs o ejecute bloques de código de manera más confiable que su predecesor.
+3.  **Privacidad local:** Debido a que estos modelos se ejecutan en tu hardware, puedes analizar datos sensibles sin subirlos a la nube.
+4.  **Eficiencia:** La arquitectura MoE garantiza que incluso los modelos "grandes" se sientan ágiles en hardware de consumo.
+
+## Capacidades multilingües y multimodales
+
+Si bien Gemma 3 fue pionera en llevar la multimodalidad a la familia Gemma, Gemma 4 la perfecciona con los modelos "Effective" que ven y escuchan el mundo en tiempo real. El soporte para más de 140 idiomas es ahora nativo en toda la familia, lo que garantiza que los flujos de trabajo agénticos funcionen tan bien en francés o japonés como en inglés.
+
+Para los usuarios internacionales, se recomienda encarecidamente la transición de Gemma 3 a Gemma 4. El modelo Effective 2B, por ejemplo, puede manejar consultas multilingües complejas mientras procesa simultáneamente entradas visuales, lo que lo convierte en un candidato ideal para aplicaciones de realidad aumentada (AR) o traducción en tiempo real en dispositivos móviles.
+
+> **⚠️ Advertencia:** Al usar los modelos más pequeños de 2B y 4B, asegúrate de utilizar las versiones "ajustadas para instrucciones" (instruction-tuned) para aplicaciones de chat, ya que los pesos pre-entrenados están destinados a un ajuste fino posterior.
+
+## Licencias: Una gran victoria para el código abierto
+
+Una de las actualizaciones más sorprendentes en 2026 es el cambio de licencia. Por primera vez, Google ha lanzado Gemma 4 bajo la **licencia Apache 2.0**. Este es un cambio significativo en comparación con los "Términos de uso de Gemma" personalizados que se encontraban en Gemma 3.
+
+Este cambio simplifica el panorama legal tanto para empresas como para desarrolladores independientes. Permite una mayor libertad en la forma en que los modelos se modifican, redistribuyen e integran en productos comerciales. Si eres un desarrollador que decide entre **gemma 4 vs gemma 3** para un proyecto de juegos comercial, la licencia Apache 2.0 convierte a Gemma 4 en el claro ganador por su estabilidad a largo plazo y facilidad legal.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/qcjrduz_YS8"
+    title="Which Gemma version is the right one for you?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Cómo empezar con Gemma 4
+
+La transición de Gemma 3 a Gemma 4 es sencilla, ya que Google ha mantenido la compatibilidad con herramientas populares. Puedes descargar los pesos desde plataformas como [Hugging Face](https://huggingface.co/google) o Kaggle y ejecutarlos usando Ollama, LM Studio o las herramientas de inferencia local de NVIDIA.
+
+### Implementación paso a paso
+
+*   **Descargar los pesos:** Selecciona el tamaño del modelo (por ejemplo, 26B MoE) que se ajuste a tu VRAM.
+*   **Elegir una cuantización:** Si tienes memoria limitada, utiliza cuantización de 4 u 8 bits para que los modelos más grandes quepan en tarjetas más pequeñas.
+*   **Seleccionar la variante:** Usa "Instruction-tuned" para uso inmediato en chatbots o "Pre-trained" si planeas realizar un ajuste fino con conjuntos de datos de juegos específicos.
+*   **Integrar herramientas:** Aprovecha las capacidades nativas de uso de herramientas de Gemma 4 para conectar el modelo a tu sistema de archivos local o APIs externas.
+
+## FAQ
+
+**P: ¿Debería actualizar de Gemma 3 a Gemma 4?**
+
+R: Sí, en casi todos los casos. Gemma 4 ofrece un mejor rendimiento, una ventana de contexto más grande y una licencia Apache 2.0 más permisiva. La única razón para quedarse en Gemma 3 es si tienes un modelo ajustado muy específicamente que aún no ha sido portado.
+
+**P: ¿Cuál es la principal diferencia entre gemma 4 y gemma 3 para usuarios móviles?**
+
+R: Para móviles, Gemma 4 introduce los modelos "Effective" 2B y 4B que admiten procesamiento de audio y visión en tiempo real con mejor eficiencia de memoria que los modelos Gemma 3 4B y 1B.
+
+**P: ¿Requiere Gemma 4 más VRAM que Gemma 3?**
+
+R: No necesariamente. Aunque el buque insignia Gemma 4 es de 31B (comparado con el 27B de Gemma 3), el modelo 26B MoE en realidad funciona más rápido y de manera más eficiente en hardware similar porque solo activa 3.8B de parámetros a la vez.
+
+**P: ¿Es Gemma 4 realmente de código abierto?**
+
+R: Sí, Gemma 4 se lanza bajo la licencia Apache 2.0, que es una licencia estándar de código abierto. Esta es una mejora importante respecto a los términos restrictivos de las versiones anteriores.

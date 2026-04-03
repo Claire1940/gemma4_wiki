@@ -10,7 +10,15 @@
       "twitterDescription": "Gemma 4 Wiki covers model sizes, benchmarks, prompting, local deployment, and multimodal workflows for developers."
     }
   },
-  "nav": {},
+  "nav": {
+    "guide": "Guide",
+    "models": "Models",
+    "requirements": "Requirements",
+    "ollama": "Ollama",
+    "install": "Install",
+    "benchmark": "Benchmark",
+    "comparison": "Comparison"
+  },
   "common": {
     "home": "Home",
     "more": "More",
@@ -834,7 +842,12 @@
       "title": "Gemma 4 vs Gemma 3",
       "subtitle": "See what actually changes when you move from Gemma 3 to Gemma 4",
       "intro": "This comparison is for developers deciding whether to keep an existing Gemma 3 workflow or rebuild around Gemma 4. The clearest differences show up in context length, control format, multimodal scope, and benchmark performance at the top end of each family.",
-      "tableHeaders": ["Dimension", "Gemma 4", "Gemma 3", "Why It Matters"],
+      "tableHeaders": [
+        "Dimension",
+        "Gemma 4",
+        "Gemma 3",
+        "Why It Matters"
+      ],
       "items": [
         {
           "dimension": "Release and core sizes",
@@ -930,165 +943,145 @@
     "disclaimer": "Unofficial fan-made resource website."
   },
   "pages": {
+    "guide": {
+      "title": "Gemma 4 Guide",
+      "description": "Comprehensive guides covering everything about Gemma 4 — from first steps to advanced reasoning, thinking mode, and real-world use cases.",
+      "metaTitle": "Gemma 4 Guide - Tutorials, Release Notes & Getting Started",
+      "metaDescription": "Learn Gemma 4 from scratch with step-by-step guides covering release details, thinking mode, tutorials, and practical use cases for developers.",
+      "categoryLabel": "GUIDES & TUTORIALS",
+      "whatIs": "What is Gemma 4?",
+      "whatIsDescription": "Gemma 4 is Google DeepMind's open-weight model family released April 2026. These guides cover the full picture — what changed, why it matters, and how to put it to work.",
+      "why": "Why read these guides?",
+      "whySteps": {
+        "step1Title": "Understand the Release",
+        "step1Description": "Get up to speed on Gemma 4's capabilities, architecture, and what sets it apart from previous generations",
+        "step2Title": "Learn Thinking Mode",
+        "step2Description": "Discover how to enable and use Gemma 4's built-in reasoning with the thinking token system",
+        "step3Title": "Follow Practical Tutorials",
+        "step3Description": "Step-by-step walkthroughs from first prompt to production-ready integration"
+      },
+      "featured": "Featured & Essential",
+      "all": "All Gemma 4 Guides"
+    },
     "models": {
       "title": "Gemma 4 Models",
       "description": "Compare all Gemma 4 model sizes, parameters, context windows, and hardware requirements to choose the right checkpoint.",
       "metaTitle": "Gemma 4 Models - Sizes, Parameters & Context Windows",
       "metaDescription": "Compare Gemma 4 E2B, E4B, 26B A4B, and 31B model sizes. Understand Dense vs MoE, context windows, and hardware requirements for local and cloud deployment.",
       "categoryLabel": "MODEL OVERVIEW",
-      "whatIs": "What are Models?",
-      "whatIsDescription": "Guides covering all official Gemma 4 model sizes, architecture differences, context window details, and hardware requirements for each checkpoint.",
-      "why": "Why compare models?",
+      "whatIs": "What are Gemma 4 Models?",
+      "whatIsDescription": "Gemma 4 ships in four sizes — E2B, E4B, 26B A4B (MoE), and 31B Dense. Each is tuned for different hardware and use cases, from mobile devices to high-end workstations.",
+      "why": "Why compare Gemma 4 models?",
       "whySteps": {
         "step1Title": "Choose the Right Size",
-        "step1Description": "Select the model that matches your hardware and use case",
-        "step2Title": "Understand Architecture",
-        "step2Description": "Learn the difference between Dense and Mixture-of-Experts models",
+        "step1Description": "Select the model checkpoint that fits your hardware constraints and quality requirements",
+        "step2Title": "Understand Dense vs MoE",
+        "step2Description": "Learn why the 26B MoE runs faster than you'd expect compared to a 26B Dense model",
         "step3Title": "Plan Your Deployment",
-        "step3Description": "Know memory requirements before downloading large checkpoints"
+        "step3Description": "Know exact memory and storage requirements before downloading large checkpoints"
       },
       "featured": "Featured & Essential",
-      "all": "All Model Guides"
+      "all": "All Gemma 4 Model Guides"
     },
-    "benchmarks": {
-      "title": "Gemma 4 Benchmarks",
-      "description": "Explore official benchmark scores, performance comparisons, and task-specific evaluations for Gemma 4 models.",
-      "metaTitle": "Gemma 4 Benchmarks - Performance Scores & Comparisons",
-      "metaDescription": "Compare Gemma 4 benchmark results on AIME, MMMU, LiveCodeBench, and GPQA. See how Gemma 4 ranks against other open models.",
+    "requirements": {
+      "title": "Gemma 4 Requirements",
+      "description": "Hardware and software requirements for running Gemma 4 models locally — covering RAM, VRAM, CPU, GPU, laptop, and phone compatibility.",
+      "metaTitle": "Gemma 4 Requirements - RAM, VRAM & Hardware Guide",
+      "metaDescription": "Check Gemma 4 hardware requirements including RAM, VRAM, GPU, and CPU specs for each model size. Learn what laptop, PC, and phone setups are supported.",
+      "categoryLabel": "SYSTEM REQUIREMENTS",
+      "whatIs": "What are Gemma 4 Requirements?",
+      "whatIsDescription": "Before downloading Gemma 4, you need to know if your hardware can handle it. These guides break down exact RAM, VRAM, and compute requirements for every model size.",
+      "why": "Why check requirements first?",
+      "whySteps": {
+        "step1Title": "Avoid Download Waste",
+        "step1Description": "Know before you download whether the model will actually run on your current setup",
+        "step2Title": "Optimize for Your Device",
+        "step2Description": "Find the right quantization level and model size for your laptop, desktop, or phone",
+        "step3Title": "Plan Hardware Upgrades",
+        "step3Description": "Understand exactly what you need if you want to run larger or faster Gemma 4 variants"
+      },
+      "featured": "Featured & Essential",
+      "all": "All Gemma 4 Requirements Guides"
+    },
+    "ollama": {
+      "title": "Gemma 4 Ollama",
+      "description": "Run Gemma 4 locally with Ollama — setup guides, model tags, MLX support, and troubleshooting for all model sizes.",
+      "metaTitle": "Gemma 4 Ollama - Local Setup, Models & MLX Support",
+      "metaDescription": "Set up Gemma 4 with Ollama on Mac, Linux, or Windows. Find the right model tag, enable MLX on Apple Silicon, and get Gemma 4 running in minutes.",
+      "categoryLabel": "OLLAMA SETUP",
+      "whatIs": "What is Gemma 4 on Ollama?",
+      "whatIsDescription": "Ollama is the easiest way to run Gemma 4 locally. With a single command you can pull any Gemma 4 variant and start chatting or integrating into your apps.",
+      "why": "Why use Ollama for Gemma 4?",
+      "whySteps": {
+        "step1Title": "One-Command Setup",
+        "step1Description": "Run `ollama pull gemma4` and you're ready — no Python environment or CUDA config required",
+        "step2Title": "Apple Silicon Support",
+        "step2Description": "Use MLX backend on Mac for fast, energy-efficient inference with Metal acceleration",
+        "step3Title": "API Compatibility",
+        "step3Description": "Ollama exposes an OpenAI-compatible REST API, making it easy to swap in Gemma 4 for any app"
+      },
+      "featured": "Featured & Essential",
+      "all": "All Gemma 4 Ollama Guides"
+    },
+    "install": {
+      "title": "Gemma 4 Install",
+      "description": "Step-by-step installation guides for Gemma 4 on Windows, Linux, and Mac — including local setup, GGUF download, and offline deployment.",
+      "metaTitle": "Gemma 4 Install - Windows, Linux & Mac Setup Guide",
+      "metaDescription": "Install Gemma 4 on your device with these step-by-step guides covering Windows, Linux, Mac, GGUF download, offline setup, and local deployment options.",
+      "categoryLabel": "INSTALLATION",
+      "whatIs": "How to Install Gemma 4?",
+      "whatIsDescription": "Installing Gemma 4 means getting the model weights and a compatible runtime onto your machine. These guides cover every platform and method — from one-click tools to manual GGUF setup.",
+      "why": "Why follow an install guide?",
+      "whySteps": {
+        "step1Title": "Get It Right the First Time",
+        "step1Description": "Avoid common pitfalls with platform-specific instructions for Windows, Linux, and Mac",
+        "step2Title": "Choose Your Runtime",
+        "step2Description": "Pick the right tool — Ollama, LM Studio, or Python — based on your skill level and goals",
+        "step3Title": "Go Fully Offline",
+        "step3Description": "Learn how to download and run Gemma 4 with no internet connection after the initial setup"
+      },
+      "featured": "Featured & Essential",
+      "all": "All Gemma 4 Install Guides"
+    },
+    "benchmark": {
+      "title": "Gemma 4 Benchmark",
+      "description": "Gemma 4 performance benchmarks across MMMU, LiveCodeBench, GPQA, and AIME — with direct comparisons to competing open and closed models.",
+      "metaTitle": "Gemma 4 Benchmark - MMMU, GPQA & Coding Performance",
+      "metaDescription": "Explore Gemma 4 benchmark results across reasoning, coding, math, and multimodal tasks. See how it compares to GPT-4o, Qwen, and other frontier models.",
       "categoryLabel": "BENCHMARKS",
-      "whatIs": "What are Benchmarks?",
-      "whatIsDescription": "Guides to Gemma 4 performance metrics, task-specific evaluations, and comparisons with other open models on standard benchmarks.",
-      "why": "Why check benchmarks?",
+      "whatIs": "What are Gemma 4 Benchmarks?",
+      "whatIsDescription": "Benchmarks are standardized tests that measure model performance on reasoning, coding, math, science, and multimodal tasks. Gemma 4 results are drawn from official Google model cards and third-party evaluations.",
+      "why": "Why look at Gemma 4 benchmarks?",
       "whySteps": {
-        "step1Title": "Evaluate Capability",
-        "step1Description": "Understand how Gemma 4 performs on reasoning, coding, and multimodal tasks",
-        "step2Title": "Compare Models",
-        "step2Description": "See how different Gemma 4 sizes rank against each other and other open models",
-        "step3Title": "Make Informed Choices",
-        "step3Description": "Use benchmark data to select the best model for your specific workload"
+        "step1Title": "Measure Real Performance",
+        "step1Description": "See how Gemma 4 scores on standardized tasks before choosing it for your project",
+        "step2Title": "Compare Across Models",
+        "step2Description": "Understand where Gemma 4 outperforms alternatives and where trade-offs exist",
+        "step3Title": "Match Tasks to Strengths",
+        "step3Description": "Identify which Gemma 4 variant excels at coding, reasoning, math, or multimodal tasks"
       },
       "featured": "Featured & Essential",
-      "all": "All Benchmark Guides"
+      "all": "All Gemma 4 Benchmark Guides"
     },
-    "prompting": {
-      "title": "Gemma 4 Prompting",
-      "description": "Learn Gemma 4 prompt formatting, chat templates, system roles, thinking tokens, and best practices for getting reliable outputs.",
-      "metaTitle": "Gemma 4 Prompting - Chat Templates & Prompt Formatting",
-      "metaDescription": "Master Gemma 4 prompt formatting with chat templates, system roles, thinking mode tokens, and structured prompting techniques for consistent results.",
-      "categoryLabel": "PROMPTING",
-      "whatIs": "What is Prompting?",
-      "whatIsDescription": "Guides to Gemma 4 prompt structure, chat templates, system/user/model roles, thinking token usage, and formatting conventions for different use cases.",
-      "why": "Why learn prompting?",
+    "comparison": {
+      "title": "Gemma 4 Comparison",
+      "description": "Direct comparisons of Gemma 4 against other leading models — covering performance, cost, speed, and local deployment trade-offs.",
+      "metaTitle": "Gemma 4 Comparison - vs GPT-4o, Qwen & Other Models",
+      "metaDescription": "Compare Gemma 4 to GPT-4o, Qwen, Llama, and other frontier models. Evaluate performance, hardware requirements, licensing, and local deployment options.",
+      "categoryLabel": "MODEL COMPARISON",
+      "whatIs": "Why Compare Gemma 4?",
+      "whatIsDescription": "With so many models available, choosing the right one requires direct comparisons. These guides put Gemma 4 head-to-head against competing models across real benchmarks and practical criteria.",
+      "why": "Why read Gemma 4 comparisons?",
       "whySteps": {
-        "step1Title": "Format Correctly",
-        "step1Description": "Use the right chat template structure to avoid unexpected model behavior",
-        "step2Title": "Enable Thinking Mode",
-        "step2Description": "Learn how to activate extended reasoning with thinking tokens",
-        "step3Title": "Get Reliable Outputs",
-        "step3Description": "Apply prompt engineering techniques for consistent, high-quality responses"
+        "step1Title": "Make the Right Choice",
+        "step1Description": "See exactly how Gemma 4 stacks up before committing to a model for your workflow",
+        "step2Title": "Understand Trade-offs",
+        "step2Description": "Compare performance, speed, memory usage, and licensing across all major alternatives",
+        "step3Title": "Find the Best Fit",
+        "step3Description": "Get clear guidance on when to choose Gemma 4 and when another model may suit you better"
       },
       "featured": "Featured & Essential",
-      "all": "All Prompting Guides"
-    },
-    "agents": {
-      "title": "Gemma 4 Agents",
-      "description": "Implement function calling, structured output, tool use, and agentic workflows with Gemma 4 and the Agent Development Kit.",
-      "metaTitle": "Gemma 4 Agents - Function Calling & Tool Use",
-      "metaDescription": "Build agents with Gemma 4 using function calling, structured output, and tool use. Learn the three-phase call flow and integrate with Google ADK.",
-      "categoryLabel": "AGENTS",
-      "whatIs": "What are Agents?",
-      "whatIsDescription": "Guides to building agentic applications with Gemma 4, covering function calling, structured JSON output, tool use, and Agent Development Kit integration.",
-      "why": "Why build agents?",
-      "whySteps": {
-        "step1Title": "Extend Model Capabilities",
-        "step1Description": "Connect Gemma 4 to external tools, APIs, and data sources",
-        "step2Title": "Get Structured Output",
-        "step2Description": "Use JSON schemas to reliably extract information from model responses",
-        "step3Title": "Build Real Applications",
-        "step3Description": "Create production-ready agentic workflows with the ADK framework"
-      },
-      "featured": "Featured & Essential",
-      "all": "All Agent Guides"
-    },
-    "multimodal": {
-      "title": "Gemma 4 Multimodal",
-      "description": "Explore Gemma 4 image, audio, and video input capabilities for visual understanding, document analysis, and audio transcription.",
-      "metaTitle": "Gemma 4 Multimodal - Image, Audio & Video Input",
-      "metaDescription": "Use Gemma 4 multimodal capabilities for image understanding, audio input, OCR, and visual analysis. Learn which models support each input type.",
-      "categoryLabel": "MULTIMODAL",
-      "whatIs": "What is Multimodal?",
-      "whatIsDescription": "Guides to Gemma 4 multimodal input support, covering image analysis, audio transcription, video understanding, and the differences between edge and large models.",
-      "why": "Why use multimodal?",
-      "whySteps": {
-        "step1Title": "Understand Images",
-        "step1Description": "Analyze screenshots, documents, charts, and visual content with Gemma 4",
-        "step2Title": "Process Audio",
-        "step2Description": "Use E2B and E4B native audio input for transcription and analysis",
-        "step3Title": "Build Vision Apps",
-        "step3Description": "Create applications that combine text and visual understanding"
-      },
-      "featured": "Featured & Essential",
-      "all": "All Multimodal Guides"
-    },
-    "localrun": {
-      "title": "Gemma 4 Local Run",
-      "description": "Run Gemma 4 locally with Ollama, LM Studio, AI Edge Gallery, and Android Studio on your laptop, workstation, or mobile device.",
-      "metaTitle": "Gemma 4 Local Run - Ollama, LM Studio & Edge Deployment",
-      "metaDescription": "Run Gemma 4 locally with Ollama, LM Studio, or Google AI Edge Gallery. Learn model tags, VRAM requirements, and setup steps for each runtime.",
-      "categoryLabel": "LOCAL RUN",
-      "whatIs": "What is Local Run?",
-      "whatIsDescription": "Guides to running Gemma 4 models locally on your own hardware using Ollama, LM Studio, AI Edge Gallery, and other local inference frameworks.",
-      "why": "Why run locally?",
-      "whySteps": {
-        "step1Title": "Full Privacy",
-        "step1Description": "Keep prompts and data on your own hardware with no cloud dependencies",
-        "step2Title": "Unlimited Usage",
-        "step2Description": "Run as many requests as your hardware allows without API rate limits",
-        "step3Title": "Custom Integration",
-        "step3Description": "Connect local Gemma 4 to your own apps via Ollama REST API"
-      },
-      "featured": "Featured & Essential",
-      "all": "All Local Run Guides"
-    },
-    "tuning": {
-      "title": "Gemma 4 Tuning",
-      "description": "Fine-tune Gemma 4 with QLoRA, adjust quantization settings, and evaluate tuned models for domain-specific applications.",
-      "metaTitle": "Gemma 4 Tuning - Fine-tuning, QLoRA & Quantization",
-      "metaDescription": "Fine-tune Gemma 4 models with QLoRA and various quantization strategies. Learn training frameworks, data preparation, and evaluation for custom Gemma 4 models.",
-      "categoryLabel": "FINE-TUNING",
-      "whatIs": "What is Tuning?",
-      "whatIsDescription": "Guides to fine-tuning Gemma 4 with QLoRA, selecting quantization levels, preparing training data, and evaluating custom tuned checkpoints.",
-      "why": "Why fine-tune?",
-      "whySteps": {
-        "step1Title": "Domain Specialization",
-        "step1Description": "Adapt Gemma 4 to perform better on your specific task or domain",
-        "step2Title": "Reduce Model Size",
-        "step2Description": "Use quantization to run larger models on more constrained hardware",
-        "step3Title": "Own Your Model",
-        "step3Description": "Create custom Gemma 4 checkpoints tailored to your data and requirements"
-      },
-      "featured": "Featured & Essential",
-      "all": "All Tuning Guides"
-    },
-    "deploy": {
-      "title": "Gemma 4 Deploy",
-      "description": "Deploy Gemma 4 to production with Vertex AI, Cloud Run, LiteRT, and edge delivery through Google AI Edge Gallery.",
-      "metaTitle": "Gemma 4 Deploy - Vertex AI, Cloud Run & Edge Delivery",
-      "metaDescription": "Deploy Gemma 4 in production using Vertex AI, Cloud Run, serverless endpoints, or LiteRT for mobile and edge inference.",
-      "categoryLabel": "DEPLOYMENT",
-      "whatIs": "What is Deploy?",
-      "whatIsDescription": "Guides to production deployment of Gemma 4 on Vertex AI, Cloud Run, Google AI Edge, and LiteRT for scalable cloud and edge inference.",
-      "why": "Why deploy to production?",
-      "whySteps": {
-        "step1Title": "Scale Reliably",
-        "step1Description": "Use Vertex AI or Cloud Run for managed, autoscaling Gemma 4 inference",
-        "step2Title": "Deploy to Edge",
-        "step2Description": "Use LiteRT and Google AI Edge Gallery for mobile and device inference",
-        "step3Title": "Reduce Costs",
-        "step3Description": "Choose the right deployment path based on usage patterns and budget"
-      },
-      "featured": "Featured & Essential",
-      "all": "All Deployment Guides"
+      "all": "All Gemma 4 Comparison Guides"
     }
   }
 }

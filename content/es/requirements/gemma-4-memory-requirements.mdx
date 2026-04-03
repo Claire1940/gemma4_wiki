@@ -1,0 +1,131 @@
+export const metadata = {
+  title: "Requisitos de memoria de Gemma 4: Guía completa de hardware 2026",
+  description: "Conozca los requisitos exactos de memoria de Gemma 4 para el despliegue local. Explore las necesidades de VRAM para los modelos 31B, 26B MoE y Edge con nuestra guía detallada de hardware 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4c1d95/fff?text=Gemma+4+Memory+Requirements",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la última familia de modelos abiertos de Google ha establecido un nuevo estándar para el rendimiento de la IA local, pero comprender los **requisitos de memoria de gemma 4** es esencial antes de intentar una instalación local. Con el cambio a una licencia Apache 2.0 en 2026, más desarrolladores y entusiastas buscan ejecutar estos modelos en sus propias estaciones de trabajo, que van desde configuraciones de servidores de gama alta hasta dispositivos de borde modestos como la Raspberry Pi. Sin embargo, debido a que Gemma 4 introduce mejoras arquitectónicas masivas, incluyendo una ventana de contexto de 256K y multimodalidad nativa, la sobrecarga de hardware ha cambiado significativamente en comparación con las generaciones anteriores.
+
+Navegar por los **requisitos de memoria de gemma 4** requiere una mirada clara a los cuatro niveles de modelos distintos: el 31B Dense, el 26B Mixture of Experts (MoE), y los modelos de borde altamente eficientes E2B y E4B. Ya sea que esté construyendo un flujo de trabajo agéntico o un asistente de programación local, su VRAM disponible y la memoria del sistema dictarán qué modelo proporciona el mejor equilibrio entre velocidad e inteligencia. En esta guía, desglosamos las necesidades específicas de hardware y las estrategias de optimización para ayudarle a aprovechar al máximo los pesos abiertos de vanguardia de Google.
+
+## La jerarquía de modelos de Gemma 4
+
+Antes de sumergirse en los gigabytes brutos, es importante entender la arquitectura de la línea 2026. Google ha dividido la familia en modelos de "Estación de trabajo" (Workstation) y modelos de "Borde" (Edge). Los modelos de estación de trabajo están diseñados para tareas pesadas como el razonamiento complejo y la programación, mientras que los modelos Edge están optimizados para dispositivos móviles e IoT.
+
+El modelo 31B Dense representa la cima de la calidad en este lanzamiento, con menos capas que Gemma 3 pero con mejoras significativas como la normalización de valores y una ventana de contexto de 256K. Mientras tanto, el modelo 26B MoE utiliza un enfoque de "Mezcla de Expertos", donde solo 3.8 mil millones de parámetros están activos en un momento dado. Esto permite la inteligencia de un modelo mucho más grande con los costos de cómputo de uno más pequeño, aunque los **requisitos de memoria de gemma 4** para el almacenamiento siguen vinculados al recuento total de parámetros.
+
+| Nivel del modelo | Recuento de parámetros | Parámetros activos | Ventana de contexto nativa | Caso de uso principal |
+|---|---|---|---|---|
+| **31B Dense** | 31 mil millones | 31 mil millones | 256K | Programación, lógica compleja |
+| **26B MoE** | 26 mil millones | 3.8 mil millones | 256K | Razonamiento de alta velocidad |
+| **E4B (Edge)** | 4 mil millones | 4 mil millones | 128K | Asistentes móviles |
+| **E2B (Edge)** | 2 mil millones | 2 mil millones | 128K | IoT/Raspberry Pi |
+
+## Requisitos detallados de memoria de Gemma 4 para VRAM
+
+El factor más crítico para ejecutar Gemma 4 es la memoria de video (VRAM). Aunque los modelos pueden ejecutarse en la memoria del sistema (inferencia por CPU), el rendimiento suele ser demasiado lento para aplicaciones en tiempo real. Para los modelos de clase de estación de trabajo, generalmente necesitará GPUs de grado profesional o tarjetas de consumo de gama alta con al menos 24 GB de VRAM para las versiones cuantizadas.
+
+Si tiene la intención de ejecutar los modelos a precisión completa (FP16/BF16), los **requisitos de memoria de gemma 4** escalan linealmente con el recuento de parámetros. Un modelo 31B en FP16 requiere aproximadamente 62 GB de VRAM solo para cargar los pesos, excluyendo la memoria necesaria para el caché KV (ventana de contexto). El uso de cuantización de 4 bits (Int4) reduce significativamente esta carga, haciendo que los modelos 31B y 26B MoE sean accesibles para hardware de consumo como la RTX 4090 o RTX 5090 (2026).
+
+| Modelo | Precisión (Cuantización) | VRAM estimada (Pesos) | GPU recomendada |
+|---|---|---|---|
+| **31B Dense** | FP16 | ~64 GB | A100 (80GB) / H100 |
+| **31B Dense** | 4 bits (Q4_K_M) | ~18-20 GB | RTX 3090 / 4090 (24GB) |
+| **26B MoE** | FP16 | ~54 GB | RTX 6000 Ada / A6000 |
+| **26B MoE** | 4 bits (Q4_K_M) | ~15-17 GB | RTX 4080 (16GB) / 3090 |
+| **E4B Edge** | FP16 | ~8.5 GB | RTX 3060 (12GB) |
+| **E2B Edge** | FP16 | ~4.5 GB | GTX 1660 / T4 |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Ventana de contexto y sobrecarga de memoria
+
+Una de las características más impresionantes del lanzamiento de Gemma 4 en 2026 es la enorme ventana de contexto. Los modelos de estación de trabajo admiten hasta 256,000 tokens. Sin embargo, los usuarios deben tener en cuenta que el caché KV (la memoria utilizada para almacenar el contexto durante una conversación) crece a medida que la conversación se alarga. 
+
+Ejecutar un contexto completo de 256K en un modelo 31B puede consumir fácilmente entre 20 GB y 40 GB adicionales de VRAM, dependiendo de la implementación. Por lo tanto, los **requisitos de memoria de gemma 4** para una sesión de contexto largo pueden exceder la capacidad de una sola GPU de consumo. Para los usuarios que necesitan la ventana completa de 256K, se recomiendan encarecidamente las configuraciones multi-GPU o hardware profesional como la NVIDIA RTX 6000 Pro (96 GB de VRAM).
+
+> **⚠️ Advertencia:** No intente cargar la ventana de contexto de 256K en una tarjeta de 24 GB sin una cuantización pesada y compresión de caché KV, ya que es probable que resulte en un error de "Memoria insuficiente" (OOM).
+
+## Computación en el borde: Requisitos de E2B y E4B
+
+Para aquellos que trabajan con dispositivos móviles, Raspberry Pi o Jetson Nano, los modelos Edge (E2B y E4B) son el enfoque principal. Estos modelos han sido diseñados para una máxima eficiencia de memoria. Google ha logrado comprimir significativamente los codificadores de audio y visión en estas versiones. Por ejemplo, el codificador de audio es ahora un 50% más pequeño que en la serie anterior Gemma 3N, pasando de 390 MB a solo 87 MB en espacio de disco.
+
+Los **requisitos de memoria de gemma 4** para el modelo E2B son lo suficientemente bajos como para que pueda ejecutarse cómodamente en un dispositivo con 8 GB de RAM total del sistema, incluso mientras maneja entradas multimodales como audio e imágenes.
+
+1.  **Raspberry Pi 5 (8GB):** Puede ejecutar E2B con cuantización de 4 bits a velocidades utilizables.
+2.  **Jetson Nano:** Adecuado para E2B; E4B puede requerir la serie Jetson Orin para un rendimiento fluido en tiempo real.
+3.  **Smartphones modernos:** Los dispositivos Android e iOS de gama alta de 2026 pueden ejecutar E2B de forma nativa para asistentes de voz en el dispositivo.
+
+## Multimodalidad e impacto en la memoria
+
+Gemma 4 es nativamente multimodal, lo que significa que el soporte para visión y audio está integrado en la arquitectura en lugar de estar "añadido". Este es un cambio significativo para los **requisitos de memoria de gemma 4** porque el modelo debe mantener los codificadores de visión y audio activos en la memoria.
+
+El nuevo codificador de visión utiliza procesamiento nativo de relación de aspecto, que es mucho más eficiente que los métodos antiguos utilizados en Gemma 3N. A pesar de la mayor capacidad, el codificador de visión en los modelos pequeños se ha reducido a 150 millones de parámetros. Esta arquitectura más ligera permite un procesamiento más rápido de capturas de pantalla de documentos y entradas de múltiples imágenes sin un aumento masivo en el uso de VRAM.
+
+| Componente | Tamaño de parámetros (Edge) | Impacto en la memoria |
+|---|---|---|
+| **Codificador de audio** | 305 millones | ~600 MB (FP16) |
+| **Codificador de visión** | 150 millones | ~300 MB (FP16) |
+| **Núcleo de texto** | 2B / 4B | 4GB - 8GB (FP16) |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Entrenamiento consciente de la cuantización (QAT)
+
+Para ayudar a los usuarios a gestionar los **requisitos de memoria de gemma 4**, Google está lanzando puntos de control de "Entrenamiento consciente de la cuantización" (QAT). A diferencia de la cuantización estándar posterior al entrenamiento, que a veces puede degradar las capacidades de razonamiento del modelo, los puntos de control QAT están entrenados para mantener una alta calidad incluso a tasas de bits más bajas.
+
+Si está limitado por el hardware —por ejemplo, si solo tiene 12 GB de VRAM— el uso de un punto de control QAT de 4 bits del modelo E4B producirá resultados significativamente mejores que una compresión estándar de 4 bits de un modelo más grande que no encaja correctamente. Estos puntos de control están disponibles en Hugging Face y son compatibles con ejecutores locales populares como Ollama y LM Studio.
+
+> **💡 Consejo:** Busque siempre las etiquetas oficiales "Gemma-4-QAT" en los repositorios de modelos para asegurarse de obtener la mayor relación entre inteligencia y memoria.
+
+## Configuraciones de hardware recomendadas para 2026
+
+Para proporcionar una ruta clara de despliegue, hemos categorizado las mejores configuraciones de hardware basadas en el uso previsto de los modelos Gemma 4.
+
+| Perfil de usuario | Modelo recomendado | Hardware recomendado |
+|---|---|---|
+| **Dev de móviles/IoT** | E2B (2B) | Raspberry Pi 5 (8GB) / Jetson Nano |
+| **Asistente local** | E4B (4B) | RTX 3060 (12GB) / MacBook Air (16GB RAM) |
+| **Usuario avanzado / Programador** | 26B MoE | RTX 4090 (24GB) / Mac Studio (M2/M3 Max) |
+| **Empresa / Investigador** | 31B Dense | 2x RTX 6000 Pro / A100 (80GB) |
+
+Para los usuarios empresariales, Google Cloud ahora admite el servicio de estos modelos de forma serverless a través de Cloud Run. Al utilizar GPUs G4 (NVIDIA RTX Pro 6000 con 96 GB de VRAM), puede admitir el modelo 31B Dense completo con toda su ventana de contexto de 256K sin mantener hardware permanente en las instalaciones. Esta es una excelente alternativa para aquellos que encuentran que los **requisitos de memoria de gemma 4** locales son demasiado exigentes para su configuración de escritorio actual.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 en una computadora portátil con 16 GB de RAM?**
+
+R: Sí, puede ejecutar cómodamente los modelos E2B y E4B (Edge). Para el modelo E4B, se recomienda usar la cuantización de 4 bits para dejar suficiente memoria para su sistema operativo y otras aplicaciones. Los modelos 26B y 31B probablemente serán demasiado grandes para un sistema de 16 GB, a menos que use una cuantización extrema y descargue algunas capas al SSD, lo cual será muy lento.
+
+**P: ¿Requiere el modelo 26B MoE menos VRAM que el modelo 31B Dense?**
+
+R: Sí, el modelo 26B MoE (Mezcla de Expertos) tiene un recuento total de parámetros más pequeño (26 mil millones frente a 31 mil millones), por lo que sus **requisitos de memoria de gemma 4** base para cargar los pesos son menores. Además, debido a que solo activa 3.8 mil millones de parámetros por token, es significativamente más rápido durante la inferencia, lo que lo convierte en la mejor opción para usuarios con GPUs de gama media como la RTX 4080.
+
+**P: ¿Por qué es tan importante la ventana de contexto para la memoria?**
+
+R: La ventana de contexto requiere VRAM para almacenar el "caché KV" (pares clave-valor) para cada token en la conversación. Con 256,000 tokens, este caché se vuelve masivo. Incluso si el modelo en sí cabe en su VRAM, una conversación larga podría causar un error de memoria insuficiente. Si planea usar el contexto completo de 256K, debe considerar entre 15 y 30 GB de VRAM adicionales más allá de lo necesario solo para cargar el modelo.
+
+**P: ¿Existen herramientas oficiales para ayudar a calcular los requisitos de memoria de gemma 4?**
+
+R: La mayoría de las plataformas de alojamiento de modelos como Hugging Face proporcionan una "Calculadora de VRAM" en la página de la tarjeta del modelo. Además, herramientas como Ollama verificarán automáticamente su VRAM disponible y la RAM del sistema antes de intentar cargar el modelo, asegurando que no bloquee su sistema al exceder sus límites de hardware. Para obtener los datos más precisos de 2026, consulte la documentación oficial de Google DeepMind.

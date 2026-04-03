@@ -1,0 +1,122 @@
+export const metadata = {
+  title: "Prueba de programación de Gemma 4: Benchmarks de los modelos abiertos de Google 2026",
+  description: "Una prueba de programación exhaustiva de Gemma 4 que cubre desarrollo web, motores de juegos 3D y rendimiento local. Vea cómo se comparan los modelos 26B y 31B en escenarios del mundo real.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Coding+Test",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la última familia de pesos abiertos de Google ha causado un gran impacto en la comunidad de desarrolladores, particularmente para aquellos interesados en el rendimiento de los LLM locales. En nuestra exhaustiva **prueba de programación de gemma 4**, evaluamos a los dos pesos pesados de la línea: el modelo 31B Dense y el modelo 26B Mixture of Experts (MoE). Estos modelos se comercializan como los modelos abiertos más capaces "byte por byte", y nuestros benchmarks pretenden ver si realmente pueden manejar tareas complejas de ingeniería de software. Ya sea que estés construyendo un SO de navegador basado en React o un simulador de vuelo en 3D, comprender los matices de esta **prueba de programación de gemma 4** es esencial para optimizar tu flujo de trabajo en 2026. Desde la generación de portafolios multimodales hasta el manejo de lógica pura en JavaScript, llevamos estos modelos al límite para ver si pueden reemplazar a los gigantes de código cerrado en la asistencia diaria de programación.
+
+## La familia Gemma 4: Especificaciones técnicas
+
+Antes de profundizar en los resultados de la **prueba de programación de gemma 4**, es importante entender la arquitectura detrás de estos modelos. Google ha lanzado cuatro tamaños distintos, pero los modelos 26B y 31B son el foco principal para el desarrollo de alto rendimiento. El modelo 26B utiliza una arquitectura de Mezcla de Expertos (MoE) con solo 4B de parámetros activos, lo que lo hace increíblemente eficiente para hardware local. Mientras tanto, el modelo 31B Dense está diseñado para una profundidad de razonamiento máxima.
+
+| Tamaño del modelo | Arquitectura | Parámetros activos | Ventana de contexto | Licencia |
+|---|---|---|---|---|
+| **Gemma 4 2B** | Dense | 2.3B | 128K | Apache 2.0 |
+| **Gemma 4 4B** | Dense | 4.5B | 128K | Apache 2.0 |
+| **Gemma 4 26B** | MoE | **4B** | 256K | Apache 2.0 |
+| **Gemma 4 31B** | Dense | **31B** | 256K | Apache 2.0 |
+
+> **💡 Consejo:** Para los desarrolladores con VRAM limitada, el modelo 26B MoE ofrece el "punto ideal" de rendimiento, funcionando significativamente más rápido que el modelo 31B Dense mientras mantiene altas capacidades de razonamiento.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Desarrollo Web: Construyendo un SO de navegador
+
+Uno de los segmentos más reveladores de nuestra **prueba de programación de gemma 4** consistió en pedir a los modelos que generaran un "SO de navegador" funcional utilizando HTML, CSS y JavaScript. Esta tarea pone a prueba la capacidad del modelo para manejar la gestión de estados, la estética de la interfaz de usuario y la lógica de múltiples componentes.
+
+El modelo 26B MoE produjo inicialmente un resultado minimalista. Sin embargo, cuando se le proporcionó "refuerzo negativo" (críticas sobre sus elecciones estéticas), dio un giro brillante. La segunda iteración incluyó:
+*   Efectos de ventana translúcidos.
+*   Un menú de inicio de "Cohete".
+*   Aplicaciones funcionales que incluían un juego de Snake y un juego de memoria.
+*   Un motor de temas dinámico (temas Bosque, Medianoche y Atardecer).
+
+El modelo 31B Dense, probado a través de APIs en la nube, produjo una interfaz inicial similar pero ligeramente más pulida llamada "Nova OS". Incluía un reloj funcional y un juego "Clicker Quest" con lógica de mejora de auto-clic. Curiosamente, la capacidad del modelo 26B para seguir instrucciones estéticas complejas a través de un proceso iterativo lo convirtió en la opción preferida para el prototipado front-end.
+
+## Desarrollo de juegos 3D y física
+
+En 2026, se espera que los modelos de IA hagan más que simplemente escribir "Hola mundo". Encargamos a los modelos la creación de una escena de metro en 3D que pudiera navegarse usando las teclas WASD.
+
+| Característica | Resultado 26B MoE | Resultado 31B Dense |
+|---|---|---|
+| **Movimiento** | Lógica WASD fluida | Lógica WASD estándar |
+| **Iluminación** | Deslizador de brillo básico | Proyección realista avanzada |
+| **Materiales** | Texturas procedimentales | Superficies reflectantes de alto brillo |
+| **Combate** | FPS "Subway Protocol" | FPS "Subway Survival" |
+
+La **prueba de programación de gemma 4** dio un giro inesperado cuando pedimos a los modelos que convirtieran estas escenas estáticas en juegos de disparos en primera persona (FPS). Ambos modelos implementaron con éxito:
+1.  **Generación de enemigos:** Oleadas infinitas de enemigos.
+2.  **Mecánicas de armas:** Modelos de armas 3D con destellos de disparo.
+3.  **Física avanzada:** El modelo 31B implementó un retroceso de arma impresionante que se sentía sorprendentemente táctil para ser código generado por IA.
+
+> **⚠️ Advertencia:** Aunque los modelos sobresalen en la generación de estructuras básicas para juegos 3D, a menudo tienen dificultades con la "lógica de salud". En nuestras pruebas, se podía disparar a los enemigos, pero el personaje del jugador era efectivamente invencible ya que los modelos omitieron escribir las funciones de recepción de daño.
+
+## Capacidades multimodales: De Wireframe a sitio web
+
+Gemma 4 es multimodal, lo que significa que puede "ver" imágenes y traducirlas a código. Proporcionamos un wireframe dibujado a mano de un portafolio profesional y solicitamos una implementación de alta gama.
+
+El modelo 26B superó las expectativas, creando un sitio para un ingeniero ficticio llamado "Levi Lapis". No se limitó a copiar el diseño; añadió una función de **Simulación de Inferencia en Vivo**. Esta incluía una representación visual de una red neuronal activando unidades ocultas cuando se hacía clic en un botón de "Forward Pass". Este nivel de interpretación creativa a partir de un boceto a mano demuestra que los resultados de la **prueba de programación de gemma 4** para desarrolladores frontend son excepcionalmente positivos.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/h-LRknODV3M"
+    title="Gemma 4 Tested for Coding: Complex Web Apps"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Pruebas de aplicaciones complejas: DAW y editores de video
+
+Para poner a prueba realmente la lógica de estos modelos, nos alejamos de las interfaces simples y nos adentramos en el procesamiento de datos complejo. Pedimos a Gemma 4 que construyera una Estación de Trabajo de Audio Digital (DAW) web y un editor de video.
+
+### La prueba del DAW Web
+El modelo generó con éxito una interfaz con un piano, un motor de batería y un rompler de EDM. Sin embargo, la lógica fue irregular:
+*   **Batería:** Totalmente funcional (Bombo, Caja, Charles).
+*   **Piano:** La interfaz aparecía, pero no se producía sonido.
+*   **BPM:** Deslizador funcional que ajustaba correctamente la velocidad de reproducción.
+*   **Grabación:** El botón existía pero carecía de la lógica de backend para capturar audio realmente.
+
+### La prueba del editor de video
+El editor de video generado permitía la importación de medios y contaba con una línea de tiempo. Aunque la tecla "C" funcionaba para cortar clips y el escalado funcionaba para cambiar el tamaño, los puntos de anclaje estaban configurados incorrectamente en la esquina superior izquierda en lugar del centro. Esto demuestra que, aunque Gemma 4 entiende el *concepto* de herramientas complejas, todavía requiere supervisión humana para corregir la geometría de coordenadas y el procesamiento profundo de señales.
+
+## Rendimiento local y cuantización
+
+Una parte importante de cualquier **prueba de programación de gemma 4** es cómo se ejecuta en hardware de consumo local. Utilizamos el DGX Spark para nuestras pruebas locales.
+
+*   **26B MoE:** Funcionó perfectamente con cuantización Q8. Mantuvo velocidades altas (aprox. 22-28 tokens por segundo) y siguió las instrucciones con precisión.
+*   **31B Dense:** Enfrentó obstáculos significativos con la cuantización local. En Q4 y Q8, el modelo a menudo producía caracteres "alucinados" o respondía en idiomas incorrectos. Para 2026, se recomienda ejecutar el modelo 31B a través de APIs en la nube FP16 de alta calidad o servicios NIM especializados hasta que los kernels de cuantización se optimicen más.
+
+Para obtener la documentación más actualizada sobre el despliegue local de estos modelos, puedes visitar el [Blog oficial de Google AI](https://blog.google/technology/ai/) o consultar las últimas fichas de modelos en Hugging Face.
+
+## FAQ
+
+**P: ¿Es Gemma 4 mejor que GPT-4 para programar?**
+
+R: En nuestra **prueba de programación de gemma 4**, encontramos que, si bien rivaliza con los modelos de primer nivel en generación de UI y lógica básica de juegos, todavía se queda un poco atrás en arquitectura de backend compleja como el procesamiento de audio en tiempo real. Sin embargo, su rendimiento "byte por byte" es líder en la industria para pesos abiertos.
+
+**P: ¿Qué hardware se necesita para ejecutar el modelo Gemma 4 26B localmente?**
+
+R: Debido a que es un modelo de Mezcla de Expertos (MoE) con solo 4B de parámetros activos, puedes ejecutarlo en GPUs de gama media con al menos 16GB-24GB de VRAM (dependiendo de la cuantización) a velocidades muy altas.
+
+**P: ¿Soporta Gemma 4 la programación multimodal?**
+
+R: Sí. Como se mostró en nuestras pruebas, puedes subir imágenes de wireframes de UI o diagramas de circuitos, y el modelo puede identificar componentes y generar el código correspondiente (HTML/CSS o Arduino C++).
+
+**P: ¿Es Gemma 4 gratuito para uso comercial?**
+
+R: Sí, la familia Gemma 4 se publica bajo la licencia Apache 2.0, que permite el uso comercial, la modificación y la distribución sin las tarifas por token asociadas con las APIs de código cerrado.

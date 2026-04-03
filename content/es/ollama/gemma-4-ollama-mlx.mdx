@@ -1,0 +1,144 @@
+export const metadata = {
+  title: "Gemma 4 Ollama MLX: Guía Avanzada de IA Local 2026",
+  description: "Domina el despliegue y el ajuste fino de Gemma 4 usando Ollama y MLX. Guía completa de 2026 para Apple Silicon y rendimiento de escritorio de alta gama.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Ollama+MLX+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con el lanzamiento del último modelo de pesos abiertos de Google. La integración del flujo de trabajo **gemma 4 ollama mlx** permite a los desarrolladores aprovechar capacidades multimodales sin precedentes directamente en sus máquinas locales sin depender de costosas suscripciones en la nube. Ya sea que busques construir un asistente de investigación privado o un compañero de programación especializado, el pipeline **gemma 4 ollama mlx** proporciona el camino más eficiente hacia una inferencia de alto rendimiento en 2026.
+
+Al utilizar Ollama para la orquestación y el framework MLX para el ajuste fino (fine-tuning) acelerado por hardware en Apple Silicon, los usuarios ahora pueden lograr resultados que anteriormente requerían clústeres de GPU de grado empresarial. Esta guía explora los diferentes tamaños de modelo disponibles en la familia Gemma 4, el proceso paso a paso para el ajuste fino con conjuntos de datos personalizados y cómo optimizar tu entorno local para obtener la máxima velocidad.
+
+## Cómo elegir el tamaño adecuado del modelo Gemma 4
+
+Gemma 4 está diseñado pensando en la versatilidad, ofreciendo múltiples niveles adaptados a restricciones de hardware y casos de uso específicos. Comprender qué versión se ajusta a tu configuración actual es el primer paso para un despliegue exitoso. En 2026, la arquitectura del modelo se ha refinado para admitir contextos más largos y una mayor multilingüidad en todas las variantes.
+
+| Tamaño del modelo | Hardware optimizado | Caso de uso principal | Requisito de memoria |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 1B** | Dispositivos móviles / IoT | Tareas de texto simples, chat básico | ~2GB VRAM |
+| **Gemma 4 4B** | Portátiles de alta gama | Traducción, resumen | ~4GB-6GB VRAM |
+| **Gemma 4 12B** | Portátiles Premium (M3/M4 Max) | Razonamiento complejo, programación | ~12GB-16GB VRAM |
+| **Gemma 4 27B** | Sobremesa de alta gama / Servidores | Rendimiento multimodal de primer nivel | ~24GB+ VRAM |
+
+> **💡 Consejo:** Si no estás seguro de con qué versión empezar, el modelo 12B ofrece la mejor relación "rendimiento-precio" para los usuarios modernos de MacBook Pro, equilibrando la velocidad con un razonamiento de alto nivel.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/qcjrduz_YS8"
+    title="Which Gemma version is the right one for you?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Configuración de Gemma 4 con Ollama
+
+Ollama sigue siendo el estándar de oro para ejecutar modelos de lenguaje de gran tamaño (LLM) localmente debido a su simplicidad y su robusta API. Para comenzar con la integración de **gemma 4 ollama mlx**, primero debes asegurarte de que tu instalación de Ollama esté actualizada a la última versión de 2026, que incluye soporte nativo para los nuevos mecanismos de atención de Gemma 4.
+
+### Pasos de instalación
+1. **Descargar Ollama:** Visita el [sitio web oficial de Ollama](https://ollama.com) e instala la versión compatible con tu sistema operativo.
+2. **Obtener el modelo:** Abre tu terminal y ejecuta `ollama run gemma4:12b` (o el tamaño de tu preferencia).
+3. **Verificar el soporte multimodal:** Para los modelos más grandes, ahora puedes arrastrar y soltar imágenes en la interfaz de la terminal para probar las capacidades de visión.
+
+| Comando | Descripción |
+| :--- | :--- |
+| `ollama list` | Ver todas las variantes de Gemma instaladas actualmente |
+| `ollama run gemma4` | Iniciar el modelo predeterminado de 12B ajustado para instrucciones |
+| `ollama pull gemma4:27b` | Descargar la versión multimodal a escala completa |
+| `ollama rm [modelo]` | Eliminar versiones antiguas para ahorrar espacio en disco |
+
+## Ajuste fino con MLX en Apple Silicon
+
+Para los usuarios de hardware Mac, el framework MLX es esencial para ajustar los pesos del modelo. El ajuste fino (fine-tuning) no se trata necesariamente de enseñar nuevos hechos al modelo, sino de ajustar el *estilo*, la *sintaxis* y el *formato* de la salida para que coincida con tus necesidades específicas. La sinergia de **gemma 4 ollama mlx** es particularmente poderosa aquí, ya que MLX puede generar "adaptadores" que Ollama puede cargar de forma nativa.
+
+### Paso 1: Preparación del conjunto de datos
+Necesitas una colección de pares de instrucción-respuesta formateados como un archivo JSONL. Cada línea debe representar una única interacción. Para un ajuste fino de alta calidad en 2026, apunta a tener al menos entre 100 y 500 ejemplos de alta calidad.
+
+| División de datos | Porcentaje | Propósito |
+| :--- | :--- | :--- |
+| **Train** | 60% | Los datos principales utilizados para ajustar los pesos |
+| **Valid** | 20% | Utilizado durante el entrenamiento para evitar el sobreajuste |
+| **Test** | 20% | Utilizado después del entrenamiento para verificar el rendimiento |
+
+### Paso 2: Ejecución del comando de entrenamiento de MLX
+Una vez que tus datos estén listos, utiliza la biblioteca `mlx-lm` para iniciar el proceso LoRA (Low-Rank Adaptation). Este método es eficiente en memoria y mantiene intactos los pesos originales del modelo mientras crea un pequeño archivo "adaptador".
+
+```bash
+# Instalar las herramientas necesarias
+pip install mlx-lm
+
+# Ejecutar el proceso de ajuste fino
+python -m mlx_lm.lora \
+  --model google/gemma-4-12b \
+  --data ./my_custom_data \
+  --train \
+  --batch-size 4 \
+  --iters 1000
+```
+
+> **⚠️ Advertencia:** El ajuste fino es un proceso que consume muchos recursos. Asegúrate de que tu Mac esté conectado a la corriente y tenga una refrigeración adecuada, ya que es probable que los ventiladores funcionen a la máxima velocidad durante varios minutos.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/3UQ7GY9hNwk"
+    title="Fine Tune a model with MLX for Ollama"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Exportación de adaptadores a Ollama
+
+La belleza del ecosistema **gemma 4 ollama mlx** es la capacidad de usar tus adaptadores entrenados a medida dentro de la interfaz amigable de Ollama. Después de que termine el entrenamiento en MLX, encontrarás un directorio llamado `adapters` que contiene archivos `.safetensors`.
+
+Para usar esto en Ollama, crea un `Modelfile`:
+
+```dockerfile
+FROM gemma4:12b
+ADAPTER ./path/to/adapters
+```
+
+Luego, crea tu modelo personalizado:
+`ollama create mi-gemma-especializada -f Modelfile`
+
+Esto te permite alternar entre un Gemma 4 "vainilla" y tu versión personalizada de forma instantánea. Este flujo de trabajo es ideal para escritores que quieren que la IA imite su estilo de prosa específico o desarrolladores que necesitan que el modelo genere código en un framework propietario muy concreto.
+
+## Técnicas avanzadas de optimización
+
+En 2026, la cuantización se ha vuelto más sofisticada, lo que permite que el modelo 27B se ejecute en hardware que anteriormente tenía dificultades con modelos de 7B. Al descargar modelos a través del pipeline **gemma 4 ollama mlx**, puedes elegir diferentes niveles de cuantización (por ejemplo, Q4_K_M, Q8_0).
+
+1. **Cuantización Q4:** La mejor para usuarios con VRAM limitada; conserva aproximadamente el 95% de la inteligencia original del modelo al tiempo que reduce el uso de memoria a la mitad.
+2. **Cuantización Q8:** Rendimiento casi sin pérdidas; recomendada para los modelos 1B y 4B si tienes recursos de sobra.
+3. **K-Quants:** Optimizados específicamente para el formato GGUF utilizado por Ollama, proporcionando un mejor equilibrio entre el tamaño del archivo y la perplejidad.
+
+## Casos de uso prácticos para Gemma 4
+
+Con sus capacidades multimodales, Gemma 4 no es solo un chatbot: es un motor lógico con capacidad de visión. En un flujo de trabajo de 2026, puedes usar la configuración **gemma 4 ollama mlx** para:
+
+*   **Traducción en tiempo real:** Usa el modelo 4B en un portátil para traducir letreros o menús a través de tu cámara web sin conexión a internet.
+*   **Análisis de documentos:** Entrega al modelo 27B PDFs complejos o hojas de cálculo para extraer información o resumir contenido de larga duración.
+*   **Planificación en el dispositivo:** El modelo 1B es lo suficientemente eficiente como para ejecutarse en smartphones de alta gama, sirviendo como un planificador diario o de viajes privado que nunca envía datos a la nube.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 en un PC con Windows y una GPU NVIDIA?**
+
+R: Sí. Aunque MLX es exclusivo de Apple Silicon, Ollama es compatible con Windows y Linux con GPUs NVIDIA. Para el ajuste fino en Windows, normalmente usarías Unsloth o Axolotl en lugar de MLX, pero el modelo resultante aún se puede usar en Ollama.
+
+**P: ¿Cuánta RAM necesito para el modelo gemma 4 ollama mlx 27B?**
+
+R: Para el modelo 27B, se recomienda un mínimo de 24GB de memoria unificada (en Mac) o VRAM (en PC) para una inferencia fluida. Si planeas realizar un ajuste fino de este modelo, 64GB o más es lo ideal para manejar la carga adicional del proceso de entrenamiento.
+
+**P: ¿Hay una gran diferencia entre las versiones pre-entrenadas y las ajustadas para instrucciones?**
+
+R: La mayoría de los usuarios deberían optar por las variantes ajustadas para instrucciones (instruction-tuned). Estas están optimizadas para la conversación y para seguir prompts específicos. Los modelos pre-entrenados son "puros" y generalmente solo los utilizan investigadores que pretenden realizar un ajuste fino extensivo desde cero.
+
+**P: ¿Requiere el ajuste fino de Gemma 4 un conjunto de datos masivo?**
+
+R: No necesariamente. Gracias a LoRA y a la eficiencia del pipeline **gemma 4 ollama mlx**, puedes ver mejoras significativas en el estilo y el formato con tan solo 50 a 100 ejemplos de alta calidad. La calidad de los datos siempre es más importante que la cantidad en el espacio de la IA local.

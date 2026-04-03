@@ -11,12 +11,13 @@
     }
   },
   "nav": {
-    "guides": "Rehberler",
-    "crafting": "Üretim",
-    "items": "Eşyalar",
-    "biomes": "Biyomlar",
-    "building": "İnşa",
-    "support": "Destek"
+    "guide": "Rehber",
+    "models": "Modeller",
+    "requirements": "Gereksinimler",
+    "ollama": "Ollama",
+    "install": "Kurulum",
+    "benchmark": "Kıyaslama",
+    "comparison": "Karşılaştırma"
   },
   "common": {
     "home": "Ana Sayfa",

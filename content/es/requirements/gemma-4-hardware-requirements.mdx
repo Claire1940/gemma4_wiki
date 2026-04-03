@@ -1,0 +1,123 @@
+export const metadata = {
+  title: "Requisitos de hardware de Gemma 4: Guía completa de IA local 2026",
+  description: "Conoce los requisitos de hardware esenciales de Gemma 4 para ejecutar localmente los últimos modelos abiertos de Google. Especificaciones detalladas de VRAM, RAM y GPU para modelos de 2B a 31B.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e3a8a/fff?text=Gemma+4+Hardware+Requirements",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+Con el lanzamiento oficial de la última familia de IA de código abierto de Google, comprender los **requisitos de hardware de gemma 4** se ha convertido en una prioridad absoluta para desarrolladores, investigadores y entusiastas de la tecnología. Basado en la investigación innovadora detrás de Gemini 3, Gemma 4 está diseñado específicamente para ejecutarse directamente en el hardware que ya posees, desde teléfonos inteligentes y laptops hasta estaciones de trabajo de escritorio de alta gama. Ya sea que busques implementar un modelo ligero de 2B para procesamiento móvil en tiempo real o un modelo masivo de 31B para flujos de trabajo agénticos complejos, cumplir con los **requisitos de hardware de gemma 4** específicos es el primer paso para lograr una inteligencia de nivel de frontera en un entorno local y privado.
+
+En esta guía completa, desglosaremos las especificaciones del sistema necesarias para cada variante del modelo, exploraremos el impacto de la cuantización en el uso de VRAM y proporcionaremos consejos de optimización para la nueva ventana de contexto de 250,000 tokens.
+
+## Descripción general de la familia de modelos Gemma 4
+
+El lanzamiento de 2026 de Gemma 4 presenta una línea diversa de modelos adaptados a diferentes casos de uso. A diferencia de las generaciones anteriores, estos modelos se publican bajo la licencia Apache 2.0, lo que los hace más accesibles que nunca para proyectos empresariales y personales.
+
+| Variante del modelo | Arquitectura | Parámetros totales | Parámetros activos | Caso de uso principal |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | Dense | 31 mil millones | 31 mil millones | Razonamiento y codificación de alta calidad |
+| **Gemma 4 26B** | MoE (Mezcla de expertos) | 26 mil millones | 3.8 mil millones | Inteligencia local de alta velocidad |
+| **Gemma 4 4B** | Effective | 4 mil millones | 4 mil millones | Laptops y móviles de gama alta |
+| **Gemma 4 2B** | Effective | 2 mil millones | 2 mil millones | Tareas de IoT y móviles en tiempo real |
+
+Los modelos "Effective" (2B y 4B) están diseñados para una máxima eficiencia de memoria, mientras que los modelos más grandes de 26B y 31B proporcionan "inteligencia de frontera" directamente en tu computadora personal. La variante 26B MoE es particularmente notable por su velocidad, ya que solo activa 3.8 mil millones de parámetros en un momento dado, lo que reduce significativamente la carga computacional en comparación con el modelo 31B Dense.
+
+## Requisitos de hardware de Gemma 4 para escritorio
+
+Para los usuarios de escritorio, el principal cuello de botella para ejecutar Gemma 4 es la memoria de video (VRAM). Aunque los modelos pueden ejecutarse en la RAM del sistema (inferencia por CPU), el rendimiento es significativamente más lento. Para lograr la velocidad "agéntica" requerida para la planificación de múltiples pasos y el uso de herramientas, se recomienda encarecidamente una GPU moderna.
+
+### Especificaciones de GPU mínimas vs. recomendadas
+
+Al evaluar los **requisitos de hardware de gemma 4**, debes considerar el nivel de "cuantización". La cuantización reduce la precisión de los pesos del modelo (por ejemplo, de 16 bits a 4 bits) para ahorrar memoria con una pérdida mínima de inteligencia.
+
+| Modelo | Cuantización | VRAM mínima | GPU recomendada (2026) |
+| :--- | :--- | :--- | :--- |
+| **31B Dense** | 4-bit (Q4_K_M) | 20 GB | RTX 3090 / 4090 / 5080 |
+| **31B Dense** | 8-bit (Q8_0) | 34 GB | 2x RTX 3090 o RTX 6000 Ada |
+| **26B MoE** | 4-bit (Q4_K_M) | 16 GB | RTX 4070 Ti Super / 4080 |
+| **4B Effective** | 4-bit (Q4_K_M) | 4 GB | RTX 3060 / 4060 |
+| **2B Effective** | 4-bit (Q4_K_M) | 2 GB | Gráficos integrados / GTX 1650 |
+
+> **⚠️ Advertencia:** Intentar ejecutar el modelo 31B en una GPU con menos de 20 GB de VRAM resultará en una "descarga" (offloading) a la RAM del sistema, lo que puede ralentizar la generación de tokens de 50 tokens/seg a menos de 2 tokens/seg.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimización para la ventana de contexto de 250k tokens
+
+Una de las características más destacadas de Gemma 4 es su enorme ventana de contexto. Poder procesar hasta 250,000 tokens permite el análisis de bases de código completas o documentos extensos. Sin embargo, esta característica aumenta significativamente los **requisitos de hardware de gemma 4** en cuanto a memoria.
+
+El "KV Cache" (Caché de clave-valor) almacena el contexto de tu conversación. A medida que el contexto crece, también lo hace la huella de memoria:
+*   **Contexto pequeño (8k tokens):** Requiere entre 500 MB y 1 GB de VRAM adicional.
+*   **Contexto grande (250k tokens):** Puede requerir de 16 GB a 32 GB de VRAM adicional, dependiendo de la arquitectura del modelo y la precisión.
+
+Si planeas utilizar la ventana de contexto completa, deberías apuntar a una configuración de múltiples GPU o una estación de trabajo con memoria unificada de gran ancho de banda, como las últimas Mac con Apple Silicon o tarjetas empresariales NVIDIA de gama alta. Para la mayoría de los usuarios, una ventana de contexto de 32k es un objetivo más realista para el hardware de consumo.
+
+## Especificaciones de hardware para móviles e IoT
+
+Los modelos Gemma 4 2B y 4B están diseñados para "ver y oír el mundo" a través de soporte nativo de audio y visión. Estos modelos están optimizados para la integración con la NPU (Unidad de Procesamiento Neuronal) móvil.
+
+### Requisitos de dispositivos móviles
+Para ejecutar Gemma 4 2B de manera efectiva en un dispositivo móvil en 2026, sigue estas pautas:
+1.  **RAM:** Mínimo 8 GB de RAM total del sistema (se recomiendan 12 GB+).
+2.  **Chipset:** Snapdragon 8 Gen 3 o más reciente, MediaTek Dimensity 9300+, o Apple A17 Pro/serie M.
+3.  **Almacenamiento:** Al menos 5 GB de espacio libre para los pesos del modelo y el caché.
+
+> **💡 Consejo:** Usa el modelo 2B "Effective" para tareas multilingües. Admite de forma nativa más de 140 idiomas y es lo suficientemente pequeño como para permanecer residente en la memoria del móvil para tiempos de respuesta instantáneos.
+
+## Flujos de trabajo agénticos y consideraciones de CPU
+
+Gemma 4 está diseñado para la "era agéntica", lo que significa que destaca en la planificación de múltiples pasos y el uso de herramientas. Mientras que la GPU se encarga del trabajo pesado de la generación de tokens, la CPU juega un papel vital en la gestión de la lógica agéntica y las llamadas a herramientas externas (como buscar en la web o ejecutar código).
+
+Al optimizar tus **requisitos de hardware de gemma 4**, no descuides el procesador:
+*   **CPU mínima:** Procesador de 6 núcleos (por ejemplo, Ryzen 5 5600X o Intel i5-12400).
+*   **CPU recomendada:** Procesador de 12 núcleos o más (por ejemplo, Ryzen 9 7900X o Intel i9-14900K) para manejar scripts agénticos paralelos y preprocesamiento de datos.
+*   **RAM del sistema:** 32 GB es el estándar de 2026 para el desarrollo de IA local, especialmente cuando se trabaja con los modelos 26B y 31B.
+
+Para obtener más documentación técnica sobre la integración de modelos, visita el [repositorio oficial de Google DeepMind Gemma](https://deepmind.google/technologies/gemma/) para explorar las últimas guías de implementación.
+
+## Seguridad local y base empresarial
+
+Una razón clave para cumplir con los **requisitos de hardware de gemma 4** para la ejecución local es la seguridad. Al ejecutar los modelos 26B o 31B en tu propio hardware, puedes analizar bases de código sensibles y datos privados sin tener que subir información a la nube.
+
+Google DeepMind ha aplicado los mismos protocolos de seguridad rigurosos a Gemma 4 que a sus modelos propietarios Gemini. Esto convierte a Gemma 4 en una base confiable para aplicaciones empresariales. Para mantener esta seguridad, asegúrate de que tu entorno local esté actualizado y que estés utilizando cargadores de confianza como Ollama, LM Studio o Hugging Face Transformers.
+
+## Resumen de niveles de hardware
+
+Para ayudarte a decidir qué modelo se adapta a tu configuración, hemos categorizado los **requisitos de hardware de gemma 4** en tres niveles distintos:
+
+| Nivel | Mejor modelo | Perfil de hardware | Caso de uso |
+| :--- | :--- | :--- | :--- |
+| **Entrada** | 2B Effective | Laptop con 8GB RAM / Teléfono | Traducción en tiempo real, chat simple |
+| **Gama media** | 26B MoE | GPU con 16GB VRAM / 32GB RAM | Asistente de código, razonamiento rápido |
+| **Pro** | 31B Dense | GPU con 24GB+ VRAM / 64GB RAM | Lógica compleja, análisis de gran contexto |
+
+Al seleccionar el nivel que coincida con tu equipo actual, puedes garantizar una experiencia fluida con el ecosistema de Gemma 4.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 en una GPU antigua como la GTX 1080 Ti?**
+
+R: Aunque técnicamente puedes ejecutar los modelos 2B y 4B en hardware antiguo, la falta de núcleos Tensor modernos resultará en un rendimiento mucho más lento. Para los modelos más grandes 26B y 31B, la VRAM limitada en las tarjetas antiguas probablemente impedirá que los modelos se carguen por completo, a menos que uses una cuantización pesada (2 bits), lo que degrada significativamente la inteligencia.
+
+**P: ¿Gemma 4 es compatible con el hardware de Mac?**
+
+R: Sí, Gemma 4 está excepcionalmente bien optimizado para Apple Silicon (chips M1, M2, M3 y M4). Debido a que las Mac usan memoria unificada, una M2 Ultra con 128 GB de RAM puede ejecutar el modelo 31B con una ventana de contexto muy grande más fácilmente que muchas configuraciones de PC.
+
+**P: ¿Cuál es el factor más importante en los requisitos de hardware de gemma 4?**
+
+R: La VRAM (RAM de video) es el factor más crítico. Los pesos del modelo deben caber en la memoria de tu GPU para un rendimiento aceptable. Si tienes poca VRAM, prioriza el modelo 26B MoE, ya que su recuento de parámetros activos es mucho menor, lo que permite un procesamiento más rápido incluso en hardware de gama media.
+
+**P: ¿Se requiere conexión a Internet para usar Gemma 4?**
+
+R: No. Una vez que hayas descargado los pesos (bajo la licencia Apache 2.0), Gemma 4 está diseñado para ejecutarse 100% fuera de línea. Esto es ideal para entornos seguros o áreas con conectividad limitada.

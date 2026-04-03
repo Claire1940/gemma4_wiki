@@ -1,0 +1,130 @@
+export const metadata = {
+  title: "Gemma 4 Offline: Cómo ejecutar localmente la potente IA de Google en 2026",
+  description: "Aprenda a descargar y ejecutar Gemma 4 sin conexión en su ordenador. Una guía completa sobre los modelos de IA de código abierto de Google, requisitos de hardware y pasos de configuración local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Offline+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con el lanzamiento del último avance de código abierto de Google. Para los usuarios que buscan mantener la privacidad y el rendimiento sin una conexión constante a Internet, configurar **gemma 4 offline** es la solución definitiva. Esta nueva familia de modelos ofrece una gama de tamaños que pueden adaptarse a todo, desde equipos de gaming de gama alta hasta dispositivos móviles modestos. Al ejecutar **gemma 4 offline**, usted evita las cuotas de suscripción y las preocupaciones sobre la privacidad de los datos, al tiempo que obtiene acceso a capacidades de razonamiento que rivalizan con los modelos propietarios más grandes del mundo.
+
+En esta guía completa, exploraremos las especificaciones técnicas de la familia Gemma 4, el hardware que necesita para empezar y el proceso paso a paso para inicializar estos modelos en su máquina local. Tanto si es un desarrollador que busca un asistente de programación como si es un usuario avanzado que desea un compañero de IA privado, Gemma 4 representa un nuevo estándar de oro en la comunidad de código abierto.
+
+## Entendiendo las variantes del modelo Gemma 4
+
+Google ha lanzado Gemma 4 en varios "sabores" para adaptarse a diferentes limitaciones de hardware y casos de uso. A diferencia de las generaciones anteriores, estos modelos utilizan una arquitectura de "parámetros efectivos", lo que les permite rendir muy por encima de su categoría en términos de inteligencia por parámetro.
+
+| Tamaño del modelo | Parámetros efectivos | Caso de uso principal | Objetivo de hardware |
+|---|---|---|---|
+| **Gemma 4 2B** | 2 mil millones | Dispositivos móviles e IoT | Smartphones / Portátiles |
+| **Gemma 4 4B (E4B)** | ~8 mil millones (4B activos) | Chat general y tareas básicas | PCs de consumo (8GB RAM) |
+| **Gemma 4 26B** | 26 mil millones | Razonamiento avanzado y agentes | GPUs de gama alta (16GB+ VRAM) |
+| **Gemma 4 31B** | 31 mil millones | Programación, investigación y lógica compleja | Estaciones de trabajo (24GB+ VRAM) |
+
+El modelo 31B es particularmente digno de mención, situándose actualmente entre los tres mejores modelos en las tablas de clasificación mundiales. Con frecuencia supera a modelos con cientos de miles de millones de parámetros, como Qwen 3.5 o GLM5, a pesar de su tamaño significativamente menor.
+
+## ¿Por qué ejecutar Gemma 4 offline?
+
+Ejecutar un modelo de IA localmente ofrece varias ventajas distintas sobre las alternativas basadas en la nube como ChatGPT o Gemini. Cuando utiliza **gemma 4 offline**, usted tiene el control total de sus datos.
+
+1.  **Privacidad de datos**: Sus instrucciones (prompts) y archivos nunca salen de su máquina local. Esto es crucial para desarrolladores que trabajan con código propietario o usuarios que manejan información personal sensible.
+2.  **Latencia cero**: La ejecución local elimina el tiempo de "ida y vuelta" a un servidor, proporcionando respuestas casi instantáneas dependiendo de su hardware.
+3.  **Sin suscripciones**: Una vez descargado, el modelo es gratuito para siempre. No hay límites mensuales ni niveles "pro" de los que preocuparse.
+4.  **Personalización**: Los modelos locales pueden combinarse con herramientas como LM Studio u Ollama para habilitar flujos de trabajo agénticos, como la búsqueda web local o la manipulación del sistema de archivos.
+
+> **⚠️ Advertencia:** Aunque Gemma 4 es muy eficiente, ejecutar las variantes más grandes de 26B o 31B requiere recursos significativos del sistema. Asegúrese de que su solución de refrigeración sea adecuada para cargas sostenidas de GPU/CPU.
+
+## Requisitos de hardware para la ejecución local
+
+Antes de intentar ejecutar **gemma 4 offline**, debe verificar que su hardware pueda soportar el tamaño de modelo específico que pretende utilizar. El factor más crítico es la VRAM (Video RAM) si utiliza una GPU NVIDIA o AMD, o la RAM del sistema si utiliza un Mac con Apple Silicon.
+
+| Variante del modelo | Cuantización | VRAM/RAM mínima | Hardware recomendado |
+|---|---|---|---|
+| **4B (E4B)** | 4-bit (Q4_K_M) | **6 GB** | RTX 3060 / Apple M1 (8GB) |
+| **4B (E4B)** | 8-bit (Q8_0) | **10 GB** | RTX 4070 / Apple M2 (16GB) |
+| **26B** | 4-bit (Q4_K_M) | **18 GB** | RTX 3090 / RTX 4090 |
+| **31B** | 4-bit (Q4_K_M) | **22 GB** | RTX 4090 / Apple M3 Max |
+
+Si su hardware está ligeramente por debajo de estos requisitos, aún puede ejecutar los modelos utilizando la "Descarga a RAM del sistema" (System RAM Offloading), aunque esto ralentizará significativamente los tokens por segundo (velocidad de generación).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eS9RJbnYiF0"
+    title="How to Download and Run Google Gemma 4 AI LOCALLY on Your Computer"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Guía de instalación paso a paso (LM Studio)
+
+La forma más sencilla de poner en marcha **gemma 4 offline** en Windows, macOS o Linux es a través de **LM Studio**. Este software proporciona una interfaz limpia y gestiona las complejas configuraciones del backend por usted.
+
+### 1. Descargar y actualizar LM Studio
+Diríjase al [sitio web oficial de LM Studio](https://lmstudio.ai/) y descargue el instalador para su sistema operativo.
+> **💡 Consejo:** Asegúrese de estar ejecutando la última versión (v0.3.x o superior) para que sea compatible con la nueva arquitectura y tiempos de ejecución de Gemma 4.
+
+### 2. Buscar Gemma 4
+Abra LM Studio y haga clic en el icono de "Buscar" en la barra lateral izquierda. Escriba "Gemma 4" en la barra de búsqueda. Verá varias opciones proporcionadas por la comunidad (como Unsloth o Bartowski), así como los lanzamientos oficiales de Google.
+
+### 3. Seleccionar la cuantización adecuada
+Elija una versión que se ajuste a su VRAM. Para la mayoría de los usuarios con una GPU de 8GB o 12GB, las versiones **4B de 8 bits** o **26B de 4 bits** ofrecen el mejor equilibrio entre inteligencia y velocidad. Haga clic en "Download" en el archivo elegido.
+
+### 4. Cargar el modelo
+Una vez completada la descarga, vaya a la pestaña "AI Chat" (el icono de la burbuja). En la parte superior de la pantalla, seleccione el modelo que acaba de descargar en el menú desplegable. Espere a que aparezca la barra verde de "Model Loaded".
+
+### 5. Ajustar la configuración
+En la barra lateral derecha, asegúrese de que "GPU Offload" esté configurado al "Max" si tiene una tarjeta gráfica dedicada. Esto garantiza que el modelo funcione a su máximo rendimiento.
+
+## Funciones avanzadas: Flujos de trabajo agénticos y visión
+
+uno de los aspectos más impresionantes de la experiencia con **gemma 4 offline** es la inclusión de funciones "agénticas". A diferencia de los modelos más antiguos que simplemente predicen texto, Gemma 4 está diseñado para utilizar herramientas.
+
+*   **Llamada a funciones (Function Calling)**: Gemma 4 puede generar JSON estructurado para llamar a herramientas externas. Por ejemplo, puede activar un script de Python local para organizar sus archivos o consultar datos meteorológicos si tiene habilitados los complementos adecuados en LM Studio.
+*   **Capacidades multimodales**: El modelo cuenta con comprensión de visión y audio. Puede subir una imagen (por ejemplo, una foto de un animal raro o una captura de pantalla de código) y pedirle a Gemma 4 que la analice. En las pruebas, Gemma 4 identificó correctamente un ualabí blanco, una tarea con la que muchos modelos más grandes tienen dificultades.
+*   **Ventana de contexto amplia**: Con una ventana de contexto de hasta 256.000 tokens, puede introducir libros enteros o bases de código masivas en el modelo para su análisis sin que este "olvide" el principio de la conversación.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5IokaPWQHe0"
+    title="Google's Gemma 4 Just Broke the Internet! FREE AI That Feels..."
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Comparación de rendimiento: Gemma 4 frente a la competencia
+
+Para entender por qué tantos usuarios se están pasando a **gemma 4 offline**, tenemos que fijarnos en las puntuaciones ELO y los datos de referencia. El modelo 31B de Google está superando actualmente a modelos que son casi 10 veces su tamaño.
+
+| Métrica | Gemma 4 (31B) | Qwen 3.5 (122B) | DeepSeek V3.2 |
+|---|---|---|---|
+| **Preferencia humana (ELO)** | **~1451** | ~1445 | ~1448 |
+| **Programación (HumanEval)** | **Alta** | Media-Alta | Alta |
+| **Razonamiento (MMMU)** | **Élite** | Alta | Alta |
+| **Soporte de idiomas** | 140+ | 30+ | 10+ |
+
+Esta eficiencia de "Inteligencia por parámetro" significa que puede obtener un rendimiento de "nivel GPT-4" en un ordenador doméstico sin necesidad de una granja de servidores.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 offline en un smartphone?**
+
+R: Sí, las variantes 2B y 4B están optimizadas para el despliegue móvil. Puede utilizar aplicaciones como Private LLM (iOS) o MLCChat (Android) para ejecutar estos modelos directamente en el hardware de su teléfono.
+
+**P: ¿Qué significa la "E" en Gemma 4 E4B?**
+
+R: La "E" significa "Effective" (Efectivo). Significa que el modelo tiene la inteligencia de un modelo de 8B parámetros más grande, pero utiliza una arquitectura optimizada que solo activa 4 mil millones de parámetros en cualquier momento dado, lo que lo hace más rápido y fácil de ejecutar.
+
+**P: ¿Es Gemma 4 mejor que Gemini?**
+
+R: Gemini es el modelo insignia de Google en la nube y suele ser más potente para tareas masivas. Sin embargo, Gemma 4 está diseñado para ser de código abierto y ejecutarse localmente. Para muchos usuarios, la privacidad y la ausencia de costes de **gemma 4 offline** lo convierten en una opción superior para las tareas diarias.
+
+**P: ¿Soporta Gemma 4 otros idiomas además del inglés?**
+
+R: Sí, Gemma 4 ha sido entrenado con un conjunto de datos diverso que admite más de 140 idiomas, lo que lo convierte en uno de los modelos de código abierto más versátiles para usuarios globales.

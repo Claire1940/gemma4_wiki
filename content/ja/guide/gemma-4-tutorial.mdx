@@ -1,0 +1,151 @@
+export const metadata = {
+  title: "Gemma 4 チュートリアル：GoogleのオープンAIモデルをマスターする（2026年版）",
+  description: "GoogleのGemma 4モデルのデプロイとファインチューニング方法を学びましょう。マルチモーダル、MoEアーキテクチャ、2026年のローカルセットアップを網羅した包括的なチュートリアルです。",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Tutorial",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+Googleの最新モデルファミリーのリリースは開発コミュニティに衝撃を与えました。この**Gemma 4 チュートリアル**は、これらの強力なツールを使いこなすためのガイドです。以前のバージョンとは異なり、今回のリリースはApache 2.0ライセンスという寛容なライセンスで提供され、真のオープンソースアクセシビリティへの大きな転換を象徴しています。これは、開発者が以前のバージョンを制限していた「競合禁止」条項に縛られることなく、Googleの最も高度なオープンウェイトを修正、ファインチューニング、そして商用展開できるようになったことを意味します。次世代RPGのAI駆動型NPCを構築する場合でも、ローカルのコーディングアシスタントを作成する場合でも、2026年において優位に立つためには**Gemma 4 チュートリアル**のワークフローを理解することが不可欠です。
+
+このガイドでは、4つの異なるモデル階層を詳しく解説し、画期的なMixture of Experts（MoE）アーキテクチャを探求し、独自のカスタムデータセットでこれらのモデルをファインチューニングするためのステップバイステップの手順を提供します。高性能なワークステーションモデルから超効率的なエッジバージョンまで、Gemma 4はあらゆる計算予算に応じたソリューションを提供します。
+
+## Gemma 4 モデルファミリーの理解
+
+Googleは今回のリリースを「ワークステーション」と「エッジ」の2つの主要な階層に構造化しました。ワークステーションモデルは複雑な推論や大規模なコード生成などの重負荷タスク向けに設計されており、エッジモデルはスマートフォン、Raspberry Pi、Jetson Nanoなどのリソースが限られたデバイス向けに最適化されています。
+
+| モデル階層 | モデル名 | パラメータ数 | アーキテクチャ | コンテキストウィンドウ |
+|---|---|---|---|---|
+| **ワークステーション** | Gemma 4 31B | 310億 | デンス (Dense) | **256K** |
+| **ワークステーション** | Gemma 4 26B | 260億 | MoE (3.8B アクティブ) | **256K** |
+| **エッジ** | Gemma 4 E4B | 40億 | デンス / オーディオネイティブ | **128K** |
+| **エッジ** | Gemma 4 E2B | 20億 | デンス / オーディオネイティブ | **128K** |
+
+特に26BのMixture of Experts（混合エキスパート）モデルは注目に値します。総パラメータ数は260億ですが、トークンごとにアクティブになるのは約38億パラメータのみです。これにより、4Bモデル並みの推論速度と計算コストを維持しながら、はるかに大規模なモデルと同等の知能を実現しています。ローカルハードウェアを運用する開発者にとって、これは非常に大きな効率性の向上です。
+
+## 2026年における主要なアーキテクチャの革新
+
+Gemma 4は単なるパラメータの増量ではありません。以前は外部パイプラインを介して後付けされていたいくつかの「ネイティブ」機能を導入しています。最も重要な変更は、アーキテクチャレベルでのマルチモーダルの統合です。
+
+### ネイティブ・マルチモーダル
+かつてAIに「聞かせ」たり「見せ」たりするには、音声テキスト変換用のWhisperや画像認識用のCLIPといった別個のモデルが必要でした。Gemma 4はこれらをネイティブに処理します。
+*   **ビジョン:** 新しいビジョンエンコーダーはネイティブのアスペクト比処理機能を備えており、不自然なクロッピングで詳細を損なうことなく、ドキュメント、スクリーンショット、複雑な画像を理解できます。
+*   **オーディオ:** エッジモデル（E2BおよびE4B）には、組み込みのASR（自動音声認識）エンコーダーが含まれています。これにより、単一のモデルパス内で直接的な音声テキスト変換、さらには音声から翻訳済みテキストへの変換が可能になります。
+
+### 長文の思考の連鎖（Chain-of-Thought）推論
+Googleは「思考」機能をチャットテンプレートに直接統合しました。思考モードを有効にすることで、モデルはテキスト、画像、さらにはオーディオにわたって長文の思考の連鎖推論を実行できます。これにより、MMU ProやSweetBench Proなどの複雑なベンチマークでのパフォーマンスが大幅に向上します。
+
+> **💡 ヒント:** Transformersライブラリを使用する場合、チャットテンプレートの処理で `enable_thinking=True` を設定することで、推論機能を切り替えることができます。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## ステップバイステップ Gemma 4 チュートリアル：ローカル実装
+
+Gemma 4をローカルで開始するには、最新のPython環境と最新バージョンのTransformersライブラリが必要です。これらは最先端のモデルであるため、ドライバーとライブラリが2026年版に完全にアップデートされていることを確認してください。
+
+### 1. 環境構築
+まず、依存関係の競合を避けるために仮想環境を作成します。GPUを使用する場合は、E2Bモデルで少なくとも8GB、ワークステーションモデルで24GB以上のVRAMがあることを確認してください。
+
+```bash
+conda create -n gemma4_env python=3.10
+conda activate gemma4_env
+pip install torch transformers accelerate bitsandbytes
+```
+
+### 2. 基本的な推論スクリプト
+モデルの実行には、プロセッサ（テキスト、画像、オーディオを処理）とモデルの重みのロードが必要です。以下は、基本的なテキストベースの推論セッションを開始する方法です。
+
+```python
+from transformers import AutoModelForCausalLM, AutoProcessor
+
+model_id = "google/gemma-4-e2b-it"
+processor = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto")
+
+# 思考モードを有効にする
+messages = [
+    {"role": "user", "content": "MoEアーキテクチャがローカルAI推論に与える影響を説明してください。"}
+]
+inputs = processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=True, return_tensors="pt", enable_thinking=True)
+
+outputs = model.generate(**inputs, max_new_tokens=500)
+print(processor.decode(outputs[0]))
+```
+
+## UnslothによるGemma 4のファインチューニング
+
+特定のゲームの伝承に詳しいAIエキスパートや、ニッチな技術分野の専門家を作成するといった特殊なタスクには、ファインチューニングが必要です。Unslothライブラリを使用すると、最小限のVRAM使用量で非常に高速なトレーニングが可能になります。
+
+### データ準備
+データセットはShareGPTまたはOpenAIのJSONL形式に従う必要があります。ファインチューニングに焦点を当てた**Gemma 4 チュートリアル**では、量よりも質が重要です。100〜500個の高品質な質問と回答のペアを目指してください。
+
+```json
+{"conversations": [{"from": "human", "value": "クシャーナ朝の首都はどこですか？"}, {"from": "gpt", "value": "主な首都はプルシャプラ（現在のペシャワール）とマトゥラーでした。"}]}
+```
+
+### トレーニング設定
+2026年ではLoRA（Low-Rank Adaptation）を使用するのが標準です。これにより、数十億のパラメータすべてではなく、小さな「アダプター」層のみをトレーニングできるため、時間とメモリを節約できます。
+
+| パラメータ | 推奨値 | 説明 |
+|---|---|---|
+| **学習率 (Learning Rate)** | **2e-4** | 速度と安定性のバランスをとります。 |
+| **エポック数 (Epochs)** | **3** | データを通過させる回数。 |
+| **バッチサイズ (Batch Size)** | **2** | GPUの1パスあたりのサンプル数。 |
+| **オプティマイザ (Optimizer)** | **AdamW 8-bit** | 低メモリフットプリントで高効率。 |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/cHpB0PTRx5A"
+    title="Fine-Tune Gemma-4 on Your Own Dataset Locally: Step-by-Step Tutorial"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### ファインチューニングの実行
+スクリプトの準備ができたら、トレーニングを実行できます。NVIDIA H100や、民生用のRTX 4090であっても、小さなデータセットなら5分以内にファインチューニングが完了します。生成されたLoRAアダプターは小さく（多くの場合100MB未満）、簡単に共有したりベースモデルにマージしたりできます。
+
+> **⚠️ 警告:** 損失曲線を監視して「過学習（オーバーフィッティング）」を避けてください。損失が下がりすぎると、モデルは概念を学習するのではなく、単にデータを暗記している可能性があります。
+
+## 2026年のハードウェア要件
+
+Googleはこれらのモデルを大幅に最適化しましたが、効果的に実行するには適切なハードウェアが必要です。以下の表は、さまざまな展開シナリオにおける要件の概要です。
+
+| モデル | タスク | 最小ハードウェア | 推奨ハードウェア |
+|---|---|---|---|
+| **E2B (2B)** | 基本チャット / オーディオ | 8GB VRAM (T4) | RTX 4060 / Jetson Orin |
+| **E4B (4B)** | ビジョン / 翻訳 | 12GB VRAM | RTX 4070 Ti |
+| **26B MoE** | 高度な推論 | 24GB VRAM | RTX 4090 / RTX 6000 |
+| **31B Dense** | コーディング / 多言語 | 48GB以上 VRAM | A100 / H100 |
+
+モデルの重みやドキュメントの詳細については、[Hugging Faceの公式リポジトリ](https://huggingface.co/google)にアクセスして最新のチェックポイントをダウンロードしてください。
+
+## FAQ
+
+**Q: Gemma 4は商用利用で完全に無料ですか？**
+
+A: はい。Gemma 4は**Apache 2.0ライセンス**の下でリリースされており、これは最も寛容なライセンスの一つです。Googleにロイヤリティを支払うことなく、商用製品での使用、コードの修正、配布が可能です。
+
+**Q: このGemma 4 チュートリアルをMacで実行できますか？**
+
+A: もちろんです。Gemma 4はMLXおよびllama.cppを介してサポートされています。macOSで最高の体験を得るには、E2BまたはE4Bモデルを快適に扱うために、少なくとも16GBのユニファイドメモリを搭載したデバイス（M2/M3チップ）を使用してください。
+
+**Q: Gemma 4は英語以外の言語もサポートしていますか？**
+
+A: はい、これらのモデルは高度に多言語対応しています。トレーニングデータには140以上の言語が含まれており、主要35言語については特定の指示ファインチューニングが行われているため、グローバルなアプリケーションに最適です。
+
+**Q: 「思考（Thinking）」モードはどのように機能しますか？**
+
+A: 特殊な「思考の連鎖（Chain-of-Thought: CoT）」プロンプトテンプレートを利用しており、最終的な回答に到達する前にモデルが中間的な推論ステップを生成するように促します。これは特に数学、論理、複雑なコーディングの問題に役立ちます。

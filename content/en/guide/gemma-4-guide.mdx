@@ -1,0 +1,122 @@
+export const metadata = {
+  title: "Gemma 4 Guide: Mastering Google’s Open-Source AI in 2026",
+  description: "Learn how to run Google's Gemma 4 locally, explore vibe-coding in AIventure, and optimize performance for gaming and development in 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Complete+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+The landscape of open-source artificial intelligence has shifted dramatically with the release of Google's latest model family. This **gemma 4 guide** is designed to help gamers, developers, and AI enthusiasts navigate the complexities of these powerful new weights. Whether you are looking to integrate intelligent NPCs into a PhaserJS project or simply want a private, local alternative to cloud-based LLMs, understanding the architecture of this release is essential.
+
+As we move further into 2026, the ability to run high-performance models on consumer hardware has become a reality. This comprehensive **gemma 4 guide** explores the different parameter sizes, ranging from the lightweight 2B version to the powerhouse 31B model that currently rivals trillion-parameter giants on global leaderboards. By the end of this article, you will know exactly how to set up your local environment, utilize agentic features, and even engage in "vibe-coding" for rapid game prototyping.
+
+## Understanding Gemma 4 Model Variants
+
+Google has provided several "flavors" of the model to suit different hardware constraints and use cases. One of the most significant breakthroughs in this generation is the "Effective" parameter architecture, which allows smaller models to punch far above their weight class.
+
+| Model Size | "Effective" Parameters | Key Use Case | Arena.ai Rank (2026) |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 2B** | 4B | Mobile devices & basic chat | Top 50 |
+| **Gemma 4 4B (E4B)** | 8B | Local gaming & vibe-coding | Top 20 |
+| **Gemma 4 26B** | 40B | Complex reasoning & tool use | Top 10 |
+| **Gemma 4 31B** | 50B+ | Professional coding & research | **#3 Overall** |
+
+The 31B model is particularly "insane" because it competes directly with models like GLM5 and Kim 2.5, despite those models having significantly higher parameter counts. This efficiency makes it the go-to choice for users who have the VRAM to support it but want the speed of a smaller footprint.
+
+> **⚠️ Warning:** When downloading models, pay close attention to the "E" prefix (e.g., E4B). This stands for "Effective," meaning the model uses a mixture-of-experts or similar architecture to deliver the quality of an 8B model while only activating 4B parameters during inference.
+
+## Local Setup: Running Gemma 4 on Your Computer
+
+Running these models locally ensures privacy and removes the latency of cloud APIs. The most popular way to get started in 2026 is through [LM Studio](https://lmstudio.ai/), which provides a streamlined interface for downloading and chatting with open-source models.
+
+### Step-by-Step Installation
+
+1.  **Update Your Tools:** Ensure you are running the latest version of LM Studio or Ollama. The 2026 runtimes include specific optimizations for the Gemma 4 architecture that older versions lack.
+2.  **Search for the Model:** Navigate to the search bar and type "Gemma 4." You will see official Google releases as well as community quantizations from creators like Unsloth.
+3.  **Choose Your Quantization:** For most users, an 8-bit (Q8_0) or 4-bit (Q4_K_M) quantization is the sweet spot between file size and intelligence.
+4.  **Check Your Runtime:** Verify that your local engine is using the latest frameworks. Using an outdated framework may result in "garbage" text output or failed loads.
+5.  **Load and Chat:** Select the model from the top menu and wait for it to load into your System RAM or GPU VRAM.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eS9RJbnYiF0"
+    title="How to Download and Run Google Gemma 4 AI LOCALLY on Your Computer"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Gaming and "Vibe-Coding" with AIventure
+
+One of the most exciting applications of this technology is found in **AIventure**, an educational game built with Angular and PhaserJS. This project demonstrates how the **gemma 4 guide** principles apply to real-world software development through a concept known as "vibe-coding."
+
+### What is Vibe-Coding?
+
+Vibe-coding allows developers to describe the "vibe" or functionality of a feature in natural language, which the AI then converts into working code. In AIventure, players encounter NPCs like a chicken that requires a to-do list app. Instead of writing JavaScript, the player prompts the AI to "build a to-do list for eating and sleeping."
+
+| Feature | Traditional Coding | Vibe-Coding with Gemma 4 |
+| :--- | :--- | :--- |
+| **Syntax** | Strict (JS/TypeScript) | Natural Language (English/Multilingual) |
+| **Iteration** | Manual debugging | AI-driven analysis & re-generation |
+| **Logic** | Boolean/Conditional | Agentic "Thinking" Loops |
+| **Integration** | Manual API calls | Function calling & Tool access |
+
+### Agentic NPCs and Thinking Loops
+
+Beyond simple chat, Gemma 4 supports **agentic features**. In a gaming context, this means an NPC can receive a goal—such as "find the switch on the other side of the lava"—and enter a loop of searching, moving, and re-evaluating its surroundings until the task is complete. This is powered by the model's ability to access tools and perform "function calling" locally.
+
+> **💡 Tip:** When implementing agentic NPCs, use the 31B model if possible. Its superior reasoning capabilities make it much less likely to get "stuck" in a logic loop compared to the 4B variant.
+
+## Hardware Requirements for 2026
+
+To get the most out of this **gemma 4 guide**, you need to match the model size to your hardware. While the 4B model can run on a modern smartphone, the 31B model requires a dedicated GPU for a smooth experience.
+
+| Hardware Tier | Recommended Model | Minimum RAM/VRAM | Performance Expectation |
+| :--- | :--- | :--- | :--- |
+| **Entry Level** | Gemma 4 2B / 4B | 8GB RAM | 30-50 tokens/sec |
+| **Mid-Range** | Gemma 4 4B / 26B | 16GB VRAM | 40-60 tokens/sec |
+| **High-End** | Gemma 4 31B | 24GB+ VRAM | 50+ tokens/sec |
+| **Mobile/Tablet** | Gemma 4 2B | 6GB RAM | 15-20 tokens/sec |
+
+If you find that your hardware is struggling, consider using a higher level of compression (quantization). A 4-bit quantization reduces the memory footprint by nearly 50% with only a minor hit to the model's reasoning accuracy.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/6yjJ7Prt-RI"
+    title="AIventure: Learning about vibe-coding, agents and Gen AI with Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Advanced Capabilities: Vision and Audio
+
+Unlike previous generations, Gemma 4 is natively multimodal. This means it doesn't just "read" descriptions of images; it "sees" them. In tests involving rare animals like the white walabe, Gemma 4 successfully identified the species even when the prompt tried to mislead it by calling it a ferret.
+
+### Multimodal Use Cases:
+*   **Visual Debugging:** Upload a screenshot of your game's UI, and ask the AI to identify alignment issues.
+*   **Audio Transcription:** Feed the model audio clips to generate subtitles or translate dialogue in real-time.
+*   **Long Context:** With a window of up to **256,000 tokens**, you can upload entire game design documents or codebases, and the model will retain the context of the entire project.
+
+## FAQ
+
+**Q: Is Gemma 4 completely free to use?**
+
+A: Yes, Gemma 4 is an open-weight model, meaning you can download it and run it on your own hardware without paying subscription fees. However, if you use it via Google Cloud Vertex AI, standard cloud hosting costs will apply.
+
+**Q: Can I run this model on a Mac?**
+
+A: Absolutely. LM Studio and Ollama are fully compatible with Apple Silicon (M1, M2, M3, M4 chips). The Unified Memory architecture of Macs is actually excellent for running larger models like the 31B variant.
+
+**Q: What is the difference between Gemini and Gemma?**
+
+A: Gemini is Google's closed-source, cloud-based model family (like GPT-4). Gemma is the "open" version derived from the same technology, designed for local use and customization by the community.
+
+**Q: How do I improve the speed of the model?**
+
+A: To increase tokens per second, ensure you are utilizing GPU acceleration (Metal on Mac, CUDA on NVIDIA, or ROCm on AMD). Additionally, using a lower-bit quantization like Q4_K_S can significantly boost speed on older hardware, as detailed earlier in this **gemma 4 guide**.

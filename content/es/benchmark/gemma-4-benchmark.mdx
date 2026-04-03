@@ -1,0 +1,104 @@
+export const metadata = {
+  title: "Benchmark de Gemma 4: Análisis de Rendimiento y Guía de Modelos 2026",
+  description: "Explore los últimos resultados del benchmark de Gemma 4, las mejoras de arquitectura y las estrategias de implementación para los nuevos modelos de pesos abiertos Apache 2.0 de Google.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4285F4/fff?text=Gemma+4+Benchmark+Analysis",
+  date: "2026-04-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+Google ha transformado oficialmente el panorama de la IA de código abierto con el lanzamiento de Gemma 4, una suite de modelos que redefine lo que el hardware local puede lograr. Para los desarrolladores y entusiastas de la IA, los resultados del **benchmark de gemma 4** representan un hito significativo, demostrando que los modelos de pesos abiertos finalmente pueden igualar la multimodalidad nativa y las capacidades de razonamiento de sus contrapartes propietarias. A diferencia de las iteraciones anteriores, este lanzamiento se basa en la investigación de vanguardia de Gemini 3, aportando una arquitectura de nivel empresarial a la comunidad.
+
+Al examinar los últimos datos del **benchmark de gemma 4**, vemos una familia de modelos que destaca en diversas tareas, que van desde el razonamiento de formato largo hasta la traducción de audio en tiempo real. Esta guía ofrece una inmersión profunda en los cuatro nuevos modelos, divididos entre el nivel Workstation de alto rendimiento y el nivel Edge ultraeficiente, para ayudarle a determinar qué versión se adapta a su hardware específico y a los requisitos de su proyecto.
+
+## Descripción General de la Familia de Modelos Gemma 4
+
+El lanzamiento de Gemma 4 se categoriza en dos niveles distintos: Workstation y Edge. Los modelos Workstation están diseñados para tareas pesadas como la asistencia en codificación y la comprensión de documentos complejos, mientras que los modelos Edge están optimizados para un rendimiento de baja latencia en dispositivos de consumo como smartphones y Raspberry Pis.
+
+| Nivel del Modelo | Nombre del Modelo | Parámetros | Arquitectura | Ventana de Contexto |
+|---|---|---|---|---|
+| **Workstation** | Gemma 4 31B | **31 Mil millones** | Denso | 256K Tokens |
+| **Workstation** | Gemma 4 26B | **26 Mil millones** | MoE (3.8B Activos) | 256K Tokens |
+| **Edge** | Gemma 4 E4B | **4 Mil millones** | Denso | 128K Tokens |
+| **Edge** | Gemma 4 E2B | **2 Mil millones** | Denso | 128K Tokens |
+
+> **💡 Consejo:** Si está utilizando GPUs de consumo con VRAM limitada, el modelo MoE de 26B ofrece la inteligencia de un modelo mucho más grande con los costes de computación de un modelo de 4B parámetros.
+
+## Rendimiento y Razonamiento del Benchmark de Gemma 4
+
+Una de las características más destacadas de la serie Gemma 4 es la integración del "Pensamiento" o razonamiento de Cadena de Pensamiento Larga (CoT). Esto permite que el modelo procese consultas complejas desglosándolas en pasos lógicos antes de generar una respuesta final. En cualquier prueba del **benchmark de gemma 4**, habilitar esta función aumenta significativamente las puntuaciones en evaluaciones con gran carga lógica como MMU Pro y SweetBench Pro.
+
+### Multimodalidad Nativa
+A diferencia de los modelos anteriores que "añadían" capacidades de visión o audio utilizando codificadores externos como Whisper, Gemma 4 es nativamente multimodal desde el nivel de arquitectura. Esto significa que el modelo no solo ve una imagen; entiende las relaciones espaciales y el contexto de forma nativa.
+
+1.  **Codificación de Visión:** El nuevo codificador de visión gestiona relaciones de aspecto nativas, lo que lo hace muy superior para el OCR y la comprensión de documentos.
+2.  **Procesamiento de Audio:** Los modelos admiten entrada de audio nativa, lo que permite el paso directo de voz a texto e incluso de voz a texto traducido sin un paso de transcripción intermedio.
+3.  **Llamada a Funciones:** Los flujos de trabajo de agentes son ahora más fluidos, ya que la llamada a funciones está "integrada", lo que permite al modelo interactuar con herramientas y APIs con mayor fiabilidad.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Innovaciones Arquitectónicas en Gemma 4
+
+Google ha introducido varias mejoras significativas en la arquitectura en este lanzamiento de 2026. El modelo denso de 31B, por ejemplo, utiliza menos capas que sus predecesores pero incorpora **Normalización de Valores** y un mecanismo de atención revisado. Estos cambios están específicamente ajustados para manejar la masiva ventana de contexto de 256K, asegurando que el modelo no "pierda el hilo" durante el análisis de documentos extensos.
+
+### Eficiencia de la Mezcla de Expertos (MoE)
+El modelo MoE de 26B es una maravilla de la eficiencia. Utiliza 128 "pequeños expertos", de los cuales solo se activan 8 para cualquier token dado. Esta arquitectura permite al modelo mantener una inteligencia de alto nivel mientras sigue siendo accesible para usuarios con hardware de gama media.
+
+| Característica | Modelo Denso 31B | Modelo MoE 26B |
+|---|---|---|
+| **Uso Principal** | Codificación y Lógica Compleja | Chat de Propósito General |
+| **Parámetros Activos** | 31 Mil millones | **3.8 Mil millones** |
+| **Mejor Hardware** | H100 / RTX 6000 Pro | RTX 3090 / 4090 |
+| **Multilingüe** | Más de 140 idiomas | Más de 140 idiomas |
+
+## Los Modelos Edge: E2B y E4B
+
+Los modelos Edge son donde los resultados del **benchmark de gemma 4** se vuelven realmente interesantes para los desarrolladores móviles. Estos modelos han experimentado una reducción drástica en el tamaño de sus codificadores mientras que, de hecho, han aumentado su rendimiento. El codificador de audio, por ejemplo, se ha comprimido en un 50%, pasando de 681 millones de parámetros a solo 305 millones.
+
+Esta compresión no solo ahorra espacio en disco; reduce la duración de la trama de 160 ms a 40 ms. Esto da como resultado una transcripción y traducción que se siente instantánea, convirtiéndolo en la opción ideal para crear asistentes de IA centrados en la voz y basados en el dispositivo.
+
+> **⚠️ Advertencia:** Aunque los modelos Edge son muy eficientes, tienen una ventana de contexto más pequeña (128K) en comparación con los modelos Workstation. Asegúrese de que sus prompts estén optimizados para este límite.
+
+## Licencias y Uso Comercial
+
+Quizás el cambio más significativo en 2026 es el paso de Google a la **Licencia Apache 2.0**. Los modelos Gemma anteriores se lanzaron bajo licencias personalizadas que incluían cláusulas de "no competencia" y diversas restricciones. Gemma 4 es verdaderamente abierto, permitiéndole:
+*   Modificar y ajustar los pesos para cualquier propósito.
+*   Implementar los modelos comercialmente sin restricciones de ingresos.
+*   Distribuir versiones modificadas del modelo libremente.
+
+Este cambio sitúa a Gemma 4 en competencia directa con la serie Llama, proporcionando una alternativa de alta calidad para las empresas que requieren una licencia permisiva para sus herramientas internas de IA. Puede encontrar los últimos pesos y fichas de modelo en el [repositorio de Hugging Face Gemma](https://huggingface.co/google) para comenzar sus propios proyectos de ajuste fino (fine-tuning).
+
+## Cómo Ejecutar Gemma 4 Localmente
+
+Ejecutar un **benchmark de gemma 4** en su propio hardware es más fácil que nunca gracias al lanzamiento de los puntos de control de Entrenamiento Consciente de la Cuantización (QAT). Estos puntos de control aseguran que incluso cuando el modelo se comprime a una precisión de 4 u 8 bits, la calidad se mantenga notablemente cercana a los pesos originales en FP16.
+
+1.  **Ollama y LM Studio:** Se espera que el soporte para Gemma 4 se integre casi de inmediato, permitiendo instalaciones con un solo clic.
+2.  **Biblioteca Transformers:** Utilice la última versión de la biblioteca Transformers de Hugging Face para cargar los modelos con `enable_thinking=True` para obtener la máxima potencia de razonamiento.
+3.  **Cloud Run:** Para aquellos que no disponen de GPUs locales, Google Cloud ahora permite servir estos modelos de forma serverless utilizando GPUs G4, que pueden reducirse a cero cuando no están en uso.
+
+## FAQ
+
+**P: ¿Cuál es la principal diferencia entre los modelos Denso de 31B y MoE de 26B?**
+
+R: El modelo Denso de 31B utiliza todos sus parámetros para cada cálculo, lo que lo hace más potente para la codificación y la lógica compleja, pero más lento. El modelo MoE de 26B solo activa 3.8B de parámetros a la vez, ofreciendo una experiencia más rápida y eficiente que es más fácil de ejecutar en hardware de consumo.
+
+**P: ¿Incluye el benchmark de gemma 4 tareas de visión y audio?**
+
+R: Sí, los resultados del **benchmark de gemma 4** cubren una amplia gama de modalidades. Los modelos se prueban en MMU Pro para visión y en varios benchmarks de ASR (Reconocimiento Automático de Voz) para audio, mostrando mejoras significativas en OCR y traducción en tiempo real respecto a versiones anteriores.
+
+**P: ¿Puedo usar Gemma 4 para aplicaciones comerciales?**
+
+R: Absolutamente. Gemma 4 se publica bajo la licencia Apache 2.0, que es una de las licencias más permisivas disponibles. Esto permite el despliegue comercial, la modificación y la redistribución sin las cláusulas restrictivas de "no competencia" presentes en versiones anteriores.
+
+**P: ¿Qué hardware necesito para ejecutar el modelo E2B?**
+
+R: El modelo E2B (2 mil millones de parámetros) está diseñado para ejecutarse en hardware muy modesto. Puede funcionar eficazmente en smartphones modernos, Raspberry Pi 5 o incluso en módulos NVIDIA Jetson Nano antiguos, siempre que tengan al menos 4 GB de RAM disponibles.

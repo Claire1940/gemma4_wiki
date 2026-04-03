@@ -1,0 +1,110 @@
+export const metadata = {
+  title: "Modo de Pensamiento de Gemma 4: Guía de Optimización y Hardware 2026",
+  description: "Domina el nuevo modo de pensamiento de Gemma 4 para un razonamiento avanzado. Aprende sobre la arquitectura A4B, la optimización de la latencia y los requisitos de hardware para el alojamiento local de IA.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Thinking+Mode",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El panorama del desarrollo local de IA ha cambiado drásticamente en 2026 con el lanzamiento de la última potencia de pesos abiertos de Google. Una de las adiciones más significativas a este ecosistema es el **modo de pensamiento de gemma 4** (gemma 4 thinking mode), una función de razonamiento nativa diseñada para cerrar la brecha entre los modelos conversacionales estándar y los motores de lógica compleja. Al integrar un proceso de "Cadena de Pensamiento" directamente en la arquitectura, Google ha proporcionado a los desarrolladores y entusiastas una herramienta que puede "pensar" a través de los problemas antes de emitir una respuesta final. Esta guía explorará cómo utilizar eficazmente el **modo de pensamiento de gemma 4**, el hardware necesario para ejecutarlo sin una latencia masiva y cómo los nuevos cambios en la licencia Apache 2.0 cambian las reglas del juego para la integración local.
+
+## Decodificando la Arquitectura de Gemma 4: Activo vs. Efectivo
+
+Antes de sumergirse en las capacidades de razonamiento, es esencial entender la nomenclatura que Google ha introducido en 2026. A diferencia de las generaciones anteriores que dependían únicamente del recuento total de parámetros, Gemma 4 utiliza un sistema de etiquetado más matizado: Activo (A) y Efectivo (E). Esta distinción es crítica para cualquiera que intente ejecutar el modelo en hardware de consumo o equipos de gaming.
+
+El buque insignia de la línea es el modelo **26B A4B**. Se trata de una arquitectura de Mezcla de Expertos (MoE). Aunque el modelo contiene técnicamente 26 mil millones de parámetros, solo activa aproximadamente entre 3.8 y 4 mil millones de parámetros para cualquier token dado. Este enfoque equilibrado permite el razonamiento profundo y el conocimiento del mundo de un modelo 26B con la velocidad de inferencia típicamente asociada a un modelo 4B.
+
+| Variante del Modelo | Parámetros Totales | Parámetros Activos/Efectivos | Caso de Uso Principal |
+| :--- | :--- | :--- | :--- |
+| **26B A4B** | 26 Mil Millones | **3.8B - 4B Activos** | Razonamiento de alto nivel, servidores locales |
+| **E4B** | ~7.9 Mil Millones | **4B Efectivos** | PCs de gama media, agentes complejos |
+| **E2B** | ~5.1 Mil Millones | **2B Efectivos** | Dispositivos móviles, IoT, Raspberry Pi |
+
+Los modelos de la serie "E", como el E4B y el E2B, utilizan Embeddings por Capa (PLLE) para mantener una huella de memoria pequeña mientras superan su categoría en rendimiento. Por ejemplo, el E2B puede caber en menos de 1.5 GB de RAM cuando se utiliza cuantización de dos bits, lo que lo convierte en la opción preferida para aplicaciones móviles sin conexión.
+
+## ¿Qué es el Modo de Pensamiento de Gemma 4?
+
+El **modo de pensamiento de gemma 4** es la implementación nativa de Google de trazas de razonamiento avanzado, similar a los modelos de lógica pesada como el o1 de OpenAI. Cuando este modo está activo, el modelo no genera inmediatamente una respuesta a un prompt. En su lugar, genera un monólogo interno —una traza de razonamiento— donde desglosa el problema, identifica posibles errores y verifica su propia lógica.
+
+> **💡 Consejo:** El modo de pensamiento es una espada de doble filo. Aunque aumenta significativamente la precisión en codificación y matemáticas, introduce un retraso promedio de 3 segundos por paso de razonamiento.
+
+Esta función está integrada de forma nativa, lo que significa que no requiere ingeniería de prompts compleja para activarse. Sin embargo, la contrapartida es la latencia. En un entorno de producción donde la experiencia del usuario depende de respuestas "ágiles", el monólogo interno puede convertirse en un cuello de botella. Para los desarrolladores que construyen flujos de trabajo de agentes, el uso de herramientas nativas y la salida JSON estructurada de Gemma 4 hacen que sea necesario equilibrar este modo de pensamiento con la necesidad de velocidad.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/OUpETXU0oIc"
+    title="26B MoE vs E2B: You may want to rethink about the Thinking Mode"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Realidad del Hardware: Ejecutar Gemma 4 Localmente
+
+Ejecutar el **modo de pensamiento de gemma 4** de manera efectiva requiere una evaluación realista de su hardware. Aunque la arquitectura MoE (A4B) es eficiente, el proceso de "pensamiento" es computacionalmente costoso. En un mini PC o portátil estándar, la CPU debe procesar miles de tokens internos antes de que aparezca la primera palabra de la respuesta real.
+
+Basándose en los benchmarks de 2026 utilizando un Ryzen 7840HS (una opción popular para consolas portátiles y mini PCs), el rendimiento varía enormemente entre los modelos 26B y 2B.
+
+| Configuración de Hardware | Modelo | Rendimiento del Modo de Pensamiento | Recomendación |
+| :--- | :--- | :--- | :--- |
+| **Solo CPU (32GB RAM)** | 26B A4B | Latencia Alta (5-10 min de espera) | **Desactivar Modo de Pensamiento** |
+| **Solo CPU (16GB RAM)** | E2B | Tiempo real / Casi tiempo real | **Mantener Modo de Pensamiento activado** |
+| **GPU RTX serie 50** | 26B A4B | Latencia de menos de un segundo | **Uso completo de funciones** |
+
+Si está alojando localmente en una máquina sin una GPU dedicada de gama alta, la traza de razonamiento del modelo 26B puede romper su flujo de trabajo. En estos casos, suele ser mejor utilizar el modelo E2B. Debido a que el E2B está optimizado para la eficiencia de memoria, puede manejar la traza de razonamiento casi en tiempo real, incluso en hardware modesto.
+
+## Optimizando el Modo de Pensamiento de Gemma 4 en Ollama
+
+Para aquellos que utilizan la CLI de Ollama para gestionar sus modelos locales, existen comandos específicos para ayudar a gestionar el rendimiento del **modo de pensamiento de gemma 4**. Si encuentra que el modelo pasa demasiado tiempo "pensando" y no el suficiente respondiendo, puede ajustar los parámetros internos para agilizar el proceso.
+
+Para transformar a un investigador lento en un asistente ágil, puede modificar el comportamiento del modelo directamente en la CLI:
+
+1.  Abra su terminal y acceda a la CLI de Ollama.
+2.  Utilice el comando `set` para ajustar la profundidad del pensamiento.
+3.  Para omitir el monólogo por completo, use `set no_think`.
+
+> **⚠️ Advertencia:** Desactivar el modo de pensamiento en el modelo 26B lo devolverá a un estado de LLM estándar. Ganará velocidad pero perderá la verificación lógica de alto nivel que define el lanzamiento de Gemma 4.
+
+Para los usuarios de mini PCs basados en Ryzen o MacBooks con Memoria Unificada, el "punto ideal" se encuentra a menudo utilizando el modelo E2B con el modo de pensamiento activado. Esto proporciona el beneficio de la lógica de cadena de pensamiento sin la pesada "penalización" de los requisitos de cómputo del modelo más grande.
+
+## Capacidades Multimodales y la Ventana de Contexto de 256k
+
+Más allá del **modo de pensamiento de gemma 4**, Google ha ampliado los límites del contexto y la modalidad. Gemma 4 admite una ventana de contexto masiva de **256k**. En teoría, esto le permite introducir bases de código completas o novelas largas en el modelo para su análisis.
+
+Sin embargo, los usuarios deben abordar esta cifra con precaución. Históricamente, los modelos pequeños y medianos tienden a "perder el hilo" o sufrir el síndrome de "perdido en el medio" mucho antes de alcanzar el límite de 256k. Hasta que las pruebas independientes de "Aguja en un Pajar" confirmen la precisión de la recuperación, es mejor tratar la ventana de 256k como una capacidad máxima en lugar de un estándar operativo diario.
+
+Además, las variantes E2B y E4B ahora admiten audio y visión de forma nativa. Esto las hace mucho más versátiles para la computación en el borde (edge computing) que los modelos anteriores de solo texto. Un desarrollador ahora puede desplegar un modelo E2B en una Raspberry Pi para que actúe como un agente de seguridad con capacidad de visión o un asistente activado por voz que procesa la lógica de forma local y segura.
+
+## Licencias y el Futuro de los Pesos Abiertos
+
+Quizás la noticia más importante de 2026 no sea el rendimiento, sino la licencia. Google ha movido oficialmente Gemma 4 a la **licencia Apache 2.0**. Este es un cambio significativo respecto al enfoque anterior de "pesos abiertos con restricciones". Al adoptar una licencia verdaderamente permisiva, Google está desafiando directamente al ecosistema Llama de Meta por el dominio en el espacio de los desarrolladores.
+
+Este cambio significa:
+*   **Libertad Comercial:** No más límites de ingresos ni restricciones de uso para aplicaciones a gran escala.
+*   **Integración:** Más fácil de empaquetar Gemma 4 en software propietario y motores de juegos.
+*   **Confianza:** Los desarrolladores pueden construir sobre una base que no está sujeta a cambios repentinos en las políticas de "uso aceptable".
+
+Aunque los datos de entrenamiento siguen siendo una "caja negra", la licencia permisiva convierte a Gemma 4 en una alternativa viable y a largo plazo para aquellos que desean evitar las complejidades legales de otros modelos propietarios o semiabiertos.
+
+## FAQ
+
+**P: ¿Funciona el modo de pensamiento de gemma 4 en dispositivos móviles?**
+
+R: Sí, específicamente con el modelo E2B. Debido a que el E2B está diseñado para una huella de memoria de aproximadamente 2 GB, puede ejecutar las trazas de razonamiento del modo de pensamiento en smartphones modernos y dispositivos IoT como el Jetson Nano.
+
+**P: ¿Cómo desactivo el monólogo interno en Gemma 4?**
+
+R: Si está utilizando la CLI de Ollama, puede usar el comando `set no_think` o `set think low`. Esto evitará que el modelo genere largas trazas de razonamiento y lo obligará a proporcionar una respuesta directa, lo que reduce significativamente la latencia en hardware de gama baja.
+
+**P: ¿Es fiable la ventana de contexto de 256k para tareas de codificación complejas?**
+
+R: Aunque la ventana está técnicamente soportada, el modelo 26B A4B es más fiable para la recuperación de contexto largo que los modelos más pequeños de la serie E. Para archivos muy grandes, se recomienda utilizar RAG (Generación Aumentada por Recuperación) junto con el modelo en lugar de confiar únicamente en la ventana de contexto.
+
+**P: ¿Cuál es la diferencia entre A4B y E4B?**
+
+R: A4B significa "Activo 4 Mil Millones" y se refiere a un modelo de Mezcla de Expertos que tiene 26B de parámetros totales pero solo utiliza 4B por token. E4B significa "Efectivo 4 Mil Millones", que es un modelo más pequeño (~7.9B de parámetros) optimizado mediante embeddings por capa para rendir como un modelo mucho más grande manteniendo una huella de memoria de 4B.
+
+Para más información sobre las licencias de código abierto, puede visitar la [Apache Software Foundation](https://www.apache.org/licenses/LICENSE-2.0) para entender todas las implicaciones de la nueva licencia de Gemma 4.
