@@ -51,6 +51,9 @@ export const iconRegistry: Record<string, LucideIcon> = {
   Brain: LucideIcons.Brain,
   Wrench: LucideIcons.Wrench,
   Image: LucideIcons.Image,
+  HardDrive: LucideIcons.HardDrive,
+  Smartphone: LucideIcons.Smartphone,
+  Scale: LucideIcons.Scale,
 
   // 默认回退图标
   HelpCircle: LucideIcons.HelpCircle,

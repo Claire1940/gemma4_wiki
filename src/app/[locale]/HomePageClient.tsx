@@ -13,14 +13,18 @@ import {
   Download,
   ExternalLink,
   FileText,
+  HardDrive,
   Image,
   Layers,
   MessageCircle,
+  Scale,
   Settings,
+  Smartphone,
   Sparkles,
   Terminal,
   TrendingUp,
   Wrench,
+  Zap,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useMessages } from 'next-intl'
@@ -296,7 +300,8 @@ export default function HomePageClient({ latestArticles, moduleLinkMap, locale }
               const sectionIds = [
                 'quick-start', 'ollama-setup', 'api-guide', 'hugging-face',
                 'model-sizes', 'specs-context', 'benchmarks', 'fine-tuning',
-                'prompt-guide', 'thinking-mode', 'function-calling', 'multimodal-guide'
+                'prompt-guide', 'thinking-mode', 'function-calling', 'multimodal-guide',
+                'gguf-and-quantization', 'pytorch-guide', 'mobile-deployment', 'vs-gemma-3'
               ]
               const sectionId = sectionIds[index]
 
@@ -942,6 +947,225 @@ export default function HomePageClient({ latestArticles, moduleLinkMap, locale }
                     </li>
                   ))}
                 </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 13: Gemma 4 GGUF and Quantization */}
+      <section id="gguf-and-quantization" className="scroll-mt-24 px-4 py-20">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <HardDrive className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4GgufQuantization.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4GgufQuantization.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4GgufQuantization.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4GgufQuantization.intro}
+          </p>
+
+          <div className="scroll-reveal space-y-4">
+            {t.modules.gemma4GgufQuantization.items.map((item: any, index: number) => {
+              const itemIcons = [HardDrive, ChevronDown, Download, Settings]
+              const ItemIcon = itemIcons[index % itemIcons.length]
+              return (
+                <div
+                  key={index}
+                  className="p-6 bg-white/5 border border-border rounded-xl hover:border-[hsl(var(--nav-theme)/0.5)] transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[hsl(var(--nav-theme)/0.15)] flex items-center justify-center">
+                      <ItemIcon className="w-5 h-5 text-[hsl(var(--nav-theme-light))]" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold mb-2">{item.topic}</h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{item.details}</p>
+                    </div>
+                  </div>
+                  <div className="ml-14 p-4 bg-[hsl(var(--nav-theme)/0.05)] border border-[hsl(var(--nav-theme)/0.2)] rounded-lg">
+                    <div className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[hsl(var(--nav-theme-light))] mt-0.5 flex-shrink-0" />
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.practicalTakeaway}</p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 14: Gemma 4 PyTorch Guide */}
+      <section id="pytorch-guide" className="scroll-mt-24 px-4 py-20 bg-white/[0.02]">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Zap className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4PytorchGuide.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4PytorchGuide.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4PytorchGuide.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4PytorchGuide.intro}
+          </p>
+
+          <div className="scroll-reveal space-y-4">
+            {t.modules.gemma4PytorchGuide.steps.map((step: any, index: number) => (
+              <div
+                key={index}
+                className="border border-border rounded-xl overflow-hidden bg-card hover:border-[hsl(var(--nav-theme)/0.5)] transition-colors"
+              >
+                <div className="p-6">
+                  <div className="flex gap-4 mb-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[hsl(var(--nav-theme)/0.2)] border-2 border-[hsl(var(--nav-theme)/0.5)] flex items-center justify-center">
+                      <span className="text-xl font-bold text-[hsl(var(--nav-theme-light))]">{step.step}</span>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                      <p className="text-muted-foreground text-sm">{step.description}</p>
+                    </div>
+                  </div>
+                  {step.code && (
+                    <div className="bg-background/60 border border-border rounded-lg p-4 font-mono text-xs text-muted-foreground whitespace-pre-wrap break-all ml-16">
+                      {step.code}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 15: Gemma 4 Mobile Deployment */}
+      <section id="mobile-deployment" className="scroll-mt-24 px-4 py-20">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Smartphone className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4MobileDeployment.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4MobileDeployment.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4MobileDeployment.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4MobileDeployment.intro}
+          </p>
+
+          <div className="scroll-reveal space-y-4">
+            {t.modules.gemma4MobileDeployment.steps.map((step: any, index: number) => (
+              <div
+                key={index}
+                className="border border-border rounded-xl overflow-hidden bg-card hover:border-[hsl(var(--nav-theme)/0.5)] transition-colors"
+              >
+                <div className="p-6">
+                  <div className="flex gap-4 mb-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[hsl(var(--nav-theme)/0.2)] border-2 border-[hsl(var(--nav-theme)/0.5)] flex items-center justify-center">
+                      <span className="text-xl font-bold text-[hsl(var(--nav-theme-light))]">{step.step}</span>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                      <p className="text-muted-foreground text-sm">{step.description}</p>
+                    </div>
+                  </div>
+                  {step.code && (
+                    <div className="bg-background/60 border border-border rounded-lg p-4 font-mono text-xs text-muted-foreground whitespace-pre-wrap break-all ml-16">
+                      {step.code}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 16: Gemma 4 vs Gemma 3 */}
+      <section id="vs-gemma-3" className="scroll-mt-24 px-4 py-20 bg-white/[0.02]">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Scale className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4VsGemma3.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4VsGemma3.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4VsGemma3.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4VsGemma3.intro}
+          </p>
+
+          {/* Comparison Table - Desktop */}
+          <div className="scroll-reveal hidden md:block overflow-x-auto rounded-xl border border-border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-[hsl(var(--nav-theme)/0.1)] border-b border-border">
+                  {t.modules.gemma4VsGemma3.tableHeaders.map((header: string, i: number) => (
+                    <th key={i} className={`px-4 py-3 text-left font-semibold ${i === 0 ? 'text-foreground' : i === 1 ? 'text-[hsl(var(--nav-theme-light))]' : 'text-muted-foreground'}`}>
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {t.modules.gemma4VsGemma3.items.map((row: any, index: number) => (
+                  <tr key={index} className={`border-b border-border/50 hover:bg-white/5 transition-colors ${index % 2 === 0 ? '' : 'bg-white/[0.02]'}`}>
+                    <td className="px-4 py-4 font-semibold text-sm align-top">{row.dimension}</td>
+                    <td className="px-4 py-4 text-sm text-[hsl(var(--nav-theme-light))] font-medium align-top">{row.gemma4}</td>
+                    <td className="px-4 py-4 text-sm text-muted-foreground align-top">{row.gemma3}</td>
+                    <td className="px-4 py-4 text-xs text-muted-foreground align-top leading-relaxed">{row.whyItMatters}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Comparison Cards - Mobile */}
+          <div className="scroll-reveal md:hidden space-y-4">
+            {t.modules.gemma4VsGemma3.items.map((row: any, index: number) => (
+              <div key={index} className="p-5 bg-white/5 border border-border rounded-xl">
+                <h3 className="font-bold mb-3 text-base">{row.dimension}</h3>
+                <div className="space-y-3">
+                  <div className="p-3 bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.2)] rounded-lg">
+                    <div className="text-xs font-semibold text-[hsl(var(--nav-theme-light))] mb-1">Gemma 4</div>
+                    <div className="text-sm">{row.gemma4}</div>
+                  </div>
+                  <div className="p-3 bg-white/5 border border-border rounded-lg">
+                    <div className="text-xs font-semibold text-muted-foreground mb-1">Gemma 3</div>
+                    <div className="text-sm text-muted-foreground">{row.gemma3}</div>
+                  </div>
+                  <div className="p-3 bg-background/50 rounded-lg">
+                    <div className="flex items-start gap-2">
+                      <ChevronRight className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))] mt-0.5 flex-shrink-0" />
+                      <p className="text-xs text-muted-foreground leading-relaxed">{row.whyItMatters}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

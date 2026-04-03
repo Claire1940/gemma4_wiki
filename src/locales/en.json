@@ -118,6 +118,26 @@
         "icon": "Image",
         "title": "Gemma 4 Multimodal Guide",
         "description": "Process image, video, and audio inputs across all Gemma 4 model sizes."
+      },
+      {
+        "icon": "HardDrive",
+        "title": "Gemma 4 GGUF and Quantization",
+        "description": "Choose the right local format and memory footprint for your hardware"
+      },
+      {
+        "icon": "Zap",
+        "title": "Gemma 4 PyTorch Guide",
+        "description": "Run Gemma 4 from a PyTorch and Transformers stack"
+      },
+      {
+        "icon": "Smartphone",
+        "title": "Gemma 4 Mobile Deployment",
+        "description": "Deploy Gemma 4 on Android via AICore, Studio, and LiteRT-LM"
+      },
+      {
+        "icon": "Scale",
+        "title": "Gemma 4 vs Gemma 3",
+        "description": "Key differences in context, format, multimodal support, and benchmarks"
       }
     ]
   },
@@ -702,6 +722,155 @@
             "26B A4B and 31B: larger reasoning-focused models with 256K context",
             "All four official sizes available in base and instruction-tuned variants"
           ]
+        }
+      ]
+    },
+    "gemma4GgufQuantization": {
+      "eyebrow": "Local Deployment",
+      "title": "Gemma 4 GGUF and Quantization",
+      "subtitle": "Choose the smallest Gemma 4 footprint that still fits your machine",
+      "intro": "For most local setups, the practical decision is whether to stay with E2B or E4B, or move up to a 26B A4B GGUF build. Google documents approximate memory needs for BF16, SFP8, and 4-bit-style deployment choices across all four official sizes.",
+      "items": [
+        {
+          "topic": "Official local entry points",
+          "details": "Google's Ollama guide exposes four Gemma 4 tags: gemma4:e2b, gemma4:e4b, gemma4:26b, and gemma4:31b. LM Studio also supports Gemma models in both GGUF and MLX formats for fully local inference.",
+          "practicalTakeaway": "Start with E2B or E4B for a lighter local loop, and move to 26B or 31B only when you have the RAM budget and want a stronger reasoning model."
+        },
+        {
+          "topic": "Approximate memory by official size",
+          "details": "Google lists approximate inference memory as E2B 9.6 GB BF16 / 3.2 GB Q4_0, E4B 15 GB / 5 GB, 26B A4B 48 GB / 15.6 GB, and 31B 58.3 GB / 17.4 GB.",
+          "practicalTakeaway": "If your target is a mainstream local machine, 4-bit-style deployment or a smaller model size is usually the line between runnable and impractical."
+        },
+        {
+          "topic": "Official 26B A4B GGUF example",
+          "details": "The official ggml-org Gemma 4 26B A4B IT GGUF page recommends llama-server for startup and lists Q4_K_M at 16.8 GB, Q8_0 at 26.9 GB, and F16 at 50.5 GB.",
+          "practicalTakeaway": "Q4_K_M is the most practical default when you want a large local Gemma 4 model but cannot afford Q8_0 or full 16-bit memory use."
+        },
+        {
+          "topic": "What quantization changes",
+          "details": "Higher parameter counts and higher precision are generally more capable, but they cost more processing cycles, memory, and power. Lower precision reduces those costs but can reduce capability.",
+          "practicalTakeaway": "Use quantization to fit the model to your hardware: smaller GGUF builds help you run locally, but they are a deployment compromise rather than a free upgrade."
+        }
+      ]
+    },
+    "gemma4PytorchGuide": {
+      "eyebrow": "Python Workflow",
+      "title": "Gemma 4 PyTorch Guide",
+      "subtitle": "Run Gemma 4 from a PyTorch-first stack",
+      "intro": "The fastest Python path for Gemma 4 is Hugging Face Transformers on top of PyTorch: install torch and transformers, pick a Gemma 4 model ID, and begin with pipeline-based text inference before moving into multimodal or tool-enabled workflows.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Install the runtime",
+          "description": "Google's Gemma 4 text inference guide starts with torch, accelerate, and transformers, plus dialog for conversation handling.",
+          "code": "pip install torch accelerate\npip install transformers\npip install dialog"
+        },
+        {
+          "step": "2",
+          "title": "Pick an official Gemma 4 checkpoint",
+          "description": "Google's Gemma 4 examples show four official instruction-tuned IDs: google/gemma-4-E2B-it, google/gemma-4-E4B-it, google/gemma-4-26B-A4B-it, and google/gemma-4-31B-it.",
+          "code": "MODEL_ID = \"google/gemma-4-E2B-it\""
+        },
+        {
+          "step": "3",
+          "title": "Start with text generation",
+          "description": "Use transformers.pipeline with task=\"text-generation\", device_map=\"auto\", and dtype=\"auto\" as the quickest way to get a first response.",
+          "code": "from transformers import pipeline\n\ntxt_pipe = pipeline(\n    task=\"text-generation\",\n    model=MODEL_ID,\n    device_map=\"auto\",\n    dtype=\"auto\"\n)"
+        },
+        {
+          "step": "4",
+          "title": "Move to multimodal and tools when needed",
+          "description": "For multimodal and function-calling workflows, use AutoProcessor and AutoModelForMultimodalLM with apply_chat_template for tool-aware prompting.",
+          "code": "from transformers import AutoProcessor, AutoModelForMultimodalLM\n\nmodel = AutoModelForMultimodalLM.from_pretrained(\n    MODEL_ID, dtype=\"auto\", device_map=\"auto\")\nprocessor = AutoProcessor.from_pretrained(MODEL_ID)"
+        },
+        {
+          "step": "5",
+          "title": "Use native PyTorch for deeper control",
+          "description": "Google's PyTorch guide documents Kaggle credential setup, dependency installation, cloning gemma_pytorch, and loading multimodal model classes for experimentation with direct checkpoint control.",
+          "code": "pip install -q -U torch immutabledict sentencepiece\n\ngit clone https://github.com/google/gemma_pytorch.git"
+        }
+      ]
+    },
+    "gemma4MobileDeployment": {
+      "eyebrow": "On-Device AI",
+      "title": "Gemma 4 Mobile Deployment",
+      "subtitle": "Put Gemma 4 on mobile through the current Android stack",
+      "intro": "Gemma 4 now has three practical mobile-facing paths: ML Kit Prompt API on AICore preview devices, Android Studio local-model workflows for developer-side usage, and LiteRT-LM for lower-level runtime control across mobile and embedded devices.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Choose the path that matches your goal",
+          "description": "Use ML Kit Prompt API on AICore if you are building an Android app experience, Android Studio local models if you want offline coding help, and LiteRT-LM if you need lower-level runtime control.",
+          "code": "Path by use case:\n- App feature prototype: ML Kit Prompt API + AICore\n- Local coding workflow: Android Studio local model\n- Custom runtime control: LiteRT-LM"
+        },
+        {
+          "step": "2",
+          "title": "Prototype on-device with AICore",
+          "description": "Google's April 2026 preview lets you target Gemma 4 E2B or E4B through model preference settings inside the Prompt API flow on AICore-enabled devices.",
+          "code": "val previewFullConfig = generationConfig {\n    modelConfig = ModelConfig {\n        releaseTrack = ModelReleaseTrack.PREVIEW\n        preference = ModelPreference.FULL\n    }\n}"
+        },
+        {
+          "step": "3",
+          "title": "Know the device expectations",
+          "description": "Preview models run on AICore-enabled devices and the latest AI accelerators from Google, MediaTek, and Qualcomm. AI Edge Gallery is available for quick model checks on non-AICore devices.",
+          "code": "Testing options:\n- AICore-enabled phone for preview models\n- AI Edge Gallery for quick model checks\n- High-end Android hardware (Pixel 8, Samsung S23+)"
+        },
+        {
+          "step": "4",
+          "title": "Use Android Studio for developer-side workflows",
+          "description": "Android Studio currently recommends Gemma 4 as its local model option. Gemma E4B requires 12 GB RAM and 4 GB storage; Gemma 26B MoE requires 24 GB RAM and 17 GB storage.",
+          "code": "Settings > Tools > AI > Model Providers"
+        },
+        {
+          "step": "5",
+          "title": "Switch to LiteRT-LM for deeper runtime control",
+          "description": "LiteRT-LM is a cross-platform library for language model pipelines from phones to embedded systems, with CPU, GPU, and NPU paths including Qualcomm AI Engine Direct and MediaTek NeuroPilot.",
+          "code": "LiteRT-LM supports:\n- CPU / GPU execution\n- Qualcomm AI Engine Direct\n- MediaTek NeuroPilot"
+        }
+      ]
+    },
+    "gemma4VsGemma3": {
+      "eyebrow": "Model Comparison",
+      "title": "Gemma 4 vs Gemma 3",
+      "subtitle": "See what actually changes when you move from Gemma 3 to Gemma 4",
+      "intro": "This comparison is for developers deciding whether to keep an existing Gemma 3 workflow or rebuild around Gemma 4. The clearest differences show up in context length, control format, multimodal scope, and benchmark performance at the top end of each family.",
+      "tableHeaders": ["Dimension", "Gemma 4", "Gemma 3", "Why It Matters"],
+      "items": [
+        {
+          "dimension": "Release and core sizes",
+          "gemma4": "Released March 31, 2026 in E2B, E4B, 26B A4B, and 31B sizes.",
+          "gemma3": "Released March 10, 2025 in 1B, 4B, 12B, and 27B sizes, with 270M added August 14, 2025.",
+          "whyItMatters": "Gemma 4 trims the family around clearer deployment tiers: edge-first E-models plus larger workstation-class models."
+        },
+        {
+          "dimension": "Context window",
+          "gemma4": "E2B and E4B support up to 128K context; 26B A4B and 31B support up to 256K.",
+          "gemma3": "4B, 12B, and 27B support 128K context; 1B and 270M support 32K.",
+          "whyItMatters": "For long documents, tool traces, or multi-step history, Gemma 4's larger models open significantly more headroom."
+        },
+        {
+          "dimension": "Multimodality",
+          "gemma4": "Supports image, video, interleaved text-image, and native audio input on E2B and E4B.",
+          "gemma3": "Core models support text and image input with text output.",
+          "whyItMatters": "Gemma 4 is the broader multimodal family if your use case moves beyond image-text into video, OCR-heavy flows, or audio-capable edge models."
+        },
+        {
+          "dimension": "Prompt and control format",
+          "gemma4": "Adds native system-role support and specialized control tokens for tools, reasoning, images, and audio.",
+          "gemma3": "Legacy formatting uses user/model turns; the separate system role is not supported.",
+          "whyItMatters": "Teams building agents or structured workflows get a cleaner control surface in Gemma 4."
+        },
+        {
+          "dimension": "Top-end benchmark snapshot",
+          "gemma4": "Gemma 4 31B: MMLU Pro 85.2, AIME 2026 89.2, LiveCodeBench v6 80.0, GPQA Diamond 84.3.",
+          "gemma3": "Gemma 3 27B (no think): MMLU Pro 67.6, AIME 2026 20.8, LiveCodeBench v6 29.1, GPQA Diamond 42.4.",
+          "whyItMatters": "If upgrading for reasoning, coding, or high-difficulty QA, the top-end Gemma 4 jump is large enough to justify a migration."
+        },
+        {
+          "dimension": "Deployment profile",
+          "gemma4": "E2B and E4B for efficient local and on-device use; 26B A4B and 31B for consumer GPU or workstation scenarios.",
+          "gemma3": "Remains strong for smaller classic sizes like 1B and 4B, with a 27B top end and 128K context on main larger variants.",
+          "whyItMatters": "Stay on Gemma 3 when small classic sizes already fit your stack; move to Gemma 4 when you want newer control features, larger-context top models, or stronger edge-oriented variants."
         }
       ]
     }
