@@ -7,11 +7,15 @@ import {
   Check,
   ChevronDown,
   Code2,
+  Cpu,
   Download,
   ExternalLink,
+  Layers,
   MessageCircle,
+  Settings,
   Sparkles,
   Terminal,
+  TrendingUp,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useMessages } from 'next-intl'
@@ -285,7 +289,8 @@ export default function HomePageClient({ latestArticles, moduleLinkMap, locale }
             {t.tools.cards.map((card: any, index: number) => {
               // 映射卡片索引到 section ID
               const sectionIds = [
-                'quick-start', 'ollama-setup', 'api-guide', 'hugging-face'
+                'quick-start', 'ollama-setup', 'api-guide', 'hugging-face',
+                'model-sizes', 'specs-context', 'benchmarks', 'fine-tuning'
               ]
               const sectionId = sectionIds[index]
 
@@ -525,6 +530,240 @@ export default function HomePageClient({ latestArticles, moduleLinkMap, locale }
           </div>
         </div>
       </section>
+      {/* Module 5: Gemma 4 Model Sizes */}
+      <section id="model-sizes" className="scroll-mt-24 px-4 py-20">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Cpu className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4ModelSizes.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4ModelSizes.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4ModelSizes.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4ModelSizes.intro}
+          </p>
+
+          <div className="scroll-reveal grid grid-cols-1 md:grid-cols-2 gap-5">
+            {t.modules.gemma4ModelSizes.models.map((model: any, index: number) => (
+              <div
+                key={index}
+                className="p-6 bg-white/5 border border-border rounded-xl hover:border-[hsl(var(--nav-theme)/0.5)] transition-all duration-300 hover:shadow-lg hover:shadow-[hsl(var(--nav-theme)/0.05)]"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-[hsl(var(--nav-theme)/0.15)] flex items-center justify-center flex-shrink-0">
+                    <Cpu className="w-5 h-5 text-[hsl(var(--nav-theme-light))]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-[hsl(var(--nav-theme-light))]">{model.model}</h3>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between gap-2 py-1.5 border-b border-border/50">
+                    <span className="text-muted-foreground font-medium">Architecture</span>
+                    <span className="font-semibold text-right">{model.architecture}</span>
+                  </div>
+                  <div className="flex justify-between gap-2 py-1.5 border-b border-border/50">
+                    <span className="text-muted-foreground font-medium">Parameters</span>
+                    <span className="font-semibold text-right">{model.parameters}</span>
+                  </div>
+                  <div className="flex justify-between gap-2 py-1.5 border-b border-border/50">
+                    <span className="text-muted-foreground font-medium">Context</span>
+                    <span className="font-semibold text-right">{model.contextWindow}</span>
+                  </div>
+                  <div className="flex justify-between gap-2 py-1.5 border-b border-border/50">
+                    <span className="text-muted-foreground font-medium shrink-0">Memory (BF16/Q4)</span>
+                    <span className="font-semibold text-right text-xs">{model.inferenceMemory}</span>
+                  </div>
+                  <div className="flex justify-between gap-2 py-1.5 border-b border-border/50">
+                    <span className="text-muted-foreground font-medium">Platform</span>
+                    <span className="font-semibold text-right">{model.platform}</span>
+                  </div>
+                  <div className="pt-2">
+                    <p className="text-muted-foreground text-xs leading-relaxed">{model.bestFor}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 6: Gemma 4 Specs and Context Window */}
+      <section id="specs-context" className="scroll-mt-24 px-4 py-20 bg-white/[0.02]">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Layers className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4SpecsContext.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4SpecsContext.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4SpecsContext.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4SpecsContext.intro}
+          </p>
+
+          <div className="scroll-reveal space-y-3">
+            {t.modules.gemma4SpecsContext.specs.map((spec: any, index: number) => (
+              <div
+                key={index}
+                className="grid grid-cols-1 md:grid-cols-3 gap-4 p-5 bg-white/5 border border-border rounded-xl hover:border-[hsl(var(--nav-theme)/0.4)] transition-colors"
+              >
+                <div className="md:col-span-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-2 h-2 rounded-full bg-[hsl(var(--nav-theme-light))]" />
+                    <span className="font-semibold text-sm">{spec.feature}</span>
+                  </div>
+                  <p className="text-[hsl(var(--nav-theme-light))] text-sm font-medium pl-4">{spec.value}</p>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-muted-foreground text-sm leading-relaxed">{spec.whyItMatters}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 7: Gemma 4 Benchmarks */}
+      <section id="benchmarks" className="scroll-mt-24 px-4 py-20">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <TrendingUp className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4Benchmarks.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4Benchmarks.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4Benchmarks.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4Benchmarks.intro}
+          </p>
+
+          {/* Benchmark Table - Desktop */}
+          <div className="scroll-reveal hidden md:block overflow-x-auto rounded-xl border border-border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-[hsl(var(--nav-theme)/0.1)] border-b border-border">
+                  {t.modules.gemma4Benchmarks.tableHeaders.map((header: string, i: number) => (
+                    <th key={i} className="px-4 py-3 text-left font-semibold text-[hsl(var(--nav-theme-light))]">
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {t.modules.gemma4Benchmarks.benchmarks.map((row: any, index: number) => (
+                  <tr key={index} className={`border-b border-border/50 hover:bg-white/5 transition-colors ${index % 2 === 0 ? '' : 'bg-white/[0.02]'}`}>
+                    <td className="px-4 py-3 font-semibold">{row.benchmark}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{row.taskFocus}</td>
+                    <td className="px-4 py-3 font-bold text-[hsl(var(--nav-theme-light))]">{row.gemma431b}</td>
+                    <td className="px-4 py-3 font-semibold">{row.gemma426bA4b}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{row.gemma4E4b}</td>
+                    <td className="px-4 py-3 text-muted-foreground">{row.gemma4E2b}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Benchmark Cards - Mobile */}
+          <div className="scroll-reveal md:hidden space-y-4">
+            {t.modules.gemma4Benchmarks.benchmarks.map((row: any, index: number) => (
+              <div key={index} className="p-5 bg-white/5 border border-border rounded-xl">
+                <h3 className="font-bold mb-1">{row.benchmark}</h3>
+                <p className="text-muted-foreground text-xs mb-3">{row.taskFocus}</p>
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div className="p-2 bg-[hsl(var(--nav-theme)/0.1)] rounded-lg text-center">
+                    <div className="font-bold text-[hsl(var(--nav-theme-light))]">{row.gemma431b}</div>
+                    <div className="text-xs text-muted-foreground">31B</div>
+                  </div>
+                  <div className="p-2 bg-white/5 rounded-lg text-center">
+                    <div className="font-semibold">{row.gemma426bA4b}</div>
+                    <div className="text-xs text-muted-foreground">26B A4B</div>
+                  </div>
+                  <div className="p-2 bg-white/5 rounded-lg text-center">
+                    <div className="text-muted-foreground">{row.gemma4E4b}</div>
+                    <div className="text-xs text-muted-foreground">E4B</div>
+                  </div>
+                  <div className="p-2 bg-white/5 rounded-lg text-center">
+                    <div className="text-muted-foreground">{row.gemma4E2b}</div>
+                    <div className="text-xs text-muted-foreground">E2B</div>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground mt-3 leading-relaxed">{row.whatItMeans}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 8: Gemma 4 Fine-Tuning */}
+      <section id="fine-tuning" className="scroll-mt-24 px-4 py-20 bg-white/[0.02]">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Settings className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4FineTuning.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4FineTuning.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4FineTuning.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4FineTuning.intro}
+          </p>
+
+          <div className="scroll-reveal space-y-4 mb-10">
+            {t.modules.gemma4FineTuning.steps.map((step: any, index: number) => (
+              <div key={index} className="flex gap-4 p-6 bg-white/5 border border-border rounded-xl hover:border-[hsl(var(--nav-theme)/0.5)] transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[hsl(var(--nav-theme)/0.2)] border-2 border-[hsl(var(--nav-theme)/0.5)] flex items-center justify-center">
+                  <span className="text-xl font-bold text-[hsl(var(--nav-theme-light))]">{index + 1}</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="scroll-reveal p-6 bg-[hsl(var(--nav-theme)/0.05)] border border-[hsl(var(--nav-theme)/0.3)] rounded-xl">
+            <div className="flex items-center gap-2 mb-4">
+              <Settings className="w-5 h-5 text-[hsl(var(--nav-theme-light))]" />
+              <h3 className="font-bold text-lg">Quick Tips</h3>
+            </div>
+            <ul className="space-y-2">
+              {t.modules.gemma4FineTuning.quickTips.map((tip: string, index: number) => (
+                <li key={index} className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-[hsl(var(--nav-theme-light))] mt-1 flex-shrink-0" />
+                  <span className="text-muted-foreground text-sm">{tip}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <Suspense fallback={<LoadingPlaceholder />}>
         <FAQSection

@@ -78,6 +78,26 @@
         "icon": "Download",
         "title": "Gemma 4 Hugging Face",
         "description": "Pick the right checkpoint from the official collection"
+      },
+      {
+        "icon": "Cpu",
+        "title": "Gemma 4 Model Sizes",
+        "description": "Compare E2B, E4B, 26B A4B and 31B by hardware and deployment target"
+      },
+      {
+        "icon": "Layers",
+        "title": "Gemma 4 Specs",
+        "description": "Context window, modalities, licensing, and key feature overview"
+      },
+      {
+        "icon": "TrendingUp",
+        "title": "Gemma 4 Benchmarks",
+        "description": "Official scores across reasoning, coding, vision, and long-context"
+      },
+      {
+        "icon": "Settings",
+        "title": "Gemma 4 Fine-Tuning",
+        "description": "Step-by-step QLoRA and adapter tuning workflow for real product work"
       }
     ]
   },
@@ -238,6 +258,215 @@
           "name": "google/gemma-4-31B",
           "description": "Base 31B dense checkpoint for teams that want the largest official Gemma 4 foundation model before their own fine-tuning or alignment stage."
         }
+      ]
+    },
+    "gemma4ModelSizes": {
+      "eyebrow": "Model Comparison",
+      "title": "Choose the Right Gemma 4 Size for Your Hardware",
+      "subtitle": "Gemma 4 ships in four sizes with very different trade-offs. The fastest choice is not always the smallest model, and the highest-quality choice is not always the easiest one to deploy.",
+      "intro": "Gemma 4 is available in two edge-first dense models, one efficient Mixture-of-Experts model, and one large dense model. For most teams, the real decision is not just quality, but where the model runs: phone, laptop, workstation, or server. A practical starting point is 26B A4B when you want strong quality without jumping all the way to 31B.",
+      "tableHeaders": [
+        "Model",
+        "Architecture",
+        "Parameters",
+        "Context",
+        "Approx. Memory (BF16)",
+        "Platform",
+        "Best For"
+      ],
+      "models": [
+        {
+          "model": "Gemma 4 E2B",
+          "architecture": "Dense",
+          "parameters": "2.3B effective",
+          "contextWindow": "128K tokens",
+          "inferenceMemory": "9.6 GB BF16 / 4.6 GB SFP8 / 3.2 GB Q4_0",
+          "platform": "Mobile devices",
+          "bestFor": "Offline assistants, lightweight multimodal apps, edge deployment"
+        },
+        {
+          "model": "Gemma 4 E4B",
+          "architecture": "Dense",
+          "parameters": "4.5B effective",
+          "contextWindow": "128K tokens",
+          "inferenceMemory": "15 GB BF16 / 7.5 GB SFP8 / 5 GB Q4_0",
+          "platform": "Mobile and laptops",
+          "bestFor": "Stronger local copilots, on-device reasoning, multimodal apps with more headroom"
+        },
+        {
+          "model": "Gemma 4 26B A4B",
+          "architecture": "MoE",
+          "parameters": "25.2B total, 3.8B active",
+          "contextWindow": "256K tokens",
+          "inferenceMemory": "48 GB BF16 / 25 GB SFP8 / 15.6 GB Q4_0",
+          "platform": "Desktop and small servers",
+          "bestFor": "Best balance of quality, speed, and long-context work for most teams"
+        },
+        {
+          "model": "Gemma 4 31B",
+          "architecture": "Dense",
+          "parameters": "30.7B",
+          "contextWindow": "256K tokens",
+          "inferenceMemory": "58.3 GB BF16 / 30.4 GB SFP8 / 17.4 GB Q4_0",
+          "platform": "Large servers",
+          "bestFor": "Highest-end reasoning, coding, and multimodal quality in the Gemma 4 family"
+        }
+      ]
+    },
+    "gemma4SpecsContext": {
+      "eyebrow": "Core Specs",
+      "title": "The Gemma 4 Specs That Actually Matter Before You Build",
+      "subtitle": "For most builders, the key questions are context length, modalities, language coverage, licensing, and app-level features. These are the specs that change implementation choices, hosting cost, and product scope.",
+      "intro": "Gemma 4 is not just a text model refresh. The family combines long context, multimodal input, thinking mode, native system prompts, and function-calling support in one open-weight lineup. The smaller models add audio input, while the larger models extend context to 256K for document-heavy and repository-scale workloads.",
+      "specs": [
+        {
+          "feature": "Release",
+          "value": "March 31, 2026",
+          "whyItMatters": "This is the current Gemma core generation and the one Google now highlights across docs and launch materials."
+        },
+        {
+          "feature": "Input and Output",
+          "value": "All models: text and image → text; E2B and E4B also support audio input",
+          "whyItMatters": "You can build text-only, vision, and lightweight speech understanding flows without switching model families."
+        },
+        {
+          "feature": "Maximum Context Window",
+          "value": "128K tokens on E2B and E4B; 256K tokens on 26B A4B and 31B",
+          "whyItMatters": "Large prompts such as long documents, long chats, or multi-file code context fit in a single request."
+        },
+        {
+          "feature": "Language Coverage",
+          "value": "Over 140 languages",
+          "whyItMatters": "This matters for multilingual products, OCR, and globally deployed assistants."
+        },
+        {
+          "feature": "License and Weights",
+          "value": "Apache 2.0 license with open weights and support for responsible commercial use",
+          "whyItMatters": "You can tune, deploy, and run Gemma 4 in your own stack with fewer licensing constraints."
+        },
+        {
+          "feature": "Reasoning and Control",
+          "value": "Configurable thinking mode, native system role support, structured JSON output, and function calling",
+          "whyItMatters": "These features make Gemma 4 much easier to use for agents, tool use, and instruction-heavy applications."
+        },
+        {
+          "feature": "Visual Handling",
+          "value": "Variable image resolutions and token budgets of 70, 140, 280, 560, or 1120 tokens",
+          "whyItMatters": "You can trade image detail for speed depending on whether the task is OCR, UI reading, chart analysis, or fast frame processing."
+        }
+      ]
+    },
+    "gemma4Benchmarks": {
+      "eyebrow": "Performance",
+      "title": "Official Gemma 4 Benchmark Snapshot",
+      "subtitle": "These scores show where each Gemma 4 size is strongest across reasoning, coding, science, vision, and long-context retrieval. Use them to shortlist a model quickly, then match that shortlist to your latency and memory budget.",
+      "intro": "Gemma 4 is positioned as a model family for reasoning, agentic workflows, coding, and multimodal understanding. The official benchmark tables show a clear pattern: 31B leads, 26B A4B stays surprisingly close while being much more efficient, and E4B and E2B bring meaningful capability to smaller devices.",
+      "tableHeaders": [
+        "Benchmark",
+        "Task Focus",
+        "Gemma 4 31B",
+        "Gemma 4 26B A4B",
+        "Gemma 4 E4B",
+        "Gemma 4 E2B"
+      ],
+      "benchmarks": [
+        {
+          "benchmark": "MMLU Pro",
+          "taskFocus": "Knowledge and reasoning",
+          "gemma431b": "85.2%",
+          "gemma426bA4b": "82.6%",
+          "gemma4E4b": "69.4%",
+          "gemma4E2b": "60.0%",
+          "whatItMeans": "Best quick comparison for general high-level reasoning performance across the family."
+        },
+        {
+          "benchmark": "AIME 2026 (no tools)",
+          "taskFocus": "Math reasoning",
+          "gemma431b": "89.2%",
+          "gemma426bA4b": "88.3%",
+          "gemma4E4b": "42.5%",
+          "gemma4E2b": "37.5%",
+          "whatItMeans": "31B and 26B A4B are the right targets for math-heavy assistants and planning tasks."
+        },
+        {
+          "benchmark": "LiveCodeBench v6",
+          "taskFocus": "Competitive coding",
+          "gemma431b": "80.0%",
+          "gemma426bA4b": "77.1%",
+          "gemma4E4b": "52.0%",
+          "gemma4E2b": "44.0%",
+          "whatItMeans": "If coding is a primary use case, the larger two models are in a different tier from the edge models."
+        },
+        {
+          "benchmark": "GPQA Diamond",
+          "taskFocus": "Scientific reasoning",
+          "gemma431b": "84.3%",
+          "gemma426bA4b": "82.3%",
+          "gemma4E4b": "58.6%",
+          "gemma4E2b": "43.4%",
+          "whatItMeans": "A strong signal for technical and expert-facing workflows."
+        },
+        {
+          "benchmark": "MMMU Pro",
+          "taskFocus": "Multimodal reasoning",
+          "gemma431b": "76.9%",
+          "gemma426bA4b": "73.8%",
+          "gemma4E4b": "52.6%",
+          "gemma4E2b": "44.2%",
+          "whatItMeans": "Vision tasks benefit heavily from the larger models when accuracy matters more than footprint."
+        },
+        {
+          "benchmark": "MRCR v2 (128K, 8-needle)",
+          "taskFocus": "Long-context retrieval",
+          "gemma431b": "66.4%",
+          "gemma426bA4b": "44.1%",
+          "gemma4E4b": "25.4%",
+          "gemma4E2b": "19.1%",
+          "whatItMeans": "For large-document and repository-scale prompting, 31B is the strongest long-context choice."
+        }
+      ]
+    },
+    "gemma4FineTuning": {
+      "eyebrow": "Customization",
+      "title": "How to Fine-Tune Gemma 4 for Real Product Work",
+      "subtitle": "Fine-tuning matters when prompting alone is not enough and you want Gemma 4 to perform better on a specific domain, workflow, or role. The practical paths are lightweight adapter tuning for text tasks and multimodal adapter tuning for image-plus-text tasks.",
+      "intro": "The official Gemma tuning docs center on a simple rule: tune for a defined task, not for vague improvement. For many builders, QLoRA is the most realistic place to start because it keeps hardware requirements much lower than full-model tuning.",
+      "steps": [
+        {
+          "title": "Start with a narrow tuning goal",
+          "description": "Choose a task or role that the base model should perform better, such as customer support, text-to-SQL, or product description generation. Use fine-tuning when the task is specific and repeated."
+        },
+        {
+          "title": "Pick the tuning path",
+          "description": "Use text tuning for instruction and generation tasks, or vision tuning when your dataset combines images and text. The text QLoRA guide demonstrates text-to-SQL; the vision QLoRA guide demonstrates image-plus-text product descriptions."
+        },
+        {
+          "title": "Choose a realistic framework",
+          "description": "Gemma 4 supports Keras with LoRA, the Gemma library, Hugging Face-based workflows, GKE, and Vertex AI. Hugging Face plus TRL is the most direct path for many developers."
+        },
+        {
+          "title": "Match the workflow to your hardware",
+          "description": "The official text QLoRA example is designed around a T4 16GB setup. The vision QLoRA guide calls for a BF16-capable GPU such as NVIDIA L4 or A100 with more than 16GB of memory."
+        },
+        {
+          "title": "Use QLoRA when efficiency matters",
+          "description": "QLoRA keeps the base model quantized to 4-bit, freezes the original weights, and trains only the added LoRA adapters. This lowers memory usage while preserving strong task performance."
+        },
+        {
+          "title": "Prepare data in the right format",
+          "description": "Build a dataset that directly matches the behavior you want, then format it for conversation-style training with TRL and SFTTrainer. The official text guide uses a large synthetic text-to-SQL dataset."
+        },
+        {
+          "title": "Evaluate, compare, and deploy",
+          "description": "After training, run inference checks against your base model, verify task gains, and then deploy the tuned model or adapter. Treat deployment format as an early decision because framework choice affects the output format you get."
+        }
+      ],
+      "quickTips": [
+        "Start with QLoRA and a T4-class GPU for text tasks — full fine-tuning is rarely needed for task adaptation.",
+        "Format your dataset to mirror the instruction-tuned chat format that Gemma 4 already understands.",
+        "Keep your eval set from the same distribution as your training data to get meaningful improvement signals.",
+        "The MoE model 26B A4B has efficient active parameters, but its total parameter count still affects checkpoint size during training.",
+        "Use the Gemma 4 -it checkpoint as your starting point for instruction tasks rather than the pre-trained base."
       ]
     }
   },
