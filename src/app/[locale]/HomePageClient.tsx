@@ -4,18 +4,23 @@ import { useEffect, useState, Suspense, lazy } from 'react'
 import {
   ArrowRight,
   BookOpen,
+  Brain,
   Check,
   ChevronDown,
+  ChevronRight,
   Code2,
   Cpu,
   Download,
   ExternalLink,
+  FileText,
+  Image,
   Layers,
   MessageCircle,
   Settings,
   Sparkles,
   Terminal,
   TrendingUp,
+  Wrench,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useMessages } from 'next-intl'
@@ -290,7 +295,8 @@ export default function HomePageClient({ latestArticles, moduleLinkMap, locale }
               // 映射卡片索引到 section ID
               const sectionIds = [
                 'quick-start', 'ollama-setup', 'api-guide', 'hugging-face',
-                'model-sizes', 'specs-context', 'benchmarks', 'fine-tuning'
+                'model-sizes', 'specs-context', 'benchmarks', 'fine-tuning',
+                'prompt-guide', 'thinking-mode', 'function-calling', 'multimodal-guide'
               ]
               const sectionId = sectionIds[index]
 
@@ -760,6 +766,184 @@ export default function HomePageClient({ latestArticles, moduleLinkMap, locale }
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Module 9: Gemma 4 Prompt Guide */}
+      <section id="prompt-guide" className="scroll-mt-24 px-4 py-20">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <FileText className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4PromptGuide.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4PromptGuide.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4PromptGuide.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4PromptGuide.intro}
+          </p>
+
+          <div className="scroll-reveal space-y-4">
+            {t.modules.gemma4PromptGuide.items.map((item: any, index: number) => (
+              <div key={index} className="border border-border rounded-xl overflow-hidden bg-card hover:border-[hsl(var(--nav-theme)/0.5)] transition-colors">
+                <div className="p-6">
+                  <div className="flex items-start gap-4 mb-3">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[hsl(var(--nav-theme)/0.15)] flex items-center justify-center">
+                      <ChevronRight className="w-4 h-4 text-[hsl(var(--nav-theme-light))]" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold mb-1">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm">{item.summary}</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-1 mb-4 pl-12">
+                    {item.highlights.map((h: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <Check className="w-4 h-4 text-[hsl(var(--nav-theme-light))] mt-0.5 flex-shrink-0" />
+                        <span className="text-muted-foreground">{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="bg-background/60 border border-border rounded-lg p-4 font-mono text-xs text-muted-foreground whitespace-pre-wrap break-all">
+                    {item.template}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 10: Gemma 4 Thinking Mode */}
+      <section id="thinking-mode" className="scroll-mt-24 px-4 py-20 bg-white/[0.02]">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Brain className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4ThinkingMode.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4ThinkingMode.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4ThinkingMode.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4ThinkingMode.intro}
+          </p>
+
+          <div className="scroll-reveal grid grid-cols-1 md:grid-cols-2 gap-6">
+            {t.modules.gemma4ThinkingMode.steps.map((step: any, index: number) => (
+              <div key={index} className="flex gap-4 p-6 bg-card border border-border rounded-xl hover:border-[hsl(var(--nav-theme)/0.5)] transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[hsl(var(--nav-theme)/0.2)] border-2 border-[hsl(var(--nav-theme)/0.5)] flex items-center justify-center">
+                  <span className="text-xl font-bold text-[hsl(var(--nav-theme-light))]">{step.step}</span>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2">{step.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-3">{step.description}</p>
+                  <ul className="space-y-1">
+                    {step.details.map((detail: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2 text-xs">
+                        <Check className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))] mt-0.5 flex-shrink-0" />
+                        <span className="text-muted-foreground">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 11: Gemma 4 Function Calling */}
+      <section id="function-calling" className="scroll-mt-24 px-4 py-20">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Wrench className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4FunctionCalling.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4FunctionCalling.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4FunctionCalling.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4FunctionCalling.intro}
+          </p>
+
+          <div className="scroll-reveal space-y-4">
+            {t.modules.gemma4FunctionCalling.steps.map((step: any, index: number) => (
+              <div key={index} className="flex gap-4 p-6 bg-card border border-border rounded-xl hover:border-[hsl(var(--nav-theme)/0.5)] transition-colors">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[hsl(var(--nav-theme)/0.2)] border-2 border-[hsl(var(--nav-theme)/0.5)] flex items-center justify-center">
+                  <span className="text-xl font-bold text-[hsl(var(--nav-theme-light))]">{step.step}</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                  <p className="text-muted-foreground mb-3">{step.description}</p>
+                  <ul className="space-y-1">
+                    {step.details.map((detail: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <Check className="w-4 h-4 text-[hsl(var(--nav-theme-light))] mt-0.5 flex-shrink-0" />
+                        <span className="text-muted-foreground">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module 12: Gemma 4 Multimodal Guide */}
+      <section id="multimodal-guide" className="scroll-mt-24 px-4 py-20 bg-white/[0.02]">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12 scroll-reveal">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(var(--nav-theme)/0.1)] border border-[hsl(var(--nav-theme)/0.3)] text-sm mb-4">
+              <Image className="w-3.5 h-3.5 text-[hsl(var(--nav-theme-light))]" />
+              <span>{t.modules.gemma4MultimodalGuide.eyebrow}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              {t.modules.gemma4MultimodalGuide.title}
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+              {t.modules.gemma4MultimodalGuide.subtitle}
+            </p>
+          </div>
+
+          <p className="scroll-reveal text-muted-foreground text-center mb-10 max-w-3xl mx-auto">
+            {t.modules.gemma4MultimodalGuide.intro}
+          </p>
+
+          <div className="scroll-reveal grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.modules.gemma4MultimodalGuide.items.map((item: any, index: number) => (
+              <div key={index} className="p-6 bg-card border border-border rounded-xl hover:border-[hsl(var(--nav-theme)/0.5)] transition-colors">
+                <h3 className="text-lg font-bold mb-2 text-[hsl(var(--nav-theme-light))]">{item.title}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{item.description}</p>
+                <ul className="space-y-2">
+                  {item.highlights.map((h: string, i: number) => (
+                    <li key={i} className="flex items-start gap-2 text-sm">
+                      <Check className="w-4 h-4 text-[hsl(var(--nav-theme-light))] mt-0.5 flex-shrink-0" />
+                      <span className="text-muted-foreground">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>

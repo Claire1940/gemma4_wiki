@@ -98,6 +98,26 @@
         "icon": "Settings",
         "title": "Gemma 4 Fine-Tuning",
         "description": "Step-by-step QLoRA and adapter tuning workflow for real product work"
+      },
+      {
+        "icon": "FileText",
+        "title": "Gemma 4 Prompt Guide",
+        "description": "Learn the turn-based prompt format with system roles and multimodal inputs."
+      },
+      {
+        "icon": "Brain",
+        "title": "Gemma 4 Thinking Mode",
+        "description": "Enable reasoning channel for math, planning, and complex analysis tasks."
+      },
+      {
+        "icon": "Wrench",
+        "title": "Gemma 4 Function Calling",
+        "description": "Connect Gemma 4 to APIs and external tools with native structured tool use."
+      },
+      {
+        "icon": "Image",
+        "title": "Gemma 4 Multimodal Guide",
+        "description": "Process image, video, and audio inputs across all Gemma 4 model sizes."
       }
     ]
   },
@@ -467,6 +487,222 @@
         "Keep your eval set from the same distribution as your training data to get meaningful improvement signals.",
         "The MoE model 26B A4B has efficient active parameters, but its total parameter count still affects checkpoint size during training.",
         "Use the Gemma 4 -it checkpoint as your starting point for instruction tasks rather than the pre-trained base."
+      ]
+    },
+    "gemma4PromptGuide": {
+      "eyebrow": "Prompting",
+      "title": "Gemma 4 Prompt Guide",
+      "subtitle": "Gemma 4 introduces a new turn-based prompt format with native system instructions, multimodal placeholders, and built-in controls for thinking and tool use.",
+      "intro": "This guide turns the official Gemma 4 format into a practical prompt library. Structure every interaction as turns, use the system role for behavior and global rules, insert image or audio placeholders where needed, and only enable thinking or tool use when the task actually benefits from them.",
+      "items": [
+        {
+          "title": "Core chat skeleton",
+          "summary": "Gemma 4 uses native system, user, and model roles, wrapped in turn markers.",
+          "highlights": [
+            "Use system for global instructions",
+            "Use user for the current request",
+            "Use model as the generation start point"
+          ],
+          "template": "<|turn>system\nYou are a helpful assistant.<turn|>\n<|turn>user\nSummarize the following article in 5 bullets.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "System prompt pattern",
+          "summary": "Put stable behavior rules in one system turn instead of repeating them every time.",
+          "highlights": [
+            "Good for style, scope, and output format",
+            "Native system role support starts with Gemma 4",
+            "Keep it concise and task-specific"
+          ],
+          "template": "<|turn>system\nYou are a technical writer. Answer in clear English, use short paragraphs, and include one practical example.<turn|>\n<|turn>user\nExplain function calling for a beginner.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "Multimodal placeholders",
+          "summary": "Use placeholder tokens to indicate where image and audio embeddings should be inserted.",
+          "highlights": [
+            "Use <|image|> for images",
+            "Use <|audio|> for audio",
+            "The processor replaces placeholders with embeddings after tokenization"
+          ],
+          "template": "<|turn>user\nDescribe this image: <|image|>\n\nThen transcribe this clip: <|audio|><turn|>\n<|turn>model"
+        },
+        {
+          "title": "Thinking-ready prompt",
+          "summary": "Thinking mode is activated by placing <|think|> inside the system instruction.",
+          "highlights": [
+            "Enable it for reasoning-heavy tasks",
+            "Keep it off for simple direct generation",
+            "Use one system turn for both thinking and other global instructions"
+          ],
+          "template": "<|turn>system\n<|think|>You are a careful reasoning assistant.<turn|>\n<|turn>user\nCompare two pricing models and recommend one for a startup.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "Tool-aware prompt structure",
+          "summary": "Tool declarations belong in the system turn, and tool calls and tool responses are handled with dedicated control tokens.",
+          "highlights": [
+            "Useful for APIs, search, calculators, and external data lookups",
+            "Tool use is structured, not plain-text pretending",
+            "Reasoning and tool use can happen in the same turn"
+          ],
+          "template": "Define tools in the system turn using the tool declaration token block, then set user and model turns as usual. Gemma 4 handles the rest with structured tool_call and tool_response tokens."
+        }
+      ]
+    },
+    "gemma4ThinkingMode": {
+      "eyebrow": "Reasoning",
+      "title": "Gemma 4 Thinking Mode",
+      "subtitle": "Thinking mode lets Gemma 4 produce a reasoning channel before the final answer, and the processor can separate both parts for application use.",
+      "intro": "Thinking mode is best for tasks where the model benefits from intermediate reasoning before it answers: ambiguous questions, math, coding, tool planning, and multimodal analysis. In Gemma 4, you can enable it at the chat-template level, stream the reasoning live, and then split the output into a thinking block and a user-facing answer block.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Choose the right tasks",
+          "description": "Use thinking mode when the request needs decomposition, comparison, planning, or careful interpretation rather than a short direct reply.",
+          "details": [
+            "Good fits: math, code debugging, structured decision-making, image-plus-text reasoning",
+            "Less necessary for simple rewrites, short summaries, or straightforward facts",
+            "Official examples cover both text-only and image-text workflows"
+          ]
+        },
+        {
+          "step": 2,
+          "title": "Enable thinking in the chat template",
+          "description": "With Hugging Face Transformers, set enable_thinking=True in apply_chat_template(). At the token level, Gemma 4 uses <|think|> in the system turn.",
+          "details": [
+            "E2B and E4B: thinking OFF uses a simple user-model flow; thinking ON adds a system turn with <|think|>",
+            "26B A4B and 31B: official templates include an empty thinking token when thinking is off to stabilize output",
+            "Thinking is designed to be enabled at the conversation level"
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Generate and separate the result",
+          "description": "The model can emit a reasoning channel first and the final answer after it. You can stream it with TextStreamer and split it with parse_response().",
+          "details": [
+            "processor.parse_response() returns separated thinking and answer content",
+            "This works for text prompts and image-text prompts",
+            "The reasoning channel can also include tool calls when the turn becomes agentic"
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Handle multi-turn chats correctly",
+          "description": "For normal multi-turn conversations, strip the previous turn generated thoughts before sending the history back. In tool-calling turns, keep the thought flow intact until the tool cycle finishes.",
+          "details": [
+            "Regular chat: remove prior thought blocks before the next turn",
+            "Tool-use exception: do not remove thoughts between function calls inside the same turn",
+            "This keeps context clean while preserving agentic behavior"
+          ]
+        }
+      ]
+    },
+    "gemma4FunctionCalling": {
+      "eyebrow": "Agentic Workflows",
+      "title": "Gemma 4 Function Calling",
+      "subtitle": "Gemma 4 supports native structured tool use, letting the model request functions instead of faking external actions in plain text.",
+      "intro": "Function calling is the practical bridge between model output and real application behavior. Instead of asking Gemma 4 to guess live data or simulate actions, you define tools, let the model generate a structured call, execute the function in your app, and then feed the result back so the model can finish with a clean natural-language answer.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Define tools clearly",
+          "description": "Pass tools through apply_chat_template() using either a manual JSON schema or a raw Python function converted to schema.",
+          "details": [
+            "Manual JSON schema is best when you need precise nested parameters",
+            "Raw Python functions are convenient for simple tools with clear type hints and docstrings",
+            "Tool definitions should include name, description, parameter types, and required fields"
+          ]
+        },
+        {
+          "step": 2,
+          "title": "Let the model request a tool",
+          "description": "Gemma 4 receives the user prompt plus available tools and returns a structured function call object rather than plain text when a tool is needed.",
+          "details": [
+            "Tool use is controlled with dedicated tokens such as tool, tool_call, and tool_response",
+            "A typical example is a weather or search function",
+            "This is better than plain text when the answer depends on external state or system actions"
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Validate and execute in your app",
+          "description": "Gemma 4 cannot execute code on its own. Your application must parse the function name and arguments, validate them, and run the real function safely.",
+          "details": [
+            "Always validate function names and arguments before execution",
+            "Do not rely on generated code without safeguards",
+            "For production systems, map tool names to approved handlers instead of dynamic execution"
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Return tool output for the final answer",
+          "description": "Append the tool result back into the chat history, then let Gemma 4 produce the final user-facing response.",
+          "details": [
+            "Official workflow: define tools, model turn, developer turn, final response",
+            "This pattern works for APIs, live lookups, calculators, settings updates, and agent loops",
+            "Tool responses should stay structured so the model can ground the final answer correctly"
+          ]
+        }
+      ]
+    },
+    "gemma4MultimodalGuide": {
+      "eyebrow": "Multimodal",
+      "title": "Gemma 4 Multimodal Guide",
+      "subtitle": "Gemma 4 handles text and image across all models, supports video as frames, and adds native audio support on E2B and E4B.",
+      "intro": "Gemma 4 is built for multimodal input. All models support image and video-style visual understanding, the small models add audio input, and the runtime lets you trade off visual detail against speed using token budgets. That makes Gemma 4 suitable for OCR, captioning, object detection, speech tasks, and mixed media prompts inside one chat flow.",
+      "items": [
+        {
+          "title": "Image understanding",
+          "description": "All Gemma 4 models support text-plus-image workflows.",
+          "highlights": [
+            "Common tasks: OCR, object detection, visual question answering, image captioning",
+            "Supports reasoning across multiple images in one prompt",
+            "Best for screenshots, documents, product images, and scene analysis"
+          ]
+        },
+        {
+          "title": "Video understanding",
+          "description": "All Gemma 4 models can process video as a sequence of frames.",
+          "highlights": [
+            "Good for scene description, human interaction, and situational summaries",
+            "Video passed as a content item in the messages array",
+            "Maximum supported video length is 60 seconds at 1 frame per second"
+          ]
+        },
+        {
+          "title": "Audio understanding",
+          "description": "Audio is available on the E2B and E4B models.",
+          "highlights": [
+            "Supports multilingual speech recognition, speech translation, and general speech understanding",
+            "Audio token cost is 25 tokens per second",
+            "Maximum audio length is 30 seconds"
+          ]
+        },
+        {
+          "title": "Visual token budgets",
+          "description": "Gemma 4 introduces variable-resolution image processing so you can choose speed or detail based on the task.",
+          "highlights": [
+            "Supported image budgets: 70, 140, 280, 560, 1120 tokens",
+            "Lower budgets for faster classification, captioning, and video frame analysis",
+            "Higher budgets for OCR, document parsing, and reading small text"
+          ]
+        },
+        {
+          "title": "Input preparation rules",
+          "description": "The processor handles much of the media formatting, but a few limits matter in production.",
+          "highlights": [
+            "Audio should be mono, 16 kHz, float32, normalized to [-1, 1]",
+            "Image file support depends on the framework used to convert files into tensors",
+            "Prompt quality still matters: specific instructions outperform vague multimodal requests"
+          ]
+        },
+        {
+          "title": "Model capability split",
+          "description": "Use the smallest models for mobile and speech-heavy use cases, and the larger models for heavier reasoning with long context.",
+          "highlights": [
+            "E2B and E4B: audio-enabled small models with 128K context",
+            "26B A4B and 31B: larger reasoning-focused models with 256K context",
+            "All four official sizes available in base and instruction-tuned variants"
+          ]
+        }
       ]
     }
   },
