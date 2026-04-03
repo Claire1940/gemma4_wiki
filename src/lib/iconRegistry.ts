@@ -38,6 +38,16 @@ export const iconRegistry: Record<string, LucideIcon> = {
   Clock: LucideIcons.Clock,
   X: LucideIcons.X,
 
+  // 开发和技术图标
+  Terminal: LucideIcons.Terminal,
+  Code2: LucideIcons.Code2,
+  Monitor: LucideIcons.Monitor,
+  Cpu: LucideIcons.Cpu,
+  Globe: LucideIcons.Globe,
+  Database: LucideIcons.Database,
+  Layers: LucideIcons.Layers,
+  Zap: LucideIcons.Zap,
+
   // 默认回退图标
   HelpCircle: LucideIcons.HelpCircle,
 }
