@@ -1,13 +1,13 @@
 {
   "seo": {
     "home": {
-      "title": "Wiki de Lucid Blocks - Fabricación, biomas y logros",
-      "description": "La Wiki de Lucid Blocks cubre fabricación, biomas, criaturas, objetos, logros, finales y consejos de supervivencia para la aventura surrealista de sandbox de vóxeles en Steam.",
-      "keywords": "Lucid Blocks, Lucid Blocks wiki, fabricación, biomas, logros, supervivencia, Steam",
-      "ogTitle": "Wiki de Lucid Blocks - Fabricación, biomas y logros",
-      "ogDescription": "La Wiki de Lucid Blocks cubre fabricación, biomas, criaturas, objetos, logros, finales y consejos de supervivencia para la aventura surrealista de sandbox de vóxeles en Steam.",
-      "twitterTitle": "Wiki de Lucid Blocks - Fabricación, biomas y logros",
-      "twitterDescription": "La Wiki de Lucid Blocks cubre fabricación, biomas, criaturas, objetos, logros y consejos de supervivencia para el sandbox surrealista de vóxeles en Steam."
+      "title": "Gemma 4 Wiki - Modelos, Benchmarks y Despliegue Local",
+      "description": "Gemma 4 Wiki cubre tamaños de modelos, benchmarks, prompting, despliegue, ajuste fino y flujos de trabajo multimodales para desarrolladores que usan los modelos abiertos de Google.",
+      "keywords": "Gemma 4, Google AI, modelo abierto, benchmarks, despliegue local, llamada a funciones, ajuste fino",
+      "ogTitle": "Gemma 4 Wiki - Modelos, Benchmarks y Despliegue Local",
+      "ogDescription": "Gemma 4 Wiki cubre tamaños de modelos, benchmarks, prompting, despliegue, ajuste fino y flujos de trabajo multimodales para desarrolladores que usan los modelos abiertos de Google.",
+      "twitterTitle": "Gemma 4 Wiki - Modelos, Benchmarks y Despliegue Local",
+      "twitterDescription": "Gemma 4 Wiki cubre tamaños de modelos, benchmarks, prompting, despliegue local y flujos de trabajo multimodales para desarrolladores."
     }
   },
   "nav": {
@@ -15,14 +15,14 @@
     "models": "Modelos",
     "requirements": "Requisitos",
     "ollama": "Ollama",
-    "install": "Instalación",
+    "install": "Instalar",
     "benchmark": "Benchmark",
     "comparison": "Comparación"
   },
   "common": {
     "home": "Inicio",
     "more": "Más",
-    "playNow": "Juega en Steam",
+    "playNow": "Explorar Gemma 4",
     "switchLanguage": "Cambiar idioma",
     "switchTheme": "Cambiar tema",
     "lightMode": "Modo claro",
@@ -34,721 +34,856 @@
     "readMore": "Leer más"
   },
   "hero": {
-    "badge": "__PROTECTED_c0b0161c__ Sandbox de supervivencia de vóxeles",
-    "title": "Lucid Blocks Wiki",
-    "description": "Explora biomas oníricos, fusiona objetos con Apotheosis, construye libremente y sobrevive a criaturas extrañas en este sandbox surrealista de mundo abierto en Steam.",
-    "getFreeCodesCTA": "Explorar guía de fabricación",
-    "playOnSteamCTA": "Jugar en Steam",
+    "badge": "Familia de Modelos Multimodales Abiertos",
+    "title": "Gemma 4 Wiki",
+    "description": "Sigue los tamaños de modelos de Gemma 4, benchmarks, prompting, llamada a funciones, entrada multimodal, despliegue local y ajuste fino en el ecosistema oficial de Google.",
+    "getFreeCodesCTA": "Comparar modelos",
+    "playOnRobloxCTA": "Sitio oficial",
     "stats": {
       "stat1": {
-        "value": "1,325",
-        "label": "Jugadores en línea"
+        "value": "400M+",
+        "label": "Descargas totales"
       },
       "stat2": {
-        "value": "1,986",
-        "label": "Pico de CCU"
+        "value": "100K+",
+        "label": "Variantes de la comunidad"
       },
       "stat3": {
-        "value": "97%",
-        "label": "Reseñas positivas"
+        "value": "140+",
+        "label": "Idiomas"
       },
       "stat4": {
-        "value": "12 de mar. de 2026",
-        "label": "Fecha de lanzamiento"
+        "value": "256K",
+        "label": "Contexto máximo"
       }
     }
   },
   "gameFeature": {
-    "title": "Jugabilidad de Lucid Blocks",
-    "description": "Explora biomas surrealistas, fusiona objetos con Apotheosis y sobrevive a criaturas extrañas en este sandbox de vóxeles onírico en Steam."
+    "title": "Resumen de Gemma 4",
+    "description": "La familia de modelos abiertos más reciente de Google DeepMind para razonamiento, programación y flujos de trabajo multimodales. Soporta entradas de texto, imagen y audio con hasta 256K de contexto bajo Apache 2.0."
   },
   "tools": {
-    "title": "Lucid Blocks",
+    "title": "Gemma 4",
     "titleHighlight": "Recursos",
-    "subtitle": "Todo lo que necesitas para explorar, fabricar y sobrevivir en Lucid Blocks",
+    "subtitle": "Todo lo que necesitas para empezar con Gemma 4 — desde la configuración local hasta la integración de API",
     "cards": [
       {
         "icon": "BookOpen",
-        "title": "Guía para principiantes",
-        "description": "Primeros pasos, exploración y progresión inicial"
+        "title": "Tutorial de Gemma 4",
+        "description": "Inicio rápido desde el descubrimiento hasta tu primer prompt real"
       },
       {
-        "icon": "Sparkles",
-        "title": "Fabricación de Apotheosis",
-        "description": "Sistema de fusión libre y recetas iniciales"
+        "icon": "Terminal",
+        "title": "Configuración de Gemma 4 en Ollama",
+        "description": "Ejecuta Gemma 4 localmente en una laptop o estación de trabajo"
       },
       {
-        "icon": "Hammer",
-        "title": "Herramientas y armas",
-        "description": "Pico de escarcha, Azrael, __PROTECTED_6a765cb2__ y más"
+        "icon": "Code2",
+        "title": "Guía de API de Gemma 4",
+        "description": "Acceso alojado a través de la API de Gemini y AI Studio"
       },
       {
-        "icon": "Package",
-        "title": "Almacenamiento e inventario",
-        "description": "Cubos de suministros, gabinetes y almacenamiento de Qualia"
+        "icon": "Download",
+        "title": "Gemma 4 en Hugging Face",
+        "description": "Elige el checkpoint adecuado de la colección oficial"
       },
       {
-        "icon": "Home",
-        "title": "Qualia y construcción de bases",
-        "description": "Qualia personal y configuración de la base"
+        "icon": "Cpu",
+        "title": "Tamaños de modelos de Gemma 4",
+        "description": "Compara E2B, E4B, 26B A4B y 31B por hardware y objetivo de despliegue"
       },
       {
-        "icon": "Eye",
-        "title": "Regiones del mundo",
-        "description": "Fog Meadow, Ciénaga de la Esencia y más"
-      },
-      {
-        "icon": "AlertTriangle",
-        "title": "Criaturas y enemigos",
-        "description": "Maniquíes, arañas y cómo sobrevivir"
-      },
-      {
-        "icon": "ArrowRight",
-        "title": "Equipo de movilidad",
-        "description": "__PROTECTED_6a765cb2__, Guante planeador, __PROTECTED_163b9bec__"
+        "icon": "Layers",
+        "title": "Especificaciones de Gemma 4",
+        "description": "Ventana de contexto, modalidades, licencias y resumen de características clave"
       },
       {
         "icon": "TrendingUp",
-        "title": "Cultivo y crecimiento",
-        "description": "Progresión de semillas y recolección de materiales"
-      },
-      {
-        "icon": "Star",
-        "title": "Mejores desbloqueos iniciales",
-        "description": "Mejoras prioritarias para la primera hora"
-      },
-      {
-        "icon": "ClipboardCheck",
-        "title": "Seguimiento de logros",
-        "description": "Los 19 logros y condiciones de Steam"
-      },
-      {
-        "icon": "MessageCircle",
-        "title": "Preguntas frecuentes del modo un jugador",
-        "description": "Preguntas sobre plataformas, precio, cooperativo e idiomas"
-      },
-      {
-        "icon": "Gamepad2",
-        "title": "Steam Deck y controles",
-        "description": "Configuración de Proton 9.0.4 y consejos para el control"
+        "title": "Benchmarks de Gemma 4",
+        "description": "Puntajes oficiales en razonamiento, programación, visión y contexto largo"
       },
       {
         "icon": "Settings",
-        "title": "Ajustes y accesibilidad",
-        "description": "Ocultar manos, __PROTECTED_38625270__ y opciones de pantalla"
+        "title": "Ajuste fino de Gemma 4",
+        "description": "Flujo de trabajo paso a paso de QLoRA y ajuste de adaptadores para productos reales"
       },
       {
-        "icon": "Clock",
-        "title": "Actualizaciones y notas del parche",
-        "description": "Correcciones recientes y notas de la hoja de ruta"
+        "icon": "FileText",
+        "title": "Guía de prompts de Gemma 4",
+        "description": "Aprende el formato de prompt por turnos con roles de sistema y entradas multimodales."
       },
       {
-        "icon": "Shield",
-        "title": "Solución de cierres inesperados",
-        "description": "Verificación de __PROTECTED_38625270__, ruta de registros y reporte de errores"
+        "icon": "Brain",
+        "title": "Modo de pensamiento de Gemma 4",
+        "description": "Activa el canal de razonamiento para tareas de matemáticas, planificación y análisis complejo."
+      },
+      {
+        "icon": "Wrench",
+        "title": "Llamada a funciones de Gemma 4",
+        "description": "Conecta Gemma 4 a APIs y herramientas externas con uso nativo de herramientas estructuradas."
+      },
+      {
+        "icon": "Image",
+        "title": "Guía multimodal de Gemma 4",
+        "description": "Procesa entradas de imagen, video y audio en todos los tamaños de modelos de Gemma 4."
+      },
+      {
+        "icon": "HardDrive",
+        "title": "Gemma 4 GGUF y cuantización",
+        "description": "Elige el formato local correcto y la huella de memoria para tu hardware"
+      },
+      {
+        "icon": "Zap",
+        "title": "Guía de PyTorch para Gemma 4",
+        "description": "Ejecuta Gemma 4 desde un stack de PyTorch y Transformers"
+      },
+      {
+        "icon": "Smartphone",
+        "title": "Despliegue móvil de Gemma 4",
+        "description": "Despliega Gemma 4 en Android a través de AICore, Studio y LiteRT-LM"
+      },
+      {
+        "icon": "Scale",
+        "title": "Gemma 4 vs Gemma 3",
+        "description": "Diferencias clave en contexto, formato, soporte multimodal y benchmarks"
       }
     ]
   },
   "modules": {
-    "lucidBlocksBeginnerGuide": {
-      "title": "Guía para principiantes de Lucid Blocks",
+    "gemma4Tutorial": {
+      "title": "Tutorial de Gemma 4",
       "displayType": "steps",
-      "intro": "Comienza aprendiendo cómo se conectan la exploración, la fusión y la progresión. Lucid Blocks premia la experimentación, por lo que el progreso temprano proviene de recolectar materiales inusuales, probar combinaciones y desbloquear tu Qualia personal.",
+      "eyebrow": "Inicio rápido",
+      "intro": "Gemma 4 se lanzó el 2 de abril de 2026 en cuatro tamaños oficiales: E2B, E4B, 26B A4B y 31B. La familia está diseñada para el despliegue de pesos abiertos bajo Apache 2.0, con modelos de borde más pequeños dirigidos a hardware de clase móvil y portátil, y modelos más grandes dirigidos a computadoras de escritorio, estaciones de trabajo y servidores.",
       "steps": [
         {
-          "title": "Explora antes de comprometerte",
-          "description": "Camina hacia el exterior, mina bloques comunes y conserva cualquier botín extraño que encuentres. El progreso inicial se trata menos de misiones fijas y más de descubrir en qué se pueden convertir los materiales."
+          "title": "Comprende los cuatro tamaños oficiales de Gemma 4",
+          "description": "Gemma 4 viene en E2B, E4B, 26B A4B y 31B. E2B y E4B aceptan entrada de texto, imagen y audio; 26B A4B y 31B aceptan entrada de texto e imagen y están dirigidos a despliegues locales o de servidor más grandes."
         },
         {
-          "title": "Desbloquea tu Qualia personal pronto",
-          "description": "Tu Qualia personal es uno de los hitos iniciales más importantes. Te brinda un lugar confiable para reagruparte y construir a su alrededor."
+          "title": "Adapta el modelo a tu hardware",
+          "description": "Usa E2B o E4B cuando desees una inferencia local compatible con dispositivos móviles, de borde o portátiles. Usa 26B A4B para un modelo local de propósito general más potente, y 31B cuando desees el punto de control oficial más grande de Gemma 4."
         },
         {
-          "title": "Usa Osmio para progresar rápido al inicio",
-          "description": "El Osmio es uno de los materiales iniciales más útiles. Una ruta inicial popular es combinar Osmio con palos para fabricar un Pico de Escarcha para minar rápido."
+          "title": "Elige un punto de partida",
+          "description": "Gemma 4 26B A4B es una opción predeterminada sólida para primeras experiencias potentes. Si deseas el punto de partida más ligero, comienza con un modelo de borde ajustado por instrucciones y sube de nivel cuando tu carga de trabajo necesite más capacidad."
         },
         {
-          "title": "Registra las buenas fusiones",
-          "description": "Lleva un registro de las combinaciones exitosas en tu diario. Lucid Blocks tiene muchas rutas de fusión posibles, por lo que anotar los resultados útiles ahorra mucho tiempo."
+          "title": "Elige cómo quieres probarlo",
+          "description": "Prueba Gemma 4 alojado a través de Google AI Studio y la Gemini API, o descarga los pesos abiertos de Hugging Face o Kaggle para uso local, ajuste y despliegue personalizado."
+        },
+        {
+          "title": "Conoce para qué está optimizado Gemma 4",
+          "description": "La familia está diseñada para el razonamiento, la programación, flujos de trabajo agénticos y comprensión multimodal. Los modelos de borde admiten un contexto de 128K, mientras que 26B A4B y 31B admiten un contexto de hasta 256K."
         }
       ],
       "quickTips": [
-        "Apotheosis no requiere una lista de recetas fija.",
-        "La generación de mundo infinito significa que moverte hacia arriba o hacia lo profundo puede revelar materiales completamente diferentes.",
-        "Las herramientas de movimiento y el equipo de utilidad se convierten en una gran mejora de calidad de vida una vez que comienzas a desbloquearlos.",
-        "Perderse al principio es normal, pero las herramientas útiles, el almacenamiento y las opciones de movimiento crecen como bola de nieve rápidamente una vez que tus primeras buenas fusiones empiezan a funcionar."
+        "Las variantes ajustadas por instrucciones (-it) son mejores para casos de uso de chat y asistentes.",
+        "E2B y E4B son los puntos de partida más accesibles a nivel de hardware para la experimentación local.",
+        "El 26B A4B es un modelo MoE con una inferencia efectiva más rápida que un modelo denso de tamaño total similar.",
+        "Todos los pesos de Gemma 4 se publican bajo la licencia Apache 2.0."
       ]
     },
-    "lucidBlocksApotheosisCrafting": {
-      "title": "Artesanía de Apotheosis en Lucid Blocks",
-      "displayType": "cards",
-      "intro": "Apotheosis es el sistema de fusión sin restricciones del juego. En lugar de memorizar un libro de recetas tradicional, combinas materiales, observas el resultado y construyes tu propio conocimiento de artesanía con el tiempo.",
-      "cards": [
-        {
-          "name": "Fusión de forma libre",
-          "description": "Apotheosis te permite fusionar diferentes objetos sin necesidad de seguir una lista de recetas fija."
-        },
-        {
-          "name": "Múltiples resultados útiles",
-          "description": "Diferentes materiales suelen orientarse hacia ciertos resultados. Los descubrimientos de la comunidad muestran que insumos similares pueden derivar en herramientas prácticas, almacenamiento o mejoras de combate."
-        },
-        {
-          "name": "Artesanía basada en el diario",
-          "description": "La mejor manera de aprender Apotheosis es registrar tus combinaciones exitosas. Tu diario se convertirá rápidamente en tu propia referencia de artesanía."
-        },
-        {
-          "name": "Fusiones iniciales probadas por la comunidad",
-          "description": "Ejemplos iniciales populares incluyen Osmio más Palo para un Pico de Escarcha, Palo más Apéndice de Tungsteno para Azrael, y Azrael más Magnetita para el Estoque de Zarcillo."
-        }
-      ],
-      "milestones": [
-        "Fusionar un objeto",
-        "Fusionar una alimaña",
-        "Fusionar un artefacto divino"
-      ]
-    },
-    "lucidBlocksToolsAndWeapons": {
-      "title": "Herramientas y armas de Lucid Blocks",
-      "displayType": "itemCards",
-      "intro": "Lucid Blocks mezcla equipo de utilidad oficial con armas iniciales descubiertas por la comunidad. La mejor configuración suele ser una mezcla de minería rápida, travesía segura y una opción de combate confiable.",
-      "items": [
-        {
-          "name": "Pico de Escarcha",
-          "type": "Herramienta de minería",
-          "description": "Un pico inicial rápido y económico hecho de Osmio y Palo. Los jugadores lo usan para acelerar la recolección inicial de materiales."
-        },
-        {
-          "name": "Azrael",
-          "type": "Arma inicial",
-          "description": "Una ruta práctica para un arma inicial fabricada con un Palo y un Apéndice de Tungsteno."
-        },
-        {
-          "name": "Estoque de Zarcillo",
-          "type": "Arma mejorada",
-          "description": "Una continuación más fuerte creada al combinar Azrael con Magnetita. Es una de las rutas de combate inicial-media más útiles compartidas por los jugadores."
-        },
-        {
-          "name": "__PROTECTED_6a765cb2__",
-          "type": "Herramienta de movilidad",
-          "description": "Un objeto de travesía oficial que mejora enormemente el movimiento y la exploración vertical."
-        },
-        {
-          "name": "__PROTECTED_163b9bec__",
-          "type": "Herramienta de movilidad",
-          "description": "Un objeto de movimiento oficial que ayuda a cubrir terreno de forma más segura y eficiente."
-        },
-        {
-          "name": "Varita de Bola",
-          "type": "Arma de utilidad",
-          "description": "Un objeto de utilidad a distancia oficial que expande tus opciones de combate y acertijos."
-        },
-        {
-          "name": "Equipo de buceo",
-          "type": "Equipo de travesía",
-          "description": "Un objeto de utilidad oficial para llegar a áreas que de otro modo ralentizarían la exploración."
-        },
-        {
-          "name": "Explosivos",
-          "type": "Daño de utilidad",
-          "description": "Destacados oficialmente como parte del conjunto de herramientas principal y útiles para atravesar amenazas u obstáculos."
-        }
-      ]
-    },
-    "lucidBlocksStorageAndInventory": {
-      "title": "Almacenamiento e inventario de Lucid Blocks",
-      "displayType": "solutionCards",
-      "intro": "La presión del inventario comienza temprano en Lucid Blocks, por lo que construir almacenamiento debería ser uno de tus primeros objetivos. Ya destacan varias soluciones probadas por jugadores reales.",
-      "solutions": [
-        {
-          "name": "Cubo de Almacenamiento",
-          "role": "Almacenamiento tipo cofre",
-          "description": "Los Cubos de Almacenamiento son una de las soluciones prácticas más tempranas y los jugadores los tratan como el contenedor principal tipo cofre del juego."
-        },
-        {
-          "name": "Gabinete",
-          "role": "Almacenamiento de base simple",
-          "description": "Los gabinetes son otra opción de almacenamiento confirmada. Una receta inicial compartida usa 1 de Madera cortada y 1 de Cuerda."
-        },
-        {
-          "name": "Qualia personal",
-          "role": "Centro de almacenamiento a largo plazo",
-          "description": "Una vez desbloqueada, tu Qualia personal se convierte en un lugar natural para organizar materiales, fabricar en paz y expandir la configuración de tu base."
-        },
-        {
-          "name": "Seguimiento en el diario",
-          "role": "Eficiencia de inventario",
-          "description": "Registrar combinaciones útiles en tu diario reduce el desperdicio de materiales y facilita mucho la gestión del inventario."
-        }
-      ],
-      "managementTips": [
-        "Prioriza una opción de almacenamiento confiable antes de acumular botines raros.",
-        "Construye alrededor de tu Qualia personal una vez que esté disponible.",
-        "Mantén separados los materiales de artesanía, las herramientas de combate y el equipo de movimiento para que las mejoras sean más fáciles de planificar.",
-        "Usa tu diario como parte de la gestión del inventario, no solo para descubrir recetas."
-      ]
-    },
-    "lucidBlocksQualiaAndBaseBuilding": {
-      "title": "Qualia y construcción de bases en Lucid Blocks",
-      "displayType": "cards",
-      "intro": "La Qualia es uno de los hitos de progresión más importantes en Lucid Blocks. Te brinda un espacio personal para reagruparte, almacenar materiales y convertir gradualmente el progreso de exploración en una verdadera base de operaciones.",
-      "cards": [
-        {
-          "name": "Qualia personal",
-          "description": "Desbloquear una Qualia es un hito inicial que te da un lugar más confiable al cual regresar mientras exploras el mundo exterior."
-        },
-        {
-          "name": "Construcción centrada en el almacenamiento",
-          "description": "Muchos jugadores comienzan usando su Qualia como un centro de almacenamiento antes de convertirla en una base más grande con espacios organizados para artesanía y construcción."
-        },
-        {
-          "name": "Construcción creativa de hogares",
-          "description": "Lucid Blocks admite la construcción creativa, y los jugadores ya están usando los espacios de Qualia para crear casas y diseños personalizados."
-        },
-        {
-          "name": "Centro de progresión",
-          "description": "Una base sólida te ayuda a separar el botín de exploración, los materiales de artesanía, las semillas, las herramientas y el equipo de movilidad para planificar mejor tus próximas mejoras."
-        }
-      ],
-      "highlights": [
-        "Entrar en una qualia",
-        "Almacenar materiales de forma segura",
-        "Expandir de la utilidad a la decoración",
-        "Usar el espacio de la base para apoyar la artesanía y el cultivo"
-      ]
-    },
-    "lucidBlocksWorldRegions": {
-      "title": "Regiones del mundo de Lucid Blocks",
-      "displayType": "regionCards",
-      "intro": "Lucid Blocks utiliza generación de mundo infinito, por lo que los jugadores siguen descubriendo nuevos entornos y estructuras. Algunos lugares con nombre ya aparecen en los logros y en las discusiones de la comunidad.",
-      "regions": [
-        {
-          "name": "Fog Meadow",
-          "type": "Área destacada por la comunidad",
-          "description": "Fog Meadow ya es conocida entre los jugadores como un área tensa asociada con amenazas ocultas y encuentros peligrosos."
-        },
-        {
-          "name": "Línea ley de Tiamana",
-          "type": "Punto de referencia de descubrimiento",
-          "description": "La línea ley de tiamana es lo suficientemente importante como para tener su propio hito de logro, lo que la convierte en uno de los descubrimientos mundiales con nombre más claros hasta ahora."
-        },
-        {
-          "name": "Clonaqualia",
-          "type": "Espacio de construcción",
-          "description": "Los jugadores ya están usando Clonaqualia como un lugar para construir casas, almacenar materiales y experimentar con diseños más permanentes."
-        },
-        {
-          "name": "Ciénaga de Esencia",
-          "type": "Área de recolección",
-          "description": "La Ciénaga de Esencia está siendo compartida por los jugadores como una ubicación útil para recolectar recursos, especialmente para luchar contra slimes y ganar experiencia."
-        }
-      ]
-    },
-    "lucidBlocksCreaturesAndEnemies": {
-      "title": "Criaturas y enemigos de Lucid Blocks",
-      "displayType": "creatureCards",
-      "intro": "Lucid Blocks mezcla criaturas surreales con peligros reales. Las descripciones oficiales y las publicaciones de la comunidad apuntan a un mundo lleno de vida extraña, amenazas hostiles y algunos encuentros destacados que los jugadores recuerdan rápidamente.",
-      "creatures": [
-        {
-          "name": "Maniquíes",
-          "role": "Enemigo hostil",
-          "description": "Los maniquíes son uno de los enemigos nombrados oficialmente en el mundo y parte del catálogo de amenazas surreales del juego."
-        },
-        {
-          "name": "Geles blandos",
-          "role": "Enemigo hostil",
-          "description": "Los geles blandos son otro tipo de enemigo nombrado oficialmente y ayudan a definir el extraño estilo biológico del juego."
-        },
-        {
-          "name": "Seres de dimensiones superiores",
-          "role": "Enemigo hostil",
-          "description": "Estos seres se presentan como parte del catálogo de enemigos más abstractos e inquietantes del mundo."
-        },
-        {
-          "name": "Arañas colosales",
-          "role": "Amenaza mayor",
-          "description": "Las arañas son uno de los enemigos más temidos de inmediato en las discusiones de la comunidad y son claramente un peligro memorable."
-        },
-        {
-          "name": "__PROTECTED_26ee183b__",
-          "role": "Criatura con nombre",
-          "description": "__PROTECTED_26ee183b__ es lo suficientemente notable como para tener su propio logro, lo que lo convierte en uno de los encuentros con criaturas nombradas más claros del juego."
-        },
-        {
-          "name": "Alimañas adorables",
-          "role": "Criatura interactuable",
-          "description": "Las alimañas no solo son parte de la progresión de fusión, también se les puede cambiar el nombre, dándoles un papel más personal que a los enemigos estándar."
-        },
-        {
-          "name": "Criatura blasfema",
-          "role": "Amenaza de élite",
-          "description": "La criatura blasfema está vinculada a un logro de combate dedicado, lo que la marca como un encuentro enemigo significativo."
-        }
-      ]
-    },
-    "lucidBlocksMobilityGear": {
-      "title": "Equipo de movilidad de Lucid Blocks",
-      "displayType": "itemCards",
-      "intro": "Las mejoras de movimiento son uno de los mayores saltos en la calidad de vida en Lucid Blocks. Una vez que desbloqueas tus primeras herramientas de travesía, la exploración se vuelve más rápida, segura y mucho más gratificante.",
-      "items": [
-        {
-          "name": "__PROTECTED_6a765cb2__",
-          "type": "Herramienta de travesía",
-          "description": "El gancho es uno de los hitos de movimiento más claros del juego y tiene su propio logro dedicado."
-        },
-        {
-          "name": "Guante planeador",
-          "type": "Movilidad aérea",
-          "description": "El guante planeador permite un viaje mucho más fluido y es otro hito importante de progresión con su propio logro."
-        },
-        {
-          "name": "__PROTECTED_163b9bec__",
-          "type": "Herramienta de travesía",
-          "description": "Los planeadores abeja se destacan oficialmente como parte del conjunto de herramientas de movimiento del juego para cubrir terreno de manera más eficiente."
-        },
-        {
-          "name": "Varita de Bola",
-          "type": "Equipo de utilidad",
-          "description": "Las varitas de bola son una de las herramientas especiales destacadas oficialmente y expanden la forma en que te mueves o interactúas con el mundo."
-        },
-        {
-          "name": "Equipo de buceo",
-          "type": "Equipo de exploración",
-          "description": "El equipo de buceo figura oficialmente como parte del conjunto de utilidad principal para llegar a áreas que de otro modo serían más difíciles de explorar."
-        },
-        {
-          "name": "Explosivos",
-          "type": "Daño de utilidad",
-          "description": "Los explosivos están destacados oficialmente y vinculados a un hito de logro, lo que los hace parte de la progresión de utilidad principal del juego."
-        }
-      ],
-      "unlockMilestones": [
-        "Dominar un gancho",
-        "Volar con el guante planeador",
-        "Empuñar una varita de proyectiles",
-        "Empuñar un explosivo"
-      ]
-    },
-    "lucidBlocksFarmingAndGrowth": {
-      "title": "Cultivo y crecimiento en Lucid Blocks",
-      "displayType": "mixedCards",
-      "intro": "El crecimiento es parte de la progresión real en Lucid Blocks. El cultivo no se trata solo de plantar y cosechar, sino también de establecer rutas de materiales repetibles que mantengan el flujo de tus herramientas, armas y opciones de artesanía.",
-      "sections": [
-        {
-          "name": "Progresión de semillas",
-          "description": "Plantar y fertilizar semillas es un hito real en el juego, y cosechar una nuez completamente crecida es parte de la misma ruta de crecimiento."
-        },
-        {
-          "name": "Recolección de materiales",
-          "description": "Un ciclo práctico de recolección inicial es crear Cápsulas de Mercurio, que generan pequeños slimes que sueltan zarcillos y viscosidad para materiales de artesanía repetibles."
-        },
-        {
-          "name": "Sustento de herramientas",
-          "description": "La recolección de recursos se vuelve mucho más fuerte una vez que puedes reunir consistentemente Osmio, fragmentos de vidrio, plantas y materiales de slime para artesanías posteriores."
-        },
-        {
-          "name": "Rutina de base",
-          "description": "La mejor configuración de cultivo apoya más que solo la comida. Debería abastecer tu almacenamiento, herramientas de movimiento, mejoras de armas y futuros experimentos de fusión."
-        }
-      ],
-      "growthMilestones": [
-        "Fertilizar una semilla",
-        "Cosechar una nuez completamente crecida",
-        "Crear ciclos de materiales repetibles",
-        "Convertir el cultivo en progresión a largo plazo"
-      ]
-    },
-    "lucidBlocksBestEarlyUnlocks": {
-      "title": "Mejores desbloqueos iniciales de Lucid Blocks",
-      "displayType": "priorityCards",
-      "intro": "Los desbloqueos iniciales más fuertes son aquellos que mejoran la seguridad, el almacenamiento y el movimiento. En Lucid Blocks, unas pocas mejoras prácticas pueden hacer que el resto del juego sea mucho más fluido.",
-      "priorities": [
-        {
-          "name": "Qualia personal",
-          "priority": "Esencial",
-          "description": "Tan pronto como obtengas acceso a tu Qualia personal, tu partida se volverá mucho más estable. Actúa como un centro confiable para el almacenamiento, la construcción y el reagrupamiento."
-        },
-        {
-          "name": "Pico de Escarcha",
-          "priority": "Muy alta",
-          "description": "Una herramienta de minería inicial rápida y barata hecha de Osmio y Palo. Es una de las mejoras más útiles para acelerar la recolección inicial de recursos."
-        },
-        {
-          "name": "Cubo de Almacenamiento",
-          "priority": "Muy alta",
-          "description": "La presión del inventario comienza pronto, por lo que obtener tu primer contenedor confiable tipo cofre es una mejora importante de calidad de vida."
-        },
-        {
-          "name": "__PROTECTED_6a765cb2__",
-          "priority": "Alta",
-          "description": "El gancho es uno de los hitos de movimiento más claros del juego y rápidamente hace que la exploración sea más rápida y segura."
-        },
-        {
-          "name": "Guante planeador",
-          "priority": "Alta",
-          "description": "El guante planeador añade otro gran impulso a la movilidad y hace que el movimiento a larga distancia sea mucho más eficiente."
-        },
-        {
-          "name": "Varita de proyectiles o bombas",
-          "priority": "Alta",
-          "description": "Una herramienta a distancia o una opción explosiva te brinda una respuesta más segura ante enemigos peligrosos y encuentros tipo desafío."
-        }
-      ]
-    },
-    "lucidBlocksAchievementTracker": {
-      "title": "Seguimiento de logros de Lucid Blocks",
-      "displayType": "achievementGrid",
-      "intro": "Lucid Blocks tiene actualmente 19 logros de Steam, y se dividen naturalmente en progresión de exploración, artesanía, movilidad, combate y crecimiento.",
-      "groups": [
-        {
-          "name": "Exploración",
-          "achievements": [
-            {
-              "title": "__PROTECTED_c973d4a3__ α",
-              "description": "Entrar en una qualia."
-            },
-            {
-              "title": "__PROTECTED_c973d4a3__ γ",
-              "description": "Descubrir una línea ley de tiamana."
-            },
-            {
-              "title": "__PROTECTED_c973d4a3__ δ",
-              "description": "Superar un desafío de tiamana."
-            },
-            {
-              "title": "__PROTECTED_c973d4a3__ ε",
-              "description": "Logro oculto."
-            }
-          ]
-        },
-        {
-          "name": "Artesanía e invocación",
-          "achievements": [
-            {
-              "title": "Apotheosis α",
-              "description": "Fusionar un objeto."
-            },
-            {
-              "title": "Apotheosis β",
-              "description": "Fusionar una alimaña."
-            },
-            {
-              "title": "Apotheosis γ",
-              "description": "Fusionar un artefacto divino."
-            },
-            {
-              "title": "Arcángel β",
-              "description": "Invoca tu fe."
-            }
-          ]
-        },
-        {
-          "name": "Movilidad y utilidad",
-          "achievements": [
-            {
-              "title": "Virtud α",
-              "description": "Volar con el guante planeador."
-            },
-            {
-              "title": "Virtud β",
-              "description": "Dominar un gancho."
-            },
-            {
-              "title": "Arcángel α",
-              "description": "Empuñar una varita de proyectiles."
-            },
-            {
-              "title": "Arcángel γ",
-              "description": "Empuñar un explosivo."
-            }
-          ]
-        },
-        {
-          "name": "Combate y criaturas",
-          "achievements": [
-            {
-              "title": "Masacre de __PROTECTED_26ee183b__",
-              "description": "Derrotar osos burbuja inocentes."
-            },
-            {
-              "title": "Arcángel δ",
-              "description": "Eliminar una criatura blasfema."
-            },
-            {
-              "title": "__PROTECTED_c973d4a3__ β",
-              "description": "Morir."
-            },
-            {
-              "title": "Dominio γ",
-              "description": "Cambiar el nombre a una alimaña adorable."
-            }
-          ]
-        },
-        {
-          "name": "Crecimiento y cultivo",
-          "achievements": [
-            {
-              "title": "Dominio α",
-              "description": "Fertilizar una semilla."
-            },
-            {
-              "title": "Dominio β",
-              "description": "Cosechar una nuez completamente crecida."
-            },
-            {
-              "title": "Dominio δ",
-              "description": "Logro oculto."
-            }
-          ]
-        }
-      ]
-    },
-    "lucidBlocksSingleplayerAndPlatformFAQ": {
-      "title": "Preguntas frecuentes sobre un solo jugador y plataformas de Lucid Blocks",
-      "displayType": "accordion",
-      "intro": "Estas son las preguntas principales sobre plataformas y acceso que los jugadores suelen hacer antes de comprar Lucid Blocks.",
-      "faqs": [
-        {
-          "question": "¿Es Lucid Blocks para un solo jugador?",
-          "answer": "Sí. Lucid Blocks es un juego para un solo jugador."
-        },
-        {
-          "question": "¿Está planeado el multijugador o cooperativo?",
-          "answer": "No. No se planea multijugador para el lanzamiento ni para futuras actualizaciones."
-        },
-        {
-          "question": "¿Dónde puedo jugar Lucid Blocks?",
-          "answer": "Actualmente está disponible en Steam para Windows."
-        },
-        {
-          "question": "¿Cuánto cuesta Lucid Blocks?",
-          "answer": "$9.99 en Steam."
-        },
-        {
-          "question": "¿Lucid Blocks es compatible con controles?",
-          "answer": "Sí, pero no se recomienda jugar con control porque los menús no están diseñados para ello."
-        },
-        {
-          "question": "¿Lucid Blocks funciona en Steam Deck?",
-          "answer": "Sí. Proton 9.0 o 9.0.4 es la configuración recomendada habitualmente para Steam Deck."
-        },
-        {
-          "question": "¿Lucid Blocks funciona en Linux?",
-          "answer": "Sí. Se informa que Proton 9.0 funciona bien para Linux y Steam Deck."
-        },
-        {
-          "question": "¿Habrá soporte para Mac o Android?",
-          "answer": "Es posible que sean compatibles en el futuro, pero no son plataformas de lanzamiento actuales."
-        },
-        {
-          "question": "¿Lucid Blocks tiene traducciones?",
-          "answer": "No. Actualmente no hay traducciones planeadas."
-        },
-        {
-          "question": "¿Lucid Blocks seguirá recibiendo actualizaciones?",
-          "answer": "Sí. Se planean algunas actualizaciones de contenido después del lanzamiento, pero no pretenden continuar con un calendario regular indefinido."
-        }
-      ]
-    },
-    "lucidBlocksSteamDeckAndController": {
-      "title": "Lucid Blocks en Steam Deck y controles",
-      "displayType": "accordion",
-      "intro": "Lucid Blocks puede ejecutarse en Steam Deck, pero la configuración predeterminada puede necesitar ajustes. El teclado y el mouse siguen siendo la opción más fluida para los menús y el juego en general.",
-      "faqs": [
-        {
-          "question": "¿Lucid Blocks funciona en Steam Deck?",
-          "answer": "Sí. Proton 9.0 funciona bien, y Proton 9.0.4 es una solución compartida habitualmente para problemas en Steam Deck."
-        },
-        {
-          "question": "¿Qué debo hacer si los controles de Steam Deck no funcionan?",
-          "answer": "Fuerza la compatibilidad y cambia el juego a Proton 9.0.4. Es posible que la configuración predeterminada no acepte correctamente la entrada del control."
-        },
-        {
-          "question": "¿Lucid Blocks es compatible con controles?",
-          "answer": "Sí, pero no se recomienda jugar con control porque los menús del juego no están diseñados para ello."
-        },
-        {
-          "question": "¿Es posible el soporte para Linux?",
-          "answer": "Sí. Se informa que Proton 9.0 funciona bien para Linux y Steam Deck."
-        },
-        {
-          "question": "¿Cuál es la mejor configuración de entrada?",
-          "answer": "El teclado y el mouse son la opción más fluida para la navegación por los menús y el juego general momento a momento."
-        }
-      ]
-    },
-    "lucidBlocksSettingsAndAccessibility": {
-      "title": "Ajustes y accesibilidad de Lucid Blocks",
-      "displayType": "settingCards",
-      "intro": "Lucid Blocks ya cuenta con algunos ajustes prácticos y notas de compatibilidad que son importantes de inmediato cuando los jugadores inician el juego por primera vez.",
-      "settings": [
-        {
-          "name": "Ajustes de pantalla",
-          "type": "Opción de comodidad",
-          "description": "Los ajustes de pantalla incluyen una opción que permite a los jugadores ocultar las manos en pantalla."
-        },
-        {
-          "name": "Compatibilidad de gráficos",
-          "type": "Requisito del sistema",
-          "description": "Se requiere soporte de __PROTECTED_38625270__ para que los gráficos se rendericen correctamente. Los sistemas sin __PROTECTED_38625270__ pueden sufrir cierres inesperados y errores gráficos graves."
-        },
-        {
-          "name": "Preferencia de entrada",
-          "type": "Configuración de control",
-          "description": "Existe soporte para controles, pero el teclado y el mouse brindan una experiencia más fluida porque los menús no están diseñados para el uso de controles."
-        },
-        {
-          "name": "Soporte de idiomas",
-          "type": "Localización",
-          "description": "La configuración actual es solo en inglés y no hay traducciones planeadas en este momento."
-        }
-      ]
-    },
-    "lucidBlocksUpdatesAndPatchNotes": {
-      "title": "Actualizaciones y notas del parche de Lucid Blocks",
-      "displayType": "timeline",
-      "intro": "Lucid Blocks ya está recibiendo correcciones rápidas post-lanzamiento y pequeñas actualizaciones de usabilidad.",
-      "entries": [
-        {
-          "title": "Actualización 2.8.2",
-          "type": "Actualización de IU",
-          "description": "Se cambió el nombre de \"awaken\" (despertar) a \"exit\" (salir) en el menú principal."
-        },
-        {
-          "title": "Pequeño parche para cierres al iniciar",
-          "type": "Hotfix",
-          "description": "Se lanzó un parche dedicado para los jugadores cuyo juego se cerraba inesperadamente al iniciar."
-        },
-        {
-          "title": "Soporte de contenido post-lanzamiento",
-          "type": "Nota de hoja de ruta",
-          "description": "Se planean algunas actualizaciones de contenido después del lanzamiento, pero no pretenden continuar con un calendario regular indefinido."
-        }
-      ]
-    },
-    "lucidBlocksCrashFixAndTroubleshooting": {
-      "title": "Solución de cierres inesperados y solución de problemas de Lucid Blocks",
+    "gemma4OllamaSetup": {
+      "title": "Configuración de Gemma 4 en Ollama",
       "displayType": "steps",
-      "intro": "La mayoría de los problemas inmediatos de inicio y cierres deben revisarse en un orden sencillo: nivel de parche, soporte de gráficos, compatibilidad de plataforma y registros.",
+      "eyebrow": "Ejecución local",
+      "intro": "Ollama es una de las formas más rápidas de poner en marcha Gemma 4 en una computadora portátil o estación de trabajo. El flujo predeterminado de Ollama es simple: instala Ollama, descarga Gemma 4, confirma la lista de modelos, elige la etiqueta adecuada para tu hardware y luego ejecútalo desde la CLI o la API local.",
       "steps": [
         {
-          "title": "Instala el último hotfix para cierres inesperados",
-          "description": "Si el juego se cierra al iniciar, actualiza primero y prueba de nuevo con el parche más reciente para cierres al inicio."
+          "title": "Instala y verifica Ollama",
+          "description": "Descarga Ollama para Windows, macOS o Linux, instálalo y verifica la configuración con el comando ollama --version."
         },
         {
-          "title": "Verifica el soporte de __PROTECTED_38625270__",
-          "description": "Lucid Blocks requiere soporte de __PROTECTED_38625270__. Los sistemas sin __PROTECTED_38625270__ pueden sufrir cierres inesperados o problemas graves de renderizado."
+          "title": "Descarga la variante predeterminada de Gemma 4",
+          "description": "Usa ollama pull gemma4 para descargar el paquete predeterminado de Gemma 4, luego ejecuta ollama list para confirmar que está disponible localmente."
         },
         {
-          "title": "Usa Proton 9.0.4 en Steam Deck",
-          "description": "Si la entrada o el comportamiento de inicio en Steam Deck fallan, fuerza la compatibilidad y cambia a Proton 9.0.4."
+          "title": "Elige la etiqueta de modelo correcta",
+          "description": "Usa gemma4:e2b para la opción de borde más ligera, gemma4:e4b para una opción de borde predeterminada más potente, gemma4:26b para el modelo de estación de trabajo MoE 26B A4B, y gemma4:31b para el modelo grande completo."
         },
         {
-          "title": "Recopila registros de cierres (logs)",
-          "description": "Abre Ejecutar de Windows, pega %APPDATA%, ve a lucid blocks/logs y reúne los archivos .txt para solucionar el problema."
+          "title": "Conoce lo que espera cada etiqueta",
+          "description": "En la página de la biblioteca de Ollama, e2b figura con 7.2GB y 128K de contexto, e4b con 9.6GB y 128K, 26b con 18GB y 256K, y 31b con 20GB y 256K."
         },
         {
-          "title": "Reporta el problema correctamente",
-          "description": "Comparte los registros y los detalles del dispositivo a través del foro oficial de reportes de errores en Discord o en la página de la comunidad de Steam."
+          "title": "Ejecuta tu primer prompt",
+          "description": "Para una primera prueba de texto, ejecuta ollama run gemma4 \"Hola, ¿qué puedes hacer?\". Ollama también admite entrada de imágenes con el formato de prompt que se muestra en la guía oficial."
+        },
+        {
+          "title": "Usa la API local para la integración de aplicaciones",
+          "description": "Ollama expone un servicio web local en http://localhost:11434/api/generate, por lo que puedes pasar de las pruebas en la CLI a una aplicación local ligera sin configurar un servidor de modelos independiente."
+        }
+      ],
+      "quickTips": [
+        "E2B y E4B son las primeras opciones prácticas para la experimentación local en hardware más ligero.",
+        "La etiqueta 26b se dirige al modelo MoE 26B A4B, que utiliza menos cómputo activo que un modelo denso de tamaño total similar.",
+        "ollama list muestra todos los modelos descargados localmente y sus tamaños.",
+        "Ollama admite la entrada de imágenes con el formato de prompt: ollama run gemma4:e2b con una ruta de imagen."
+      ]
+    },
+    "gemma4ApiGuide": {
+      "title": "Guía de la API de Gemma 4",
+      "displayType": "steps",
+      "eyebrow": "API alojada",
+      "intro": "La Gemini API proporciona acceso alojado a Gemma 4, lo cual es útil cuando se construye sin gestionar la inferencia local. Los modelos Gemma 4 alojados en AI Studio y la Gemini API son gemma-4-26b-a4b-it y gemma-4-31b-it.",
+      "steps": [
+        {
+          "title": "Crea una clave de API en Google AI Studio",
+          "description": "Abre Google AI Studio y crea una clave de Gemini API. Los nuevos usuarios pueden comenzar con un proyecto predeterminado de Google Cloud, mientras que los usuarios existentes pueden importar un proyecto de Cloud y crear claves allí."
+        },
+        {
+          "title": "Configura la clave en tu entorno",
+          "description": "Los SDK de Gemini detectan automáticamente GEMINI_API_KEY o GOOGLE_API_KEY. Si ambas están configuradas, GOOGLE_API_KEY tiene prioridad."
+        },
+        {
+          "title": "Instala el SDK oficial",
+          "description": "Para Python, instala google-genai. Para JavaScript y TypeScript, instala @google/genai. Google también publica rutas de SDK para Go, Java, C# y Apps Script."
+        },
+        {
+          "title": "Elige el ID del modelo Gemma 4 alojado",
+          "description": "Para Gemma 4 alojado, usa gemma-4-26b-a4b-it para un modelo grande MoE más rápido, o gemma-4-31b-it para el punto de control denso insignia."
+        },
+        {
+          "title": "Envía una primera solicitud generateContent",
+          "description": "El ejemplo oficial utiliza client.models.generate_content con el campo model establecido en gemma-4-31b-it. En REST, las solicitudes van al endpoint generateContent con el encabezado x-goog-api-key."
+        },
+        {
+          "title": "Usa AI Studio para pasar de las pruebas al código",
+          "description": "Google AI Studio te permite experimentar con prompts, configuraciones de modelo, llamadas a funciones y salida estructurada, para luego exportar el código funcional a través del flujo Get code."
+        }
+      ],
+      "quickTips": [
+        "AI Studio es la forma más rápida de probar prompts de Gemma 4 antes de escribir cualquier código.",
+        "La Gemini API admite respuestas en streaming para casos de uso de chat y generación larga.",
+        "gemma-4-26b-a4b-it es el modelo MoE; generalmente es más rápido y eficiente en costos que el 31B.",
+        "La llamada a funciones y la salida estructurada están disponibles para ambos IDs de modelo de Gemma 4 alojados."
+      ]
+    },
+    "gemma4HuggingFaceDownload": {
+      "title": "Descarga de Gemma 4 en Hugging Face",
+      "displayType": "cards",
+      "eyebrow": "Descargas",
+      "intro": "La colección oficial de Google en Hugging Face incluye ocho puntos de control principales de Gemma 4: E2B, E4B, 26B A4B y 31B, cada uno en forma base y ajustada por instrucciones. Los repositorios ajustados por instrucciones (-it) son el punto de partida natural para experiencias de chat, programación y asistentes.",
+      "cards": [
+        {
+          "tag": "Ajustado por instrucciones",
+          "name": "google/gemma-4-E2B-it",
+          "description": "Punto de control de borde con entrada de texto, imagen y audio y contexto de 128K. Ideal para asistentes locales rápidos y experimentación multimodal en el dispositivo."
+        },
+        {
+          "tag": "Ajustado por instrucciones",
+          "name": "google/gemma-4-E4B-it",
+          "description": "Punto de control de borde más potente con entrada de texto, imagen y audio y contexto de 128K. Más capaz que E2B sin necesidad de saltar a hardware de clase de estación de trabajo."
+        },
+        {
+          "tag": "Ajustado por instrucciones",
+          "name": "google/gemma-4-26B-A4B-it",
+          "description": "Punto de control MoE con contexto de 256K y entrada de texto e imagen. Calidad de modelo grande con una inferencia efectiva más rápida que un modelo denso de tamaño total similar."
+        },
+        {
+          "tag": "Ajustado por instrucciones",
+          "name": "google/gemma-4-31B-it",
+          "description": "Punto de control denso insignia de Gemma 4 con contexto de 256K y entrada de texto e imagen. Ideal para los flujos de trabajo más potentes de chat, razonamiento, programación y agentes."
+        },
+        {
+          "tag": "Preentrenado",
+          "name": "google/gemma-4-E2B",
+          "description": "Punto de control de borde base para usuarios que desean estudiar, adaptar o ajustar el modelo multimodal más pequeño de Gemma 4."
+        },
+        {
+          "tag": "Preentrenado",
+          "name": "google/gemma-4-E4B",
+          "description": "Punto de control de borde base que mantiene la entrada de texto, imagen y audio mientras deja el comportamiento de instrucciones posterior a tu propio flujo de ajuste."
+        },
+        {
+          "tag": "Preentrenado",
+          "name": "google/gemma-4-26B-A4B",
+          "description": "Punto de control grande MoE base para adaptación personalizada donde desees la arquitectura 26B A4B sin el comportamiento predeterminado ajustado por instrucciones."
+        },
+        {
+          "tag": "Preentrenado",
+          "name": "google/gemma-4-31B",
+          "description": "Punto de control denso 31B base para equipos que desean el modelo base oficial más grande de Gemma 4 antes de su propia etapa de ajuste o alineación."
+        }
+      ]
+    },
+    "gemma4ModelSizes": {
+      "eyebrow": "Comparación de modelos",
+      "title": "Elija el tamaño de Gemma 4 adecuado para su hardware",
+      "subtitle": "Gemma 4 se distribuye en cuatro tamaños con compensaciones muy diferentes. La opción más rápida no siempre es el modelo más pequeño, y la opción de mayor calidad no siempre es la más fácil de implementar.",
+      "intro": "Gemma 4 está disponible en dos modelos densos optimizados para dispositivos finales, un modelo eficiente de Mixture-of-Experts y un modelo denso de gran tamaño. Para la mayoría de los equipos, la decisión real no es solo la calidad, sino dónde se ejecuta el modelo: teléfono, laptop, estación de trabajo o servidor. Un punto de partida práctico es el 26B A4B cuando se busca una calidad sólida sin dar el salto total al 31B.",
+      "tableHeaders": [
+        "Modelo",
+        "Arquitectura",
+        "Parámetros",
+        "Contexto",
+        "Memoria aprox. (BF16)",
+        "Plataforma",
+        "Ideal para"
+      ],
+      "models": [
+        {
+          "model": "Gemma 4 E2B",
+          "architecture": "Denso",
+          "parameters": "2.3B efectivos",
+          "contextWindow": "128K tokens",
+          "inferenceMemory": "9.6 GB BF16 / 4.6 GB SFP8 / 3.2 GB Q4_0",
+          "platform": "Dispositivos móviles",
+          "bestFor": "Asistentes sin conexión, aplicaciones multimodales ligeras, implementación en dispositivos finales"
+        },
+        {
+          "model": "Gemma 4 E4B",
+          "architecture": "Denso",
+          "parameters": "4.5B efectivos",
+          "contextWindow": "128K tokens",
+          "inferenceMemory": "15 GB BF16 / 7.5 GB SFP8 / 5 GB Q4_0",
+          "platform": "Móviles y laptops",
+          "bestFor": "Copilotos locales más potentes, razonamiento en el dispositivo, aplicaciones multimodales con más margen de maniobra"
+        },
+        {
+          "model": "Gemma 4 26B A4B",
+          "architecture": "MoE",
+          "parameters": "25.2B total, 3.8B activos",
+          "contextWindow": "256K tokens",
+          "inferenceMemory": "48 GB BF16 / 25 GB SFP8 / 15.6 GB Q4_0",
+          "platform": "Escritorio y servidores pequeños",
+          "bestFor": "El mejor equilibrio entre calidad, velocidad y trabajo de contexto largo para la mayoría de los equipos"
+        },
+        {
+          "model": "Gemma 4 31B",
+          "architecture": "Denso",
+          "parameters": "30.7B",
+          "contextWindow": "256K tokens",
+          "inferenceMemory": "58.3 GB BF16 / 30.4 GB SFP8 / 17.4 GB Q4_0",
+          "platform": "Servidores grandes",
+          "bestFor": "Calidad de razonamiento, programación y multimodalidad de más alto nivel en la familia Gemma 4"
+        }
+      ]
+    },
+    "gemma4SpecsContext": {
+      "eyebrow": "Especificaciones principales",
+      "title": "Las especificaciones de Gemma 4 que realmente importan antes de construir",
+      "subtitle": "Para la mayoría de los desarrolladores, las preguntas clave son la longitud del contexto, las modalidades, la cobertura de idiomas, las licencias y las funciones a nivel de aplicación. Estas son las especificaciones que cambian las opciones de implementación, el costo de alojamiento y el alcance del producto.",
+      "intro": "Gemma 4 no es solo una actualización del modelo de texto. La familia combina contexto largo, entrada multimodal, modo de pensamiento, prompts de sistema nativos y soporte para llamadas a funciones en una línea de pesos abiertos. Los modelos más pequeños añaden entrada de audio, mientras que los modelos más grandes extienden el contexto a 256K para cargas de trabajo con muchos documentos y a escala de repositorio.",
+      "specs": [
+        {
+          "feature": "Lanzamiento",
+          "value": "31 de marzo de 2026",
+          "whyItMatters": "Esta es la generación principal actual de Gemma y la que Google destaca ahora en sus documentos y materiales de lanzamiento."
+        },
+        {
+          "feature": "Entrada y salida",
+          "value": "Todos los modelos: texto e imagen → texto; E2B y E4B también admiten entrada de audio",
+          "whyItMatters": "Puede crear flujos de solo texto, visión y comprensión de voz ligera sin cambiar de familia de modelos."
+        },
+        {
+          "feature": "Ventana de contexto máxima",
+          "value": "128K tokens en E2B y E4B; 256K tokens en 26B A4B y 31B",
+          "whyItMatters": "Los prompts extensos, como documentos largos, chats prolongados o contexto de código de varios archivos, caben en una sola solicitud."
+        },
+        {
+          "feature": "Cobertura de idiomas",
+          "value": "Más de 140 idiomas",
+          "whyItMatters": "Esto es importante para productos multilingües, OCR y asistentes implementados globalmente."
+        },
+        {
+          "feature": "Licencia y pesos",
+          "value": "Licencia Apache 2.0 con pesos abiertos y soporte para uso comercial responsable",
+          "whyItMatters": "Puede ajustar, implementar y ejecutar Gemma 4 en su propia infraestructura con menos restricciones de licencia."
+        },
+        {
+          "feature": "Razonamiento y control",
+          "value": "Modo de pensamiento configurable, soporte nativo para roles de sistema, salida JSON estructurada y llamadas a funciones",
+          "whyItMatters": "Estas funciones hacen que Gemma 4 sea mucho más fácil de usar para agentes, uso de herramientas y aplicaciones con muchas instrucciones."
+        },
+        {
+          "feature": "Manejo visual",
+          "value": "Resoluciones de imagen variables y presupuestos de tokens de 70, 140, 280, 560 o 1120 tokens",
+          "whyItMatters": "Puede intercambiar el detalle de la imagen por velocidad dependiendo de si la tarea es OCR, lectura de interfaz de usuario, análisis de gráficos o procesamiento rápido de fotogramas."
+        }
+      ]
+    },
+    "gemma4Benchmarks": {
+      "eyebrow": "Rendimiento",
+      "title": "Resumen oficial de los puntos de referencia de Gemma 4",
+      "subtitle": "Estos puntajes muestran dónde es más fuerte cada tamaño de Gemma 4 en razonamiento, programación, ciencia, visión y recuperación de contexto largo. Úselos para preseleccionar un modelo rápidamente y luego compare esa selección con su presupuesto de latencia y memoria.",
+      "intro": "Gemma 4 se posiciona como una familia de modelos para razonamiento, flujos de trabajo de agentes, programación y comprensión multimodal. Las tablas oficiales de puntos de referencia muestran un patrón claro: el 31B lidera, el 26B A4B se mantiene sorprendentemente cerca siendo mucho más eficiente, y el E4B y el E2B aportan una capacidad significativa a los dispositivos más pequeños.",
+      "tableHeaders": [
+        "Punto de referencia",
+        "Enfoque de la tarea",
+        "Gemma 4 31B",
+        "Gemma 4 26B A4B",
+        "Gemma 4 E4B",
+        "Gemma 4 E2B"
+      ],
+      "benchmarks": [
+        {
+          "benchmark": "MMLU Pro",
+          "taskFocus": "Conocimiento y razonamiento",
+          "gemma431b": "85.2%",
+          "gemma426bA4b": "82.6%",
+          "gemma4E4b": "69.4%",
+          "gemma4E2b": "60.0%",
+          "whatItMeans": "La mejor comparación rápida para el rendimiento general de razonamiento de alto nivel en toda la familia."
+        },
+        {
+          "benchmark": "AIME 2026 (sin herramientas)",
+          "taskFocus": "Razonamiento matemático",
+          "gemma431b": "89.2%",
+          "gemma426bA4b": "88.3%",
+          "gemma4E4b": "42.5%",
+          "gemma4E2b": "37.5%",
+          "whatItMeans": "31B y 26B A4B son los objetivos adecuados para asistentes con gran carga matemática y tareas de planificación."
+        },
+        {
+          "benchmark": "LiveCodeBench v6",
+          "taskFocus": "Programación competitiva",
+          "gemma431b": "80.0%",
+          "gemma426bA4b": "77.1%",
+          "gemma4E4b": "52.0%",
+          "gemma4E2b": "44.0%",
+          "whatItMeans": "Si la programación es un caso de uso principal, los dos modelos más grandes están en un nivel diferente al de los modelos para dispositivos finales."
+        },
+        {
+          "benchmark": "GPQA Diamond",
+          "taskFocus": "Razonamiento científico",
+          "gemma431b": "84.3%",
+          "gemma426bA4b": "82.3%",
+          "gemma4E4b": "58.6%",
+          "gemma4E2b": "43.4%",
+          "whatItMeans": "Una señal sólida para flujos de trabajo técnicos y orientados a expertos."
+        },
+        {
+          "benchmark": "MMMU Pro",
+          "taskFocus": "Razonamiento multimodal",
+          "gemma431b": "76.9%",
+          "gemma426bA4b": "73.8%",
+          "gemma4E4b": "52.6%",
+          "gemma4E2b": "44.2%",
+          "whatItMeans": "Las tareas de visión se benefician enormemente de los modelos más grandes cuando la precisión importa más que el tamaño de la instalación."
+        },
+        {
+          "benchmark": "MRCR v2 (128K, 8 agujas)",
+          "taskFocus": "Recuperación de contexto largo",
+          "gemma431b": "66.4%",
+          "gemma426bA4b": "44.1%",
+          "gemma4E4b": "25.4%",
+          "gemma4E2b": "19.1%",
+          "whatItMeans": "Para prompts de documentos grandes y a escala de repositorio, 31B es la opción más sólida para contexto largo."
+        }
+      ]
+    },
+    "gemma4FineTuning": {
+      "eyebrow": "Personalización",
+      "title": "Cómo realizar el ajuste fino de Gemma 4 para trabajo de productos reales",
+      "subtitle": "El ajuste fino es importante cuando el prompting por sí solo no es suficiente y desea que Gemma 4 funcione mejor en un dominio, flujo de trabajo o rol específico. Las rutas prácticas son el ajuste de adaptadores ligeros para tareas de texto y el ajuste de adaptadores multimodales para tareas de imagen más texto.",
+      "intro": "La documentación oficial de ajuste de Gemma se centra en una regla simple: ajustar para una tarea definida, no para una mejora vaga. Para muchos desarrolladores, QLoRA es el punto de partida más realista porque mantiene los requisitos de hardware mucho más bajos que el ajuste del modelo completo.",
+      "steps": [
+        {
+          "title": "Comience con un objetivo de ajuste específico",
+          "description": "Elija una tarea o rol en el que el modelo base deba desempeñarse mejor, como atención al cliente, text-to-SQL o generación de descripciones de productos. Use el ajuste fino cuando la tarea sea específica y repetitiva."
+        },
+        {
+          "title": "Elija la ruta de ajuste",
+          "description": "Use el ajuste de texto para tareas de instrucción y generación, o el ajuste de visión cuando su conjunto de datos combine imágenes y texto. La guía de QLoRA de texto demuestra text-to-SQL; la guía de QLoRA de visión demuestra descripciones de productos de imagen más texto."
+        },
+        {
+          "title": "Elija un framework realista",
+          "description": "Gemma 4 es compatible con Keras con LoRA, la biblioteca de Gemma, flujos de trabajo basados en Hugging Face, GKE y Vertex AI. Hugging Face más TRL es la ruta más directa para muchos desarrolladores."
+        },
+        {
+          "title": "Adapte el flujo de trabajo a su hardware",
+          "description": "El ejemplo oficial de QLoRA de texto está diseñado para una configuración T4 de 16 GB. La guía de QLoRA de visión requiere una GPU compatible con BF16, como NVIDIA L4 o A100 con más de 16 GB de memoria."
+        },
+        {
+          "title": "Use QLoRA cuando la eficiencia sea importante",
+          "description": "QLoRA mantiene el modelo base cuantizado a 4 bits, congela los pesos originales y entrena solo los adaptadores LoRA añadidos. Esto reduce el uso de memoria mientras mantiene un sólido rendimiento en la tarea."
+        },
+        {
+          "title": "Prepare los datos en el formato correcto",
+          "description": "Cree un conjunto de datos que coincida directamente con el comportamiento que desea, luego dele formato para el entrenamiento de estilo conversación con TRL y SFTTrainer. La guía oficial de texto utiliza un gran conjunto de datos sintéticos de text-to-SQL."
+        },
+        {
+          "title": "Evalúe, compare y despliegue",
+          "description": "Después del entrenamiento, realice comprobaciones de inferencia contra su modelo base, verifique las mejoras en la tarea y luego despliegue el modelo ajustado o el adaptador. Trate el formato de despliegue como una decisión temprana porque la elección del framework afecta el formato de salida que obtendrá."
+        }
+      ],
+      "quickTips": [
+        "Comience con QLoRA y una GPU de clase T4 para tareas de texto; rara vez se necesita un ajuste fino completo para la adaptación de tareas.",
+        "Formatee su conjunto de datos para reflejar el formato de chat ajustado por instrucciones que Gemma 4 ya entiende.",
+        "Mantenga su conjunto de evaluación con la misma distribución que sus datos de entrenamiento para obtener señales de mejora significativas.",
+        "El modelo MoE 26B A4B tiene parámetros activos eficientes, pero su recuento total de parámetros aún afecta el tamaño del checkpoint durante el entrenamiento.",
+        "Use el checkpoint Gemma 4 -it como punto de partida para tareas de instrucción en lugar de la base pre-entrenada."
+      ]
+    },
+    "gemma4PromptGuide": {
+      "eyebrow": "Prompting",
+      "title": "Guía de prompts de Gemma 4",
+      "subtitle": "Gemma 4 introduce un nuevo formato de prompt basado en turnos con instrucciones de sistema nativas, marcadores de posición multimodales y controles integrados para el pensamiento y el uso de herramientas.",
+      "intro": "Esta guía convierte el formato oficial de Gemma 4 en una biblioteca de prompts práctica. Estructure cada interacción como turnos, use el rol de sistema para el comportamiento y las reglas globales, inserte marcadores de posición de imagen o audio donde sea necesario y solo habilite el pensamiento o el uso de herramientas cuando la tarea realmente se beneficie de ellos.",
+      "items": [
+        {
+          "title": "Esqueleto central del chat",
+          "summary": "Gemma 4 utiliza roles nativos de sistema, usuario y modelo, envueltos en marcadores de turno.",
+          "highlights": [
+            "Use system para instrucciones globales",
+            "Use user para la solicitud actual",
+            "Use model como punto de inicio de la generación"
+          ],
+          "template": "<|turn>system\nYou are a helpful assistant.<turn|>\n<|turn>user\nSummarize the following article in 5 bullets.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "Patrón de prompt de sistema",
+          "summary": "Coloque las reglas de comportamiento estables en un turno de sistema en lugar de repetirlas cada vez.",
+          "highlights": [
+            "Ideal para estilo, alcance y formato de salida",
+            "El soporte nativo del rol de sistema comienza con Gemma 4",
+            "Manténgalo conciso y específico para la tarea"
+          ],
+          "template": "<|turn>system\nYou are a technical writer. Answer in clear English, use short paragraphs, and include one practical example.<turn|>\n<|turn>user\nExplain function calling for a beginner.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "Marcadores de posición multimodales",
+          "summary": "Use tokens de marcador de posición para indicar dónde deben insertarse los embeddings de imagen y audio.",
+          "highlights": [
+            "Use <|image|> para imágenes",
+            "Use <|audio|> para audio",
+            "El procesador reemplaza los marcadores de posición con embeddings después de la tokenización"
+          ],
+          "template": "<|turn>user\nDescribe this image: <|image|>\n\nThen transcribe this clip: <|audio|><turn|>\n<|turn>model"
+        },
+        {
+          "title": "Prompt listo para el pensamiento",
+          "summary": "El modo de pensamiento se activa colocando <|think|> dentro de la instrucción del sistema.",
+          "highlights": [
+            "Habilítelo para tareas con mucha carga de razonamiento",
+            "Manténgalo desactivado para generaciones directas simples",
+            "Use un turno de sistema tanto para el pensamiento como para otras instrucciones globales"
+          ],
+          "template": "<|turn>system\n<|think|>You are a careful reasoning assistant.<turn|>\n<|turn>user\nCompare two pricing models and recommend one for a startup.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "Estructura de prompt consciente de herramientas",
+          "summary": "Las declaraciones de herramientas pertenecen al turno del sistema, y las llamadas y respuestas de herramientas se manejan con tokens de control dedicados.",
+          "highlights": [
+            "Útil para APIs, búsquedas, calculadoras y consultas de datos externos",
+            "El uso de herramientas está estructurado, no es una simulación de texto plano",
+            "El razonamiento y el uso de herramientas pueden ocurrir en el mismo turno"
+          ],
+          "template": "Define tools in the system turn using the tool declaration token block, then set user and model turns as usual. Gemma 4 handles the rest with structured tool_call and tool_response tokens."
+        }
+      ]
+    },
+    "gemma4ThinkingMode": {
+      "eyebrow": "Razonamiento",
+      "title": "Modo de pensamiento de Gemma 4",
+      "subtitle": "El modo de pensamiento permite que Gemma 4 produzca un canal de razonamiento antes de la respuesta final, y el procesador puede separar ambas partes para el uso de la aplicación.",
+      "intro": "El modo de pensamiento es ideal para tareas en las que el modelo se beneficia de un razonamiento intermedio antes de responder: preguntas ambiguas, matemáticas, codificación, planificación de herramientas y análisis multimodal. En Gemma 4, puede habilitarlo a nivel de plantilla de chat, transmitir el razonamiento en vivo y luego dividir la salida en un bloque de pensamiento y un bloque de respuesta para el usuario.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Elija las tareas adecuadas",
+          "description": "Use el modo de pensamiento cuando la solicitud necesite descomposición, comparación, planificación o una interpretación cuidadosa en lugar de una respuesta directa corta.",
+          "details": [
+            "Casos ideales: matemáticas, depuración de código, toma de decisiones estructurada, razonamiento de imagen más texto",
+            "Menos necesario para reescrituras simples, resúmenes cortos o hechos directos",
+            "Los ejemplos oficiales cubren flujos de trabajo tanto de solo texto como de imagen-texto"
+          ]
+        },
+        {
+          "step": 2,
+          "title": "Habilite el pensamiento en la plantilla de chat",
+          "description": "Con Hugging Face Transformers, establezca enable_thinking=True en apply_chat_template(). A nivel de token, Gemma 4 utiliza <|think|> en el turno del sistema.",
+          "details": [
+            "E2B y E4B: el pensamiento desactivado (OFF) utiliza un flujo simple usuario-modelo; el pensamiento activado (ON) añade un turno de sistema con <|think|>",
+            "26B A4B y 31B: las plantillas oficiales incluyen un token de pensamiento vacío cuando el pensamiento está desactivado para estabilizar la salida",
+            "El pensamiento está diseñado para habilitarse a nivel de conversación"
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Genere y separe el resultado",
+          "description": "El modelo puede emitir un canal de razonamiento primero y la respuesta final después. Puede transmitirlo con TextStreamer y dividirlo con parse_response().",
+          "details": [
+            "processor.parse_response() devuelve el contenido de pensamiento y respuesta por separado",
+            "Esto funciona para prompts de texto y prompts de imagen-texto",
+            "El canal de razonamiento también puede incluir llamadas a herramientas cuando el turno se vuelve agéntico"
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Maneje correctamente los chats de varios turnos",
+          "description": "Para conversaciones normales de varios turnos, elimine los pensamientos generados en el turno anterior antes de enviar el historial de vuelta. En los turnos de llamada a herramientas, mantenga el flujo de pensamiento intacto hasta que termine el ciclo de la herramienta.",
+          "details": [
+            "Chat regular: elimine los bloques de pensamiento previos antes del siguiente turno",
+            "Excepción de uso de herramientas: no elimine los pensamientos entre llamadas a funciones dentro del mismo turno",
+            "Esto mantiene el contexto limpio mientras se preserva el comportamiento agéntico"
+          ]
+        }
+      ]
+    },
+    "gemma4FunctionCalling": {
+      "eyebrow": "Flujos de trabajo agénticos",
+      "title": "Llamada a funciones de Gemma 4",
+      "subtitle": "Gemma 4 admite el uso nativo de herramientas estructuradas, lo que permite que el modelo solicite funciones en lugar de simular acciones externas en texto plano.",
+      "intro": "La llamada a funciones es el puente práctico entre la salida del modelo y el comportamiento real de la aplicación. En lugar de pedirle a Gemma 4 que adivine datos en tiempo real o simule acciones, usted define herramientas, permite que el modelo genere una llamada estructurada, ejecuta la función en su aplicación y luego devuelve el resultado para que el modelo pueda finalizar con una respuesta clara en lenguaje natural.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Defina las herramientas con claridad",
+          "description": "Pase las herramientas a través de apply_chat_template() utilizando un esquema JSON manual o una función de Python pura convertida a esquema.",
+          "details": [
+            "El esquema JSON manual es mejor cuando se necesitan parámetros anidados precisos",
+            "Las funciones de Python puras son convenientes para herramientas simples con sugerencias de tipo y docstrings claros",
+            "Las definiciones de herramientas deben incluir nombre, descripción, tipos de parámetros y campos obligatorios"
+          ]
+        },
+        {
+          "step": 2,
+          "title": "Permita que el modelo solicite una herramienta",
+          "description": "Gemma 4 recibe el prompt del usuario junto con las herramientas disponibles y devuelve un objeto de llamada a función estructurado en lugar de texto plano cuando se necesita una herramienta.",
+          "details": [
+            "El uso de herramientas se controla con tokens dedicados como tool, tool_call y tool_response",
+            "Un ejemplo típico es una función de clima o de búsqueda",
+            "Esto es mejor que el texto plano cuando la respuesta depende de un estado externo o de acciones del sistema"
+          ]
+        },
+        {
+          "step": 3,
+          "title": "Valide y ejecute en su aplicación",
+          "description": "Gemma 4 no puede ejecutar código por sí sola. Su aplicación debe analizar el nombre de la función y los argumentos, validarlos y ejecutar la función real de forma segura.",
+          "details": [
+            "Valide siempre los nombres de las funciones y los argumentos antes de la ejecución",
+            "No confíe en el código generado sin medidas de seguridad",
+            "Para sistemas de producción, asocie los nombres de las herramientas con controladores aprobados en lugar de una ejecución dinámica"
+          ]
+        },
+        {
+          "step": 4,
+          "title": "Devuelva la salida de la herramienta para la respuesta final",
+          "description": "Agregue el resultado de la herramienta al historial del chat y luego deje que Gemma 4 genere la respuesta final para el usuario.",
+          "details": [
+            "Flujo de trabajo oficial: definir herramientas, turno del modelo, turno del desarrollador, respuesta final",
+            "Este patrón funciona para APIs, búsquedas en vivo, calculadoras, actualizaciones de configuración y bucles de agentes",
+            "Las respuestas de las herramientas deben mantenerse estructuradas para que el modelo pueda fundamentar la respuesta final correctamente"
+          ]
+        }
+      ]
+    },
+    "gemma4MultimodalGuide": {
+      "eyebrow": "Multimodal",
+      "title": "Guía multimodal de Gemma 4",
+      "subtitle": "Gemma 4 maneja texto e imágenes en todos los modelos, admite video como fotogramas y añade soporte nativo de audio en E2B y E4B.",
+      "intro": "Gemma 4 está diseñada para entradas multimodales. Todos los modelos admiten la comprensión visual de imágenes y videos, los modelos pequeños añaden entrada de audio y el tiempo de ejecución permite equilibrar el detalle visual frente a la velocidad mediante presupuestos de tokens. Esto hace que Gemma 4 sea adecuada para OCR, subtitulado, detección de objetos, tareas de voz y prompts de medios mixtos dentro de un mismo flujo de chat.",
+      "items": [
+        {
+          "title": "Comprensión de imágenes",
+          "description": "Todos los modelos de Gemma 4 admiten flujos de trabajo de texto más imagen.",
+          "highlights": [
+            "Tareas comunes: OCR, detección de objetos, respuesta a preguntas visuales, subtitulado de imágenes",
+            "Admite el razonamiento a través de múltiples imágenes en un solo prompt",
+            "Ideal para capturas de pantalla, documentos, imágenes de productos y análisis de escenas"
+          ]
+        },
+        {
+          "title": "Comprensión de video",
+          "description": "Todos los modelos de Gemma 4 pueden procesar video como una secuencia de fotogramas.",
+          "highlights": [
+            "Útil para descripción de escenas, interacción humana y resúmenes situacionales",
+            "El video se pasa como un elemento de contenido en el arreglo de mensajes",
+            "La duración máxima de video admitida es de 60 segundos a 1 fotograma por segundo"
+          ]
+        },
+        {
+          "title": "Comprensión de audio",
+          "description": "El audio está disponible en los modelos E2B y E4B.",
+          "highlights": [
+            "Admite reconocimiento de voz multilingüe, traducción de voz y comprensión general del habla",
+            "El costo de tokens de audio es de 25 tokens por segundo",
+            "La duración máxima de audio es de 30 segundos"
+          ]
+        },
+        {
+          "title": "Presupuestos de tokens visuales",
+          "description": "Gemma 4 introduce el procesamiento de imágenes de resolución variable para que pueda elegir velocidad o detalle según la tarea.",
+          "highlights": [
+            "Presupuestos de imagen admitidos: 70, 140, 280, 560, 1120 tokens",
+            "Presupuestos más bajos para clasificación rápida, subtitulado y análisis de fotogramas de video",
+            "Presupuestos más altos para OCR, análisis de documentos y lectura de texto pequeño"
+          ]
+        },
+        {
+          "title": "Reglas de preparación de entrada",
+          "description": "El procesador se encarga de gran parte del formateo de medios, pero algunos límites son importantes en producción.",
+          "highlights": [
+            "El audio debe ser mono, 16 kHz, float32, normalizado a [-1, 1]",
+            "El soporte de archivos de imagen depende del framework utilizado para convertir archivos en tensores",
+            "La calidad del prompt sigue siendo importante: las instrucciones específicas superan a las solicitudes multimodales vagas"
+          ]
+        },
+        {
+          "title": "División de capacidades del modelo",
+          "description": "Utilice los modelos más pequeños para casos de uso móviles y centrados en voz, y los modelos más grandes para un razonamiento más pesado con contexto largo.",
+          "highlights": [
+            "E2B y E4B: modelos pequeños con capacidad de audio y contexto de 128K",
+            "26B A4B y 31B: modelos más grandes enfocados en el razonamiento con contexto de 256K",
+            "Los cuatro tamaños oficiales están disponibles en variantes base y ajustadas por instrucciones"
+          ]
+        }
+      ]
+    },
+    "gemma4GgufQuantization": {
+      "eyebrow": "Implementación local",
+      "title": "Gemma 4 GGUF y cuantización",
+      "subtitle": "Elija la huella de Gemma 4 más pequeña que se ajuste a su máquina",
+      "intro": "Para la mayoría de las configuraciones locales, la decisión práctica es si quedarse con E2B o E4B, o subir a una compilación GGUF de 26B A4B. Google documenta las necesidades aproximadas de memoria para las opciones de implementación BF16, SFP8 y estilo de 4 bits en los cuatro tamaños oficiales.",
+      "items": [
+        {
+          "topic": "Puntos de entrada locales oficiales",
+          "details": "La guía de Ollama de Google expone cuatro etiquetas de Gemma 4: gemma4:e2b, gemma4:e4b, gemma4:26b y gemma4:31b. LM Studio también admite modelos Gemma tanto en formato GGUF como MLX para inferencia totalmente local.",
+          "practicalTakeaway": "Comience con E2B o E4B para un ciclo local más ligero, y pase a 26B o 31B solo cuando tenga el presupuesto de RAM necesario y desee un modelo de razonamiento más sólido."
+        },
+        {
+          "topic": "Memoria aproximada por tamaño oficial",
+          "details": "Google enumera la memoria de inferencia aproximada como E2B 9.6 GB BF16 / 3.2 GB Q4_0, E4B 15 GB / 5 GB, 26B A4B 48 GB / 15.6 GB y 31B 58.3 GB / 17.4 GB.",
+          "practicalTakeaway": "Si su objetivo es una máquina local convencional, la implementación de estilo de 4 bits o un tamaño de modelo más pequeño suele ser la línea entre lo ejecutable y lo impráctico."
+        },
+        {
+          "topic": "Ejemplo oficial de 26B A4B GGUF",
+          "details": "La página oficial de ggml-org para Gemma 4 26B A4B IT GGUF recomienda llama-server para el inicio y enumera Q4_K_M en 16.8 GB, Q8_0 en 26.9 GB y F16 en 50.5 GB.",
+          "practicalTakeaway": "Q4_K_M es el valor predeterminado más práctico cuando se desea un modelo Gemma 4 local grande pero no se puede costear el uso de memoria de Q8_0 o de 16 bits completos."
+        },
+        {
+          "topic": "Qué cambia la cuantización",
+          "details": "Los recuentos de parámetros más altos y la mayor precisión son generalmente más capaces, pero cuestan más ciclos de procesamiento, memoria y energía. La menor precisión reduce esos costos pero puede disminuir la capacidad.",
+          "practicalTakeaway": "Utilice la cuantización para ajustar el modelo a su hardware: las compilaciones GGUF más pequeñas le ayudan a ejecutar localmente, pero son un compromiso de implementación en lugar de una mejora gratuita."
+        }
+      ]
+    },
+    "gemma4PytorchGuide": {
+      "eyebrow": "Flujo de trabajo de Python",
+      "title": "Guía de Gemma 4 para PyTorch",
+      "subtitle": "Ejecuta Gemma 4 desde un entorno centrado en PyTorch",
+      "intro": "La vía más rápida de Python para Gemma 4 es Hugging Face Transformers sobre PyTorch: instala torch y transformers, elige un ID de modelo de Gemma 4 y comienza con la inferencia de texto basada en pipelines antes de pasar a flujos de trabajo multimodales o habilitados para herramientas.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Instala el entorno de ejecución",
+          "description": "La guía de inferencia de texto de Gemma 4 de Google comienza con torch, accelerate y transformers, además de dialog para el manejo de conversaciones.",
+          "code": "pip install torch accelerate\npip install transformers\npip install dialog"
+        },
+        {
+          "step": "2",
+          "title": "Elige un checkpoint oficial de Gemma 4",
+          "description": "Los ejemplos de Gemma 4 de Google muestran cuatro IDs oficiales ajustados por instrucciones: google/gemma-4-E2B-it, google/gemma-4-E4B-it, google/gemma-4-26B-A4B-it y google/gemma-4-31B-it.",
+          "code": "MODEL_ID = \"google/gemma-4-E2B-it\""
+        },
+        {
+          "step": "3",
+          "title": "Comienza con la generación de texto",
+          "description": "Usa transformers.pipeline con task=\"text-generation\", device_map=\"auto\" y dtype=\"auto\" como la forma más rápida de obtener una primera respuesta.",
+          "code": "from transformers import pipeline\n\ntxt_pipe = pipeline(\n    task=\"text-generation\",\n    model=MODEL_ID,\n    device_map=\"auto\",\n    dtype=\"auto\"\n)"
+        },
+        {
+          "step": "4",
+          "title": "Pasa a flujos multimodales y herramientas cuando sea necesario",
+          "description": "Para flujos de trabajo multimodales y de llamada a funciones, usa AutoProcessor y AutoModelForMultimodalLM con apply_chat_template para prompts conscientes de herramientas.",
+          "code": "from transformers import AutoProcessor, AutoModelForMultimodalLM\n\nmodel = AutoModelForMultimodalLM.from_pretrained(\n    MODEL_ID, dtype=\"auto\", device_map=\"auto\")\nprocessor = AutoProcessor.from_pretrained(MODEL_ID)"
+        },
+        {
+          "step": "5",
+          "title": "Usa PyTorch nativo para un control más profundo",
+          "description": "La guía de PyTorch de Google documenta la configuración de credenciales de Kaggle, la instalación de dependencias, la clonación de gemma_pytorch y la carga de clases de modelos multimodales para la experimentación con control directo de checkpoints.",
+          "code": "pip install -q -U torch immutabledict sentencepiece\n\ngit clone https://github.com/google/gemma_pytorch.git"
+        }
+      ]
+    },
+    "gemma4MobileDeployment": {
+      "eyebrow": "IA en el dispositivo",
+      "title": "Despliegue móvil de Gemma 4",
+      "subtitle": "Lleva Gemma 4 a dispositivos móviles a través del stack actual de Android",
+      "intro": "Gemma 4 ahora tiene tres rutas prácticas para móviles: ML Kit Prompt API en dispositivos de vista previa de AICore, flujos de trabajo de modelos locales de Android Studio para uso de desarrolladores y LiteRT-LM para un control del entorno de ejecución de bajo nivel en dispositivos móviles y embebidos.",
+      "steps": [
+        {
+          "step": "1",
+          "title": "Elige la ruta que coincida con tu objetivo",
+          "description": "Usa ML Kit Prompt API en AICore si estás creando una experiencia de aplicación para Android, modelos locales de Android Studio si deseas ayuda de codificación sin conexión y LiteRT-LM si necesitas un control del entorno de ejecución de bajo nivel.",
+          "code": "Path by use case:\n- App feature prototype: ML Kit Prompt API + AICore\n- Local coding workflow: Android Studio local model\n- Custom runtime control: LiteRT-LM"
+        },
+        {
+          "step": "2",
+          "title": "Prototipa en el dispositivo con AICore",
+          "description": "La vista previa de abril de 2026 de Google te permite apuntar a Gemma 4 E2B o E4B a través de la configuración de preferencia de modelo dentro del flujo de la Prompt API en dispositivos habilitados para AICore.",
+          "code": "val previewFullConfig = generationConfig {\n    modelConfig = ModelConfig {\n        releaseTrack = ModelReleaseTrack.PREVIEW\n        preference = ModelPreference.FULL\n    }\n}"
+        },
+        {
+          "step": "3",
+          "title": "Conoce las expectativas del dispositivo",
+          "description": "Los modelos de vista previa se ejecutan en dispositivos habilitados para AICore y en los aceleradores de IA más recientes de Google, MediaTek y Qualcomm. AI Edge Gallery está disponible para comprobaciones rápidas de modelos en dispositivos que no son AICore.",
+          "code": "Testing options:\n- AICore-enabled phone for preview models\n- AI Edge Gallery for quick model checks\n- High-end Android hardware (Pixel 8, Samsung S23+)"
+        },
+        {
+          "step": "4",
+          "title": "Usa Android Studio para flujos de trabajo de desarrolladores",
+          "description": "Android Studio recomienda actualmente a Gemma 4 como su opción de modelo local. Gemma E4B requiere 12 GB de RAM y 4 GB de almacenamiento; Gemma 26B MoE requiere 24 GB de RAM y 17 GB de almacenamiento.",
+          "code": "Settings > Tools > AI > Model Providers"
+        },
+        {
+          "step": "5",
+          "title": "Cambia a LiteRT-LM para un control más profundo del entorno de ejecución",
+          "description": "LiteRT-LM es una biblioteca multiplataforma para pipelines de modelos de lenguaje desde teléfonos hasta sistemas embebidos, con rutas de CPU, GPU y NPU que incluyen Qualcomm AI Engine Direct y MediaTek NeuroPilot.",
+          "code": "LiteRT-LM supports:\n- CPU / GPU execution\n- Qualcomm AI Engine Direct\n- MediaTek NeuroPilot"
+        }
+      ]
+    },
+    "gemma4VsGemma3": {
+      "eyebrow": "Comparación de modelos",
+      "title": "Gemma 4 frente a Gemma 3",
+      "subtitle": "Descubre qué cambia realmente al pasar de Gemma 3 a Gemma 4",
+      "intro": "Esta comparación es para desarrolladores que deciden si mantener un flujo de trabajo existente de Gemma 3 o reconstruirlo en torno a Gemma 4. Las diferencias más claras aparecen en la longitud del contexto, el formato de control, el alcance multimodal y el rendimiento de los benchmarks en el nivel superior de cada familia.",
+      "tableHeaders": [
+        "Dimensión",
+        "Gemma 4",
+        "Gemma 3",
+        "Por qué es importante"
+      ],
+      "items": [
+        {
+          "dimension": "Lanzamiento y tamaños principales",
+          "gemma4": "Lanzado el 31 de marzo de 2026 en tamaños E2B, E4B, 26B A4B y 31B.",
+          "gemma3": "Lanzado el 10 de marzo de 2025 en tamaños 1B, 4B, 12B y 27B, con el de 270M añadido el 14 de agosto de 2025.",
+          "whyItMatters": "Gemma 4 reduce la familia en torno a niveles de despliegue más claros: modelos E centrados en el borde y modelos más grandes de clase estación de trabajo."
+        },
+        {
+          "dimension": "Ventana de contexto",
+          "gemma4": "E2B y E4B admiten hasta 128K de contexto; 26B A4B y 31B admiten hasta 256K.",
+          "gemma3": "4B, 12B y 27B admiten 128K de contexto; 1B y 270M admiten 32K.",
+          "whyItMatters": "Para documentos largos, trazas de herramientas o historiales de varios pasos, los modelos más grandes de Gemma 4 ofrecen un margen significativamente mayor."
+        },
+        {
+          "dimension": "Multimodalidad",
+          "gemma4": "Admite entrada de imagen, video, texto-imagen intercalado y audio nativo en E2B y E4B.",
+          "gemma3": "Los modelos principales admiten entrada de texto e imagen con salida de texto.",
+          "whyItMatters": "Gemma 4 es la familia multimodal más amplia si tu caso de uso va más allá de imagen-texto hacia video, flujos con mucho OCR o modelos de borde con capacidad de audio."
+        },
+        {
+          "dimension": "Formato de prompt y control",
+          "gemma4": "Añade soporte nativo para el rol de sistema y tokens de control especializados para herramientas, razonamiento, imágenes y audio.",
+          "gemma3": "El formato heredado usa turnos de usuario/modelo; no se admite el rol de sistema por separado.",
+          "whyItMatters": "Los equipos que crean agentes o flujos de trabajo estructurados obtienen una superficie de control más limpia en Gemma 4."
+        },
+        {
+          "dimension": "Instantánea de benchmarks de nivel superior",
+          "gemma4": "Gemma 4 31B: MMLU Pro 85.2, AIME 2026 89.2, LiveCodeBench v6 80.0, GPQA Diamond 84.3.",
+          "gemma3": "Gemma 3 27B (sin razonamiento): MMLU Pro 67.6, AIME 2026 20.8, LiveCodeBench v6 29.1, GPQA Diamond 42.4.",
+          "whyItMatters": "Si se actualiza por razonamiento, codificación o preguntas y respuestas de alta dificultad, el salto del nivel superior de Gemma 4 es lo suficientemente grande como para justificar una migración."
+        },
+        {
+          "dimension": "Perfil de despliegue",
+          "gemma4": "E2B y E4B para un uso local y en el dispositivo eficiente; 26B A4B y 31B para escenarios de GPU de consumo o estaciones de trabajo.",
+          "gemma3": "Sigue siendo sólido para tamaños clásicos más pequeños como 1B y 4B, con un nivel superior de 27B y 128K de contexto en las variantes principales más grandes.",
+          "whyItMatters": "Quédate en Gemma 3 cuando los tamaños clásicos pequeños ya se ajusten a tu stack; cámbiate a Gemma 4 cuando desees nuevas funciones de control, modelos superiores con mayor contexto o variantes más potentes orientadas al borde."
         }
       ]
     }
@@ -756,177 +891,197 @@
   "faq": {
     "title": "Preguntas",
     "titleHighlight": "frecuentes",
-    "subtitle": "Todo lo que necesitas saber sobre Lucid Blocks",
+    "subtitle": "Todo lo que necesitas saber sobre Gemma 4",
     "questions": [
       {
-        "question": "¿Es Lucid Blocks un juego para un solo jugador?",
-        "answer": "Sí. Lucid Blocks es un juego exclusivamente para un solo jugador, sin planes para multijugador o cooperativo."
+        "question": "¿Qué es Gemma 4?",
+        "answer": "Gemma 4 es la familia de modelos abiertos más reciente de Google DeepMind, lanzada el 2 de abril de 2026. Viene en cuatro tamaños (E2B, E4B, 26B A4B y 31B) y admite entradas de texto, imagen y audio con un contexto de hasta 256K bajo la licencia Apache 2.0."
       },
       {
-        "question": "¿Qué es el sistema Apotheosis en Lucid Blocks?",
-        "answer": "Apotheosis es el sistema de creación por fusión de forma libre de Lucid Blocks. En lugar de seguir recetas fijas, combinas materiales y descubres tus propias rutas de creación."
+        "question": "¿Cuáles son los tamaños de los modelos de Gemma 4?",
+        "answer": "Gemma 4 tiene cuatro tamaños: E2B (edge, ~2B parámetros), E4B (edge, ~4B parámetros), 26B A4B (MoE, 26B totales/4B activos) y 31B (denso). E2B y E4B admiten entrada de audio y están orientados a hardware móvil y laptops; 26B A4B y 31B están orientados a estaciones de trabajo y servidores."
       },
       {
-        "question": "¿Dónde puedo jugar Lucid Blocks?",
-        "answer": "Lucid Blocks está disponible actualmente en Steam para Windows. El soporte para Linux y Steam Deck está disponible a través de Proton 9.0."
+        "question": "¿Cómo ejecuto Gemma 4 localmente?",
+        "answer": "La forma más común es a través de Ollama. Instala Ollama, ejecuta ollama pull gemma4 para la variante predeterminada y luego usa ollama run gemma4 para comenzar a chatear. Para una opción más ligera, prueba gemma4:e2b o gemma4:e4b. LM Studio es otra opción popular para una configuración local basada en interfaz gráfica."
       },
       {
-        "question": "¿Cuánto cuesta Lucid Blocks?",
-        "answer": "Lucid Blocks cuesta $9.99 en Steam."
+        "question": "¿Cuál es la ventana de contexto de Gemma 4?",
+        "answer": "Gemma 4 E2B y E4B admiten una ventana de contexto de 128K. Gemma 4 26B A4B y 31B admiten un contexto de hasta 256K, lo que los hace adecuados para documentos largos, conversaciones extensas y análisis de grandes bases de código."
       },
       {
-        "question": "¿Lucid Blocks es compatible con controles?",
-        "answer": "Sí, pero no se recomienda jugar con control porque los menús no están diseñados para ello. El teclado y el mouse son la opción más fluida."
+        "question": "¿En qué se diferencia Gemma 4 26B A4B de Gemma 4 31B?",
+        "answer": "Gemma 4 26B A4B es un modelo MoE con 26B de parámetros totales pero solo ~4B activos por token. Esto significa una inferencia más rápida y un menor uso de memoria en comparación con el modelo denso 31B, manteniendo un alto rendimiento en los benchmarks."
       },
       {
-        "question": "¿Recibirá actualizaciones Lucid Blocks?",
-        "answer": "Sí. Se planean algunas actualizaciones de contenido después del lanzamiento, pero no se pretende que continúen con un calendario regular indefinido."
+        "question": "¿Puedo usar Gemma 4 a través de una API sin configuración local?",
+        "answer": "Sí. Gemma 4 está disponible a través de la API de Gemini y Google AI Studio como gemma-4-26b-a4b-it y gemma-4-31b-it. Crea una clave de API en AI Studio, instala el SDK google-genai y comienza a enviar solicitudes sin necesidad de gestionar el modelo localmente."
       }
     ]
   },
   "cta": {
-    "title": "¿Listo para explorar Lucid Blocks?",
-    "description": "¡Únete a la comunidad de Lucid Blocks en Discord para ver guías, actualizaciones y discusiones!",
-    "joinCommunity": "Únete a Discord",
-    "joinGame": "Juega en Steam"
+    "title": "¿Listo para explorar Gemma 4?",
+    "description": "¡Únete a la comunidad de desarrolladores de Google en Discord para obtener guías de Gemma, actualizaciones de modelos y discusiones para desarrolladores!",
+    "joinCommunity": "Unirse a Discord",
+    "joinGame": "Sitio oficial"
   },
   "footer": {
-    "title": "Wiki de Lucid Blocks",
-    "description": "Tu centro completo de recursos para la fabricación, biomas, criaturas, logros y guías de supervivencia de Lucid Blocks.",
+    "title": "Gemma 4 Wiki",
+    "description": "Tu centro de recursos completo para tamaños de modelos de Gemma 4, benchmarks, prompting, despliegue local, llamadas a funciones y guías de ajuste fino.",
     "resources": "Recursos",
     "community": "Comunidad",
     "legal": "Legal",
     "discord": "Discord",
     "twitter": "X / Twitter",
-    "steamCommunity": "Comunidad de Steam",
-    "steamStore": "Tienda de Steam",
+    "huggingFace": "Hugging Face",
+    "officialDocs": "Documentación oficial",
     "about": "Acerca de",
     "privacy": "Política de privacidad",
     "terms": "Términos de servicio",
     "copyrightNotice": "Derechos de autor",
-    "copyright": "© 2026 Wiki de Lucid Blocks. No afiliada con los desarrolladores de Lucid Blocks.",
+    "copyright": "© 2026 Gemma 4 Wiki. No afiliado con Google ni Google DeepMind.",
     "disclaimer": "Sitio web de recursos no oficial creado por fans."
   },
   "pages": {
-    "guides": {
-      "title": "Guías de Lucid Blocks",
-      "description": "Guías completas de juego, desde conceptos básicos para principiantes hasta estrategias avanzadas de Apotheosis. Domina la supervivencia y la fabricación.",
-      "metaTitle": "Guías de Lucid Blocks - Estrategias de principiante a avanzado",
-      "metaDescription": "Guías completas de Lucid Blocks que cubren consejos para principiantes, el sistema Apotheosis, estrategias de supervivencia y tácticas expertas para dominar este sandbox surrealista.",
-      "categoryLabel": "GUÍAS DEL JUEGO",
-      "whatIs": "¿Qué son las guías?",
-      "whatIsDescription": "Guías exhaustivas que cubren mecánicas de juego, estrategias de supervivencia y el sistema de fabricación Apotheosis. Aprende todo, desde los primeros pasos hasta técnicas avanzadas.",
-      "why": "¿Por qué leer las guías?",
+    "guide": {
+      "title": "Guía de Gemma 4",
+      "description": "Guías completas que cubren todo sobre Gemma 4: desde los primeros pasos hasta el razonamiento avanzado, el modo de pensamiento y casos de uso del mundo real.",
+      "metaTitle": "Guía de Gemma 4: tutoriales, notas de lanzamiento y primeros pasos",
+      "metaDescription": "Aprende Gemma 4 desde cero con guías paso a paso que cubren detalles del lanzamiento, modo de pensamiento, tutoriales y casos de uso prácticos para desarrolladores.",
+      "categoryLabel": "GUÍAS Y TUTORIALES",
+      "whatIs": "¿Qué es Gemma 4?",
+      "whatIsDescription": "Gemma 4 es la familia de modelos de pesos abiertos de Google DeepMind lanzada en abril de 2026. Estas guías cubren el panorama completo: qué cambió, por qué es importante y cómo ponerlo a trabajar.",
+      "why": "¿Por qué leer estas guías?",
       "whySteps": {
-        "step1Title": "Aprende las mecánicas principales",
-        "step1Description": "Entiende el sistema Apotheosis y evita errores comunes de principiante",
-        "step2Title": "Progresión rápida",
-        "step2Description": "Sigue caminos probados para sobrevivir y prosperar en este mundo surrealista",
-        "step3Title": "Domina las estrategias",
-        "step3Description": "Desarrolla tácticas avanzadas para la exploración y la fabricación"
+        "step1Title": "Entiende el lanzamiento",
+        "step1Description": "Ponte al día sobre las capacidades y arquitectura de Gemma 4, y lo que lo diferencia de las generaciones anteriores",
+        "step2Title": "Aprende el modo de pensamiento",
+        "step2Description": "Descubre cómo habilitar y usar el razonamiento integrado de Gemma 4 con el sistema de tokens de pensamiento",
+        "step3Title": "Sigue tutoriales prácticos",
+        "step3Description": "Recorridos paso a paso desde el primer prompt hasta la integración lista para producción"
       },
-      "featured": "Destacado y esencial",
-      "all": "Todas las guías"
+      "featured": "Destacados y esenciales",
+      "all": "Todas las guías de Gemma 4"
     },
-    "crafting": {
-      "title": "Fabricación en Lucid Blocks",
-      "description": "Domina el sistema de fusión Apotheosis con mecánicas de esencia, recetas y estrategias de fabricación para objetos poderosos.",
-      "metaTitle": "Fabricación en Lucid Blocks - Sistema Apotheosis y recetas",
-      "metaDescription": "Domina el sistema de fabricación Apotheosis de Lucid Blocks. Aprende mecánicas de esencia, recetas de fusión y estrategias para crear herramientas y armas poderosas.",
-      "categoryLabel": "SISTEMA DE FABRICACIÓN",
-      "whatIs": "¿Qué es la fabricación?",
-      "whatIsDescription": "El sistema Apotheosis es una mecánica de fusión única impulsada por esencias donde combinas hasta seis objetos para descubrir nuevas recetas. Sin menús de fabricación fijos: la experimentación es la clave.",
-      "why": "¿Por qué dominar la fabricación?",
+    "models": {
+      "title": "Modelos de Gemma 4",
+      "description": "Compara todos los tamaños de modelos, parámetros, ventanas de contexto y requisitos de hardware de Gemma 4 para elegir el checkpoint adecuado.",
+      "metaTitle": "Modelos de Gemma 4: tamaños, parámetros y ventanas de contexto",
+      "metaDescription": "Compara los tamaños de los modelos Gemma 4 E2B, E4B, 26B A4B y 31B. Entiende la diferencia entre denso y MoE, ventanas de contexto y requisitos de hardware para despliegue local y en la nube.",
+      "categoryLabel": "DESCRIPCIÓN GENERAL DEL MODELO",
+      "whatIs": "¿Qué son los modelos de Gemma 4?",
+      "whatIsDescription": "Gemma 4 se distribuye en cuatro tamaños: E2B, E4B, 26B A4B (MoE) y 31B denso. Cada uno está ajustado para diferentes hardwares y casos de uso, desde dispositivos móviles hasta estaciones de trabajo de alta gama.",
+      "why": "¿Por qué comparar los modelos de Gemma 4?",
       "whySteps": {
-        "step1Title": "Desbloquea objetos poderosos",
-        "step1Description": "Descubre herramientas esenciales, armas y equipo de movilidad a través de la fusión",
-        "step2Title": "Entiende las esencias",
-        "step2Description": "Aprende cómo se combinan las esencias de los objetos para crear resultados predecibles",
-        "step3Title": "Optimiza recursos",
-        "step3Description": "Usa mecánicas de dilución para maximizar la producción con materiales baratos"
+        "step1Title": "Elige el tamaño adecuado",
+        "step1Description": "Selecciona el checkpoint del modelo que se ajuste a tus limitaciones de hardware y requisitos de calidad",
+        "step2Title": "Entiende denso vs MoE",
+        "step2Description": "Aprende por qué el 26B MoE se ejecuta más rápido de lo esperado en comparación con un modelo denso de 26B",
+        "step3Title": "Planifica tu despliegue",
+        "step3Description": "Conoce los requisitos exactos de memoria y almacenamiento antes de descargar checkpoints grandes"
       },
-      "featured": "Destacado y esencial",
-      "all": "Todas las guías de fabricación"
+      "featured": "Destacados y esenciales",
+      "all": "Todas las guías de modelos de Gemma 4"
     },
-    "items": {
-      "title": "Objetos de Lucid Blocks",
-      "description": "Guías detalladas de objetos que cubren herramientas, armas, equipo de movilidad y soluciones de almacenamiento con recetas de fabricación y consejos de uso.",
-      "metaTitle": "Objetos de Lucid Blocks - Guía de herramientas, armas y equipo",
-      "metaDescription": "Base de datos completa de objetos para Lucid Blocks, incluyendo herramientas, armas, equipo de movilidad y almacenamiento. Aprende a fabricar y usar cada objeto de manera efectiva.",
-      "categoryLabel": "OBJETOS Y EQUIPAMIENTO",
-      "whatIs": "¿Qué son los objetos?",
-      "whatIsDescription": "Guías exhaustivas de herramientas, armas, equipo de movilidad y objetos funcionales. Aprende recetas de fabricación, estrategias de uso y combinaciones óptimas.",
-      "why": "¿Por qué consultar las guías de objetos?",
+    "requirements": {
+      "title": "Requisitos de Gemma 4",
+      "description": "Requisitos de hardware y software para ejecutar modelos de Gemma 4 localmente, cubriendo compatibilidad con RAM, VRAM, CPU, GPU, laptops y teléfonos.",
+      "metaTitle": "Requisitos de Gemma 4: guía de RAM, VRAM y hardware",
+      "metaDescription": "Consulta los requisitos de hardware de Gemma 4, incluyendo especificaciones de RAM, VRAM, GPU y CPU para cada tamaño de modelo. Conoce qué configuraciones de laptop, PC y teléfono son compatibles.",
+      "categoryLabel": "REQUISITOS DEL SISTEMA",
+      "whatIs": "¿Cuáles son los requisitos de Gemma 4?",
+      "whatIsDescription": "Antes de descargar Gemma 4, necesitas saber si tu hardware puede manejarlo. Estas guías detallan los requisitos exactos de RAM, VRAM y cómputo para cada tamaño de modelo.",
+      "why": "¿Por qué verificar los requisitos primero?",
       "whySteps": {
-        "step1Title": "Aprende recetas de fabricación",
-        "step1Description": "Descubre cómo fabricar herramientas y armas esenciales usando Apotheosis",
-        "step2Title": "Optimiza tu equipamiento",
-        "step2Description": "Elige los mejores objetos para tu estilo de juego y etapa de progresión",
-        "step3Title": "Mejora tu supervivencia",
-        "step3Description": "Equípate con equipo de movilidad y armas para navegar por este mundo peligroso"
+        "step1Title": "Evita descargas innecesarias",
+        "step1Description": "Averigua antes de descargar si el modelo realmente funcionará en tu configuración actual",
+        "step2Title": "Optimiza para tu dispositivo",
+        "step2Description": "Encuentra el nivel de cuantización y el tamaño de modelo adecuados para tu laptop, computadora de escritorio o teléfono",
+        "step3Title": "Planifica actualizaciones de hardware",
+        "step3Description": "Entiende exactamente qué necesitas si quieres ejecutar variantes de Gemma 4 más grandes o rápidas"
       },
-      "featured": "Destacado y esencial",
-      "all": "Todos los objetos"
+      "featured": "Destacados y esenciales",
+      "all": "Todas las guías de requisitos de Gemma 4"
     },
-    "biomes": {
-      "title": "Biomas de Lucid Blocks",
-      "description": "Explora las regiones del mundo, características ambientales, ubicaciones de recursos y consejos de supervivencia para cada bioma.",
-      "metaTitle": "Biomas de Lucid Blocks - Regiones del mundo y exploración",
-      "metaDescription": "Explora los biomas de Lucid Blocks, incluyendo las Líneas Ley de Tiamana, Fog Meadow y regiones surrealistas. Encuentra recursos, evita peligros y navega por un mundo infinito.",
-      "categoryLabel": "REGIONES DEL MUNDO",
-      "whatIs": "¿Qué son los biomas?",
-      "whatIsDescription": "Guías de las diferentes regiones del mundo, características ambientales, distribución de recursos y zonas de peligro. Aprende qué esperar y cómo prepararte para cada área.",
-      "why": "¿Por qué explorar los biomas?",
+    "ollama": {
+      "title": "Gemma 4 Ollama",
+      "description": "Ejecuta Gemma 4 localmente con Ollama: guías de configuración, etiquetas de modelos, soporte para MLX y solución de problemas para todos los tamaños de modelo.",
+      "metaTitle": "Gemma 4 Ollama: configuración local, modelos y soporte para MLX",
+      "metaDescription": "Configura Gemma 4 con Ollama en Mac, Linux o Windows. Encuentra la etiqueta de modelo adecuada, habilita MLX en Apple Silicon y pon en marcha Gemma 4 en minutos.",
+      "categoryLabel": "CONFIGURACIÓN DE OLLAMA",
+      "whatIs": "¿Qué es Gemma 4 en Ollama?",
+      "whatIsDescription": "Ollama es la forma más sencilla de ejecutar Gemma 4 localmente. Con un solo comando puedes descargar cualquier variante de Gemma 4 y comenzar a chatear o integrarla en tus aplicaciones.",
+      "why": "¿Por qué usar Ollama para Gemma 4?",
       "whySteps": {
-        "step1Title": "Encuentra recursos",
-        "step1Description": "Localiza materiales raros y esencias específicas de cada región",
-        "step2Title": "Evita peligros",
-        "step2Description": "Entiende los riesgos ambientales y las criaturas hostiles",
-        "step3Title": "Planifica tu exploración",
-        "step3Description": "Prepara las herramientas y el equipo adecuados para cada tipo de bioma"
+        "step1Title": "Configuración con un solo comando",
+        "step1Description": "Ejecuta `ollama pull gemma4` y listo: no se requiere entorno de Python ni configuración de CUDA",
+        "step2Title": "Soporte para Apple Silicon",
+        "step2Description": "Usa el backend MLX en Mac para una inferencia rápida y eficiente en energía con aceleración Metal",
+        "step3Title": "Compatibilidad con API",
+        "step3Description": "Ollama ofrece una API REST compatible con OpenAI, lo que facilita el intercambio de Gemma 4 en cualquier aplicación"
       },
-      "featured": "Destacado y esencial",
-      "all": "Todos los biomas"
+      "featured": "Destacados y esenciales",
+      "all": "Todas las guías de Gemma 4 Ollama"
     },
-    "building": {
-      "title": "Construcción en Lucid Blocks",
-      "description": "Domina las dimensiones personales Qualia, la construcción de bases, la gestión de almacenamiento y técnicas creativas de construcción.",
-      "metaTitle": "Construcción en Lucid Blocks - Qualia y construcción de bases",
-      "metaDescription": "Domina la construcción en Lucid Blocks con las dimensiones personales Qualia, construcción de bases, soluciones de almacenamiento y técnicas creativas de construcción.",
-      "categoryLabel": "CONSTRUCCIÓN Y BASES",
-      "whatIs": "¿Qué es la construcción?",
-      "whatIsDescription": "Guías sobre el sistema de dimensiones personales Qualia, construcción de bases, gestión de almacenamiento y construcción creativa. Aprende a crear tu refugio seguro en este mundo surrealista.",
-      "why": "¿Por qué construir bases?",
+    "install": {
+      "title": "Instalación de Gemma 4",
+      "description": "Guías de instalación paso a paso para Gemma 4 en Windows, Linux y Mac, incluyendo configuración local, descarga de GGUF y despliegue sin conexión.",
+      "metaTitle": "Instalación de Gemma 4: guía de configuración para Windows, Linux y Mac",
+      "metaDescription": "Instala Gemma 4 en tu dispositivo con estas guías paso a paso que cubren Windows, Linux, Mac, descarga de GGUF, configuración sin conexión y opciones de despliegue local.",
+      "categoryLabel": "INSTALACIÓN",
+      "whatIs": "¿Cómo instalar Gemma 4?",
+      "whatIsDescription": "Instalar Gemma 4 significa obtener los pesos del modelo y un entorno de ejecución compatible en tu máquina. Estas guías cubren todas las plataformas y métodos, desde herramientas de un solo clic hasta la configuración manual de GGUF.",
+      "why": "¿Por qué seguir una guía de instalación?",
       "whySteps": {
-        "step1Title": "Crea espacios seguros",
-        "step1Description": "Establece bases seguras para el almacenamiento y las operaciones de fabricación",
-        "step2Title": "Gestiona tus recursos",
-        "step2Description": "Organiza tus materiales de manera eficiente con soluciones de almacenamiento",
-        "step3Title": "Desbloquea Qualia",
-        "step3Description": "Accede a dimensiones de bolsillo personales para la máxima comodidad"
+        "step1Title": "Hazlo bien a la primera",
+        "step1Description": "Evita errores comunes con instrucciones específicas para Windows, Linux y Mac",
+        "step2Title": "Elige tu entorno de ejecución",
+        "step2Description": "Elige la herramienta adecuada (Ollama, LM Studio o Python) según tu nivel de habilidad y objetivos",
+        "step3Title": "Funciona totalmente sin conexión",
+        "step3Description": "Aprende a descargar y ejecutar Gemma 4 sin conexión a internet después de la configuración inicial"
       },
-      "featured": "Destacado y esencial",
-      "all": "Todas las guías de construcción"
+      "featured": "Destacados y esenciales",
+      "all": "Todas las guías de instalación de Gemma 4"
     },
-    "support": {
-      "title": "Soporte de Lucid Blocks",
-      "description": "Soporte técnico, compatibilidad de plataformas, optimización de rendimiento y solución de problemas comunes.",
-      "metaTitle": "Soporte de Lucid Blocks - Ayuda técnica y soluciones",
-      "metaDescription": "Obtén soporte técnico para Lucid Blocks, incluyendo la configuración de Steam Deck, soluciones a cierres inesperados, optimización de rendimiento y guías de compatibilidad de plataformas.",
-      "categoryLabel": "SOPORTE TÉCNICO",
-      "whatIs": "¿Qué es el soporte?",
-      "whatIsDescription": "Guías técnicas que cubren la compatibilidad de plataformas, optimización de rendimiento, soluciones a cierres inesperados y problemas comunes. Obtén ayuda con Steam Deck, preguntas sobre multijugador y ajustes.",
-      "why": "¿Por qué consultar el soporte?",
+    "benchmark": {
+      "title": "Benchmarks de Gemma 4",
+      "description": "Benchmarks de rendimiento de Gemma 4 en MMMU, LiveCodeBench, GPQA y AIME, con comparaciones directas con modelos abiertos y cerrados de la competencia.",
+      "metaTitle": "Benchmarks de Gemma 4: rendimiento en MMMU, GPQA y programación",
+      "metaDescription": "Explora los resultados de los benchmarks de Gemma 4 en tareas de razonamiento, programación, matemáticas y multimodales. Mira cómo se compara con GPT-4o, Qwen y otros modelos de vanguardia.",
+      "categoryLabel": "BENCHMARKS",
+      "whatIs": "¿Qué son los benchmarks de Gemma 4?",
+      "whatIsDescription": "Los benchmarks son pruebas estandarizadas que miden el rendimiento del modelo en tareas de razonamiento, programación, matemáticas, ciencia y multimodales. Los resultados de Gemma 4 se extraen de las fichas oficiales de modelos de Google DeepMind y evaluaciones de terceros.",
+      "why": "¿Por qué mirar los benchmarks de Gemma 4?",
       "whySteps": {
-        "step1Title": "Soluciona problemas técnicos",
-        "step1Description": "Resuelve cierres inesperados, problemas de rendimiento y de compatibilidad",
-        "step2Title": "Optimiza el rendimiento",
-        "step2Description": "Configura los ajustes para obtener la mejor experiencia en tu plataforma",
-        "step3Title": "Compatibilidad de plataformas",
-        "step3Description": "Aprende sobre Steam Deck, soporte para controles y requisitos del sistema"
+        "step1Title": "Mide el rendimiento real",
+        "step1Description": "Mira cómo puntúa Gemma 4 en tareas estandarizadas antes de elegirlo para tu proyecto",
+        "step2Title": "Compara entre modelos",
+        "step2Description": "Comprende dónde Gemma 4 supera a las alternativas y dónde existen compensaciones",
+        "step3Title": "Asigna tareas según fortalezas",
+        "step3Description": "Identifica qué variante de Gemma 4 destaca en programación, razonamiento, matemáticas o tareas multimodales"
       },
-      "featured": "Destacado y esencial",
-      "all": "Todos los artículos de soporte"
+      "featured": "Destacados y esenciales",
+      "all": "Todas las guías de benchmarks de Gemma 4"
+    },
+    "comparison": {
+      "title": "Comparativa de Gemma 4",
+      "description": "Comparaciones directas de Gemma 4 con otros modelos líderes, cubriendo rendimiento, costo, velocidad y compensaciones de despliegue local.",
+      "metaTitle": "Comparativa de Gemma 4: vs GPT-4o, Qwen y otros modelos",
+      "metaDescription": "Compara Gemma 4 con GPT-4o, Qwen, Llama y otros modelos de vanguardia. Evalúa el rendimiento, los requisitos de hardware, las licencias y las opciones de despliegue local.",
+      "categoryLabel": "COMPARACIÓN DE MODELOS",
+      "whatIs": "¿Por qué comparar Gemma 4?",
+      "whatIsDescription": "Con tantos modelos disponibles, elegir el adecuado requiere comparaciones directas. Estas guías ponen a Gemma 4 frente a frente con modelos de la competencia en benchmarks reales y criterios prácticos.",
+      "why": "¿Por qué leer las comparativas de Gemma 4?",
+      "whySteps": {
+        "step1Title": "Toma la decisión correcta",
+        "step1Description": "Mira exactamente cómo se posiciona Gemma 4 antes de comprometerte con un modelo para tu flujo de trabajo",
+        "step2Title": "Comprende las compensaciones",
+        "step2Description": "Compara el rendimiento, la velocidad, el uso de memoria y las licencias de todas las alternativas principales",
+        "step3Title": "Encuentra el mejor ajuste",
+        "step3Description": "Obtén orientación clara sobre cuándo elegir Gemma 4 y cuándo otro modelo podría resultarte mejor"
+      },
+      "featured": "Destacados y esenciales",
+      "all": "Todas las guías de comparativas de Gemma 4"
     }
   }
 }

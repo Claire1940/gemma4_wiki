@@ -1,19 +1,19 @@
 {
   "seo": {
     "home": {
-      "title": "Lucid Blocks Wiki - クラフト、バイオーム、実績",
-      "description": "Lucid Blocks Wikiでは、Steamで展開される超現実的なボクセルサンドボックスアドベンチャーのクラフト、バイオーム、クリーチャー、アイテム、実績、エンディング、サバイバルのヒントについて解説しています。",
-      "keywords": "Lucid Blocks, Lucid Blocks wiki, クラフト, バイオーム, 実績, サバイバル, Steam",
-      "ogTitle": "Lucid Blocks Wiki - クラフト、バイオーム、実績",
-      "ogDescription": "Lucid Blocks Wikiでは、Steamで展開される超現実的なボクセルサンドボックスアドベンチャーのクラフト、バイオーム、クリーチャー、アイテム、実績、エンディング、サバイバルのヒントについて解説しています。",
-      "twitterTitle": "Lucid Blocks Wiki - クラフト、バイオーム、実績",
-      "twitterDescription": "Lucid Blocks Wikiでは、Steamの超現実的なボクセルサンドボックスにおけるクラフト、バイオーム、クリーチャー、アイテム、実績、サバイバルのヒントを網羅しています。"
+      "title": "Gemma 4 Wiki - モデル、ベンチマーク、ローカルデプロイ",
+      "description": "Gemma 4 Wikiは、Googleのオープンモデルを使用する開発者向けに、モデルサイズ、ベンチマーク、プロンプト、デプロイ、ファインチューニング、マルチモーダルワークフローを網羅しています。",
+      "keywords": "Gemma 4, Google AI, オープンモデル, ベンチマーク, ローカルデプロイ, 関数呼び出し, ファインチューニング",
+      "ogTitle": "Gemma 4 Wiki - モデル、ベンチマーク、ローカルデプロイ",
+      "ogDescription": "Gemma 4 Wikiは、Googleのオープンモデルを使用する開発者向けに、モデルサイズ、ベンチマーク、プロンプト、デプロイ、ファインチューニング、マルチモーダルワークフローを網羅しています。",
+      "twitterTitle": "Gemma 4 Wiki - モデル、ベンチマーク、ローカルデプロイ",
+      "twitterDescription": "Gemma 4 Wikiは、開発者向けにモデルサイズ、ベンチマーク、プロンプト、ローカルデプロイ、マルチモーダルワークフローを網羅しています。"
     }
   },
   "nav": {
     "guide": "ガイド",
     "models": "モデル",
-    "requirements": "動作環境",
+    "requirements": "要件",
     "ollama": "Ollama",
     "install": "インストール",
     "benchmark": "ベンチマーク",
@@ -22,7 +22,7 @@
   "common": {
     "home": "ホーム",
     "more": "もっと見る",
-    "playNow": "Steamでプレイ",
+    "playNow": "Gemma 4 を探索する",
     "switchLanguage": "言語を切り替える",
     "switchTheme": "テーマを切り替える",
     "lightMode": "ライトモード",
@@ -34,721 +34,856 @@
     "readMore": "続きを読む"
   },
   "hero": {
-    "badge": "__PROTECTED_c0b0161c__ ボクセル・サバイバル・サンドボックス",
-    "title": "Lucid Blocks Wiki",
-    "description": "夢のようなバイオームを探索し、Apotheosisでアイテムを融合、自由に建築を楽しみましょう。Steamで繰り広げられるこのシュールなオープンワールド・サンドボックスで、奇妙なクリーチャーから生き延びてください。",
-    "getFreeCodesCTA": "クラフトガイドを見る",
-    "playOnSteamCTA": "Steamでプレイ",
+    "badge": "オープンマルチモーダルモデルファミリー",
+    "title": "Gemma 4 Wiki",
+    "description": "公式のGoogleエコシステム全体における、Gemma 4 のモデルサイズ、ベンチマーク、プロンプト、関数呼び出し、マルチモーダル入力、ローカルデプロイ、ファインチューニングを追跡します。",
+    "getFreeCodesCTA": "モデルを比較する",
+    "playOnRobloxCTA": "公式サイト",
     "stats": {
       "stat1": {
-        "value": "1,325",
-        "label": "オンラインプレイヤー"
+        "value": "4億+",
+        "label": "総ダウンロード数"
       },
       "stat2": {
-        "value": "1,986",
-        "label": "最大同時接続数"
+        "value": "10万+",
+        "label": "コミュニティバリアント"
       },
       "stat3": {
-        "value": "97%",
-        "label": "好評"
+        "value": "140+",
+        "label": "対応言語"
       },
       "stat4": {
-        "value": "2026年3月12日",
-        "label": "リリース日"
+        "value": "256K",
+        "label": "最大コンテキスト"
       }
     }
   },
   "gameFeature": {
-    "title": "Lucid Blocks ゲームプレイ",
-    "description": "超現実的なバイオームを探索し、Apotheosis でアイテムを融合。Steam で、奇妙なクリーチャーから生き延びる夢のようなボクセルサンドボックスを体験しましょう。"
+    "title": "Gemma 4 概要",
+    "description": "Google DeepMind の最新オープンモデルファミリー。推論、コーディング、マルチモーダルワークフローに対応。Apache 2.0 ライセンスの下、最大256Kのコンテキストでテキスト、画像、音声入力をサポートします。"
   },
   "tools": {
-    "title": "Lucid Blocks",
+    "title": "Gemma 4",
     "titleHighlight": "リソース",
-    "subtitle": "Lucid Blocksでの探索、クラフト、生存に必要なすべての情報",
+    "subtitle": "ローカルセットアップからAPI統合まで、Gemma 4 を始めるために必要なすべて",
     "cards": [
       {
         "icon": "BookOpen",
-        "title": "初心者ガイド",
-        "description": "最初のステップ、探索、序盤の進め方"
+        "title": "Gemma 4 チュートリアル",
+        "description": "発見から最初のプロンプト作成までのクイックスタート"
       },
       {
-        "icon": "Sparkles",
-        "title": "Apotheosis クラフト",
-        "description": "フリーフォーム・フュージョンシステムと序盤のレシピ"
+        "icon": "Terminal",
+        "title": "Gemma 4 Ollama セットアップ",
+        "description": "ノートPCやワークステーションで Gemma 4 をローカルに実行"
       },
       {
-        "icon": "Hammer",
-        "title": "ツールと武器",
-        "description": "フロストピック、アズラエル、__PROTECTED_6a765cb2__、その他"
+        "icon": "Code2",
+        "title": "Gemma 4 API ガイド",
+        "description": "Gemini API と AI Studio を介したホスト型アクセス"
       },
       {
-        "icon": "Package",
-        "title": "ストレージとインベントリ",
-        "description": "キャッシュキューブ、キャビネット、クオリアストレージ"
+        "icon": "Download",
+        "title": "Gemma 4 Hugging Face",
+        "description": "公式コレクションから適切なチェックポイントを選択"
       },
       {
-        "icon": "Home",
-        "title": "クオリアと拠点建築",
-        "description": "パーソナルクオリアと拠点のセットアップ"
+        "icon": "Cpu",
+        "title": "Gemma 4 モデルサイズ",
+        "description": "ハードウェアとデプロイターゲット別に E2B、E4B、26B A4B、31B を比較"
       },
       {
-        "icon": "Eye",
-        "title": "ワールドエリア",
-        "description": "Fog Meadow、エッセンスの沼地、その他"
-      },
-      {
-        "icon": "AlertTriangle",
-        "title": "クリーチャーと敵",
-        "description": "マネキン、クモ、そして生き残る方法"
-      },
-      {
-        "icon": "ArrowRight",
-        "title": "移動用装備",
-        "description": "__PROTECTED_6a765cb2__、グライダーグローブ、__PROTECTED_163b9bec__"
+        "icon": "Layers",
+        "title": "Gemma 4 仕様",
+        "description": "コンテキストウィンドウ、モダリティ、ライセンス、主要機能の概要"
       },
       {
         "icon": "TrendingUp",
-        "title": "農業と成長",
-        "description": "種の進行と素材集め"
-      },
-      {
-        "icon": "Star",
-        "title": "序盤のおすすめアンロック",
-        "description": "プレイ開始1時間で優先すべきアップグレード"
-      },
-      {
-        "icon": "ClipboardCheck",
-        "title": "実績トラッカー",
-        "description": "全19個のSteamの実績と解除条件"
-      },
-      {
-        "icon": "MessageCircle",
-        "title": "シングルプレイヤーFAQ",
-        "description": "プラットフォーム、価格、協力プレイ、言語に関する質問"
-      },
-      {
-        "icon": "Gamepad2",
-        "title": "Steam Deckとコントローラー",
-        "description": "Proton 9.0.4のセットアップとコントローラーのヒント"
+        "title": "Gemma 4 ベンチマーク",
+        "description": "推論、コーディング、ビジョン、ロングコンテキストにおける公式スコア"
       },
       {
         "icon": "Settings",
-        "title": "設定とアクセシビリティ",
-        "description": "手の非表示、__PROTECTED_38625270__、表示オプション"
+        "title": "Gemma 4 ファインチューニング",
+        "description": "実際の製品開発のための QLoRA とアダプターチューニングのステップバイステップワークフロー"
       },
       {
-        "icon": "Clock",
-        "title": "アップデートとパッチノート",
-        "description": "最近の修正とロードマップ"
+        "icon": "FileText",
+        "title": "Gemma 4 プロンプトガイド",
+        "description": "システムロールとマルチモーダル入力を備えたターン制プロンプト形式を学ぶ"
       },
       {
-        "icon": "Shield",
-        "title": "クラッシュ修正",
-        "description": "__PROTECTED_38625270__の確認、ログのパス、バグ報告"
+        "icon": "Brain",
+        "title": "Gemma 4 思考モード",
+        "description": "数学、計画、複雑な分析タスクのための推論チャネルを有効化"
+      },
+      {
+        "icon": "Wrench",
+        "title": "Gemma 4 関数呼び出し",
+        "description": "ネイティブな構造化ツールを使用して Gemma 4 をAPIや外部ツールに接続"
+      },
+      {
+        "icon": "Image",
+        "title": "Gemma 4 マルチモーダルガイド",
+        "description": "すべての Gemma 4 モデルサイズで画像、動画、音声入力を処理"
+      },
+      {
+        "icon": "HardDrive",
+        "title": "Gemma 4 GGUF と量子化",
+        "description": "ハードウェアに適したローカル形式とメモリ使用量を選択"
+      },
+      {
+        "icon": "Zap",
+        "title": "Gemma 4 PyTorch ガイド",
+        "description": "PyTorch と Transformers スタックから Gemma 4 を実行"
+      },
+      {
+        "icon": "Smartphone",
+        "title": "Gemma 4 モバイルデプロイ",
+        "description": "AICore、Studio、LiteRT-LM を介して Android に Gemma 4 をデプロイ"
+      },
+      {
+        "icon": "Scale",
+        "title": "Gemma 4 vs Gemma 3",
+        "description": "コンテキスト、形式、マルチモーダルサポート、ベンチマークの主な違い"
       }
     ]
   },
   "modules": {
-    "lucidBlocksBeginnerGuide": {
-      "title": "Lucid Blocks 初心者ガイド",
+    "gemma4Tutorial": {
+      "title": "Gemma 4 チュートリアル",
       "displayType": "steps",
-      "intro": "まずは探索、融合、そして進行がどのように繋がっているかを学ぶことから始めましょう。Lucid Blocks では試行錯誤が報われます。序盤の進行は、珍しい素材を集め、組み合わせを試し、自分だけのクオリアを解放することから始まります。",
+      "eyebrow": "クイックスタート",
+      "intro": "Gemma 4 は2026年4月2日に、E2B、E4B、26B A4B、31Bの4つの公式サイズでリリースされました。このファミリーは Apache 2.0 ライセンスの下でオープンウェイト展開向けに構築されており、モバイルやノートPCクラスのハードウェアを対象とした小型のエッジモデルと、デスクトップ、ワークステーション、サーバーを対象とした大型モデルが用意されています。",
       "steps": [
         {
-          "title": "本格的に動く前に探索する",
-          "description": "外へ歩き出し、一般的なブロックを採掘し、見つけた奇妙なドロップアイテムはすべて取っておきましょう。序盤の進行は、決まったクエストをこなすことよりも、素材が何に変化するかを発見することに重点が置かれています。"
+          "title": "4つの公式 Gemma 4 サイズを理解する",
+          "description": "Gemma 4 には E2B、E4B、26B A4B、31B があります。E2B と E4B はテキスト、画像、音声の入力を受け付けます。26B A4B と 31B はテキストと画像の入力を受け付け、より大規模なローカル環境やサーバー展開を対象としています。"
         },
         {
-          "title": "早めに自分専用のクオリアを解放する",
-          "description": "自分専用のクオリアは、序盤で最も重要なマイルストーンの一つです。体制を立て直し、拠点を構築するための信頼できる場所となります。"
+          "title": "ハードウェアに合ったモデルを選択する",
+          "description": "モバイル、エッジ、またはノートPCに適したローカル推論を行いたい場合は E2B または E4B を使用してください。より強力な汎用ローカルモデルが必要な場合は 26B A4B を、公式の Gemma 4 チェックポイントの中で最大のモデルが必要な場合は 31B を使用してください。"
         },
         {
-          "title": "序盤の素早い進行にオスミウムを活用する",
-          "description": "オスミウムは序盤で最も役立つ素材の一つです。オスミウムと棒を組み合わせて、素早い採掘が可能な「フロストピック」を作るのが人気の序盤ルートです。"
+          "title": "開始点を選択する",
+          "description": "Gemma 4 26B A4B は、強力な初回体験のための有力なデフォルト選択肢です。最も軽量な開始点を求める場合は、指示調整済みのエッジモデルから始め、ワークロードにより高い能力が必要になった段階で上位モデルに移行してください。"
         },
         {
-          "title": "優れた融合を記録する",
-          "description": "成功した組み合わせはジャーナルに記録しておきましょう。Lucid Blocks には膨大な融合パターンがあるため、有用な結果を書き留めておくことで大幅な時間の節約になります。"
+          "title": "試用方法を選択する",
+          "description": "Google AI Studio や Gemini API を通じてホスト型の Gemma 4 を試すか、Hugging Face や Kaggle からオープンウェイトをダウンロードして、ローカルでの利用、チューニング、カスタム展開を行ってください。"
+        },
+        {
+          "title": "Gemma 4 の最適化対象を知る",
+          "description": "このファミリーは、推論、コーディング、エージェントワークフロー、およびマルチモーダル理解のために構築されています。エッジモデルは 128K コンテキストをサポートし、26B A4B と 31B は最大 256K コンテキストをサポートします。"
         }
       ],
       "quickTips": [
-        "Apotheosis には固定のレシピリストは必要ありません。",
-        "無限に生成される世界では、より高く、あるいはより深く移動することで、全く異なる素材が見つかることがあります。",
-        "移動ツールやユーティリティ装備を解放し始めると、プレイの快適さが劇的に向上します。",
-        "序盤に迷うのは普通のことですが、最初の優れた融合が成功すれば、便利なツール、ストレージ、移動手段が次々と手に入るようになります。"
+        "指示調整済み（-it）バリアントは、チャットやアシスタントのユースケースに最適です。",
+        "E2B と E4B は、ローカルでの実験において最もハードウェアの敷居が低い開始点です。",
+        "26B A4B は MoE モデルであり、同等の合計サイズを持つ高密度モデルよりも実効推論速度が高速です。",
+        "すべての Gemma 4 のウェイトは Apache 2.0 ライセンスの下で公開されています。"
       ]
     },
-    "lucidBlocksApotheosisCrafting": {
-      "title": "Lucid Blocks Apotheosis クラフト",
-      "displayType": "cards",
-      "intro": "Apotheosis は、このゲームの制限のない融合システムです。従来のレシピ本を暗記する代わりに、素材を組み合わせ、結果を観察し、時間をかけて自分だけのクラフト知識を築き上げていきます。",
-      "cards": [
-        {
-          "name": "フリーフォームな融合",
-          "description": "Apotheosis では、固定のレシピリストに従うことなく、さまざまなアイテムを融合させることができます。"
-        },
-        {
-          "name": "複数の有用な結果",
-          "description": "素材によって、特定の結果に繋がりやすい傾向があります。コミュニティの発見によれば、似たような投入素材からでも、実用的なツール、ストレージ、あるいは戦闘用のアップグレードを作成可能です。"
-        },
-        {
-          "name": "ジャーナル優先のクラフト",
-          "description": "Apotheosis を学ぶ最良の方法は、成功した組み合わせを記録することです。ジャーナルはすぐにあなた専用のクラフトリファレンスになります。"
-        },
-        {
-          "name": "コミュニティ検証済みの序盤の融合",
-          "description": "序盤の代表例としては、オスミウム＋棒で「フロストピック」、棒＋タングステンの付属肢で「アズラエル」、アズラエル＋磁鉄鉱で「触手レイピア」などが挙げられます。"
-        }
-      ],
-      "milestones": [
-        "アイテムを融合させる",
-        "害獣を融合させる",
-        "神聖なアーティファクトを融合させる"
-      ]
-    },
-    "lucidBlocksToolsAndWeapons": {
-      "title": "Lucid Blocks ツールと武器",
-      "displayType": "itemCards",
-      "intro": "Lucid Blocks では、公式のユーティリティ装備とコミュニティが発見した序盤の武器が混在しています。最適なセットアップは通常、素早い採掘、安全な移動、そして信頼できる戦闘手段を組み合わせたものです。",
-      "items": [
-        {
-          "name": "フロストピック",
-          "type": "採掘ツール",
-          "description": "オスミウムと棒から作られる、高速で安価な序盤用ピッケル。プレイヤーはこれを使って序盤の素材集めを加速させます。"
-        },
-        {
-          "name": "アズラエル",
-          "type": "初期武器",
-          "description": "棒とタングステンの付属肢からクラフトできる、実用的な序盤の武器ルートです。"
-        },
-        {
-          "name": "触手レイピア",
-          "type": "強化武器",
-          "description": "アズラエルと磁鉄鉱を組み合わせて作る強力な発展武器。プレイヤー間で共有されている、序盤から中盤にかけて最も有用な戦闘ルートの一つです。"
-        },
-        {
-          "name": "__PROTECTED_6a765cb2__",
-          "type": "移動ツール",
-          "description": "移動能力と垂直方向の探索を大幅に向上させる公式の移動アイテムです。"
-        },
-        {
-          "name": "__PROTECTED_163b9bec__",
-          "type": "移動ツール",
-          "description": "より安全かつ効率的に距離を移動するのに役立つ公式の移動アイテムです。"
-        },
-        {
-          "name": "ボールワンド",
-          "type": "ユーティリティ武器",
-          "description": "戦闘やパズルの選択肢を広げる公式の遠距離ユーティリティアイテムです。"
-        },
-        {
-          "name": "スキューバダイビングギア",
-          "type": "移動装備",
-          "description": "通常は探索が困難な場所へ到達するための公式ユーティリティアイテムです。"
-        },
-        {
-          "name": "爆発物",
-          "type": "ユーティリティ・ダメージ",
-          "description": "中核となるツールセットの一部として公式に推奨されており、脅威や障害物を突破するのに役立ちます。"
-        }
-      ]
-    },
-    "lucidBlocksStorageAndInventory": {
-      "title": "Lucid Blocks ストレージとインベントリ",
-      "displayType": "solutionCards",
-      "intro": "Lucid Blocks では早い段階からインベントリが圧迫されるため、ストレージの構築を優先目標にすべきです。実際のプレイヤーによって検証されたいくつかの解決策がすでに確立されています。",
-      "solutions": [
-        {
-          "name": "キャッシュキューブ",
-          "role": "チェスト型ストレージ",
-          "description": "キャッシュキューブは最も初期に利用可能な実用的なストレージであり、プレイヤーの間ではゲーム内の主要なチェスト型コンテナとして扱われています。"
-        },
-        {
-          "name": "キャビネット",
-          "role": "簡易拠点ストレージ",
-          "description": "キャビネットも確認されているストレージの選択肢です。共有されている序盤のレシピでは、カットウッド1つと紐1つを使用します。"
-        },
-        {
-          "name": "個人用クオリア",
-          "role": "長期ストレージハブ",
-          "description": "解放されると、個人用クオリアは素材を整理し、落ち着いてクラフトを行い、拠点を拡張するための自然な拠点となります。"
-        },
-        {
-          "name": "ジャーナルによる追跡",
-          "role": "インベントリの効率化",
-          "description": "有用な組み合わせをジャーナルに記録することで、素材の無駄を減らし、インベントリ管理を大幅に楽にすることができます。"
-        }
-      ],
-      "managementTips": [
-        "レアなドロップ品を溜め込む前に、信頼できるストレージを一つ確保することを優先しましょう。",
-        "個人用クオリアが利用可能になったら、そこを中心に構築を進めましょう。",
-        "クラフト素材、戦闘ツール、移動装備を分けて保管することで、アップグレードの計画が立てやすくなります。",
-        "ジャーナルを単なるクラフトの発見用ではなく、インベントリ管理の一部として活用しましょう。"
-      ]
-    },
-    "lucidBlocksQualiaAndBaseBuilding": {
-      "title": "Lucid Blocks クオリアと拠点建築",
-      "displayType": "cards",
-      "intro": "クオリアは Lucid Blocks における最も重要な進行マイルストーンの一つです。体制を整え、素材を保管し、探索の成果を徐々に本格的な拠点へと変えていくための個人空間を提供します。",
-      "cards": [
-        {
-          "name": "個人用クオリア",
-          "description": "クオリアの解放は序盤のマイルストーンであり、広い世界を探索する中で戻ってくるための信頼できる場所となります。"
-        },
-        {
-          "name": "ストレージ優先の建築",
-          "description": "多くのプレイヤーは、整理されたクラフトスペースや建築スペースを持つ大きな拠点にする前に、まずクオリアをストレージハブとして使い始めます。"
-        },
-        {
-          "name": "クリエイティブな自宅建築",
-          "description": "Lucid Blocks はクリエイティブな建築をサポートしており、プレイヤーはすでにクオリアの空間を利用して家やパーソナライズされたレイアウトを作成しています。"
-        },
-        {
-          "name": "進行のハブ",
-          "description": "強力な拠点は、探索で得た戦利品、クラフト素材、種、ツール、移動装備を分類するのに役立ち、次のアップグレード計画を容易にします。"
-        }
-      ],
-      "highlights": [
-        "クオリアに入る",
-        "素材を安全に保管する",
-        "実用性から装飾へと拡張する",
-        "拠点のスペースを活用してクラフトや農業を支援する"
-      ]
-    },
-    "lucidBlocksWorldRegions": {
-      "title": "Lucid Blocks 世界の地域",
-      "displayType": "regionCards",
-      "intro": "Lucid Blocks は無限の世界生成を採用しているため、プレイヤーは常に新しい環境や構造物を発見し続けています。実績やコミュニティの議論には、すでにいくつかの地名が登場しています。",
-      "regions": [
-        {
-          "name": "Fog Meadow",
-          "type": "コミュニティ注目エリア",
-          "description": "Fog Meadow は、隠れた脅威や危険な遭遇に関連する緊張感のあるエリアとして、プレイヤーの間ですでに知られています。"
-        },
-        {
-          "name": "ティアマナ・レイライン",
-          "type": "発見ランドマーク",
-          "description": "ティアマナ・レイラインは独自の実績マイルストーンを持つほど重要であり、これまでに判明している中で最も明確な名前付きの発見場所の一つです。"
-        },
-        {
-          "name": "クロナクオリア",
-          "type": "建築スペース",
-          "description": "プレイヤーはすでにクロナクオリアを、家を建てたり、素材を保管したり、より永続的なレイアウトを試したりする場所として利用しています。"
-        },
-        {
-          "name": "エッセンスの沼地",
-          "type": "ファーミングエリア",
-          "description": "エッセンスの沼地は、特にスライムとの戦闘や経験値稼ぎに役立つファーミング場所としてプレイヤー間で共有されています。"
-        }
-      ]
-    },
-    "lucidBlocksCreaturesAndEnemies": {
-      "title": "Lucid Blocks クリーチャーと敵",
-      "displayType": "creatureCards",
-      "intro": "Lucid Blocks は超現実的なクリーチャーと現実的な危険が混ざり合っています。公式の説明やコミュニティの投稿は、奇妙な生命、敵対的な脅威、そしてプレイヤーがすぐに覚えるような印象的な遭遇に満ちた世界を指し示しています。",
-      "creatures": [
-        {
-          "name": "マネキン",
-          "role": "敵対的な敵",
-          "description": "マネキンはこの世界における公式な名前を持つ敵の一つであり、ゲームの超現実的な脅威リストの一部です。"
-        },
-        {
-          "name": "ぷにぷにジェル",
-          "role": "敵対的な敵",
-          "description": "ぷにぷにジェルも公式な名前を持つ敵タイプであり、ゲームの奇妙な生物学的スタイルを象徴しています。"
-        },
-        {
-          "name": "高次元の存在",
-          "role": "敵対的な敵",
-          "description": "これらの存在は、世界のより抽象的で不安をかき立てる敵ラインナップの一部として登場します。"
-        },
-        {
-          "name": "巨大クモ",
-          "role": "主要な脅威",
-          "description": "クモはコミュニティの議論で最も即座に恐れられている敵の一つであり、明らかに記憶に残る危険な存在です。"
-        },
-        {
-          "name": "__PROTECTED_26ee183b__",
-          "role": "名前付きクリーチャー",
-          "description": "__PROTECTED_26ee183b__ は独自の実績を持つほど注目に値し、ゲーム内で最も明確な名前付きクリーチャーとの遭遇の一つです。"
-        },
-        {
-          "name": "可愛い害獣",
-          "role": "インタラクティブな生物",
-          "description": "害獣は融合の進行に関わるだけでなく、名前を付けることもでき、標準的な敵よりも個人的な役割を持ちます。"
-        },
-        {
-          "name": "冒涜的なクリーチャー",
-          "role": "エリートの脅威",
-          "description": "冒涜的なクリーチャーは専用の戦闘実績に関連付けられており、重要な敵との遭遇として位置づけられています。"
-        }
-      ]
-    },
-    "lucidBlocksMobilityGear": {
-      "title": "Lucid Blocks 移動装備",
-      "displayType": "itemCards",
-      "intro": "移動手段のアップグレードは、Lucid Blocks におけるプレイの快適さを最も大きく向上させる要素の一つです。最初の移動ツールを解放すれば、探索はより速く、より安全に、そしてより実りあるものになります。",
-      "items": [
-        {
-          "name": "__PROTECTED_6a765cb2__",
-          "type": "移動ツール",
-          "description": "フックショットはゲーム内で最も明確な移動のマイルストーンの一つであり、専用の実績も用意されています。"
-        },
-        {
-          "name": "グライダーグローブ",
-          "type": "空中移動",
-          "description": "グライダーグローブはよりスムーズな移動を可能にし、独自の実績を持つもう一つの主要な進行マイルストーンです。"
-        },
-        {
-          "name": "__PROTECTED_163b9bec__",
-          "type": "移動ツール",
-          "description": "ビィ・グライダーは、効率的に距離を移動するための移動ツールキットの一部として公式に推奨されています。"
-        },
-        {
-          "name": "ボールワンド",
-          "type": "ユーティリティ装備",
-          "description": "ボールワンドは公式に推奨されている特殊ツールの一つで、世界を移動したり干渉したりする方法を広げてくれます。"
-        },
-        {
-          "name": "スキューバダイビングギア",
-          "type": "探索装備",
-          "description": "スキューバダイビングギアは、通常では探索が困難なエリアに到達するための中核的なユーティリティセットとして公式にリストされています。"
-        },
-        {
-          "name": "爆発物",
-          "type": "ユーティリティ・ダメージ",
-          "description": "爆発物は公式に推奨されていると同時に実績マイルストーンにも関連付けられており、ゲームの中核的なユーティリティ進行の一部となっています。"
-        }
-      ],
-      "unlockMilestones": [
-        "フックショットを使いこなす",
-        "グライダーグローブで空を飛ぶ",
-        "投射物ワンドを構える",
-        "爆発物を構える"
-      ]
-    },
-    "lucidBlocksFarmingAndGrowth": {
-      "title": "Lucid Blocks 農業と成長",
-      "displayType": "mixedCards",
-      "intro": "成長は Lucid Blocks における真の進行の一部です。農業は単に植えて収穫するだけでなく、ツール、武器、クラフトの選択肢を維持するための反復可能な素材ルートを確立することでもあります。",
-      "sections": [
-        {
-          "name": "種の進行",
-          "description": "種を植えて肥料を与えることはゲーム内の重要なマイルストーンであり、完全に成長したナッツを収穫することも同じ成長パスの一部です。"
-        },
-        {
-          "name": "素材ファーミング",
-          "description": "実用的な序盤のファーミングループは「水銀カプセル」を作成することです。これにより、反復可能なクラフト素材となる触手やグーをドロップする小さなスライムが出現します。"
-        },
-        {
-          "name": "ツールの維持",
-          "description": "オスミウム、ガラスの破片、植物、スライム素材を安定して集められるようになると、その後のクラフトのための資源ファーミングがより強力になります。"
-        },
-        {
-          "name": "拠点のルーチン",
-          "description": "最適な農業セットアップは食料以上のものを支えます。ストレージ、移動ツール、武器のアップグレード、そして将来の融合実験に供給されるべきです。"
-        }
-      ],
-      "growthMilestones": [
-        "種に肥料を与える",
-        "完全に成長したナッツを収穫する",
-        "反復可能な素材ループを作成する",
-        "農業を長期的な進行に組み込む"
-      ]
-    },
-    "lucidBlocksBestEarlyUnlocks": {
-      "title": "Lucid Blocks おすすめの序盤解放要素",
-      "displayType": "priorityCards",
-      "intro": "最強の序盤解放要素は、安全性、ストレージ、そして移動能力を向上させるものです。Lucid Blocks では、いくつかの実用的なアップグレードがその後のゲームプレイ全体を非常にスムーズにします。",
-      "priorities": [
-        {
-          "name": "個人用クオリア",
-          "priority": "必須",
-          "description": "個人用クオリアにアクセスできるようになると、プレイが格段に安定します。ストレージ、建築、体制の立て直しのための信頼できるハブとして機能します。"
-        },
-        {
-          "name": "フロストピック",
-          "priority": "極めて高い",
-          "description": "オスミウムと棒で作れる、高速で安価な序盤の採掘ツール。序盤の資源収集を加速させるために最も有用なアップグレードの一つです。"
-        },
-        {
-          "name": "キャッシュキューブ",
-          "priority": "極めて高い",
-          "description": "インベントリの圧迫は早くから始まるため、最初の信頼できるチェスト型コンテナを手に入れることは、プレイの快適さを大きく向上させます。"
-        },
-        {
-          "name": "__PROTECTED_6a765cb2__",
-          "priority": "高い",
-          "description": "フックショットはゲーム内で最も明確な移動のマイルストーンの一つであり、探索をより速く、より安全にします。"
-        },
-        {
-          "name": "グライダーグローブ",
-          "priority": "高い",
-          "description": "グライダーグローブはもう一つの大きな機動力ブーストをもたらし、長距離の移動をはるかに効率的にします。"
-        },
-        {
-          "name": "投射物ワンドまたは爆弾",
-          "priority": "高い",
-          "description": "遠距離ツールや爆発物の選択肢を持つことで、危険な敵や試練形式の遭遇に対してより安全に対処できるようになります。"
-        }
-      ]
-    },
-    "lucidBlocksAchievementTracker": {
-      "title": "Lucid Blocks 実績トラッカー",
-      "displayType": "achievementGrid",
-      "intro": "Lucid Blocks には現在 19 個の Steam 実績があり、それらは探索、クラフト、移動、戦闘、成長の進行に自然に分類されます。",
-      "groups": [
-        {
-          "name": "探索",
-          "achievements": [
-            {
-              "title": "__PROTECTED_c973d4a3__ α",
-              "description": "クオリアに入る。"
-            },
-            {
-              "title": "__PROTECTED_c973d4a3__ γ",
-              "description": "ティアマナ・レイラインを発見する。"
-            },
-            {
-              "title": "__PROTECTED_c973d4a3__ δ",
-              "description": "ティアマナの試練を乗り越える。"
-            },
-            {
-              "title": "__PROTECTED_c973d4a3__ ε",
-              "description": "隠し実績。"
-            }
-          ]
-        },
-        {
-          "name": "クラフトと召喚",
-          "achievements": [
-            {
-              "title": "Apotheosis α",
-              "description": "アイテムを融合させる。"
-            },
-            {
-              "title": "Apotheosis β",
-              "description": "害獣を融合させる。"
-            },
-            {
-              "title": "Apotheosis γ",
-              "description": "神聖なアーティファクトを融合させる。"
-            },
-            {
-              "title": "Archangel β",
-              "description": "信仰を召喚する。"
-            }
-          ]
-        },
-        {
-          "name": "移動とユーティリティ",
-          "achievements": [
-            {
-              "title": "Virtue α",
-              "description": "グライダーグローブで空を飛ぶ。"
-            },
-            {
-              "title": "Virtue β",
-              "description": "フックショットを使いこなす。"
-            },
-            {
-              "title": "Archangel α",
-              "description": "投射物ワンドを構える。"
-            },
-            {
-              "title": "Archangel γ",
-              "description": "爆発物を構える。"
-            }
-          ]
-        },
-        {
-          "name": "戦闘とクリーチャー",
-          "achievements": [
-            {
-              "title": "__PROTECTED_26ee183b__ の虐殺",
-              "description": "罪のないバブルベアを倒す。"
-            },
-            {
-              "title": "Archangel δ",
-              "description": "冒涜的なクリーチャーを排除する。"
-            },
-            {
-              "title": "__PROTECTED_c973d4a3__ β",
-              "description": "死亡する。"
-            },
-            {
-              "title": "Dominion γ",
-              "description": "可愛い害獣に名前を付ける。"
-            }
-          ]
-        },
-        {
-          "name": "成長と農業",
-          "achievements": [
-            {
-              "title": "Dominion α",
-              "description": "種に肥料を与える。"
-            },
-            {
-              "title": "Dominion β",
-              "description": "完全に成長したナッツを収穫する。"
-            },
-            {
-              "title": "Dominion δ",
-              "description": "隠し実績。"
-            }
-          ]
-        }
-      ]
-    },
-    "lucidBlocksSingleplayerAndPlatformFAQ": {
-      "title": "Lucid Blocks シングルプレイヤーおよびプラットフォーム FAQ",
-      "displayType": "accordion",
-      "intro": "これらは、Lucid Blocks を購入する前にプレイヤーからよく寄せられる、プラットフォームとアクセスに関する核心的な質問です。",
-      "faqs": [
-        {
-          "question": "Lucid Blocks はシングルプレイヤーですか？",
-          "answer": "はい。Lucid Blocks はシングルプレイヤー専用ゲームです。"
-        },
-        {
-          "question": "マルチプレイヤーや協力プレイの予定はありますか？",
-          "answer": "いいえ。リリース時および将来のアップデートにおいて、マルチプレイヤーの予定はありません。"
-        },
-        {
-          "question": "Lucid Blocks はどこでプレイできますか？",
-          "answer": "現在は Windows 用に Steam で配信されています。"
-        },
-        {
-          "question": "Lucid Blocks の価格はいくらですか？",
-          "answer": "Steam で 9.99 ドルです。"
-        },
-        {
-          "question": "Lucid Blocks はコントローラーに対応していますか？",
-          "answer": "はい。ただし、メニューがコントローラー操作を前提に設計されていないため、コントローラーでのプレイは推奨されません。"
-        },
-        {
-          "question": "Lucid Blocks は Steam Deck で動作しますか？",
-          "answer": "はい。Steam Deck では、Proton 9.0 または 9.0.4 の使用が一般的に推奨されています。"
-        },
-        {
-          "question": "Lucid Blocks は Linux で動作しますか？",
-          "answer": "はい。Linux および Steam Deck において、Proton 9.0 で良好に動作することが報告されています。"
-        },
-        {
-          "question": "Mac や Android はサポートされますか？",
-          "answer": "将来的にサポートされる可能性はありますが、現時点でのローンチプラットフォームではありません。"
-        },
-        {
-          "question": "Lucid Blocks に翻訳はありますか？",
-          "answer": "いいえ。現在、翻訳の予定はありません。"
-        },
-        {
-          "question": "Lucid Blocks はアップデートされ続けますか？",
-          "answer": "はい。リリース後にいくつかのコンテンツアップデートが予定されていますが、無期限に定期的なスケジュールで継続することを意図したものではありません。"
-        }
-      ]
-    },
-    "lucidBlocksSteamDeckAndController": {
-      "title": "Lucid Blocks Steam Deck とコントローラー",
-      "displayType": "accordion",
-      "intro": "Lucid Blocks は Steam Deck で動作しますが、デフォルト設定では調整が必要な場合があります。メニュー操作や一般的なプレイにおいては、キーボードとマウスの方がスムーズです。",
-      "faqs": [
-        {
-          "question": "Lucid Blocks は Steam Deck で動作しますか？",
-          "answer": "はい。Proton 9.0 で良好に動作します。また、Proton 9.0.4 は Steam Deck の問題に対する一般的な修正方法として共有されています。"
-        },
-        {
-          "question": "Steam Deck の操作が効かない場合はどうすればよいですか？",
-          "answer": "互換性設定を強制し、ゲームを Proton 9.0.4 に切り替えてください。デフォルト設定ではコントローラー入力が正しく受け付けられない場合があります。"
-        },
-        {
-          "question": "Lucid Blocks はコントローラーに対応していますか？",
-          "answer": "はい。ただし、ゲームのメニューがコントローラー操作を前提に設計されていないため、コントローラーでのプレイは推奨されません。"
-        },
-        {
-          "question": "Linux のサポートは可能ですか？",
-          "answer": "はい。Linux および Steam Deck において、Proton 9.0 で良好に動作することが報告されています。"
-        },
-        {
-          "question": "最適な入力設定は何ですか？",
-          "answer": "メニューのナビゲーションや一般的なプレイにおいては、キーボードとマウスが最もスムーズな選択肢です。"
-        }
-      ]
-    },
-    "lucidBlocksSettingsAndAccessibility": {
-      "title": "Lucid Blocks 設定とアクセシビリティ",
-      "displayType": "settingCards",
-      "intro": "Lucid Blocks には、プレイヤーが最初にゲームを起動した際に重要となる、いくつかの実用的な設定と互換性に関する注意点があります。",
-      "settings": [
-        {
-          "name": "ディスプレイ設定",
-          "type": "快適性オプション",
-          "description": "ディスプレイ設定には、画面上の手を表示しないようにするオプションが含まれています。"
-        },
-        {
-          "name": "グラフィックスの互換性",
-          "type": "システム要件",
-          "description": "グラフィックスを正しくレンダリングするには __PROTECTED_38625270__ のサポートが必要です。__PROTECTED_38625270__ に対応していないシステムでは、クラッシュや深刻なグラフィックの不具合が発生する可能性があります。"
-        },
-        {
-          "name": "入力の好み",
-          "type": "操作設定",
-          "description": "コントローラーのサポートは存在しますが、メニューがコントローラー操作向けに構築されていないため、キーボードとマウスの方がスムーズな体験が得られます。"
-        },
-        {
-          "name": "言語サポート",
-          "type": "ローカライズ",
-          "description": "現在の設定は英語のみであり、現時点では翻訳の予定はありません。"
-        }
-      ]
-    },
-    "lucidBlocksUpdatesAndPatchNotes": {
-      "title": "Lucid Blocks アップデートとパッチノート",
-      "displayType": "timeline",
-      "intro": "Lucid Blocks では、リリース直後の迅速な修正や小規模なユーザビリティのアップデートがすでに行われています。",
-      "entries": [
-        {
-          "title": "アップデート 2.8.2",
-          "type": "UI アップデート",
-          "description": "メインメニューの「awaken（目覚める）」を「exit（終了）」に変更しました。"
-        },
-        {
-          "title": "起動時のクラッシュに関する小規模パッチ",
-          "type": "ホットフィックス",
-          "description": "起動時にゲームがクラッシュしていたプレイヤー向けに、専用のパッチがリリースされました。"
-        },
-        {
-          "title": "リリース後のコンテンツサポート",
-          "type": "ロードマップ注記",
-          "description": "リリース後にいくつかのコンテンツアップデートが予定されていますが、無期限に定期的なスケジュールで継続することを意図したものではありません。"
-        }
-      ]
-    },
-    "lucidBlocksCrashFixAndTroubleshooting": {
-      "title": "Lucid Blocks クラッシュ修正とトラブルシューティング",
+    "gemma4OllamaSetup": {
+      "title": "Gemma 4 Ollama セットアップ",
       "displayType": "steps",
-      "intro": "起動時やクラッシュに関する差し迫った問題は、パッチレベル、グラフィックスサポート、プラットフォームの互換性、ログの順に確認してください。",
+      "eyebrow": "ローカル実行",
+      "intro": "Ollama は、ノートPCやワークステーションで Gemma 4 を実行するための最も速い方法の1つです。デフォルトの Ollama の流れはシンプルです。Ollama をインストールし、Gemma 4 をプルし、モデルリストを確認し、ハードウェアに適したタグを選択して、CLI またはローカル API から実行します。",
       "steps": [
         {
-          "title": "最新のクラッシュホットフィックスをインストールする",
-          "description": "起動時にゲームがクラッシュする場合は、まずアップデートを行い、最新の起動クラッシュ用パッチで再度テストしてください。"
+          "title": "Ollama のインストールと確認",
+          "description": "Windows、macOS、または Linux 用の Ollama をダウンロードしてインストールし、コマンド ollama --version でセットアップを確認します。"
         },
         {
-          "title": "__PROTECTED_38625270__ のサポートを確認する",
-          "description": "Lucid Blocks には __PROTECTED_38625270__ のサポートが必要です。__PROTECTED_38625270__ に対応していないシステムでは、クラッシュや重大なレンダリングの問題が発生する可能性があります。"
+          "title": "デフォルトの Gemma 4 バリアントをプルする",
+          "description": "ollama pull gemma4 を使用してデフォルトの Gemma 4 パッケージをダウンロードし、ollama list を実行してローカルで利用可能であることを確認します。"
         },
         {
-          "title": "Steam Deck で Proton 9.0.4 を使用する",
-          "description": "Steam Deck で入力や起動の挙動に問題がある場合は、互換性設定を強制し、Proton 9.0.4 に切り替えてください。"
+          "title": "適切なモデルタグを選択する",
+          "description": "最も軽量なエッジオプションには gemma4:e2b を、より強力なエッジのデフォルトには gemma4:e4b を、26B A4B MoE ワークステーションモデルには gemma4:26b を、フルサイズの大型モデルには gemma4:31b を使用してください。"
         },
         {
-          "title": "クラッシュログを収集する",
-          "description": "Windows の「ファイル名を指定して実行」を開き、「%APPDATA%」を貼り付けて、lucid blocks/logs フォルダに移動し、トラブルシューティング用の .txt ファイルを収集してください。"
+          "title": "各タグの要件を把握する",
+          "description": "Ollama ライブラリページでは、e2b は 7.2GB（128K コンテキスト）、e4b は 9.6GB（128K）、26b は 18GB（256K）、31b は 20GB（256K）と記載されています。"
         },
         {
-          "title": "問題を正しく報告する",
-          "description": "公式 Discord の bug-reports フォーラム、または Steam コミュニティページで、ログとデバイスの詳細を共有してください。"
+          "title": "最初のプロンプトを実行する",
+          "description": "最初のテキストテストとして、ollama run gemma4 \"こんにちは、何ができますか？\" を実行します。Ollama は、公式ガイドに示されているプロンプト形式で画像入力もサポートしています。"
+        },
+        {
+          "title": "アプリ統合にローカル API を使用する",
+          "description": "Ollama は http://localhost:11434/api/generate でローカルウェブサービスを公開しているため、別のモデルサーバーをセットアップすることなく、CLI テストから軽量なローカルアプリケーションへ移行できます。"
+        }
+      ],
+      "quickTips": [
+        "E2B と E4B は、軽量なハードウェアでローカルな実験を行う際の現実的な最初の選択肢です。",
+        "26b タグは 26B A4B MoE モデルを対象としており、同等の合計サイズを持つ高密度モデルよりもアクティブな計算量が少なくなります。",
+        "ollama list は、ローカルにダウンロードされたすべてのモデルとそのサイズを表示します。",
+        "Ollama は、ollama run gemma4:e2b に画像パスを添えるプロンプト形式で画像入力をサポートしています。"
+      ]
+    },
+    "gemma4ApiGuide": {
+      "title": "Gemma 4 API ガイド",
+      "displayType": "steps",
+      "eyebrow": "ホスト型 API",
+      "intro": "Gemini API は Gemma 4 へのホスト型アクセスを提供し、ローカル推論を管理せずに構築する場合に便利です。AI Studio および Gemini API でホストされている Gemma 4 モデルは、gemma-4-26b-a4b-it と gemma-4-31b-it です。",
+      "steps": [
+        {
+          "title": "Google AI Studio で API キーを作成する",
+          "description": "Google AI Studio を開き、Gemini API キーを作成します。新規ユーザーはデフォルトの Google Cloud プロジェクトから開始でき、既存ユーザーは Cloud プロジェクトをインポートしてキーを作成できます。"
+        },
+        {
+          "title": "環境変数にキーを設定する",
+          "description": "Gemini SDK は GEMINI_API_KEY または GOOGLE_API_KEY を自動的に取得します。両方が設定されている場合は、GOOGLE_API_KEY が優先されます。"
+        },
+        {
+          "title": "公式 SDK をインストールする",
+          "description": "Python の場合は google-genai をインストールします。JavaScript および TypeScript の場合は @google/genai をインストールします。Google は Go、Java、C#、および Apps Script 用の SDK パスも公開しています。"
+        },
+        {
+          "title": "ホスト型 Gemma 4 モデル ID を選択する",
+          "description": "ホスト型 Gemma 4 の場合、より高速な MoE 大型モデルには gemma-4-26b-a4b-it を、フラッグシップの高密度チェックポイントには gemma-4-31b-it を使用してください。"
+        },
+        {
+          "title": "最初の generateContent リクエストを送信する",
+          "description": "公式の例では、model フィールドを gemma-4-31b-it に設定して client.models.generate_content を使用します。REST では、x-goog-api-key ヘッダーを付けて generateContent エンドポイントにリクエストを送信します。"
+        },
+        {
+          "title": "AI Studio を使用してテストからコードへ橋渡しする",
+          "description": "Google AI Studio では、プロンプト、モデル設定、関数呼び出し、構造化出力を試行し、その後「コードを取得」フローを通じて動作するコードをエクスポートできます。"
+        }
+      ],
+      "quickTips": [
+        "AI Studio は、コードを書く前に Gemma 4 のプロンプトをテストする最も速い方法です。",
+        "Gemini API は、チャットや長い生成のユースケース向けにストリーミングレスポンスをサポートしています。",
+        "gemma-4-26b-a4b-it は MoE モデルであり、一般的に 31B よりも高速でコスト効率に優れています。",
+        "関数呼び出しと構造化出力は、両方のホスト型 Gemma 4 モデル ID で利用可能です。"
+      ]
+    },
+    "gemma4HuggingFaceDownload": {
+      "title": "Gemma 4 Hugging Face ダウンロード",
+      "displayType": "cards",
+      "eyebrow": "ダウンロード",
+      "intro": "Hugging Face 上の公式 Google コレクションには、E2B、E4B、26B A4B、31B の4つの主要な Gemma 4 チェックポイントが含まれており、それぞれベース形式と指示調整済み形式があります。指示調整済み（-it）リポジトリは、チャット、コーディング、アシスタント体験の自然な開始点となります。",
+      "cards": [
+        {
+          "tag": "指示調整済み",
+          "name": "google/gemma-4-E2B-it",
+          "description": "テキスト、画像、音声入力に対応し、128K コンテキストを備えたエッジ向けチェックポイント。高速なローカルアシスタントやデバイス上でのマルチモーダル実験に最適です。"
+        },
+        {
+          "tag": "指示調整済み",
+          "name": "google/gemma-4-E4B-it",
+          "description": "テキスト、画像、音声入力に対応し、128K コンテキストを備えた、より強力なエッジ向けチェックポイント。ワークステーション級のハードウェアに移行することなく、E2B よりも高い能力を発揮します。"
+        },
+        {
+          "tag": "指示調整済み",
+          "name": "google/gemma-4-26B-A4B-it",
+          "description": "256K コンテキストとテキスト・画像入力を備えた MoE チェックポイント。同等の合計サイズを持つ高密度モデルよりも実効推論が速く、大型モデル並みの品質を提供します。"
+        },
+        {
+          "tag": "指示調整済み",
+          "name": "google/gemma-4-31B-it",
+          "description": "256K コンテキストとテキスト・画像入力を備えた、フラッグシップとなる高密度 Gemma 4 チェックポイント。最高精度のチャット、推論、コーディング、エージェントワークフローに最適です。"
+        },
+        {
+          "tag": "事前学習済み",
+          "name": "google/gemma-4-E2B",
+          "description": "最小のマルチモーダル Gemma 4 モデルを研究、適応、または微調整したいユーザー向けのベースエッジチェックポイント。"
+        },
+        {
+          "tag": "事前学習済み",
+          "name": "google/gemma-4-E4B",
+          "description": "テキスト、画像、音声入力を維持しつつ、下流の指示動作を独自のチューニングパイプラインに委ねるためのベースエッジチェックポイント。"
+        },
+        {
+          "tag": "事前学習済み",
+          "name": "google/gemma-4-26B-A4B",
+          "description": "デフォルトの指示調整済み動作を必要とせず、26B A4B アーキテクチャをカスタム適応させたい場合のベース MoE 大型チェックポイント。"
+        },
+        {
+          "tag": "事前学習済み",
+          "name": "google/gemma-4-31B",
+          "description": "独自の微調整やアライメント段階の前に、最大の公式 Gemma 4 基盤モデルを必要とするチーム向けのベース 31B 高密度チェックポイント。"
+        }
+      ]
+    },
+    "gemma4ModelSizes": {
+      "eyebrow": "Model Comparison",
+      "title": "Choose the Right Gemma 4 Size for Your Hardware",
+      "subtitle": "Gemma 4 ships in four sizes with very different trade-offs. The fastest choice is not always the smallest model, and the highest-quality choice is not always the easiest one to deploy.",
+      "intro": "Gemma 4 is available in two edge-first dense models, one efficient Mixture-of-Experts model, and one large dense model. For most teams, the real decision is not just quality, but where the model runs: phone, laptop, workstation, or server. A practical starting point is 26B A4B when you want strong quality without jumping all the way to 31B.",
+      "tableHeaders": [
+        "Model",
+        "Architecture",
+        "Parameters",
+        "Context",
+        "Approx. Memory (BF16)",
+        "Platform",
+        "Best For"
+      ],
+      "models": [
+        {
+          "model": "Gemma 4 E2B",
+          "architecture": "Dense",
+          "parameters": "2.3B effective",
+          "contextWindow": "128K tokens",
+          "inferenceMemory": "9.6 GB BF16 / 4.6 GB SFP8 / 3.2 GB Q4_0",
+          "platform": "Mobile devices",
+          "bestFor": "Offline assistants, lightweight multimodal apps, edge deployment"
+        },
+        {
+          "model": "Gemma 4 E4B",
+          "architecture": "Dense",
+          "parameters": "4.5B effective",
+          "contextWindow": "128K tokens",
+          "inferenceMemory": "15 GB BF16 / 7.5 GB SFP8 / 5 GB Q4_0",
+          "platform": "Mobile and laptops",
+          "bestFor": "Stronger local copilots, on-device reasoning, multimodal apps with more headroom"
+        },
+        {
+          "model": "Gemma 4 26B A4B",
+          "architecture": "MoE",
+          "parameters": "25.2B total, 3.8B active",
+          "contextWindow": "256K tokens",
+          "inferenceMemory": "48 GB BF16 / 25 GB SFP8 / 15.6 GB Q4_0",
+          "platform": "Desktop and small servers",
+          "bestFor": "Best balance of quality, speed, and long-context work for most teams"
+        },
+        {
+          "model": "Gemma 4 31B",
+          "architecture": "Dense",
+          "parameters": "30.7B",
+          "contextWindow": "256K tokens",
+          "inferenceMemory": "58.3 GB BF16 / 30.4 GB SFP8 / 17.4 GB Q4_0",
+          "platform": "Large servers",
+          "bestFor": "Highest-end reasoning, coding, and multimodal quality in the Gemma 4 family"
+        }
+      ]
+    },
+    "gemma4SpecsContext": {
+      "eyebrow": "Core Specs",
+      "title": "The Gemma 4 Specs That Actually Matter Before You Build",
+      "subtitle": "For most builders, the key questions are context length, modalities, language coverage, licensing, and app-level features. These are the specs that change implementation choices, hosting cost, and product scope.",
+      "intro": "Gemma 4 is not just a text model refresh. The family combines long context, multimodal input, thinking mode, native system prompts, and function-calling support in one open-weight lineup. The smaller models add audio input, while the larger models extend context to 256K for document-heavy and repository-scale workloads.",
+      "specs": [
+        {
+          "feature": "Release",
+          "value": "March 31, 2026",
+          "whyItMatters": "This is the current Gemma core generation and the one Google now highlights across docs and launch materials."
+        },
+        {
+          "feature": "Input and Output",
+          "value": "All models: text and image → text; E2B and E4B also support audio input",
+          "whyItMatters": "You can build text-only, vision, and lightweight speech understanding flows without switching model families."
+        },
+        {
+          "feature": "Maximum Context Window",
+          "value": "128K tokens on E2B and E4B; 256K tokens on 26B A4B and 31B",
+          "whyItMatters": "Large prompts such as long documents, long chats, or multi-file code context fit in a single request."
+        },
+        {
+          "feature": "Language Coverage",
+          "value": "Over 140 languages",
+          "whyItMatters": "This matters for multilingual products, OCR, and globally deployed assistants."
+        },
+        {
+          "feature": "License and Weights",
+          "value": "Apache 2.0 license with open weights and support for responsible commercial use",
+          "whyItMatters": "You can tune, deploy, and run Gemma 4 in your own stack with fewer licensing constraints."
+        },
+        {
+          "feature": "Reasoning and Control",
+          "value": "Configurable thinking mode, native system role support, structured JSON output, and function calling",
+          "whyItMatters": "These features make Gemma 4 much easier to use for agents, tool use, and instruction-heavy applications."
+        },
+        {
+          "feature": "Visual Handling",
+          "value": "Variable image resolutions and token budgets of 70, 140, 280, 560, or 1120 tokens",
+          "whyItMatters": "You can trade image detail for speed depending on whether the task is OCR, UI reading, chart analysis, or fast frame processing."
+        }
+      ]
+    },
+    "gemma4Benchmarks": {
+      "eyebrow": "Performance",
+      "title": "Official Gemma 4 Benchmark Snapshot",
+      "subtitle": "These scores show where each Gemma 4 size is strongest across reasoning, coding, science, vision, and long-context retrieval. Use them to shortlist a model quickly, then match that shortlist to your latency and memory budget.",
+      "intro": "Gemma 4 is positioned as a model family for reasoning, agentic workflows, coding, and multimodal understanding. The official benchmark tables show a clear pattern: 31B leads, 26B A4B stays surprisingly close while being much more efficient, and E4B and E2B bring meaningful capability to smaller devices.",
+      "tableHeaders": [
+        "Benchmark",
+        "Task Focus",
+        "Gemma 4 31B",
+        "Gemma 4 26B A4B",
+        "Gemma 4 E4B",
+        "Gemma 4 E2B"
+      ],
+      "benchmarks": [
+        {
+          "benchmark": "MMLU Pro",
+          "taskFocus": "Knowledge and reasoning",
+          "gemma431b": "85.2%",
+          "gemma426bA4b": "82.6%",
+          "gemma4E4b": "69.4%",
+          "gemma4E2b": "60.0%",
+          "whatItMeans": "Best quick comparison for general high-level reasoning performance across the family."
+        },
+        {
+          "benchmark": "AIME 2026 (no tools)",
+          "taskFocus": "Math reasoning",
+          "gemma431b": "89.2%",
+          "gemma426bA4b": "88.3%",
+          "gemma4E4b": "42.5%",
+          "gemma4E2b": "37.5%",
+          "whatItMeans": "31B and 26B A4B are the right targets for math-heavy assistants and planning tasks."
+        },
+        {
+          "benchmark": "LiveCodeBench v6",
+          "taskFocus": "Competitive coding",
+          "gemma431b": "80.0%",
+          "gemma426bA4b": "77.1%",
+          "gemma4E4b": "52.0%",
+          "gemma4E2b": "44.0%",
+          "whatItMeans": "If coding is a primary use case, the larger two models are in a different tier from the edge models."
+        },
+        {
+          "benchmark": "GPQA Diamond",
+          "taskFocus": "Scientific reasoning",
+          "gemma431b": "84.3%",
+          "gemma426bA4b": "82.3%",
+          "gemma4E4b": "58.6%",
+          "gemma4E2b": "43.4%",
+          "whatItMeans": "A strong signal for technical and expert-facing workflows."
+        },
+        {
+          "benchmark": "MMMU Pro",
+          "taskFocus": "Multimodal reasoning",
+          "gemma431b": "76.9%",
+          "gemma426bA4b": "73.8%",
+          "gemma4E4b": "52.6%",
+          "gemma4E2b": "44.2%",
+          "whatItMeans": "Vision tasks benefit heavily from the larger models when accuracy matters more than footprint."
+        },
+        {
+          "benchmark": "MRCR v2 (128K, 8-needle)",
+          "taskFocus": "Long-context retrieval",
+          "gemma431b": "66.4%",
+          "gemma426bA4b": "44.1%",
+          "gemma4E4b": "25.4%",
+          "gemma4E2b": "19.1%",
+          "whatItMeans": "For large-document and repository-scale prompting, 31B is the strongest long-context choice."
+        }
+      ]
+    },
+    "gemma4FineTuning": {
+      "eyebrow": "カスタマイズ",
+      "title": "実践的なプロダクト開発のための Gemma 4 ファインチューニング手法",
+      "subtitle": "プロンプティングだけでは不十分で、特定のドメイン、ワークフロー、または役割において Gemma 4 のパフォーマンスを向上させたい場合に、ファインチューニングが重要になります。実用的なパスとしては、テキストタスク向けの軽量なアダプターチューニングと、画像＋テキストタスク向けのマルチモーダルアダプターチューニングがあります。",
+      "intro": "公式の Gemma チューニングドキュメントは、「漠然とした改善ではなく、定義されたタスクのためにチューニングする」というシンプルなルールに基づいています。多くの開発者にとって、QLoRA はフルモデルチューニングよりもハードウェア要件を大幅に低く抑えられるため、最も現実的な開始点となります。",
+      "steps": [
+        {
+          "title": "明確なチューニング目標から始める",
+          "description": "カスタマーサポート、Text-to-SQL、製品説明文の生成など、ベースモデルのパフォーマンスを向上させたいタスクや役割を選択します。タスクが具体的で繰り返される場合にファインチューニングを使用します。"
+        },
+        {
+          "title": "チューニングパスを選択する",
+          "description": "指示や生成タスクにはテキストチューニングを、データセットに画像とテキストが含まれる場合はビジョンチューニングを使用します。テキスト QLoRA ガイドでは Text-to-SQL を、ビジョン QLoRA ガイドでは画像＋テキストの製品説明を例示しています。"
+        },
+        {
+          "title": "現実的なフレームワークを選択する",
+          "description": "Gemma 4 は、Keras with LoRA、Gemma ライブラリ、Hugging Face ベースのワークフロー、GKE、および Vertex AI をサポートしています。多くの開発者にとって、Hugging Face と TRL の組み合わせが最も直接的なパスです。"
+        },
+        {
+          "title": "ハードウェアに合わせたワークフローを選択する",
+          "description": "公式のテキスト QLoRA の例は、T4 16GB のセットアップ向けに設計されています。ビジョン QLoRA ガイドでは、NVIDIA L4 や A100 など、16GB 以上のメモリを搭載した BF16 対応の GPU が必要です。"
+        },
+        {
+          "title": "効率を重視する場合は QLoRA を使用する",
+          "description": "QLoRA はベースモデルを 4-bit に量子化したまま元の重みを凍結し、追加された LoRA アダプターのみをトレーニングします。これにより、高いタスクパフォーマンスを維持しながらメモリ使用量を抑えることができます。"
+        },
+        {
+          "title": "適切な形式でデータを準備する",
+          "description": "目的の動作に直接一致するデータセットを構築し、TRL や SFTTrainer を使用した対話形式のトレーニング用にフォーマットします。公式のテキストガイドでは、大規模な合成 Text-to-SQL データセットを使用しています。"
+        },
+        {
+          "title": "評価、比較、そしてデプロイ",
+          "description": "トレーニング後、ベースモデルとの推論比較を行い、タスクの改善を確認してから、チューニング済みモデルまたはアダプターをデプロイします。フレームワークの選択が出力形式に影響するため、デプロイ形式は早い段階で決定してください。"
+        }
+      ],
+      "quickTips": [
+        "テキストタスクには QLoRA と T4 クラスの GPU から始めてください。タスク適応のためにフルファインチューニングが必要になることは稀です。",
+        "データセットは、Gemma 4 がすでに理解している指示チューニング済みのチャット形式を反映するようにフォーマットしてください。",
+        "有意義な改善シグナルを得るために、評価セットはトレーニングデータと同じ分布から抽出してください。",
+        "MoE モデルの 26B A4B は効率的なアクティブパラメータを持っていますが、トレーニング中のチェックポイントサイズには総パラメータ数が影響します。",
+        "指示タスクの開始点としては、事前学習済みのベースモデルではなく、Gemma 4 -it チェックポイントを使用してください。"
+      ]
+    },
+    "gemma4PromptGuide": {
+      "eyebrow": "プロンプティング",
+      "title": "Gemma 4 プロンプトガイド",
+      "subtitle": "Gemma 4 では、ネイティブのシステム指示、マルチモーダルプレースホルダー、思考やツール使用のための組み込みコントロールを備えた、新しいターンベースのプロンプト形式が導入されました。",
+      "intro": "このガイドでは、公式の Gemma 4 形式を実践的なプロンプトライブラリとして解説します。すべてのやり取りをターンとして構造化し、振る舞いやグローバルルールにはシステムロールを使用し、必要に応じて画像や音声のプレースホルダーを挿入します。思考やツール使用は、タスクに実際にメリットがある場合にのみ有効にします。",
+      "items": [
+        {
+          "title": "基本的なチャットスケルトン",
+          "summary": "Gemma 4 は、ターンマーカーで囲まれたネイティブの system、user、model ロールを使用します。",
+          "highlights": [
+            "グローバルな指示には system を使用",
+            "現在のリクエストには user を使用",
+            "生成の開始点として model を使用"
+          ],
+          "template": "<|turn>system\nYou are a helpful assistant.<turn|>\n<|turn>user\nSummarize the following article in 5 bullets.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "システムプロンプトのパターン",
+          "summary": "毎回繰り返すのではなく、固定の振る舞いルールを 1 つのシステムターンに記述します。",
+          "highlights": [
+            "スタイル、範囲、出力形式の指定に有効",
+            "ネイティブのシステムロールサポートは Gemma 4 から開始",
+            "簡潔かつタスク固有の内容にする"
+          ],
+          "template": "<|turn>system\nYou are a technical writer. Answer in clear English, use short paragraphs, and include one practical example.<turn|>\n<|turn>user\nExplain function calling for a beginner.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "マルチモーダルプレースホルダー",
+          "summary": "画像や音声のエンベディングを挿入する場所を示すために、プレースホルダートークンを使用します。",
+          "highlights": [
+            "画像には <|image|> を使用",
+            "音声には <|audio|> を使用",
+            "プロセッサがトークナイズ後にプレースホルダーをエンベディングに置換"
+          ],
+          "template": "<|turn>user\nDescribe this image: <|image|>\n\nThen transcribe this clip: <|audio|><turn|>\n<|turn>model"
+        },
+        {
+          "title": "思考対応プロンプト",
+          "summary": "システム指示の中に <|think|> を配置することで、思考モードが有効になります。",
+          "highlights": [
+            "推論が重要なタスクで有効にする",
+            "単純な直接生成の場合はオフにする",
+            "思考とその他のグローバル指示の両方に 1 つのシステムターンを使用する"
+          ],
+          "template": "<|turn>system\n<|think|>You are a careful reasoning assistant.<turn|>\n<|turn>user\nCompare two pricing models and recommend one for a startup.<turn|>\n<|turn>model"
+        },
+        {
+          "title": "ツール対応プロンプト構造",
+          "summary": "ツールの宣言はシステムターンで行い、ツール呼び出しとツール応答は専用のコントロールトークンで処理されます。",
+          "highlights": [
+            "API、検索、計算機、外部データ参照に有用",
+            "ツール使用はプレーンテキストの模倣ではなく構造化されている",
+            "同じターン内で推論とツール使用を同時に行える"
+          ],
+          "template": "Define tools in the system turn using the tool declaration token block, then set user and model turns as usual. Gemma 4 handles the rest with structured tool_call and tool_response tokens."
+        }
+      ]
+    },
+    "gemma4ThinkingMode": {
+      "eyebrow": "推論",
+      "title": "Gemma 4 思考モード",
+      "subtitle": "思考モードを使用すると、Gemma 4 は最終的な回答の前に推論チャネルを生成でき、プロセッサはアプリケーションで使用するために両方の部分を分離できます。",
+      "intro": "思考モードは、曖昧な質問、数学、コーディング、ツール計画、マルチモーダル分析など、回答前の中間推論が役立つタスクに最適です。Gemma 4 では、チャットテンプレートレベルで有効にし、推論をライブでストリーミングし、出力を思考ブロックとユーザー向けの回答ブロックに分割できます。",
+      "steps": [
+        {
+          "step": 1,
+          "title": "適切なタスクを選択する",
+          "description": "短い直接的な回答ではなく、分解、比較、計画、または慎重な解釈が必要なリクエストに対して思考モードを使用します。",
+          "details": [
+            "適したタスク: 数学、コードのデバッグ、構造化された意思決定、画像＋テキストの推論",
+            "不要なケース: 単純な書き換え、短い要約、単純な事実確認",
+            "公式の例ではテキストのみと画像＋テキストの両方のワークフローをカバー"
+          ]
+        },
+        {
+          "step": 2,
+          "title": "チャットテンプレートで思考を有効にする",
+          "description": "Hugging Face Transformers では、apply_chat_template() で enable_thinking=True を設定します。トークンレベルでは、Gemma 4 はシステムターンで <|think|> を使用します。",
+          "details": [
+            "E2B および E4B: 思考オフではシンプルな user-model フローを使用し、思考オンでは <|think|> を含むシステムターンを追加",
+            "26B A4B および 31B: 公式テンプレートには、出力を安定させるために思考オフ時でも空の思考トークンが含まれている",
+            "思考は会話レベルで有効にするように設計されている"
+          ]
+        },
+        {
+          "step": 3,
+          "title": "結果の生成と分離",
+          "description": "モデルは最初に推論チャネルを出力し、その後に最終的な回答を出力できます。TextStreamer でストリーミングし、parse_response() で分割できます。",
+          "details": [
+            "processor.parse_response() は、分離された思考内容と回答内容を返す",
+            "これはテキストプロンプトと画像＋テキストプロンプトの両方で機能",
+            "ターンがエージェント的になる場合、推論チャネルにツール呼び出しを含めることも可能"
+          ]
+        },
+        {
+          "step": 4,
+          "title": "マルチターンチャットを正しく処理する",
+          "description": "通常のマルチターン会話では、履歴を戻す前に前のターンで生成された思考を削除します。ツール呼び出しのターンでは、ツールサイクルが終了するまで思考の流れを維持します。",
+          "details": [
+            "通常のチャット: 次のターンの前に以前の思考ブロックを削除",
+            "ツール使用の例外: 同じターン内の関数呼び出し間では思考を削除しない",
+            "これにより、エージェントの動作を維持しながらコンテキストをクリーンに保つ"
+          ]
+        }
+      ]
+    },
+    "gemma4FunctionCalling": {
+      "eyebrow": "エージェンティック・ワークフロー",
+      "title": "Gemma 4 関数呼び出し (Function Calling)",
+      "subtitle": "Gemma 4はネイティブな構造化ツール利用をサポートしており、モデルがプレーンテキストで外部アクションを模倣するのではなく、関数をリクエストできるようにします。",
+      "intro": "関数呼び出しは、モデルの出力と実際のアプリケーションの動作を繋ぐ実用的な架け橋です。Gemma 4にライブデータを推測させたりアクションをシミュレートさせたりする代わりに、ツールを定義し、モデルに構造化された呼び出しを生成させ、アプリ内で関数を実行し、その結果をモデルに戻すことで、最終的に自然言語でクリーンな回答を得ることができます。",
+      "steps": [
+        {
+          "step": 1,
+          "title": "ツールを明確に定義する",
+          "description": "手動のJSONスキーマ、またはスキーマに変換された生のPython関数のいずれかを使用して、apply_chat_template()経由でツールを渡します。",
+          "details": [
+            "正確なネストされたパラメータが必要な場合は、手動のJSONスキーマが最適です",
+            "明確な型ヒントとドキュメント文字列を持つシンプルなツールの場合は、生のPython関数が便利です",
+            "ツールの定義には、名前、説明、パラメータの型、および必須フィールドを含める必要があります"
+          ]
+        },
+        {
+          "step": 2,
+          "title": "モデルにツールをリクエストさせる",
+          "description": "Gemma 4はユーザープロンプトと利用可能なツールを受け取り、ツールが必要な場合にはプレーンテキストではなく構造化された関数呼び出しオブジェクトを返します。",
+          "details": [
+            "ツールの使用は、tool、tool_call、tool_responseなどの専用トークンで制御されます",
+            "典型的な例は、天気予報や検索関数です",
+            "回答が外部の状態やシステムのアクションに依存する場合、これはプレーンテキストよりも優れています"
+          ]
+        },
+        {
+          "step": 3,
+          "title": "アプリ内で検証して実行する",
+          "description": "Gemma 4は単独でコードを実行することはできません。アプリケーション側で関数名と引数を解析し、それらを検証して、実際の関数を安全に実行する必要があります。",
+          "details": [
+            "実行前に必ず関数名と引数を検証してください",
+            "安全策なしに生成されたコードに依存しないでください",
+            "本番システムでは、動的な実行ではなく、ツール名を承認済みのハンドラーにマッピングしてください"
+          ]
+        },
+        {
+          "step": 4,
+          "title": "最終回答のためにツールの出力を返す",
+          "description": "ツールの結果をチャット履歴に追加し、Gemma 4に最終的なユーザー向けの回答を生成させます。",
+          "details": [
+            "公式ワークフロー：ツールの定義、モデルのターン、開発者のターン、最終回答",
+            "このパターンは、API、ライブ検索、計算機、設定の更新、およびエージェントループで機能します",
+            "モデルが最終的な回答を正しく根拠付けられるよう、ツールの応答は構造化された状態を維持する必要があります"
+          ]
+        }
+      ]
+    },
+    "gemma4MultimodalGuide": {
+      "eyebrow": "マルチモーダル",
+      "title": "Gemma 4 マルチモーダルガイド",
+      "subtitle": "Gemma 4はすべてのモデルでテキストと画像を処理し、ビデオをフレームとしてサポートし、E2BおよびE4Bではネイティブなオーディオサポートを追加しています。",
+      "intro": "Gemma 4はマルチモーダル入力向けに構築されています。すべてのモデルが画像とビデオ形式の視覚的理解をサポートし、小型モデルにはオーディオ入力が追加されています。また、ランタイムではトークン予算を使用して、視覚的な詳細さと速度のトレードオフを調整できます。これにより、Gemma 4はOCR、キャプション生成、物体検出、音声タスク、および1つのチャットフロー内での混合メディアプロンプトに適しています。",
+      "items": [
+        {
+          "title": "画像理解",
+          "description": "すべての Gemma 4 モデルは、テキストと画像を組み合わせたワークフローをサポートしています。",
+          "highlights": [
+            "一般的なタスク：OCR、物体検出、視覚的質問回答、画像キャプション生成",
+            "1つのプロンプト内での複数の画像にわたる推論をサポート",
+            "スクリーンショット、ドキュメント、製品画像、およびシーン分析に最適"
+          ]
+        },
+        {
+          "title": "ビデオ理解",
+          "description": "すべての Gemma 4 モデルは、ビデオを一連のフレームとして処理できます。",
+          "highlights": [
+            "シーンの説明、対人関係、および状況の要約に適しています",
+            "ビデオはメッセージ配列内のコンテンツアイテムとして渡されます",
+            "サポートされている最大ビデオ長は、毎秒1フレームで60秒です"
+          ]
+        },
+        {
+          "title": "オーディオ理解",
+          "description": "オーディオはE2BおよびE4Bモデルで利用可能です。",
+          "highlights": [
+            "多言語の音声認識、音声翻訳、および一般的な音声理解をサポート",
+            "オーディオトークンのコストは1秒あたり25トークンです",
+            "最大オーディオ長は30秒です"
+          ]
+        },
+        {
+          "title": "視覚トークン予算",
+          "description": "Gemma 4は可変解像度の画像処理を導入しており、タスクに基づいて速度または詳細度を選択できます。",
+          "highlights": [
+            "サポートされている画像予算：70、140、280、560、1120トークン",
+            "高速な分類、キャプション生成、およびビデオフレーム分析には低い予算を使用",
+            "OCR、ドキュメント解析、および小さなテキストの読み取りには高い予算を使用"
+          ]
+        },
+        {
+          "title": "入力準備ルール",
+          "description": "プロセッサがメディアフォーマットの多くを処理しますが、本番環境ではいくつかの制限が重要になります。",
+          "highlights": [
+            "オーディオはモノラル、16 kHz、float32、[-1, 1]に正規化されている必要があります",
+            "画像ファイルのサポートは、ファイルをテンソルに変換するために使用されるフレームワークに依存します",
+            "プロンプトの品質は依然として重要です。具体的な指示は、曖昧なマルチモーダルリクエストよりも優れた結果をもたらします"
+          ]
+        },
+        {
+          "title": "モデル機能の区分",
+          "description": "モバイルや音声を多用するユースケースには最小のモデルを使用し、長いコンテキストを伴う高度な推論には大規模なモデルを使用してください。",
+          "highlights": [
+            "E2BおよびE4B：128Kコンテキストを備えたオーディオ対応の小型モデル",
+            "26B A4Bおよび31B：256Kコンテキストを備えた推論重視の大型モデル",
+            "4つの公式サイズすべてにおいて、ベース版と指示調整（instruction-tuned）版が利用可能"
+          ]
+        }
+      ]
+    },
+    "gemma4GgufQuantization": {
+      "eyebrow": "ローカルデプロイ",
+      "title": "Gemma 4 GGUF と量子化",
+      "subtitle": "お使いのマシンに適合する、最小の Gemma 4 フットプリントを選択してください",
+      "intro": "ほとんどのローカル環境において、実用的な判断は、E2BやE4Bにとどまるか、あるいは26B A4Bの GGUF ビルドに移行するかどうかです。Googleは、4つの公式サイズすべてについて、BF16、SFP8、および4ビット形式のデプロイメント選択肢における概算メモリ必要量をドキュメント化しています。",
+      "items": [
+        {
+          "topic": "公式ローカルエントリポイント",
+          "details": "Googleの Ollama ガイドでは、gemma4:e2b、gemma4:e4b、gemma4:26b、gemma4:31bの4つの Gemma 4 タグが公開されています。LM Studio も、完全なローカル推論のために GGUF とMLXの両方の形式でGemmaモデルをサポートしています。",
+          "practicalTakeaway": "まずはE2BまたはE4Bから始めて軽量なローカルループを構築し、RAM予算に余裕があり、より強力な推論モデルが必要な場合にのみ26Bまたは31Bに移行してください。"
+        },
+        {
+          "topic": "公式サイズ別の概算メモリ",
+          "details": "Googleは、推論メモリの目安をE2B 9.6 GB BF16 / 3.2 GB Q4_0、E4B 15 GB / 5 GB、26B A4B 48 GB / 15.6 GB、31B 58.3 GB / 17.4 GBと記載しています。",
+          "practicalTakeaway": "一般的なローカルマシンを対象とする場合、4ビット形式のデプロイまたは小型のモデルサイズを選択することが、実行可能かどうかの境界線になることが一般的です。"
+        },
+        {
+          "topic": "公式 26B A4B GGUF の例",
+          "details": "公式のggml-org Gemma 4 26B A4B IT GGUF ページでは、起動にllama-serverを推奨しており、Q4_K_Mは16.8 GB、Q8_0は26.9 GB、F16は50.5 GBと記載されています。",
+          "practicalTakeaway": "大規模なローカル Gemma 4 モデルが必要だが、Q8_0やフル16ビットのメモリ使用が困難な場合、Q4_K_Mが最も実用的なデフォルトの選択肢となります。"
+        },
+        {
+          "topic": "量子化による変化",
+          "details": "パラメータ数が多く精度が高いほど一般的に能力は高くなりますが、処理サイクル、メモリ、電力のコストも高くなります。精度を下げるとこれらのコストは削減されますが、能力が低下する可能性があります。",
+          "practicalTakeaway": "量子化を使用してモデルをハードウェアに適合させてください。小型の GGUF ビルドはローカルでの実行を助けますが、それは無料のアップグレードではなく、デプロイのための妥協案であることを理解しておく必要があります。"
+        }
+      ]
+    },
+    "gemma4PytorchGuide": {
+      "eyebrow": "Python ワークフロー",
+      "title": "Gemma 4 PyTorch ガイド",
+      "subtitle": "PyTorch ファーストのスタックから Gemma 4 を実行する",
+      "intro": "Gemma 4 の最短の Python パスは、PyTorch 上の Hugging Face Transformers です。torch と transformers をインストールし、Gemma 4 モデル ID を選択して、マルチモーダルやツール対応のワークフローに進む前に、まずはパイプラインベースのテキスト推論から始めましょう。",
+      "steps": [
+        {
+          "step": "1",
+          "title": "ランタイムのインストール",
+          "description": "Google の Gemma 4 テキスト推論ガイドは、torch、accelerate、transformers、および会話処理用の dialog から始まります。",
+          "code": "pip install torch accelerate\npip install transformers\npip install dialog"
+        },
+        {
+          "step": "2",
+          "title": "公式の Gemma 4 チェックポイントを選択する",
+          "description": "Google の Gemma 4 の例では、4 つの公式な指示調整済み ID が示されています：google/gemma-4-E2B-it、google/gemma-4-E4B-it、google/gemma-4-26B-A4B-it、および google/gemma-4-31B-it。",
+          "code": "MODEL_ID = \"google/gemma-4-E2B-it\""
+        },
+        {
+          "step": "3",
+          "title": "テキスト生成から始める",
+          "description": "最初のレスポンスを得るための最も簡単な方法として、task=\"text-generation\"、device_map=\"auto\"、dtype=\"auto\" を指定した transformers.pipeline を使用します。",
+          "code": "from transformers import pipeline\n\ntxt_pipe = pipeline(\n    task=\"text-generation\",\n    model=MODEL_ID,\n    device_map=\"auto\",\n    dtype=\"auto\"\n)"
+        },
+        {
+          "step": "4",
+          "title": "必要に応じてマルチモーダルやツールへ移行する",
+          "description": "マルチモーダルや関数呼び出しのワークフローでは、AutoProcessor と AutoModelForMultimodalLM を使用し、ツール対応のプロンプト作成のために apply_chat_template を活用します。",
+          "code": "from transformers import AutoProcessor, AutoModelForMultimodalLM\n\nmodel = AutoModelForMultimodalLM.from_pretrained(\n    MODEL_ID, dtype=\"auto\", device_map=\"auto\")\nprocessor = AutoProcessor.from_pretrained(MODEL_ID)"
+        },
+        {
+          "step": "5",
+          "title": "より詳細な制御のためにネイティブ PyTorch を使用する",
+          "description": "Google の PyTorch ガイドには、Kaggle 認証情報の設定、依存関係のインストール、gemma_pytorch のクローン、および直接的なチェックポイント制御による実験のためのマルチモーダルモデルクラスのロード方法が記載されています。",
+          "code": "pip install -q -U torch immutabledict sentencepiece\n\ngit clone https://github.com/google/gemma_pytorch.git"
+        }
+      ]
+    },
+    "gemma4MobileDeployment": {
+      "eyebrow": "オンデバイス AI",
+      "title": "Gemma 4 モバイルデプロイメント",
+      "subtitle": "現在の Android スタックを通じて Gemma 4 をモバイルに導入する",
+      "intro": "Gemma 4 には現在、3 つの実用的なモバイル向けパスがあります。AICore プレビューデバイス上の ML Kit Prompt API、開発者向けの Android Studio ローカルモデルワークフロー、そしてモバイルや組み込みデバイス全体で低レベルのランタイム制御を可能にする LiteRT-LM です。",
+      "steps": [
+        {
+          "step": "1",
+          "title": "目的に合ったパスを選択する",
+          "description": "Android アプリ体験を構築する場合は AICore 上の ML Kit Prompt API を、オフラインでのコーディング支援が必要な場合は Android Studio ローカルモデルを、より低レベルのランタイム制御が必要な場合は LiteRT-LM を使用してください。",
+          "code": "Path by use case:\n- App feature prototype: ML Kit Prompt API + AICore\n- Local coding workflow: Android Studio local model\n- Custom runtime control: LiteRT-LM"
+        },
+        {
+          "step": "2",
+          "title": "AICore でオンデバイスのプロトタイプを作成する",
+          "description": "Google の 2026 年 4 月のプレビューでは、AICore 対応デバイス上の Prompt API フロー内のモデル設定を通じて、Gemma 4 E2B または E4B をターゲットにできます。",
+          "code": "val previewFullConfig = generationConfig {\n    modelConfig = ModelConfig {\n        releaseTrack = ModelReleaseTrack.PREVIEW\n        preference = ModelPreference.FULL\n    }\n}"
+        },
+        {
+          "step": "3",
+          "title": "デバイスの要件を確認する",
+          "description": "プレビューモデルは、AICore 対応デバイス、および Google、MediaTek、Qualcomm の最新 AI アクセラレータで動作します。AI Edge Gallery は、AICore 非対応デバイスでの迅速なモデル確認に利用可能です。",
+          "code": "Testing options:\n- AICore-enabled phone for preview models\n- AI Edge Gallery for quick model checks\n- High-end Android hardware (Pixel 8, Samsung S23+)"
+        },
+        {
+          "step": "4",
+          "title": "開発者向けワークフローに Android Studio を使用する",
+          "description": "Android Studio は現在、ローカルモデルのオプションとして Gemma 4 を推奨しています。Gemma E4B には 12 GB の RAM と 4 GB のストレージが必要で、Gemma 26B MoE には 24 GB の RAM と 17 GB のストレージが必要です。",
+          "code": "Settings > Tools > AI > Model Providers"
+        },
+        {
+          "step": "5",
+          "title": "より詳細なランタイム制御のために LiteRT-LM に切り替える",
+          "description": "LiteRT-LM は、スマートフォンから組み込みシステムまでの言語モデルパイプライン用のクロスプラットフォームライブラリであり、Qualcomm AI Engine Direct や MediaTek NeuroPilot を含む CPU、GPU、NPU パスを備えています。",
+          "code": "LiteRT-LM supports:\n- CPU / GPU execution\n- Qualcomm AI Engine Direct\n- MediaTek NeuroPilot"
+        }
+      ]
+    },
+    "gemma4VsGemma3": {
+      "eyebrow": "モデル比較",
+      "title": "Gemma 4 vs Gemma 3",
+      "subtitle": "Gemma 3 から Gemma 4 へ移行する際の実際の変更点を確認する",
+      "intro": "この比較は、既存の Gemma 3 ワークフローを維持するか、Gemma 4 を中心に再構築するかを検討している開発者向けです。最も明確な違いは、コンテキスト長、制御フォーマット、マルチモーダルの範囲、および各ファミリーの最上位モデルにおけるベンチマークパフォーマンスに現れます。",
+      "tableHeaders": [
+        "項目",
+        "Gemma 4",
+        "Gemma 3",
+        "重要性"
+      ],
+      "items": [
+        {
+          "dimension": "リリースと主要サイズ",
+          "gemma4": "2026 年 3 月 31 日に E2B、E4B、26B A4B、および 31B サイズでリリース。",
+          "gemma3": "2025 年 3 月 10 日に 1B、4B、12B、および 27B サイズでリリースされ、2025 年 8 月 14 日に 270M が追加。",
+          "whyItMatters": "Gemma 4 は、エッジ優先の E モデルと、より大規模なワークステーションクラスのモデルという、より明確なデプロイメント層に合わせてファミリーを整理しています。"
+        },
+        {
+          "dimension": "コンテキストウィンドウ",
+          "gemma4": "E2B と E4B は最大 128K のコンテキストをサポートし、26B A4B と 31B は最大 256K をサポートします。",
+          "gemma3": "4B、12B、27B は 128K のコンテキストをサポートし、1B と 270M は 32K をサポートします。",
+          "whyItMatters": "長いドキュメント、ツールのトレース、またはマルチステップの履歴において、Gemma 4 の大規模モデルは大幅に広い余裕を提供します。"
+        },
+        {
+          "dimension": "マルチモーダル性",
+          "gemma4": "E2B および E4B で画像、動画、テキストと画像の混在、およびネイティブ音声入力をサポートします。",
+          "gemma3": "主要モデルはテキストと画像の入力、およびテキスト出力をサポートします。",
+          "whyItMatters": "ユースケースが画像とテキストを超えて、動画、OCR 重視のフロー、または音声対応のエッジモデルに移行する場合、Gemma 4 はより広範なマルチモーダルファミリーとなります。"
+        },
+        {
+          "dimension": "プロンプトと制御フォーマット",
+          "gemma4": "ネイティブのシステムロールサポートと、ツール、推論、画像、音声用の特殊な制御トークンを追加しています。",
+          "gemma3": "レガシーなフォーマットではユーザー/モデルのターンを使用し、独立したシステムロールはサポートされていません。",
+          "whyItMatters": "エージェントや構造化されたワークフローを構築するチームは、Gemma 4 でよりクリーンな制御インターフェースを利用できます。"
+        },
+        {
+          "dimension": "最上位モデルのベンチマークスナップショット",
+          "gemma4": "Gemma 4 31B: MMLU Pro 85.2, AIME 2026 89.2, LiveCodeBench v6 80.0, GPQA Diamond 84.3。",
+          "gemma3": "Gemma 3 27B (思考なし): MMLU Pro 67.6, AIME 2026 20.8, LiveCodeBench v6 29.1, GPQA Diamond 42.4。",
+          "whyItMatters": "推論、コーディング、または高難易度の QA のためにアップグレードする場合、最上位の Gemma 4 の飛躍は移行を正当化するのに十分な大きさです。"
+        },
+        {
+          "dimension": "デプロイメントプロファイル",
+          "gemma4": "効率的なローカルおよびオンデバイス利用のための E2B および E4B。コンシューマー向け GPU またはワークステーションシナリオのための 26B A4B および 31B。",
+          "gemma3": "1B や 4B のような小規模なクラシックサイズで引き続き強力であり、主要な大規模バリアントでは 27B の最上位モデルと 128K のコンテキストを備えています。",
+          "whyItMatters": "小規模なクラシックサイズがすでにスタックに適合している場合は Gemma 3 を使い続け、新しい制御機能、より大きなコンテキストを持つ最上位モデル、またはより強力なエッジ向けバリアントが必要な場合は Gemma 4 に移行してください。"
         }
       ]
     }
@@ -756,177 +891,197 @@
   "faq": {
     "title": "よくある",
     "titleHighlight": "質問",
-    "subtitle": "Lucid Blocks に関するすべての情報",
+    "subtitle": "Gemma 4 に関するすべての情報",
     "questions": [
       {
-        "question": "Lucid Blocks はシングルプレイヤーゲームですか？",
-        "answer": "はい。Lucid Blocks はシングルプレイヤー専用のゲームであり、マルチプレイヤーや協力プレイの予定はありません。"
+        "question": "Gemma 4 とは何ですか？",
+        "answer": "Gemma 4 は、2026年4月2日にリリースされた Google DeepMind の最新のオープンモデルファミリーです。E2B、E4B、26B A4B、31B の4つのサイズがあり、Apache 2.0 ライセンスの下で、最大256Kのコンテキストでテキスト、画像、オーディオ入力をサポートします。"
       },
       {
-        "question": "Lucid Blocks における Apotheosis システムとは何ですか？",
-        "answer": "Apotheosis は Lucid Blocks のフリーフォーム・フュージョン・クラフトシステムです。決まったレシピに従うのではなく、素材を組み合わせて独自のクラフトパスを発見していきます。"
+        "question": "Gemma 4 のモデルサイズにはどのようなものがありますか？",
+        "answer": "Gemma 4 には4つのサイズがあります：E2B（エッジ、約20億パラメータ）、E4B（エッジ、約40億パラメータ）、26B A4B（MoE、合計260億/アクティブ40億）、31B（デンス）。E2B と E4B はオーディオ入力をサポートし、モバイルおよびノートPCのハードウェアを対象としています。26B A4B と 31B はワークステーションとサーバーを対象としています。"
       },
       {
-        "question": "Lucid Blocks はどこでプレイできますか？",
-        "answer": "Lucid Blocks は現在、Windows向けに Steam で配信されています。Linuxおよび Steam Deckへの対応は、Proton 9.0を通じて提供されています。"
+        "question": "Gemma 4 をローカルで実行するにはどうすればよいですか？",
+        "answer": "最も一般的な方法は Ollama を使用することです。Ollama をインストールし、デフォルトバリアントの場合は ollama pull gemma4 を実行し、ollama run gemma4 を使用してチャットを開始します。より軽量なオプションについては、gemma4:e2b または gemma4:e4b を試してください。LM Studio も、GUIベースのローカルセットアップとして人気のある選択肢です。"
       },
       {
-        "question": "Lucid Blocks の価格はいくらですか？",
-        "answer": "Lucid Blocks は Steam で9.99ドルです。"
+        "question": "Gemma 4 のコンテキストウィンドウはどのくらいですか？",
+        "answer": "Gemma 4 E2B と E4B は 128K のコンテキストウィンドウをサポートしています。Gemma 4 26B A4B と 31B は最大 256K のコンテキストをサポートしており、長い文書、長時間の会話、大規模なコードベースの分析に適しています。"
       },
       {
-        "question": "Lucid Blocks はコントローラーに対応していますか？",
-        "answer": "はい。ただし、メニューがコントローラー操作を前提に設計されていないため、コントローラーでのプレイは推奨されません。キーボードとマウスの方がスムーズに操作できます。"
+        "question": "Gemma 4 26B A4B と Gemma 4 31B の違いは何ですか？",
+        "answer": "Gemma 4 26B A4B は MoE モデルであり、合計260億のパラメータを持ちますが、トークンごとにアクティブなのは約40億のみです。これにより、31B のデンスモデルと比較して、ベンチマークで強力なパフォーマンスを維持しながら、推論の高速化とメモリ使用量の削減を実現しています。"
       },
       {
-        "question": "Lucid Blocks のアップデートはありますか？",
-        "answer": "はい。リリース後にいくつかのコンテンツアップデートを予定していますが、無期限に定期的なスケジュールで継続することを意図したものではありません。"
+        "question": "ローカルセットアップなしで API 経由で Gemma 4 を使用できますか？",
+        "answer": "はい。Gemma 4 は、Gemini API および Google AI Studio を通じて、gemma-4-26b-a4b-it および gemma-4-31b-it として利用可能です。AI Studio で API キーを作成し、google-genai SDK をインストールすれば、ローカルでのモデル管理なしでリクエストの送信を開始できます。"
       }
     ]
   },
   "cta": {
-    "title": "Lucid Blocksを探索する準備はできましたか？",
-    "description": "DiscordのLucid Blocksコミュニティに参加して、ガイドや最新情報、ディスカッションをチェックしましょう！",
-    "joinCommunity": "Discordに参加",
-    "joinGame": "Steamでプレイ"
+    "title": "Gemma 4 を探索する準備はできましたか？",
+    "description": "Discord の Google デベロッパーコミュニティに参加して、Gemma のガイド、モデルのアップデート、開発者向けのディスカッションをチェックしましょう！",
+    "joinCommunity": "Discord に参加",
+    "joinGame": "公式サイト"
   },
   "footer": {
-    "title": "Lucid Blocks Wiki",
-    "description": "Lucid Blocksのクラフト、バイオーム、クリーチャー、実績、サバイバルガイドに関する完全なリソースハブです。",
+    "title": "Gemma 4 Wiki",
+    "description": "Gemma 4 のモデルサイズ、ベンチマーク、プロンプト、ローカルデプロイ、関数呼び出し、ファインチューニングガイドに関する完全なリソースハブです。",
     "resources": "リソース",
     "community": "コミュニティ",
     "legal": "法的情報",
     "discord": "Discord",
     "twitter": "X / Twitter",
-    "steamCommunity": "Steam コミュニティ",
-    "steamStore": "Steam ストア",
-    "about": "このサイトについて",
+    "huggingFace": "Hugging Face",
+    "officialDocs": "公式ドキュメント",
+    "about": "概要",
     "privacy": "プライバシーポリシー",
     "terms": "利用規約",
-    "copyrightNotice": "著作権",
-    "copyright": "© 2026 Lucid Blocks Wiki. Lucid Blocksの開発元とは提携していません。",
-    "disclaimer": "非公式のファン作成リソースサイトです。"
+    "copyrightNotice": "著作権表示",
+    "copyright": "© 2026 Gemma 4 Wiki. Google または Google DeepMind とは提携していません。",
+    "disclaimer": "非公式のファン作成リソースウェブサイトです。"
   },
   "pages": {
-    "guides": {
-      "title": "Lucid Blocks 攻略ガイド",
-      "description": "初心者向けの基本から、高度な Apotheosis 戦略まで網羅した完全攻略ガイド。サバイバルとクラフトを極めましょう。",
-      "metaTitle": "Lucid Blocks 攻略ガイド - 初心者から上級者向けの戦略",
-      "metaDescription": "初心者向けのヒント、Apotheosis システム、サバイバル戦略、そしてシュールなサンドボックスの世界を攻略するための専門的な戦術を網羅した Lucid Blocks 完全ガイド。",
-      "categoryLabel": "ゲームガイド",
-      "whatIs": "ガイドとは？",
-      "whatIsDescription": "ゲームの仕組み、サバイバル戦略、Apotheosis クラフトシステムを網羅した包括的なガイド。最初の一歩から高度なテクニックまで、すべてを学びましょう。",
-      "why": "なぜガイドを読むのか？",
+    "guide": {
+      "title": "Gemma 4 ガイド",
+      "description": "最初のステップから高度な推論、思考モード、実世界のユースケースまで、Gemma 4 に関するすべてを網羅した包括的なガイドです。",
+      "metaTitle": "Gemma 4 ガイド - チュートリアル、リリースノート、スタートガイド",
+      "metaDescription": "リリース詳細、思考モード、チュートリアル、開発者向けの実用的なユースケースを網羅したステップバイステップのガイドで、Gemma 4 をゼロから学びましょう。",
+      "categoryLabel": "ガイド＆チュートリアル",
+      "whatIs": "Gemma 4 とは何ですか？",
+      "whatIsDescription": "Gemma 4 は、2026年4月にリリースされた Google DeepMind のオープンウェイトモデルファミリーです。これらのガイドでは、変更点、その重要性、そして活用方法など、全体像を解説します。",
+      "why": "なぜこれらのガイドを読むべきなのですか？",
       "whySteps": {
-        "step1Title": "基本システムを学ぶ",
-        "step1Description": "Apotheosis システムを理解し、初心者が陥りやすいミスを回避しましょう",
-        "step2Title": "素早い進行",
-        "step2Description": "シュールな世界で生き残り、繁栄するための実証済みの道筋を辿りましょう",
-        "step3Title": "戦略を極める",
-        "step3Description": "探索とクラフトのための高度な戦術を身につけましょう"
+        "step1Title": "リリースの理解",
+        "step1Description": "Gemma 4 の機能、アーキテクチャ、および以前の世代との違いについて最新情報を入手しましょう。",
+        "step2Title": "思考モードの学習",
+        "step2Description": "思考トークンシステムを使用して、Gemma 4 に組み込まれた推論を有効にし、使用する方法を確認してください。",
+        "step3Title": "実用的なチュートリアルの実行",
+        "step3Description": "最初のプロンプトから本番環境への統合まで、ステップバイステップで解説します。"
       },
-      "featured": "注目・必須ガイド",
-      "all": "すべてのガイド"
+      "featured": "注目のガイド",
+      "all": "すべての Gemma 4 ガイド"
     },
-    "crafting": {
-      "title": "Lucid Blocks クラフト",
-      "description": "エッセンスの仕組み、レシピ、強力なアイテムを作るためのクラフト戦略など、Apotheosis 合成システムをマスターしましょう。",
-      "metaTitle": "Lucid Blocks クラフト - Apotheosis システムとレシピ",
-      "metaDescription": "Lucid Blocks の Apotheosis クラフトシステムを極める。エッセンスの仕組み、合成レシピ、強力な道具や武器を作るための戦略を学びましょう。",
-      "categoryLabel": "クラフトシステム",
-      "whatIs": "クラフトとは？",
-      "whatIsDescription": "Apotheosis システムは、最大6つのアイテムを組み合わせて新しいレシピを発見する、独自のエッセンス駆動型合成メカニズムです。固定されたクラフトメニューはなく、実験が鍵となります。",
-      "why": "なぜクラフトを極めるのか？",
+    "models": {
+      "title": "Gemma 4 モデル",
+      "description": "すべての Gemma 4 モデルのサイズ、パラメータ、コンテキストウィンドウ、ハードウェア要件を比較して、適切なチェックポイントを選択してください。",
+      "metaTitle": "Gemma 4 モデル - サイズ、パラメータ、コンテキストウィンドウ",
+      "metaDescription": "Gemma 4 E2B、E4B、26B A4B、31B のモデルサイズを比較します。デンス vs MoE、コンテキストウィンドウ、ローカルおよびクラウドデプロイのハードウェア要件について理解しましょう。",
+      "categoryLabel": "モデル概要",
+      "whatIs": "Gemma 4 モデルとは何ですか？",
+      "whatIsDescription": "Gemma 4 には、E2B、E4B、26B A4B (MoE)、31B デンスの4つのサイズがあります。それぞれ、モバイルデバイスからハイエンドワークステーションまで、異なるハードウェアとユースケースに合わせて調整されています。",
+      "why": "なぜ Gemma 4 モデルを比較するのですか？",
       "whySteps": {
-        "step1Title": "強力なアイテムをアンロック",
-        "step1Description": "合成を通じて、不可欠な道具、武器、移動用装備を発見しましょう",
-        "step2Title": "エッセンスを理解する",
-        "step2Description": "アイテムのエッセンスがどのように組み合わさり、予測可能な結果を生み出すかを学びましょう",
-        "step3Title": "リソースを最適化",
-        "step3Description": "希釈メカニズムを使用して、安価な材料から出力を最大化しましょう"
+        "step1Title": "適切なサイズの選択",
+        "step1Description": "ハードウェアの制約と品質要件に適合するモデルチェックポイントを選択してください。",
+        "step2Title": "デンス vs MoE の理解",
+        "step2Description": "26B MoE が、26B デンスモデルと比較して予想以上に高速に動作する理由を学びましょう。",
+        "step3Title": "デプロイの計画",
+        "step3Description": "大きなチェックポイントをダウンロードする前に、正確なメモリとストレージの要件を確認してください。"
       },
-      "featured": "注目・必須ガイド",
-      "all": "すべてのクラフトガイド"
+      "featured": "注目のモデル",
+      "all": "すべての Gemma 4 モデルガイド"
     },
-    "items": {
-      "title": "Lucid Blocks アイテム",
-      "description": "道具、武器、移動用装備、収納ソリューションを網羅した詳細なアイテムガイド。クラフトレシピや使い方のヒントも掲載。",
-      "metaTitle": "Lucid Blocks アイテム - 道具、武器、装備ガイド",
-      "metaDescription": "道具、武器、移動用装備、収納を含む Lucid Blocks の完全アイテムデータベース。各アイテムを効果的に作り、使用する方法を学びましょう。",
-      "categoryLabel": "アイテム＆装備",
-      "whatIs": "アイテムとは？",
-      "whatIsDescription": "道具、武器、移動用装備、機能的なアイテムに関する包括的なガイド。クラフトレシピ、使用戦略、最適な組み合わせを学びましょう。",
-      "why": "なぜアイテムガイドをチェックするのか？",
+    "requirements": {
+      "title": "Gemma 4 要件",
+      "description": "RAM、VRAM、CPU、GPU、ノートPC、スマートフォンの互換性など、Gemma 4 モデルをローカルで実行するためのハードウェアおよびソフトウェア要件です。",
+      "metaTitle": "Gemma 4 要件 - RAM、VRAM、ハードウェアガイド",
+      "metaDescription": "各モデルサイズの RAM、VRAM、GPU、CPU 仕様を含む Gemma 4 のハードウェア要件を確認してください。サポートされているノートPC、PC、スマートフォンのセットアップについて学びましょう。",
+      "categoryLabel": "システム要件",
+      "whatIs": "Gemma 4 要件とは何ですか？",
+      "whatIsDescription": "Gemma 4 をダウンロードする前に、お使いのハードウェアで処理できるかどうかを知る必要があります。これらのガイドでは、すべてのモデルサイズの正確な RAM、VRAM、および計算要件を詳しく説明しています。",
+      "why": "なぜ最初に要件を確認するのですか？",
       "whySteps": {
-        "step1Title": "クラフトレシピを学ぶ",
-        "step1Description": "Apotheosis を使用して、不可欠な道具や武器をクラフトする方法を発見しましょう",
-        "step2Title": "装備を最適化",
-        "step2Description": "プレイスタイルや進行状況に合わせて最適なアイテムを選びましょう",
-        "step3Title": "生存率を高める",
-        "step3Description": "移動用装備や武器を装備して、危険な世界を探索しましょう"
+        "step1Title": "無駄なダウンロードの回避",
+        "step1Description": "ダウンロードする前に、現在のセットアップでモデルが実際に動作するかどうかを確認してください。",
+        "step2Title": "デバイスの最適化",
+        "step2Description": "ノートPC、デスクトップ、またはスマートフォンに適した量子化レベルとモデルサイズを見つけてください。",
+        "step3Title": "ハードウェアアップグレードの計画",
+        "step3Description": "より大規模または高速な Gemma 4 バリアントを実行する場合に、具体的に何が必要かを理解しましょう。"
       },
-      "featured": "注目・必須ガイド",
-      "all": "すべてのアイテム"
+      "featured": "注目の要件",
+      "all": "すべての Gemma 4 要件ガイド"
     },
-    "biomes": {
-      "title": "Lucid Blocks バイオーム",
-      "description": "世界の各地域、環境の特徴、リソースの場所、各バイオームでのサバイバルのヒントを探索しましょう。",
-      "metaTitle": "Lucid Blocks バイオーム - 世界の地域と探索",
-      "metaDescription": "ティアマナ・レイライン、Fog Meadow、シュールな地域を含む Lucid Blocks のバイオームを探索。リソースを見つけ、危険を回避し、無限の世界を旅しましょう。",
-      "categoryLabel": "世界の地域",
-      "whatIs": "バイオームとは？",
-      "whatIsDescription": "世界のさまざまな地域、環境の特徴、リソースの分布、危険地帯に関するガイド。各エリアで何が待ち受けているか、どのように準備すべきかを学びましょう。",
-      "why": "なぜバイオームを探索するのか？",
+    "ollama": {
+      "title": "Gemma 4 Ollama",
+      "description": "Ollama で Gemma 4 をローカルで実行しましょう。セットアップガイド、モデルタグ、MLX サポート、全モデルサイズのトラブルシューティングを掲載しています。",
+      "metaTitle": "Gemma 4 Ollama - ローカルセットアップ、モデル、MLX サポート",
+      "metaDescription": "Mac、Linux、Windows で Ollama を使用して Gemma 4 をセットアップ。適切なモデルタグの検索、Apple Silicon での MLX 有効化により、数分で Gemma 4 を実行できます。",
+      "categoryLabel": "OLLAMA セットアップ",
+      "whatIs": "Ollama の Gemma 4 とは？",
+      "whatIsDescription": "Ollama は、Gemma 4 をローカルで実行する最も簡単な方法です。コマンド 1 つで任意の Gemma 4 バリアントをプルし、チャットの開始やアプリへの統合が可能です。",
+      "why": "なぜ Gemma 4 に Ollama を使うのか？",
       "whySteps": {
-        "step1Title": "リソースを見つける",
-        "step1Description": "各地域特有の希少な材料やエッセンスの場所を特定しましょう",
-        "step2Title": "危険を回避",
-        "step2Description": "環境の危険や敵対的な生物について理解しましょう",
-        "step3Title": "探索を計画",
-        "step3Description": "各バイオームのタイプに合わせて、適切な道具と装備を準備しましょう"
+        "step1Title": "コマンド 1 つでセットアップ",
+        "step1Description": "`ollama pull gemma4` を実行するだけで準備完了。Python 環境や CUDA の設定は不要です。",
+        "step2Title": "Apple Silicon サポート",
+        "step2Description": "Mac で MLX バックエンドを使用し、Metal アクセラレーションによる高速で省電力な推論を実現します。",
+        "step3Title": "API 互換性",
+        "step3Description": "Ollama は OpenAI 互換の REST API を提供しているため、あらゆるアプリで Gemma 4 への切り替えが容易です。"
       },
-      "featured": "注目・必須ガイド",
-      "all": "すべてのバイオーム"
+      "featured": "注目のガイドと必須知識",
+      "all": "すべての Gemma 4 Ollama ガイド"
     },
-    "building": {
-      "title": "Lucid Blocks 建築",
-      "description": "クオリア個人次元、拠点建築、収納管理、クリエイティブな建設テクニックをマスターしましょう。",
-      "metaTitle": "Lucid Blocks 建築 - クオリアと拠点建設",
-      "metaDescription": "クオリア個人次元、拠点建設、収納ソリューション、クリエイティブな建築テクニックなど、Lucid Blocks の建築を極めましょう。",
-      "categoryLabel": "建築＆拠点",
-      "whatIs": "建築とは？",
-      "whatIsDescription": "クオリア個人次元システム、拠点建設、収納管理、クリエイティブな建築に関するガイド。シュールな世界の中に自分だけの安息の地を作る方法を学びましょう。",
-      "why": "なぜ拠点を建てるのか？",
+    "install": {
+      "title": "Gemma 4 インストール",
+      "description": "Windows、Linux、Mac への Gemma 4 インストール手順。ローカルセットアップ、GGUF のダウンロード、オフライン展開を網羅しています。",
+      "metaTitle": "Gemma 4 インストール - Windows、Linux、Mac セットアップガイド",
+      "metaDescription": "Windows、Linux、Mac、GGUF のダウンロード、オフライン設定、ローカル展開オプションをカバーするステップバイステップガイドで、デバイスに Gemma 4 をインストールしましょう。",
+      "categoryLabel": "インストール",
+      "whatIs": "Gemma 4 のインストール方法は？",
+      "whatIsDescription": "Gemma 4 のインストールとは、モデルの重みと互換性のあるランタイムをマシンに導入することを意味します。ワンクリックツールから手動の GGUF 設定まで、あらゆるプラットフォームと方法を解説します。",
+      "why": "なぜインストールガイドが必要なのか？",
       "whySteps": {
-        "step1Title": "安全な場所を作る",
-        "step1Description": "収納やクラフト作業のための安全な拠点を確立しましょう",
-        "step2Title": "リソースを管理",
-        "step2Description": "収納ソリューションを使用して、材料を効率的に整理しましょう",
-        "step3Title": "クオリアをアンロック",
-        "step3Description": "究極の利便性を備えた個人のポケット次元にアクセスしましょう"
+        "step1Title": "最初から正しく設定",
+        "step1Description": "Windows、Linux、Mac 向けのプラットフォーム別手順により、よくある落とし穴を回避できます。",
+        "step2Title": "ランタイムの選択",
+        "step2Description": "スキルレベルや目的に応じて、Ollama、LM Studio、Python などから最適なツールを選択できます。",
+        "step3Title": "完全オフライン化",
+        "step3Description": "初期設定後、インターネット接続なしで Gemma 4 をダウンロードして実行する方法を学びます。"
       },
-      "featured": "注目・必須ガイド",
-      "all": "すべての建築ガイド"
+      "featured": "注目のガイドと必須知識",
+      "all": "すべての Gemma 4 インストールガイド"
     },
-    "support": {
-      "title": "Lucid Blocks サポート",
-      "description": "テクニカルサポート、プラットフォームの互換性、パフォーマンスの最適化、一般的な問題のトラブルシューティング。",
-      "metaTitle": "Lucid Blocks サポート - テクニカルヘルプと修正",
-      "metaDescription": "Steam Deck のセットアップ、クラッシュの修正、パフォーマンスの最適化、プラットフォームの互換性ガイドなど、Lucid Blocks のテクニカルサポートを受けられます。",
-      "categoryLabel": "テクニカルサポート",
-      "whatIs": "サポートとは？",
-      "whatIsDescription": "プラットフォームの互換性、パフォーマンスの最適化、クラッシュの修正、一般的な問題を網羅したテクニカルガイド。Steam Deck、マルチプレイヤーに関する質問、設定などのヘルプ。",
-      "why": "なぜサポートをチェックするのか？",
+    "benchmark": {
+      "title": "Gemma 4 ベンチマーク",
+      "description": "MMMU、LiveCodeBench、GPQA、AIME における Gemma 4 のパフォーマンスベンチマーク。競合するオープンモデルやクローズドモデルとの直接比較を掲載。",
+      "metaTitle": "Gemma 4 ベンチマーク - MMMU、GPQA、コーディング性能",
+      "metaDescription": "推論、コーディング、数学、マルチモーダルタスクにおける Gemma 4 のベンチマーク結果を確認。GPT-4o や Qwen などの最先端モデルとの比較をご覧いただけます。",
+      "categoryLabel": "ベンチマーク",
+      "whatIs": "Gemma 4 ベンチマークとは？",
+      "whatIsDescription": "ベンチマークは、推論、コーディング、数学、科学、マルチモーダルタスクにおけるモデルの性能を測定する標準化されたテストです。Gemma 4 の結果は、Google 公式のモデルカードや第三者機関の評価に基づいています。",
+      "why": "なぜ Gemma 4 のベンチマークを見るのか？",
       "whySteps": {
-        "step1Title": "技術的な問題を解決",
-        "step1Description": "クラッシュ、パフォーマンスの問題、互換性の問題を解決しましょう",
-        "step2Title": "パフォーマンスを最適化",
-        "step2Description": "お使いのプラットフォームで最高の体験を得るために設定を構成しましょう",
-        "step3Title": "プラットフォームの互換性",
-        "step3Description": "Steam Deck、コントローラーのサポート、システム要件について学びましょう"
+        "step1Title": "実際の性能を測定",
+        "step1Description": "プロジェクトに採用する前に、標準化されたタスクで Gemma 4 がどのようなスコアを出すかを確認できます。",
+        "step2Title": "モデル間の比較",
+        "step2Description": "Gemma 4 が他の選択肢より優れている点や、トレードオフが存在する箇所を把握できます。",
+        "step3Title": "タスクと強みのマッチング",
+        "step3Description": "コーディング、推論、数学、マルチモーダルタスクのどれにどの Gemma 4 バリアントが適しているかを特定できます。"
       },
-      "featured": "注目・必須ガイド",
-      "all": "すべてのサポート記事"
+      "featured": "注目のガイドと必須知識",
+      "all": "すべての Gemma 4 ベンチマークガイド"
+    },
+    "comparison": {
+      "title": "Gemma 4 比較",
+      "description": "Gemma 4 と他の主要モデルの直接比較。パフォーマンス、コスト、速度、ローカル展開のトレードオフを網羅しています。",
+      "metaTitle": "Gemma 4 比較 - GPT-4o、Qwen、その他のモデルとの比較",
+      "metaDescription": "Gemma 4 を GPT-4o、Qwen、Llama などの最先端モデルと比較。性能、ハードウェア要件、ライセンス、ローカル展開オプションを評価します。",
+      "categoryLabel": "モデル比較",
+      "whatIs": "なぜ Gemma 4 を比較するのか？",
+      "whatIsDescription": "多くのモデルが存在する中で最適なものを選択するには、直接の比較が不可欠です。これらのガイドでは、実際のベンチマークと実用的な基準に基づいて、Gemma 4 を競合モデルと徹底比較します。",
+      "why": "なぜ Gemma 4 の比較記事を読むのか？",
+      "whySteps": {
+        "step1Title": "正しい選択をするために",
+        "step1Description": "ワークフローにモデルを導入する前に、Gemma 4 の立ち位置を正確に把握できます。",
+        "step2Title": "トレードオフの理解",
+        "step2Description": "主要な代替モデルとの間で、性能、速度、メモリ使用量、ライセンスを比較できます。",
+        "step3Title": "最適なモデルを見つける",
+        "step3Description": "Gemma 4 を選ぶべきケースと、他のモデルが適しているケースについて明確な指針を提供します。"
+      },
+      "featured": "注目のガイドと必須知識",
+      "all": "すべての Gemma 4 比較ガイド"
     }
   }
 }
