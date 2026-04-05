@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Gemma 4 Jan AI Setup: Complete Local Coding Guide 2026",
+  description: "Learn how to configure the Gemma 4 Jan AI setup for high-performance local coding. Step-by-step guide for API integration and Claude Code optimization.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Jan+AI+Setup",
+  date: "2026-04-05",
+  author: "Gemma Wiki Team"
+}
+
+The release of Google’s latest open-source models has completely shifted the landscape for developers and power users looking for local efficiency. Implementing a proper **gemma 4 jan ai setup** allows you to leverage 26B and 31B parameter models directly within a streamlined desktop environment. This configuration is particularly potent for those who want to move away from expensive subscription-based models while maintaining high-level reasoning and agentic capabilities. By using Jan.ai as your primary orchestrator, you can bridge the gap between local hardware and powerful cloud APIs, creating a seamless workflow for coding, debugging, and general task automation.
+
+In this guide, we will walk through the entire **gemma 4 jan ai setup** process, ensuring you have the correct API configurations and model parameters to outperform standard industry benchmarks. Whether you are integrating this into Claude Code or using it as a standalone local assistant, following these steps will ensure your environment is optimized for the 2026 tech stack.
+
+## Why Choose Gemma 4 for Your Local Workflow?
+
+Gemma 4 represents a significant leap over its predecessors, built on the refined Gemini 3 architecture. Unlike previous iterations, the 26B and 31B models offer a unique balance of speed and intelligence that rivals much larger models like Qwen 3.5. One of the standout features of Gemma 4 is its performance in ELO scores—a human-voting system that ranks model responses based on quality rather than just synthetic benchmarks.
+
+| Feature | Gemma 4 (31B) | Claude Haiku | Qwen 3.5 (35B) |
+| :--- | :--- | :--- | :--- |
+| **Open Source** | **Yes** | No | Yes |
+| **Agentic Capability** | **High** | Moderate | High |
+| **Multimodal Support** | **Yes** | Yes | Yes |
+| **Cost (Free Tier)** | **Available** | Limited | Available |
+
+The ELO system has shown that Gemma 4 consistently provides more "human-preferred" answers in coding and reasoning tasks compared to models twice its size. This makes it a primary candidate for your local Jan.ai environment, especially when you need a model that can handle complex logic without the latency of a massive 400B parameter cluster.
+
+## Step-by-Step Gemma 4 Jan AI Setup
+
+To begin, you must have the Jan desktop application installed. Jan is a leading open-source alternative to proprietary AI interfaces, allowing for deep customization of model providers and local server settings.
+
+### 1. Install Jan Desktop
+Navigate to the official [Jan.ai website](https://jan.ai/) and download the version compatible with your operating system (Windows, Linux, or macOS). The installation is straightforward; follow the prompts and launch the application once complete.
+
+### 2. Configure the Google AI Studio Provider
+The most cost-effective way to run the **gemma 4 jan ai setup** in 2026 is through the official Google AI Studio provider. While OpenRouter is an option, using the official API often grants access to free tiers that are not available through third-party aggregators.
+
+*   Open Jan and click on the **Settings** gear icon in the bottom-left corner.
+*   Select **Model Provider** from the sidebar.
+*   Locate **Gemini** (or Google AI Studio) and toggle it on.
+*   You will see a field for an **API Key**.
+
+### 3. Generate Your API Key
+Follow these steps to secure your credentials:
+1.  Visit the Google AI Studio dashboard.
+2.  Click on **Create API Key**.
+3.  Choose an existing project or create a new one specifically for your Jan integration.
+4.  Copy the generated key and return to Jan.
+5.  Paste the key into the API field and click **Refresh**.
+
+> **⚠️ Warning:** Never share your API key in public repositories or screenshots. In 2026, automated bots can drain your rate limits within seconds if a key is exposed.
+
+### 4. Selecting the Gemma 4 Models
+Once the provider is refreshed, you will see a list of available models. For a high-performance **gemma 4 jan ai setup**, look for the following:
+*   **Gemma 4 31B:** Best for complex coding and agentic workflows.
+*   **Gemma 4 26B:** Optimized for speed and everyday reasoning tasks.
+
+Select your preferred version and click **Download** or **Use** to initialize the model within the Jan interface.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/dhlrZwH1Uzg"
+    title="Gemma 4 + Claude Code + Jan : Best FREE AI Coding Setup"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Integrating Gemma 4 with Claude Code
+
+One of the most powerful applications of the **gemma 4 jan ai setup** is using it as a backend for Claude Code. This allows you to route specific coding tasks to Gemma 4, saving your Claude Opus or Sonnet credits for only the most difficult architectural decisions.
+
+### Routing Models in Jan
+Within the Jan interface, navigate to the **Integrations** tab. If you have Claude Code installed via CLI, you can assign different models to the standard tiers:
+*   **Opus Tier:** Assign to a heavy-duty model or Gemma 4 31B.
+*   **Sonnet Tier:** Assign to Gemma 4 26B.
+*   **Haiku Tier:** Assign to Gemma 4 (Small) or a localized version of the model.
+
+### Launching the CLI
+Once the routing is saved, open your terminal and launch your project environment. Run the following command to verify the integration:
+
+```bash
+claude code --model haiku
+```
+
+By typing `/model` inside the Claude Code interface, you should see that the Haiku tier is now successfully pointing to your Gemma 4 31B parameter model. This setup provides a "free" coding assistant that rivals paid tiers in speed and accuracy.
+
+## Optimizing Performance and Context Windows
+
+To get the most out of your **gemma 4 jan ai setup**, you must manage your hardware resources effectively. Even though Gemma 4 is efficient, running it locally requires a clear understanding of VRAM versus System RAM.
+
+| Hardware Component | Recommended for 26B | Recommended for 31B |
+| :--- | :--- | :--- |
+| **GPU VRAM** | 16GB+ (RTX 4070 Ti or better) | 24GB+ (RTX 3090/4090/5090) |
+| **System RAM** | 32GB DDR5 | 64GB DDR5 |
+| **Storage** | NVMe SSD | NVMe SSD |
+
+> **💡 Tip:** If your model feels sluggish, check the context window settings in Jan. Reducing the context from 128k to 32k can significantly increase token-per-second (TPS) speed on mid-range GPUs.
+
+If you are using a machine with limited VRAM, Jan allows you to offload layers to your System RAM. However, be aware that this will result in a performance hit. For agentic coding, where the model needs to read multiple files, a larger context window is necessary. In 2026, it is recommended to set your context window to at least **80,000 tokens** if your hardware permits, as this prevents the model from "forgetting" the system prompts injected by tools like Claude Code.
+
+## Advanced Configuration: Sub-Agents
+
+For complex full-stack development, a single model instance can sometimes struggle with context overflow. The **gemma 4 jan ai setup** supports the use of sub-agents. By explicitly asking the main agent to "create a sub-agent for this task," you spawn a fresh context window for a specific sub-component of your code. This is particularly useful for:
+1.  **Unit Testing:** Spawning an agent just to write tests for a specific function.
+2.  **Documentation:** Having a sub-agent analyze and document a new API endpoint.
+3.  **Refactoring:** Isolating a legacy module for a cleanup without cluttering the main conversation history.
+
+## FAQ
+
+**Q: Is the Gemma 4 Jan AI setup completely free?**
+
+A: Yes, as of 2026, using Gemma 4 through the Google AI Studio official provider offers a free tier that is highly generous for individual developers. Jan.ai itself is open-source and free to use.
+
+**Q: Can I run Gemma 4 on a laptop without a dedicated GPU?**
+
+A: You can, but it will rely on your CPU and System RAM. This will be significantly slower (often 1-3 tokens per second). For a usable experience, a dedicated GPU with at least 12GB of VRAM is recommended.
+
+**Q: Why does my model identify itself as "Claude" or "Sonnet" after the setup?**
+
+A: This is common when using Claude Code as an interface. Claude Code injects a heavy system prompt that tells the model it is an Anthropic model. The underlying model is still Gemma 4, but it is following the instructions provided by the system prompt.
+
+**Q: How do I update Gemma 4 within Jan?**
+
+A: Go to the **Models** section in Jan, click on the three dots next to your Gemma 4 model, and select **Check for Updates**. If a newer version or a more optimized quantization is available, Jan will prompt you to download it.

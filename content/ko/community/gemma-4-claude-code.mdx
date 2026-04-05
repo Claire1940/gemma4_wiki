@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Gemma 4 Claude Code: 2026년 최고의 AI 코딩 설정 가이드",
+  description: "Jan.ai를 사용하여 Google의 Gemma 4를 Anthropic의 Claude Code와 통합하는 방법을 알아보세요. 에이전틱 코딩 및 로컬 AI 개발을 위한 최적의 오픈 소스 설정을 확인하세요.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/0f172a/fff?text=Gemma+4+Claude+Code+Setup",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+2026년 로컬 AI 개발 환경은 구글의 가장 강력한 오픈 모델 제품군 출시와 함께 급격하게 변화했습니다. **Gemma 4 Claude Code** 워크플로우를 통합하면 고가의 유료 API 호출 없이도 최첨단 추론 능력을 활용할 수 있습니다. Gemma 4 31B Dense 모델의 강력한 성능과 Claude Code 인터페이스의 에이전틱 기능을 결합하여 일반 소비자용 하드웨어에서도 고성능의 프라이빗한 코딩 환경을 구축할 수 있습니다. 이 **Gemma 4 Claude Code** 설정은 Claude 3 Haiku를 대신하여 멀티모달 작업과 복잡한 레포지토리 수준의 엔지니어링에 뛰어난 역량을 발휘하는 더 유능한 오픈 소스 대안을 찾는 분들에게 특히 효과적입니다.
+
+## Gemma 4 모델 제품군 이해하기
+
+Google의 Gemma 4 출시는 오픈 소스 커뮤니티에 있어 큰 도약을 의미합니다. Gemini 3와 동일한 아키텍처를 기반으로 구축된 이 모델들은 허용 범위가 넓은 Apache 2.0 라이선스로 배포되므로, 여러분이 구축한 모든 것에 대한 소유권을 가집니다. 개발자들에게 가장 흥미로운 모델은 26B MoE(Mixture of Experts)와 31B Dense 모델로, 두 모델 모두 최신 데스크톱 GPU에서 원활하게 구동됩니다.
+
+| 모델 변형 | 파라미터 | 유형 | 최적의 사용 사례 |
+|---|---|---|---|
+| **Gemma 4 E2B** | 20억 | 에지 | 모바일 기기 및 저지연 IoT |
+| **Gemma 4 E4B** | 40억 | 에지 | 라즈베리 파이 및 젯슨 나노 작업 |
+| **Gemma 4 26B** | 260억 (3.8B 활성) | MoE | 실시간 코딩을 위한 빠른 추론 |
+| **Gemma 4 31B** | 310억 | 고밀도 (Dense) | 고품질 추론 및 미세 조정 |
+
+31B Dense 모델은 현재 Arena AI 오픈 모델 리더보드에서 3위를 차지하고 있으며, 자신보다 거의 20배나 큰 모델들보다 뛰어난 성능을 보여줍니다. 이는 코딩 에이전트와의 로컬 통합을 위한 최적의 후보가 됩니다.
+
+> **💡 팁:** 24GB 이상의 VRAM을 갖춘 GPU가 있다면 항상 31B Dense 모델을 선택하세요. 26B MoE 변형보다 복잡한 로직에 대해 훨씬 더 나은 추론 성능을 제공합니다.
+
+## Anthropic의 Claude Code와 Conway 유출 사건
+
+Google이 모델을 제공하는 동안 Anthropic은 인터페이스를 조용히 발전시켜 왔습니다. 최근 소스 코드 유출을 통해 Anthropic이 "Conway"라는 코드명의 프로젝트를 진행 중임이 밝혀졌습니다. 일반적인 채팅 인터페이스와 달리 Conway는 "항상 켜져 있는(always-on)" 상태로 설계된 독립형 에이전트 환경입니다. 전용 사이드바, 커스텀 도구를 위한 확장 패널, 외부 웹훅을 통한 트리거 기능을 갖추고 있습니다.
+
+이러한 지속적인 아키텍처 덕분에 **gemma 4 claude code** 조합이 매우 강력해집니다. Claude Code가 로컬 Gemma 모델을 사용하도록 라우팅함으로써, 데이터 프라이버시를 유지하고 지연 시간을 줄이면서도 정교한 에이전틱 프레임워크의 이점을 누릴 수 있습니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/slH-jPY1TgE"
+    title="Google drops Gemma 4, Anthropic's SECRET AI Agent, Qwen 3.6 & MORE!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 단계별 가이드: Claude Code와 Gemma 4 설정하기
+
+이 두 기술을 연결하는 가장 쉬운 방법은 로컬 모델 제공자 및 오케스트레이터 역할을 하는 무료 오픈 소스 데스크톱 애플리케이션인 [Jan.ai](https://jan.ai/)를 사용하는 것입니다.
+
+### 1. Jan 데스크톱 설치
+Windows, Mac 또는 Linux용 Jan 앱을 다운로드하여 설치합니다. 이 도구는 로컬 하드웨어와 Claude Code CLI 사이의 미들웨어 역할을 합니다.
+
+### 2. 모델 제공자 설정
+Jan의 **Settings(설정)** 메뉴로 이동하여 **Model Providers(모델 제공자)**를 선택합니다. Gemma 4를 완전히 무료로 실행하려면 Google AI Studio 제공자를 사용해야 합니다.
+*   [Google AI Studio](https://aistudio.google.com/)로 이동하여 무료 API 키를 생성합니다.
+*   키를 Jan의 Gemini 제공자 섹션에 붙여넣습니다.
+*   모델 목록을 새로고침하여 Gemma 4 변형 모델을 확인합니다.
+
+### 3. Claude Code와 통합
+Jan 설정에서 **Integrations(통합)** 탭을 찾아 **Claude Code**를 선택합니다. 그런 다음 특정 Claude 모델(Haiku, Sonnet, Opus)을 로컬 Gemma 4 모델에 매핑할 수 있습니다.
+
+| Claude 별칭 | 권장 로컬 매핑 | 이유 |
+|---|---|---|
+| **Haiku** | **Gemma 4 31B Dense** | 더 나은 성능 및 기본 멀티모달 지원 |
+| **Sonnet** | **Qwen 3.6 Plus** | 탁월한 레포지토리 수준 탐색 능력 |
+| **Opus** | **GLM 5V Turbo** | 고급 시각-코드 변환 기능 |
+
+### 4. 환경 실행
+터미널을 열고 `claude` 명령어를 실행합니다. 인터페이스 내에서 `/model` 명령어를 사용하여 방금 Gemma 4로 성공적으로 라우팅한 "Haiku" 프로필로 전환합니다.
+
+> **⚠️ 경고:** 로컬 드라이버가 최신 상태인지 확인하세요. Gemma 4는 네이티브 함수 호출 및 구조화된 JSON 출력을 활용하므로, 효율적인 실행을 위해 최신 CUDA 또는 Metal 지원이 필요합니다.
+
+## 비교 분석: Gemma 4 vs. 경쟁 모델
+
+Gemma 4는 강력한 모델이지만, 2026년 초에 출시된 더 넓은 "에이전틱" 모델 생태계의 일부입니다. 알리바바의 Qwen 3.6 Plus와 Z.AI의 GLM 5V Turbo 역시 코딩 분야에서 우위를 점하기 위해 경쟁하고 있습니다.
+
+| 기능 | Gemma 4 31B | Qwen 3.6 Plus | GLM 5V Turbo |
+|---|---|---|---|
+| **컨텍스트 창** | 256,000 | 1,000,000 | 128,000 |
+| **주요 강점** | 일반적 추론 | 레포지토리 수준 엔지니어링 | 시각적 디자인의 코드화 |
+| **라이선스** | Apache 2.0 | 독점/오픈 가중치 | 독점 |
+| **멀티모달** | 네이티브 오디오/비디오 | 이미지/문서 | 하이엔드 GUI 에이전트 |
+
+Qwen 3.6 Plus는 모델의 커맨드 라인 조작 능력을 측정하는 "Terminal Bench" 점수에서 앞서 있습니다. 하지만 Gemma 4는 완전한 오픈 소스 특성과 소비자용 GPU에서의 우수한 성능 덕분에 여전히 많은 이들의 선택을 받고 있습니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/dhlrZwH1Uzg"
+    title="Gemma 4 + Claude Code + Jan : Best FREE AI Coding Setup"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 들쭉날쭉한 지능(Jagged Intelligence)의 미래
+
+OpenAI의 Greg Brockman은 최근 AI의 현재 상태를 "들쭉날쭉한 지능(Jagged Intelligence)"이라고 설명했습니다. 이는 모델이 커널 수준의 코드를 작성하는 것과 같은 복잡한 작업에는 초인적인 능력을 발휘하면서도 때때로 기본적인 인간의 논리에서 실패하는 현상을 말합니다. **gemma 4 claude code** 통합의 목표는 에이전틱 워크플로우를 사용하여 이러한 "들쭉날쭉함"을 매끄럽게 다듬는 것입니다.
+
+모델이 자체 터미널 명령을 실행하고, 코드를 테스트하며, 오류 로그를 기반으로 반복하도록 함으로써 AI 신뢰성의 "최저 기준"을 높입니다. 현재 우리는 AGI로 가는 길의 약 70-80% 지점에 와 있는 것으로 추정되며, 마지막 20%는 바로 이러한 신뢰성과 도구 통합에 달려 있습니다.
+
+## 고급 워크플로우: 시각적 코딩
+
+Gemma 4 제품군의 두드러진 특징 중 하나는 기본 멀티모달 지원입니다. 시각 기능이 나중에 "추가"된 이전 모델들과 달리, Gemma 4는 이미지와 비디오를 기본적으로 학습했습니다. 이를 통해 "스크린-투-코드(Screen-to-Code)" 워크플로우가 가능해집니다.
+1. UI 디자인이나 손으로 그린 와이어프레임의 스크린샷을 찍습니다.
+2. 이미지를 **gemma 4 claude code** 에이전트에게 전달합니다.
+3. 에이전트는 시각적 레이아웃과 일치하는 기능적인 React 또는 Tailwind CSS 코드를 생성합니다.
+
+이 워크플로우는 디자인과 개발 사이의 간극을 메워주며, 이전의 텍스트 전용 모델로는 불가능했던 신속한 프로토타이핑을 가능하게 합니다.
+
+## FAQ
+
+**Q: Gemma 4를 Claude Code와 함께 사용하는 것이 완전히 무료인가요?**
+
+A: 네, Jan.ai나 Ollama를 사용하여 로컬에서 가중치를 실행하거나 Google AI Studio의 무료 티어를 사용하는 경우 무료입니다. Apache 2.0 라이선스에 따라 모델 자체에 대한 구독료는 없습니다.
+
+**Q: Gemma 4 31B 모델을 실행하려면 얼마나 많은 VRAM이 필요한가요?**
+
+A: 양자화되지 않은 가중치의 경우 80GB H100이 권장되지만, 대부분의 개발자에게는 RTX 3090 또는 4090과 같은 24GB 소비자용 GPU에서 4비트 또는 6비트 양자화 버전을 편안하게 실행할 수 있습니다.
+
+**Q: Gemma 4가 전체 코드베이스를 한 번에 처리할 수 있나요?**
+
+A: 256,000 토큰의 컨텍스트 창을 통해 대부분의 중간 규모 레포지토리를 처리할 수 있습니다. 대규모 엔터프라이즈 급 코드베이스의 경우 여전히 RAG(검색 증강 생성)를 사용하거나 100만 토큰 창을 제공하는 Qwen 3.6 Plus와 같은 모델로 전환해야 할 수도 있습니다.
+
+**Q: 유출본에서 언급된 "Conway" 에이전트는 무엇인가요?**
+
+A: Conway는 Anthropic에서 출시할 예정인 독립형 에이전트 환경으로 보입니다. 이는 웹훅을 통해 외부 이벤트에 응답할 수 있는 지속적이고 항상 켜져 있는 AI로 설계되었으며, 단순한 채팅 인터페이스 그 이상을 의미합니다.

@@ -1,0 +1,133 @@
+export const metadata = {
+  title: "Gemma 4 Llama CPP: Local AI Setup & Performance Guide 2026",
+  description: "Learn how to run Google's Gemma 4 models locally using Llama.cpp. Complete guide on quantization, hardware requirements, and multimodal performance benchmarks.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Llama+CPP+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+The release of Google’s latest open-weights model family has transformed the local AI landscape, making the **gemma 4 llama cpp** integration a top priority for developers and enthusiasts alike. By leveraging the efficiency of the Llama.cpp inference engine, users can now run sophisticated multimodal models on consumer hardware without relying on expensive cloud subscriptions. Setting up a **gemma 4 llama cpp** environment allows for private, high-speed interactions that include advanced reasoning, image understanding, and complex coding tasks. 
+
+In this comprehensive guide, we will explore the various model sizes available in the Gemma 4 family, ranging from mobile-optimized 2B parameter versions to the heavy-hitting 31B dense models. We will walk you through the installation process, hardware optimization strategies, and real-world performance metrics observed on modern 2026 hardware like the Apple M4 Pro and NVIDIA 50-series GPUs. Whether you are building an autonomous agent or a local coding assistant, mastering this setup is essential for cutting-edge local AI development.
+
+## Understanding the Gemma 4 Model Family
+
+Google DeepMind has structured Gemma 4 to be a "mobile-first" AI release, but the larger variants are where the architecture truly shines for desktop users. Unlike previous generations, Gemma 4 utilizes a Mixture of Experts (MoE) approach for its mid-range models, providing a high "intelligence density" that rivals much larger dense models.
+
+The family is divided into several tiers based on "effective" parameter counts, which helps users decide which version fits their VRAM constraints.
+
+| Model Variant | Effective Parameters | Actual Parameters | Context Window | Best Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 2B** | 2 Billion | 5 Billion | 128k | Mobile devices / Basic Chat |
+| **Gemma 4 4B** | 4 Billion | 8 Billion | 128k | Coding / Local RAG |
+| **Gemma 4 26B (MoE)** | 26 Billion | 26 Billion | 256k | Complex Reasoning / Agents |
+| **Gemma 4 31B** | 31 Billion | 31 Billion | 256k | Frontier Research / Multimodal |
+
+> **💡 Tip:** If you have limited VRAM (under 12GB), stick to the 4B effective version with 4-bit quantization for the best balance of speed and intelligence.
+
+## Setting Up Gemma 4 with Llama.cpp
+
+Running **gemma 4 llama cpp** requires the latest build of the Llama.cpp repository, as Google introduced new architectural changes in 2026 that require specific GGUF support. Follow these steps to get your local server running.
+
+### 1. Install Llama.cpp
+For macOS users, Homebrew remains the fastest method. Linux and Windows users should compile from source to ensure AVX-512 or CUDA support is fully optimized.
+
+```bash
+# For macOS
+brew install llama.cpp
+
+# For Linux/Windows (Build from source)
+git clone https://github.com/ggerganov/llama.cpp
+cd llama.cpp
+make
+```
+
+### 2. Download Quantized GGUF Weights
+You will need to fetch the model weights from Hugging Face. The community typically provides GGUF versions shortly after release. For a 16GB RAM machine, the `IQ2_M` or `Q4_K_M` quantizations are recommended.
+
+| Quantization | Memory Required (26B) | Quality Loss | Speed |
+| :--- | :--- | :--- | :--- |
+| **Q8_0** | ~28 GB | Negligible | Fast |
+| **Q4_K_M** | ~16 GB | Low | Very Fast |
+| **IQ2_M** | ~9 GB | Moderate | Extreme |
+
+### 3. Launch the Server
+Once you have your `.gguf` file, initiate the Llama.cpp server. This allows you to interact with the model via a web UI or an OpenAI-compatible API.
+
+```bash
+llama-server --model ./models/gemma-4-26b-it.Q4_K_M.gguf --ctx-size 8192 --port 8080
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/_lXgq-U49Aw"
+    title="Gemma 4 Local Test | New Open LLM King?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Hardware Performance & Token Speeds
+
+Performance in a **gemma 4 llama cpp** setup is heavily dependent on memory bandwidth. Because Gemma 4 supports native thinking (reasoning steps), the initial "thought" phase may take longer, but the final generation is remarkably snappy on 2026-era silicon.
+
+On an Apple M4 Pro with 48GB of unified memory, the 26B MoE model achieves approximately 40-42 tokens per second using 8-bit quantization. This is more than enough for real-time reading and coding assistance.
+
+| Hardware Configuration | Model Size | Quantization | Tokens Per Second |
+| :--- | :--- | :--- | :--- |
+| **Apple M4 (16GB)** | 4B Effective | Q8_0 | 65+ t/s |
+| **Apple M4 Pro (48GB)** | 26B MoE | Q8_0 | 42 t/s |
+| **NVIDIA RTX 4090 (24GB)** | 26B MoE | Q4_K_M | 55 t/s |
+| **NVIDIA RTX 5090 (32GB)** | 31B Dense | Q4_K_M | 70+ t/s |
+
+> **⚠️ Warning:** Attempting to run the 26B or 31B models on a GPU with only 8GB of VRAM will result in extreme slowdowns as the system offloads weights to system RAM (System Fallback).
+
+## Multimodal Capabilities in 2026
+
+One of the standout features of Gemma 4 is its native multimodal training. Unlike previous models that used "vision encoders" as an afterthought, Gemma 4 was trained from the ground up to understand images, audio, and even video.
+
+In local testing, the **gemma 4 llama cpp** combination excels at:
+1.  **Object Detection:** Identifying specific UI elements or items in a photo and providing bounding boxes.
+2.  **Complex OCR:** Reading messy receipts or handwritten notes with near-perfect accuracy.
+3.  **Code Generation from UI:** Taking a screenshot of a website and reproducing the functional HTML/CSS/React code.
+4.  **Diagram Analysis:** Interpreting software architecture diagrams (like Clean Architecture or Hexagonal) and explaining the data flow.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/WSiN0B0Is44"
+    title="Google Gemma 4 Released! (Local Setup with Llama.cpp + Web UI)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Advanced Agentic Workflows
+
+Gemma 4 is optimized for agentic behavior, meaning it is specifically tuned to follow system instructions and call external tools. When running via Llama.cpp, you can utilize structured JSON outputs to ensure the model communicates perfectly with your local scripts.
+
+Google has improved the "native system instruction" adherence in this version. This means that if you tell the model to "act as a terminal," it is less likely to break character compared to Gemma 2 or 3. This makes it an ideal candidate for local DevOps agents that can generate and execute CLI commands safely in a containerized environment.
+
+For more information on the official research and licensing, you can visit [Hugging Face](https://huggingface.co/google) to view the model cards and Apache 2.0 license details.
+
+## FAQ
+
+**Q: Can I run Gemma 4 on a standard laptop with 8GB of RAM?**
+
+A: Yes, but you will be limited to the "Effective 2B" parameter version. You should use a high-compression quantization like `IQ2_M` or `Q3_K_S` to ensure the model stays within your memory limits while maintaining a usable inference speed.
+
+**Q: Does gemma 4 llama cpp support GPU acceleration?**
+
+A: Absolutely. Llama.cpp supports CUDA (NVIDIA), Metal (Apple), and Vulkan (AMD/Intel). When starting the server, ensure you use the `-ngl` (number of GPU layers) flag to offload as many layers as possible to your graphics card for maximum performance.
+
+**Q: Is Gemma 4 better than Qwen 3.5 for coding?**
+
+A: While Qwen 3.5 is highly regarded for its raw logic, Gemma 4 shows superior performance in "thinking" tasks and multimodal code generation (building code from images). For standard Python or TypeScript generation, both are top-tier, but Gemma 4's Apache 2 license is often more attractive for commercial use.
+
+**Q: How do I handle the long "reasoning" delays?**
+
+A: Gemma 4 is a "thinking" model, similar to the o1 series. If the delay is too long, you can adjust the system prompt to ask for "concise answers without internal monologue," which can significantly reduce the time to first token in a **gemma 4 llama cpp** setup.

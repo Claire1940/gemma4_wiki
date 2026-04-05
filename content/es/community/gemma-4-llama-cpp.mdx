@@ -1,0 +1,133 @@
+export const metadata = {
+  title: "Gemma 4 Llama CPP: Guía de Configuración Local y Rendimiento 2026",
+  description: "Aprende a ejecutar los modelos Gemma 4 de Google localmente usando Llama.cpp. Guía completa sobre cuantización, requisitos de hardware y pruebas de rendimiento multimodales.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Llama+CPP+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la última familia de modelos de pesos abiertos de Google ha transformado el panorama de la IA local, convirtiendo la integración de **gemma 4 llama cpp** en una prioridad absoluta para desarrolladores y entusiastas por igual. Al aprovechar la eficiencia del motor de inferencia Llama.cpp, los usuarios ahora pueden ejecutar modelos multimodales sofisticados en hardware de consumo sin depender de costosas suscripciones en la nube. Configurar un entorno de **gemma 4 llama cpp** permite interacciones privadas y de alta velocidad que incluyen razonamiento avanzado, comprensión de imágenes y tareas complejas de programación.
+
+En esta guía exhaustiva, exploraremos los diversos tamaños de modelo disponibles en la familia Gemma 4, que van desde versiones de 2B parámetros optimizadas para móviles hasta los potentes modelos densos de 31B. Te guiaremos a través del proceso de instalación, las estrategias de optimización de hardware y las métricas de rendimiento del mundo real observadas en hardware moderno de 2026, como el Apple M4 Pro y las GPUs NVIDIA de la serie 50. Ya sea que estés construyendo un agente autónomo o un asistente de programación local, dominar esta configuración es esencial para el desarrollo de IA local de vanguardia.
+
+## Entendiendo la Familia de Modelos Gemma 4
+
+Google DeepMind ha estructurado Gemma 4 para que sea un lanzamiento de IA "prioritariamente móvil", pero las variantes más grandes es donde la arquitectura realmente brilla para los usuarios de escritorio. A diferencia de las generaciones anteriores, Gemma 4 utiliza un enfoque de Mezcla de Expertos (MoE) para sus modelos de gama media, proporcionando una alta "densidad de inteligencia" que rivaliza con modelos densos mucho más grandes.
+
+La familia se divide en varios niveles basados en recuentos de parámetros "efectivos", lo que ayuda a los usuarios a decidir qué versión se ajusta a sus limitaciones de VRAM.
+
+| Variante del Modelo | Parámetros Efectivos | Parámetros Reales | Ventana de Contexto | Mejor Caso de Uso |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 2B** | 2 Mil millones | 5 Mil millones | 128k | Dispositivos móviles / Chat básico |
+| **Gemma 4 4B** | 4 Mil millones | 8 Mil millones | 128k | Programación / RAG local |
+| **Gemma 4 26B (MoE)** | 26 Mil millones | 26 Mil millones | 256k | Razonamiento complejo / Agentes |
+| **Gemma 4 31B** | 31 Mil millones | 31 Mil millones | 256k | Investigación de vanguardia / Multimodal |
+
+> **💡 Consejo:** Si tienes VRAM limitada (menos de 12GB), quédate con la versión de 4B efectivos con cuantización de 4 bits para obtener el mejor equilibrio entre velocidad e inteligencia.
+
+## Configurando Gemma 4 con Llama.cpp
+
+Ejecutar **gemma 4 llama cpp** requiere la última compilación del repositorio Llama.cpp, ya que Google introdujo nuevos cambios arquitectónicos en 2026 que requieren soporte GGUF específico. Sigue estos pasos para poner en marcha tu servidor local.
+
+### 1. Instalar Llama.cpp
+Para los usuarios de macOS, Homebrew sigue siendo el método más rápido. Los usuarios de Linux y Windows deben compilar desde el código fuente para asegurar que el soporte AVX-512 o CUDA esté totalmente optimizado.
+
+```bash
+# Para macOS
+brew install llama.cpp
+
+# Para Linux/Windows (Compilar desde fuente)
+git clone https://github.com/ggerganov/llama.cpp
+cd llama.cpp
+make
+```
+
+### 2. Descargar Pesos GGUF Cuantizados
+Necesitarás obtener los pesos del modelo desde Hugging Face. La comunidad suele proporcionar versiones GGUF poco después del lanzamiento. Para una máquina con 16GB de RAM, se recomiendan las cuantizaciones `IQ2_M` o `Q4_K_M`.
+
+| Cuantización | Memoria Requerida (26B) | Pérdida de Calidad | Velocidad |
+| :--- | :--- | :--- | :--- |
+| **Q8_0** | ~28 GB | Despreciable | Rápida |
+| **Q4_K_M** | ~16 GB | Baja | Muy Rápida |
+| **IQ2_M** | ~9 GB | Moderada | Extrema |
+
+### 3. Iniciar el Servidor
+Una vez que tengas tu archivo `.gguf`, inicia el servidor de Llama.cpp. Esto te permite interactuar con el modelo a través de una interfaz web o una API compatible con OpenAI.
+
+```bash
+llama-server --model ./models/gemma-4-26b-it.Q4_K_M.gguf --ctx-size 8192 --port 8080
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/_lXgq-U49Aw"
+    title="Gemma 4 Local Test | New Open LLM King?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Rendimiento de Hardware y Velocidad de Tokens
+
+El rendimiento en una configuración de **gemma 4 llama cpp** depende en gran medida del ancho de banda de la memoria. Debido a que Gemma 4 admite el pensamiento nativo (pasos de razonamiento), la fase inicial de "pensamiento" puede tardar más, pero la generación final es notablemente ágil en el silicio de la era 2026.
+
+En un Apple M4 Pro con 48GB de memoria unificada, el modelo 26B MoE alcanza aproximadamente 40-42 tokens por segundo usando cuantización de 8 bits. Esto es más que suficiente para lectura en tiempo real y asistencia en programación.
+
+| Configuración de Hardware | Tamaño del Modelo | Cuantización | Tokens por Segundo |
+| :--- | :--- | :--- | :--- |
+| **Apple M4 (16GB)** | 4B Efectivo | Q8_0 | 65+ t/s |
+| **Apple M4 Pro (48GB)** | 26B MoE | Q8_0 | 42 t/s |
+| **NVIDIA RTX 4090 (24GB)** | 26B MoE | Q4_K_M | 55 t/s |
+| **NVIDIA RTX 5090 (32GB)** | 31B Denso | Q4_K_M | 70+ t/s |
+
+> **⚠️ Advertencia:** Intentar ejecutar los modelos 26B o 31B en una GPU con solo 8GB de VRAM resultará en ralentizaciones extremas a medida que el sistema traslada los pesos a la RAM del sistema (System Fallback).
+
+## Capacidades Multimodales en 2026
+
+Una de las características destacadas de Gemma 4 es su entrenamiento multimodal nativo. A diferencia de modelos anteriores que usaban "codificadores de visión" como una idea secundaria, Gemma 4 fue entrenado desde cero para entender imágenes, audio e incluso video.
+
+En pruebas locales, la combinación **gemma 4 llama cpp** destaca en:
+1.  **Detección de Objetos:** Identificar elementos específicos de la interfaz de usuario o artículos en una foto y proporcionar cuadros delimitadores.
+2.  **OCR Complejo:** Leer recibos desordenados o notas escritas a mano con una precisión casi perfecta.
+3.  **Generación de Código desde UI:** Tomar una captura de pantalla de un sitio web y reproducir el código funcional HTML/CSS/React.
+4.  **Análisis de Diagramas:** Interpretar diagramas de arquitectura de software (como Arquitectura Limpia o Hexagonal) y explicar el flujo de datos.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/WSiN0B0Is44"
+    title="Google Gemma 4 Released! (Local Setup with Llama.cpp + Web UI)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Flujos de Trabajo Agénticos Avanzados
+
+Gemma 4 está optimizado para el comportamiento agéntico, lo que significa que está específicamente ajustado para seguir instrucciones del sistema y llamar a herramientas externas. Al ejecutarlo a través de Llama.cpp, puedes utilizar salidas JSON estructuradas para asegurar que el modelo se comunique perfectamente con tus scripts locales.
+
+Google ha mejorado la adherencia a las "instrucciones nativas del sistema" en esta versión. Esto significa que si le dices al modelo que "actúe como una terminal", es menos probable que abandone el personaje en comparación con Gemma 2 o 3. Esto lo convierte en un candidato ideal para agentes de DevOps locales que pueden generar y ejecutar comandos CLI de forma segura en un entorno de contenedores.
+
+Para obtener más información sobre la investigación oficial y las licencias, puedes visitar [Hugging Face](https://huggingface.co/google) para ver las tarjetas del modelo y los detalles de la licencia Apache 2.0.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 en una laptop estándar con 8GB de RAM?**
+
+R: Sí, pero estarás limitado a la versión de parámetros "Efectivos 2B". Deberías usar una cuantización de alta compresión como `IQ2_M` o `Q3_K_S` para asegurar que el modelo permanezca dentro de tus límites de memoria mientras mantiene una velocidad de inferencia utilizable.
+
+**P: ¿Soporta gemma 4 llama cpp aceleración por GPU?**
+
+R: Absolutamente. Llama.cpp soporta CUDA (NVIDIA), Metal (Apple) y Vulkan (AMD/Intel). Al iniciar el servidor, asegúrate de usar la bandera `-ngl` (número de capas de GPU) para descargar tantas capas como sea posible a tu tarjeta gráfica para obtener el máximo rendimiento.
+
+**P: ¿Es Gemma 4 mejor que Qwen 3.5 para programación?**
+
+R: Mientras que Qwen 3.5 es muy valorado por su lógica pura, Gemma 4 muestra un rendimiento superior en tareas de "pensamiento" y generación de código multimodal (crear código a partir de imágenes). Para la generación estándar de Python o TypeScript, ambos son de primer nivel, pero la licencia Apache 2 de Gemma 4 suele ser más atractiva para uso comercial.
+
+**P: ¿Cómo manejo los largos retrasos de "razonamiento"?**
+
+R: Gemma 4 es un modelo de "pensamiento", similar a la serie o1. Si el retraso es demasiado largo, puedes ajustar el prompt del sistema para pedir "respuestas concisas sin monólogo interno", lo que puede reducir significativamente el tiempo hasta el primer token en una configuración de **gemma 4 llama cpp**.

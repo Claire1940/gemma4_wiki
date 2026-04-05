@@ -1,0 +1,125 @@
+export const metadata = {
+  title: "Gemma 4 VRAM Requirements: Complete Local Hardware Guide 2026",
+  description: "Explore the official Gemma 4 VRAM requirements for Workstation and Edge models. Learn how to run Google's latest open-weight AI on your local GPU.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+VRAM+Requirements",
+  date: "2026-04-05",
+  author: "Gemma Wiki Team"
+}
+
+The release of Google's latest open-weight model family has sent ripples through the local AI community, making it essential to understand the **gemma 4 vram requirements** before attempting a local deployment. Unlike previous iterations, this generation introduces a bifurcated approach with "Workstation" and "Edge" tiers, each demanding different hardware configurations. Whether you are a developer looking to integrate native vision and audio capabilities or a hobbyist running a coding assistant on a single GPU, knowing the **gemma 4 vram requirements** ensures you select the right model for your specific VRAM overhead.
+
+In this comprehensive guide, we break down the hardware specifications for the 31B Dense model, the 26B Mixture of Experts (MoE) variant, and the highly efficient E-series models. With the shift to an Apache 2.0 license, these models are more accessible than ever, but their multi-modal architecture—featuring native reasoning and function calling—requires careful memory management to maintain high performance.
+
+## Gemma 4 Model Family Overview
+
+Google has restructured the Gemma lineup into two distinct categories. The Workstation models are designed for heavy-duty tasks like IDE integration and complex reasoning, while the Edge models (E2B and E4B) are optimized for low-latency performance on consumer devices, including Raspberry Pis and mobile hardware.
+
+| Model Tier | Parameter Count | Architecture | Context Window | Key Features |
+| :--- | :--- | :--- | :--- | :--- |
+| **Workstation 31B** | 31 Billion | Dense | 256K | Advanced Coding, Multilingual (140+ languages) |
+| **Workstation 26B** | 26 Billion | MoE (3.8B Active) | 256K | High Intelligence, Low Compute Cost |
+| **Edge E4B** | 4 Billion | Dense | 128K | Native Audio/Vision, On-device Assistant |
+| **Edge E2B** | 2 Billion | Dense | 128K | Ultra-low Latency, Edge Computing |
+
+The Workstation 26B model is particularly interesting because it utilizes a Mixture of Experts (MoE) architecture. While it has 26 billion total parameters, only 3.8 billion are active at any given time, providing the intelligence of a much larger model with the inference speed of a 4B model.
+
+## Detailed Gemma 4 VRAM Requirements
+
+When calculating your **gemma 4 vram requirements**, you must account for the precision of the model (FP16, INT8, or INT4). Running a model in full 16-bit precision provides the highest quality but requires significantly more memory than quantized versions.
+
+### Workstation 31B (Dense)
+The 31B Dense model is the powerhouse of the family. Due to its size, running this at FP16 is generally out of reach for consumer-grade GPUs without multi-GPU setups. However, with 4-bit quantization (GGUF or EXL2), it becomes accessible to users with 24GB cards.
+
+### Workstation 26B (MoE)
+Despite having fewer total parameters than the 31B model, the 26B MoE still requires the full model weights to be loaded into VRAM. The advantage here is the speed of generation, not necessarily a reduction in memory footprint compared to a similar-sized dense model.
+
+| Quantization Level | 31B Dense VRAM | 26B MoE VRAM | Recommended GPU |
+| :--- | :--- | :--- | :--- |
+| **FP16 (Uncompressed)** | ~64 GB | ~52 GB | 2x RTX 3090/4090 or A6000 |
+| **INT8 (8-bit)** | ~34 GB | ~28 GB | RTX 6000 Ada or 2x RTX 3060 (12GB) |
+| **INT4 (4-bit)** | ~18-20 GB | ~15-17 GB | **RTX 3090 / RTX 4090 (24GB)** |
+
+> **💡 Tip:** For the best balance of speed and intelligence on a single consumer GPU, the 26B MoE model at 4-bit quantization is the current "sweet spot" for local enthusiasts.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Edge Models: E4B and E2B Requirements
+
+The Edge models are where Google has made the most significant architectural strides. The audio and vision encoders have been massively compressed. For instance, the audio encoder is now 50% smaller than in previous versions, dropping from 681 million parameters to just 305 million. This drastic reduction directly lowers the **gemma 4 vram requirements** for mobile and embedded applications.
+
+| Model | VRAM (FP16) | VRAM (INT4) | Target Hardware |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E4B** | ~8.5 GB | ~3.5 GB | RTX 3060, MacBook Air (M2/M3) |
+| **Gemma 4 E2B** | ~4.5 GB | ~1.8 GB | Raspberry Pi 5 (8GB), Jetson Nano |
+
+These smaller models are ideal for "Voice-First" AI applications. Since they support native audio-to-audio and speech-to-translated-text, you can run a fully functional translator or voice assistant locally without needing a massive server-grade GPU.
+
+## Understanding the Architecture Upgrades
+
+The 2026 release of Gemma 4 brings more than just size variations. The architecture has moved away from "bolted-on" modalities. In earlier versions, audio was often handled by an external Whisper pipeline. In Gemma 4, vision, audio, and reasoning are baked into the architecture at the fundamental level.
+
+### Native Multi-Modality
+The vision encoder now supports native aspect ratio processing. Instead of cropping or stretching images to fit a square input, the model understands the actual dimensions of the document or screenshot you provide. This makes it exceptionally good at OCR (Optical Character Recognition) and document understanding tasks.
+
+### Long Chain of Thought (CoT)
+One of the reasons the **gemma 4 vram requirements** might fluctuate during use is the "Thinking" mode. When enabled, the model generates an internal monologue to reason through a problem before providing a final answer. While this improves accuracy in coding and math, it consumes more tokens within the context window.
+
+> **⚠️ Warning:** High context usage (up to 256K) significantly increases VRAM consumption. If you plan to use the full context window, expect to need an additional 4-8GB of VRAM just for the KV cache.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/02tjBAsGacs"
+    title="Google's New AI Runs Locally for Free (Gemma 4 Coding Demo)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Software and Implementation Tools
+
+To run these models locally, several tools have updated their support for the Gemma 4 architecture. Because Google released Quantization Aware Training (QAT) checkpoints, the 4-bit versions of these models maintain a much higher quality than standard post-training quantization methods.
+
+1.  **Ollama:** The easiest way to get started. A single command like `ollama run gemma4:26b` will handle the download and configuration.
+2.  **LM Studio:** Provides a GUI for selecting specific quantization levels and monitoring VRAM usage in real-time.
+3.  **Transformers (Hugging Face):** For developers, the latest `transformers` library supports the native audio and vision processors required for the E-series models.
+4.  **Cloud Run (Serverless):** For those who lack the hardware to meet **gemma 4 vram requirements**, Google Cloud now allows serving the 31B model on G4 instances (Nvidia RTX 6000 Pro) in a serverless fashion.
+
+You can find the official weights and model cards on the [Gemma Hugging Face page](https://huggingface.co/google) to explore the base and instruction-tuned versions.
+
+## Hardware Recommendations for 2026
+
+If you are building a PC specifically to handle the **gemma 4 vram requirements**, consider the following tiers based on your intended use case:
+
+*   **The Budget Enthusiast:** An **RTX 3060 (12GB)** or **RTX 4060 Ti (16GB)**. This will comfortably run the E-series models and the 26B MoE at high quantization.
+*   **The Power User:** An **RTX 3090 or 4090 (24GB)**. This is the gold standard for local LLMs in 2026, allowing you to run the 26B MoE or 31B Dense models with enough room for a decent context window.
+*   **The Professional Developer:** An **RTX 6000 Ada (48GB)** or a **Mac Studio with 64GB+ Unified Memory**. These setups allow for running the larger models at 8-bit precision or higher, which is critical for fine-tuning tasks.
+
+## FAQ
+
+**Q: Can I run Gemma 4 on a CPU if I don't meet the VRAM requirements?**
+
+A: Yes, using tools like llama.cpp, you can offload layers to your system RAM. However, the generation speed (tokens per second) will be significantly slower, especially for the 31B Workstation model. 
+
+**Q: Does the 26B MoE model use less VRAM than the 31B Dense model?**
+
+A: Not necessarily. While the "active" parameters are lower (3.8B), the entire 26B model must still reside in your VRAM for the experts to be swapped in and out during the forward pass. The primary benefit of the MoE architecture is faster inference speed, not a lower memory footprint.
+
+**Q: What is the minimum VRAM needed for the vision and audio features?**
+
+A: The **gemma 4 vram requirements** for the smallest model (E2B) with vision and audio enabled are approximately 2GB at 4-bit quantization. This makes it possible to run on almost any modern laptop or high-end mobile device.
+
+**Q: Is the Apache 2.0 license applicable to all Gemma 4 models?**
+
+A: Yes, Google has moved away from custom restrictive licenses. You can modify, fine-tune, and deploy all Gemma 4 models commercially without the "don't compete" clauses found in previous versions.

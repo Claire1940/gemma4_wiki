@@ -1,0 +1,111 @@
+export const metadata = {
+  title: "Gemma 4 HF: Guía Definitiva de los Nuevos Modelos de IA de Google 2026",
+  description: "Explora el revolucionario lanzamiento de Gemma 4 HF. Conoce la licencia Apache 2.0, la multimodalidad nativa y cómo implementar estos pesos abiertos en tus proyectos de 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+HF+Guide",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de **gemma 4 hf** marca un momento crucial para desarrolladores independientes, modders y entusiastas de la IA en todo el mundo. A diferencia de las iteraciones anteriores que se veían obstaculizadas por licencias restrictivas, Google ha abrazado plenamente a la comunidad de código abierto al lanzar esta última generación bajo una licencia permisiva Apache 2.0. Esto significa que finalmente puedes tomar lo mejor de la investigación de Google, ajustarlo para tus necesidades específicas de juegos o aplicaciones y desplegarlo comercialmente sin las cláusulas de "no competencia" que afectaban a los modelos anteriores. Para quienes buscan **gemma 4 hf** en Hugging Face, la nueva familia ofrece cuatro modelos distintos diseñados para escalar desde estaciones de trabajo de alta gama hasta dispositivos de borde como la Steam Deck o teléfonos móviles.
+
+En esta guía exhaustiva, desglosaremos las innovaciones arquitectónicas de Gemma 4, incluyendo su multimodalidad nativa y sus capacidades de "pensamiento". Ya sea que estés construyendo un sistema de NPCs impulsado por IA o un asistente de programación local, comprender cómo aprovechar estos modelos es esencial para mantenerse a la vanguardia en el panorama tecnológico de 2026.
+
+## Los Cuatro Pilares de Gemma 4
+
+Google ha estructurado la familia Gemma 4 en dos niveles: modelos **Workstation** para tareas pesadas y modelos **Edge** para un rendimiento de baja latencia en el dispositivo. Este enfoque por niveles garantiza que, ya sea que tengas un rack de servidores o una Raspberry Pi, haya una versión de Gemma 4 optimizada para tu hardware.
+
+### Nivel Workstation: 31B Dense y 26B MoE
+Los pesos pesados de la familia están diseñados para el razonamiento complejo y tareas de contexto largo. El modelo 31B Dense presenta mejoras arquitectónicas significativas sobre Gemma 3, incluyendo la normalización de valores y un mecanismo de atención refinado adaptado para ventanas de contexto masivas. Por otro lado, el modelo 26B Mixture of Experts (MoE) proporciona la inteligencia de un modelo mucho más grande mientras solo activa 3.8 mil millones de parámetros en cualquier momento dado.
+
+### Nivel Edge: E2B y E4B
+Los modelos E2B y E4B son las estrellas para aplicaciones móviles y de juegos portátiles. Estos modelos son diminutos, eficientes y, lo más importante, admiten audio y visión de forma nativa. Son lo suficientemente pequeños como para ejecutarse en GPUs de consumo o incluso en chips de IA especializados de borde, lo que los hace perfectos para asistentes de IA "primero la voz" que no requieren una conexión a la nube.
+
+| Nombre del Modelo | Parámetros | Parámetros Activos | Ventana de Contexto | Mejor Caso de Uso |
+|---|---|---|---|---|
+| **Gemma 4 31B Dense** | 31 Mil Millones | 31 Mil Millones | **256K** | Programación, Lógica Compleja |
+| **Gemma 4 26B MoE** | 26 Mil Millones | **3.8 Mil Millones** | **256K** | Apps de Servidor Eficientes |
+| **Gemma 4 E4B** | 4 Mil Millones | 4 Mil Millones | 128K | NPCs Avanzados, UI Local |
+| **Gemma 4 E2B** | 2 Mil Millones | 2 Mil Millones | 128K | Apps Móviles, IoT, Voz |
+
+## Multimodalidad Nativa: Más Allá del Texto
+
+Una de las mejoras más significativas que se encuentran en **gemma 4 hf** es el paso a la multimodalidad nativa. En años anteriores, si querías que una IA "oyera" o "viera", tenías que acoplar modelos externos como Whisper para el audio o codificadores CLIP separados para la visión. Esto creaba latencia y una alta sobrecarga de memoria.
+
+Gemma 4 integra codificadores de visión y audio directamente en la arquitectura. El codificador de visión ha sido rediseñado con procesamiento nativo de relación de aspecto, lo que le permite comprender documentos, capturas de pantalla e incluso fotogramas de video sin perder detalles debido a recortes inadecuados. Para el audio, el codificador en los modelos Edge (E2B y E4B) se ha comprimido en un 50% en comparación con la serie Gemma 3N, reduciendo el espacio en disco de 390MB a solo 87MB mientras mejora la capacidad de respuesta.
+
+> **💡 Consejo:** Usa el modelo E2B para tareas de transcripción y traducción en tiempo real. Su duración de fotograma de 40ms lo hace significativamente más receptivo que los modelos de pesos abiertos anteriores.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Implementación de Pensamiento y Llamada de Funciones
+
+Gemma 4 introduce un modo de "pensamiento" dedicado, que permite al modelo realizar un razonamiento de cadena de pensamiento extenso antes de entregar una respuesta final. Esto es particularmente útil para juegos de estrategia complejos o para depurar código donde un juicio instantáneo podría llevar a errores.
+
+### Cómo habilitar el Pensamiento
+Al usar el modelo a través de la biblioteca Transformers o un backend local como Ollama, puedes activar esta función dentro de la plantilla de chat. Al establecer `enable_thinking=True`, el modelo mostrará su proceso de razonamiento interno, lo que a menudo resulta en salidas finales de mayor calidad para matemáticas, lógica y planificación de múltiples pasos.
+
+### Llamada de Funciones Nativa
+A diferencia de los modelos más antiguos que dependían de un prompting ingenioso para simular el uso de herramientas, Gemma 4 tiene la llamada de funciones integrada en su núcleo. Esto lo convierte en un motor potente para flujos de trabajo de agentes. Por ejemplo, un desarrollador de juegos podría permitir que un NPC "llame" a una función para abrir una puerta, verificar el inventario del jugador o activar un evento mundial basado en el flujo de la conversación.
+
+| Característica | Capacidad | Beneficio para Desarrolladores |
+|---|---|---|
+| **Modo de Pensamiento** | Cadena de pensamiento interna | Precisión mejorada en lógica y matemáticas |
+| **Llamada de Funciones** | Integración nativa de herramientas | Comportamientos de agentes fiables sin JSON "alucinado" |
+| **Multilingüe** | Más de 140 idiomas | Despliegue global sin ajuste fino adicional |
+| **Cuantización** | Checkpoints QAT | Alta calidad incluso con precisión de **4 bits** u **8 bits** |
+
+## Requisitos de Hardware para el Despliegue Local
+
+Ejecutar **gemma 4 hf** localmente en 2026 es más accesible que nunca, pero aún necesitas ajustar el tamaño del modelo a tu VRAM. El lanzamiento por parte de Google de los checkpoints de Entrenamiento Consciente de la Cuantización (QAT) significa que incluso el modelo 31B puede ajustarse en hardware de consumo sin la caída masiva de calidad vista en la cuantización tradicional post-entrenamiento.
+
+1. **Para los modelos E2B/E4B:** Un portátil de gama media o una Steam Deck es suficiente. Estos modelos suelen requerir de 2GB a 6GB de VRAM dependiendo del nivel de cuantización.
+2. **Para el 26B MoE:** Una RTX 3080 o 4070 (12GB+ de VRAM) es el punto ideal. Debido a que solo hay 3.8B de parámetros activos, el costo de cómputo es bajo, pero aún necesitas suficiente memoria para albergar los pesos.
+3. **Para el 31B Dense:** Necesitarás una RTX 3090/4090 o hardware de grado profesional como la RTX 6000 Ada. Si ejecutas esto en un servidor, Cloud Run de Google ahora admite GPUs G4 para una experiencia sin servidor.
+
+> **⚠️ Advertencia:** Asegúrate siempre de que tus controladores estén actualizados a las últimas versiones de 2026 para admitir los nuevos mecanismos de atención utilizados en los modelos Workstation.
+
+## Entrenamiento y Ajuste Fino de Gemma 4
+
+Debido a la licencia Apache 2.0, la comunidad ya está produciendo versiones especializadas de estos modelos. Los modelos base son excepcionalmente fuertes, pero el ajuste fino (fine-tuning) permite aplicaciones de nicho como estilos de juego de rol específicos, lenguajes de programación poco comunes o tareas de OCR con gran densidad de documentos.
+
+La capacidad del codificador de visión para manejar entradas de imágenes múltiples entrelazadas lo convierte en un candidato ideal para la comprensión de video. Al alimentar al modelo con una secuencia de fotogramas, puedes entrenarlo para reconocer acciones, resumir clips de juegos o incluso proporcionar entrenamiento en tiempo real para juegos competitivos.
+
+Para obtener más documentación técnica y descargar los pesos, visita la [Colección oficial de Gemma en Hugging Face](https://huggingface.co/google) para comenzar con tu propia implementación.
+
+## Comparación: Gemma 4 vs. Gemma 3N
+
+| Métrica | Gemma 3N (Anterior) | Gemma 4 (Nuevo) |
+|---|---|---|
+| **Licencia** | Personalizada (Restrictiva) | **Apache 2.0** |
+| **Ventana de Contexto** | 32K | **128K - 256K** |
+| **Codificador de Audio** | 681M Parámetros | **305M Parámetros** |
+| **Soporte de Visión** | Básico / Relación Fija | **Relación de Aspecto Nativa** |
+| **Razonamiento** | Instrucción Estándar | **Cadena de Pensamiento Larga** |
+
+## FAQ
+
+**P: ¿Dónde puedo encontrar los pesos oficiales de gemma 4 hf?**
+
+R: Puedes encontrar los cuatro tamaños de modelo y sus variantes ajustadas por instrucciones en el hub de modelos de Hugging Face bajo la organización "google". Asegúrate de usar la última versión de la biblioteca `transformers` para admitir la nueva arquitectura.
+
+**P: ¿Puede Gemma 4 ejecutarse en un teléfono?**
+
+R: Sí, los modelos E2B y E4B están diseñados específicamente para dispositivos de borde. Con una cuantización adecuada (como 4 bits), el modelo E2B puede ejecutarse de manera eficiente en dispositivos Android e iOS modernos con un consumo mínimo de batería.
+
+**P: ¿Gemma 4 admite la generación de imágenes?**
+
+R: No, Gemma 4 es un modelo de *comprensión* multimodal. Puede "ver" y "oír" procesando entradas de imagen y audio, pero emite texto o llamadas a funciones. Seguirías necesitando un modelo como Stable Diffusion para la generación de imágenes.
+
+**P: ¿Está el modo de "pensamiento" disponible en los modelos pequeños?**
+
+R: Sí, la capacidad de pensamiento está integrada en toda la familia, aunque la profundidad y complejidad del razonamiento son naturalmente más avanzadas en los modelos workstation 31B y 26B.

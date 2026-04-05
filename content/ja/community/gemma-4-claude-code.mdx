@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Gemma 4 Claude Code: 2026年版 最強AIコーディング環境構築ガイド",
+  description: "Jan.aiを使用してGoogleのGemma 4とAnthropicのClaude Codeを統合する方法を学びましょう。エージェント型コーディングとローカルAI開発のための最高のオープンソース環境を紹介します。",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/0f172a/fff?text=Gemma+4+Claude+Code+Setup",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+ローカルAI開発の状況は、2026年にGoogle史上最も強力なオープンモデルファミリーがリリースされたことで劇的に変化しました。**Gemma 4 Claude Code**のワークフローを統合することで、開発者はプロプライエタリなAPI呼び出しに伴う高額なコストを回避しながら、最先端の推論能力を活用できるようになります。Gemma 4 31B Denseモデルの圧倒的なパワーとClaude Codeインターフェースのエージェント機能を組み合わせることで、コンシューマー向けハードウェア上で高性能かつプライベートなコーディング環境を構築できます。この**Gemma 4 Claude Code**セットアップは、マルチモーダルタスクや複雑なリポジトリレベルのエンジニアリングにおいて、Claude 3 Haikuをより有能なオープンソースの代替案に置き換えたいと考えている方に特に効果的です。
+
+## Gemma 4 モデルファミリーを理解する
+
+GoogleのGemma 4リリースは、オープンソースコミュニティにとって大きな飛躍を意味します。Gemini 3と同じアーキテクチャに基づいて構築されたこれらのモデルは、寛容なApache 2.0ライセンスの下でリリースされており、構築したものはすべてユーザーの所有物となります。開発者にとって最も興味深いモデルは、26B Mixture of Experts (MoE) と 31B Denseモデルであり、どちらも最新のデスクトップGPUで快適に動作します。
+
+| モデルバリアント | パラメータ数 | タイプ | 最適なユースケース |
+|---|---|---|---|
+| **Gemma 4 E2B** | 20億 | エッジ | モバイルデバイスおよび低遅延IoT |
+| **Gemma 4 E4B** | 40億 | エッジ | Raspberry PiおよびJetson Nanoのタスク |
+| **Gemma 4 26B** | 260億 (3.8B アクティブ) | MoE | リアルタイムコーディングのための高速推論 |
+| **Gemma 4 31B** | 310億 | Dense | 高品質な推論とファインチューニング |
+
+31B Denseモデルは現在、Arena AIオープンモデルリーダーボードで3位にランクインしており、自身の約20倍のサイズのモデルを凌駕する性能を見せています。これにより、コーディングエージェントとのローカル統合における主要な候補となっています。
+
+> **💡 ヒント:** 24GB以上のVRAMを搭載したGPUをお持ちの場合は、常に31B Denseモデルを選択してください。26B MoEバリアントよりも複雑なロジックに対して大幅に優れた推論を提供します。
+
+## AnthropicのClaude Codeと「Conway」リーク
+
+Googleがモデルを提供する一方で、Anthropicは静かにそのインターフェースを進化させてきました。最近のソースコードのリークにより、Anthropicが「Conway」というコードネームのプロジェクトに取り組んでいることが明らかになりました。標準的なチャットインターフェースとは異なり、Conwayは「常時オン」の状態を維持するように設計されたスタンドアロンのエージェント環境です。専用のサイドバー、カスタムツール用の拡張パネル、および外部ウェブフックを介してトリガーされる機能を備えています。
+
+この永続的なアーキテクチャこそが、**gemma 4 claude code**の組み合わせを非常に強力なものにしている理由です。Claude CodeをローカルのGemmaモデルを使用するようにルーティングすることで、データのプライバシーを維持し、遅延を削減しながら、洗練されたエージェント型フレームワークの利点を得ることができます。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/slH-jPY1TgE"
+    title="Google drops Gemma 4, Anthropic's SECRET AI Agent, Qwen 3.6 & MORE!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## ステップバイステップ：Gemma 4とClaude Codeのセットアップ
+
+これら2つのテクノロジーを橋渡しする最も簡単な方法は、ローカルモデルプロバイダーおよびオーケストレーターとして機能する無料のオープンソースデスクトップアプリケーションである[Jan.ai](https://jan.ai/)を使用することです。
+
+### 1. Jan Desktopのインストール
+Windows、Mac、またはLinux用のJanアプリをダウンロードしてインストールします。このツールは、ローカルハードウェアとClaude Code CLIの間のミドルウェアとして機能します。
+
+### 2. モデルプロバイダーの設定
+Janの **Settings**（設定）メニューに移動し、**Model Providers**（モデルプロバイダー）を選択します。Gemma 4を完全に無料で使用したい場合は、Google AI Studioプロバイダーを使用することをお勧めします。
+*   [Google AI Studio](https://aistudio.google.com/) にアクセスして、無料のAPIキーを生成します。
+*   JanのGeminiプロバイダーセクションにキーを貼り付けます。
+*   モデルリストを更新して、Gemma 4バリアントを表示させます。
+
+### 3. Claude Codeとの統合
+Janの設定で **Integrations**（統合）タブを探し、**Claude Code** を選択します。その後、特定のClaudeモデル（Haiku、Sonnet、Opus）をローカルのGemma 4モデルにマッピングできます。
+
+| Claudeエイリアス | 推奨されるローカルマッピング | 理由 |
+|---|---|---|
+| **Haiku** | **Gemma 4 31B Dense** | より優れたパフォーマンスとネイティブなマルチモーダルサポート |
+| **Sonnet** | **Qwen 3.6 Plus** | 優れたリポジトリレベルのナビゲーション |
+| **Opus** | **GLM 5V Turbo** | 高度なVision-to-Code（画像からコードへの変換）機能 |
+
+### 4. 環境の起動
+ターミナルを開き、`claude` コマンドを実行します。インターフェース内で `/model` コマンドを使用して「Haiku」プロファイルに切り替えます。これで、Gemma 4へのルーティングが正常に完了しました。
+
+> **⚠️ 警告:** ローカルドライバーが最新であることを確認してください。Gemma 4はネイティブな関数呼び出しと構造化されたJSON出力を利用するため、効率的に動作させるには最新のCUDAまたはMetalのサポートが必要です。
+
+## 比較分析：Gemma 4 vs 競合モデル
+
+Gemma 4は強力ですが、2026年初頭にリリースされた広範な「エージェント型」モデルのエコシステムの一部に過ぎません。AlibabaのQwen 3.6 PlusやZ.AIのGLM 5V Turboも、コーディング分野での覇権を争っています。
+
+| 機能 | Gemma 4 31B | Qwen 3.6 Plus | GLM 5V Turbo |
+|---|---|---|---|
+| **コンテキストウィンドウ** | 256,000 | 1,000,000 | 128,000 |
+| **主な強み** | 一般的な推論 | リポジトリレベルのエンジニアリング | ビジュアルデザインからコードへの変換 |
+| **ライセンス** | Apache 2.0 | プロプライエタリ / オープンウェイト | プロプライエタリ |
+| **マルチモーダル** | ネイティブなオーディオ/ビデオ | 画像/ドキュメント | ハイエンドGUIエージェント |
+
+Qwen 3.6 Plusは、モデルがコマンドラインを効果的に操作できる能力を測定する「Terminal Bench」スコアでリードしています。しかし、Gemma 4は完全にオープンソースであること、およびコンシューマー向けGPUでの優れたパフォーマンスにより、依然として多くの開発者に好まれています。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/dhlrZwH1Uzg"
+    title="Gemma 4 + Claude Code + Jan : Best FREE AI Coding Setup"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 「Jagged Intelligence（ギザギザの知能）」の未来
+
+OpenAIのGreg Brockman氏は最近、AIの現状を「Jagged Intelligence（ギザギザの知能）」と表現しました。これは、モデルがカーネルレベルのコードを書くような複雑なタスクでは超人的な能力を発揮する一方で、基本的な人間の論理で時折失敗することを指します。**gemma 4 claude code** 統合の目標は、エージェント型ワークフローを使用することで、これらの「ギザギザ」を滑らかにすることです。
+
+モデルが独自のターミナルコマンドを実行し、自身のコードをテストし、エラーログに基づいて反復処理を行えるようにすることで、AIの信頼性の「底」を上げることができます。現在、AGI（汎用人工知能）への道のりの70〜80%に達していると推定されており、残りの20%はこの正確な信頼性とツールの統合にかかっています。
+
+## 高度なワークフロー：ビジュアルコーディング
+
+Gemma 4ファミリーの際立った機能の一つは、ネイティブなマルチモーダルサポートです。ビジョン機能が後付けされた古いモデルとは異なり、Gemma 4は画像やビデオでネイティブにトレーニングされています。これにより、「Screen-to-Code（画面からコードへ）」のワークフローが可能になります。
+1. UIデザインや手書きのワイヤーフレームのスクリーンショットを撮ります。
+2. その画像を **gemma 4 claude code** エージェントに渡します。
+3. エージェントは、視覚的なレイアウトに一致する機能的なReactまたはTailwind CSSコードを生成します。
+
+このワークフローはデザインと開発の間の溝を埋め、以前のテキストのみのモデルでは不可能だった迅速なプロトタイピングを可能にします。
+
+## よくある質問
+
+**Q: Gemma 4をClaude Codeで使用するのは完全に無料ですか？**
+
+A: はい、Jan.aiやOllamaを使用してローカルでウェイトを実行する場合、またはGoogle AI Studioの無料枠を使用する場合は無料です。Apache 2.0ライセンスの下で、モデル自体のサブスクリプション料金はかかりません。
+
+**Q: Gemma 4 31Bモデルを実行するには、どのくらいのVRAMが必要ですか？**
+
+A: 量子化されていないウェイトの場合、80GBのH100が推奨されますが、ほとんどの開発者にとって、4ビットまたは6ビットの量子化バージョンであれば、RTX 3090や4090のような24GBのコンシューマー向けGPUで快適に動作します。
+
+**Q: Gemma 4はコードベース全体を一度に処理できますか？**
+
+A: 256,000トークンのコンテキストウィンドウにより、ほとんどの中規模リポジトリを処理できます。大規模なエンタープライズレベルのコードベースの場合は、RAG（検索拡張生成）を使用するか、100万トークンのウィンドウを提供するQwen 3.6 Plusのようなモデルに切り替える必要があるかもしれません。
+
+**Q: リークで言及された「Conway」エージェントとは何ですか？**
+
+A: Conwayは、Anthropicが今後リリースする予定のスタンドアロンのエージェント環境のようです。これは、単なるチャットインターフェースをはるかに超えた、ウェブフックを介して外部イベントに応答できる永続的で常時オンのAIとして設計されています。

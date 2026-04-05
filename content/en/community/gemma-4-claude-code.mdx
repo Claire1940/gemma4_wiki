@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Gemma 4 Claude Code: Best AI Coding Setup Guide 2026",
+  description: "Learn how to integrate Google's Gemma 4 with Anthropic's Claude Code using Jan.ai. Discover the best open-source setup for agentic coding and local AI development.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/0f172a/fff?text=Gemma+4+Claude+Code+Setup",
+  date: "2026-04-03",
+  author: "Gemma Wiki Team"
+}
+
+The landscape of local AI development has shifted dramatically in 2026 with the release of Google's most powerful open model family to date. Integrating **Gemma 4 Claude Code** workflows allows developers to harness state-of-the-art reasoning without the heavy costs associated with proprietary API calls. By combining the raw power of the Gemma 4 31B Dense model with the agentic capabilities of the Claude Code interface, you can create a high-performance, private coding environment on consumer-grade hardware. This **Gemma 4 Claude Code** setup is particularly effective for those looking to replace Claude 3 Haiku with a more capable, open-source alternative that excels in multimodal tasks and complex repository-level engineering.
+
+## Understanding the Gemma 4 Model Family
+
+Google's Gemma 4 release represents a significant leap forward for the open-source community. Built on the same architecture as Gemini 3, these models are released under a permissive Apache 2.0 license, meaning you own everything you build. For developers, the most interesting models are the 26B Mixture of Experts (MoE) and the 31B Dense model, both of which fit comfortably on modern desktop GPUs.
+
+| Model Variant | Parameters | Type | Best Use Case |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 Billion | Edge | Mobile devices and low-latency IoT |
+| **Gemma 4 E4B** | 4 Billion | Edge | Raspberry Pi and Jetson Nano tasks |
+| **Gemma 4 26B** | 26 Billion (3.8B Active) | MoE | Fast inference for real-time coding |
+| **Gemma 4 31B** | 31 Billion | Dense | High-quality reasoning and fine-tuning |
+
+The 31B Dense model currently holds the #3 spot on the Arena AI open model leaderboard, outperforming models nearly 20 times its size. This makes it a prime candidate for local integration with coding agents.
+
+> **💡 Tip:** If you have a GPU with 24GB VRAM or more, always opt for the 31B Dense model. It provides significantly better reasoning for complex logic than the 26B MoE variant.
+
+## Anthropic's Claude Code and the Conway Leak
+
+While Google provided the models, Anthropic has been quietly evolving its interface. A recent source code leak revealed that Anthropic is working on a project codenamed "Conway." Unlike a standard chat interface, Conway is a standalone agent environment designed to stay "always on." It features a dedicated sidebar, an extension panel for custom tools, and the ability to be triggered via external webhooks.
+
+This persistent architecture is what makes the **gemma 4 claude code** combination so potent. By routing Claude Code to use local Gemma models, you gain the benefits of a sophisticated agentic framework while maintaining data privacy and reducing latency.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/slH-jPY1TgE"
+    title="Google drops Gemma 4, Anthropic's SECRET AI Agent, Qwen 3.6 & MORE!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Step-by-Step: Setting Up Gemma 4 with Claude Code
+
+The easiest way to bridge these two technologies is by using [Jan.ai](https://jan.ai/), a free, open-source desktop application that acts as a local model provider and orchestrator.
+
+### 1. Install Jan Desktop
+Download and install the Jan app for Windows, Mac, or Linux. This tool will serve as the middleware between your local hardware and the Claude Code CLI.
+
+### 2. Configure the Model Provider
+Navigate to the **Settings** menu in Jan and select **Model Providers**. If you want to run Gemma 4 entirely for free, you should use the Google AI Studio provider.
+*   Go to [Google AI Studio](https://aistudio.google.com/) to generate a free API key.
+*   Paste the key into Jan's Gemini provider section.
+*   Refresh the model list to see Gemma 4 variants.
+
+### 3. Integrate with Claude Code
+In the Jan settings, look for the **Integrations** tab and select **Claude Code**. You can then map specific Claude models (Haiku, Sonnet, Opus) to your local Gemma 4 models.
+
+| Claude Alias | Recommended Local Mapping | Reason |
+|---|---|---|
+| **Haiku** | **Gemma 4 31B Dense** | Better performance and native multimodal support |
+| **Sonnet** | **Qwen 3.6 Plus** | Superior repository-level navigation |
+| **Opus** | **GLM 5V Turbo** | Advanced vision-to-code capabilities |
+
+### 4. Launching the Environment
+Open your terminal and run the `claude` command. Use the `/model` command within the interface to switch to the "Haiku" profile, which you have now successfully routed to Gemma 4.
+
+> **⚠️ Warning:** Ensure your local drivers are updated. Gemma 4 utilizes native function calling and structured JSON output, which requires modern CUDA or Metal support to run efficiently.
+
+## Comparative Analysis: Gemma 4 vs. Competitors
+
+While Gemma 4 is a powerhouse, it is part of a broader ecosystem of "agentic" models released in early 2026. Alibaba's Qwen 3.6 Plus and Z.AI's GLM 5V Turbo are also vying for dominance in the coding space.
+
+| Feature | Gemma 4 31B | Qwen 3.6 Plus | GLM 5V Turbo |
+|---|---|---|---|
+| **Context Window** | 256,000 | 1,000,000 | 128,000 |
+| **Primary Strength** | General Reasoning | Repo-level Engineering | Visual Design to Code |
+| **License** | Apache 2.0 | Proprietary/Open Weights | Proprietary |
+| **Multimodal** | Native Audio/Video | Image/Document | High-end GUI Agents |
+
+Qwen 3.6 Plus leads in "Terminal Bench" scores, which measure a model's ability to operate a command line effectively. However, Gemma 4 remains the preferred choice for many due to its fully open-source nature and superior performance on consumer GPUs.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/dhlrZwH1Uzg"
+    title="Gemma 4 + Claude Code + Jan : Best FREE AI Coding Setup"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## The Future of Jagged Intelligence
+
+OpenAI's Greg Brockman recently described the current state of AI as "Jagged Intelligence." This refers to models being superhuman at complex tasks like writing kernel-level code while occasionally failing at basic human logic. The goal of the **gemma 4 claude code** integration is to smooth out these "jags" by using agentic workflows. 
+
+By allowing the model to run its own terminal commands, test its own code, and iterate based on error logs, we raise the "floor" of AI reliability. We are currently estimated to be 70-80% of the way toward AGI, with the final 20% depending on this exact type of reliability and tool integration.
+
+## Advanced Workflows: Visual Coding
+
+One of the standout features of the Gemma 4 family is its native multimodal support. Unlike older models that had vision capabilities "bolted on," Gemma 4 was trained on images and video natively. This allows for a "Screen-to-Code" workflow:
+1.  Take a screenshot of a UI design or a hand-drawn wireframe.
+2.  Pass the image to the **gemma 4 claude code** agent.
+3.  The agent generates functional React or Tailwind CSS code that matches the visual layout.
+
+This workflow closes the gap between design and development, allowing for rapid prototyping that was previously impossible with text-only models.
+
+## FAQ
+
+**Q: Is Gemma 4 completely free to use with Claude Code?**
+
+A: Yes, if you run the weights locally using Jan.ai or Ollama, or if you use the free tier of Google AI Studio. There are no subscription fees for the model itself under the Apache 2.0 license.
+
+**Q: How much VRAM do I need to run the Gemma 4 31B model?**
+
+A: For the unquantized weights, an 80GB H100 is recommended, but for most developers, a 4-bit or 6-bit quantized version will run comfortably on a 24GB consumer GPU like the RTX 3090 or 4090.
+
+**Q: Can Gemma 4 handle an entire codebase at once?**
+
+A: With a context window of 256,000 tokens, it can handle most medium-sized repositories. For massive enterprise-level codebases, you may still need to use RAG (Retrieval-Augmented Generation) or switch to a model like Qwen 3.6 Plus which offers a 1 million token window.
+
+**Q: What is the "Conway" agent mentioned in the leaks?**
+
+A: Conway appears to be Anthropic's upcoming standalone agent environment. It is designed to be a persistent, always-on AI that can respond to external events via webhooks, making it much more than a simple chat interface.
