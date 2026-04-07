@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "Benchmark de velocidad de Gemma 4: Guía de rendimiento 2026",
+  description: "Explora los últimos resultados del benchmark de velocidad de Gemma 4. Compara el rendimiento de RTX 5090, 4090 y Mac M3 para los nuevos modelos de IA de pesos abiertos de Google.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Speed+Benchmark",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la serie Gemma 4 de Google ha redefinido lo que es posible para la ejecución local de IA en hardware de consumo y empresarial. Si buscas los últimos resultados del **benchmark de velocidad de gemma 4**, has llegado al lugar adecuado para entender cómo se comparan estos modelos con la competencia. Estos modelos, que van desde una versión diminuta de 2B parámetros hasta un potente transformador denso de 31B, están optimizados específicamente para razonamiento de alto rendimiento y flujos de trabajo agénticos. 
+
+Entender el **benchmark de velocidad de gemma 4** es crucial para desarrolladores, gamers y entusiastas de la IA que desean ejecutar inteligencia de nivel de frontera en sus propias máquinas. Al alejarse de las API basadas en la nube, los usuarios pueden aprovechar el enfoque de "inteligencia por parámetro" de Gemma 4 para lograr resultados que anteriormente requerían modelos 20 veces más grandes. Ya sea que uses una RTX 5090 o un Mac Studio, las mejoras de rendimiento en 2026 son nada menos que revolucionarias.
+
+## Descripción general de la familia de modelos Gemma 4
+
+La familia Gemma 4 se divide en cuatro tamaños distintos, cada uno adaptado a limitaciones de hardware y casos de uso específicos. La principal innovación en 2026 es la introducción de la arquitectura Mixture-of-Experts (MoE) en el modelo de gama media, que permite velocidades increíbles al activar solo una fracción de sus parámetros durante la inferencia.
+
+| Modelo | Tipo | Parámetros activos | Dispositivo objetivo |
+|---|---|---|---|
+| **Gemma 4 2B** | Denso | 2.3 mil millones | Móvil y Edge |
+| **Gemma 4 4B** | Denso | 4.5 mil millones | Edge potente/Multimodal |
+| **Gemma 4 26B-A4B** | **MoE** | **3.8 mil millones** | Escritorio/Estación de trabajo |
+| **Gemma 4 31B** | Denso | 31 mil millones | GPU de gama alta/Servidor |
+
+> **💡 Consejo:** Para obtener el mejor equilibrio entre velocidad e inteligencia, el modelo 26B-A4B MoE es el "punto ideal" para la mayoría de los usuarios domésticos, ofreciendo velocidades comparables al modelo 4B con las capacidades de razonamiento de un sistema mucho más grande.
+
+## Benchmark de velocidad de Gemma 4: Análisis de rendimiento de GPU
+
+Al evaluar un **benchmark de velocidad de gemma 4**, la elección del hardware es el factor más significativo. Con la llegada de las GPU de la serie RTX 50 en 2026, vemos un salto masivo en tokens por segundo (t/s). Los siguientes datos comparan el modelo insignia 31B denso en los tres niveles superiores del hardware de consumo de NVIDIA.
+
+### RTX 3090 vs 4090 vs 5090 (Modelo denso 31B)
+
+| GPU | VRAM | Velocidad (Tokens/seg) | Ganancia de rendimiento |
+|---|---|---|---|
+| **RTX 3090** | 24 GB | 35.7 t/s | Base de referencia |
+| **RTX 4090** | 24 GB | 42.3 t/s | +18% |
+| **RTX 5090** | 32 GB | **64.88 t/s** | **+81%** |
+
+Como se muestra, la RTX 5090 actúa como un valor atípico significativo, casi duplicando el rendimiento de la veterana 3090. Esto se debe en gran medida al aumento del ancho de banda de memoria y al búfer de 32 GB de VRAM, lo que permite que el modelo 31B se ejecute con una cuantización menos agresiva.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/VYc47oqBnqI"
+    title="RTX 3090 vs 4090 vs 5090 vs Mac: Gemma 4 Benchmarks"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## La ventaja de velocidad de Mixture-of-Experts (MoE)
+
+Los resultados más impresionantes del **benchmark de velocidad de gemma 4** provienen del modelo 26B-A4B. Debido a que utiliza una arquitectura de Mixture-of-Experts, solo activa 3.8 mil millones de parámetros en cualquier momento dado. Esto le permite evitar los cuellos de botella del ancho de banda de memoria que ralentizan los modelos densos como el 31B.
+
+### Velocidades de inferencia de 26B-A4B MoE
+
+| Hardware | Velocidad (Tokens/seg) | Eficiencia |
+|---|---|---|
+| **RTX 5090** | **182 t/s** | Excepcional |
+| **RTX 4090** | 147 t/s | Alta |
+| **RTX 3090** | 120 t/s | Sólida |
+| **Mac Studio M2 Ultra** | 300 t/s | Pico de memoria unificada |
+
+Para los usuarios que ejecutan flujos de trabajo agénticos —donde la IA debe "pensar" a través de múltiples pasos y llamar a diversas herramientas— la velocidad de más de 182 t/s en una RTX 5090 hace que la interacción se sienta instantánea. Este **benchmark de velocidad de gemma 4** específico resalta por qué MoE se está convirtiendo en el estándar para el despliegue local de IA.
+
+## Benchmarks empresariales: NVIDIA DGX Spark (Grace Blackwell)
+
+Para entornos profesionales, el NVIDIA DGX Spark (que utiliza el superchip GB10 Grace Blackwell) ofrece una perspectiva diferente sobre el rendimiento. Mientras que las GPU de consumo se centran en la velocidad de generación bruta, los sistemas de memoria unificada como el DGX Spark destacan en el "Procesamiento de Prompts" (prefill), lo cual es vital para tareas de contexto largo.
+
+| Config. del modelo | Procesamiento de prompts (2048 tokens) | Velocidad de decodificación (Pico) |
+|---|---|---|
+| **31B (BF16)** | 1066 t/s | 4.0 t/s |
+| **31B (AWQ int4)** | 810 t/s | 11.0 t/s |
+| **26B-A4B (MoE)** | **3105 t/s** | **24.0 t/s** |
+
+> **⚠️ Advertencia:** En sistemas de memoria unificada como el DGX Spark o Mac, la generación de tokens a menudo está limitada por el ancho de banda LPDDR5X más que por la potencia de cálculo. Si necesitas una generación de alta velocidad para documentos largos, prioriza las tarjetas de centro de datos basadas en HBM o recetas de alta cuantización (int4).
+
+## Capacidades en el mundo real y lógica agéntica
+
+Más allá de los números brutos del **benchmark de velocidad de gemma 4**, la calidad de los resultados sigue siendo competitiva con modelos mucho más grandes. Google ha integrado "habilidades de agente" que permiten que el modelo se ejecute completamente en el dispositivo, incluso en teléfonos móviles. Esto permite que la IA razone a través de datos estructurados, use herramientas y ejecute tareas de varios pasos sin una conexión a la nube.
+
+En las pruebas, el modelo 31B ha completado con éxito las siguientes tareas complejas:
+1. **Clon de Mac OS**: Creó una interfaz de usuario basada en web funcional con una barra de herramientas, terminal y calculadora.
+2. **Simulador de Donas de F1**: Codificó una simulación física en 3D en código de navegador puro.
+3. **Lógica de juego**: Manejó la gestión de estados y la puntuación por turnos para un complejo juego de coches de cartón.
+4. **Razonamiento visual**: Analizó y comparó múltiples imágenes para extraer patrones compartidos.
+
+El modelo 31B ocupa actualmente el puesto #3 entre los modelos abiertos en la clasificación de LM Arena, quedando solo ligeramente por detrás de Qwen 3.5 27B, pero utilizando significativamente menos tokens para lograr resultados similares. Puedes acceder a estos modelos para realizar pruebas a través de [Google AI Studio](https://aistudio.google.com/) de forma gratuita.
+
+## Cómo optimizar tu configuración de Gemma 4
+
+Para sacar el máximo partido a tu hardware y maximizar tus puntuaciones en el **benchmark de velocidad de gemma 4**, sigue estos pasos de optimización:
+
+1. **Usa el entorno adecuado**: Para tareas agénticas, utiliza **Kilo CLI**. Está diseñado específicamente para aprovechar las capacidades de llamada a funciones de Gemma 4.
+2. **Elige la cuantización sabiamente**: Si tienes 24 GB de VRAM, ejecuta el modelo 31B en **AWQ int4**. Esto ofrece aproximadamente el triple de velocidad que la precisión estándar BF16 con una pérdida mínima de inteligencia.
+3. **Actualiza los controladores**: Asegúrate de estar en CUDA 13.0 o superior (controlador 580.142+) para aprovechar las últimas optimizaciones del kernel vLLM.
+4. **Activa Flash Attention**: Gemma 4 utiliza dimensiones de cabecera heterogéneas (256/512). Asegúrate de que tu motor de inferencia (como llama.cpp o vLLM) esté utilizando los backends Triton o Flash Attention.
+
+## FAQ
+
+**P: ¿Cuál es el mejor hardware para ejecutar un benchmark de velocidad de Gemma 4 en casa?**
+
+R: La **NVIDIA RTX 5090** es actualmente la de mejor rendimiento para montajes de consumo, alcanzando más de 64 t/s en el modelo 31B. Sin embargo, un Mac Studio con un M2 o M3 Ultra es superior para el modelo 26B-A4B MoE debido a su masivo ancho de banda de memoria unificada.
+
+**P: ¿Puede Gemma 4 ejecutarse en un teléfono móvil?**
+
+R: Sí. Los modelos "Edge" de 2B y 4B están diseñados específicamente para dispositivos móviles y placas Raspberry Pi. La actualización "Agent Skills" de Google permite que estos modelos se ejecuten localmente en tu teléfono para procesar tus datos de forma privada.
+
+**P: ¿Cómo se compara Gemma 4 con Llama 4 Scout?**
+
+R: Mientras que Llama 4 Scout ofrece una ventana de contexto más grande de 10 millones de tokens, Gemma 4 es a menudo más rápida y eficiente para tareas de menos de 256k tokens. Gemma 4 suele utilizar 2,5 veces menos tokens para tareas de razonamiento similares, lo que la hace más barata y rápida para aplicaciones del mundo real.
+
+**P: ¿Qué modelo debería usar para programación?**
+
+R: El **modelo 31B Denso** es el más sólido para programación, con una puntuación superior al 80% en LiveCodeBench. Si tienes un sistema con limitaciones de memoria, el 26B-A4B MoE es una alternativa viable que mantiene una salida JSON estructurada de alta calidad.

@@ -1,0 +1,141 @@
+export const metadata = {
+  title: "Gemma4 API 설정: 로컬 AI 통합 가이드 2026",
+  description: "로컬 AI 추론을 위한 Gemma4 API 설정을 마스터하는 방법을 배워보세요. Ollama 통합, 디스코드 봇 제작 및 2026년 하드웨어 최적화 가이드를 포함합니다.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma4+API+Setup+Guide",
+  date: "2026-04-07",
+  author: "Gemma4 위키 팀"
+}
+
+구글의 최신 오픈 가중치 모델 제품군의 출시는 개발자와 애호가들이 로컬 인텔리전스를 처리하는 방식을 혁신적으로 변화시켰습니다. 적절한 **gemma4 api 설정**을 수행하면 고성능 추론 모델을 자신의 하드웨어에서 직접 실행할 수 있으며, 이를 통해 완전한 데이터 프라이버시를 보장하고 반복적인 구독 비용을 없앨 수 있습니다. 개인화된 게이밍 어시스턴트를 구축하든 프라이빗 코딩 동료를 만들든, **gemma4 api 설정**의 미묘한 차이를 이해하는 것은 로컬 AI 주권을 향한 첫 걸음입니다. 2026년 현재, 올바른 구성만 갖춘다면 310억 개의 파라미터 모델을 사용하기 위한 진입 장벽은 크게 낮아졌습니다.
+
+이 종합 가이드는 Ollama와 같은 필수 환경 설치부터 로컬 REST 엔드포인트 구성, 그리고 Discord 및 Claude Code와 같은 플랫폼과의 고급 통합 과정을 안내합니다. 이 튜토리얼을 마칠 때쯤이면 데스크톱이나 서버에서 직접 비전 및 추론을 포함한 복잡한 멀티모달 작업을 처리할 수 있는 완전 기능의 프라이빗 API를 갖게 될 것입니다.
+
+## 하드웨어 및 VRAM 요구 사항
+
+소프트웨어 구성을 시작하기 전에, 사용 중인 장비가 모델의 무게를 견딜 수 있는지 확인해야 합니다. Gemma 4는 모바일 친화적인 "Effective"(E) 모델부터 거대한 31B Dense 변체에 이르기까지 여러 버전으로 제공됩니다. 이러한 모델을 VRAM에서 완전히 실행하는 것이 속도 면에서 가장 이상적이지만, GPU 리소스가 제한적인 경우 CPU 오프로딩도 가능한 대안입니다.
+
+| 모델 변체 | 최소 VRAM | 권장 VRAM | 주요 용도 |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2 GB | 4 GB | 모바일 기기 및 경량 봇 |
+| **Gemma 4 E4B** | 4 GB | 6 GB | 노트북 및 기본 게이밍 PC |
+| **Gemma 4 26B A4B (MoE)** | 8 GB | 12 GB | 중급형 GPU (RTX 4070/5070) |
+| **Gemma 4 31B Dense** | 16 GB | 24 GB | 하이엔드 워크스테이션 (RTX 4090/H100) |
+
+> **⚠️ 경고:** Apple 실리콘 맥은 통합 메모리를 사용하여 32GB 이상의 RAM으로 31B 모델을 실행할 수 있지만, PC 사용자는 시스템 RAM 스와핑으로 인한 "느릿한" 응답 시간을 피하기 위해 전용 VRAM을 우선시해야 합니다.
+
+## 1단계: 추론 엔진 설치
+
+2026년에 **gemma4 api 설정**을 처리하는 가장 효율적인 방법은 Ollama를 사용하는 것입니다. Ollama는 가공되지 않은 모델 가중치와 애플리케이션 사이의 가교 역할을 하며, 깔끔한 OpenAI 호환 API를 제공합니다.
+
+### macOS 및 Linux 설정
+터미널을 열고 다음 명령어를 실행하여 환경을 설치합니다:
+
+`curl -fsSL https://ollama.com/install.sh | sh`
+
+Linux 사용자의 경우, API를 항상 사용할 수 있도록 systemd를 통해 서비스를 활성화하는 것이 좋습니다:
+`sudo systemctl enable ollama`
+
+### Windows 설정
+Ollama 웹사이트에서 공식 설치 프로그램을 다운로드하세요. 설치가 완료되면 Ollama는 백그라운드 트레이 애플리케이션으로 실행됩니다. PowerShell이나 명령 프롬프트에서 `ollama --version`을 입력하여 설치를 확인할 수 있습니다.
+
+## 2단계: Gemma 4 로컬 API 구성
+
+엔진이 실행되면 특정 모델 가중치를 가져와야 합니다. 26B A4B로 알려진 "전문가 혼합(MoE)" 변체는 대형 모델의 추론 능력과 4B 파라미터 모델의 추론 속도를 동시에 제공하기 때문에 2026년 현재 가장 선호되는 모델입니다.
+
+1. **모델 가져오기:**
+   `ollama pull gemma4:26b`(또는 원하는 크기)를 실행합니다.
+2. **엔드포인트 확인:**
+   Ollama는 자동으로 `http://localhost:11434`에서 REST API를 호스팅합니다. 간단한 curl 명령어로 이를 테스트할 수 있습니다:
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "gemma4:26b",
+  "prompt": "로컬 AI가 게이밍에 더 좋은 이유는 무엇인가요?"
+}'
+```
+
+JSON 응답을 받는다면 로컬 수준에서 **gemma4 api 설정**이 기술적으로 완료된 것입니다. 하지만 앱에서 유용하게 사용하려면 통합 과정을 살펴봐야 합니다.
+
+## 3단계: OpenClaw를 통한 디스코드 통합
+
+많은 사용자에게 궁극적인 목표는 익숙한 인터페이스를 통해 AI와 상호작용하는 것입니다. Gemma 4와 OpenClaw를 결합하면 도구, 메모리 및 웹 검색 권한을 가진 자체 호스팅 디스코드 에이전트를 만들 수 있습니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/pInnVUaUX7M"
+    title="Gemma 4 + OpenClaw + Ollama + Discord - Full Local AI Setup for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### 디스코드 개발자 포털 설정
+로컬 API를 디스코드에 연결하려면 다음 단계를 따르세요:
+1. [Discord Developer Portal](https://discord.com/developers/applications)로 이동합니다.
+2. "New Application"을 생성하고 **Bot** 탭으로 이동합니다.
+3. **Bot Token**을 재설정하고 복사합니다.
+4. Privileged Gateway Intents 섹션 아래의 **Message Content Intent**를 활성화합니다.
+5. **OAuth2**에서 `bot` 및 `applications.commands` 범위를 선택합니다.
+6. 메시지 보내기(Send Messages), 채널 보기(View Channels), 링크 첨부(Embed Links), 메시지 기록 읽기(Read Message History) 권한을 부여합니다.
+
+### OpenClaw 설정
+머신에 OpenClaw를 설치하고 구성 마법사를 실행합니다. 공급자(provider)를 묻는 메시지가 나타나면 **Ollama**를 선택합니다. Base URL을 로컬 호스트로 지정하고 모델 이름에 `gemma4:31b`(또는 다운로드한 버전)를 입력합니다. 마지막으로 디스코드 봇 토큰과 사용자 ID를 붙여넣어 서비스를 페어링합니다.
+
+## 4단계: 고급 API 기능 및 멀티모달 활용
+
+Gemma 4는 단순한 텍스트 모델이 아닙니다. 정교한 "생각 모드(Thinking Mode)"와 멀티모달 기능을 갖추고 있습니다. API를 통해 이를 활용하려면 인터리브(interleaved) 데이터를 처리하도록 요청을 구성해야 합니다.
+
+| 기능 | API 트리거 | 모범 사례 |
+| :--- | :--- | :--- |
+| **생각 모드** | 시스템 프롬프트에 `&lt;|think|&gt;` 포함 | 복잡한 로직 및 수학에 사용 |
+| **비전 (OCR)** | `images` 배열에 Base64 이미지 전송 | 이미지 콘텐츠를 텍스트 **앞에** 배치 |
+| **긴 컨텍스트** | `num_ctx`를 128000+로 설정 | 상당한 VRAM 오버헤드 필요 |
+| **오디오 (E-시리즈)** | Transformers에서 `AutoProcessor` 사용 | 게임 채팅 전사에 최적 |
+
+Python을 사용하는 개발자에게는 `transformers` 라이브러리가 Gemma 4 아키텍처와 상호작용하는 가장 유연한 방법으로 남아 있습니다. 아키텍처 변경 사항에 대한 최신 소식은 [공식 Google AI for Developers](https://ai.google.dev/gemma) 사이트에서 확인할 수 있습니다.
+
+## 5단계: 코딩 어시스턴트 연결
+
+로컬 **gemma4 api 설정**의 가장 실용적인 용도 중 하나는 Claude Code와 같은 코딩 도구의 백엔드로 사용하는 것입니다. 이를 통해 코드를 타사 서버에 업로드하지 않고도 AI가 프라이빗 저장소를 분석하도록 할 수 있습니다.
+
+Claude Code를 로컬 Gemma 4 인스턴스로 리디렉션하려면 터미널에서 환경 변수를 설정하면 됩니다:
+
+```bash
+export ANTHROPIC_BASE_URL=http://localhost:11434/v1
+export ANTHROPIC_API_KEY=ollama
+claude --model gemma4:26b
+```
+
+이 구성은 CLI가 클라우드 공급자와 통신하고 있다고 생각하도록 속이지만, 실제로는 모든 토큰이 사용자의 GPU에 의해 생성됩니다.
+
+## 일반적인 설정 문제 해결
+
+최고의 하드웨어를 갖추고 있더라도 병목 현상이 발생할 수 있습니다. 다음은 **gemma4 api 설정** 과정에서 보고되는 가장 빈번한 문제입니다:
+
+*   **API 연결 거부 (Connection Refused):** 이는 보통 Ollama 서비스가 실행 중이지 않음을 의미합니다. Windows에서는 시스템 트레이를 확인하고, Linux에서는 `sudo systemctl start ollama`를 실행하세요.
+*   **느린 추론 (낮은 Tokens/Sec):** `OLLAMA_NUM_GPU`가 1로 설정되어 있는지 확인하세요. 모델이 VRAM에 비해 너무 크면 CPU로 넘어가게 되어 성능이 대폭 저하됩니다.
+*   **메모리 부족 (OOM):** 모델의 양자화(quantized) 버전을 시도해 보세요. 전체 정밀도 버전 대신 `gemma4:27b:q4_k_m`을 가져오면 품질 손실을 최소화하면서 VRAM을 최대 40% 절약할 수 있습니다.
+*   **디스코드 봇 응답 없음:** 디스코드 개발자 포털에서 "Message Content Intent"가 ON으로 설정되어 있는지 다시 확인하세요. 이 설정이 없으면 봇이 메시지를 "볼" 수 없어 처리하지 못합니다.
+
+> **💡 팁:** 여러 로컬 모델을 관리하거나 API 요청에 로깅을 추가해야 하는 경우 LiteLLM과 같은 도구를 프록시로 사용하세요.
+
+## 자주 묻는 질문 (FAQ)
+
+**Q: gemma4 api 설정과 관련된 비용이 있나요?**
+
+A: 아니요. Gemma 4는 오픈 가중치 모델이며 Ollama나 OpenClaw를 사용하여 본인의 하드웨어에서 호스팅하므로 API 비용이나 구독료가 전혀 없습니다. 유일한 "비용"은 GPU가 사용하는 전기료뿐입니다.
+
+**Q: 일반 게이밍 노트북에서 31B 모델을 실행할 수 있나요?**
+
+A: 쉽지 않습니다. 일반적인 게이밍 노트북은 보통 6GB에서 8GB의 VRAM을 가집니다. 31B 모델의 경우 고도로 양자화된 버전(Q2 또는 Q3)을 사용해야 하는데, 이는 추론 품질에 영향을 줄 수 있습니다. 노트북 하드웨어에서는 더 부드러운 경험을 위해 E4B 또는 12B 변체를 실행하는 것이 좋습니다.
+
+**Q: Gemma 4 API를 사용할 때 데이터가 내 머신을 벗어나나요?**
+
+A: 이 가이드를 따른다면 그렇지 않습니다. Ollama와 로컬 통합을 사용하면 모든 처리가 로컬 실리콘에서 이루어집니다. 텍스트, 이미지 또는 코드는 구글이나 다른 클라우드 제공업체로 전송되지 않습니다.
+
+**Q: 새 버전이 출시되면 모델을 어떻게 업데이트하나요?**
+
+A: 단순히 pull 명령어를 다시 실행하면 됩니다(예: `ollama pull gemma4`). Ollama는 업데이트된 레이어를 확인하고 필요한 변경 사항만 다운로드하므로 초기 설치보다 훨씬 빠르게 업데이트됩니다.

@@ -1,0 +1,141 @@
+export const metadata = {
+  title: "Configuración de la API de Gemma4: Guía de integración de IA local 2026",
+  description: "Aprenda a dominar la configuración de la API de Gemma4 para la inferencia de IA local. Nuestra guía cubre la integración de Ollama, la creación de bots de Discord y la optimización de hardware para 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma4+API+Setup+Guide",
+  date: "2026-04-07",
+  author: "Equipo de Wiki de Gemma4"
+}
+
+El lanzamiento de la última familia de modelos de pesos abiertos de Google ha revolucionado la forma en que los desarrolladores y entusiastas manejan la inteligencia local. Realizar una **configuración de la api de gemma4** adecuada le permite ejecutar modelos de razonamiento de alto rendimiento íntegramente en su propio hardware, garantizando la privacidad total de los datos y eliminando los costes de suscripción recurrentes. Ya sea que esté construyendo un asistente de juegos personalizado o un compañero de programación privado, comprender los matices de la **configuración de la api de gemma4** es el primer paso hacia la soberanía de la IA local. En 2026, la barrera de entrada para los modelos de 31 mil millones de parámetros ha bajado significativamente, siempre que cuente con la configuración correcta.
+
+Esta guía exhaustiva le llevará a través de la instalación de los entornos necesarios como Ollama, la configuración de puntos de conexión REST locales e integraciones avanzadas con plataformas como Discord y Claude Code. Al final de este tutorial, tendrá una API privada totalmente funcional capaz de manejar tareas multimodales complejas, incluyendo visión y razonamiento, directamente desde su escritorio o servidor.
+
+## Requisitos de Hardware y VRAM
+
+Antes de sumergirse en la configuración del software, debe asegurarse de que su equipo pueda soportar el peso del modelo. Gemma 4 se presenta en varias versiones, que van desde los modelos "Effective" (E) aptos para móviles hasta la masiva variante densa de 31B. Ejecutar estos modelos completamente en VRAM es el estándar de oro para la velocidad, aunque la descarga a CPU es una alternativa viable para aquellos con recursos de GPU limitados.
+
+| Variante del Modelo | VRAM Mínima | VRAM Recomendada | Mejor Caso de Uso |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2 GB | 4 GB | Dispositivos móviles y bots ligeros |
+| **Gemma 4 E4B** | 4 GB | 6 GB | Portátiles y equipos de gaming básicos |
+| **Gemma 4 26B A4B (MoE)** | 8 GB | 12 GB | GPUs de gama media (RTX 4070/5070) |
+| **Gemma 4 31B Dense** | 16 GB | 24 GB | Estaciones de trabajo de gama alta (RTX 4090/H100) |
+
+> **⚠️ Advertencia:** Aunque los Mac con Apple Silicon pueden usar memoria unificada para ejecutar el modelo 31B con más de 32 GB de RAM, los usuarios de PC deben priorizar la VRAM dedicada para evitar los tiempos de respuesta lentos asociados con el intercambio de memoria RAM del sistema.
+
+## Paso 1: Instalación del motor de inferencia
+
+La forma más eficiente de gestionar la **configuración de la api de gemma4** en 2026 es a través de Ollama. Actúa como un puente entre los pesos brutos del modelo y sus aplicaciones, proporcionando una API limpia compatible con OpenAI.
+
+### Configuración en macOS y Linux
+Abra su terminal y ejecute el siguiente comando para instalar el entorno:
+
+`curl -fsSL https://ollama.com/install.sh | sh`
+
+Para los usuarios de Linux, se recomienda encarecidamente habilitar el servicio a través de systemd para asegurar que su API esté siempre disponible:
+`sudo systemctl enable ollama`
+
+### Configuración en Windows
+Descargue el instalador oficial desde el sitio web de Ollama. Una vez instalado, Ollama se ejecuta como una aplicación en segundo plano en la bandeja del sistema. Puede verificar la instalación escribiendo `ollama --version` en su PowerShell o Símbolo del sistema.
+
+## Paso 2: Configuración de la API local de Gemma 4
+
+Una vez que el motor esté funcionando, debe descargar los pesos específicos del modelo. La variante "Mixture-of-Experts" (MoE), conocida como 26B A4B, es actualmente la favorita para 2026 porque ofrece la potencia de razonamiento de un modelo grande con la velocidad de inferencia de un modelo de 4B parámetros.
+
+1. **Descargar el modelo:**
+   Ejecute `ollama pull gemma4:26b` (o el tamaño de su preferencia).
+2. **Verificar el punto de conexión (endpoint):**
+   Ollama aloja automáticamente una API REST en `http://localhost:11434`. Puede probar esto con un comando curl sencillo:
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "gemma4:26b",
+  "prompt": "¿Por qué la IA local es mejor para los juegos?"
+}'
+```
+
+Si recibe una respuesta JSON, su **configuración de la api de gemma4** está técnicamente completa a nivel local. Sin embargo, para que sea útil para las aplicaciones, necesitamos analizar la integración.
+
+## Paso 3: Integración con Discord mediante OpenClaw
+
+Para muchos usuarios, el objetivo final es interactuar con su IA a través de una interfaz familiar. Combinando Gemma 4 con OpenClaw, puede crear un agente de Discord autohospedado que tenga acceso a herramientas, memoria y búsqueda web.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/pInnVUaUX7M"
+    title="Gemma 4 + OpenClaw + Ollama + Discord - Configuración completa de IA local gratuita"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Configuración del Portal de Desarrolladores de Discord
+Para conectar su API local con Discord, siga estos pasos:
+1. Navegue al [Portal de Desarrolladores de Discord](https://discord.com/developers/applications).
+2. Cree una "New Application" y vaya a la pestaña **Bot**.
+3. Restablezca y copie su **Bot Token**.
+4. Habilite el **Message Content Intent** bajo la sección de Privileged Gateway Intents.
+5. En **OAuth2**, seleccione los alcances `bot` y `applications.commands`.
+6. Otorgue permisos para: Send Messages, View Channels, Embed Links y Read Message History.
+
+### Configuración de OpenClaw
+Instale OpenClaw en su máquina y ejecute el asistente de configuración. Cuando se le pregunte por el proveedor, seleccione **Ollama**. Apunte la URL base a su host local e introduzca el nombre del modelo `gemma4:31b` (o la versión que haya descargado). Finalmente, pegue su Token de Bot de Discord y su ID de usuario para vincular el servicio.
+
+## Paso 4: Funciones avanzadas de la API y uso multimodal
+
+Gemma 4 no es solo un modelo de texto; cuenta con un sofisticado "Modo de Pensamiento" y capacidades multimodales. Para utilizarlas a través de la API, debe estructurar sus solicitudes para manejar datos intercalados.
+
+| Característica | Activador de API | Mejor Práctica |
+| :--- | :--- | :--- |
+| **Modo de Pensamiento** | Incluir `&lt;|think|&gt;` en el prompt de sistema | Usar para lógica compleja y matemáticas |
+| **Visión (OCR)** | Enviar imagen Base64 en el array `images` | Colocar el contenido de la imagen **antes** del texto |
+| **Contexto Largo** | Ajustar `num_ctx` a 128000+ | Requiere una sobrecarga significativa de VRAM |
+| **Audio (Serie E)** | Usar `AutoProcessor` en Transformers | Ideal para transcribir chats de juegos |
+
+Para los desarrolladores que utilizan Python, la biblioteca `transformers` sigue siendo la forma más flexible de interactuar con la arquitectura de Gemma 4. Puede encontrar la documentación más reciente en el sitio oficial de [Google AI for Developers](https://ai.google.dev/gemma) para mantenerse actualizado sobre los cambios arquitectónicos.
+
+## Paso 5: Conexión con asistentes de programación
+
+Una de las aplicaciones más prácticas para una **configuración de la api de gemma4** local es como backend para herramientas de programación como Claude Code. Esto le permite que una IA analice su repositorio privado sin subir el código a un servidor de terceros.
+
+Para redirigir Claude Code a su instancia local de Gemma 4, puede configurar variables de entorno en su terminal:
+
+```bash
+export ANTHROPIC_BASE_URL=http://localhost:11434/v1
+export ANTHROPIC_API_KEY=ollama
+claude --model gemma4:26b
+```
+
+Esta configuración engaña a la CLI haciéndole creer que está hablando con un proveedor en la nube, mientras que en realidad, cada token está siendo generado por su GPU.
+
+## Resolución de problemas comunes de configuración
+
+Incluso con el mejor hardware, puede encontrar cuellos de botella. Estos son los problemas más frecuentes reportados durante el proceso de **configuración de la api de gemma4**:
+
+*   **Conexión de API rechazada:** Esto generalmente significa que el servicio Ollama no se está ejecutando. En Windows, compruebe la bandeja del sistema; en Linux, ejecute `sudo systemctl start ollama`.
+*   **Inferencia lenta (Bajos Tokens/Seg):** Asegúrese de que `OLLAMA_NUM_GPU` esté configurado en 1. Si el modelo es demasiado grande para su VRAM, se desbordará a la CPU, causando una caída masiva del rendimiento.
+*   **Memoria insuficiente (OOM):** Pruebe una versión cuantizada del modelo. Descargar `gemma4:27b:q4_k_m` en lugar de la versión de precisión completa puede ahorrar hasta un 40% de VRAM con una pérdida de calidad insignificante.
+*   **El bot de Discord no responde:** Verifique que el "Message Content Intent" esté activado en el portal de Desarrolladores de Discord. Sin esto, el bot no puede "ver" sus mensajes para procesarlos.
+
+> **💡 Consejo:** Use una herramienta como LiteLLM como proxy si necesita administrar múltiples modelos locales o añadir registros a sus solicitudes de API.
+
+## Preguntas Frecuentes (FAQ)
+
+**P: ¿Existe algún coste asociado con la configuración de la api de gemma4?**
+
+R: No. Debido a que Gemma 4 es un modelo de pesos abiertos y usted lo aloja en su propio hardware utilizando Ollama u OpenClaw, no hay costes de API ni cuotas de suscripción. Su único "coste" es la electricidad utilizada por su GPU.
+
+**P: ¿Puedo ejecutar el modelo 31B en un portátil de gaming estándar?**
+
+R: Es difícil. Un portátil de gaming estándar suele tener entre 6 GB y 8 GB de VRAM. Para el modelo 31B, necesitaría usar una versión altamente cuantizada (Q2 o Q3), lo que puede afectar la calidad del razonamiento. Es mejor ejecutar las variantes E4B o 12B en hardware de portátil para una experiencia más fluida.
+
+**P: ¿Mis datos salen de mi máquina al usar la API de Gemma 4?**
+
+R: No si sigue esta guía. Al usar Ollama e integraciones locales, todo el procesamiento ocurre en su silicio local. Ningún texto, imagen o código se envía a Google ni a ningún otro proveedor de la nube.
+
+**P: ¿Cómo actualizo el modelo cuando se lanza una nueva versión?**
+
+R: Simplemente ejecute el comando pull de nuevo (ej. `ollama pull gemma4`). Ollama buscará capas actualizadas y descargará solo los cambios necesarios, lo que hace que las actualizaciones sean mucho más rápidas que la instalación inicial.

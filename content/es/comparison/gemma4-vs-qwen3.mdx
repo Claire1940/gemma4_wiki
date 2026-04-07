@@ -1,0 +1,137 @@
+export const metadata = {
+  title: "Gemma4 vs Qwen3: Los mejores modelos de IA para juegos y programación en 2026",
+  description: "Una comparación exhaustiva de los modelos Gemma 4 de Google y Qwen 3.5/3.6 de Alibaba. Descubre qué IA domina en programación, desarrollo de videojuegos y tareas de visión.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma4+vs+Qwen3+Comparison",
+  date: "2026-04-07",
+  author: "Equipo de Gemma4 Wiki"
+}
+
+El panorama de la inteligencia artificial de pesos abiertos ha cambiado drásticamente en 2026, con la rivalidad entre Google DeepMind y Alibaba Cloud alcanzando su punto máximo. Para desarrolladores, jugadores y entusiastas de la tecnología, el debate **gemma4 vs qwen3** es más que una simple batalla de benchmarks; es una elección entre dos filosofías distintas de inteligencia artificial. Ya sea que busques integrar un agente de IA local en tu último juego indie o busques un potente compañero de programación para motores complejos de 3JS, comprender los matices de estos modelos es esencial.
+
+En esta guía profunda, evaluamos el rendimiento de Gemma 4 y la serie Qwen 3.5/3.6 a través de pruebas de estrés del mundo real. Desde la generación de editores de vídeo funcionales hasta la identificación de manuscritos antiguos, el enfrentamiento **gemma4 vs qwen3** revela fortalezas y debilidades sorprendentes en ambas familias. Mientras que uno destaca en razonamiento puro y precisión científica, el otro ofrece una sintonización superior en preferencias de chat y soporte multilingüe. Sigue estos pasos para determinar qué modelo merece un lugar en tu despliegue local.
+
+## El duelo de pesos pesados: Gemma 4 31B vs. Qwen 3.5 27B
+
+Al comparar la clase de modelos de "estación de trabajo", la competencia es increíblemente ajustada. Tanto Google como Alibaba han optimizado estos modelos para la inferencia en una sola GPU, convirtiéndolos en los favoritos para usuarios domésticos con hardware de gama alta como las tarjetas Nvidia H100 o la serie RTX 50.
+
+| Característica | Gemma 4 31B | Qwen 3.5 27B |
+|---|---|---|
+| **Longitud de contexto** | 262K Tokens | 262K Tokens |
+| **Modalidades de entrada** | Texto, Imagen, Vídeo | Texto, Imagen, Vídeo |
+| **Modalidades de salida** | Texto | Texto |
+| **Precios (por M de tokens)** | **$0.14 (Entrada) / $0.40 (Salida)** | $0.195 (Entrada) / $1.56 (Salida) |
+| **Rendimiento (p50)** | 3.0 tok/s | **34.0 tok/s** |
+
+Como se muestra en la tabla anterior, Qwen 3.5 27B ofrece un rendimiento significativamente mayor, lo que lo convierte en la mejor opción para aplicaciones en tiempo real donde la latencia es crítica. Sin embargo, Gemma 4 31B es notablemente más rentable en proveedores alojados como [OpenRouter](https://openrouter.ai/), particularmente en lo que respecta a los costes de los tokens de salida.
+
+> **💡 Consejo:** Si estás ejecutando estos modelos localmente, asegúrate de tener al menos 80 GB de VRAM para utilizar la ventana de contexto completa y la caché KV de manera efectiva.
+
+## Pruebas de estrés de programación y motores de juegos
+
+Para los desarrolladores de juegos, la capacidad de una IA para generar código funcional y sin errores en un solo intento es la métrica definitiva. En recientes "Batallas de Programación", ambos modelos tuvieron la tarea de crear aplicaciones web complejas utilizando JavaScript puro y HTML5.
+
+### El desafío del editor de vídeo
+En una prueba para construir un editor de vídeo de alto rendimiento con un pipeline de renderizado y enrutamiento de audio, Qwen 3.6 demostró una comprensión superior de la arquitectura compleja. Implementó con éxito una herramienta de transformación para escala y opacidad, aunque tuvo dificultades con el renderizado de las pistas de vídeo en la línea de tiempo. Gemma 4 31B, sin embargo, produjo una interfaz de usuario más funcional donde los archivos de audio eran visibles y reproducibles de inmediato, aunque su herramienta de texto no llegó a funcionar.
+
+### Desarrollo de motores de juegos 3D
+La prueba más brutal consistió en crear un juego de carreras de karts en 3D utilizando 3JS con terreno procedimental e inclinación de pistas.
+
+| Tarea | Qwen 3.5 Omni Plus | Gemma 4 31B |
+|---|---|---|
+| **Generación de escenas 3D** | Exitoso | Fallido |
+| **Lógica física** | Parcialmente funcional | No funcional |
+| **Sistema de IU/Menú** | Equilibrado | **Superior** |
+| **Éxito en un solo intento** | 40% | 20% |
+
+Si bien ambos modelos encontraron difícil resolver la lógica de física 3D en un solo bloque de código, Qwen 3.5 Omni Plus fue generalmente más confiable para tareas matemáticas complejas. Gemma 4 a menudo falló en cinemática esférica y generación de terreno procedimental, aunque a menudo proporcionó una interfaz de usuario más estética.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KDYRG0Us0Sw"
+    title="Gemma 4 vs Qwen 3.6 vs Qwen 3.5 omni: La batalla de programación"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Visión y razonamiento multimodal
+
+La rivalidad **gemma4 vs qwen3** se extiende a las tareas de visión, donde los modelos deben interpretar imágenes, resolver ecuaciones manuscritas e identificar lugares emblemáticos.
+
+### Notación científica y OCR
+En pruebas que involucraron 30 ecuaciones de física escritas a mano, ambos modelos identificaron correctamente las fórmulas. Sin embargo, Qwen 3.5 mostró un conocimiento de dominio más profundo, identificando correctamente leyes oscuras como la ley de Duane-Hunt y organizando los datos por tema (por ejemplo, Relatividad Especial, Óptica Ondulatoria). Gemma 4 31B fue más literal, organizando los datos por filas, y cometió pequeños errores al transcribir denominadores complejos en la Ley de Planck.
+
+### Identificación cultural y arquitectónica
+Gemma 4 31B demostró ser superior en la identificación de lugares emblemáticos específicos. Al presentársele una imagen de una mezquita en Lahore, Pakistán, Gemma identificó correctamente la ubicación y el estilo arquitectónico. Qwen 3.5, por el contrario, alucinó que la imagen era de la Tumba de Humayun en Nueva Delhi.
+
+Inversamente, al encargársele la identificación de un antiguo manuscrito en escritura Lontara de Indonesia, Qwen 3.5 fue 100% preciso con respecto al grupo étnico y el reino, mientras que Gemma 4 identificó erróneamente la isla y el sistema de escritura por completo.
+
+## Benchmarks: Estáticos vs. Preferencia de Chat
+
+Al elegir entre estas familias, es importante distinguir entre los benchmarks oficiales y las tablas de clasificación de "preferencia humana" de terceros como Arena AI.
+
+| Benchmark | Gemma 4 31B | Qwen 3.5 27B | Ganador |
+|---|---|---|---|
+| **MMLU-Pro** | 85.2 | **86.1** | Qwen |
+| **GPQA Diamond** | 84.3 | **85.5** | Qwen |
+| **LiveCodeBench v6** | 80.0 | **80.7** | Qwen |
+| **MMMLU (Multilingüe)** | **88.4** | 85.9 | Gemma |
+| **MMMU-Pro (Visión)** | **76.9** | 75.0 | Gemma |
+
+En la tabla de clasificación de texto de código abierto de Arena AI (marzo de 2026), Gemma 4 31B ocupa actualmente el puesto número 3 como modelo abierto, superando incluso al masivo Qwen 3.5 397B en preferencia de chat. Esto sugiere que, si bien Qwen puede ganar en razonamiento estático y filas de ciencia, la sintonización de Google hace que Gemma 4 se sienta "más inteligente" y más útil en contextos conversacionales.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/ZCKuK8UCsP4"
+    title="Gemma-4 31B vs Qwen3.5 27B: Comparación local práctica"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Eficiencia en el Edge: Clases 2B y 4B
+
+No todos los proyectos requieren un modelo de 30 mil millones de parámetros. Para agentes de juegos móviles o extensiones de navegador ligeras, las clases "Edge" y "4B" son el campo de batalla principal para **gemma4 vs qwen3**.
+
+*   **Clase 2B:** Qwen 3.5 2B domina en el uso de herramientas y razonamiento (TAU2-Bench), lo que lo convierte en la opción preferida para agentes autónomos. Gemma 4 E2B es más adecuado para aplicaciones multilingües y tareas de audio nativas.
+*   **Clase 4B:** Esta es la victoria más sólida de Qwen. Qwen 3.5 4B supera a Gemma 4 E4B en casi todas las categorías, incluyendo programación y razonamiento científico, a menudo por un margen de 10 a 20 puntos.
+
+> **⚠️ Advertencia:** Los parámetros "efectivos" de Gemma pueden ser engañosos. Gemma 4 E4B en realidad carga 8 mil millones de parámetros con los embeddings, lo que significa que puede requerir más VRAM que su contraparte Qwen 3.5 4B a pesar de tener niveles de rendimiento similares.
+
+## Soporte multilingüe y manejo de contexto
+
+Si tu proyecto se dirige a una audiencia global, Gemma 4 es el líder indiscutible. En una prueba que involucró un anuncio dramático de un desfile de moda traducido a 78 idiomas, Gemma 4 completó cada uno de ellos, incluyendo dialectos raros como el feroés y el tigriña. Qwen 3.5 tuvo dificultades con los idiomas escandinavos y se cortó a mitad de frase en nepalí y jemer.
+
+En cuanto al contexto, ambas familias ofrecen una ventana de 262K tokens, pero la implementación de mecanismos de atención lineal de Qwen a menudo resulta en un procesamiento más rápido de documentos extensos o repositorios de código masivos.
+
+## Veredicto final: ¿Cuál deberías usar?
+
+Elegir entre **gemma4 vs qwen3** depende totalmente de tu caso de uso específico.
+
+1.  **Para lógica de juegos y matemáticas 3D:** Usa **Qwen 3.5/3.6**. Su rendimiento superior en 3JS y razonamiento científico lo hace más confiable para cálculos complejos.
+2.  **Para chats estilo asistente y diseño de IU:** Usa **Gemma 4**. Las puntuaciones de preferencia humana indican que es mucho mejor siguiendo instrucciones matizadas y creando diseños estéticamente agradables.
+3.  **Para aplicaciones multilingües:** Usa **Gemma 4**. Su cobertura de más de 78 idiomas no tiene rival actualmente en el espacio de pesos abiertos.
+4.  **Para agentes móviles ligeros:** Usa **Qwen 3.5 4B**. Es posiblemente el modelo más potente en su clase de peso a partir de 2026.
+
+## FAQ
+
+**P: ¿Es gemma4 o qwen3 mejor para el alojamiento local en un PC de gama media?**
+
+R: Para un PC de gama media (por ejemplo, de 12 GB a 16 GB de VRAM), los modelos Qwen 3.5 4B o 7B (si están disponibles) son generalmente más eficientes. El modelo Gemma 4 31B requiere una cuantización significativa (4 bits o menos) para caber en hardware de consumo, lo que puede degradar su rendimiento.
+
+**P: ¿Qué modelo maneja mejor los proyectos de programación de larga duración?**
+
+R: Qwen 3.5/3.6 generalmente maneja mejor el contexto largo y la estructura de código compleja que Gemma 4. Sin embargo, Gemma 4 suele ser mejor transcribiendo y explicando el código que escribe, lo que lo convierte en un mejor "tutor" para principiantes.
+
+**P: ¿Pueden estos modelos generar activos 3D para juegos?**
+
+R: Si bien pueden generar el *código* para crear objetos 3D (utilizando librerías como 3JS o OpenSCAD), no generan archivos de malla 3D (como .obj o .fbx) directamente. Qwen 3.5 Omni Plus ha mostrado la mayor promesa en la generación de escenas WebGL 3D funcionales en un solo prompt.
+
+**P: ¿Admiten estos modelos entrada de audio nativa?**
+
+R: Sí, tanto Gemma 4 como la serie Qwen 3.5 Omni admiten entradas multimodales, incluidos audio y vídeo. Esto los hace excelentes para crear interfaces de juego controladas por voz o herramientas de accesibilidad.

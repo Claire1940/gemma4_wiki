@@ -1,0 +1,125 @@
+export const metadata = {
+  title: "Requisitos de VRAM de 12GB para Gemma 4: Guía completa de configuración 2026",
+  description: "¿Puedes ejecutar Gemma 4 de Google en una GPU de 12GB? Explora los requisitos de VRAM de 12GB para Gemma 4, consejos de optimización y pruebas de rendimiento para IA local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+VRAM+Requirements",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la última serie de modelos de pesos abiertos de Google ha causado un gran impacto en la comunidad de IA local, especialmente para aquellos que intentan equilibrar el rendimiento con el hardware de consumo. Comprender los **requisitos de VRAM de 12GB para Gemma 4** es esencial para los usuarios que poseen GPUs de gama media como la RTX 4070 o la veterana RTX 3060. Si bien 12GB de VRAM se ha convertido en el "punto ideal" para el gaming a 1440p en 2026, sirve como un punto de entrada de alto riesgo para ejecutar modelos de lenguaje de gran tamaño (LLM) sofisticados de forma local sin recurrir al lento offloading a la CPU.
+
+En esta guía completa, desglosaremos exactamente cómo interactúan las diferentes variantes de Gemma 4 con un búfer de tramas de 12GB. Cumplir con los **requisitos de VRAM de 12GB para Gemma 4** no se trata solo de tener el número correcto en la caja; implica elegir la cuantización correcta, gestionar las ventanas de contexto y utilizar los motores de inferencia adecuados como llama.cpp o Unsloth Studio. Ya sea que busques desplegar la ágil variante E4B para tareas de borde o llevar el modelo 26B-A4B a su límite absoluto, este desglose cubre las notas de estabilidad y las expectativas de rendimiento que necesitas para tener éxito.
+
+## Variantes del modelo Gemma 4 y escalado de VRAM
+
+Google ha diversificado la línea Gemma 4 para satisfacer desde dispositivos móviles hasta estaciones de trabajo de alta gama. Para el usuario de una tarjeta de 12GB de VRAM, el panorama se divide en modelos que encajan "cómodamente" y modelos que requieren una "optimización agresiva".
+
+La línea incluye el E2B y E4B (enfocados en el borde), el 26B-A4B (un diseño de Mezcla de Expertos o MoE) y el modelo insignia 31B. Para una tarjeta de 12GB, las variantes de la serie E son triviales de ejecutar, mientras que el 26B-A4B representa el desafío definitivo.
+
+| Variante de Gemma 4 | Cantidad de parámetros | Caso de uso principal | Compatibilidad con 12GB de VRAM |
+| :--- | :--- | :--- | :--- |
+| **E2B** | ~2 mil millones | Teléfonos, ASR de borde, Traducción | **Perfecta** (FP16 completo cabe) |
+| **E4B** | ~4 mil millones | Laptops, Chat multimodal rápido | **Excelente** (8-bit o FP16) |
+| **26B-A4B** | 26B (MoE) | Programación, Razonamiento, Agentes | **Ajustada** (Requiere 4-bit/5-bit) |
+| **31B** | 31 mil millones | Máxima calidad de razonamiento | **Parcial** (Requiere mucho offloading) |
+
+> **💡 Consejo:** Si usas una tarjeta de 12GB, enfoca tus esfuerzos en la variante **26B-A4B**. Su arquitectura de Mezcla de Expertos (MoE) solo activa 4B de parámetros por token, ofreciendo una ventaja de velocidad masiva sobre el modelo 31B manteniendo una alta precisión.
+
+## Requisitos oficiales de VRAM de 12GB para Gemma 4
+
+Al discutir los **requisitos de VRAM de 12GB para Gemma 4**, debemos fijarnos en los "bits por peso". Un modelo crudo y sin comprimir (FP16) requiere aproximadamente 2GB de VRAM por cada mil millones de parámetros. Obviamente, un modelo 26B requeriría 52GB de VRAM en su estado original, mucho más allá del alcance de una RTX 4070.
+
+Aquí es donde entra la cuantización. Al comprimir el modelo a una precisión de 4 o 5 bits (formato GGUF), podemos encajar modelos mucho más grandes en huellas de memoria más pequeñas.
+
+| Variante del modelo | Cuantización | VRAM/RAM requerida | Estado en 12GB |
+| :--- | :--- | :--- | :--- |
+| **E4B** | 8-bit | 9–12 GB | **Estable** |
+| **E4B** | BF16 / FP16 | 16 GB | **OOM (Sin memoria)** |
+| **26B-A4B** | 4-bit (Q4_K_M) | ~16 GB | **Requiere Offloading** |
+| **26B-A4B** | 5-bit (UD-Q5_K_XL) | ~18 GB | **Requiere Offloading** |
+
+Un momento, si el modelo 26B requiere de 16 a 18GB para 4-bit/5-bit, ¿cómo podemos satisfacer los **requisitos de VRAM de 12GB para Gemma 4**? La respuesta reside en la "Memoria Unificada" y el "Offloading Parcial". Usando herramientas como `llama.cpp`, puedes mantener las partes más críticas del modelo en tu GPU mientras envías el resto a la memoria RAM de tu sistema.
+
+## Optimizando para 12GB: La estrategia de ajuste ("Fit")
+
+Para ejecutar los modelos más grandes de Gemma 4 en una tarjeta de 12GB, debes usar una estrategia de ubicación basada en el ajuste. Esto implica indicarle al motor de inferencia exactamente cuánta VRAM se le permite usar para los pesos del modelo frente a la "Ventana de Contexto" (la memoria utilizada para recordar la conversación).
+
+A partir de 2026, la forma más estable de ejecutar Gemma 4 26B-A4B en hardware de 12GB es a través de `llama.cpp` utilizando los siguientes parámetros:
+
+1.  **Cuantización:** Usa `UD-Q4_K_XL` o `UD-Q5_K_XL`.
+2.  **Tamaño de contexto:** Limítate a un contexto de 64k o 128k.
+3.  **Flash Attention:** Activa siempre `--flash-attn` para ahorrar memoria.
+4.  **Fit Target:** Establece un `FIT_TARGET` de aproximadamente 2048 para asegurar que haya suficiente margen para el sistema y los adaptadores de visión.
+
+### Benchmarks de rendimiento en GPUs de 12GB
+
+Basado en pruebas del mundo real en tarjetas de las series RTX 3060 y 4070, el rendimiento de Gemma 4 es sorprendentemente viable para el uso diario. Incluso con offloading parcial, la arquitectura MoE garantiza que la generación siga siendo ágil.
+
+| Modo de tarea | Longitud de contexto | Rendimiento (Tokens/seg) |
+| :--- | :--- | :--- |
+| **Solo texto** | 128k Contexto | **~44.20 tok/s** |
+| **Visión/Multimodal** | 64k Contexto | **~42.09 tok/s** |
+| **Sintético (pp512)** | N/A | **~1466.82 tok/s** |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/_8UsD5Ga1Lg"
+    title="Every GPU VRAM Size Explained in 10 Minutes"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Notas de estabilidad para visión y multimodal
+
+Gemma 4 no es solo un modelo de texto; es una potencia multimodal. Sin embargo, añadir capacidades de visión aumenta significativamente los **requisitos de VRAM de 12GB para Gemma 4**. El adaptador `mmproj` (la parte que "ve" las imágenes) requiere su propia porción de VRAM.
+
+Si intentas ejecutar el modelo 26B-A4B con visión en una tarjeta de 12GB con configuraciones agresivas, es probable que encuentres un error de **Out of Memory (OOM)**. Para evitarlo, debes reducir el tamaño del contexto o aumentar el margen de memoria.
+
+> **⚠️ Advertencia:** Las tareas de visión pueden causar un OOM durante la asignación de `mmproj` si tu `FIT_TARGET` es demasiado bajo. Para una tarjeta de 12GB, se recomienda un `FIT_TARGET` de 3072 para mantener la estabilidad durante el procesamiento de imágenes.
+
+### Configuraciones recomendadas para estabilidad en 12GB
+*   **Modelo:** `gemma-4-26B-A4B-it-UD-Q5_K_XL.gguf`
+*   **Tamaño de lote (Batch Size):** 256 (Menor que el estándar de 512/1024 para ahorrar memoria)
+*   **Tamaño de lote U (UBatch Size):** 512
+*   **Hilos (Threads):** Deben coincidir con el recuento de núcleos físicos de tu CPU (usualmente 8-12 para PCs modernos de gama media).
+
+## Por qué la VRAM es importante en 2026
+
+Como se ha explicado en análisis de hardware recientes, la brecha entre 8GB y 12GB de VRAM se ha convertido en un abismo en 2026. Mientras que las tarjetas de 8GB luchan por ejecutar juegos AAA modernos en configuraciones superiores a medio, las tarjetas de 12GB como la RTX 4070 son la base para una computación moderna "cómoda".
+
+En el ámbito de la IA, esos 4GB extra de VRAM te permiten pasar de modelos de "juguete" (como las variantes 2B) a modelos de "grado de producción" (como el 26B-A4B). Sin 12GB, a menudo te ves obligado a usar cuantización de 2 o 3 bits, lo que degrada significativamente la inteligencia y las capacidades de razonamiento del modelo.
+
+Para obtener más información sobre los últimos pesos de modelos, puedes visitar el [Hugging Face Hub](https://huggingface.co/models?search=gemma-4) oficial para encontrar cuantizaciones optimizadas por la comunidad.
+
+## Configuración local de Gemma 4
+
+Para comenzar con Gemma 4 en tu sistema de 12GB, el camino más fácil es usar **Unsloth Studio**. Proporciona una interfaz web que automatiza gran parte de la gestión de memoria.
+
+### Instalación paso a paso
+1.  **Instalar Unsloth:** Ejecuta el script de instalación a través de tu terminal (disponible para Windows PowerShell o MacOS/Linux).
+2.  **Iniciar el Studio:** Usa el comando `unsloth studio` para abrir la interfaz web local.
+3.  **Buscar Gemma 4:** Utiliza la búsqueda integrada para encontrar la variante `26B-A4B`.
+4.  **Seleccionar cuantización:** Elige `4-bit` o `Dynamic 4-bit` para asegurar que quepa en tu búfer de 12GB.
+5.  **Activar el modo de pensamiento (Thinking Mode):** Si quieres que el modelo muestre su razonamiento interno, añade el token `&lt;|think|&gt;` a tu prompt de sistema.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 31B en una tarjeta con 12GB de VRAM?**
+
+R: Sí, pero será lento. Debido a que el modelo 31B requiere al menos 17-20GB para una cuantización de 4 bits, aproximadamente el 40-50% del modelo residirá en la RAM de tu sistema. Esto resulta en una cantidad de tokens por segundo mucho menor en comparación con el modelo 26B-A4B.
+
+**P: ¿Qué sucede si excedo los requisitos de VRAM de 12GB para Gemma 4?**
+
+R: Tu sistema se bloqueará con un error de "Out of Memory" (OOM) o, si usas `llama.cpp`, descargará automáticamente las capas restantes a tu CPU. Esto evita el bloqueo pero reduce drásticamente la velocidad de generación.
+
+**P: ¿Es suficiente 12GB de VRAM para el ajuste fino (fine-tuning) de Gemma 4?**
+
+R: Solo para las variantes más pequeñas. Para ajustar los modelos E2B o E4B, 12GB es suficiente utilizando los kernels optimizados de Unsloth. Sin embargo, el ajuste fino de los modelos 26B o 31B generalmente requiere de 24GB a 48GB de VRAM.
+
+**P: ¿El "Modo de Pensamiento" consume más VRAM?**
+
+R: No, el "Modo de Pensamiento" es un interruptor de comportamiento activado por un token. Aumenta el número de tokens generados (lo que toma más tiempo), pero no incrementa significativamente el requisito base de VRAM del modelo en sí.

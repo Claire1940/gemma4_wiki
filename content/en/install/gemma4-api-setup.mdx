@@ -1,0 +1,141 @@
+export const metadata = {
+  title: "Gemma4 API Setup: Local AI Integration Guide 2026",
+  description: "Learn how to master the Gemma4 API setup for local AI inference. Our guide covers Ollama integration, Discord bot creation, and hardware optimization for 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma4+API+Setup+Guide",
+  date: "2026-04-07",
+  author: "Gemma4 Wiki Team"
+}
+
+The release of Google’s latest open-weight model family has revolutionized how developers and enthusiasts handle local intelligence. Performing a proper **gemma4 api setup** allows you to run high-performance reasoning models entirely on your own hardware, ensuring total data privacy and zero recurring subscription costs. Whether you are building a personalized gaming assistant or a private coding companion, understanding the nuances of the **gemma4 api setup** is the first step toward local AI sovereignty. In 2026, the barrier to entry for 31-billion parameter models has dropped significantly, provided you have the right configuration.
+
+This comprehensive guide will walk you through the installation of necessary environments like Ollama, the configuration of local REST endpoints, and advanced integrations with platforms like Discord and Claude Code. By the end of this tutorial, you will have a fully functional, private API capable of handling complex multimodal tasks, including vision and reasoning, right from your desktop or server.
+
+## Hardware and VRAM Requirements
+
+Before diving into the software configuration, you must ensure your rig can handle the weight of the model. Gemma 4 comes in several flavors, ranging from mobile-friendly "Effective" (E) models to the massive 31B dense variant. Running these models entirely in VRAM is the gold standard for speed, though CPU offloading is a viable fallback for those with limited GPU resources.
+
+| Model Variant | Minimum VRAM | Recommended VRAM | Best Use Case |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2 GB | 4 GB | Mobile devices and lightweight bots |
+| **Gemma 4 E4B** | 4 GB | 6 GB | Laptops and basic gaming rigs |
+| **Gemma 4 26B A4B (MoE)** | 8 GB | 12 GB | Mid-range GPUs (RTX 4070/5070) |
+| **Gemma 4 31B Dense** | 16 GB | 24 GB | High-end workstations (RTX 4090/H100) |
+
+> **⚠️ Warning:** While Apple Silicon Macs can use unified memory to run the 31B model with 32GB+ RAM, PC users should prioritize dedicated VRAM to avoid the "sluggish" response times associated with system RAM swapping.
+
+## Step 1: Installing the Inference Engine
+
+The most efficient way to handle the **gemma4 api setup** in 2026 is through Ollama. It acts as a bridge between the raw model weights and your applications, providing a clean OpenAI-compatible API.
+
+### macOS and Linux Setup
+Open your terminal and execute the following command to install the environment:
+
+`curl -fsSL https://ollama.com/install.sh | sh`
+
+For Linux users, it is highly recommended to enable the service via systemd to ensure your API is always available:
+`sudo systemctl enable ollama`
+
+### Windows Setup
+Download the official installer from the Ollama website. Once installed, Ollama runs as a background tray application. You can verify the installation by typing `ollama --version` in your PowerShell or Command Prompt.
+
+## Step 2: Configuring the Gemma 4 Local API
+
+Once the engine is running, you need to pull the specific model weights. The "Mixture-of-Experts" (MoE) variant, known as the 26B A4B, is currently the favorite for 2026 because it offers the reasoning power of a large model with the inference speed of a 4B parameter model.
+
+1. **Pull the Model:**
+   Run `ollama pull gemma4:26b` (or your preferred size).
+2. **Verify the Endpoint:**
+   Ollama automatically hosts a REST API at `http://localhost:11434`. You can test this with a simple curl command:
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "gemma4:26b",
+  "prompt": "Why is local AI better for gaming?"
+}'
+```
+
+If you receive a JSON response, your **gemma4 api setup** is technically complete at the local level. However, to make it useful for apps, we need to look at integration.
+
+## Step 3: Integrating with Discord via OpenClaw
+
+For many users, the ultimate goal is to interact with their AI through a familiar interface. By combining Gemma 4 with OpenClaw, you can create a self-hosted Discord agent that has access to tools, memory, and web search.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/pInnVUaUX7M"
+    title="Gemma 4 + OpenClaw + Ollama + Discord - Full Local AI Setup for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Discord Developer Portal Configuration
+To bridge your local API to Discord, follow these steps:
+1. Navigate to the [Discord Developer Portal](https://discord.com/developers/applications).
+2. Create a "New Application" and navigate to the **Bot** tab.
+3. Reset and copy your **Bot Token**.
+4. Enable the **Message Content Intent** under the Privileged Gateway Intents section.
+5. Under **OAuth2**, select the `bot` and `applications.commands` scopes.
+6. Grant permissions for: Send Messages, View Channels, Embed Links, and Read Message History.
+
+### OpenClaw Setup
+Install OpenClaw on your machine and run the configuration wizard. When prompted for the provider, select **Ollama**. Point the Base URL to your local host and input the model name `gemma4:31b` (or whichever version you downloaded). Finally, paste your Discord Bot Token and User ID to pair the service.
+
+## Step 4: Advanced API Features and Multimodal Use
+
+Gemma 4 is not just a text model; it features a sophisticated "Thinking Mode" and multimodal capabilities. To utilize these via the API, you must structure your requests to handle interleaved data.
+
+| Feature | API Trigger | Best Practice |
+| :--- | :--- | :--- |
+| **Thinking Mode** | Include `&lt;|think|&gt;` in system prompt | Use for complex logic and math |
+| **Vision (OCR)** | Send Base64 image in `images` array | Place image content **before** text |
+| **Long Context** | Set `num_ctx` to 128000+ | Requires significant VRAM overhead |
+| **Audio (E-Series)** | Use `AutoProcessor` in Transformers | Best for transcribing game chat |
+
+For developers using Python, the `transformers` library remains the most flexible way to interact with the Gemma 4 architecture. You can find the latest documentation on the [official Google AI for Developers](https://ai.google.dev/gemma) site to stay updated on architectural changes.
+
+## Step 5: Connecting to Coding Assistants
+
+One of the most practical applications for a local **gemma4 api setup** is as a backend for coding tools like Claude Code. This allows you to have an AI analyze your private repository without uploading code to a third-party server.
+
+To redirect Claude Code to your local Gemma 4 instance, you can set environment variables in your terminal:
+
+```bash
+export ANTHROPIC_BASE_URL=http://localhost:11434/v1
+export ANTHROPIC_API_KEY=ollama
+claude --model gemma4:26b
+```
+
+This configuration tricks the CLI into thinking it is talking to a cloud provider, while in reality, every token is being generated by your GPU.
+
+## Troubleshooting Common Setup Issues
+
+Even with the best hardware, you may encounter bottlenecks. Here are the most frequent issues reported during the **gemma4 api setup** process:
+
+*   **API Connection Refused:** This usually means the Ollama service isn't running. On Windows, check the system tray; on Linux, run `sudo systemctl start ollama`.
+*   **Slow Inference (Low Tokens/Sec):** Ensure `OLLAMA_NUM_GPU` is set to 1. If the model is too large for your VRAM, it will spill over to the CPU, causing a massive performance drop.
+*   **Out of Memory (OOM):** Try a quantized version of the model. Pulling `gemma4:27b:q4_k_m` instead of the full precision version can save up to 40% VRAM with negligible quality loss.
+*   **Discord Bot Not Responding:** Double-check that the "Message Content Intent" is toggled ON in the Discord Developer portal. Without this, the bot can't "see" your messages to process them.
+
+> **💡 Tip:** Use a tool like LiteLLM as a proxy if you need to manage multiple local models or add logging to your API requests.
+
+## FAQ
+
+**Q: Is there a cost associated with the gemma4 api setup?**
+
+A: No. Because Gemma 4 is an open-weight model and you are hosting it on your own hardware using Ollama or OpenClaw, there are zero API costs or subscription fees. Your only "cost" is the electricity used by your GPU.
+
+**Q: Can I run the 31B model on a standard gaming laptop?**
+
+A: It is difficult. A standard gaming laptop usually has 6GB to 8GB of VRAM. For the 31B model, you would need to use a highly quantized version (Q2 or Q3), which may impact reasoning quality. It is better to run the E4B or 12B variants on laptop hardware for a smoother experience.
+
+**Q: Does my data leave my machine when using the Gemma 4 API?**
+
+A: Not if you follow this guide. By using Ollama and local integrations, all processing happens on your local silicon. No text, images, or code are sent to Google or any other cloud provider.
+
+**Q: How do I update the model when a new version is released?**
+
+A: Simply run the pull command again (e.g., `ollama pull gemma4`). Ollama will check for updated layers and download only the necessary changes, making updates much faster than the initial installation.

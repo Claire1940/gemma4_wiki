@@ -1,0 +1,119 @@
+export const metadata = {
+  title: "Gemma4 MLX: Complete Local AI Setup & Performance Guide 2026",
+  description: "Learn how to optimize Google's Gemma 4 models using the MLX framework on Apple Silicon. Explore benchmarks, agentic workflows, and local installation steps.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma4+MLX+Guide",
+  date: "2026-04-07",
+  author: "Gemma4 Wiki Team"
+}
+
+Google has officially shifted the landscape of local artificial intelligence with the release of the Gemma 4 family. For enthusiasts looking to maximize performance on Apple Silicon, **gemma4 mlx** represents the cutting edge of on-device processing. This successor to the Gemma 3 lineup brings massive architectural improvements, including a shift to the Apache 2.0 license, making it more accessible than ever for developers and gamers alike. Whether you are building complex agentic workflows or simply want a private, high-powered assistant on your MacBook, understanding the nuances of **gemma4 mlx** is essential for 2026. In this guide, we will explore the model variants, performance benchmarks, and the specific steps required to optimize these models for the MLX framework. By leveraging Apple's unified memory architecture, these models can now handle tasks that previously required massive server-grade GPUs.
+
+## The Gemma 4 Model Family Overview
+
+The Gemma 4 release introduces a tiered approach to local intelligence, ranging from ultra-efficient mobile models to "frontier-class" reasoning engines. Unlike previous iterations, Google has optimized these specifically for "agentic" use cases—scenarios where the AI doesn't just chat but plans and executes multi-step tasks.
+
+The lineup is divided into four primary variants, each serving a distinct purpose in the local AI ecosystem. For users running **gemma4 mlx**, the choice of model depends heavily on your available Unified Memory (VRAM).
+
+| Model Variant | Parameters | Type | Primary Use Case |
+|---|---|---|---|
+| **Effective 2B (E2B)** | 2 Billion | Dense | Mobile, IoT, and high-speed chat |
+| **Effective 4B (E4B)** | 4 Billion | Dense | On-device agents and vision tasks |
+| **Gemma 4 26B** | 26 Billion | **Mixture of Experts (MoE)** | High-speed reasoning with 3.8B active params |
+| **Gemma 4 31B** | 31 Billion | Dense | Maximum quality, coding, and complex logic |
+
+> **💡 Tip:** If you are using a base M2 or M3 Mac with 8GB or 16GB of RAM, stick to the E2B or E4B models. The 26B MoE model is surprisingly fast but requires at least 24GB of Unified Memory for a smooth experience.
+
+## Performance Jumps and Benchmarks
+
+The leap from Gemma 3 to Gemma 4 is not merely incremental; it is transformative. Google DeepMind has integrated the same world-class research used in Gemini 3 into these open models. In various coding and reasoning benchmarks, the 31B model competes with much larger proprietary models.
+
+One of the most significant improvements is the context window. While previous versions struggled with "context rot" around 32K tokens, the larger Gemma 4 models support up to **256K tokens**. This allows the AI to analyze entire codebases or long-form gaming scripts without losing track of the initial instructions.
+
+| Benchmark | Gemma 3 (27B) | Gemma 4 (31B) | Improvement |
+|---|---|---|---|
+| **MMLU Pro** | 67.0 | **85.0** | +26.8% |
+| **Codeforces ELO** | 110 | **2150** | +1854% |
+| **LiveCodeBench V6** | 29.1 | **80.0** | +174% |
+
+These numbers suggest that **gemma4 mlx** is now a viable tool for professional software development and complex game modding. The massive jump in Codeforces ELO indicates a fundamental shift in the model's ability to handle logical constraints and algorithmic thinking.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimizing Gemma4 MLX for Apple Silicon
+
+Running large language models on Mac hardware requires specific optimizations to take advantage of the Metal GPU. The **gemma4 mlx** implementation uses 4-bit or 8-bit quantization to fit larger models into consumer-grade memory. 
+
+When setting up your environment, the MLX framework allows for "lazy loading" and efficient sharding across the GPU cores. This is particularly useful for the 26B Mixture of Experts model, which only activates a fraction of its parameters (approx. 3.8B) during any single inference step, resulting in blazing-fast token generation.
+
+### Hardware Requirements for MLX
+To run these models effectively in 2026, ensure your hardware meets the following recommendations:
+
+| Model Size | Recommended Mac Chip | Minimum Unified Memory |
+|---|---|---|
+| **2B / 4B** | M1, M2, M3, M4 (Any) | 8GB |
+| **26B MoE** | M2 Pro, M3 Pro | 24GB |
+| **31B Dense** | M1 Max, M2 Ultra, M3 Max | 48GB+ |
+
+> **⚠️ Warning:** Running the 31B Dense model on a machine with only 16GB of RAM will cause heavy system swapping, significantly shortening the lifespan of your SSD and resulting in unusable speeds.
+
+## Agentic Workflows and Tool Calling
+
+Gemma 4 is built for the "agentic era." This means the model is natively trained to use tools—such as web browsers, code interpreters, or game engine APIs—to complete tasks. For gamers, this could mean a local AI assistant that can modify game files, manage server backups, or act as a dynamic Game Master in tabletop simulators.
+
+The native support for over 140 languages also makes it a powerhouse for global modding communities. You can prompt the model in French to generate a Python script for a Unity plugin, and it will handle the logic and translation seamlessly.
+
+### How to Initialize Gemma 4 for Agents
+1. **Update Transformers:** Ensure your local environment is running the latest nightly build of the Transformers library.
+2. **Configure Tool Parsers:** Use the specific Gemma 4 tool calling parser to ensure the model correctly formats its requests to external APIs.
+3. **Set Context Limits:** For agentic tasks, a context window of 128K is usually the "sweet spot" for balancing memory usage and reasoning depth.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Installation and Setup Guide
+
+To get started with **gemma4 mlx**, you will need to use the Hugging Face `mlx-examples` repository or a dedicated runner like LM Studio or Ollama (if they have updated their backends for the 2026 release).
+
+### Manual Installation Steps
+1. **Clone the MLX Repo:** Download the latest MLX framework tools from GitHub.
+2. **Download Weights:** Access the official Gemma 4 weights from [Google's Hugging Face profile](https://huggingface.co/google).
+3. **Quantization:** Convert the weights to the MLX format. We recommend `q4_k_m` for the best balance of quality and speed.
+4. **Execution:** Run the model using the `mlx_lm.generate` command with your specific prompt.
+
+The shift to the Apache 2.0 license is a major win for the community. Previous versions of Gemma had more restrictive usage agreements; now, developers can integrate Gemma 4 into commercial products and open-source games without the legal hurdles of the past.
+
+## FAQ
+
+**Q: Can I run gemma4 mlx on an iPad?**
+
+A: Yes, provided your iPad has an M1 chip or newer and at least 8GB of RAM. You will need to use an app like "AIBench" or a local terminal environment that supports the MLX framework.
+
+**Q: Is the 26B MoE model better than the 31B Dense model?**
+
+A: The 26B MoE (Mixture of Experts) is significantly faster because it only uses a small portion of its brain for each word generated. However, the 31B Dense model generally provides higher-quality reasoning and fewer hallucinations for complex coding tasks.
+
+**Q: Does Gemma 4 support multimodal input like images and audio?**
+
+A: The Effective 2B and 4B models feature native vision and audio support. The larger 26B and 31B models are currently focused on text and code, though multimodal wrappers are expected to be released later in 2026.
+
+**Q: How do I fix the "Transformers version mismatch" error?**
+
+A: Because Gemma 4 uses new architectural features, you must update your environment using `pip install --upgrade transformers`. If you are using a local server like VLLM, you may need to build from the latest source code to support the new tool-calling parsers.

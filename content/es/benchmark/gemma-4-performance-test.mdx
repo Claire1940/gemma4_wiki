@@ -1,0 +1,114 @@
+export const metadata = {
+  title: "Prueba de rendimiento de Gemma 4: Evaluando la IA de frontera de Google en 2026",
+  description: "Explore los resultados exhaustivos de la prueba de rendimiento de Gemma 4. Analice benchmarks, requisitos de hardware y capacidades multimodales de los últimos modelos de pesos abiertos de Google.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Performance+Test",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la última familia de modelos de pesos abiertos de Google ha causado un gran impacto en la comunidad local de IA, especialmente después de que una reciente **prueba de rendimiento de gemma 4** confirmara que el razonamiento de nivel frontera ahora puede ejecutarse en hardware de consumo. Como sucesor directo de la popular línea Gemma 3, Gemma 4 introduce cambios arquitectónicos significativos, incluyendo variantes de Mezcla de Expertos (MoE) y capacidades multimodales mejoradas. Ya sea un desarrollador que busca integrar marcos de agentes o un investigador que prueba los límites de los LLM locales, comprender los datos de la **prueba de rendimiento de gemma 4** es esencial para optimizar su implementación. Esta guía desglosa los benchmarks, los requisitos de hardware y las pruebas de lógica en el mundo real de los modelos 31B, 26B y los niveles de borde (edge).
+
+## Descripción general de la familia de modelos Gemma 4
+
+Google DeepMind ha estructurado el lanzamiento de Gemma 4 para cubrir desde la investigación de alto nivel hasta aplicaciones móviles en el dispositivo. La familia se divide en cuatro tamaños principales, cada uno bajo una licencia Apache 2.0, lo que supone un cambio notable hacia un marco de código abierto más estándar en comparación con iteraciones anteriores.
+
+| Modelo | Cantidad de parámetros | Tipo de arquitectura | Ventana de contexto | Mejor caso de uso |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | 31 mil millones | Transformer denso | 256k tokens | Razonamiento frontera y codificación |
+| **Gemma 4 26B (A4B)** | 26 mil millones | Mezcla de Expertos | 128k tokens | Inferencia rápida y agentes |
+| **Gemma 4 E4B** | 4.5 mil millones | Denso efectivo | 128k tokens | Smartphones de gama alta/IoT |
+| **Gemma 4 E2B** | 2.3 mil millones | Denso efectivo | 128k tokens | Móviles de gama baja/Edge |
+
+La variante 26B MoE es particularmente interesante para los entusiastas del rendimiento; solo activa aproximadamente 3.8 mil millones de parámetros durante la inferencia, lo que permite una generación de tokens ultrarrápida manteniendo una alta calidad de respuesta.
+
+## Resultados de la prueba de rendimiento de Gemma 4: Benchmarks vs. Uso real
+
+Al evaluar las métricas de la **prueba de rendimiento de gemma 4**, los saltos en la capacidad de razonamiento y codificación en comparación con Gemma 3 son asombrosos. En pruebas estandarizadas como AIME 2026 (matemáticas) y LiveCodeBench (programación), el modelo 31B rivaliza con sistemas propietarios que son significativamente más grandes.
+
+### Comparación de Benchmarks estandarizados
+
+| Benchmark | Gemma 4 31B | Gemma 4 26B (MoE) | Gemma 4 E4B | Gemma 3 27B |
+| :--- | :--- | :--- | :--- | :--- |
+| **MMLU Pro** | **85.2%** | 82.6% | 69.4% | 67.6% |
+| **AIME 2026 (Sin herramientas)** | **89.2%** | 88.3% | 42.5% | 20.8% |
+| **LiveCodeBench v6** | **80.0%** | 77.1% | 52.0% | 29.1% |
+| **Codeforces ELO** | **2150** | 1718 | 940 | 110 |
+
+> **💡 Consejo:** El modelo "Edge" E4B en realidad supera al modelo de 27B de la generación anterior en varias tareas de razonamiento, a pesar de ser casi seis veces más pequeño. Esto lo convierte en un candidato ideal para el desarrollo de agentes locales.
+
+### Rendimiento Multimodal y de Visión
+Gemma 4 es nativamente multimodal en todos sus tamaños. En tareas basadas en visión, los modelos destacan en la detección de GUI y el señalamiento de objetos. Por ejemplo, cuando se le pide identificar elementos específicos en un sitio web o encontrar un cuadro delimitador para un objeto en una foto, los modelos 31B y 26B devuelven coordenadas JSON precisas con alta exactitud. Los modelos más pequeños E2B y E4B también incluyen entrada de audio nativa, una característica actualmente excluida de los modelos densos más grandes.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de hardware para despliegue local
+
+Realizar una **prueba de rendimiento de gemma 4** en su propio hardware requiere configuraciones específicas según el tamaño del modelo y el nivel de cuantización. Mientras que el modelo 31B puede caber en una sola Nvidia H100 de 80GB en precisión BF16, los usuarios de consumo probablemente dependerán de la cuantización de 4 u 8 bits.
+
+### Configuraciones de GPU recomendadas
+
+1.  **Gemma 4 31B (Denso):** Requiere 24GB de VRAM (RTX 3090/4090/5090) para versiones cuantizadas de 4 bits. Para BF16 completo, es necesaria una configuración multi-GPU o una tarjeta de estación de trabajo como la A6000/H100.
+2.  **Gemma 4 26B (MoE):** Debido a su naturaleza dispersa, este modelo es increíblemente eficiente. Puede ejecutarse cómodamente en tarjetas de consumo de 24GB con espacio de sobra para ventanas de contexto largas.
+3.  **Gemma 4 E4B/E2B:** Estos están optimizados para "RTX AI Garage" y chips móviles. Pueden ejecutarse con tan solo 8GB de VRAM o incluso en Apple Silicon (serie M) utilizando memoria unificada.
+
+> **⚠️ Advertencia:** Al configurar servidores locales como VLLM, asegúrese de usar las últimas compilaciones nocturnas (nightly builds). Gemma 4 utiliza una configuración "Dual RoPE" y "Per-Layer Embeddings" que las versiones anteriores de Transformers o VLLM podrían no soportar todavía, lo que provocaría errores o una degradación en la salida.
+
+## Innovaciones arquitectónicas en Gemma 4
+
+Las ganancias de rendimiento observadas en 2026 se atribuyen en gran medida a varios cambios arquitectónicos clave. Google se ha alejado de un bloque transformer "estándar" hacia un diseño más complejo y eficiente.
+
+*   **Incrustaciones por capa (Per-Layer Embeddings - PLE):** A diferencia de los modelos estándar que usan una única incrustación al inicio, PLE añade una vía de condicionamiento paralela. Esto permite que cada capa del decodificador reciba información específica del token exactamente cuando se vuelve relevante.
+*   **Caché KV compartido:** Para ahorrar memoria durante la generación de contexto largo (hasta 256k tokens), las capas finales del modelo reutilizan estados de clave-valor (KV) de capas anteriores. Esto reduce la huella de memoria del "KV Cache" sin impactar significativamente la calidad.
+*   **Dual RoPE:** Los modelos alternan entre atención de ventana deslizante local y atención de contexto completo global. Este enfoque híbrido ayuda a mantener una alta calidad en documentos largos mientras mantiene altas velocidades de inferencia.
+
+## Pruebas de estrés en el mundo real: Lógica y Ética
+
+En una **prueba de rendimiento de gemma 4** manual que involucró acertijos lógicos complejos y dilemas éticos, los resultados fueron mixtos pero prometedores.
+
+### El desafío de la lógica
+*   **Precisión matemática:** Cuando se le pidió comparar 420.69 y 420.7, el modelo identificó correctamente 420.7 como el número mayor, evitando la trampa de la "longitud decimal" que afecta a modelos más pequeños.
+*   **El fallo de "Peppermint":** Una prueba común de "engaño" consiste en contar letras en una palabra. En la palabra "peppermint", el modelo tuvo dificultades, identificando incorrectamente el número de letras 'p' y vocales. Esto sugiere que, aunque el razonamiento es alto, la precisión de la tokenización a nivel de carácter todavía tiene margen de mejora.
+*   **Programación (Pico de Gato):** El modelo rastreó con éxito el horario de un gato a través de diferentes bloques de tiempo, determinando con precisión qué estaba haciendo el gato a las 3:14 PM basándose en un prompt complejo.
+
+### La prueba ética "Armageddon"
+Al presentarle un "dilema utilitario" —obligar a una tripulación a sacrificarse para salvar la Tierra— Gemma 4 31B se involucró en un razonamiento profundo. Identificó correctamente la justificación matemática para salvar miles de millones de vidas, pero finalmente activó rechazos de seguridad con respecto a la "disciplina" o "castigo" de la tripulación. Aunque las barreras de seguridad del modelo siguen siendo estrictas, proporcionó un razonamiento interno más matizado que sus predecesores antes de llegar al rechazo.
+
+## Cómo empezar con Gemma 4
+
+Para realizar su propia **prueba de rendimiento de gemma 4**, puede utilizar varias herramientas de código abierto que ya han integrado soporte para el lanzamiento de 2026.
+
+1.  **Hugging Face Transformers:** Asegúrese de ejecutar `pip install -U transformers` para obtener las últimas definiciones de modelos.
+2.  **Llama.cpp:** Use las versiones GGUF de los modelos para obtener el mejor rendimiento en CPUs y GPUs de consumo.
+3.  **Marcos de agentes (Agentic Frameworks):** Gemma 4 está altamente optimizado para la llamada a herramientas (tool-calling). Marcos como **Hermes Agent** u **Open WebUI** le permiten usar las capacidades de razonamiento del modelo para realizar tareas como navegación web o ejecución de código de forma autónoma.
+
+> **💡 Consejo:** Si encuentra un error de "Tools Parser" en agentes locales, es probable que se deba a una discrepancia en la plantilla de chat. Asegúrese de que su prompt de sistema defina explícitamente el formato JSON para las llamadas a funciones.
+
+Para obtener más guías técnicas y análisis profundos sobre configuraciones de hardware de IA, visite el [Portal de Desarrolladores de IA de Nvidia](https://developer.nvidia.com/ai-rtx) para obtener los últimos controladores de optimización.
+
+## FAQ (Preguntas frecuentes)
+
+**P: ¿Soporta Gemma 4 más de 140 idiomas?**
+
+R: Sí, Google entrenó a toda la familia Gemma 4 en un conjunto de datos multilingüe masivo, convirtiéndolo en uno de los modelos abiertos más capaces para tareas de traducción y razonamiento intercultural en 2026.
+
+**P: ¿Puedo ejecutar el modelo 31B en una sola RTX 4090?**
+
+R: Puede ejecutar una versión cuantizada (Q4_K_M o Q8) del modelo 31B en una RTX 4090. Sin embargo, para la ventana de contexto completa de 256k, es posible que necesite usar una cuantización más baja (Q3) o descargar algunas capas a la RAM del sistema, lo que ralentizará los resultados de la **prueba de rendimiento de gemma 4**.
+
+**P: ¿Cuál es la diferencia entre los modelos "E" y los modelos estándar?**
+
+R: La "E" significa "Effective" (Efectivo). Estos modelos (E2B y E4B) utilizan incrustaciones por capa y otras optimizaciones para ofrecer un rendimiento que supera con creces su conteo real de parámetros, diseñados específicamente para dispositivos móviles y de borde (edge).
+
+**P: ¿Está disponible la entrada de audio en todos los modelos de Gemma 4?**
+
+R: No. Actualmente, la entrada de audio nativa solo está disponible en los modelos más pequeños E2B y E4B. Los modelos más grandes 26B y 31B admiten entrada de imagen y video, pero requieren transcripción externa para tareas relacionadas con audio.

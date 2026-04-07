@@ -1,0 +1,115 @@
+export const metadata = {
+  title: "Cómo ejecutar Gemma 4 localmente: Guía completa paso a paso 2026",
+  description: "Aprenda cómo ejecutar Gemma 4 localmente en su PC, Mac o dispositivo Android. Nuestra guía de 2026 cubre requisitos de hardware, configuración de Ollama y funciones multimodales.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Run+Gemma+4+Locally",
+  date: "2026-04-07",
+  author: "Equipo de Wiki de Gemma 4"
+}
+
+El lanzamiento del último modelo de pesos abiertos de Google ha cambiado el panorama para los entusiastas que desean mantener la privacidad total y el acceso sin conexión a la inteligencia artificial de vanguardia. Aprender **cómo ejecutar gemma 4 localmente** le permite aprovechar un potente motor de razonamiento sin enviar un solo byte de datos a un servidor en la nube. Esta guía de 2026 proporciona los métodos más eficientes para desplegar este modelo en su propio hardware, asegurando que obtenga el mejor rendimiento independientemente de su formación técnica. Ya sea un desarrollador que busca funciones agénticas o un usuario ocasional que desea un asistente privado, dominar **cómo ejecutar gemma 4 localmente** es el primer paso hacia una verdadera soberanía digital. En las siguientes secciones, desglosaremos los requisitos de hardware, las herramientas de software como Ollama y LM Studio, y los comandos específicos necesarios para poner en marcha su instancia local en cuestión de minutos.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Gemma 4 no es un solo modelo, sino una familia de variantes diseñadas para diferentes restricciones de hardware y casos de uso. Google ha optimizado estos modelos utilizando una arquitectura de "mezcla de expertos" (MoE) en algunas versiones, lo que les permite rendir significativamente por encima de su categoría de peso. Al elegir qué versión instalar, debe equilibrar el recuento de parámetros "Efectivos" con la memoria disponible en su sistema.
+
+| Variante del modelo | Parámetros | Mejor caso de uso | Hardware ideal |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 mil millones (Efectivos) | Teléfonos, IoT, dispositivos Edge | 4GB - 8GB RAM |
+| **Gemma 4 E4B** | 4 mil millones (Efectivos) | Laptops modernas, tareas de visión rápidas | 8GB - 12GB RAM |
+| **Gemma 4 26B-A4B** | 26 mil millones (MoE) | Programación, razonamiento complejo | 16GB - 24GB RAM |
+| **Gemma 4 31B** | 31 mil millones (Insignia) | Creación de contenido de alta gama | 32GB+ RAM / VRAM |
+
+La "E" en variantes como E4B significa "Efectivo", lo que indica que el modelo utiliza estrategias avanzadas de compresión y MoE para proporcionar el rendimiento de un modelo mucho más grande mientras mantiene una menor huella de memoria durante la inferencia activa.
+
+## Requisitos mínimos de hardware para 2026
+
+Antes de intentar descargar los pesos, asegúrese de que su sistema pueda manejar la carga computacional. Aunque Gemma 4 está altamente optimizado, los LLM locales son inherentemente intensivos en recursos.
+
+*   **Sistema operativo:** Windows 10/11, macOS (Apple Silicon M1/M2/M3/M4) o Linux (se recomienda Ubuntu 22.04+).
+*   **Memoria (RAM):** Se requiere un mínimo de 8GB para los modelos más pequeños, aunque 16GB es el punto ideal para la variante E4B.
+*   **GPU:** Una NVIDIA RTX serie 30 o serie 40 con más de 8GB de VRAM es ideal para usuarios de Windows. Los usuarios de Apple Silicon se benefician de la memoria unificada.
+*   **Almacenamiento:** Entre 5GB y 40GB de espacio libre en SSD, dependiendo del tamaño del modelo y el nivel de cuantización.
+
+> **⚠️ Advertencia:** Ejecutar modelos grandes como la variante 31B solo en una CPU resultará en una generación de tokens muy lenta (a menudo menos de 1-2 palabras por segundo). Se recomienda encarecidamente una GPU dedicada o un chip Apple Silicon para una experiencia fluida.
+
+## Cómo ejecutar Gemma 4 localmente con Ollama
+
+Ollama sigue siendo la herramienta más popular y fácil de usar para ejecutar modelos locales a través de una interfaz de línea de comandos o como motor para otras aplicaciones. Simplifica el proceso de "descarga" (pull) de los pesos del modelo y la gestión del servidor local.
+
+### Paso 1: Instalar Ollama
+Diríjase al [sitio web oficial de Ollama](https://ollama.com) y descargue el instalador para su sistema operativo específico. La instalación es un proceso estándar de "Siguiente-Siguiente-Finalizar" en Windows y Mac.
+
+### Paso 2: Descargar el modelo
+Una vez instalado, abra su Terminal (Mac/Linux) o el Símbolo del sistema/PowerShell (Windows). Para comenzar el proceso de **cómo ejecutar gemma 4 localmente**, use el comando "pull" para obtener los pesos del modelo de la biblioteca.
+
+| Comando | Acción |
+|---|---|
+| `ollama pull gemma4:e4b` | Descarga el modelo efectivo estándar de 4B |
+| `ollama pull gemma4:26b` | Descarga el modelo de mezcla de expertos de 26B |
+| `ollama run gemma4:e4b` | Inicia una sesión de chat interactiva |
+
+### Paso 3: Chat interactivo
+Después de que se complete la descarga, el comando `run` abrirá una interfaz de chat directamente en su terminal. Puede hacer preguntas, generar código o analizar texto de inmediato. Para salir de la sesión, simplemente escriba `/bye`.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Uso de LM Studio para una interfaz gráfica
+
+Si prefiere una experiencia visual similar a ChatGPT, LM Studio es la mejor opción. Proporciona una interfaz de usuario limpia y le permite monitorear el uso del hardware (CPU/GPU) en tiempo real.
+
+1.  **Descargar LM Studio:** Visite `lmstudio.ai` e instale la versión de 2026.
+2.  **Buscar Gemma 4:** Use la barra de búsqueda en la aplicación para buscar "Gemma 4". Busque cargas oficiales o cuantizaciones comunitarias de confianza de proveedores como "Unsloth" o "Bartowski".
+3.  **Seleccionar cuantización:** Elija un nivel de cuantización (por ejemplo, Q4_K_M o Q8_0). Una cuantización más baja (4 bits) se ejecuta más rápido y usa menos RAM, mientras que una cuantización más alta (8 bits) ofrece una mejor precisión.
+4.  **Cargar y chatear:** Haga clic en "Download", luego navegue a la pestaña de Chat, seleccione el modelo en el menú desplegable superior y espere a que se cargue en su memoria.
+
+## Ejecutar Gemma 4 en Android a través de AI Edge Gallery
+
+Una de las características más impresionantes del lanzamiento de Gemma 4 es su compatibilidad móvil. Usando Google AI Edge Gallery, puede ejecutar los modelos 1B o 4B completamente en su teléfono inteligente.
+
+1.  **Cargar el APK manualmente:** Dado que AI Edge Gallery es una herramienta de código abierto, es posible que deba descargar el archivo `.apk` desde el repositorio oficial de GitHub de Google AI Edge.
+2.  **Otorgar permisos:** Habilite "Instalar desde fuentes desconocidas" y otorgue permisos de almacenamiento a la aplicación.
+3.  **Selección de modelo:** Dentro de la aplicación, navegue a "Get Models" y seleccione **Gemma 4 E2B** o **E4B**.
+4.  **Inferencia sin conexión:** Una vez descargado, puede poner su teléfono en modo avión y continuar chateando. El modelo utiliza la NPU (Unidad de Procesamiento Neuronal) de su teléfono para un procesamiento eficiente.
+
+> **💡 Consejo:** Para obtener la mejor experiencia móvil, use un dispositivo con un chipset moderno como el Snapdragon 8 Gen 3 o Google Tensor G4, ya que estos tienen aceleración de hardware dedicada para tareas de IA.
+
+## Funciones avanzadas: Multimodal y Modo de Pensamiento
+
+Gemma 4 introduce varias capacidades de "vanguardia" que antes estaban reservadas para modelos masivos en la nube. Entender cómo activar estas funciones es esencial para los usuarios avanzados.
+
+### Visión multimodal
+Las variantes E2B y E4B son multimodales por defecto. En herramientas como LM Studio o AI Edge Gallery, puede cargar una imagen (recibos, gráficos o fotos) y pedirle al modelo que describa o analice el contenido. Al usar la línea de comandos con Ollama, puede pasar rutas de imágenes al modelo para realizar tareas de OCR (Reconocimiento Óptico de Caracteres).
+
+### Modo de pensamiento explícito
+Gemma 4 admite un rol de "pensamiento" que le permite mostrar su razonamiento interno antes de proporcionar una respuesta final. Esto es particularmente útil para problemas complejos de matemáticas o lógica.
+
+*   **Para habilitar:** Agregue el token `&lt;|think|&gt;` al inicio de su prompt de sistema.
+*   **Resultado:** El modelo llenará un bloque `<|channel>thought`, mostrándole cómo está desglosando su solicitud antes de entregarle la respuesta final.
+
+## FAQ
+
+**P: ¿Es completamente gratuito ejecutar Gemma 4 localmente?**
+
+R: Sí. Una vez que tenga el hardware, no hay tarifas de suscripción, costos de API ni límites de uso. Usted es el dueño de los pesos del modelo en su disco y puede usarlos indefinidamente sin conexión a Internet.
+
+**P: ¿Cómo se compara Gemma 4 con Gemini o GPT-4?**
+
+R: Si bien la variante 31B es increíblemente potente y ocupa un lugar destacado en bancos de pruebas como Arena.ai, los modelos basados en la nube como Gemini 1.5 Pro o GPT-4o generalmente siguen rindiendo mejor en tareas de razonamiento a gran escala. Sin embargo, para la asistencia diaria, la programación y el análisis de datos privados, Gemma 4 suele ser "suficientemente bueno" y mucho más rápido.
+
+**P: ¿Puedo usar Gemma 4 para fines comerciales?**
+
+R: Sí, Gemma 4 se publica bajo una licencia de pesos abiertos permisiva que permite el uso comercial, aunque siempre debe verificar los términos específicos en el [sitio web oficial de Google AI](https://ai.google.dev/gemma/terms) para cualquier restricción basada en el volumen.
+
+**P: ¿Por qué el modelo me da texto repetitivo o ininteligible?**
+
+R: Esto suele deberse a una falta de coincidencia en la "Plantilla de Chat" (Chat Template) o al uso de un nivel de cuantización demasiado bajo para su hardware. Asegúrese de que su software (Ollama o LM Studio) esté actualizado a la última versión de 2026 para admitir correctamente la arquitectura de Gemma 4.

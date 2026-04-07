@@ -1,0 +1,140 @@
+export const metadata = {
+  title: "Gemma 4 Function Calling Guide: Master AI Tool Use 2026",
+  description: "Learn how to implement function calling with Gemma 4. Our comprehensive guide covers installation, tool schemas, and advanced optimization for 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/1e40af/fff?text=Gemma+4+Function+Calling+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+Artificial intelligence is rapidly shifting toward specialization, and Google's latest release is at the forefront of this evolution. Whether you are building immersive game mechanics or responsive mobile applications, mastering this **gemma 4 function calling guide** is essential for creating agents that do more than just chat. Gemma 4 allows developers to translate natural language into structured executable actions, effectively bridging the gap between human intent and machine code. By following this **gemma 4 function calling guide**, you will learn how to leverage the model's 32k context window and specialized tool-use training to build private, cost-effective, and high-speed AI workflows.
+
+In this tutorial, we will explore the nuances of the Gemma 4 architecture, including the Mixture-of-Experts (MoE) models and the compact 270M parameter FunctionGemma variant. You will discover how to set up your local environment, define complex tool schemas, and optimize your deployment for either maximum throughput or minimum latency on modern hardware.
+
+## Understanding the Gemma 4 Model Variants
+
+Before diving into the code, you must choose the right model for your specific use case. Gemma 4 comes in several "flavors," ranging from ultra-lightweight models designed for mobile devices to massive 31B parameter powerhouses for server-side reasoning.
+
+The "IT" suffix in these model names stands for Instruction Tuned, meaning they are optimized to follow user prompts and execute tool calls accurately. For mobile developers, the 270M parameter FunctionGemma (based on the Gemma 3 architecture) remains a top choice for on-device actions like toggling flashlights or managing in-game inventories. However, for 2026 workflows, the Gemma 4 E2B and E4B models offer a superior balance of speed and intelligence.
+
+| Model Variant | Total Parameters | Primary Use Case | Hardware Requirement |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B IT** | 2B | Mobile/Edge Apps | 1x GPU (24GB VRAM) |
+| **Gemma 4 E4B IT** | 4B | Desktop Assistants | 1x GPU (24GB VRAM) |
+| **Gemma 4 26B-A4B IT** | 26B (MoE) | High-Efficiency Servers | 1x A100/H100 (80GB) |
+| **Gemma 4 31B IT** | 31B | Complex Reasoning | 2x A100/H100 |
+
+> **💡 Tip:** Use the MoE (Mixture-of-Experts) models if you need high intelligence with lower computational costs. These models only activate a fraction of their parameters (4B) for each token, saving energy and time.
+
+## Setting Up Your Development Environment
+
+To begin using function calling, you need a robust environment. Most developers in 2026 prefer using Ubuntu with NVIDIA or AMD accelerators. You will need to install the latest versions of PyTorch and the Transformers library to ensure compatibility with Gemma 4's custom tool-call protocol.
+
+Follow these steps to prepare your system:
+
+1.  **Create a Virtual Environment:** Use Conda or `uv` to manage your dependencies and avoid version conflicts.
+2.  **Install Core Libraries:** Run the following command to install the necessary packages.
+    ```bash
+    pip install torch accelerate transformers vllm
+    ```
+3.  **Download the Model:** Use the Hugging Face CLI or `AutoModel` classes to pull your desired variant.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/iTJD8MxR7nQ"
+    title="Google Drops FunctionGemma: Specialized Function-Calling AI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Defining Tools and Schemas
+
+The core of any **gemma 4 function calling guide** is the tool definition. Gemma 4 supports two primary methods for passing tools: manual JSON schemas and raw Python functions. 
+
+### Manual JSON Schema
+This method gives you total control over how parameters are described. It is particularly useful when your function requires complex objects or specific formatting that automatic parsers might miss.
+
+### Raw Python Functions
+For faster development, you can pass standard Python functions. The system uses the `get_json_schema` utility to parse your docstrings and type hints into a format the model understands. Ensure your docstrings follow the Google Python Style Guide for the best results.
+
+| Feature | JSON Schema | Python Function |
+| :--- | :--- | :--- |
+| **Control** | **High** - Manually define every field | **Medium** - Relies on docstring parsing |
+| **Speed** | **Slower** to write | **Faster** to implement |
+| **Complexity** | Supports nested properties | Best for flat arguments |
+| **Maintenance** | Requires manual updates | Updates automatically with code |
+
+## The Three-Stage Function Calling Cycle
+
+Implementing function calling is not a single step; it is a cycle between the model and your application code. You must manage this "handshake" to ensure the AI can interact with the real world.
+
+### Stage 1: The Model's Turn
+You provide the user prompt and the list of available tools. The model analyzes the request and, instead of replying with text, generates a `<|tool_call|>` object containing the function name and the required arguments.
+
+### Stage 2: The Developer's Turn
+Your application intercepts this output. You must parse the JSON-like string, execute the corresponding local function (e.g., fetching weather data or querying a database), and format the result.
+
+### Stage 3: The Final Response
+You feed the tool's output back into the model. Gemma 4 then reads this data and provides a natural language answer to the user.
+
+> **⚠️ Warning:** Never use `globals()` or `eval()` to call functions dynamically in a production environment. Always use a predefined dictionary to map function names to their actual implementations to prevent code injection attacks.
+
+## Advanced Feature: Thinking Mode
+
+One of the most powerful additions in 2026 is Gemma 4's "Thinking Mode." By enabling this feature, the model performs internal reasoning before deciding which tool to call. This significantly reduces "hallucinations" where the model might try to call a tool that doesn't exist or use incorrect parameters.
+
+To enable this, set `enable_thinking=True` in your chat template. The model will produce a `<|thought|>` block, which you can choose to display to the user or strip out before the final output.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/-Tgc_9uYJLI"
+    title="Introducing FunctionGemma"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimizing Gemma 4 for Production
+
+When deploying Gemma 4, you must balance performance against resource consumption. Depending on your hardware, you might prioritize how many requests you can handle per second (throughput) or how fast a single user gets a response (latency).
+
+| Optimization Goal | Tensor Parallelism | Batch Size | Recommended Hardware |
+| :--- | :--- | :--- | :--- |
+| **Minimum Latency** | **4-8** | **8-16** | NVIDIA H100 / AMD MI350 |
+| **Maximum Throughput** | **1-2** | **256-512** | Multi-GPU Clusters |
+| **Balanced Performance** | **2** | **128** | RTX 6000 Ada / A100 |
+
+For those running on edge devices, utilizing the [Google AI Edge Gallery](https://ai.google.dev/edge/gallery) recipes can help you fine-tune the 270M parameter models to perform with the same accuracy as much larger versions. This is particularly effective for specialized tasks like mobile game mechanics or smart home controls.
+
+## Summary of Best Practices
+
+To succeed with this **gemma 4 function calling guide**, keep these best practices in mind:
+*   **Always include system instructions:** Even if you use `response_format` for JSON, the model needs a system prompt to understand *what* values to generate.
+*   **Use FP8 Quantization:** If you are low on VRAM, use `--kv-cache-dtype fp8` to reduce memory usage by nearly 50% without a significant loss in accuracy.
+*   **Limit Multimodal Inputs:** If your function calling doesn't require vision or audio, disable those encoders at launch to save memory for the KV cache.
+*   **Secure your Tool Mapping:** Use a hardcoded dictionary to map the model's requested strings to your Python functions.
+
+## FAQ
+
+**Q: Does Gemma 4 support multiple tool calls in a single turn?**
+
+A: Yes, Gemma 4 can generate multiple independent tool calls. Your application should be prepared to parse a list of calls and execute them either sequentially or in parallel before sending the results back to the model.
+
+**Q: Can I run this gemma 4 function calling guide on a standard consumer laptop?**
+
+A: You can run the smaller variants like Gemma 4 E2B or the 270M FunctionGemma on a modern laptop with at least 16GB of RAM and an entry-level GPU. For the 31B model, you will need professional-grade hardware or a cloud provider.
+
+**Q: How does "Thinking Mode" affect the cost of API calls?**
+
+A: Thinking mode generates additional tokens (the reasoning chain). While this improves accuracy, it does increase the total token count. In a local deployment, this results in slightly higher latency; in a cloud environment, it may increase costs depending on your provider's billing model.
+
+**Q: Is Gemma 4 compatible with the OpenAI SDK?**
+
+A: Yes, when using a server like vLLM or Ollama, you can interact with Gemma 4 using the standard OpenAI Python SDK. This makes it incredibly easy to swap into existing AI workflows that were previously built for GPT-4.
+
+For more technical details and code examples, check out the [official Gemma documentation](https://ai.google.dev/gemma/docs) and join the community on Hugging Face to share your custom fine-tunes.

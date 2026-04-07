@@ -1,0 +1,123 @@
+export const metadata = {
+  title: "Gemma 3 vs Gemma 4: Complete AI Model Comparison Guide 2026",
+  description: "Explore the major differences in the gemma 3 vs gemma 4 showdown. Learn about architecture, memory requirements, and agentic performance in 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+3+vs+Gemma+4+Comparison",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+The landscape of open-source artificial intelligence has shifted dramatically with the release of Google's latest model family. When comparing **gemma 3 vs gemma 4**, the most immediate takeaway is the transition into what developers call the "agentic era." While Gemma 3 established a solid foundation for local reasoning and text generation, Gemma 4 introduces a massive leap in multi-step planning, native tool use, and multimodal capabilities. In this **gemma 3 vs gemma 4** analysis, we will break down why the new architecture isn't just a simple iteration, but a complete reimagining of what an open model can achieve on consumer hardware in 2026.
+
+## The Evolution of Gemma Architecture
+
+Gemma 4 represents a significant departure from its predecessor by offering a more diverse range of model sizes and specialized architectures. While Gemma 3 focused primarily on dense parameter efficiency, Gemma 4 introduces a sophisticated Mixture of Experts (MoE) variant and "Effective" models designed specifically for mobile and IoT deployments.
+
+The new lineup is headlined by the **31B Dense** model, which is optimized for maximum output quality, and the **26B MoE**, which utilizes 3.8B activated parameters to deliver lightning-fast inference speeds without sacrificing the reasoning depth found in larger models.
+
+### Model Family Comparison
+
+| Feature | Gemma 3 (Legacy) | Gemma 4 (New) |
+|---|---|---|
+| **License** | Gemma Terms of Use | **Apache 2.0 (Open Source)** |
+| **Context Window** | 128K Tokens | **256K Tokens** |
+| **Max Model Size** | 27B Dense | **31B Dense / 26B MoE** |
+| **Multimodal Support** | Limited / Text-heavy | **Native Audio, Vision, & Text** |
+| **Agentic Features** | Experimental | **Native Tool Use & Planning** |
+
+> **💡 Tip:** For developers looking for the best balance of speed and intelligence, the 26B MoE is the recommended starting point for local workstations.
+
+## Key Upgrades in Gemma 4
+
+The most significant change in the **gemma 3 vs gemma 4** comparison is the massive expansion of the context window. Gemma 4 now supports up to a quarter-million tokens (256K). This allows users to feed entire codebases, long-form research papers, or complex multi-turn agentic logs into the model without losing "memory" or degrading performance.
+
+### 1. The Agentic Workflow
+Gemma 4 is built for the agentic era. Unlike previous versions that often required complex prompt engineering to follow multi-step instructions, Gemma 4 features native support for tool use. This means it can plan a task, decide which external tool to use (like a calculator or a web search API), and execute those steps autonomously.
+
+### 2. Multimodal Integration
+While Gemma 3 was primarily a text-based powerhouse, Gemma 4 is natively multimodal. The "Effective" 2B and 4B models can see and hear the world in real-time, supporting over 140 languages. This makes them ideal for mobile applications where voice-to-text or visual recognition is required directly on-device.
+
+### 3. Open Source Freedom
+In a major win for the developer community, Google has released Gemma 4 under the **Apache 2.0 license**. This is a significant shift from the more restrictive licenses of previous generations, allowing for broader commercial use and deeper integration into enterprise infrastructure.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Performance Benchmarks: Coding and Logic
+
+In real-world testing, Gemma 4 has shown impressive results in UI generation and logic-heavy tasks. When tasked with building a high-performance video editor using vanilla JavaScript and Tailwind CSS, Gemma 4 outperformed many of its contemporaries in UI design and media handling.
+
+### Coding Battle Results
+
+In recent head-to-head battles against other leading models like Qwen 3.6, Gemma 4 demonstrated superior architectural understanding for web applications.
+
+*   **UI Design:** Gemma 4 creates cleaner, more functional user interfaces out of the box.
+*   **Media Handling:** Successfully rendered audio tracks and video clips on a timeline, though it struggled with some specific text-rendering tools.
+*   **Keyboard Shortcuts:** Native support for functional play/pause and trimming shortcuts was a standout feature.
+*   **Complex Math:** While strong in logic, Gemma 4 still faces challenges with highly complex 3D math (such as 3JS physics for game engines), often failing to generate functional 3D gravity systems in a single file.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KDYRG0Us0Sw"
+    title="Gemma 4 vs Qwen 3.6 vs Qwen 3.5 omni: The Coding Battle"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Hardware and Memory Requirements
+
+A critical factor in the **gemma 3 vs gemma 4** decision is the hardware required to run these models locally. Gemma 4 introduces "Effective" parameters (E2B and E4B), which use Per-Layer Embeddings (PLE) to maximize efficiency on mobile devices. However, because these embedding tables are large, the static memory footprint is higher than the parameter count might suggest.
+
+### Gemma 4 VRAM Requirements (Inference)
+
+| Model Version | BF16 (16-bit) | SFP8 (8-bit) | Q4_0 (4-bit) |
+|---|---|---|---|
+| **Gemma 4 E2B** | 9.6 GB | 4.6 GB | **3.2 GB** |
+| **Gemma 4 E4B** | 15 GB | 7.5 GB | **5 GB** |
+| **Gemma 4 31B** | 58.3 GB | 30.4 GB | **17.4 GB** |
+| **Gemma 4 26B MoE** | 48 GB | 25 GB | **15.6 GB** |
+
+> **⚠️ Warning:** The 26B MoE model requires all 26 billion parameters to be loaded into memory, even though it only activates 3.8 billion per token. Ensure you have at least 16GB of VRAM for quantized usage.
+
+## Multilingual and Security Features
+
+Security remains a top priority for Google DeepMind. Gemma 4 undergoes the same rigorous red-teaming and safety protocols as the proprietary Gemini models. This makes it a "trusted foundation" for enterprise developers who need to ensure their local AI deployments don't leak data or generate harmful content.
+
+Furthermore, the model's support for 140+ languages makes it a global tool. In testing, the 2B "Effective" model was able to seamlessly translate complex French requests into English while simultaneously performing agentic tasks like finding local restaurants. This level of multilingual reasoning was a significant hurdle in the **gemma 3 vs gemma 4** comparison, where previous models occasionally "hallucinated" or lost context during translation.
+
+## How to Get Started
+
+You can download the weights for Gemma 4 today from major AI hubs. For more technical documentation, visit the [official Google AI for Developers site](https://ai.google.dev/gemma).
+
+1.  **Choose your model:** Select 31B for quality, 26B MoE for speed, or E2B/E4B for mobile.
+2.  **Check Quantization:** Use 4-bit (Q4_0) if you are running on consumer-grade GPUs with limited VRAM.
+3.  **Deploy:** Use frameworks like Keras, PyTorch, or JAX to integrate the model into your workflow.
+
+## FAQ
+
+**Q: Is Gemma 4 better than Gemma 3 for coding?**
+
+A: Yes, specifically for web development and UI/UX design. Gemma 4 handles complex logic and multi-file structures better thanks to its 256K context window, though it still has room for improvement in 3D game physics.
+
+**Q: Can I run Gemma 4 on a laptop?**
+
+A: Yes. The **Gemma 4 E2B** and **E4B** models are specifically engineered for laptops and mobile devices. You will need approximately 5GB to 10GB of available memory to run the quantized versions smoothly.
+
+**Q: What does "Effective" parameters mean in Gemma 4?**
+
+A: "Effective" parameters refer to a new architecture using Per-Layer Embeddings (PLE). This allows the model to act with the intelligence of a larger parameter count while maintaining a smaller active compute footprint during inference.
+
+**Q: Does the gemma 3 vs gemma 4 comparison affect licensing for commercial apps?**
+
+A: Absolutely. Gemma 4's switch to the **Apache 2.0 license** makes it much easier for businesses to build and sell products using the model without the legal overhead found in earlier versions.

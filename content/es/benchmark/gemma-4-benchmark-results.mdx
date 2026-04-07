@@ -1,0 +1,107 @@
+export const metadata = {
+  title: "Resultados de los Benchmarks de Gemma 4: Reseña de la Potencia de IA de Google 2026",
+  description: "Un análisis profundo de los resultados de los benchmarks de Gemma 4. Compara los modelos 31B, 26B MoE y E2B para rendimiento de IA local e integración en juegos.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4285f4/fff?text=Gemma+4+Benchmarks",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+Google DeepMind cambió oficialmente el panorama de la inteligencia artificial de pesos abiertos con el lanzamiento de la familia Gemma 4 el 2 de abril de 2026. Para los desarrolladores y entusiastas del hardware que siguen los **resultados de los benchmarks de gemma 4**, los datos sugieren un salto generacional que desafía incluso a los modelos de código cerrado más establecidos. Construido sobre la misma base de investigación que la línea Gemini 3, Gemma 4 introduce una gama versátil de modelos diseñados para ejecutarse en todo, desde computadoras de escritorio gaming de alta gama hasta smartphones premium.
+
+El principal atractivo para la comunidad de gaming reside en la capacidad del modelo para manejar razonamiento complejo y flujos de trabajo agénticos de forma local. Los primeros **resultados de los benchmarks de gemma 4** indican que la variante 31B ha asegurado una posición entre los tres mejores del mundo en la clasificación Arena AI, superando a modelos de casi cuatro veces su tamaño. En esta guía, desglosamos las especificaciones técnicas, las puntuaciones de rendimiento sintético y las pruebas de lógica del mundo real para ver si esta familia de modelos merece un lugar en tu máquina local.
+
+## La Línea de Modelos Gemma 4
+
+El lanzamiento de 2026 presenta cuatro tamaños primordiales, cada uno optimizado para restricciones de hardware específicas. A diferencia de iteraciones anteriores, Google ha pasado a una licencia Apache 2.0, lo que hace que estos modelos sean significativamente más accesibles para el desarrollo de juegos comerciales y la creación de herramientas.
+
+| Variante del Modelo | Parámetros | Arquitectura | Objetivo de Hardware Principal |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2 Billones | Denso (Multimodal) | Smartphones, Raspberry Pi, Jetson Nano |
+| **Gemma 4 E4B** | 4 Billones | Denso (Multimodal) | GPUs de gama de entrada, Dispositivos móviles |
+| **Gemma 4 26B** | 26 Billones | Mezcla de Expertos (MoE) | PCs Gaming de gama media (RTX 4070+) |
+| **Gemma 4 31B** | 31 Billones | Denso (Razonamiento) | Estaciones de trabajo de gama alta (RTX 4090/80) |
+
+La variante 26B de Mezcla de Expertos (MoE) es particularmente notable para los jugadores. Utiliza ocho expertos activos para mantener una salida de alta calidad mientras aumenta significativamente la velocidad de generación, lo que la convierte en una candidata ideal para la generación de diálogos de NPC en tiempo real donde la latencia es un factor crítico.
+
+## Resultados Sintéticos de los Benchmarks de Gemma 4
+
+Al comparar Gemma 4 con su predecesor, Gemma 3, los saltos sintéticos son asombrosos. Google ha implementado con éxito "P-rope" para un contexto extendido, permitiendo ventanas de hasta 256K en los modelos más grandes sin la degradación de calidad típica vista en arquitecturas más antiguas.
+
+| Métrica de Benchmark | Gemma 3 (27B) | Gemma 4 (31B) | % de Mejora |
+| :--- | :--- | :--- | :--- |
+| **MMLU-Pro** | 67.0 | **85.0** | +26.8% |
+| **Codeforces ELO** | 1100 | **2150** | +95.4% |
+| **LiveCodeBench V6** | 29.1 | **80.0** | +174.9% |
+| **Arena AI ELO** | 1280 | **1452** | +13.4% |
+
+Estos **resultados de los benchmarks de gemma 4** resaltan un enfoque masivo en la programación y el razonamiento. El salto en el ELO de Codeforces sugiere que Gemma 4 ahora es capaz de resolver problemas de programación competitiva que anteriormente eran dominio exclusivo de modelos de frontera como GPT-4 o Claude 3.5.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Pruebas de Lógica del Mundo Real y "Vibe"
+
+Aunque las puntuaciones sintéticas son impresionantes, la utilidad en el mundo real a menudo depende de la capacidad de un modelo para seguir instrucciones complejas y evitar las "alucinaciones". Los probadores de IA local han sometido al modelo 31B a un riguroso "Guantelete de Lógica" con resultados mixtos pero generalmente superiores.
+
+### Desglose de Pruebas de Lógica
+
+*   **Precisión Matemática**: Cuando se le pidió comparar 420.69 y 420.7, el modelo identificó correctamente 420.7 como el número mayor sin las justificaciones errantes e incorrectas que suelen verse en modelos más pequeños.
+*   **El fallo de "Peppermint"**: En un desliz sorprendente, el modelo tuvo dificultades con la clásica prueba de "contar las P en peppermint", identificando solo dos en lugar de las tres correctas. Esto sugiere que, aunque el razonamiento ha mejorado, los problemas de tokenización aún persisten en tareas específicas de análisis de cadenas.
+*   **Programación Creativa**: En pruebas que involucraban la generación de una "página de aterrizaje para una marca de programación", Gemma 4 superó a Qwen 3.5 y GLM 5. Produjo CSS y HTML funcionales y estéticamente agradables sin "filtrar" su proceso de pensamiento interno en el bloque de código final.
+*   **Renderizado de SVG**: El modelo generó con éxito un SVG complejo de un "gato caminando sobre una valla" dentro de un límite de 2K tokens. Aunque la anatomía era ligeramente abstracta, era estructuralmente sólida y reconocible.
+
+> **⚠️ Advertencia:** Al ejecutar Gemma 4 localmente, asegúrate de que tu librería `transformers` esté actualizada a la última versión de 2026. El uso de versiones obsoletas hará que el modelo vuelva a los tokenizadores antiguos, degradando severamente la calidad de la salida.
+
+## Requisitos de Hardware para Despliegue Local
+
+Para lograr las velocidades vistas en los últimos **resultados de los benchmarks de gemma 4**, la asignación de hardware es vital. El modelo 31B es bastante denso y requiere una VRAM significativa si pretendes ejecutarlo en cuantización de 4 u 8 bits sin recurrir a la memoria del sistema.
+
+1.  **Modelo 31B**: Requiere al menos 24GB de VRAM para un rendimiento cómodo en 4 bits (QUIP/GGUF).
+2.  **26B MoE**: Puede caber en tarjetas de 16GB-20GB debido a su eficiente enrutamiento de expertos, aunque se recomiendan 24GB para tareas de contexto largo.
+3.  **E2B/E4B**: Estos son los campeones de las "consolas portátiles", capaces de ejecutarse en una Steam Deck o un smartphone de gama alta con un consumo mínimo de batería.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/ZEDWADvnXt4"
+    title="Gemma 4 Just Destroyed Every Open Source Model I Tested"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades Agénticas y Llamada a Herramientas
+
+Una de las mejoras más significativas en la actualización de 2026 es la naturaleza "agéntica" del modelo. Gemma 4 está diseñado para trabajar con marcos de trabajo como Hermes Agent y Open WebUI. Esto permite que el modelo no solo chatee, sino que ejecute tareas —como organizar tu biblioteca de juegos o gestionar un servidor local— e informe una vez que el trabajo haya terminado.
+
+Aunque algunos probadores notaron un problema con el "Tools Parser" en la semana inicial de lanzamiento, las versiones nocturnas de VLLM han resuelto en gran medida estos errores. La capacidad del modelo para mantener la calidad del contexto hasta 128K lo convierte en una opción de primer nivel para mods de RPG de "larga duración", donde la IA necesita recordar cientos de elecciones del jugador a lo largo de docenas de horas de juego.
+
+Para obtener más documentación técnica sobre el despliegue de estos modelos, puedes visitar el [repositorio oficial de Hugging Face Gemma](https://huggingface.co/google) para descargar los últimos pesos.
+
+## FAQ
+
+**P: ¿Son los resultados de los benchmarks de gemma 4 mejores que los de Llama 3?**
+
+R: En la mayoría de las tareas de razonamiento y programación, el modelo Gemma 4 31B supera actualmente al Llama 3 70B en las clasificaciones de preferencia humana (Arena ELO), a pesar de ser significativamente más pequeño y rápido de ejecutar en hardware de consumo.
+
+**P: ¿Puedo ejecutar Gemma 4 en un dispositivo móvil?**
+
+R: Sí, la variante E2B (Effective 2 Billion) está específicamente optimizada para el rendimiento en el dispositivo. Admite entrada de imagen y video, lo que la convierte en una herramienta poderosa para aplicaciones de IA móvil.
+
+**P: ¿Soporta Gemma 4 el procesamiento de audio?**
+
+R: Actualmente, los modelos E2B y E4B admiten la modalidad de imagen y video, pero el soporte de audio está excluido del lanzamiento inicial de abril de 2026. Se rumorea que se incluirá en una futura actualización "Ultra" MoE.
+
+**P: ¿Cuál es la mejor cuantización para el rendimiento en juegos?**
+
+R: Para la mayoría de los usuarios, una cuantización Q4_K_M GGUF proporciona el mejor equilibrio entre mantener los altos **resultados de los benchmarks de gemma 4** y mantener el uso de VRAM por debajo de los 20GB.

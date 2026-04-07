@@ -1,0 +1,137 @@
+export const metadata = {
+  title: "Modelo Gemma 4 26B: La guía definitiva de IA local 2026",
+  description: "Explora el poder del modelo Gemma 4 26B. Aprende a configurar este modelo MoE de alto rendimiento localmente para juegos, programación y análisis de datos privados.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+26B+Model+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente en 2026, y a la vanguardia de esta revolución se encuentra el **modelo Gemma 4 26B**. Lanzado como parte de la muy esperada familia Gemma 4 de Google, esta iteración específica utiliza una arquitectura de Mezcla de Expertos (MoE) para ofrecer un rendimiento que rivaliza con modelos diez veces más grandes. Para jugadores, desarrolladores y entusiastas de la privacidad, el **modelo Gemma 4 26B** ofrece un punto de equilibrio único: proporciona la profundidad de razonamiento de un modelo denso masivo manteniendo la velocidad y la accesibilidad de hardware de uno mucho más pequeño. Ya sea que busques generar lógica de juego compleja, analizar documentos sensibles o crear perfiles de IA personalizados, entender cómo aprovechar esta potencia de 26 mil millones de parámetros es esencial para mantenerse a la vanguardia en el ecosistema tecnológico actual.
+
+## Especificaciones técnicas del modelo Gemma 4 26B
+
+El **modelo Gemma 4 26B** se distingue de sus hermanos debido a su diseño de "Mezcla de Expertos". Aunque contiene 26 mil millones de parámetros totales, solo activa aproximadamente 4 mil millones de parámetros en cualquier momento dado durante la inferencia. Esto le permite ejecutarse de manera eficiente en hardware de consumo que normalmente tendría dificultades con un modelo denso de más de 30B.
+
+| Característica | Gemma 4 26B (MoE) | Gemma 4 31B (Denso) |
+|---|---|---|
+| **Parámetros totales** | 26 Mil millones | 31 Mil millones |
+| **Parámetros activos** | ~4 Mil millones | 31 Mil millones |
+| **Ventana de contexto** | 256K Tokens | 256K Tokens |
+| **Arquitectura** | Mezcla de Expertos | Denso |
+| **Fortaleza principal** | Velocidad y Eficiencia | Máxima profundidad de razonamiento |
+| **Licencia** | Apache 2.0 | Apache 2.0 |
+
+> **💡 Consejo:** Si tienes entre 16GB y 24GB de VRAM, el modelo 26B MoE suele ser una mejor opción que el modelo denso 31B, ya que ofrece una generación de tokens más rápida sin una caída significativa en la calidad subjetiva.
+
+## Requisitos de hardware para el despliegue local
+
+Para ejecutar el **modelo Gemma 4 26B** sin problemas en 2026, tu sistema debe cumplir con ciertos umbrales de memoria. Debido a que el archivo del modelo es de aproximadamente 18GB (en cuantización estándar), tu RAM o VRAM es el principal cuello de botella.
+
+| Componente | Requisito mínimo | Recomendado |
+|---|---|---|
+| **RAM** | 16GB | 32GB+ |
+| **GPU VRAM** | 12GB (Cuantizado) | 24GB (Full/Q8) |
+| **Almacenamiento** | 25GB de espacio libre | SSD NVMe |
+| **SO** | Windows 11 / macOS / Linux | Windows 11 (WSL2) |
+
+Ejecutar este modelo localmente garantiza que tus datos nunca salgan de tu máquina. Esto es particularmente vital para desarrolladores que trabajan en código de juegos no lanzados o profesionales que manejan datos legales y médicos sensibles.
+
+## Configuración de Gemma 4 26B con Open WebUI
+
+Aunque las interfaces básicas de terminal funcionan, la mayoría de los usuarios prefieren una experiencia al estilo "ChatGPT". La mejor manera de interactuar con el **modelo Gemma 4 26B** es a través de Open WebUI, un potente panel local que admite la carga de documentos y el análisis de imágenes.
+
+### Paso 1: Instalar el motor (Ollama)
+Primero, necesitas Ollama para servir el modelo. Descárgalo desde el [sitio oficial de Ollama](https://ollama.com/) y ejecuta la instalación. Una vez instalado, abre tu terminal y descarga el modelo:
+
+`ollama pull gemma4:26b`
+
+### Paso 2: Instalar la interfaz (Docker)
+Open WebUI funciona mejor dentro de un contenedor Docker. Asegúrate de que Docker Desktop esté instalado en tu máquina, luego ejecuta el siguiente comando para vincularlo a tu instancia local de Ollama:
+
+`docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/data --name open-webui ghcr.io/open-webui/open-webui:main`
+
+### Paso 3: Acceso y configuración
+Abre tu navegador y navega a `localhost:3000`. Crea tu cuenta local y verás el **modelo Gemma 4 26B** disponible en el menú desplegable.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Rendimiento en juegos y desarrollo creativo
+
+Una de las características más impresionantes del **modelo Gemma 4 26B** es su capacidad para manejar tareas creativas complejas. En las pruebas de rendimiento realizadas a principios de 2026, el modelo demostró una alta propensión para la generación de juegos "zero-shot".
+
+### Lógica de juego y prototipado
+Cuando se le encargó crear un shooter en primera persona (FPS) 3D en JavaScript, el modelo 26B implementó con éxito:
+*   **Lógica de movimiento WASD**: Navegación fluida del jugador dentro de un entorno 3D.
+*   **Retroceso de armas**: Animaciones procedimentales para las mecánicas de disparo.
+*   **Generación de enemigos**: Lógica de bucle infinito para oponentes de IA básicos.
+
+### Capacidades multimodales
+El modelo no es solo para texto. Puede "ver" e interpretar imágenes con una precisión sorprendente. Esto lo convierte en el compañero perfecto para:
+1.  **Diseño UI/UX**: Sube un wireframe dibujado a mano y el modelo puede generar el código HTML/CSS correspondiente.
+2.  **Gestión de activos**: Describe el contenido de miles de texturas o sprites de juegos automáticamente.
+3.  **Análisis de circuitos**: Identificación de componentes como Arduinos y sensores a partir de una sola foto de un esquema.
+
+> **⚠️ Advertencia:** Aunque el modelo es muy capaz, siempre verifica el código generado en busca de errores de sintaxis. Los modelos MoE ocasionalmente pueden alucinar versiones específicas de librerías que podrían estar desactualizadas.
+
+## Funciones avanzadas: Bases de conocimiento y perfiles
+
+El **modelo Gemma 4 26B** se vuelve significativamente más útil cuando utilizas "Bases de conocimiento". A diferencia de las sesiones de chat estándar donde la IA olvida las cargas anteriores, una Base de conocimiento permite que el modelo haga referencia a una colección permanente de archivos.
+
+### Creación de una base de conocimiento
+1.  Navega a la pestaña **Workspace** en Open WebUI.
+2.  Selecciona **Knowledge** y sube tus PDFs, hojas de cálculo o archivos de texto.
+3.  En un nuevo chat, usa el símbolo `#` para etiquetar tu base de conocimiento.
+4.  El modelo ahora responderá preguntas basándose específicamente en tus datos cargados.
+
+### Perfiles de IA personalizados
+También puedes crear "Personas" (Perfiles) configurando un Prompt del sistema. Por ejemplo, puedes instruir al modelo para que actúe como un "Diseñador Profesional de Equilibrio de Juegos" o un "Programador Senior de Motores C++". Esto obliga al modelo a adoptar un tono específico y priorizar ciertos tipos de lógica en sus respuestas.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Resumen de casos de uso
+
+| Caso de uso | Beneficio del modelo 26B |
+|---|---|
+| **Chat enfocado en la privacidad** | No se envían datos a la nube; 100% local. |
+| **Prototipado de desarrollo de juegos** | Genera código base para Three.js y Unity. |
+| **Análisis de documentos** | Resume manuales legales o técnicos largos al instante. |
+| **Escritura creativa** | Generación narrativa de alta calidad con lógica de personajes consistente. |
+
+El **modelo Gemma 4 26B** representa un salto masivo para la IA de código abierto. Al combinar la eficiencia de MoE con los robustos datos de entrenamiento de Google, proporciona una herramienta que es a la vez accesible y de grado profesional. A medida que avanzamos en 2026, los modelos locales como este se convertirán en el estándar para cualquiera que valore la velocidad, la privacidad y el control creativo.
+
+## FAQ
+
+**P: ¿Puedo ejecutar el modelo Gemma 4 26B sin una GPU dedicada?**
+
+R: Sí, puedes ejecutarlo en tu CPU usando la RAM del sistema, pero el rendimiento será significativamente más lento (a menudo 1-2 tokens por segundo). Para una experiencia fluida, se recomienda encarecidamente una GPU con al menos 12GB de VRAM.
+
+**P: ¿Es el modelo Gemma 4 26B gratuito para uso comercial?**
+
+R: Sí, el modelo se lanza bajo la licencia Apache 2.0, que permite tanto el uso personal como comercial, incluyendo la modificación del modelo y su integración en tus propios productos de software.
+
+**P: ¿Cómo se compara el modelo 26B MoE con los modelos 7B de años anteriores?**
+
+R: El modelo 26B MoE es vastamente superior en razonamiento y matices. Mientras que un modelo 7B es excelente para resúmenes simples, el **modelo Gemma 4 26B** puede manejar lógica de múltiples pasos, tareas de programación complejas y escritura creativa profunda en las que los modelos más pequeños suelen fallar.
+
+**P: ¿Funciona Open WebUI sin conexión?**
+
+R: Absolutamente. Una vez que hayas descargado el modelo y configurado el contenedor Docker, puedes desconectarte de Internet por completo. Tu **modelo Gemma 4 26B** y todos tus documentos cargados seguirán siendo plenamente funcionales en tu máquina local.
