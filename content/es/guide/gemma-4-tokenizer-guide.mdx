@@ -1,0 +1,135 @@
+export const metadata = {
+  title: "Guía del Tokenizador de Gemma 4: Dominando los Tokens de Control 2026",
+  description: "Aprenda a utilizar el tokenizador de Gemma 4 para entradas multimodales, modo de pensamiento y uso de herramientas agénticas. Guía completa para desarrolladores e investigadores de IA.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Tokenizer+Guide",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+Navegar por los últimos lanzamientos de IA requiere algo más que saber cómo escribir un prompt; se necesita una **guía del tokenizador de gemma 4** completa para entender cómo el modelo analiza datos complejos a través de su masiva ventana de contexto de 256K. Como la última evolución de modelos abiertos de Google, Gemma 4 introduce un sofisticado sistema de tokens de control diseñado para manejar datos de texto, audio y visuales simultáneamente. Ya sea que esté construyendo un asistente de juegos interactivo o un agente de codificación complejo, dominar estos tokens es la clave para desbloquear todo el potencial del modelo.
+
+En esta **guía del tokenizador de gemma 4**, desglosaremos la nueva estructura de diálogo, la integración de marcadores de posición multimodales y los tokens específicos utilizados para el "Modo de Pensamiento" y las llamadas a herramientas agénticas. Al final de este tutorial, podrá implementar un razonamiento estructurado y bucles de herramientas fluidos en sus propias aplicaciones utilizando las estrategias de tokenización más eficientes disponibles en 2026.
+
+## Guía del Tokenizador de Gemma 4: Tokens de Control Principales y Estructura de Diálogo
+
+La base de cualquier interacción con Gemma 4 reside en sus tokens de control de diálogo. A diferencia de las versiones anteriores, Gemma 4 utiliza un enfoque más granular para la toma de turnos, asegurando que el modelo pueda distinguir entre las instrucciones del sistema, las entradas del usuario y sus propios procesos de razonamiento interno.
+
+El cambio principal en la arquitectura de Gemma 4 es la introducción de los delimitadores `&lt;|turn>` y `&lt;turn|&gt;`. Estos tokens actúan como corchetes para cada intercambio en una conversación, proporcionando un límite claro para el motor de inferencia.
+
+| Token | Tipo | Propósito |
+| :--- | :--- | :--- |
+| **`&lt;|turn>`** | Límite | Indica el comienzo de un turno de diálogo. |
+| **`system`** | Rol | Especifica que el texto siguiente es una instrucción del sistema. |
+| **`user`** | Rol | Indica un turno tomado por el usuario humano. |
+| **`model`** | Rol | Indica un turno generado por el asistente de IA. |
+| **`&lt;turn|&gt;`** | Límite | Indica el final de un turno de diálogo. |
+
+> **💡 Consejo:** Envuelva siempre sus instrucciones del sistema en un bloque `&lt;|turn>system` al principio del prompt para asegurar que el modelo mantenga su personalidad y las restricciones de seguridad durante toda la sesión.
+
+## Integración de Tokens Multimodales
+
+Gemma 4 es nativamente multimodal, lo que significa que no solo "ve" imágenes a través de un modelo de subtitulado separado; las procesa directamente a través de su codificador de visión personalizado. Para facilitar esto, el tokenizador utiliza tokens de marcador de posición especiales que representan embeddings suaves. Estos no son solo cadenas de texto; son índices específicos en el vocabulario que el modelo reemplaza con datos de alta dimensión durante el paso hacia adelante (forward pass).
+
+Cuando trabaje con imágenes o archivos de audio, debe insertar estos marcadores de posición exactamente donde desea que el modelo "perciba" los datos en relación con su texto.
+
+| Token Multimodal | Escenario de Uso |
+| :--- | :--- |
+| **`&lt;|image|&gt;`** | Marcador de posición para un único embedding de imagen. |
+| **`&lt;|audio|&gt;`** | Marcador de posición para un único embedding de audio. |
+| **`&lt;|image>` / `&lt;image|&gt;`** | Utilizado por el codificador interno para envolver datos de visión. |
+| **`&lt;|audio>` / `&lt;audio|&gt;`** | Utilizado por el codificador de audio basado en conformer. |
+
+Si es un desarrollador de juegos que usa Gemma 4 para diseñar una misión basada en un boceto, su prompt podría verse así:
+`&lt;|turn>user\nAnaliza este mapa del juego: &lt;|image|&gt;\nGenera una misión de nivel 10 basada en los puntos de referencia mostrados.&lt;turn|&gt;\n&lt;|turn>model`
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/30Pme6UdUe0"
+    title="What is multimodality? A deep dive on multimodality in Gemma 3"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Modo de Pensamiento y Tokens de Razonamiento
+
+Una de las características más destacadas de la actualización Gemma 4 de 2026 es el "Modo de Pensamiento". Esto permite al modelo realizar un procesamiento de Cadena de Pensamiento (CoT) en un "canal" oculto antes de entregar una respuesta final. Esto es particularmente útil para acertijos complejos de matemáticas, codificación o lógica donde una respuesta directa podría llevar a alucinaciones.
+
+Para activar esto, debe incluir el token `&lt;|think|&gt;` en sus instrucciones del sistema. El modelo utilizará entonces la siguiente estructura:
+
+1.  **Apertura del Canal:** El modelo emite `&lt;|channel>thought`.
+2.  **Procesamiento Interno:** El modelo genera sus pasos de razonamiento.
+3.  **Cierre del Canal:** El modelo emite `&lt;channel|&gt;` e inmediatamente comienza su respuesta de cara al usuario.
+
+> **⚠️ Advertencia:** En conversaciones estándar de varios turnos, es fundamental **eliminar los pensamientos generados** del historial antes del siguiente turno del usuario. Si deja los pensamientos brutos en el prompt, puede causar que el modelo entre en un "bucle de razonamiento cíclico" donde repite su lógica anterior en lugar de avanzar.
+
+## Flujos de Trabajo Agénticos y Uso de Herramientas
+
+Gemma 4 está diseñado para ser un modelo "Agéntico", lo que significa que puede interactuar con entornos externos a través de llamadas a funciones. El tokenizador incluye seis tokens dedicados para gestionar este "protocolo de intercambio" entre el modelo y el código de su aplicación.
+
+Una característica única del protocolo de llamada a herramientas de Gemma 4 es el uso del token `&lt;|\"|&gt;`. Este actúa como un delimitador universal para todos los valores de cadena dentro de una llamada a herramienta. Esto asegura que si una cadena contiene caracteres como llaves o comas, el tokenizador no los confunda con la estructura tipo JSON de la declaración de la herramienta.
+
+| Par de Tokens | Propósito |
+| :--- | :--- |
+| **`&lt;|tool>` / `&lt;tool|&gt;`** | Define el esquema de una función disponible. |
+| **`&lt;|tool_call>` / `&lt;tool_call|&gt;`** | La solicitud del modelo para ejecutar una función específica. |
+| **`&lt;|tool_response>` / `&lt;tool_response|&gt;`** | La inyección del resultado de la función de vuelta al modelo. |
+
+### El Proceso de Intercambio de Llamada a Herramienta
+1.  **Declaración:** Usted define una herramienta como `get_weather` dentro del bloque `&lt;|tool>`.
+2.  **Llamada:** El modelo decide que necesita el clima y emite `&lt;|tool_call>call:get_weather{location:&lt;|\"|&gt;London&lt;|\"|&gt;}&lt;tool_call|&gt;`.
+3.  **Respuesta:** Su aplicación intercepta esto, ejecuta el código real y devuelve `&lt;|tool_response>response:get_weather{temp:15}&lt;tool_response|&gt;`.
+
+## Implementación con vLLM y Transformers
+
+Para usar la **guía del tokenizador de gemma 4** en un entorno de producción, es probable que utilice un framework como vLLM. A partir de abril de 2026, Gemma 4 requiere `transformers==5.5.0` o superior para reconocer correctamente los nuevos tokens de control.
+
+Al lanzar un servidor vLLM, debe usar banderas específicas para asegurar que los analizadores de razonamiento y de llamadas a herramientas estén activos. Esto evita que el canal de "pensamiento" se muestre al usuario final y asegura que las llamadas a herramientas sean capturadas por su manejador de API.
+
+```bash
+vllm serve google/gemma-4-31B-it \
+  --max-model-len 32768 \
+  --enable-auto-tool-choice \
+  --reasoning-parser gemma4 \
+  --tool-call-parser gemma4
+```
+
+### Resolución de Visión Dinámica
+Gemma 4 le permite configurar el "presupuesto de tokens" para las imágenes. Este es un paso de optimización vital. Si está analizando un icono simple, no necesita la resolución máxima.
+
+| Ajuste de Resolución | Coste de Tokens | Caso de Uso |
+| :--- | :--- | :--- |
+| **Bajo** | 70 - 140 | Iconos, texto simple, miniaturas |
+| **Medio** | 280 - 560 | Fotos estándar, diagramas, capturas de pantalla de UI |
+| **Alto** | 1120 | Mapas complejos, documentos legales, letra pequeña |
+
+## Optimización de Memoria y Rendimiento
+
+Con una ventana de contexto de hasta 256K, la gestión de la memoria es primordial. El uso de las estrategias de la **guía del tokenizador de gemma 4** puede ayudar a reducir la huella de la caché KV.
+
+*   **Caché KV FP8:** Use la bandera `--kv-cache-dtype fp8` en vLLM para reducir el uso de memoria en casi un 50% sin una pérdida significativa en la calidad del razonamiento.
+*   **Perfilado Multimodal:** Si su tarea específica solo involucra texto, pase `--limit-mm-per-prompt image=0 audio=0` para omitir por completo la asignación de memoria para los codificadores multimodales.
+*   **Eficiencia de Pensamiento Adaptativa:** Puede usar instrucciones del sistema para decirle al modelo que "piense de manera eficiente". La investigación muestra que una instrucción de "pensamiento BAJO" puede reducir el número de tokens de razonamiento en aproximadamente un 20% manteniendo la precisión para tareas más simples.
+
+Para obtener más información sobre la arquitectura del modelo, puede visitar el portal oficial de [Google AI for Developers](https://ai.google.dev/gemma).
+
+## FAQ
+
+**P: ¿Funciona el tokenizador de Gemma 4 con prompts antiguos de Gemma 2 o 3?**
+
+R: Aunque Gemma 4 puede entender formatos de prompt antiguos, no es recomendable. El modelo fue entrenado específicamente con los tokens `&lt;|turn>` y `&lt;|channel>`. El uso de formatos heredados puede resultar en una menor precisión de razonamiento y problemas con las llamadas a herramientas.
+
+**P: ¿Cómo manejo múltiples imágenes en un solo prompt usando la guía del tokenizador de gemma 4?**
+
+R: Puede insertar múltiples marcadores de posición `&lt;|image|&gt;` en su texto. Sin embargo, debe asegurarse de que su motor de inferencia esté configurado con `--limit-mm-per-prompt image=N` donde N es el número de imágenes que planea enviar.
+
+**P: ¿Qué sucede si olvido eliminar los "pensamientos" en un chat de varios turnos?**
+
+R: El modelo puede confundirse, tratando su monólogo interno anterior como parte de la verdad fáctica de la conversación actual. Esto a menudo conduce a respuestas repetitivas o a que el modelo "discuta" con su propia lógica anterior.
+
+**P: ¿Es obligatorio el delimitador `&lt;|\"|&gt;` para todas las llamadas a herramientas?**
+
+R: Sí. Gemma 4 fue entrenado para esperar este token específico como un envoltorio de cadena dentro de los bloques de herramientas. Omitirlo puede causar que el tokenizador rompa la cadena en la primera coma o llave que encuentre, lo que lleva a argumentos de función inválidos.

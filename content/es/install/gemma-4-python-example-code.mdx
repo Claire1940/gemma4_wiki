@@ -1,0 +1,156 @@
+export const metadata = {
+  title: "Código de ejemplo de Gemma 4 en Python: Guía de programación con IA local 2026",
+  description: "Aprenda cómo implementar Gemma 4 de Google localmente usando Python. Guía completa que cubre llamadas a funciones, integración con Ollama y flujos de trabajo de agentes.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Gemma+4+Python+Guide",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+El desarrollo con IA local ha experimentado un cambio masivo en 2026. Con el lanzamiento de los últimos modelos de pesos abiertos de Google, encontrar un fragmento de **código de ejemplo de gemma 4 en python** confiable se ha convertido en una prioridad absoluta para los ingenieros que buscan mantener la privacidad de los datos y eliminar los costos de API. Ya sea que esté construyendo un agente automatizado o un asistente de scripts simple, el **código de ejemplo de gemma 4 en python** proporciona la base necesaria para una inteligencia en el dispositivo de alto rendimiento sin los costos recurrentes de los servicios basados en la nube.
+
+En esta guía, exploramos las diversas formas de desplegar esta familia de modelos, que van desde los niveles eficientes 2B y 4B "Effective" hasta la potente arquitectura de Mezcla de Expertos (MoE) de 26B. Siguiendo estos pasos de implementación, puede aprovechar las llamadas a funciones nativas, entradas multimodales y una enorme ventana de contexto de 256,000 tokens directamente en su propio hardware.
+
+## Descripción general de la familia de modelos Gemma 4
+
+Antes de sumergirse en la implementación, es esencial entender qué variante se adapta a su perfil de hardware. La línea de 2026 se divide en niveles diseñados para entornos móviles, de escritorio y servidores de alto rendimiento.
+
+| Variante del modelo | Arquitectura | Parámetros activos | VRAM requerida (Cuantizada) | Ideal para |
+|---|---|---|---|---|
+| **Gemma-4-31B** | Transformer denso | 31B | 24GB - 32GB | Razonamiento complejo, programación intensiva |
+| **Gemma-4-26B-A4B** | MoE (128 Expertos) | 3.8B | 16GB - 24GB | Servicio de alto rendimiento, agentes |
+| **Gemma-4-E4B** | Transformer denso | 4.5B | 8GB - 12GB | Asistencia en el dispositivo, UI local |
+| **Gemma-4-E2B** | Transformer denso | 2.3B | 4GB - 6GB | Aplicaciones móviles, scripts básicos |
+
+> **💡 Consejo:** Para la mayoría de los desarrolladores que utilizan una sola RTX 3090 o 4090, la variante MoE de 26B ofrece el mejor equilibrio entre velocidad e inteligencia, ya que solo activa una fracción de sus parámetros por cada paso hacia adelante.
+
+## Implementación de código de ejemplo de gemma 4 en python a través de Transformers
+
+Para ejecutar Gemma 4 utilizando el ecosistema de Hugging Face, necesita instalar las últimas versiones de `torch` y `transformers`. Este método es preferible para los desarrolladores que desean un control profundo sobre los estados internos y tensores del modelo.
+
+### Configuración del entorno
+
+Primero, asegúrese de que su entorno de Python esté listo con las siguientes dependencias:
+
+| Biblioteca | Comando | Propósito |
+|---|---|---|
+| **PyTorch** | `pip install torch` | Operaciones de tensores principales |
+| **Accelerate** | `pip install accelerate` | Gestión de memoria y multi-GPU |
+| **Transformers** | `pip install transformers` | Carga de modelos e inferencia |
+
+### Script de inferencia básico
+
+El siguiente **código de ejemplo de gemma 4 en python** demuestra cómo cargar el modelo y generar una respuesta simple utilizando la clase `AutoModelForMultimodalLM`.
+
+```python
+from transformers import AutoProcessor, AutoModelForMultimodalLM
+import torch
+
+MODEL_ID = "google/gemma-4-26B-A4B-it"
+
+# Cargar el modelo con mapeo automático de dispositivos
+model = AutoModelForMultimodalLM.from_pretrained(
+    MODEL_ID, 
+    dtype="auto", 
+    device_map="auto"
+)
+processor = AutoProcessor.from_pretrained(MODEL_ID)
+
+# Preparar un prompt simple
+messages = [
+    {"role": "user", "content": "Escribe un script en Python para hacer scraping de un sitio web."}
+]
+
+# Aplicar plantilla de chat y generar
+text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = processor(text=text, return_tensors="pt").to(model.device)
+outputs = model.generate(**inputs, max_new_tokens=512)
+
+print(processor.decode(outputs[0], skip_special_tokens=True))
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/02tjBAsGacs"
+    title="Google's New AI Runs Locally for Free (Gemma 4 Coding Demo)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Llamada a funciones nativas y uso de herramientas
+
+Una de las características destacadas de Gemma 4 en 2026 es su soporte nativo para llamadas a funciones. A diferencia de las generaciones anteriores que requerían un análisis complejo de expresiones regulares, Gemma 4 puede generar llamadas a herramientas en formato JSON estructurado directamente. Esto permite que el modelo interactúe con APIs externas, bases de datos o entornos locales de Python.
+
+### Definición de herramientas
+
+Puede definir herramientas utilizando un esquema JSON manual o pasando funciones de Python puras. El proceso de "pensamiento" del modelo mejora significativamente la precisión de estas llamadas al razonar sobre los argumentos requeridos antes de la ejecución.
+
+| Método | Beneficio | Caso de uso |
+|---|---|---|
+| **Esquema JSON** | Control explícito | Objetos anidados complejos, APIs estrictas |
+| **Python puro** | Desarrollo más rápido | Utilidades simples, matemáticas, scripts locales |
+
+### Ejemplo: Herramienta de API de clima
+
+Al proporcionar **código de ejemplo de gemma 4 en python** para flujos de trabajo de agentes, es crucial manejar el ciclo de tres etapas: el turno del modelo (generar la llamada), el turno del desarrollador (ejecutar el código) y la respuesta final (resumir el resultado).
+
+```python
+def get_current_weather(location: str, unit: str = "celsius"):
+    """Obtiene el clima actual en una ubicación dada."""
+    return {"temperature": 22, "condition": "Soleado"}
+
+# El modelo generará un bloque estructurado:
+# &lt;|tool_call|&gt;call:get_current_weather{location: "Madrid"}&lt;tool_call|&gt;
+```
+
+## Construcción de un asistente de programación local con Gradio
+
+Para una experiencia más interactiva, muchos desarrolladores están integrando el **código de ejemplo de gemma 4 en python** en una interfaz de usuario basada en Gradio. Esta configuración permite un diseño de panel dividido donde puede chatear con el agente en un lado y ver actualizaciones de código en vivo en el otro.
+
+### Características clave de un asistente local
+1. **Integración con editor en vivo**: Envía automáticamente los bloques de código generados a un editor funcional.
+2. **Ejecución en entorno aislado (Sandbox)**: Utiliza un subproceso para ejecutar el código localmente y devolver `stdout` o `stderr`.
+3. **Contexto multimodal**: Sube capturas de pantalla de la interfaz de usuario y pide al modelo que genere el código Tailwind CSS o React correspondiente.
+
+> **⚠️ Advertencia:** Al ejecutar código generado por una IA, utilice siempre un entorno aislado o un sistema de archivos temporal para evitar la pérdida accidental de datos o brechas de seguridad en su máquina anfitriona.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/h-LRknODV3M"
+    title="Gemma 4 Tested for Coding: Complex Web Apps"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Pruebas de rendimiento: Aplicaciones web complejas
+
+Pruebas recientes de los modelos 26B y 31B muestran resultados impresionantes en la generación de aplicaciones web complejas. Si bien los modelos pueden tener dificultades ocasionales con lógica altamente especializada (como la síntesis de audio en tiempo real en una estación de trabajo de audio digital), destacan en:
+- **Páginas de aterrizaje responsivas**: Generación de HTML limpio y Tailwind CSS a partir de una descripción de texto.
+- **Scripts concurrentes**: Escritura de funciones asíncronas en Python para web scraping o monitoreo de APIs.
+- **Corrección de errores**: Identificación de errores lógicos en bases de código existentes y provisión de parches explicados.
+
+Para obtener documentación más avanzada, puede visitar el sitio oficial de [Google AI for Developers](https://ai.google.dev/gemma) para explorar la gama completa de capacidades del modelo.
+
+## Preguntas frecuentes
+
+**P: ¿Ejecutar el código de ejemplo de gemma 4 en python requiere una GPU de gama alta?**
+
+R: No estrictamente. Si bien se recomienda una GPU como la RTX 3090 (24GB VRAM) para los modelos 26B y 31B, las variantes "Effective" 2B y 4B están diseñadas para ejecutarse de manera eficiente en CPUs estándar y hardware móvil mediante cuantización.
+
+**P: ¿Puede Gemma 4 manejar imágenes y código simultáneamente?**
+
+R: Sí, Gemma 4 es nativamente multimodal. Puede proporcionar una imagen (como un wireframe o una captura de pantalla de un error) junto con su prompt de texto, y el modelo puede razonar a través de ambas entradas para generar una solución.
+
+**P: ¿El código generado por Gemma 4 es de uso comercial gratuito?**
+
+R: Sí, Gemma 4 se lanza bajo la licencia Apache 2.0, que permite el uso comercial, la modificación y la distribución sin las restricciones que se encuentran en muchos otros modelos propietarios.
+
+**P: ¿Cómo mejoro la precisión de las llamadas a funciones en mi código de ejemplo de gemma 4 en python?**
+
+R: Habilitar el "Modo de Pensamiento" (Thinking Mode) permite que el modelo utilice un proceso de razonamiento interno antes de generar una llamada a la herramienta. Esto le ayuda a identificar los parámetros correctos y decidir si una herramienta es realmente necesaria para la solicitud del usuario.

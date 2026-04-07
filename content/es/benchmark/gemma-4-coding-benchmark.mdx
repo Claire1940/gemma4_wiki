@@ -1,0 +1,130 @@
+export const metadata = {
+  title: "Gemma 4 Coding Benchmark: Análisis Completo de Rendimiento 2026",
+  description: "Explore los resultados exhaustivos del benchmark de programación de Gemma 4. Conozca cómo los últimos modelos de pesos abiertos de Google rinden en tareas de desarrollo y razonamiento del mundo real.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Coding+Benchmark",
+  date: "2026-04-05",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial de código abierto cambió significativamente el 2 de abril de 2026, con el lanzamiento de la última familia de modelos de Google DeepMind. Para los desarrolladores y entusiastas de la tecnología, los resultados del **gemma 4 coding benchmark** representan un salto masivo en lo que es posible hacer en hardware local. Estos modelos no son solo actualizaciones incrementales; están construidos sobre la misma base de investigación que el modelo insignia Gemini 3, ofreciendo un rendimiento de nivel de estación de trabajo sin la necesidad de una suscripción mensual o una conexión a Internet. Al centrarse en la inteligencia por parámetro, el **gemma 4 coding benchmark** demuestra que los modelos más pequeños y eficientes ahora pueden competir con —y a veces superar— a modelos propietarios veinte veces más grandes.
+
+En esta guía, desglosaremos las métricas de rendimiento específicas, exploraremos los diferentes tamaños de modelos disponibles y ofreceremos una visión paso a paso de cómo estos modelos manejan tareas complejas de programación front-end y back-end. Ya sea que esté creando flujos de trabajo agénticos o busque un asistente de programación local privado, comprender los matices de estos benchmarks es esencial para optimizar su stack de desarrollo en 2026.
+
+## Descripción General de la Familia de Modelos Gemma 4
+
+Google ha lanzado cuatro versiones distintas de la serie Gemma 4, cada una adaptada a limitaciones de hardware y casos de uso específicos. A diferencia de las iteraciones anteriores, toda la familia se distribuye ahora bajo la permisiva licencia Apache 2.0, lo que permite total libertad comercial y redistribución.
+
+| Variante del Modelo | Parámetros | Parámetros Activos | Caso de Uso Principal |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 Mil millones | 2 Mil millones | Dispositivos móviles y de borde ultraeficientes |
+| **Gemma 4 E4B** | 4 Mil millones | 4 Mil millones | Rendimiento multimodal para portátiles/tablets |
+| **Gemma 4 26B MoE** | 26 Mil millones | **~3.8 Mil millones** | Rendimiento de estación de trabajo de alta velocidad (Mezcla de Expertos) |
+| **Gemma 4 31B Dense** | 31 Mil millones | 31 Mil millones | Calidad insignia para razonamiento complejo y programación |
+
+El modelo 26B Mixture of Experts (MoE) es particularmente digno de mención para los desarrolladores. Al activar solo unos 3.8 mil millones de parámetros durante la inferencia, proporciona la velocidad de un modelo mucho más pequeño mientras mantiene la salida de alta calidad asociada con un modelo de más de 30B de parámetros.
+
+## Gemma 4 Coding Benchmark: Métricas Clave de Rendimiento
+
+El aspecto más sorprendente del lanzamiento de 2026 es el enorme salto en la capacidad técnica. En el benchmark de Codeforces, Gemma 4 alcanzó una calificación de 2150 Elo, una mejora asombrosa respecto a los 110 Elo de Gemma 3. Esto sitúa al modelo en una clase completamente diferente de capacidad de programación, haciéndolo viable para la arquitectura de software profesional y la depuración.
+
+### Comparación de Benchmarks de la Industria
+
+| Benchmark | Gemma 3 (Anterior) | Gemma 4 31B (2026) | Significado |
+|---|---|---|---|
+| **LiveCodeBench** | 35.2% | **80.0%** | Mide la competencia en programación del mundo real |
+| **MMLU Pro** | 62.1 | **85.2** | Razonamiento avanzado y conocimiento en diversos dominios |
+| **Math (AM E2026)** | 20.8% | **89.2%** | Crítico para el desarrollo de algoritmos complejos |
+| **Big Bench Hard** | 19.3% | **74.4%** | Evalúa el razonamiento lógico de múltiples pasos |
+
+Los datos del **gemma 4 coding benchmark** indican que el modelo 31B ocupa actualmente el tercer puesto entre todos los modelos de pesos abiertos a nivel mundial en la clasificación de LM Arena. Aunque se sitúa ligeramente por detrás de modelos como Qwen 3.5 en puntuaciones brutas de "índice de inteligencia", sigue siendo significativamente más eficiente, utilizando a menudo 2.5 veces menos tokens para completar tareas similares.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Aplicaciones de Programación en el Mundo Real
+
+Los benchmarks solo cuentan parte de la historia. En las pruebas prácticas, Gemma 4 ha demostrado una capacidad asombrosa para manejar salidas JSON estructuradas y llamadas a funciones nativas. Esto lo convierte en un candidato ideal para flujos de trabajo "agénticos", donde la IA debe utilizar herramientas externas para completar una tarea.
+
+### Generación Front-End y Diseño de IU
+Durante las pruebas, se le encargó al modelo 31B la creación de una interfaz de sistema operativo al estilo MacOS utilizando código puro. Los resultados incluyeron:
+*   **Componentes Funcionales:** Una calculadora funcional, una terminal y una aplicación de ajustes.
+*   **Fidelidad Visual:** Recreación precisa de barras de herramientas, fondos y gestión de ventanas.
+*   **Simulación de Física:** En pruebas separadas, el modelo generó con éxito un simulador de "donas" de F1 con física basada en el navegador en tiempo real.
+
+### Lógica de Juego y Gestión de Estado
+Una de las hazañas más impresionantes en las recientes pruebas del **gemma 4 coding benchmark** fue la capacidad del modelo para construir un juego de estilo "cardboard" desde cero. Logró:
+1.  **Implementación de Reglas:** Lógica de turnos y sistemas de puntuación precisos.
+2.  **Movimiento Fluido:** Implementación de mecánicas para el movimiento e interacción de las piezas.
+3.  **Generación de SVG:** Creación de iconos y activos personalizados directamente mediante código.
+
+> **💡 Consejo:** Al utilizar Gemma 4 para tareas de programación complejas, active el interruptor "Thinking Mode" (Modo de Pensamiento). Esto permite al modelo procesar la lógica paso a paso antes de generar el bloque de código final, reduciendo significativamente los errores de sintaxis.
+
+## Requisitos de Hardware y Configuración Local
+
+Debido a que Gemma 4 es un modelo de pesos abiertos, puede ejecutarlo íntegramente en su propio hardware, garantizando que su código propietario nunca salga de su máquina. Esta es una ventaja masiva para los desarrolladores que trabajan en proyectos sensibles o para aquellos que buscan evitar costes de API.
+
+### Especificaciones Recomendadas del Sistema
+
+| Tamaño del Modelo | RAM/VRAM Mínima | Hardware Recomendado |
+|---|---|---|
+| **E2B / E4B** | 8GB - 10GB | Raspberry Pi 5, Smartphones modernos, Portátiles de gama de entrada |
+| **26B MoE** | 16GB - 20GB | Mac M2/M3 (16GB+), RTX 3060 (12GB) con cuantización |
+| **31B Dense** | 24GB - 32GB | Mac Studio, RTX 4090, Configuraciones multi-GPU |
+
+### Cómo ejecutar Gemma 4 a través de Ollama
+La forma más sencilla de empezar es a través de [Ollama](https://ollama.com/), que proporcionó soporte el mismo día del lanzamiento de Gemma 4.
+
+1.  **Descargar Ollama:** Visite el sitio oficial e instale la versión para Windows, Mac o Linux.
+2.  **Abrir Terminal:** Asegúrese de que Ollama se está ejecutando en segundo plano.
+3.  **Obtener el Modelo:** Escriba `ollama pull gemma4:31b` (o `26b` para la versión MoE).
+4.  **Ejecutar y Chatear:** Escriba `ollama run gemma4:31b` para iniciar una sesión local.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/vdnxDeUi1w8"
+    title="Google Gemma 4 is INSANE (FREE!)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades Multimodales y Agénticas
+
+Más allá del puro texto y código, Gemma 4 introduce soporte multimodal nativo. Los modelos E más pequeños pueden manejar audio de forma nativa, mientras que las variantes más grandes 26B y 31B admiten vídeo como secuencias de fotogramas. Esto permite al modelo "ver" una captura de pantalla de una IU y generar el código HTML/CSS correspondiente con alta precisión.
+
+Google también ha introducido "Agent Skills" (Habilidades de Agente) a través del ecosistema de aplicaciones Gemini. Esto permite que los modelos Gemma 4 más pequeños se ejecuten completamente en el dispositivo (sin computación en la nube) para realizar tareas de varios pasos, como extraer datos estructurados de un archivo local, procesarlos y generar una visualización en un solo flujo.
+
+## El Cambio hacia la Eficiencia de la IA Local
+
+Los resultados del **gemma 4 coding benchmark** resaltan una tendencia más amplia de la industria para 2026: el alejamiento de los modelos masivos solo en la nube hacia sistemas locales altamente eficientes. Con una ventana de contexto de 256K, el modelo 31B puede ingerir bases de código completas, lo que le permite proporcionar sugerencias conscientes del contexto que antes solo eran posibles con llamadas a API de alta latencia.
+
+Además, la licencia Apache 2.0 elimina la fricción legal que obstaculizó a Gemma 3. Las empresas ahora pueden ajustar (fine-tune) Gemma 4 con su documentación interna y desplegarlo en sus equipos de desarrolladores sin límites de uso ni preocupaciones de privacidad.
+
+## FAQ (Preguntas Frecuentes)
+
+**P: ¿Cómo se compara el benchmark de programación de Gemma 4 con GPT-4 o Claude 3.5?**
+
+R: Aunque los modelos propietarios insignia todavía mantienen una ligera ventaja en la planificación arquitectónica compleja de un solo intento, Gemma 4 31B es ahora altamente competitivo en tareas de programación diarias, depuración y generación front-end. Su capacidad para ejecutarse localmente con latencia cero lo convierte en una opción superior para el desarrollo iterativo.
+
+**P: ¿Puedo ejecutar Gemma 4 en un teléfono móvil?**
+
+R: Sí. Los modelos Gemma 4 E2B y E4B están diseñados específicamente para dispositivos de borde. Google se ha asociado con Qualcomm y MediaTek para optimizar estos modelos para el rendimiento en el dispositivo, permitiendo el razonamiento de IA en tiempo real sin conexión a Internet.
+
+**P: ¿Cuál es la ventaja del modelo 26B MoE sobre el modelo 31B Dense?**
+
+R: El modelo 26B MoE (Mixture of Experts) es significativamente más rápido porque solo utiliza unos 3.8 mil millones de parámetros para cualquier consulta individual. Si tiene hardware limitado o necesita respuestas de alta velocidad para un flujo de trabajo agéntico, el 26B MoE es la mejor opción. Si necesita la máxima calidad y profundidad de razonamiento, es preferible el modelo 31B Dense.
+
+**P: ¿Admite Gemma 4 otros idiomas además del inglés?**
+
+R: Absolutamente. Gemma 4 fue preentrenado en más de 140 idiomas y ofrece un soporte sólido para más de 35 idiomas de forma nativa. Esto incluye una alta competencia en documentación y comentarios no ingleses dentro del código.

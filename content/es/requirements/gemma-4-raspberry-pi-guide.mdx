@@ -1,0 +1,141 @@
+export const metadata = {
+  title: "Guía de Gemma 4 para Raspberry Pi: Ejecuta IA Local en el Edge 2026",
+  description: "Aprende cómo desplegar los modelos Gemma 4 de Google en una Raspberry Pi 5. Guía completa de configuración para los modelos E2B y E4B con benchmarks de rendimiento e integración en red local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/2563eb/fff?text=Gemma+4+Raspberry+Pi+Tutorial",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la última familia de modelos abiertos de Google ha revolucionado lo que es posible en hardware de bajo consumo, y esta **guía de gemma 4 para raspberry pi** te mostrará exactamente cómo aprovechar ese poder. Ya seas un desarrollador que busca construir flujos de trabajo agénticos o un aficionado que desea un asistente de IA privado y sin conexión, la Raspberry Pi 5 finalmente ha encontrado su pareja ideal. Ejecutar un modelo de lenguaje extenso (LLM) localmente garantiza la privacidad total de los datos y elimina la necesidad de costosas suscripciones a APIs.
+
+En esta completa **guía de gemma 4 para raspberry pi**, recorreremos los requisitos técnicos, los pasos de instalación y las optimizaciones de rendimiento necesarias para que los modelos E2B y E4B funcionen sin problemas. Al aprovechar nuevas características arquitectónicas como los Embeddings por Capa (PLE) y las cachés KV compartidas, Gemma 4 ofrece capacidades de razonamiento impresionantes incluso en una computadora del tamaño de una tarjeta de crédito. Sigue estos pasos para transformar tu Pi en un nodo de IA de alto rendimiento.
+
+## Requisitos de Hardware para Gemma 4
+
+Antes de sumergirte en el software, asegúrate de que tu hardware esté a la altura de la tarea. Mientras que los modelos más antiguos sufrían con los cuellos de botella de memoria, la Raspberry Pi 5 es la base para una experiencia utilizable en 2026. El modelo E2B está optimizado específicamente para estas limitaciones, pero tus elecciones de almacenamiento y refrigeración afectarán significativamente la velocidad de generación.
+
+| Componente | Requisito Mínimo | Configuración Recomendada |
+|---|---|---|
+| **Placa** | Raspberry Pi 5 (4GB RAM) | **Raspberry Pi 5 (8GB RAM)** |
+| **Almacenamiento** | Tarjeta SD de alta velocidad de 32GB | **SSD NVMe (vía PCIe Hat)** |
+| **Refrigeración** | Disipadores pasivos | **Active Cooler o Argon ONE V3** |
+| **Alimentación** | USB-C oficial de 27W | **Fuente de alimentación oficial USB-C de 27W** |
+| **SO** | Ubuntu Server 24.04 (64-bit) | **Ubuntu Server 24.04 (Headless)** |
+
+> **⚠️ Advertencia:** No intentes ejecutar Gemma 4 en una Raspberry Pi 4 o 3. La falta de RAM y la arquitectura de CPU más lenta resultarán en una latencia extremadamente alta, a menudo tardando minutos en generar una sola oración.
+
+## Eligiendo el Modelo Gemma 4 Adecuado
+
+Google lanzó Gemma 4 en varios tamaños, pero para la Raspberry Pi, nos centramos en la serie "Edge". Estos modelos utilizan la licencia Apache 2.0, lo que te otorga total libertad comercial para construir y distribuir productos.
+
+| Nombre del Modelo | Parámetros | RAM Requerida | Mejor Caso de Uso |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2.3B Efectivos | ~5GB | **IoT, Automatización simple, Chat** |
+| **Gemma 4 E4B** | 4.5B Efectivos | ~8GB | **Generación de código, Tareas de visión** |
+| **Gemma 4 26B** | 26B (MoE) | 16GB+ | No recomendado para Pi (Solo escritorio) |
+
+La "E" en E2B y E4B significa "parámetros efectivos". Gracias a los Embeddings por Capa, estos modelos activan menos parámetros durante la inferencia, lo que ahorra batería y reduce la carga térmica en la CPU de tu Pi. Para la mayoría de los usuarios que siguen esta **guía de gemma 4 para raspberry pi**, el modelo E2B es el punto ideal para la capacidad de respuesta.
+
+## Instalación vía LM Studio (CLI Headless)
+
+Para los usuarios que prefieren una configuración ligera y sin interfaz gráfica (headless) a través de SSH, la versión CLI de LM Studio es una excelente opción. Esto permite gestionar modelos sin la sobrecarga de una interfaz de usuario gráfica.
+
+1.  **Conexión vía SSH:** Accede a tu Raspberry Pi desde tu estación de trabajo principal. Se recomienda encarecidamente usar un multiplexor de terminal como `tmux` para mantener tu sesión activa si la conexión se interrumpe.
+2.  **Instalar LM Studio CLI:** Ejecuta el script de instalación oficial proporcionado por los desarrolladores. Esto instalará el demonio y la herramienta de línea de comandos `lms`.
+3.  **Configurar Almacenamiento:** Por defecto, los modelos se almacenan en la tarjeta SD. Si tienes un SSD conectado, usa el comando `lms storage set` para apuntar el directorio de descarga a tu unidad más rápida.
+4.  **Descargar el Modelo:** Usa el comando `lms download google/gemma-4-E2B-it`. La versión "it" está ajustada para instrucciones (instruction-tuned), lo que la hace mejor para chatear y seguir órdenes.
+5.  **Iniciar el Servidor:** Lanza el servidor de API local con `lms server start --port 4000`.
+
+### Acceso al Modelo a Través de una Red Local
+
+Por defecto, el servidor local solo escuchará en `localhost`. Si quieres enviar prompts desde tu PC de gaming o MacBook a la Raspberry Pi, necesitas puentear la red. Si el software no admite un parámetro de host, puedes usar la utilidad `socat`:
+
+```bash
+socat TCP-LISTEN:4001,fork,reuseaddr TCP:127.0.0.1:4000
+```
+
+Esto crea un puente donde cualquier solicitud enviada a la dirección IP de la Pi en el puerto 4001 se reenvía internamente a la instancia de Gemma 4.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/kZhAj8--t8w"
+    title="Gemma 4 on Raspberry Pi 5: A Surprisingly Usable Local AI Setup"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Configuración Alternativa: Uso de Ollama
+
+Si deseas la experiencia más sencilla de "un solo comando", [Ollama](https://ollama.com/) es el estándar de la industria para IA local. Maneja la cuantización y la configuración del entorno automáticamente.
+
+1.  **Instalar Ollama:** Ejecuta `curl -fsSL https://ollama.com/install.sh | sh` en tu terminal.
+2.  **Descargar Gemma 4:** Ejecuta `ollama pull gemma4:e2b`.
+3.  **Ejecutar y Chatear:** Escribe `ollama run gemma4:e2b` para iniciar una sesión de chat inmediata.
+
+Ollama es particularmente útil porque proporciona una API compatible con OpenAI de fábrica, lo que permite conectar tu Raspberry Pi a herramientas existentes como Open WebUI o extensiones de VS Code.
+
+## Benchmarks de Rendimiento y Uso en el Mundo Real
+
+Ejecutar IA en el edge se trata de gestionar las expectativas. Mientras que una GPU dedicada como una RTX 4080 puede generar texto a más de 100 tokens por segundo, la Raspberry Pi 5 es mucho más lenta. Sin embargo, para tareas no interactivas, es perfectamente viable.
+
+| Tipo de Tarea | Modelo | Tiempo de Razonamiento | Tiempo Total de Gen. |
+|---|---|---|---|
+| **Lógica Simple/Chat** | E2B | 15-30 Segundos | **1-2 Minutos** |
+| **Ordenamiento de Código Python** | E2B | 45 Segundos | **5-6 Minutos** |
+| **Ideación de App Web** | E2B | 40 Segundos | **4-5 Minutos** |
+
+Durante nuestras pruebas, la Pi 5 utilizó los cuatro núcleos al 100% de su capacidad. A pesar de la alta carga, el modelo E2B proporcionó un razonamiento preciso de varios pasos. Por ejemplo, al pedirle que escribiera una función de ordenamiento, no solo proporcionó el código; ofreció dos implementaciones diferentes y explicó la complejidad temporal de cada una.
+
+> **💡 Consejo:** Para acelerar los tiempos de respuesta, considera desactivar el "Modo de Razonamiento" si tu tarea es simple. Esto omite la fase `&lt;|think|&gt;` y salta directamente a la respuesta.
+
+## Funciones Avanzadas: Visión y Audio
+
+Gemma 4 no se trata solo de texto. Los modelos E2B y E4B son multimodales. Esto significa que puedes integrar un Módulo de Cámara de Raspberry Pi o un micrófono USB para crear dispositivos verdaderamente "agénticos".
+
+*   **Visión:** Puedes alimentar imágenes a Gemma 4 a través de la biblioteca LiteRT-LM. Puede describir escenas, leer texto de recibos o identificar objetos en una habitación.
+*   **Audio:** Los modelos más pequeños admiten entrada de audio nativa. Puedes hablar directamente a la Pi y esta puede procesar voz a texto traducido sin enviar nunca tu voz a un servidor en la nube.
+*   **Habilidades Agénticas:** Usando la **Google AI Edge Gallery**, puedes construir habilidades que permitan a Gemma 4 consultar Wikipedia o generar gráficos interactivos basados en tus datos locales.
+
+Para los desarrolladores, la [colección Hugging Face Gemma 4](https://huggingface.co/collections/google/gemma-4) proporciona los pesos crudos y los archivos de configuración necesarios para ajustar estos modelos para aplicaciones específicas de gaming o IoT.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Integración con Herramientas de Desarrollo
+
+Una vez que tu Raspberry Pi esté sirviendo el modelo Gemma 4, puedes conectarlo a tus IDEs favoritos. Esto te permite tener un asistente de codificación de IA "gratis" ejecutándose en una pieza de hardware separada, ahorrando la RAM de tu computadora principal para jugar o compilar.
+
+1.  **Zed Editor / VS Code:** Abre tus ajustes y añade un proveedor de LLM personalizado.
+2.  **URL Base:** Establece esto a la IP de tu Raspberry Pi (por ejemplo, `http://192.168.1.50:4001/v1`).
+3.  **Nombre del Modelo:** Especifica `gemma-4-E2B-it`.
+4.  **Uso:** Ahora puedes usar el panel de chat del editor para hacer preguntas sobre tu código, las cuales serán procesadas enteramente por la Pi.
+
+## FAQ
+
+**P: ¿Es la Raspberry Pi 5 lo suficientemente rápida para un asistente de IA diario?**
+
+R: Depende de tu paciencia. Si bien es excelente para tareas en segundo plano, automatización y aprendizaje, el tiempo de respuesta de 5 minutos para consultas complejas lo hace mejor para ayuda "asíncrona" en lugar de una conversación rápida.
+
+**P: ¿Necesito una conexión a internet para usar esta guía de gemma 4 para raspberry pi?**
+
+R: Solo para la descarga inicial de los modelos y el software. Una vez instalado, Gemma 4 funciona 100% fuera de línea, lo que lo hace ideal para proyectos de alta privacidad o ubicaciones remotas sin acceso estable a la red.
+
+**P: ¿Puedo ejecutar el modelo 31B en una Raspberry Pi?**
+
+R: No. El modelo 31B requiere al menos 20GB de RAM (e idealmente una GPU potente) para funcionar. La Raspberry Pi 5 está limitada a 8GB, razón por la cual recomendamos las variantes E2B o E4B.
+
+**P: ¿Cómo evito que mi Raspberry Pi se sobrecaliente durante las tareas de IA?**
+
+R: Ejecutar LLMs pone una carga sostenida del 100% en la CPU. Debes usar una solución de refrigeración activa, como el Raspberry Pi Active Cooler oficial o una carcasa de alta calidad con ventiladores integrados, para evitar el estrangulamiento térmico (thermal throttling).

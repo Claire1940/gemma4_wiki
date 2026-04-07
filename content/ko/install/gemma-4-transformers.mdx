@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "Gemma 4 트랜스포머: Google의 2026년 오픈 AI 완전 가이드",
+  description: "Gemma 4 트랜스포머의 아키텍처 혁신을 살펴보세요. 256K 컨텍스트 윈도우부터 에지 지원 멀티모달 지능까지, Google의 최신 오픈 웨이트 배포 방법을 알아보세요.",
+  category: "가이드",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Transformers+Guide",
+  date: "2026-04-05",
+  author: "Gemma 위키 팀"
+}
+
+2026년 초 **gemma 4 트랜스포머(gemma 4 transformers)**의 등장은 오픈 소스 인공지능의 지형을 근본적으로 변화시켰습니다. 허용적인 Apache 2.0 라이선스로 전환함으로써, Google은 마침내 상업적 도입과 커뮤니티 미세 조정을 방해했던 제한적인 "오픈 웨이트" 장벽을 제거했습니다. 이 새로운 **gemma 4 트랜스포머** 제품군은 전례 없는 파라미터당 지능 밀도를 도입하여 복잡한 추론, 네이티브 비전 및 고충실도 오디오 처리를 소비자용 하드웨어에서 로컬로 실행할 수 있게 해줍니다.
+
+게임 엔진에 고급 NPC 행동을 통합하려는 개발자이든, 개인용 로컬 비서를 구축하려는 연구원이든 관계없이 Gemma 4 라인업은 성능에 따른 계층적 접근 방식을 제공합니다. 최대 256,000 토큰에 달하는 컨텍스트 윈도우와 사고 연쇄(chain-of-thought) 추론을 위한 특화된 "추론(thinking)" 모드를 갖춘 이 모델들은 시리즈 시작 이래 가장 중요한 아키텍처 진화를 나타냅니다.
+
+## Gemma 4 모델 라인업
+
+Google은 Gemma 4 제품군을 두 가지 고유한 계층으로 구분했습니다. 강력한 로컬 작업을 위한 **Workstation(워크스테이션)** 모델과 모바일 장치, 라즈베리 파이 및 단일 GPU 설정에 최적화된 **Edge(에지)** 모델입니다. 모든 계층에서 돋보이는 특징은 멀티모달 기능의 네이티브 통합입니다. 즉, 비전과 오디오가 외부 인코더를 통해 "추가"된 것이 아니라 아키텍처 자체에 내장되어 있음을 의미합니다.
+
+| 모델 계층 | 파라미터 수 | 아키텍처 유형 | 주요 용도 |
+|---|---|---|---|
+| **Workstation 31B** | 310억 개 | 밀집형 (Dense) | 코딩, 복잡한 추론, RAG |
+| **Workstation 26B** | 260억 개 (3.8B 활성) | 전문가 혼합 (MoE) | 고속 서버리스 추론 |
+| **Edge E4B** | 40억 개 | 밀집형 / PLE | 하이엔드 스마트폰, 노트북 |
+| **Edge E2B** | 20억 개 | 밀집형 / PLE | IoT, 에지 장치, 기본 채팅 |
+
+> **💡 팁:** VRAM 용량이 제한적인 경우, 26B MoE 모델은 27B 이상의 밀집형 모델급 지능을 제공하면서도 실제 추론 시에는 4B 모델 수준의 연산 오버헤드만 필요로 합니다.
+
+## Gemma 4 트랜스포머의 아키텍처 혁신
+
+**gemma 4 트랜스포머**가 Llama 3나 Qwen 2와 같은 대형 모델보다 성능이 뛰어난 주된 이유는 기존 하드웨어 병목 현상을 우회하도록 설계된 일련의 구조적 최적화 덕분입니다. 가장 중요한 추가 사항 중 하나는 **Interleaved Attention Topologies(인터리브드 어텐션 토폴로지)**입니다. 이 방식은 로컬 레이어(1024 토큰의 슬라이딩 윈도우 사용)와 전체 256K 컨텍스트를 스캔하는 글로벌 레이어를 교차하여 사용합니다.
+
+### PLE 및 K=V를 통한 메모리 최적화
+에지 컴퓨팅을 위해 Google은 **Per Layer Embeddings (PLE)**를 도입했습니다. 이를 통해 모델은 방대한 지식 텐서를 느린 플래시 스토리지(eMMC/UFS)에 저장하고, 추론 중에 필요한 "지식 슬라이스"만 고속 VRAM으로 동적으로 가져올 수 있습니다. 이러한 "지하실 저장소" 비유를 통해 4B 모델은 장치의 메모리 부족 현상 없이 12B 모델 수준의 세계 지식을 보유할 수 있습니다.
+
+| 기능 | 기술적 구현 | 이점 |
+|---|---|---|
+| **컨텍스트 윈도우** | 128K ~ 256K 토큰 | 소설 전체나 법률 파일 처리 가능 |
+| **위치 인코딩** | Truncated RoPE (Popey) | 긴 문맥에서도 의미론적 의미 유지 |
+| **비전 인코딩** | 2D RoPE & Patch-and-Pack | 이미지 왜곡 없이 종횡비 이해 |
+| **어텐션 메커니즘** | Grouped Query Attention (GQA) | 메모리 대역폭 요구 사항 50% 감소 |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 네이티브 멀티모달 기능
+
+Whisper와 같은 외부 ASR(자동 음성 인식) 모델이 필요했던 이전 세대와 달리, **gemma 4 트랜스포머** 제품군은 오디오와 비전을 네이티브로 처리합니다. 에지 모델(E2B 및 E4B)은 이전 Gemma 3N 버전보다 50% 더 작은 대폭 압축된 오디오 인코더를 탑재하여 크기가 390MB에서 단 87MB로 줄어들었습니다.
+
+### 비전 및 OCR
+비전 분기는 임의의 종횡비를 지원하는 수정된 Vision Transformer를 사용합니다. 이는 문서 이해 및 OCR 작업의 판도를 바꾸는 혁신입니다. 16:9 스크린샷을 1:1 정사각형으로 압축하는 대신, 모델은 높이와 너비 차원을 독립적으로 처리하여 차트, 표 및 UI 요소의 기하학적 구조를 보존합니다.
+
+### 오디오 및 번역
+어쿠스틱 컨포머(acoustic conformer) 아키텍처를 통해 모델은 다음과 같은 작업을 수행할 수 있습니다.
+1.  **음성 전사:** 낮은 지연 시간으로 높은 정확도의 ASR 제공.
+2.  **의도 감지:** 감정적 운율 파악 (예: 비꼬는 말투나 긴급함 감지).
+3.  **네이티브 번역:** 영어로 말하면 동일한 모델에서 일본어나 30개 이상의 지원 언어로 텍스트 번역을 직접 제공.
+
+> **⚠️ 경고:** E2B 모델도 오디오 번역이 가능하지만, 기술적 또는 법률적 문서 이해에는 일반적으로 더 큰 Workstation 모델이 더 정교한 뉘앙스를 제공합니다.
+
+## 개발자를 위한 Gemma 4 구현
+
+Apache 2.0 라이선스 덕분에 개발자는 이제 "경업 금지" 조항에 대한 우려 없이 상업용 애플리케이션에 **gemma 4 트랜스포머**를 배포할 수 있습니다. 이 모델들은 [Hugging Face](https://huggingface.co/models)에서 사용할 수 있으며 Google Cloud 에코시스템에서 네이티브로 지원됩니다.
+
+로컬 환경을 실행하는 경우 다음과 같은 인기 도구와 호환됩니다.
+*   **Ollama:** macOS, Linux, Windows에서 간편한 로컬 배포 가능.
+*   **LM Studio:** 다양한 양자화 수준(Q4_K_M 등) 테스트 가능.
+*   **Transformers Library:** 멀티모달 입력을 위한 최신 자동 프로세서 사용.
+
+### 추론 모드 (사고 연쇄)
+가장 인상적인 소프트웨어 기능 중 하나는 `enable_thinking` 플래그입니다. 이 값을 true로 설정하면 모델은 최종 답변을 제공하기 전에 내부 추론 단계를 생성합니다. 이는 수학, 코딩 및 논리 중심 작업에서 환각(hallucination) 현상을 크게 줄여줍니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/uz4grj4Vlrs"
+    title="Gemma 4: Google's Most Capable Open AI Model Analysed"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 경쟁 모델과의 비교
+
+2026년 AI 시장에서 Gemma 4는 Meta의 Llama 4 및 Alibaba의 Qwen 3.6과 직접 경쟁합니다. Llama 4 Scout는 더 큰 원시 컨텍스트 윈도우(최대 1,000만 토큰)를 제공할 수 있지만, 종종 대규모 서버 클러스터가 필요합니다. Gemma 4의 주요 무기는 "무게 대비 지능" 비율이며, 아레나 챗봇 리더보드에서 자기 크기의 두 배인 모델들보다 뛰어난 성능을 보여줍니다.
+
+| 모델 | 라이선스 | 컨텍스트 | 강점 |
+|---|---|---|---|
+| **Gemma 4 31B** | Apache 2.0 | 256K | 효율성/멀티모달 |
+| **Llama 4 Scout** | 커스텀/제한적 | 10M | 무한 컨텍스트 |
+| **Qwen 3.6 Plus** | Apache 2.0 | 128K | 논리/수학 |
+
+## FAQ
+
+**Q: 일반 스마트폰에서 gemma 4 트랜스포머를 실행할 수 있나요?**
+
+A: 예, E2B 및 E4B "Edge" 모델은 모바일 하드웨어용으로 특별히 설계되었습니다. PLE(Per Layer Embeddings) 덕분에 지식 검색에 휴대폰의 플래시 스토리지를 활용하여 8GB RAM만 있는 장치에서도 실행할 수 있습니다.
+
+**Q: Apache 2.0 라이선스는 이전 Gemma 릴리스와 어떻게 다른가요?**
+
+A: 이전 릴리스에는 사용자 수가 일정 임계값에 도달하면 상업적 사용을 제한하거나, 모델을 사용하여 경쟁 모델을 훈련시키는 것을 금지하는 맞춤형 약관이 있었습니다. Apache 2.0 라이선스는 아무런 조건 없이 모델을 사용하여 제품을 수정, 배포 및 판매할 수 있도록 허용하는 표준 오픈 소스 라이선스입니다.
+
+**Q: Gemma 4는 이미지-텍스트 및 오디오-텍스트 변환을 동시에 지원하나요?**
+
+A: 예, 아키텍처는 인터리브드 멀티모달 입력을 지원합니다. 스프레드시트 이미지와 지침이 담긴 음성 녹음을 함께 제공하면 모델이 두 양식을 모두 추론하여 통합된 응답을 제공합니다.
+
+**Q: 코드에서 "추론(thinking)" 기능을 어떻게 활성화하나요?**
+
+A: Transformers 라이브러리나 Google Cloud API를 사용할 때 일반적으로 채팅 템플릿에 `enable_thinking: true`와 같은 파라미터를 전달합니다. 이렇게 하면 모델이 최종 응답 전에 `<thought>` 태그 내에 자신의 논리 과정을 출력하게 됩니다.

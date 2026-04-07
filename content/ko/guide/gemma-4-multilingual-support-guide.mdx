@@ -1,0 +1,140 @@
+export const metadata = {
+  title: "Gemma 4 다국어 지원 가이드: 2026년 AI 번역 마스터하기",
+  description: "Gemma 4를 활용하여 번역, 음성 인식 및 다국어 OCR을 수행하는 방법을 알아보세요. Google의 오픈 소스 AI 모델에 대한 완벽 가이드입니다.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Multilingual+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+Google DeepMind는 Gemma 4 모델 제품군 출시와 함께 오픈 소스 인공지능의 지형을 공식적으로 변화시켰습니다. 2026년 4월 2일에 출시된 이 모델들은 자신의 하드웨어에서 로컬로 고성능 AI를 실행하려는 개발자와 애호가들에게 전례 없는 강력한 기능을 제공합니다. 포괄적인 **gemma 4 다국어 지원 가이드**를 찾고 계신다면 제대로 찾아오셨습니다. 이 **gemma 4 다국어 지원 가이드**는 이 새로운 생태계를 마스터하는 데 필요한 아키텍처의 발전, 언어 기능 및 실제 구현 단계를 안내합니다.
+
+140개 이상의 언어 지원과 2025년 1월까지의 학습 데이터를 갖춘 Gemma 4는 이전의 오픈 웨이트 모델들이 처리하기 어려워했던 복잡한 언어적 뉘앙스를 처리하도록 설계되었습니다. 스마트폰에서 가벼운 E2B 모델을 실행하든, 워크스테이션에서 거대한 31B Dense 모델을 실행하든, 다국어 기능은 사용자 경험의 핵심 기둥으로 유지됩니다.
+
+## Gemma 4 모델 제품군 이해하기
+
+Gemma 4는 단일 모델이 아니라 서로 다른 하드웨어 제약 조건에 맞게 조정된 네 가지 크기의 모델 제품군입니다. 각 모델은 Apache 2.0 라이선스에 따라 출시되어, 독점 시스템에서 흔히 발견되는 제한적인 정책 없이 완전한 상업적 자유를 제공합니다.
+
+명명 규칙에는 "유효(Effective, E)" 및 "활성(Active, A)" 파라미터 수가 도입되었으며, 이는 모델이 메모리와 컴퓨팅을 관리하는 방식을 이해하는 데 중요합니다. 예를 들어, E2B 모델은 레이어별 임베딩(Per-Layer Embeddings, PLE)을 사용하여 작은 메모리 점유율을 유지하면서도 훨씬 더 큰 아키텍처의 추론 능력을 제공합니다.
+
+| 모델 | 파라미터 | 컨텍스트 창 | 주요 사용 사례 |
+|---|---|---|---|
+| **E2B** | 2.3B 유효 | 128K 토큰 | 휴대폰, IoT 및 라즈베리 파이 |
+| **E4B** | 4.5B 유효 | 128K 토큰 | 노트북 및 빠른 엣지 추론 |
+| **26B A4B** | 26B (4B 활성) | 256K 토큰 | 저지연 서버 (Mixture of Experts) |
+| **31B Dense** | 30.7B 전체 | 256K 토큰 | 최상의 추론 품질 및 코딩 |
+
+> **💡 팁:** 일반적인 노트북에서 대부분의 다국어 번역 작업을 수행하려는 경우, **E4B** 모델이 속도와 정확도 사이에서 가장 좋은 균형을 제공합니다.
+
+## 다국어 역량 및 언어 지원
+
+Gemma 4의 가장 인상적인 기능 중 하나는 다양한 글로벌 언어에 대한 네이티브 지원입니다. 주로 영어에 최적화된 많은 모델과 달리, Gemma 4는 140개 이상의 언어로 된 웹 문서를 포함한 방대한 데이터셋으로 사전 학습되었습니다. 따라서 번역 도구, 현지화된 챗봇 및 교차 문화 콘텐츠 생성기를 구축하는 데 이상적인 후보입니다.
+
+### 네이티브 오디오 처리
+더 작은 E2B 및 E4B 모델에는 USM 스타일의 컨포머(Conformer) 아키텍처를 기반으로 한 내장 오디오 인코더가 포함되어 있습니다. 이를 통해 모델은 Whisper와 같은 별도의 전사 모델 없이도 자동 음성 인식(ASR) 및 자동 음성 번역(AST)을 직접 수행할 수 있습니다.
+
+### 다국어 OCR 및 문서 파싱
+Gemma 4의 비전 인코더는 여러 언어를 처리하는 데에도 똑같이 능숙합니다. 손글씨 메모, 복잡한 차트 및 다양한 문자로 된 공식 문서에 대해 높은 정확도의 광학 문자 인식(OCR)을 수행할 수 있습니다. 이는 국제 기록을 디지털화하거나 실시간으로 UI 요소를 번역하는 데 특히 유용합니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eS9RJbnYiF0"
+    title="How to Run Google Gemma 4 AI LOCALLY on Your Computer"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Gemma 4 다국어 지원 가이드 구현하기
+
+다국어 기능을 최대한 활용하려면 올바른 프롬프트 구조를 사용해야 합니다. Google은 모델이 형식 제약 조건을 따르도록 음성 텍스트 변환 및 번역 작업에 특정 템플릿을 사용할 것을 권장합니다.
+
+### 번역 프롬프트 템플릿
+Gemma 4를 번역에 사용할 때는 소스 언어와 타겟 언어에 대한 명확한 지침을 제공하는 것이 중요합니다. 다음은 가장 일반적인 작업에 권장되는 구조입니다.
+
+| 작업 유형 | 권장 프롬프트 구조 |
+|---|---|
+| **음성 전사 (ASR)** | "{LANGUAGE}로 된 다음 음성 세그먼트를 {LANGUAGE} 텍스트로 전사하세요." |
+| **음성 번역 (AST)** | "{SOURCE}로 된 다음 음성을 전사한 후 {TARGET}으로 번역하세요." |
+| **뉘앙스 분석** | "이 {LANGUAGE} 관용구의 문화적 맥락을 영어로 설명하세요." |
+
+> **⚠️ 경고:** 여러 언어로 다턴 대화를 수행할 때, 이전 턴의 "Thinking(생각)" 블록을 히스토리에 포함하지 않도록 주의하세요. 이는 모델의 언어 일관성에 혼란을 줄 수 있습니다.
+
+## 로컬 실행: 자신의 하드웨어에서 Gemma 4 실행하기
+
+2026년 AI 업계의 "공공연한 비밀"은 Gemma 4와 같은 로컬 모델이 사용자에게 수백 달러의 구독료를 절약해 줄 수 있다는 것입니다. 자신의 장치에서 모델을 실행함으로써 100% 프라이버시를 보장받고 속도 제한 없이 사용할 수 있습니다.
+
+### Ollama 및 LM Studio를 사용한 데스크톱 설정
+Windows, Mac 및 Linux 사용자의 경우 가장 쉬운 시작 방법은 **Ollama** 또는 **LM Studio**를 통하는 것입니다. 이러한 도구는 복잡한 백엔드 요구 사항을 처리하므로 가중치를 다운로드하고 바로 채팅을 시작할 수 있습니다.
+
+1. **Ollama 설치**: 공식 사이트에서 최신 버전을 다운로드합니다.
+2. **모델 실행**: 터미널을 열고 `ollama run gemma4`를 입력합니다.
+3. **크기 선택**: 고품질 추론을 위해서는 `gemma4:31b`를, 속도를 위해서는 `gemma4:e4b`를 사용합니다.
+
+### Google AI Edge Gallery를 통한 모바일 실행
+이동 중에도 다국어 비서를 사용하고 싶다면, **Google AI Edge Gallery** 앱(Android 및 iOS에서 사용 가능)을 통해 휴대폰의 NPU에서 직접 E2B 및 E4B 모델을 실행할 수 있습니다. 이는 인터넷 접속이 불가능한 오지에서 오프라인 번역이 필요한 여행자에게 매우 유용합니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/HdohxOTO6lo"
+    title="Google just destroyed all open-source models (Gemma 4)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 고급 기능: 생각 모드 및 긴 컨텍스트
+
+Gemma 4의 눈에 띄는 기능은 **생각 모드(Thinking Mode)**입니다. 시스템 프롬프트에 `&lt;|think|&gt;` 토큰을 포함하면 모델이 최종 답변을 제공하기 전에 문제를 추론하는 사고의 사슬(chain-of-thought) 프로세스가 트리거됩니다. 다국어 맥락에서 이는 모델이 번역을 출력하기 전에 소스 언어의 문법 규칙과 문화적 뉘앙스에 대해 "생각"할 수 있게 해줍니다.
+
+### 256K 컨텍스트 창 관리
+26B 및 31B 모델은 대규모 **256,000 토큰 컨텍스트 창**을 지원합니다. 즉, 책 한 권 전체나 방대한 코드베이스를 업로드하고 한 번에 번역이나 요약을 요청할 수 있습니다. 그러나 이는 상당한 VRAM을 요구합니다. 31B 모델의 경우 전체 컨텍스트 창을 효과적으로 활용하려면 일반적으로 최소 24GB의 VRAM(RTX 3090 또는 4090 등)이 필요합니다.
+
+### Mixture of Experts (MoE) 효율성
+26B A4B 모델은 Mixture of Experts 아키텍처를 사용합니다. 총 260억 개의 파라미터를 가지고 있지만, 토큰당 약 38억 개만 활성화합니다. 이를 통해 소비자용 하드웨어에서도 초당 50개 이상의 토큰 속도에 도달할 정도로 놀랍도록 빠르면서도 훨씬 더 큰 모델의 지능을 유지합니다. 이러한 효율성은 실시간 번역을 즉각적으로 가능하게 하므로 모든 **gemma 4 다국어 지원 가이드**의 핵심 부분입니다.
+
+## 개발자 통합 및 미세 조정
+
+개발자를 위해 Gemma 4는 [Hugging Face의 공식 Gemma 4 모델 컬렉션](https://huggingface.co/collections/google/gemma-4)에 완전히 통합되어 있습니다. `transformers` 라이브러리(버전 5.5.0 이상)를 사용하여 이러한 모델을 Python 애플리케이션에 로드할 수 있습니다.
+
+```python
+from transformers import pipeline
+
+# Gemma 4를 사용한 번역 파이프라인 예시
+pipe = pipeline(
+    task="any-to-any",
+    model="google/gemma-4-E4B-it",
+    device_map="auto"
+)
+
+messages = [
+    {"role": "user", "content": "Translate this sentence to Japanese: 'The future of AI is open-source.'"}
+]
+
+output = pipe(messages)
+print(output[0]["generated_text"])
+```
+
+기본 모델이 특정 언어적 요구 사항을 충족하지 못하는 경우, Gemma 4는 **QLoRA 미세 조정(fine-tuning)**을 지원합니다. 이를 통해 단일 NVIDIA A100 또는 고급 소비자용 GPU와 같은 최소한의 하드웨어를 사용하여 모든 언어로 된 전문 의료, 법률 또는 기술 데이터셋에 대해 모델을 학습시킬 수 있습니다.
+
+## FAQ
+
+**Q: Gemma 4는 실제로 몇 개의 언어를 지원하나요?**
+
+A: Gemma 4는 140개 이상의 언어를 포괄하는 다양한 데이터셋으로 학습되었습니다. 스페인어, 중국어, 프랑스어, 독일어, 일본어, 한국어 및 힌디어와 같은 주요 글로벌 언어에 특히 강력하지만, 많은 지역 방언도 놀라운 정확도로 처리합니다.
+
+**Q: 휴대폰에서 gemma 4 다국어 지원 가이드 기능을 실행할 수 있나요?**
+
+A: 네! Google AI Edge Gallery 앱을 사용하면 최신 스마트폰에서 로컬로 E2B 및 E4B 모델을 실행할 수 있습니다. 이 모델들은 모바일 NPU에 특별히 최적화되어 있으며 인터넷 연결 없이도 번역 및 음성 인식을 수행할 수 있습니다.
+
+**Q: "Dense" 모델과 "MoE" 모델의 차이점은 무엇인가요?**
+
+A: 31B Dense 모델은 모든 프롬프트에 대해 모든 파라미터를 활성화하여 가능한 최고 품질을 제공합니다. 26B A4B(MoE) 모델은 한 번에 파라미터의 일부(약 4B)만 활성화하므로 실시간 다국어 애플리케이션에 훨씬 더 빠르고 효율적입니다.
+
+**Q: Gemma 4를 사용하려면 인터넷 연결이 필요한가요?**
+
+A: 아니요. Gemma 4의 주요 장점 중 하나는 로컬 실행을 위해 설계된 오픈 웨이트 모델이라는 점입니다. Ollama나 LM Studio와 같은 도구를 사용하여 모델 가중치를 다운로드하면 인터넷 접속 없이도 모든 다국어 기능을 사용할 수 있습니다.

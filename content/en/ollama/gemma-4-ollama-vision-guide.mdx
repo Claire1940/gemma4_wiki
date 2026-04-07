@@ -1,0 +1,114 @@
+export const metadata = {
+  title: "Gemma 4 Ollama Vision Guide: Local Multimodal Setup 2026",
+  description: "Master the setup of Google's Gemma 4 models using Ollama and llama.cpp. Complete guide to vision testing, thinking modes, and local hardware optimization.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Vision+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+The release of Google DeepMind’s Gemma 4 on April 2, 2026, has fundamentally changed the landscape of open-weight artificial intelligence. As the most capable family of models built on the Gemini 3 research architecture, it offers developers and enthusiasts unprecedented power under the Apache 2.0 license. This **gemma 4 ollama vision guide** provides a comprehensive walkthrough for running these multimodal models locally, ensuring you can leverage advanced image reasoning and text generation without relying on cloud-based APIs.
+
+Running a **gemma 4 ollama vision guide** setup allows you to process sensitive data—such as personal screenshots or private documents—entirely on your own hardware. Whether you are using a high-end MacBook Pro M4 or a dedicated Linux workstation with NVIDIA GPUs, understanding the specific architectural tiers of Gemma 4 is essential for achieving optimal performance. In this guide, we will explore the four distinct model sizes, their hardware requirements, and how to utilize the new "Thinking Mode" for complex reasoning tasks.
+
+## Understanding the Gemma 4 Model Family
+
+Gemma 4 is not a single model but a family of four distinct sizes designed for different deployment scenarios. From IoT devices to heavy-duty server inference, each tier offers a unique balance of speed and intelligence. The "E" prefix found in the smaller models stands for "Effective Parameters," utilizing Per-Layer Embeddings (PLE) to improve efficiency during inference.
+
+| Model Tier | Total Parameters | Effective Parameters | Context Window | Best Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **E2B** | 5.1B | 2.3B | 128K Tokens | Mobile, Raspberry Pi, IoT |
+| **E4B** | 8.0B | 4.5B | 128K Tokens | Laptops, Edge Devices |
+| **26B A4B (MoE)** | 25.2B | 3.8B Active | 256K Tokens | Fast Server Inference |
+| **31B (Dense)** | 30.7B | 30.7B | 256K Tokens | Max Quality, Fine-Tuning |
+
+The 26B variant is particularly noteworthy as it introduces the Mixture of Experts (MoE) architecture to the Gemma line. While it requires 26B parameters worth of VRAM to load, it only activates roughly 4B parameters during actual inference, making it exceptionally fast for its size.
+
+## Setting Up Gemma 4 with Ollama
+
+Ollama remains the most user-friendly method for running Gemma 4 locally. It automates the process of downloading quantized weights and configuring the runtime environment. To get started, ensure you are running Ollama version 0.20.0 or later to support the latest architectural changes.
+
+### Installation Steps
+
+1.  **Update Ollama:** Download the latest version from the official site or run `brew upgrade ollama` if you are on macOS.
+2.  **Pull the Model:** Open your terminal and run the command for your preferred size. For most users, the E4B model is the sweet spot.
+    *   `ollama run gemma4` (This pulls the default 4B variant)
+    *   `ollama run gemma4:26b` (For the high-speed MoE model)
+3.  **Verify Vision Support:** Once the model is running, you can drag and drop an image into the terminal or provide a file path to begin vision-based prompting.
+
+> **💡 Tip:** If you have limited VRAM (8GB or less), stick to the E2B or E4B models. The 26B and 31B models require significant GPU memory to run without heavy offloading to system RAM, which drastically slows down performance.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/0vvlZjOw0wM"
+    title="Gemma 4 Local Guide: Ollama + llama.cpp on MacBook Pro M4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Advanced Vision Testing: Screenshots and OCR
+
+One of the standout features of Gemma 4 is its multimodal capability. Unlike previous versions, the vision encoder is tightly integrated, allowing for sophisticated reasoning about visual data. In real-world testing, the 26B MoE model demonstrates a remarkable ability to parse complex screenshots and identify specific locations with high accuracy.
+
+### Vision Performance Comparison
+
+| Task | E2B (Small) | E4B (Medium) | 26B MoE (Large) |
+| :--- | :--- | :--- | :--- |
+| **OCR Accuracy** | Basic text only | Good for headers | Excellent for small text |
+| **Spatial Reasoning** | Struggles with depth | Moderate | High (identifies landmarks) |
+| **Chart Parsing** | Hallucinates data | Identifies trends | Accurate data extraction |
+| **Inference Speed** | Near-instant | Very Fast | Fast (due to 4B active) |
+
+When using Gemma 4 for vision tasks, prompt engineering is vital. Instead of asking "What is this?", be specific: "Identify the UI elements in this screenshot and explain the function of the sidebar." This "hand-holding" approach helps the smaller E2B and E4B models stay on track without hallucinating details.
+
+## Optimizing with llama.cpp and Quantization
+
+For users who want deeper control over performance, using `llama.cpp` is the preferred method. This allows you to choose specific quantization levels, which determine the precision of the model's weights. Lower quantization (like 4-bit) reduces memory footprint but may slightly decrease accuracy, while higher quantization (8-bit) offers better logic at the cost of more VRAM.
+
+### Hardware Compatibility for llama.cpp
+
+| Quantization | Model Size | Recommended VRAM | Performance Notes |
+| :--- | :--- | :--- | :--- |
+| **Q4_K_M (4-bit)** | 4B | 4GB | Ideal for mobile/low-end laptops |
+| **Q8_0 (8-bit)** | 4B | 8GB | Best balance for 8GB GPUs |
+| **Q4_K_M (4-bit)** | 26B | 18GB | Requires high-end consumer GPU |
+| **Q8_0 (8-bit)** | 31B | 32GB+ | Server-grade or Apple Silicon (Unified) |
+
+To run the latest Gemma 4 builds, you must install the "head" version of llama.cpp to ensure compatibility with the new Per-Layer Embeddings. Use the command `brew install llama.cpp --head` to get the most recent development version.
+
+## Enabling Thinking Mode
+
+Gemma 4 introduces a "Thinking Mode" that allows the model to output its internal reasoning process before providing a final answer. This is particularly useful for math, coding, and complex logic puzzles. In Ollama, this is often handled automatically via the chat template, but you can trigger it manually in custom implementations.
+
+To enable this, you must include the `&lt;|think|&gt;` token at the start of your system prompt. The model will then wrap its logic in `&lt;|channel>thought` tags.
+
+> **⚠️ Warning:** In multi-turn conversations, it is best practice to remove the "thought" blocks from the history before sending the next user prompt. This prevents the model from getting confused by its own previous internal monologue.
+
+## Native Audio and Multimodal Workflows
+
+A significant upgrade from Gemma 3 is the inclusion of native audio support in the E2B and E4B models. These models use a USM-style conformer architecture that handles speech recognition and translation across multiple languages. While the 31B dense model focuses on maximum text and image quality, the smaller edge models are built for real-time interaction.
+
+For developers building agents, Gemma 4 supports native function calling. By defining your available tools in a JSON schema within the system prompt, you can enable the model to interact with external databases or APIs. This, combined with the 256K context window on larger models, allows for "agentic workflows" where the AI can process entire codebases to solve a single problem.
+
+For more technical documentation and model weights, you can visit the official [Hugging Face Gemma Collection](https://huggingface.co/collections/google/gemma-4) to explore the full range of instruction-tuned (IT) variants.
+
+## FAQ
+
+**Q: Which Gemma 4 model is best for a laptop with 16GB of RAM?**
+
+A: The **gemma 4 ollama vision guide** recommends the E4B (Effective 4B) model for 16GB systems. It provides a great balance of speed and multimodal intelligence without exhausting your system's memory. If you have a dedicated GPU with 8GB of VRAM, the Q8_0 quantized version of the 4B model will run exceptionally well.
+
+**Q: Does Gemma 4 support commercial use?**
+
+A: Yes. Unlike Gemma 3, which had a more restrictive custom license, Gemma 4 is released under the Apache 2.0 license. This allows for full commercial freedom, meaning you can build and sell products powered by Gemma 4 without usage caps or restrictive policies.
+
+**Q: How do I improve the image recognition accuracy of the smaller models?**
+
+A: Be very explicit in your prompts. Instead of a general question, tell the model what it is looking at (e.g., "This is a screenshot of a trading chart"). Also, ensure the image is clear; for tasks like OCR or document parsing, using higher "token budgets" (if your frontend allows) helps the model see finer details.
+
+**Q: Why is the 26B MoE model faster than the 31B Dense model?**
+
+A: The 26B MoE (Mixture of Experts) model only activates about 3.8 billion parameters for any given token during inference. The 31B Dense model, however, must process all 31 billion parameters for every single token. This makes the 26B model much more efficient and faster, even though it requires a similar amount of VRAM to load.

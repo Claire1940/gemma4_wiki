@@ -1,0 +1,140 @@
+export const metadata = {
+  title: "Guía de soporte multilingüe de Gemma 4: domine la traducción con IA 2026",
+  description: "Aprenda a aprovechar Gemma 4 para la traducción, el reconocimiento de voz y el OCR multilingüe. Guía completa de los modelos de IA de código abierto de Google.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Multilingual+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+Google DeepMind ha cambiado oficialmente el panorama de la inteligencia artificial de código abierto con el lanzamiento de la familia de modelos Gemma 4. Lanzados el 2 de abril de 2026, estos modelos ofrecen una potencia sin precedentes para desarrolladores y entusiastas que buscan ejecutar IA de alto rendimiento localmente en su propio hardware. Si está buscando una **guía de soporte multilingüe de gemma 4** exhaustiva, ha llegado al lugar adecuado. Esta **guía de soporte multilingüe de gemma 4** le guiará a través de los avances arquitectónicos, las capacidades lingüísticas y los pasos prácticos de implementación necesarios para dominar este nuevo ecosistema.
+
+Con soporte para más de 140 idiomas y una fecha de corte de entrenamiento de enero de 2025, Gemma 4 está diseñado para manejar matices lingüísticos complejos que los modelos anteriores de pesos abiertos tenían dificultades para procesar. Ya sea que esté ejecutando el modelo ligero E2B en un smartphone o el masivo modelo denso 31B en una estación de trabajo, las capacidades multilingües siguen siendo un pilar central de la experiencia.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Gemma 4 no es un único modelo, sino una familia de cuatro tamaños distintos adaptados a diferentes limitaciones de hardware. Cada modelo se publica bajo la licencia Apache 2.0, lo que ofrece total libertad comercial sin las políticas restrictivas que suelen encontrarse en los sistemas propietarios.
+
+La convención de nomenclatura introduce conteos de parámetros "Effective" (E) y "Active" (A), que son fundamentales para entender cómo estos modelos gestionan la memoria y el cómputo. Por ejemplo, el modelo E2B utiliza Per-Layer Embeddings (PLE) para mantener una huella de memoria pequeña mientras ofrece la potencia de razonamiento de una arquitectura mucho más grande.
+
+| Modelo | Parámetros | Ventana de contexto | Caso de uso principal |
+|---|---|---|---|
+| **E2B** | 2.3B Efectivos | 128K Tokens | Teléfonos móviles, IoT y Raspberry Pi |
+| **E4B** | 4.5B Efectivos | 128K Tokens | Portátiles e inferencia rápida en el borde |
+| **26B A4B** | 26B (4B Activos) | 256K Tokens | Servidores de baja latencia (Mezcla de Expertos) |
+| **31B Dense** | 30.7B Totales | 256K Tokens | Máxima calidad de razonamiento y programación |
+
+> **💡 Consejo:** Para la mayoría de las tareas de traducción multilingüe en un portátil estándar, el modelo **E4B** ofrece el mejor equilibrio entre velocidad y precisión.
+
+## Capacidades multilingües y soporte de idiomas
+
+Una de las características más impresionantes de Gemma 4 es su soporte nativo para una amplia gama de idiomas globales. A diferencia de muchos modelos que están optimizados principalmente para el inglés, Gemma 4 fue preentrenado en un conjunto de datos masivo que incluye documentos web en más de 140 idiomas. Esto lo convierte en un candidato ideal para crear herramientas de traducción, chatbots localizados y generadores de contenido transcultural.
+
+### Procesamiento de audio nativo
+Los modelos más pequeños E2B y E4B cuentan con un codificador de audio integrado basado en la arquitectura conformer de estilo USM. Esto permite que los modelos realicen Reconocimiento Automático del Habla (ASR) y Traducción Automática del Habla (AST) directamente sin necesidad de un modelo de transcripción separado como Whisper.
+
+### OCR multilingüe y análisis de documentos
+El codificador de visión en Gemma 4 es igualmente experto en el manejo de múltiples idiomas. Puede realizar un Reconocimiento Óptico de Caracteres (OCR) de alta precisión en notas escritas a mano, gráficos complejos y documentos oficiales en varios alfabetos. Esto es particularmente útil para digitalizar registros internacionales o traducir elementos de la interfaz de usuario en tiempo real.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eS9RJbnYiF0"
+    title="How to Run Google Gemma 4 AI LOCALLY on Your Computer"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Implementación de la guía de soporte multilingüe de Gemma 4
+
+Para aprovechar al máximo las funciones multilingües, debe utilizar las estructuras de prompt correctas. Google recomienda plantillas específicas para tareas de voz a texto y traducción para garantizar que el modelo siga las restricciones de formato.
+
+### Plantillas de prompt para traducción
+Al usar Gemma 4 para la traducción, es vital proporcionar instrucciones claras para los idiomas de origen y destino. A continuación se muestran las estructuras recomendadas para las tareas más comunes:
+
+| Tipo de tarea | Estructura de prompt recomendada |
+|---|---|
+| **Transcripción (ASR)** | "Transcribe el siguiente segmento de habla en {IDIOMA} a texto en {IDIOMA}." |
+| **Traducción (AST)** | "Transcribe el siguiente discurso en {ORIGEN} y luego tradúcelo al {DESTINO}." |
+| **Análisis de matices** | "Explica el contexto cultural de este modismo en {IDIOMA} en inglés." |
+
+> **⚠️ Advertencia:** Al realizar conversaciones de varios turnos en diferentes idiomas, asegúrese de no incluir los bloques de "Pensamiento" (Thinking) de los turnos anteriores en el historial, ya que esto puede confundir la consistencia lingüística del modelo.
+
+## Ejecución local: Ejecución de Gemma 4 en su hardware
+
+El "secreto a voces" de la industria de la IA en 2026 es que los modelos locales como Gemma 4 pueden ahorrar a los usuarios cientos de dólares en cuotas de suscripción. Al ejecutar el modelo en su propio dispositivo, obtiene un 100% de privacidad y cero límites de velocidad.
+
+### Configuración de escritorio con Ollama y LM Studio
+Para los usuarios de Windows, Mac y Linux, la forma más sencilla de empezar es a través de **Ollama** o **LM Studio**. Estas herramientas gestionan los complejos requisitos del backend, permitiéndole simplemente descargar los pesos y empezar a chatear.
+
+1. **Instalar Ollama**: Descargue la última versión desde el sitio oficial.
+2. **Ejecutar el modelo**: Abra su terminal y escriba `ollama run gemma4`.
+3. **Seleccionar tamaño**: Use `gemma4:31b` para un razonamiento de alta calidad o `gemma4:e4b` para mayor velocidad.
+
+### Ejecución móvil con Google AI Edge Gallery
+Si quiere llevar su asistente multilingüe a todas partes, la aplicación **Google AI Edge Gallery** (disponible en Android e iOS) le permite ejecutar los modelos E2B y E4B directamente en la NPU de su teléfono. Esto es invaluable para los viajeros que puedan necesitar traducción sin conexión en áreas remotas sin acceso a Internet.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/HdohxOTO6lo"
+    title="Google just destroyed all open-source models (Gemma 4)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Funciones avanzadas: Modo de pensamiento y contexto largo
+
+Una característica destacada de Gemma 4 es el **Modo de Pensamiento** (Thinking Mode). Al incluir el token `&lt;|think|&gt;` en su prompt de sistema, activa un proceso de cadena de pensamiento donde el modelo razona sobre el problema antes de proporcionar una respuesta final. En un contexto multilingüe, esto permite que el modelo "piense" en las reglas gramaticales y los matices culturales del idioma de origen antes de generar la traducción.
+
+### Gestión de la ventana de contexto de 256K
+Los modelos 26B y 31B admiten una ventana de contexto masiva de **256.000 tokens**. Esto significa que puede cargar un libro entero o una base de código masiva y pedir una traducción o un resumen de una sola vez. Sin embargo, esto requiere una VRAM significativa. Para el modelo 31B, generalmente se necesitan al menos 24 GB de VRAM (como una RTX 3090 o 4090) para utilizar toda la ventana de contexto de manera efectiva.
+
+### Eficiencia de la Mezcla de Expertos (MoE)
+El modelo 26B A4B utiliza una arquitectura de Mezcla de Expertos (Mixture of Experts). Aunque tiene 26 mil millones de parámetros totales, solo activa aproximadamente 3.8 mil millones por token. Esto lo hace increíblemente rápido —alcanzando a menudo velocidades de más de 50 tokens por segundo en hardware de consumo— mientras mantiene la inteligencia de un modelo mucho más grande. Esta eficiencia es una parte fundamental de cualquier **guía de soporte multilingüe de gemma 4** porque permite una traducción en tiempo real que se siente instantánea.
+
+## Integración para desarrolladores y ajuste fino
+
+Para los desarrolladores, Gemma 4 está totalmente integrado en la [colección oficial de modelos Gemma 4 en Hugging Face](https://huggingface.co/collections/google/gemma-4). Puede utilizar la biblioteca `transformers` (versión 5.5.0+) para cargar estos modelos en sus aplicaciones Python.
+
+```python
+from transformers import pipeline
+
+# Ejemplo de un pipeline de traducción usando Gemma 4
+pipe = pipeline(
+    task="any-to-any",
+    model="google/gemma-4-E4B-it",
+    device_map="auto"
+)
+
+messages = [
+    {"role": "user", "content": "Translate this sentence to Japanese: 'The future of AI is open-source.'"}
+]
+
+output = pipe(messages)
+print(output[0]["generated_text"])
+```
+
+Si los modelos base no satisfacen sus necesidades lingüísticas específicas, Gemma 4 admite el **ajuste fino QLoRA**. Esto le permite entrenar el modelo en conjuntos de datos médicos, legales o técnicos especializados en cualquier idioma utilizando un hardware mínimo, como una sola NVIDIA A100 o incluso una GPU de consumo de gama alta.
+
+## FAQ
+
+**P: ¿Cuántos idiomas admite realmente Gemma 4?**
+
+R: Gemma 4 fue entrenado en un conjunto de datos diverso que cubre más de 140 idiomas. Es particularmente fuerte en los principales idiomas globales como español, chino, francés, alemán, japonés e hindi, pero también maneja muchos dialectos regionales con una precisión sorprendente.
+
+**P: ¿Puedo ejecutar las funciones de la guía de soporte multilingüe de gemma 4 en mi teléfono?**
+
+R: ¡Sí! Al usar la aplicación Google AI Edge Gallery, puede ejecutar los modelos E2B y E4B localmente en smartphones modernos. Estos modelos están optimizados específicamente para NPU móviles y pueden realizar traducciones y reconocimiento de voz de forma totalmente offline.
+
+**P: ¿Cuál es la diferencia entre los modelos "Dense" y "MoE"?**
+
+R: El modelo 31B Dense activa todos sus parámetros para cada prompt, proporcionando la mayor calidad posible. El modelo 26B A4B (MoE) solo activa un subconjunto (alrededor de 4B) de sus parámetros a la vez, lo que lo hace significativamente más rápido y eficiente para aplicaciones multilingües en tiempo real.
+
+**P: ¿Necesito una conexión a Internet para usar Gemma 4?**
+
+R: No. Uno de los principales beneficios de Gemma 4 es que es un modelo de pesos abiertos diseñado para la ejecución local. Una vez que haya descargado los pesos del modelo utilizando una herramienta como Ollama o LM Studio, puede usar todas sus funciones multilingües sin necesidad de acceso a Internet.

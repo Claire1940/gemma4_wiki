@@ -1,0 +1,137 @@
+export const metadata = {
+  title: "Guía de casos de uso agénticos de Gemma 4: Flujos de trabajo de IA avanzados 2026",
+  description: "Domine la nueva familia de modelos Gemma 4 con nuestra guía completa de casos de uso agénticos. Aprenda a desplegar agentes autónomos en dispositivos de borde y servidores.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Agentic+Use+Case+Guide",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de Gemma 4 de Google el 2 de abril de 2026 ha cambiado fundamentalmente el panorama para los desarrolladores que buscan crear asistentes digitales autónomos. Esta **guía de casos de uso agénticos de Gemma 4** explora cómo estos modelos de pesos abiertos, basados en la misma investigación que Gemini 3, proporcionan capacidades de razonamiento sin precedentes para su tamaño. A diferencia de las iteraciones anteriores, Gemma 4 está diseñado específicamente para la planificación de múltiples pasos y la llamada a herramientas, lo que lo convierte en la opción principal para crear flujos de trabajo agénticos complejos que pueden ejecutarse completamente en el dispositivo. Ya sea que esté creando un NPC interactivo para un RPG de próxima generación o un asistente de productividad local, comprender la **guía de casos de uso agénticos de Gemma 4** es esencial para aprovechar el poder con licencia Apache 2.0 de estos nuevos modelos.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Gemma 4 llega en cuatro tamaños distintos, cada uno optimizado para diferentes restricciones de hardware y requisitos de rendimiento. El prefijo "E" en los modelos más pequeños significa "Effective" (Efectivo), y utiliza Incrustaciones por Capa (PLE) para maximizar la eficiencia durante la inferencia. Esto permite que un modelo con un recuento total de parámetros de 5.1B actúe con la huella de un modelo de 2.3B, ahorrando memoria RAM y vida útil de la batería en dispositivos móviles.
+
+| Modelo | Parámetros Totales | Parámetros Efectivos/Activos | Ventana de Contexto | Objetivo Principal |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 5.1B | **2.3B** | 128K | Móvil, IoT, Raspberry Pi |
+| **Gemma 4 E4B** | 8B | **4.5B** | 128K | Teléfonos de gama alta, Jetson Nano |
+| **Gemma 4 26B A4B** | 26B (MoE) | **4B Activos** | 256K | Servidores de baja latencia |
+| **Gemma 4 31B** | 31B (Denso) | **31B** | 256K | Razonamiento de alta calidad |
+
+La variante 26B introduce por primera vez una arquitectura de Mezcla de Expertos (MoE) en la familia Gemma. Al activar solo aproximadamente 4 mil millones de parámetros por cada paso hacia adelante, ofrece la inteligencia de un modelo mucho más grande con la velocidad requerida para interacciones agénticas en tiempo real.
+
+> **💡 Consejo:** Utilice las variantes ajustadas por instrucciones (IT) para todos los flujos de trabajo agénticos, ya que están optimizadas específicamente para la llamada a funciones y el seguimiento de instrucciones del sistema.
+
+## Funciones agénticas principales y Modo de Pensamiento
+
+Para seguir esta **guía de casos de uso agénticos de Gemma 4** de manera efectiva, debe comprender el nuevo "Modo de Pensamiento" (Thinking Mode). Al incluir el token `&lt;|think|&gt;` al comienzo de su mensaje de sistema, el modelo entra en un estado de razonamiento profundo. Emitirá una cadena de razonamiento oculta antes de proporcionar una respuesta final, lo que mejora significativamente el rendimiento en tareas lógicas complejas y planificación de múltiples pasos.
+
+### Llamada a funciones nativa
+Gemma 4 admite la salida de JSON estructurado y la llamada a herramientas nativa en todos los tamaños. Esto permite que un agente pueda:
+1.  Analizar una solicitud del usuario.
+2.  Determinar qué herramienta externa (API, base de datos o script local) se necesita.
+3.  Generar una llamada JSON precisa para esa herramienta.
+4.  Procesar la salida de la herramienta para finalizar la respuesta.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BrJdGP21B5g"
+    title="Google just dropped Gemma 4... (WOAH)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Guía práctica de casos de uso agénticos de Gemma 4
+
+La versatilidad de Gemma 4 permite una amplia gama de implementaciones, que van desde la recuperación de conocimientos hasta la síntesis creativa. A continuación se presentan las categorías principales de habilidades agénticas que puede desplegar hoy mismo.
+
+### 1. Aumento de la base de conocimientos
+Los agentes pueden programarse para expandir su conocimiento más allá de sus datos de entrenamiento. Al crear una "Habilidad de Wikipedia", un agente de Gemma 4 puede consultar de forma autónoma enciclopedias en línea para responder preguntas de nicho o verificar hechos en tiempo real. Esto es particularmente útil para asistentes de investigación o herramientas educativas.
+
+### 2. Generación de contenido interactivo
+Gemma 4 destaca en la transformación de datos brutos en formatos estructurados. Un flujo de trabajo agéntico puede tomar la transcripción de un video largo y generar automáticamente un conjunto de tarjetas de estudio interactivas o un gráfico de tendencias visuales.
+
+| Caso de Uso | Tipo de Entrada | Acción del Agente | Formato de Salida |
+| :--- | :--- | :--- | :--- |
+| **Asistente de estudio** | Audio/Texto | Resumir y extraer hechos clave | Tarjetas interactivas |
+| **Analista de datos** | CSV/Voz | Analizar tendencias | Gráficos SVG / Visualizaciones |
+| **Gestor de marca** | Prompt de texto | Coordinar con modelos de imagen | Conceptos de UI / Logotipos |
+
+### 3. Síntesis multimodal
+Con soporte nativo para audio, imagen y video, los agentes de Gemma 4 pueden actuar como "orquestadores". Por ejemplo, un agente puede analizar el "estado de ánimo" de una foto y luego llamar a un modelo de síntesis musical para generar una pista de fondo a juego. Esta capacidad intermodal es un pilar fundamental de esta **guía de casos de uso agénticos de Gemma 4**.
+
+## Despliegue de agentes en el borde (Edge)
+
+Uno de los avances más significativos en 2026 es la capacidad de ejecutar estos agentes completamente fuera de línea. LiteRT-LM de Google (anteriormente TensorFlow Lite) proporciona la pila necesaria para desplegar Gemma 4 en hardware móvil e IoT.
+
+### Objetivos de hardware para el despliegue en el borde
+*   **Móvil:** La integración nativa con AICore de Android permite que las aplicaciones accedan a Gemma 4 sin una carga pesada.
+*   **Escritorio:** Rendimiento nativo en Windows, Linux y macOS a través de Metal y WebGPU.
+*   **IoT y Robótica:** Soporte completo para Raspberry Pi 5 y procesadores Qualcomm Dragonwing IQ8 con aceleración NPU.
+
+> **⚠️ Advertencia:** Aunque los modelos E2B y E4B están optimizados para la duración de la batería, la inferencia constante de alta frecuencia seguirá afectando a los dispositivos móviles. Utilice la decodificación restringida para mantener las salidas concisas y ahorrar ciclos.
+
+## Implementación: Primeros pasos con Transformers
+
+Para comenzar a construir su propio agente, necesitará la biblioteca `transformers` (versión 5.5.0 o posterior). El siguiente patrón demuestra cómo inicializar un agente con capacidad de visión utilizando el modelo E4B.
+
+```python
+from transformers import pipeline
+
+# Inicializar la canalización any-to-any para tareas multimodales
+pipe = pipeline(
+    task="any-to-any",
+    model="google/gemma-4-E4B-it",
+    device_map="auto"
+)
+
+# Definir un prompt agéntico con visión y texto
+messages = [
+    {
+        "role": "user",
+        "content": [
+            {"type": "image", "url": "https://example.com/screenshot.png"},
+            {"type": "text", "text": "Identifica los elementos de la interfaz de usuario y escribe un script de prueba."}
+        ],
+    },
+]
+
+output = pipe(messages, return_full_text=False)
+print(output[0]["generated_text"])
+```
+
+Para agentes a escala de producción, se recomienda servir el modelo a través de **vLLM**. Esto le permite manejar múltiples solicitudes concurrentes y utilizar una ventana de contexto de 256K para modelos más grandes como la variante densa de 31B.
+
+## Mejores prácticas para flujos de trabajo agénticos
+
+Al seguir esta **guía de casos de uso agénticos de Gemma 4**, tenga en cuenta estas estrategias de optimización para garantizar que sus agentes sigan siendo confiables y eficientes:
+
+1.  **Use instrucciones de sistema:** El soporte nativo para instrucciones de sistema le permite definir la personalidad del agente y las herramientas disponibles una sola vez, en lugar de repetirlas en cada prompt.
+2.  **Aproveche la caché KV compartida:** La arquitectura de Gemma 4 reutiliza tensores de clave-valor a través de las capas, lo que reduce el consumo de memoria. Esto es vital cuando se gestionan conversaciones largas en la ventana de contexto de 128K-256K.
+3.  **Decodificación restringida:** Utilice las funciones de decodificación restringida de LiteRT-LM para obligar al modelo a emitir JSON válido. Esto evita la "alucinación" de llamadas a herramientas mal formadas que pueden romper un bucle autónomo.
+4.  **Ajuste fino (Fine-Tuning):** Si su agente necesita operar en un campo altamente especializado (como el legal o médico), use QLoRA para ajustar los modelos E2B o E4B en una sola GPU de consumo.
+
+Para obtener más recursos, puede visitar [Google AI Studio](https://aistudio.google.com) para probar prompts de forma gratuita o descargar los pesos directamente desde Hugging Face.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Cuál es el principal beneficio de usar Gemma 4 para agentes en comparación con otros modelos abiertos?**
+
+R: Gemma 4 está específicamente "diseñado" para flujos de trabajo agénticos, lo que significa que tiene puntuaciones más altas en las pruebas comparativas de llamada a herramientas y soporte nativo para razonamiento de múltiples pasos (Modo de Pensamiento) del que carecen muchos otros modelos de código abierto de este tamaño.
+
+**P: ¿Puedo ejecutar un agente de Gemma 4 en un teléfono inteligente estándar?**
+
+R: Sí. Los modelos Gemma 4 E2B y E4B están diseñados para hardware móvil. Utilizando la vista previa para desarrolladores de AICore en Android, estos modelos se ejecutan completamente fuera de línea con una latencia cercana a cero.
+
+**P: ¿Se aplica esta guía de casos de uso agénticos de Gemma 4 a los modelos antiguos de Gemma 3?**
+
+R: Aunque algunos conceptos se superponen, Gemma 4 introduce cambios significativos, incluyendo la licencia Apache 2.0, la entrada de audio nativa y la arquitectura de Mezcla de Expertos (MoE). Se recomienda encarecidamente actualizar a Gemma 4 para cualquier desarrollo agéntico serio en 2026.
+
+**P: ¿Cómo habilito el comportamiento de "Pensamiento" en mi agente?**
+
+R: Debe incluir el token `&lt;|think|&gt;` al comienzo de su instrucción de sistema. Esto activa la cadena de razonamiento interna del modelo, permitiéndole planificar tareas complejas antes de emitir una respuesta final al usuario.

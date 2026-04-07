@@ -1,0 +1,141 @@
+export const metadata = {
+  title: "Gemma 4 Raspberry Pi ガイド：2026年版エッジでローカルAIを実行する方法",
+  description: "Raspberry Pi 5にGoogleのGemma 4モデルをデプロイする方法を学びましょう。E2BおよびE4Bモデルの完全なセットアップガイド、パフォーマンスベンチマーク、ローカルネットワーク統合について解説します。",
+  category: "Guide",
+  image: "https://placehold.co/800x400/2563eb/fff?text=Gemma+4+Raspberry+Pi+Tutorial",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+Googleの最新オープンモデルファミリーのリリースは、低電力ハードウェアで可能なことを一変させました。この**gemma 4 raspberry pi guide**では、そのパワーを活用する方法を正確に示します。エージェントワークフローを構築したい開発者であれ、プライバシーに配慮したオフラインのAIアシスタントを求めるホビーユーザーであれ、Raspberry Pi 5はついにその実力を発揮する時が来ました。大規模言語モデル（LLM）をローカルで実行することで、完全なデータプライバシーが確保され、高額なAPIサブスクリプションも不要になります。
+
+この包括的な**gemma 4 raspberry pi guide**では、E2BおよびE4Bモデルをスムーズに動作させるために必要な技術要件、インストール手順、パフォーマンスの最適化について詳しく説明します。Per-Layer Embeddings (PLE) や共有KVキャッシュなどの新しいアーキテクチャ機能を活用することで、Gemma 4はクレジットカードサイズのコンピュータ上でも印象的な推論能力を発揮します。以下の手順に従って、あなたのPiを高性能なAIエッジノードに変身させましょう。
+
+## Gemma 4 のハードウェア要件
+
+ソフトウェアに取り掛かる前に、ハードウェアがタスクに対応しているか確認してください。古いモデルはメモリのボトルネックに苦労していましたが、2026年時点ではRaspberry Pi 5が実用的な体験のためのベースラインとなっています。E2Bモデルは特にこれらの制約に合わせて最適化されていますが、ストレージと冷却の選択が生成速度に大きく影響します。
+
+| コンポーネント | 最小要件 | 推奨構成 |
+|---|---|---|
+| **ボード** | Raspberry Pi 5 (4GB RAM) | **Raspberry Pi 5 (8GB RAM)** |
+| **ストレージ** | 32GB 高速SDカード | **NVMe SSD (PCIe Hat経由)** |
+| **冷却** | パッシブヒートシンク | **アクティブクーラーまたは Argon ONE V3** |
+| **電源** | 公式 27W USB-C | **公式 27W USB-C 電源アダプター** |
+| **OS** | Ubuntu Server 24.04 (64-bit) | **Ubuntu Server 24.04 (ヘッドレス)** |
+
+> **⚠️ 警告:** Raspberry Pi 4や3でGemma 4を実行しようとしないでください。RAM不足とCPUアーキテクチャの遅さにより、1つの文章を生成するのに数分かかるなど、極端に高いレイテンシが発生します。
+
+## 適切な Gemma 4 モデルの選択
+
+GoogleはGemma 4をいくつかのサイズでリリースしましたが、Raspberry Piにおいては「Edge」シリーズに焦点を当てます。これらのモデルはApache 2.0ライセンスを採用しており、製品の構築や出荷において完全な商業的自由が認められています。
+
+| モデル名 | パラメータ数 | 必要RAM | 最適なユースケース |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2.3B 有効 | ~5GB | **IoT、単純な自動化、チャット** |
+| **Gemma 4 E4B** | 4.5B 有効 | ~8GB | **コード生成、ビジョンタスク** |
+| **Gemma 4 26B** | 26B (MoE) | 16GB+ | Piには非推奨（デスクトップ向け） |
+
+E2BやE4Bの「E」は「有効パラメータ（effective parameters）」を意味します。Per-Layer Embeddingsのおかげで、これらのモデルは推論中にアクティブ化されるパラメータが少なく、バッテリー消費を抑え、PiのCPUへの熱負荷を軽減します。この**gemma 4 raspberry pi guide**に従うほとんどのユーザーにとって、E2Bモデルがレスポンスの良さにおいて最適な選択肢となります。
+
+## LM Studio によるインストール (ヘッドレス CLI)
+
+SSH経由で軽量なヘッドレスセットアップを好むユーザーには、LM StudioのCLIバージョンが優れた選択肢です。これにより、グラフィカルユーザーインターフェースのオーバーヘッドなしでモデルを管理できます。
+
+1.  **SSH経由で接続:** メインのワークステーションからRaspberry Piにアクセスします。接続が切れてもセッションを維持できるよう、`tmux`のようなターミナルマルチプレクサの使用を強くお勧めします。
+2.  **LM Studio CLIのインストール:** 開発者が提供する公式インストールスクリプトを実行します。これにより、デーモンと`lms`コマンドラインツールがインストールされます。
+3.  **ストレージの設定:** デフォルトではモデルはSDカードに保存されます。SSDを接続している場合は、`lms storage set`コマンドを使用して、ダウンロードディレクトリを高速なドライブに指定してください。
+4.  **モデルのダウンロード:** `lms download google/gemma-4-E2B-it`コマンドを使用します。「it」バージョンはインストラクションチューニング済みで、チャットや指示への追従に適しています。
+5.  **サーバーの起動:** `lms server start --port 4000`でローカルAPIサーバーを起動します。
+
+### ローカルネットワーク経由でのアクセス
+
+デフォルトでは、ローカルサーバーは`localhost`のみをリッスンします。ゲーミングPCやMacBookからRaspberry Piにプロンプトを送信したい場合は、ネットワークをブリッジする必要があります。ソフトウェアがホストパラメータをサポートしていない場合は、`socat`ユーティリティを使用できます。
+
+```bash
+socat TCP-LISTEN:4001,fork,reuseaddr TCP:127.0.0.1:4000
+```
+
+これにより、ポート4001でPiのIPアドレスに送信されたリクエストが、内部のGemma 4インスタンスに転送されるブリッジが作成されます。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/kZhAj8--t8w"
+    title="Gemma 4 on Raspberry Pi 5: A Surprisingly Usable Local AI Setup"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 代替セットアップ：Ollama の使用
+
+最もシンプルな「ワンコマンド」体験を求めるなら、[Ollama](https://ollama.com/)がローカルAIの業界標準です。量子化や環境設定を自動的に処理してくれます。
+
+1.  **Ollamaのインストール:** ターミナルで `curl -fsSL https://ollama.com/install.sh | sh` を実行します。
+2.  **Gemma 4のプル:** `ollama pull gemma4:e2b` を実行します。
+3.  **実行とチャット:** `ollama run gemma4:e2b` と入力して、すぐにチャットセッションを開始します。
+
+Ollamaは、標準でOpenAI互換のAPIを提供しているため、Open WebUIやVS Codeの拡張機能などの既存のツールにRaspberry Piを接続するのに非常に便利です。
+
+## パフォーマンスベンチマークと実利用
+
+エッジでAIを実行する際は、期待値を管理することが重要です。RTX 4080のような専用GPUは毎秒100トークン以上のテキストを生成できますが、Raspberry Pi 5はそれよりもはるかに低速です。しかし、非対話型のタスクであれば、十分に実用的です。
+
+| タスクの種類 | モデル | 推論時間 | 総生成時間 |
+|---|---|---|---|
+| **単純な論理/チャット** | E2B | 15-30 秒 | **1-2 分** |
+| **Pythonコードのソート** | E2B | 45 秒 | **5-6 分** |
+| **Webアプリのアイデア出し** | E2B | 40 秒 | **4-5 分** |
+
+テスト中、Pi 5は4つのコアすべてを100%の負荷で使用しました。高負荷にもかかわらず、E2Bモデルは正確で多段階の推論を提供しました。例えば、ソート関数の作成を依頼した際、単にコードを提供するだけでなく、2つの異なる実装を提案し、それぞれの時間計算量についても説明しました。
+
+> **💡 ヒント:** 応答速度を上げるために、タスクが単純な場合は「推論モード（Reasoning Mode）」を無効にすることを検討してください。これにより、`&lt;|think|&gt;`フェーズをスキップして直接回答にジャンプします。
+
+## 高度な機能：ビジョンとオーディオ
+
+Gemma 4はテキストだけではありません。E2BおよびE4Bモデルはマルチモーダルです。つまり、Raspberry PiカメラモジュールやUSBマイクを統合して、真の「エージェント」デバイスを作成できます。
+
+*   **ビジョン:** LiteRT-LMライブラリ経由で画像をGemma 4に渡すことができます。シーンの説明、レシートからのテキスト読み取り、部屋の中の物体の特定などが可能です。
+*   **オーディオ:** 小型のモデルはネイティブのオーディオ入力をサポートしています。Piに直接話しかけると、音声をクラウドサーバーに送ることなく、翻訳されたテキストとして処理できます。
+*   **エージェントスキル:** **Google AI Edge Gallery**を使用すると、Gemma 4がWikipediaを検索したり、ローカルデータに基づいてインタラクティブなグラフを生成したりするスキルを構築できます。
+
+開発者向けには、[Hugging Face Gemma 4 コレクション](https://huggingface.co/collections/google/gemma-4)で、特定のゲーミングやIoTアプリケーション向けにこれらのモデルを微調整するために必要な生の重みと構成ファイルが提供されています。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 開発者ツールとの統合
+
+Raspberry PiでGemma 4モデルを稼働させたら、お気に入りのIDEに接続できます。これにより、メインコンピュータのRAMをゲームやコンパイル用に節約しながら、別のハードウェアで実行される「無料」のAIコーディングアシスタントを利用できるようになります。
+
+1.  **Zed Editor / VS Code:** 設定を開き、カスタムLLMプロバイダーを追加します。
+2.  **ベースURL:** Raspberry PiのIPアドレスに設定します（例：`http://192.168.1.50:4001/v1`）。
+3.  **モデル名:** `gemma-4-E2B-it` を指定します。
+4.  **使用法:** エディタのチャットパネルを使用してコードに関する質問ができるようになり、それらはすべてPiによって処理されます。
+
+## FAQ
+
+**Q: Raspberry Pi 5は日常的なAIアシスタントとして十分な速さですか？**
+
+A: それはあなたの忍耐強さによります。バックグラウンドタスク、自動化、学習には最適ですが、複雑なクエリに対して5分かかるレスポンスタイムは、即座の会話よりも「非同期」なサポートに向いています。
+
+**Q: この gemma 4 raspberry pi guide を利用するのにインターネット接続は必要ですか？**
+
+A: モデルとソフトウェアの最初のダウンロード時のみ必要です。一度インストールすれば、Gemma 4は100%オフラインで動作するため、高いプライバシーが必要なプロジェクトや、安定したネット環境のない離れた場所での使用に理想的です。
+
+**Q: Raspberry Piで31Bモデルを実行できますか？**
+
+A: いいえ。31Bモデルを動作させるには、少なくとも20GBのRAM（および理想的には強力なGPU）が必要です。Raspberry Pi 5は最大8GBであるため、E2BまたはE4Bバリアントを推奨しています。
+
+**Q: AIタスク中にRaspberry Piがオーバーヒートするのを防ぐにはどうすればよいですか？**
+
+A: LLMの実行はCPUに継続的な100%の負荷をかけます。サーマルスロットリングを防ぐために、公式のRaspberry Piアクティブクーラーや、ファンを内蔵した高品質なケースなど、アクティブ冷却ソリューションを使用する必要があります。

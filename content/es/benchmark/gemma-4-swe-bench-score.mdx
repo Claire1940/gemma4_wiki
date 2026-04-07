@@ -1,0 +1,122 @@
+export const metadata = {
+  title: "Puntuación de Gemma 4 en SWE Bench: Guía de Benchmarks y Rendimiento 2026",
+  description: "Explora la puntuación de Gemma 4 en SWE bench, los rankings de rendimiento y los avances arquitectónicos de la última familia de modelos de IA de código abierto de Google en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4285F4/fff?text=Gemma+4+SWE+Bench+Score",
+  date: "2026-04-05",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de Gemma 4 de Google ha causado una gran conmoción en la comunidad de desarrolladores, especialmente en lo que respecta a la **puntuación de gemma 4 en swe bench**, que destaca su destreza en tareas de ingeniería de software del mundo real. A medida que avanzamos en 2026, la necesidad de modelos eficientes de pesos abiertos que puedan manejar desafíos de codificación complejos nunca ha sido tan alta. Al lograr una **puntuación de gemma 4 en swe bench** competitiva, Google ha posicionado su último lanzamiento como un contendiente de primer nivel para la integración en IDEs y agentes de codificación autónomos. Esta familia de modelos, derivada de la investigación de vanguardia de Gemini 3, ofrece una combinación de razonamiento, multimodalidad y una licencia permisiva que no se había visto anteriormente en las ofertas abiertas de Google. Ya sea que estés construyendo un asistente de codificación local o un flujo de trabajo agéntico masivo, comprender estos benchmarks es esencial para optimizar tu stack de IA en 2026.
+
+## La Jerarquía de Modelos Gemma 4
+
+Google ha estructurado el lanzamiento de Gemma 4 en dos niveles distintos: modelos **Workstation** para tareas pesadas y modelos **Edge** para aplicaciones móviles y de baja latencia. Este enfoque por niveles garantiza que los desarrolladores puedan elegir un modelo que se ajuste a sus limitaciones de hardware específicas sin sacrificar la "inteligencia por parámetro" por la que es conocida la serie Gemma 2026.
+
+| Nivel del Modelo | Cantidad de Parámetros | Parámetros Activos | Ventana de Contexto | Caso de Uso Principal |
+|---|---|---|---|---|
+| **Gemma 4 31B Dense** | 31 Mil millones | 31 Mil millones | **256K** | Codificación de alta gama, razonamiento complejo |
+| **Gemma 4 26B MoE** | 26 Mil millones | **3.8 Mil millones** | **256K** | Rendimiento eficiente en estaciones de trabajo |
+| **Gemma 4 E4B (Edge)** | 4 Mil millones | 4 Mil millones | **128K** | Asistentes en el dispositivo, aplicaciones móviles |
+| **Gemma 4 E2B (Edge)** | 2 Mil millones | 2 Mil millones | **128K** | Raspberry Pi, IoT, ASR de baja latencia |
+
+El modelo 26B Mixture of Experts (MoE) es particularmente digno de mención. Al utilizar 128 expertos diminutos y activar solo 8 por token, ofrece la inteligencia de un modelo mucho más grande manteniendo los costes de computación de un modelo de 4B parámetros. Esta eficiencia es una razón fundamental por la que la **puntuación de gemma 4 en swe bench** ha experimentado un aumento tan significativo en comparación con la generación anterior.
+
+## Analizando la Puntuación de Gemma 4 en SWE Bench
+
+En 2026, el SWE-bench (Software Engineering Benchmark) sigue siendo el estándar de oro para evaluar la capacidad de una IA para resolver problemas reales de GitHub. La **puntuación de gemma 4 en swe bench** refleja la capacidad del modelo no solo para escribir código, sino para comprender bases de código existentes, navegar por estructuras de archivos y aplicar correcciones lógicas.
+
+Según las pruebas internas y de la comunidad, el modelo 31B Dense ha asegurado un puesto entre los tres primeros entre los modelos abiertos de menos de 40 mil millones de parámetros. Su rendimiento en la variante "SWE-bench Pro" indica un alto grado de fiabilidad para flujos de trabajo agénticos donde el modelo debe llamar a funciones y utilizar herramientas para resolver problemas de varios pasos.
+
+| Benchmark | Puntuación Gemma 4 31B | Ranking (Modelos Abiertos) | Comparación |
+|---|---|---|---|
+| **SWE-bench Pro** | **Nivel Superior** | 3er Puesto | Supera a modelos 20 veces más grandes |
+| **GPQA Diamond** | **85.7%** | 3er Puesto | Razonamiento científico de alto nivel |
+| **Arena AI Leaderboard** | **Top 3** | 3er Puesto | Compitiendo con modelos cerrados insignia |
+| **MMU Pro** | **Fuerte** | Top 5 | Razonamiento multimodal y visión |
+
+> **💡 Sugerencia:** Al usar Gemma 4 para tareas de codificación, activa el modo "thinking" (pensamiento) en tu plantilla de chat para permitir que el modelo realice un razonamiento de cadena de pensamiento largo antes de generar el código.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Multimodalidad Nativa: Visión y Audio
+
+A diferencia de las iteraciones anteriores que "añadían" codificadores de visión o audio, Gemma 4 presenta soporte multimodal nativo integrado en la arquitectura. Este es un salto masivo para 2026, ya que permite al modelo razonar a través de diferentes entradas simultáneamente.
+
+### Procesamiento de Visión Avanzado
+El nuevo codificador de visión maneja el procesamiento de la relación de aspecto nativa. Esto significa que si introduces una captura de pantalla o un documento complejo en el modelo, este mantiene las dimensiones originales, lo que conduce a un OCR (Reconocimiento Óptico de Caracteres) y una comprensión de documentos superiores. Los desarrolladores han señalado que esto convierte a Gemma 4 en una excelente opción para pruebas de UI automatizadas y extracción de datos de gráficos.
+
+### Codificadores de Audio Comprimidos
+Los modelos Edge (E2B y E4B) cuentan con un codificador de audio que es un 50% más pequeño que el que se encuentra en Gemma 3N. A pesar de la reducción de tamaño, es más receptivo, con duraciones de frame que bajan de 160ms a 40ms.
+
+1. **ASR (Automatic Speech Recognition)** — Transcripción de alta precisión en el dispositivo.
+2. **Voz a texto traducido** — Habla en inglés y recibe salida de texto en japonés al instante.
+3. **Transcripción de múltiples voces** — Capacidad de distinguir entre diferentes hablantes en un solo archivo de audio.
+
+## Avances Arquitectónicos en 2026
+
+La investigación de Google sobre Gemini 3 se ha filtrado a la arquitectura de Gemma 4. Uno de los cambios más significativos es la implementación de la normalización de valores y un mecanismo de atención refinado diseñado para la estabilidad de contexto largo.
+
+Con ventanas de contexto que alcanzan hasta 256K tokens, los modelos workstation pueden procesar repositorios de código completos o documentos legales extensos. Esta capacidad de contexto largo está directamente vinculada a la alta **puntuación de gemma 4 en swe bench**, ya que el modelo puede "tener en cuenta" una mayor parte de la base de código mientras genera una corrección.
+
+| Característica | Serie Gemma 3 | Gemma 4 (2026) |
+|---|---|---|
+| **Licencia** | Personalizada/Restrictiva | **Apache 2.0** |
+| **Ventana de Contexto** | 32K | **128K - 256K** |
+| **Arquitectura** | Dense | **Variantes MoE y Dense** |
+| **Multimodalidad** | Texto/Visión | **Texto, Visión, Audio, Pensamiento** |
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B Dense a precisión completa requiere una VRAM significativa (más de 96 GB para un rendimiento óptimo). Para GPUs de consumo, busca los checkpoints QAT (Quantization Aware Training) para mantener la calidad a tasas de bits más bajas.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KmZCQrKNhDc"
+    title="Google Just Dropped Gemma 4: The Most Intelligent Open Model Ever!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## La Licencia Apache 2.0: Una Nueva Era para los Modelos Abiertos
+
+Quizás el aspecto más sorprendente del lanzamiento de Gemma 4 es el cambio a la **licencia Apache 2.0**. En años anteriores, Google utilizaba licencias personalizadas que restringían el uso comercial o prohibían la competencia. Al pasar a una licencia verdaderamente abierta en 2026, Google invita a la comunidad de desarrolladores a ajustar, modificar y desplegar estos modelos sin condiciones.
+
+Este movimiento es una respuesta directa a la presión de otros proveedores de pesos abiertos como Meta (Llama) y Alibaba (Qwen). Por primera vez, los desarrolladores pueden tomar la mejor investigación de pesos abiertos de Google y construir productos patentados sobre ella. Puedes explorar los pesos y la documentación en el [repositorio oficial de Hugging Face](https://huggingface.co/google) para comenzar con tu propia implementación.
+
+## Implementación y Despliegue
+
+El despliegue de Gemma 4 en 2026 se ha simplificado en varias plataformas. Ya sea que prefieras la inferencia local o el escalamiento basado en la nube, la integración es fluida.
+
+*   **Inferencia Local:** Usa **Ollama** o **LM Studio** para pruebas rápidas en hardware de consumo.
+*   **Despliegue en el Edge:** Optimizado para **Jetson Nano**, **Raspberry Pi** y chipsets móviles de Qualcomm y MediaTek.
+*   **Escalamiento en la Nube:** El soporte para **Google Cloud Run** con GPUs G4 (Nvidia RTX Pro 6000) permite un despliegue sin servidor que escala a cero.
+*   **Ajuste Fino:** Los modelos base son altamente receptivos a LoRA y al ajuste fino completo para dominios especializados como la IA legal o médica.
+
+## FAQ
+
+**P: ¿Qué es exactamente la puntuación de gemma 4 en swe bench?**
+
+R: La **puntuación de gemma 4 en swe bench** se refiere al rendimiento del modelo en el benchmark SWE-bench Pro, que evalúa la capacidad de una IA para resolver problemas reales de ingeniería de software. Gemma 4 se sitúa en el top 3 de los modelos abiertos en su clase de parámetros, mostrando capacidades excepcionales de codificación y razonamiento.
+
+**P: ¿Puede Gemma 4 ejecutarse en una computadora portátil para juegos estándar?**
+
+R: Sí, especialmente los modelos edge E2B y E4B. El modelo 26B MoE también puede ejecutarse en GPUs de consumo como la RTX 3090 o 4090 si utilizas versiones cuantizadas (4 bits u 8 bits).
+
+**P: ¿Admite Gemma 4 otros idiomas además del inglés?**
+
+R: Absolutamente. Gemma 4 es totalmente multilingüe, admitiendo más de 140 idiomas en su preentrenamiento y 35 idiomas para el ajuste fino de instrucciones.
+
+**P: ¿Cómo funciona el modo "thinking" en Gemma 4?**
+
+R: El modo "thinking" (pensamiento) activa un proceso de cadena de pensamiento largo. Al establecer `enable_thinking=true` en la plantilla de chat, el modelo genera pasos de razonamiento internos antes de proporcionar una respuesta final, lo que mejora significativamente el rendimiento en tareas complejas de matemáticas y codificación.

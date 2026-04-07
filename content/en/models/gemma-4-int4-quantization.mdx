@@ -1,0 +1,134 @@
+export const metadata = {
+  title: "Gemma 4 Int4 Quantization: Performance & Memory Guide 2026",
+  description: "Master Gemma 4 int4 quantization to run powerful AI models on local hardware. Learn about memory requirements, QAT, and optimization tricks for 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Int4+Quantization",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+The release of Google’s latest open-model family has fundamentally changed the landscape of local AI development. Specifically, **gemma 4 int4 quantization** has emerged as the gold standard for developers and enthusiasts who want to run high-parameter models without investing thousands of dollars in server-grade hardware. By reducing the precision of model weights from 16-bit to 4-bit, users can fit massive 31B or 26B parameter models into the VRAM of standard consumer GPUs.
+
+Understanding the nuances of **gemma 4 int4 quantization** is essential for optimizing your local environment in 2026. Whether you are building a specialized coding assistant or a multimodal chatbot, the trade-off between memory savings and perplexity (accuracy loss) is the most critical decision you will make. In this guide, we will break down the technical architecture of the Gemma 4 family, explore how 4-bit quantization affects performance, and provide a step-by-step roadmap for deploying these models efficiently.
+
+## Understanding Quantization: The "Ruler" Analogy
+
+To understand why **gemma 4 int4 quantization** is so effective, we first need to look at how AI models store information. Think of an AI model as a massive collection of billions of numbers (parameters). In their raw state, these numbers are stored with 32-bit or 16-bit precision. 
+
+Imagine you are using a ruler. A 32-bit ruler has markings for every microscopic millimeter; it is incredibly precise but takes a long time to read and requires a massive storage case. Quantization is like choosing a different ruler. An 8-bit ruler might only have markings every centimeter, while a 4-bit ruler (int4) has markings every 5 centimeters. You lose some "microscopic" detail, but the ruler becomes much smaller and faster to use.
+
+For the Gemma 4 models, moving to int4 allows the system to store these numbers in much smaller "mailboxes." Instead of an infinite variety of sizes, every number must fit into one of 16 available slots. While this sounds like a massive loss of data, modern techniques like Quantization Aware Training (QAT) allow the model to "learn" how to function with this lower precision, preserving nearly all the reasoning capabilities of the full-sized version.
+
+## Gemma 4 Model Family and Memory Requirements
+
+The Gemma 4 family is divided into several architectures to suit different hardware needs. In 2026, Google introduced "Effective" (E) parameters and Mixture-of-Experts (MoE) designs to further push the boundaries of efficiency. 
+
+The following table outlines the VRAM requirements for the primary Gemma 4 variants. Note how the **gemma 4 int4 quantization** (Q4_0) significantly lowers the barrier to entry for the larger 31B and 26B models.
+
+| Model Variant | Parameters | BF16 (16-bit) | SFP8 (8-bit) | **Q4_0 (4-bit)** |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2B (Effective) | 9.6 GB | 4.6 GB | **3.2 GB** |
+| **Gemma 4 E4B** | 4B (Effective) | 15 GB | 7.5 GB | **5 GB** |
+| **Gemma 4 31B** | 31B (Dense) | 58.3 GB | 30.4 GB | **17.4 GB** |
+| **Gemma 4 26B A4B** | 26B (MoE) | 48 GB | 25 GB | **15.6 GB** |
+
+> **💡 Tip:** If you have a GPU with 16GB or 24GB of VRAM (like an RTX 4090 or 5090), the 31B and 26B models are only accessible to you through 4-bit or 8-bit quantization.
+
+### The MoE Advantage (26B A4B)
+The 26B A4B model uses a Mixture of Experts architecture. While it has 26 billion total parameters, it only "activates" 4 billion parameters for any given token generation. However, a common misconception is that you only need enough VRAM for those 4 billion parameters. In reality, **all 26 billion parameters must be loaded into memory** to ensure the "router" can quickly send data to the correct expert. This is why the int4 version still requires roughly 15.6 GB of VRAM.
+
+## How to Optimize Your AI - Quantization Explained
+
+For a visual deep dive into how these mathematical tricks work and how to apply them to your local setup, check out this comprehensive breakdown:
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/K75j8MkwgJ0"
+    title="Optimize Your AI - Quantization Explained"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## The Impact of Int4 on Performance and Quality
+
+When using **gemma 4 int4 quantization**, the most frequent concern is "intelligence degradation." Does the model become "dumber" when you shrink it?
+
+In 2026, the answer is "hardly." Thanks to advances in Quantization Aware Training (QAT), Gemma 4 models are trained specifically to understand that they will eventually be compressed. This allows the model to prioritize the most important weights. 
+
+| Quantization Level | Precision | Quality Retention | Speed (Tokens/Sec) | Best Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **FP16 / BF16** | High | 100% | Baseline | Research & Fine-tuning |
+| **Q8_0** | Medium | 99.5% | 1.2x | High-stakes reasoning |
+| **Q4_K_M (Int4)** | **Balanced** | **98%** | **1.8x** | **General Daily Use** |
+| **Q2_K** | Low | 85-90% | 2.5x | Mobile / Raspberry Pi |
+
+The "K_M" suffix often seen in tools like Ollama stands for "K-Quants Medium." This is a smarter version of standard int4 that uses different levels of precision for different parts of the model (e.g., more bits for critical attention layers and fewer bits for less important feed-forward layers).
+
+## Context Quantization: The 2026 Secret Weapon
+
+While shrinking the model weights is great, the "KV Cache" (the memory that stores your conversation history) is another massive RAM hog. Gemma 4 supports context windows up to 256K tokens. If you try to run a 256K context at full 16-bit precision, you might need 50GB of RAM just for the conversation history alone!
+
+To solve this, developers are now using **Context Quantization**. By setting your KV cache to 8-bit (Q8) or even 4-bit, you can drastically reduce the memory footprint of long-form chats.
+
+### Enabling Context Optimization in Ollama
+If you are using Ollama to run your Gemma 4 models, you can enable these optimizations via the command line or a Modelfile:
+
+1. **Turn on Flash Attention:** This speeds up processing of long texts.
+2. **Set KV Cache to F16 or Q8:** This quantizes the "memory" of the model.
+
+```bash
+# Example command to run with optimized context
+export OLLAMA_FLASH_ATTENTION=true
+export OLLAMA_KV_CACHE_TYPE=q8_0
+ollama run gemma4:31b-instruct-q4_k_m
+```
+
+> **⚠️ Warning:** Not every model architecture supports KV cache quantization perfectly. If you notice the model "forgetting" things mid-conversation, revert your cache type to F16.
+
+## Step-by-Step Guide to Deploying Gemma 4 Int4
+
+Ready to get started? Follow these steps to deploy **gemma 4 int4 quantization** on your local machine using [Hugging Face](https://huggingface.co/google) and Ollama.
+
+### 1. Hardware Check
+Ensure you have at least 8GB of VRAM for the E4B models or 20GB+ for the 31B/26B models. If you have less than 8GB, you should stick to the E2B variant or use a Q2 quantization level.
+
+### 2. Download the Model
+You can find the official GGUF or Safetensors files on Kaggle or Hugging Face. For local execution, the GGUF format is preferred as it is optimized for CPU/GPU split loading.
+
+### 3. Configure the Context Window
+Gemma 4 defaults to a smaller context window to save memory. To unlock the full 256K potential, you must manually set the parameter:
+
+```bash
+# In Ollama
+/set parameter num_ctx 32768
+# Then save your configuration
+/save gemma4-custom
+```
+
+### 4. Monitor Memory Usage
+Use tools like `nvidia-smi` (Windows/Linux) or `asitop` (Mac) to ensure you aren't hitting your system's swap memory. If the "Memory Usage" hits 95%+, consider dropping from a Q4_K_M to a Q3 or Q2 quantization.
+
+## FAQ
+
+**Q: Is gemma 4 int4 quantization significantly worse than the 8-bit version?**
+
+A: For most tasks, including creative writing and general Q&A, the difference is negligible (less than 1-2% drop in benchmark scores). However, for complex mathematical proofs or sensitive code generation, 8-bit (Q8) may provide slightly more reliable results.
+
+**Q: Can I run a 31B Gemma 4 model on a laptop with 16GB of RAM?**
+
+A: Yes, but only by using **gemma 4 int4 quantization** and offloading some layers to the CPU. This will be significantly slower than running it entirely on a GPU, but it is functional for non-real-time tasks.
+
+**Q: What is the difference between Q4_0 and Q4_K_M?**
+
+A: Q4_0 is a "legacy" 4-bit quantization that applies the same bit-depth to every layer. Q4_K_M (K-Quants Medium) is a more modern approach that uses a "smart" distribution of bits, resulting in better accuracy for the same file size.
+
+**Q: How do I know if my quantization is working?**
+
+A: Check the file size of your model. A 31B parameter model at 16-bit precision is roughly 60GB. If your model file is between 17GB and 19GB, you are successfully using a 4-bit quantization.
+
+## Conclusion
+
+The era of needing a data center to run world-class AI is over. By leveraging **gemma 4 int4 quantization**, you can harness the power of Google's latest reasoning models on consumer-grade hardware. The key to a smooth experience in 2026 lies in balancing your model size with your available VRAM and utilizing new features like context quantization to manage long-form conversations. Start with a Q4_K_M build, and only move to higher precisions if your specific use case demands it.

@@ -1,0 +1,111 @@
+export const metadata = {
+  title: "Benchmark de velocidad de inferencia de Gemma 4: Análisis completo de rendimiento 2026",
+  description: "Explore los últimos resultados del benchmark de velocidad de inferencia de Gemma 4 en GPUs RTX y DGX Spark. Conozca cómo rinden localmente los modelos 31B y 26B MoE.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/0f172a/fff?text=Gemma+4+Inference+Benchmarks",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de Gemma 4 de Google DeepMind ha causado un gran impacto en la comunidad de IA local, ofreciendo un razonamiento de nivel de frontera en hardware de consumo. Para desarrolladores y entusiastas, los resultados más recientes del **benchmark de velocidad de inferencia de gemma 4** revelan un salto generacional masivo sobre Gemma 3, particularmente en tareas de matemáticas y programación. Ya sea que esté utilizando un dispositivo periférico compacto o una estación de trabajo de alta gama, comprender el **benchmark de velocidad de inferencia de gemma 4** es crucial para seleccionar el tamaño de modelo y el nivel de cuantización adecuados para su hardware específico.
+
+En esta guía, desglosamos el rendimiento de los cuatro tamaños de modelo principales (31B, 26B (MoE), 4B y 2B) en varias plataformas, incluyendo la NVIDIA RTX 4070 Ti, RTX 3090 y el DGX Spark potenciado por Grace Blackwell. Examinaremos cómo estos modelos manejan tareas del mundo real, como la generación de código y la síntesis de datos en vivo, manteniendo una baja latencia.
+
+## Resumen de la familia de modelos Gemma 4
+
+La línea Gemma 4 está diseñada para ser versátil, abarcando desde transformadores densos masivos hasta variantes de Mezcla de Expertos (MoE) altamente eficientes. Google ha optimizado estos modelos para que se ajusten a las limitaciones de VRAM de las GPUs modernas, haciendo que la inferencia local sea más accesible que nunca en 2026.
+
+| Variante del modelo | Parámetros | Tipo | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | 31 mil millones | Denso | Razonamiento de frontera, programación compleja |
+| **Gemma 4 26B-A4B** | 26 mil millones | MoE (4B activos) | Flujos de trabajo agénticos de alta velocidad |
+| **Gemma 4 E4B** | 4 mil millones | Efectivo/Edge | Móvil, Jetson Orin Nano, Raspberry Pi |
+| **Gemma 4 E2B** | 2 mil millones | Efectivo/Edge | Dispositivos de ultra bajo consumo, IoT |
+
+El modelo 31B es el buque insignia de la colección de pesos abiertos, situándose actualmente entre los tres mejores modelos abiertos en la clasificación de Arena AI. Sin embargo, para aquellos que priorizan la velocidad, la variante 26B MoE suele ser la mejor opción, ya que solo activa 3.8 mil millones de parámetros durante la fase de inferencia.
+
+## Benchmark de velocidad de inferencia de Gemma 4: Rendimiento del hardware
+
+Al evaluar un **benchmark de velocidad de inferencia de gemma 4**, la arquitectura del hardware juega un papel determinante. Pruebas recientes muestran que, si bien las tarjetas RTX de consumo destacan en el rendimiento bruto para modelos más pequeños, los sistemas de memoria unificada como el NVIDIA DGX Spark proporcionan la estabilidad necesaria para el modelo denso 31B más grande.
+
+### Rendimiento de GPUs de consumo (Serie RTX)
+En una RTX 4070 Ti estándar, el modelo Gemma 4 E4B ofrece respuestas casi instantáneas. En un benchmark de programación, el modelo fue capaz de planificar, estructurar y generar un juego de Snake funcional en HTML/JavaScript en aproximadamente 30 segundos. Para los usuarios con la nueva RTX 5090, el **benchmark de velocidad de inferencia de gemma 4** muestra una ventaja de rendimiento de 2.7 veces sobre el M3 Ultra de Apple cuando se utiliza la cuantización Q4.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/qh4LVnoCs-g"
+    title="Running Gemma 4 Locally Changed Everything (Real Results)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Hardware profesional: DGX Spark (Grace Blackwell)
+El DGX Spark, que utiliza el superchip GB10 Grace Blackwell, ofrece un grupo de memoria unificada único de 122 GB LPDDR5X. Aunque su ancho de banda de memoria es inferior al de las tarjetas de centro de datos basadas en HBM (como la H100), su enorme capacidad le permite ejecutar el modelo 31B a precisión BF16 completa sin cuantización.
+
+| Modelo (en DGX Spark) | Procesamiento de prompts (pp2048) | Decodificación / Gen. de tokens (tg128) |
+| :--- | :--- | :--- |
+| **31B BF16** | 1066 t/s | **3.7 t/s** |
+| **31B AWQ Int4** | 810 t/s | **10.6 t/s** |
+| **26B-A4B MoE** | **3105 t/s** | **23.7 t/s** |
+
+> **💡 Consejo:** Si su flujo de trabajo requiere chat interactivo de alta velocidad, el modelo 26B-A4B MoE es el claro ganador, ofreciendo casi 6.4 veces mejor rendimiento de decodificación que la línea base densa del 31B.
+
+## La ventaja de MoE en 2026
+
+La arquitectura de Mezcla de Expertos (MoE) en Gemma 4 cambia las reglas del juego para la inferencia local. A diferencia de los modelos densos donde cada parámetro se calcula para cada token, el modelo 26B-A4B solo "despierta" unos 4 mil millones de parámetros por solicitud. Esto permite que el modelo resida en la memoria como una entidad grande y con amplios conocimientos, mientras rinde con la velocidad de un modelo mucho más pequeño.
+
+En cualquier **benchmark de velocidad de inferencia de gemma 4** realizado en hardware con limitaciones de ancho de banda (como los sistemas LPDDR5X), el modelo MoE supera consistentemente a las variantes densas. Esto lo convierte en el candidato ideal para soluciones autoalojadas al estilo "Navitalk" o "Navibot", donde se requiere baja latencia para la conversión de voz a texto e interacción en tiempo real.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/J3GJNHSb9m8"
+    title="Gemma 4 Performance Showdown on Real Devices"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimización para flujos de trabajo locales
+
+Para aprovechar al máximo su hardware, debe elegir el método de cuantización correcto. La cuantización reduce la precisión de los pesos del modelo, lo que permite que los modelos más grandes quepan en depósitos de VRAM más pequeños, al tiempo que suele aumentar la velocidad de inferencia.
+
+1.  **AWQ Int4:** Actualmente es el "punto ideal" para GPUs de 24 GB como la RTX 3090 o 4090. Proporciona un aumento significativo de velocidad (hasta 3 veces más rápido en decodificación) con una pérdida mínima en la calidad del razonamiento.
+2.  **BF16 (Sin cuantizar):** Solo se recomienda si tiene más de 64 GB de VRAM o si utiliza un sistema de memoria unificada. Ofrece la mayor precisión, particularmente en los benchmarks de matemáticas AIME 2026.
+3.  **Caché KV FP8:** Habilitar FP8 para el caché Key-Value (KV) es esencial para flujos de trabajo de contexto largo. Gemma 4 admite hasta 256,000 tokens, pero sin el caché FP8, se quedará rápidamente sin memoria en documentos de más de 50,000 tokens.
+
+> **⚠️ Advertencia:** Algunos controladores de principios de 2026 para el Jetson Orin Nano han reportado bloqueos del sistema al cargar el modelo E4B. Asegúrese de que su JetPack OS esté actualizado a la última versión antes de intentar la inferencia local.
+
+## Utilidad en el mundo real: Más allá de los números
+
+Si bien el **benchmark de velocidad de inferencia de gemma 4** nos indica qué tan rápido es el modelo, su utilidad se define por sus nuevas capacidades nativas. Gemma 4 es multimodal en todos los tamaños, lo que significa que puede procesar imágenes y video de forma nativa. Los modelos más pequeños E4B y E2B incluso incluyen entrada de audio nativa para el reconocimiento de voz en el dispositivo.
+
+### Programación y depuración
+En pruebas prácticas, Gemma 4 demuestra un proceso de "pensamiento interno". Cuando se le pide que cree un juego, desglosa la gestión del estado y la lógica de entrada del usuario antes de escribir una sola línea de código. Aunque ocasionalmente puede fallar en tareas complejas de "un solo intento" (como el manejo de entradas rotas en un juego), destaca en la autocorrección. Proporcionar al modelo los registros de errores o describir el error le permite alcanzar una solución funcional en la segunda iteración.
+
+### Planificación estratégica
+El modelo es altamente efectivo en la generación de contenido estructurado. Cuando se le encarga crear una estrategia de redes sociales, no solo enumera ideas; las organiza en pilares, las asigna a plataformas específicas como LinkedIn o TikTok y crea una cadencia semanal lógica. Este nivel de organización estaba reservado anteriormente para modelos mucho más grandes basados en la nube.
+
+Para obtener más documentación técnica sobre la optimización de estos modelos, visite el [Portal de Desarrolladores de NVIDIA](https://developer.nvidia.com/) para acceder a las guías de optimización más recientes.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Cuál es el mejor hardware para ejecutar un benchmark de velocidad de inferencia de Gemma 4?**
+
+R: Para el modelo denso 31B, se recomienda una GPU con al menos 24 GB de VRAM (como la RTX 3090 o 4090) utilizando cuantización AWQ Int4. Para obtener el mejor rendimiento sin cuantizar, lo ideal es un DGX Spark o un sistema con más de 80 GB de memoria HBM.
+
+**P: ¿Admite Gemma 4 la búsqueda web?**
+
+R: Aunque los pesos del modelo son estáticos, Gemma 4 está diseñado para utilizar herramientas. Cuando se combina con un ejecutor local como Ollama o Alarma que tiene habilitado el acceso web, el modelo puede pausar, ejecutar una búsqueda y sintetizar noticias en tiempo real en un resumen estructurado.
+
+**P: ¿Por qué el modelo 26B MoE es más rápido que el modelo denso 31B?**
+
+R: La arquitectura MoE (Mezcla de Expertos) solo utiliza una fracción de sus parámetros totales (aprox. 4B) para cada token generado. Esto reduce la cantidad de datos que deben moverse a través del ancho de banda de memoria de la GPU, lo que resulta en una cantidad significativamente mayor de tokens por segundo.
+
+**P: ¿Puedo ejecutar Gemma 4 en una computadora portátil?**
+
+R: Sí, los modelos Gemma 4 E2B y E4B están diseñados específicamente para computadoras portátiles y dispositivos periféricos. Una laptop moderna con 16 GB de RAM puede ejecutar cómodamente el modelo E4B para tareas como la redacción de correos electrónicos, revisión de código y análisis de datos básicos.

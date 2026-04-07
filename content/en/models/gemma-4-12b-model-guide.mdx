@@ -1,0 +1,99 @@
+export const metadata = {
+  title: "Gemma 4 12B Model Guide: Performance & Local Setup 2026",
+  description: "Master the transition to Google's 2026 AI lineup. Our Gemma 4 12B model guide covers memory requirements, MoE architecture, and local deployment tips.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+12B+Model+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+The landscape of local artificial intelligence has shifted dramatically with the recent release of Google's newest open-weight family. If you are searching for a comprehensive **gemma 4 12b model guide**, you likely recognize that the "mid-range" sweet spot for local hardware has evolved. In 2026, the Gemma 4 family has redefined performance tiers by introducing Mixture-of-Experts (MoE) and Per-Layer Embeddings (PLE), effectively replacing the static 12B parameter counts of previous years with more dynamic, efficient architectures.
+
+This **gemma 4 12b model guide** is designed to help you navigate these technical advancements, ensuring you select the right model for your high-end laptop or desktop setup. Whether you are moving from Gemma 3's 12B variant to the new 26B A4B MoE model or exploring the "effective" parameters of the E4B series, understanding the underlying architecture is key to maximizing your local AI's potential.
+
+## The Evolution of Local AI: Gemma 4 12B Model Guide to MoE
+
+In previous generations, a 12B model was the gold standard for users with 16GB to 24GB of VRAM. However, the 2026 Gemma 4 release introduces a more sophisticated approach. The family now spans three distinct architectures: Dense, Mixture-of-Experts (MoE), and Effective Parameter models using Per-Layer Embeddings.
+
+For those specifically looking for the performance tier formerly occupied by the 12B, the **26B A4B** model is the primary successor. While it contains 26 billion total parameters, it only activates 4 billion during inference. This allows it to run with the speed of a small model while maintaining the reasoning capabilities of a much larger one.
+
+| Model Variant | Architecture Type | Key Feature | Best Hardware |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | Dense + PLE | Audio & Vision Input | Mobile / Budget Laptops |
+| **Gemma 4 E4B** | Dense + PLE | High-efficiency 4B | High-end Mobile / Laptops |
+| **Gemma 4 26B A4B** | Mixture-of-Experts | **4B Active Parameters** | Desktop (24GB VRAM) |
+| **Gemma 4 31B** | Dense | Maximum Reasoning | Server / High-end Desktop |
+
+> **💡 Tip:** If you are transitioning from a legacy 12B model, the 26B A4B MoE variant offers significantly better logic and reasoning without a major hit to token-per-second speeds, provided you have the VRAM to load the full weight set.
+
+## Understanding the Gemma 4 Architecture
+
+The 2026 architecture introduces several "under the hood" changes that differentiate it from the Gemma 3 series. One of the most significant changes is the implementation of **Interleaving Layers**. In Gemma 4, global attention is always the final layer, ensuring the model maintains a better "global" understanding of long-range context compared to models that end on local sliding window attention.
+
+Furthermore, the introduction of **p-RoPE** (low-frequency-pruned Rotary Positional Encodings) allows the model to handle massive context windows—up to 256K tokens—without the semantic noise that typically plagues long-form generation. This makes the **gemma 4 12b model guide** relevant for developers working on large-scale document analysis or complex coding tasks.
+
+### Multimodal Capabilities: Image and Audio
+Unlike the text-only 1B models of the past, almost all Gemma 4 variants are multimodal. They utilize a Vision Encoder based on the Vision Transformer (ViT) and a Conformer-based Audio Encoder (exclusive to the E-series). 
+
+*   **Adaptive Resizing:** Images are processed into variable patches based on a "token budget," allowing for high-resolution analysis when needed.
+*   **2D RoPE:** This technique instills the 2D position of image patches into the embeddings, improving spatial reasoning.
+*   **Audio Soft Tokens:** Raw audio is converted into a sequence of embeddings, enabling native speech-to-text and translation tasks.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/RiaCdQszjgA"
+    title="Ultimate Gemma 3 Ollama Guide — Testing 1b, 4b, 12b and 27b"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Memory Requirements and Quantization
+
+One of the most critical aspects of any **gemma 4 12b model guide** is hardware planning. Because the 26B A4B MoE model requires all 26 billion parameters to be loaded into memory (even if only 4B are active), your VRAM requirements will be higher than a standard 4B or 12B model.
+
+| Model Size | 16-bit (BF16) | 8-bit (SFP8) | 4-bit (Q4_0) |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 9.6 GB | 4.6 GB | **3.2 GB** |
+| **Gemma 4 E4B** | 15.0 GB | 7.5 GB | **5.0 GB** |
+| **Gemma 4 26B A4B** | 48.0 GB | 25.0 GB | **15.6 GB** |
+| **Gemma 4 31B** | 58.3 GB | 30.4 GB | **17.4 GB** |
+
+> **⚠️ Warning:** Do not confuse "Active Parameters" with memory footprint. Even though the 26B A4B only uses 4B parameters for calculation, you must have at least 16GB of VRAM to run the 4-bit quantized version comfortably.
+
+To run these models efficiently, you can use tools like **Ollama** or **LM Studio**. Quantization levels like Q4_0 or the newer SFP8 format allow you to fit larger models onto consumer hardware with minimal loss in reasoning accuracy.
+
+## Performance Benchmarking and Logic Traps
+
+When testing the transition from Gemma 3 to Gemma 4, users have noted a significant improvement in handling "logic traps." Standard LLMs often struggle with negation in multiple-choice questions or spatial reasoning (e.g., "If you are in London facing West, is Edinburgh on your right?").
+
+The Gemma 4 26B A4B and 31B models excel in these areas due to their increased depth and the wider "Shared Expert" in the MoE architecture. The shared expert acts as a repository for general knowledge that is always active, while the specialized experts handle niche tasks like coding or multilingual translation.
+
+### Coding and Web Generation
+In 2026, code generation has become a primary use case for local models. Following this **gemma 4 12b model guide**, you will find that the 31B dense model is the most reliable for complex script creation. However, for rapid prototyping of HTML/CSS carousels or basic Python scripts, the E4B model provides a lightweight alternative that runs at over 100 tokens per second on modern GPUs.
+
+1.  **Select the 26B A4B** for advanced logic and multi-turn coding sessions.
+2.  **Use 4-bit quantization** to keep the model responsive on 16GB VRAM cards (like the RTX 4080/5080).
+3.  **Leverage the 256K context** for analyzing entire codebases or long documentation files.
+
+For official documentation and weight downloads, visit the [Google AI for Developers](https://ai.google.dev/gemma) portal.
+
+## FAQ
+
+**Q: Does Gemma 4 have a native 12B model?**
+
+A: No, the Gemma 4 lineup (released in 2026) has replaced the traditional 12B size with the **26B A4B** Mixture-of-Experts model. This provides better performance than a 12B model while maintaining high inference speeds.
+
+**Q: Can I run Gemma 4 on my phone?**
+
+A: Yes, the **E2B** and **E4B** variants are specifically optimized for on-device use. They utilize Per-Layer Embeddings (PLE) stored in flash memory to minimize RAM usage on mobile devices.
+
+**Q: What is the benefit of the "A4B" in the 26B model?**
+
+A: The "A4B" stands for **4 Billion Active Parameters**. This means that for every token generated, the model only uses a subset of its "experts," allowing it to run much faster than a standard 26B dense model while retaining high intelligence.
+
+**Q: Is this gemma 4 12b model guide applicable to Gemma 3?**
+
+A: While some local setup steps (like using Ollama) are the same, this guide focuses on the 2026 Gemma 4 architecture. Gemma 3 models (1B, 4B, 12B, 27B) use a different interleaving pattern and lack the p-RoPE and PLE optimizations found in the newer family.

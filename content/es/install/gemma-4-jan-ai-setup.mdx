@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Configuración de Gemma 4 en Jan AI: Guía Completa de Programación Local 2026",
+  description: "Aprende a configurar Gemma 4 en Jan AI para programar localmente con alto rendimiento. Guía paso a paso para la integración de API y optimización de Claude Code.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Jan+AI+Setup",
+  date: "2026-04-05",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de los últimos modelos de código abierto de Google ha cambiado por completo el panorama para los desarrolladores y usuarios avanzados que buscan eficiencia local. Implementar una **configuración de gemma 4 en jan ai** adecuada te permite aprovechar modelos de 26B y 31B parámetros directamente dentro de un entorno de escritorio optimizado. Esta configuración es particularmente potente para aquellos que desean alejarse de los costosos modelos basados en suscripción mientras mantienen un razonamiento de alto nivel y capacidades agénticas. Al usar Jan.ai como tu orquestador principal, puedes cerrar la brecha entre el hardware local y las potentes API en la nube, creando un flujo de trabajo fluido para la programación, depuración y automatización general de tareas.
+
+En esta guía, recorreremos todo el proceso de **configuración de gemma 4 en jan ai**, asegurándonos de que tengas las configuraciones de API y los parámetros de modelo correctos para superar los estándares de la industria. Ya sea que estés integrando esto en Claude Code o usándolo como un asistente local independiente, seguir estos pasos garantizará que tu entorno esté optimizado para el stack tecnológico de 2026.
+
+## ¿Por qué elegir Gemma 4 para tu flujo de trabajo local?
+
+Gemma 4 representa un salto significativo respecto a sus predecesores, construido sobre la arquitectura refinada de Gemini 3. A diferencia de las iteraciones anteriores, los modelos 26B y 31B ofrecen un equilibrio único de velocidad e inteligencia que rivaliza con modelos mucho más grandes como Qwen 3.5. Una de las características destacadas de Gemma 4 es su rendimiento en las puntuaciones ELO, un sistema de votación humana que clasifica las respuestas del modelo basándose en la calidad en lugar de solo en evaluaciones sintéticas.
+
+| Característica | Gemma 4 (31B) | Claude Haiku | Qwen 3.5 (35B) |
+| :--- | :--- | :--- | :--- |
+| **Código Abierto** | **Sí** | No | Sí |
+| **Capacidad Agéntica** | **Alta** | Moderada | Alta |
+| **Soporte Multimodal** | **Sí** | Sí | Sí |
+| **Costo (Nivel Gratuito)** | **Disponible** | Limitado | Disponible |
+
+El sistema ELO ha demostrado que Gemma 4 proporciona consistentemente respuestas "preferidas por humanos" en tareas de programación y razonamiento en comparación con modelos del doble de su tamaño. Esto lo convierte en el candidato principal para tu entorno local de Jan.ai, especialmente cuando necesitas un modelo que pueda manejar lógica compleja sin la latencia de un clúster masivo de 400B parámetros.
+
+## Configuración paso a paso de Gemma 4 en Jan AI
+
+Para comenzar, debes tener instalada la aplicación de escritorio Jan. Jan es una alternativa líder de código abierto a las interfaces de IA propietarias, que permite una personalización profunda de los proveedores de modelos y los ajustes del servidor local.
+
+### 1. Instalar Jan Desktop
+Dirígete al sitio web oficial [Jan.ai](https://jan.ai/) y descarga la versión compatible con tu sistema operativo (Windows, Linux o macOS). La instalación es sencilla; sigue las instrucciones e inicia la aplicación una vez completada.
+
+### 2. Configurar el proveedor Google AI Studio
+La forma más rentable de ejecutar la **configuración de gemma 4 en jan ai** en 2026 es a través del proveedor oficial Google AI Studio. Aunque OpenRouter es una opción, el uso de la API oficial a menudo otorga acceso a niveles gratuitos que no están disponibles a través de agregadores de terceros.
+
+*   Abre Jan y haz clic en el icono de engranaje de **Settings** (Configuración) en la esquina inferior izquierda.
+*   Selecciona **Model Provider** en la barra lateral.
+*   Localiza **Gemini** (o Google AI Studio) y actívalo.
+*   Verás un campo para una **API Key**.
+
+### 3. Generar tu clave API
+Sigue estos pasos para asegurar tus credenciales:
+1.  Visita el panel de control de Google AI Studio.
+2.  Haz clic en **Create API Key**.
+3.  Elige un proyecto existente o crea uno nuevo específicamente para tu integración con Jan.
+4.  Copia la clave generada y regresa a Jan.
+5.  Pega la clave en el campo de la API y haz clic en **Refresh**.
+
+> **⚠️ Advertencia:** Nunca compartas tu clave API en repositorios públicos o capturas de pantalla. En 2026, los bots automatizados pueden agotar tus límites de uso en segundos si una clave queda expuesta.
+
+### 4. Selección de los modelos Gemma 4
+Una vez que el proveedor se haya actualizado, verás una lista de modelos disponibles. Para una **configuración de gemma 4 en jan ai** de alto rendimiento, busca lo siguiente:
+*   **Gemma 4 31B:** El mejor para programación compleja y flujos de trabajo agénticos.
+*   **Gemma 4 26B:** Optimizado para la velocidad y tareas de razonamiento cotidianas.
+
+Selecciona tu versión preferida y haz clic en **Download** o **Use** para inicializar el modelo dentro de la interfaz de Jan.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/dhlrZwH1Uzg"
+    title="Gemma 4 + Claude Code + Jan : Best FREE AI Coding Setup"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Integración de Gemma 4 con Claude Code
+
+Una de las aplicaciones más potentes de la **configuración de gemma 4 en jan ai** es usarla como backend para Claude Code. Esto te permite enrutar tareas de programación específicas a Gemma 4, ahorrando tus créditos de Claude Opus o Sonnet solo para las decisiones arquitectónicas más difíciles.
+
+### Enrutamiento de modelos en Jan
+Dentro de la interfaz de Jan, navega a la pestaña **Integrations**. Si tienes instalado Claude Code a través de la CLI, puedes asignar diferentes modelos a los niveles estándar:
+*   **Nivel Opus:** Asignar a un modelo de alta resistencia o a Gemma 4 31B.
+*   **Nivel Sonnet:** Asignar a Gemma 4 26B.
+*   **Nivel Haiku:** Asignar a Gemma 4 (Small) o a una versión localizada del modelo.
+
+### Lanzamiento de la CLI
+Una vez guardado el enrutamiento, abre tu terminal e inicia el entorno de tu proyecto. Ejecuta el siguiente comando para verificar la integración:
+
+```bash
+claude code --model haiku
+```
+
+Al escribir `/model` dentro de la interfaz de Claude Code, deberías ver que el nivel Haiku ahora apunta con éxito a tu modelo Gemma 4 de 31B parámetros. Esta configuración proporciona un asistente de programación "gratuito" que rivaliza con los niveles de pago en velocidad y precisión.
+
+## Optimización del rendimiento y ventanas de contexto
+
+Para sacar el máximo provecho de tu **configuración de gemma 4 en jan ai**, debes gestionar tus recursos de hardware de forma eficaz. Aunque Gemma 4 es eficiente, ejecutarlo localmente requiere una comprensión clara de la VRAM frente a la RAM del sistema.
+
+| Componente de Hardware | Recomendado para 26B | Recomendado para 31B |
+| :--- | :--- | :--- |
+| **VRAM de GPU** | 16GB+ (RTX 4070 Ti o superior) | 24GB+ (RTX 3090/4090/5090) |
+| **RAM del Sistema** | 32GB DDR5 | 64GB DDR5 |
+| **Almacenamiento** | NVMe SSD | NVMe SSD |
+
+> **💡 Consejo:** Si el modelo se siente lento, verifica los ajustes de la ventana de contexto en Jan. Reducir el contexto de 128k a 32k puede aumentar significativamente la velocidad de tokens por segundo (TPS) en GPUs de gama media.
+
+Si estás usando una máquina con VRAM limitada, Jan permite descargar capas a la RAM del sistema. Sin embargo, ten en cuenta que esto resultará en una disminución del rendimiento. Para la programación agéntica, donde el modelo necesita leer múltiples archivos, es necesaria una ventana de contexto más grande. En 2026, se recomienda configurar tu ventana de contexto al menos en **80,000 tokens** si tu hardware lo permite, ya que esto evita que el modelo "olvide" las instrucciones del sistema inyectadas por herramientas como Claude Code.
+
+## Configuración avanzada: Subagentes
+
+Para el desarrollo full-stack complejo, una sola instancia de modelo a veces puede tener problemas con el desbordamiento del contexto. La **configuración de gemma 4 en jan ai** admite el uso de subagentes. Al pedir explícitamente al agente principal que "cree un subagente para esta tarea", generas una nueva ventana de contexto para un subcomponente específico de tu código. Esto es particularmente útil para:
+1.  **Pruebas unitarias:** Generar un agente solo para escribir pruebas de una función específica.
+2.  **Documentación:** Hacer que un subagente analice y documente un nuevo endpoint de API.
+3.  **Refactorización:** Aislar un módulo heredado para una limpieza sin saturar el historial de conversación principal.
+
+## FAQ
+
+**P: ¿Es la configuración de Gemma 4 en Jan AI completamente gratuita?**
+
+R: Sí, a partir de 2026, el uso de Gemma 4 a través del proveedor oficial de Google AI Studio ofrece un nivel gratuito muy generoso para desarrolladores individuales. Jan.ai en sí mismo es de código abierto y de uso gratuito.
+
+**P: ¿Puedo ejecutar Gemma 4 en una computadora portátil sin una GPU dedicada?**
+
+R: Puedes, pero dependerá de tu CPU y de la RAM del sistema. Esto será significativamente más lento (a menudo de 1 a 3 tokens por segundo). Para una experiencia utilizable, se recomienda una GPU dedicada con al menos 12 GB de VRAM.
+
+**P: ¿Por qué mi modelo se identifica como "Claude" o "Sonnet" después de la configuración?**
+
+R: Esto es común cuando se utiliza Claude Code como interfaz. Claude Code inyecta una instrucción de sistema pesada que le dice al modelo que es un modelo de Anthropic. El modelo subyacente sigue siendo Gemma 4, pero está siguiendo las instrucciones proporcionadas por el prompt del sistema.
+
+**P: ¿Cómo actualizo Gemma 4 dentro de Jan?**
+
+R: Ve a la sección **Models** en Jan, haz clic en los tres puntos junto a tu modelo Gemma 4 y selecciona **Check for Updates**. Si hay una versión más nueva o una cuantización más optimizada disponible, Jan te pedirá que la descargues.

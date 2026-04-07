@@ -1,0 +1,164 @@
+export const metadata = {
+  title: "Gemma 4 Ollama Chat Completion: Guía de configuración completa 2026",
+  description: "Aprenda a configurar gemma 4 ollama chat completion para una IA local y privada. Guía paso a paso para la integración de API, Open WebUI y optimización de hardware.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Ollama+Guide",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+Ejecutar inteligencia artificial de alto rendimiento de forma local se ha convertido en el estándar para desarrolladores y usuarios avanzados que priorizan la privacidad en 2026. Con el lanzamiento de los últimos modelos de pesos abiertos de Google, configurar un flujo de trabajo de **gemma 4 ollama chat completion** le permite aprovechar capacidades masivas de razonamiento sin enviar nunca datos a la nube. Esta configuración es particularmente efectiva porque combina la eficiencia del motor de inferencia Ollama con la sofisticada arquitectura de la familia Gemma 4.
+
+Ya sea que esté construyendo un asistente de codificación personalizado o una base de conocimientos privada, dominar la interfaz de **gemma 4 ollama chat completion** es esencial. Al utilizar el endpoint de la API compatible con OpenAI proporcionado por Ollama, puede integrar Gemma 4 en marcos de trabajo existentes como LangChain, AutoGPT o interfaces web personalizadas con cambios mínimos en el código. Esta guía proporciona un recorrido exhaustivo por los pasos de instalación, configuración y resolución de problemas necesarios para aprovechar al máximo su entorno de IA local.
+
+## Comprensión de las variantes del modelo Gemma 4
+
+Antes de iniciar su primera solicitud de **gemma 4 ollama chat completion**, debe seleccionar la variante del modelo que mejor se adapte a su hardware. Gemma 4 se distribuye en varios tamaños, que van desde modelos 1B aptos para móviles hasta la versión insignia de 31B parámetros.
+
+El modelo 26B es un referente en 2026, ya que utiliza una arquitectura de "Mezcla de Expertos" (MoE). Esto permite que el modelo posea 26 mil millones de parámetros totales mientras solo activa una fracción (aproximadamente 4 mil millones) durante la inferencia, proporcionando una lógica de alta calidad sin requerir una potencia computacional extrema.
+
+| Variante del modelo | Recuento de parámetros | VRAM mínima | Hardware recomendado |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 1B** | 1 Mil millones | 2 GB | Dispositivos móviles, Raspberry Pi |
+| **Gemma 4 4B** | 4 Mil millones | 4 GB | Portátiles estándar, GPUs integradas |
+| **Gemma 4 12B** | 12 Mil millones | 8 GB | PCs gaming de gama media (RTX 3060+) |
+| **Gemma 4 26B (MoE)** | 26 Mil millones | 16 GB | Sobremesa de gama alta, Apple M2/M3 Pro |
+| **Gemma 4 31B** | 31 Mil millones | 20 GB+ | Estaciones de trabajo, RTX 4090, Apple M3 Max |
+
+> **💡 Consejo:** Si no está seguro de cuál elegir, la variante **4B** es la más versátil para tareas de chat general en hardware de consumo moderno, mientras que la **26B** es superior para codificación y razonamiento complejos.
+
+## Instalación de Ollama para inferencia local
+
+Ollama sirve como el motor que impulsa su IA local. Maneja las complejidades de la aceleración por GPU y proporciona la API REST necesaria para los completados de chat (chat completions).
+
+### Instalación paso a paso
+
+1.  **Descargar Ollama:** Visite el sitio oficial y descargue el instalador para Windows, macOS o Linux.
+2.  **Ejecutar el instalador:** En Windows, ejecute el `.exe` y siga las instrucciones. En macOS, arrastre la aplicación a su carpeta. Los usuarios de Linux pueden usar el comando `curl` de una sola línea proporcionado en el sitio.
+3.  **Verificar el servicio:** Abra su terminal o símbolo del sistema y escriba `ollama --version` para asegurarse de que la instalación fue exitosa.
+4.  **Descargar el modelo:** Descargue los pesos específicos de Gemma 4 ejecutando:
+    `ollama pull gemma4:12b` (Reemplace `12b` con su tamaño preferido).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Configuración de la API de Chat Completion
+
+Ollama expone un endpoint compatible con OpenAI en `http://localhost:11434/v1/chat/completions`. Este es el método principal para integrar Gemma 4 en aplicaciones de terceros.
+
+Al enviar una solicitud, la carga útil JSON sigue el formato de chat estándar. Sin embargo, un problema común en 2026 involucra el modo de "Pensamiento" o "Razonamiento" de Gemma 4, que a veces puede resultar en campos de contenido vacíos si el cliente no admite tokens de razonamiento.
+
+### Ejemplo de solicitud de API
+
+Para asegurar un **gemma 4 ollama chat completion** exitoso, use la siguiente estructura en sus solicitudes de `curl` o Python:
+
+```json
+{
+  "model": "gemma4:26b",
+  "messages": [
+    {"role": "system", "content": "Eres un asistente servicial."},
+    {"role": "user", "content": "Explica el entrelazamiento cuántico."}
+  ],
+  "reasoning_effort": "none",
+  "stream": false
+}
+```
+
+| Parámetro | Tipo | Descripción |
+| :--- | :--- | :--- |
+| **model** | String | El nombre exacto del modelo descargado (ej. `gemma4:4b`) |
+| **messages** | Array | Lista de objetos de mensaje con roles (system, user, assistant) |
+| **reasoning_effort** | String | Establezca en **"none"** para evitar errores de contenido vacío en algunas versiones |
+| **stream** | Boolean | Establezca en **true** para la generación de tokens en tiempo real |
+
+> **⚠️ Advertencia:** Si nota que el campo `content` en su respuesta de la API está vacío pero el campo `reasoning` está lleno, actualice su versión de Ollama o establezca `reasoning_effort` en "none" en su carga útil de solicitud.
+
+## Mejora de la interfaz con Open WebUI
+
+Si bien la terminal es excelente para pruebas, una experiencia profesional de **gemma 4 ollama chat completion** a menudo requiere una interfaz gráfica. Open WebUI es un panel de control gratuito y de código abierto que proporciona una experiencia similar a ChatGPT de forma local.
+
+### Instalación mediante Docker
+
+Usar Docker es la forma más eficiente de desplegar Open WebUI en 2026. Garantiza que todas las dependencias estén aisladas de su sistema operativo principal.
+
+1.  **Instalar Docker Desktop:** Descárguelo e instálelo para su SO.
+2.  **Ejecutar el comando:** Ejecute lo siguiente en su terminal:
+    `docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main`
+3.  **Acceder al panel:** Abra su navegador y navegue a `http://localhost:3000`.
+4.  **Conectar a Ollama:** Open WebUI debería detectar automáticamente su servicio Ollama en ejecución y listar Gemma 4 en el menú desplegable de modelos.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Funciones avanzadas: Bases de conocimientos y entrada multimodal
+
+Una de las ventajas significativas de usar **gemma 4 ollama chat completion** dentro de Open WebUI es la capacidad de crear "Bases de conocimientos". Esta función utiliza la Generación Aumentada por Recuperación (RAG) para permitir que la IA haga referencia a sus documentos locales (PDFs, hojas de cálculo, archivos de texto) sin enviarlos a un servidor.
+
+### Creación de una base de conocimientos
+*   **Subir documentos:** Navegue a la sección "Workspace" y seleccione "Knowledge".
+*   **Indexación:** Open WebUI fragmenta e indexa sus archivos localmente.
+*   **Consulta:** En un nuevo chat, use el símbolo `#` seguido del nombre de su base de conocimientos. Gemma 4 ahora responderá preguntas basadas específicamente en esos documentos.
+
+### Capacidades multimodales
+Gemma 4 es intrínsecamente multimodal. Puede arrastrar y soltar imágenes directamente en la interfaz de chat. El modelo puede:
+1.  **Describir fotos:** Extraer detalles de escenas complejas.
+2.  **Tareas de OCR:** Leer texto de capturas de pantalla o notas escritas a mano.
+3.  **Análisis de datos:** Interpretar tablas y gráficos proporcionados como imágenes.
+
+## Resolución de problemas comunes de la API
+
+Incluso con una configuración perfecta, puede encontrar cuellos de botella en el rendimiento o errores de conectividad. Siga esta lista de verificación para resolver los problemas más frecuentes en 2026.
+
+| Problema | Causa probable | Solución |
+| :--- | :--- | :--- |
+| **Conexión rechazada** | El servicio Ollama no se está ejecutando | Ejecute `ollama serve` en la terminal |
+| **Alta latencia** | El modelo se ejecuta en la CPU | Asegúrese de que los controladores de GPU (CUDA/ROCm) estén actualizados |
+| **Memoria insuficiente (OOM)** | VRAM excedida | Cambie a un modelo más pequeño (ej. de 26B a 12B) |
+| **Respuesta de contenido vacío** | Conflicto del modo de razonamiento | Use `reasoning_effort: "none"` en la llamada a la API |
+
+> **💡 Consejo:** Los usuarios de Apple Silicon (M1/M2/M3) deben asegurarse de tener al menos 16 GB de memoria unificada para ejecutar los modelos 12B y 26B sin problemas, ya que el sistema comparte la memoria entre la CPU y la GPU.
+
+## Resumen de puntos clave
+
+El ecosistema de **gemma 4 ollama chat completion** ofrece una alternativa potente y privada a la IA basada en la nube. Al seleccionar el tamaño de modelo correcto para su hardware y utilizar herramientas como Open WebUI, puede construir una estación de trabajo de IA sofisticada que funcione completamente fuera de línea.
+
+*   **Privacidad:** Ningún dato sale de su máquina, lo que lo hace ideal para documentos confidenciales.
+*   **Costo:** Completamente gratuito con sin suscripciones ni tarifas por token.
+*   **Versatilidad:** Admite texto, imágenes y análisis de documentos de contexto largo.
+*   **Integración:** La API compatible con OpenAI garantiza la compatibilidad con casi todas las herramientas modernas de desarrollo de IA.
+
+Para obtener más documentación técnica, visite el [repositorio oficial de Ollama en GitHub](https://github.com/ollama/ollama) para mantenerse al día con los últimos parches de rendimiento y lanzamientos de modelos a lo largo de 2026.
+
+## Preguntas frecuentes
+
+**P: ¿Puedo ejecutar Gemma 4 en un portátil sin una GPU dedicada?**
+
+R: Sí, Ollama puede ejecutar Gemma 4 en una CPU, pero será significativamente más lento. Para una experiencia utilizable sin una GPU, quédese con las variantes **1B** o **4B**. Los usuarios de Mac con Apple Silicon son la excepción, ya que su arquitectura integrada maneja modelos más grandes de manera muy eficiente.
+
+**P: ¿Cómo actualizo mi modelo Gemma 4 a la última versión?**
+
+R: Puede actualizar sus pesos locales ejecutando `ollama pull gemma4:[versión]` en su terminal. Ollama buscará cambios en las capas del modelo y solo descargará las actualizaciones necesarias, ahorrando tiempo y ancho de banda.
+
+**P: ¿Por qué mi solicitud de gemma 4 ollama chat completion devuelve un error 404?**
+
+R: Un error 404 suele indicar que el nombre del modelo en su carga útil JSON no coincide exactamente con el modelo descargado en Ollama. Ejecute `ollama list` para ver los nombres exactos de sus modelos instalados y asegúrese de que su solicitud de API utilice la cadena idéntica.
+
+**P: ¿Es posible usar Gemma 4 para proyectos comerciales?**
+
+R: Sí. Gemma 4 se lanza bajo la licencia Apache 2.0, que es altamente permisiva y permite el uso comercial, la modificación y la distribución sin regalías, siempre que se sigan los términos estándar de la licencia.

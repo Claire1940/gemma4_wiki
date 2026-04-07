@@ -1,0 +1,129 @@
+export const metadata = {
+  title: "Gemma 4 vs Gemma 2: Comparativa Completa y Guía de Actualización 2026",
+  description: "Explora las principales diferencias en la comparativa gemma 4 vs gemma 2. Conoce la nueva arquitectura MoE, el soporte multimodal y consejos para el despliegue local.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+vs+Gemma+2+Comparison",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado drásticamente con el lanzamiento de la última familia de modelos de Google. Al observar **gemma 4 vs gemma 2**, queda claro que la transición de la generación anterior al estándar de 2026 representa más que una simple actualización incremental. Gemma 4 introduce un cambio fundamental hacia flujos de trabajo "agénticos", soporte nativo multimodal y un modelo de licencia más permisivo que empodera tanto a desarrolladores como a entusiastas locales.
+
+Ya sea que estés ejecutando estos modelos en un equipo de gaming de gama alta o en un dispositivo móvil, comprender los matices de **gemma 4 vs gemma 2** es esencial para optimizar tu entorno de IA local. En esta guía completa, desglosamos los cambios arquitectónicos, los puntos de referencia de rendimiento y las estrategias de despliegue que definen esta nueva era de pesos abiertos. Desde la masiva ventana de contexto de 250,000 tokens hasta los innovadores modelos de parámetros "Efectivos", aquí tienes todo lo que necesitas saber sobre cómo se comparan estas dos generaciones.
+
+## Evolución de la Familia Gemma: Arquitectura y Licencias
+
+El cambio más inmediato en la comparativa **gemma 4 vs gemma 2** es la licencia. Mientras que Gemma 2 operaba bajo unos "Términos de uso de Gemma" personalizados, Gemma 4 se ha lanzado bajo la **licencia Apache 2.0**. Este es un movimiento histórico para Google DeepMind, que ofrece significativamente más libertad para el uso comercial y la redistribución.
+
+Arquitectónicamente, Gemma 4 se aleja de las estructuras puramente densas vistas en muchas variantes de Gemma 2. Mientras que Gemma 2 se centró fuertemente en la destilación para lograr un alto rendimiento en tamaños reducidos (como los modelos 9B y 27B), Gemma 4 utiliza un enfoque de **Mezcla de Expertos (MoE)** y **Embeddings por Capa (PLE)** para maximizar la eficiencia.
+
+| Característica | Gemma 2 (Legado) | Gemma 4 (Estándar 2026) |
+| :--- | :--- | :--- |
+| **Licencia** | Pesos Abiertos Personalizados | **Apache 2.0** |
+| **Ventana de Contexto Máx.** | 8k - 32k Tokens | **250k Tokens** |
+| **Modalidad Nativa** | Mayormente solo texto | **Nativo en Visión y Audio** |
+| **Arquitectura** | Primordialmente Densa | **Densa, MoE y PLE** |
+| **Enfoque Principal** | Eficiencia de Inferencia | **Lógica Agéntica y Multimodal** |
+
+## Desglose de la Línea de Modelos
+
+Gemma 4 ha diversificado su familia para cubrir una gama más amplia de hardware, desde dispositivos IoT hasta estaciones de trabajo locales de grado empresarial. Al comparar **gemma 4 vs gemma 2**, las convenciones de nomenclatura también han evolucionado para reflejar los recuentos de parámetros "Activos" y "Efectivos".
+
+### Las Potencias: 31B Dense y 26B A4B
+Los modelos insignia de la familia Gemma 4 están diseñados para el razonamiento de frontera. El modelo **31B Dense** está optimizado para la calidad de respuesta pura, mientras que el **26B A4B** (Active 4 Billion) utiliza una arquitectura de Mezcla de Expertos. El modelo 26B A4B contiene 26 mil millones de parámetros totales, pero solo activa 4 mil millones durante cualquier paso de inferencia individual, lo que le permite ejecutarse con la velocidad de un modelo mucho más pequeño manteniendo la base de conocimientos de uno más grande.
+
+### Los Campeones Móviles: E2B y E4B
+La "E" en estos modelos significa **Parámetros Efectivos** (Effective Parameters). Estos modelos utilizan Embeddings por Capa, lo que les permite almacenar información de alta densidad en el almacenamiento flash en lugar de obstruir la valiosa VRAM. Esto convierte a los modelos E2B y E4B en la opción ideal para smartphones y portátiles con memoria limitada.
+
+> **💡 Consejo:** Si tienes 16GB de RAM o menos, el **Gemma 4 E4B** o el **26B A4B** son tus mejores opciones para un rendimiento local fluido.
+
+## Inmersión Técnica: ¿Qué hace que Gemma 4 sea más rápido?
+
+Un componente central de la brecha de rendimiento entre **gemma 4 vs gemma 2** radica en cómo los modelos manejan la atención. Gemma 4 introduce una estrategia refinada de "Capa de Entrelazado" (Interleaving Layer). Esta alterna entre **Atención Local** (ventana deslizante) y **Atención Global**.
+
+En los modelos E2B más pequeños, esto sigue un patrón 4:1 (cuatro capas locales por cada una global), mientras que los modelos más grandes usan un patrón 5:1. Esto reduce significativamente la carga computacional en comparación con las estructuras de atención más rígidas de Gemma 2.
+
+### Mejoras en la Atención Global
+Gemma 4 implementa varios "trucos" para que las capas de atención global sean más eficientes:
+1. **K=V:** En las capas globales, las Claves (Keys) se establecen como equivalentes a los Valores (Values), reduciendo a la mitad la memoria requerida para el K-cache.
+2. **p-RoPE:** Una Codificación Posicional Rotatoria podada por baja frecuencia que aplica datos posicionales a solo el 25% de las dimensiones, preservando el significado semántico en conversaciones de contexto largo.
+3. **Atención de Consulta Agrupada (GQA):** Gemma 4 utiliza 8 cabezales de Consulta por cada cabezal KV en las capas globales, optimizando aún más el uso de la memoria.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades Multimodales: Ver y Oír
+
+Quizás la diferencia funcional más significativa en la comparativa **gemma 4 vs gemma 2** es el soporte nativo para visión y audio. Mientras que Gemma 2 era principalmente un modelo de texto a texto, Gemma 4 es nativamente multimodal.
+
+*   **Codificador de Visión:** Basado en el Vision Transformer (ViT), Gemma 4 puede procesar imágenes de diversas relaciones de aspecto mediante el uso de redimensionamiento adaptativo y RoPE 2D. Agrupa los parches de imagen en "tokens suaves" que el modelo de lenguaje puede entender.
+*   **Codificador de Audio:** Los modelos más pequeños (E2B y E4B) cuentan con un codificador de audio **Conformer**. Esto permite que el modelo "escuche" audio bruto convirtiéndolo en mel-espectrogramas y luego en embeddings, lo que permite la transcripción de voz a texto y la traducción en tiempo real sin complementos externos.
+
+## Despliegue Local: Configuración de Gemma 4 con Open WebUI
+
+Una de las mejores maneras de experimentar el salto de **gemma 4 vs gemma 2** es a través de una interfaz local como **Open WebUI**. Esta configuración te permite ejecutar Gemma 4 de forma completamente privada en tu máquina, con funciones que rivalizan con servicios basados en la nube como ChatGPT.
+
+### Requisitos previos para la configuración local
+Para ejecutar los modelos más grandes de Gemma 4 (como el 26B MoE), generalmente necesitarás:
+*   **Docker Desktop** instalado en tu máquina.
+*   **Ollama** como motor back-end para servir el modelo.
+*   Al menos **16GB de RAM** (se recomiendan 32GB para el modelo 31B Dense).
+
+### Instalación paso a paso
+1.  **Instalar Docker:** Descarga Docker Desktop y asegúrate de que WSL 2 esté habilitado (en Windows).
+2.  **Ejecutar Open WebUI:** Usa el siguiente comando en tu terminal:
+    `docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/data --name open-webui ghcr.io/open-webui/open-webui:main`
+3.  **Descargar Gemma 4:** En tu terminal, escribe `ollama pull gemma4:26b` para descargar la variante de Mezcla de Expertos.
+4.  **Acceder al Panel de Control:** Abre tu navegador en `localhost:3000`.
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B Dense en una máquina con solo 8GB de RAM causará ralentizaciones extremas del sistema. Quédate con las versiones E4B o 26B A4B para hardware de menores especificaciones.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Casos de Uso: ¿Por qué actualizar a Gemma 4?
+
+Si actualmente usas Gemma 2 para chatbots básicos, es posible que te preguntes si la actualización vale la pena. La respuesta reside en las capacidades de la era "Agéntica" de Gemma 4.
+
+### 1. Bases de Conocimiento Documentales
+A diferencia de Gemma 2, que tenía dificultades con la memoria a largo plazo entre chats, Gemma 4 combinado con Open WebUI te permite construir **Bases de Conocimiento**. Puedes subir docenas de PDFs o hojas de cálculo una vez, y el modelo los indexará. Debido a la ventana de contexto de un cuarto de millón de tokens, puede referenciar estos documentos con precisión en cualquier conversación futura.
+
+### 2. Personas Personalizadas
+Gemma 4 responde excepcionalmente bien a los prompts del sistema. Puedes crear un "Asistente de Correo Profesional" o una persona de "Experto en Programación Python" que se mantenga consistente. La capacidad del modelo para seguir instrucciones complejas de varios pasos es un salto significativo en la comparativa **gemma 4 vs gemma 2**.
+
+### 3. Análisis de Imágenes y Datos
+Con el codificador de visión nativo, puedes arrastrar y soltar una captura de pantalla de un gráfico en el chat. Gemma 4 puede analizar las tendencias, extraer el texto e incluso sugerir mejoras para la visualización de los datos.
+
+## FAQ (Preguntas Frecuentes)
+
+**P: ¿Puedo ejecutar Gemma 4 en mi teléfono?**
+
+R: ¡Sí! Los modelos **Gemma 4 E2B** y **E4B** están diseñados específicamente para dispositivos móviles. Utilizan Embeddings por Capa para minimizar el uso de RAM, lo que los hace altamente eficientes para tareas en el dispositivo como asistencia por voz y traducción.
+
+**P: ¿Es notable la diferencia de rendimiento entre gemma 4 vs gemma 2 en programación?**
+
+R: Absolutamente. Los modelos 26B y 31B de Gemma 4 han sido entrenados en bases de código significativamente más diversas y cuentan con soporte nativo para el uso de herramientas. Esto les permite planificar y ejecutar flujos de programación de varios turnos de manera mucho más efectiva que Gemma 2.
+
+**P: ¿Necesito una conexión a Internet para usar Gemma 4?**
+
+R: No. Una vez que hayas descargado los pesos a través de Ollama o una herramienta similar, Gemma 4 se ejecuta 100% localmente. Esto garantiza una privacidad total para documentos sensibles y análisis de datos.
+
+**P: ¿Qué modelo debería elegir para un portátil con 16GB de RAM?**
+
+R: El **Gemma 4 26B A4B** es el mejor equilibrio entre inteligencia y velocidad para sistemas de 16GB. Debido a que solo activa 4 mil millones de parámetros a la vez, mantiene la capacidad de respuesta mientras proporciona un razonamiento de alta calidad.

@@ -1,0 +1,123 @@
+export const metadata = {
+  title: "Gemma 4 Text Generation WebUI 가이드: 2026년 로컬 설정 완벽 가이드",
+  description: "Open WebUI 및 text-generation-webui를 사용하여 Gemma 4를 설치하고 최적화하는 방법을 배워보세요. 2026년 개인용 로컬 AI 성능을 위한 종합 가이드입니다.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Gemma+4+WebUI+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+고성능 비공개 AI 환경을 구축하는 것이 **gemma 4 text generation webui 가이드**와 함께라면 그 어느 때보다 쉬워졌습니다. 2026년, 오픈 소스 대규모 언어 모델(LLM)의 판도는 로컬 우선 솔루션으로 이동하여, 게이머와 개발자가 자신의 하드웨어에서 직접 Google의 Gemma 4와 같은 강력한 모델을 실행할 수 있게 되었습니다. 이 종합적인 **gemma 4 text generation webui 가이드**는 하드웨어 요구 사항부터 검색 증강 생성(RAG) 및 맞춤형 AI 페르소나와 같은 고급 설정까지 모든 내용을 다룹니다.
+
+클라우드 기반 구독에서 벗어남으로써 데이터에 대한 완전한 통제권과 100% 프라이버시를 확보할 수 있습니다. 게임 설정을 위한 로컬 지식 베이스를 구축하든, 독점 스크립트를 공유하지 않는 코딩 어시스턴트가 필요하든, 이 가이드에서 다루는 도구들은 가공되지 않은 모델을 세련된 ChatGPT와 같은 경험으로 바꾸는 데 필요한 인터페이스를 제공합니다.
+
+## 하드웨어 요구 사항: Gemma 4 Text Generation WebUI 가이드
+
+설치를 시작하기 전에 시스템이 계산 부하를 감당할 수 있는지 확인해야 합니다. Gemma 4는 가벼운 7B 모델부터 정교한 26B Mixture of Experts (MoE) 변체까지 다양한 크기로 제공됩니다. 다음 표는 표준 4비트(Q4) 양자화를 기준으로 다양한 모델 크기에 대한 최소 및 권장 사양을 요약한 것입니다.
+
+| 모델 크기 | 최소 VRAM | 권장 GPU | 시스템 RAM |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 7B** | 6GB | RTX 3060 / 4060 | 16GB |
+| **Gemma 4 13B** | 10GB | RTX 3080 / 4070 | 16GB |
+| **Gemma 4 26B (MoE)** | 18GB | RTX 3090 / 4090 | 32GB |
+| **Gemma 4 70B** | 40GB | A100 / Dual 3090s | 64GB |
+
+> **💡 팁:** GPU에서 26B 모델을 완전히 실행할 VRAM이 부족한 경우, `llama.cpp` 로더를 사용하여 일부 레이어를 시스템 RAM으로 오프로드할 수 있지만, 이는 생성 속도를 크게 저하시킵니다.
+
+## 경로 1: Docker를 통한 Open WebUI 설치
+
+Open WebUI는 현재 로컬 모델을 위한 가장 인기 있는 "프런트엔드"로, 전문적인 클라우드 AI 도구를 모방한 세련된 인터페이스를 제공합니다. 이는 실제 모델 처리를 담당하는 Ollama라는 엔진 위에서 작동합니다. 문서 업로드 및 검색 가능한 히스토리와 같은 기능이 필요한 사용자는 이 **gemma 4 text generation webui 가이드** 경로를 따르는 것을 권장합니다.
+
+### 단계별 Docker 설정
+
+1.  **Docker Desktop 설치:** 운영 체제(Windows, Mac 또는 Linux)에 맞는 Docker를 다운로드하여 설치합니다. Windows에서는 설치 과정에서 **WSL 2**가 활성화되어 있는지 확인하세요.
+2.  **Ollama 확인:** Ollama가 설치되어 시스템 트레이에서 실행 중인지 확인합니다. 터미널에 `ollama pull gemma4:26b`를 입력하여 최신 모델을 다운로드할 수 있습니다.
+3.  **Open WebUI 명령 실행:** 터미널이나 명령 프롬프트를 열고 다음 명령어를 복사하여 붙여넣어 인터페이스를 다운로드하고 실행합니다:
+    `docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main`
+4.  **대시보드 접속:** 브라우저를 열고 `localhost:3000`으로 이동합니다. 로컬 계정을 생성하라는 메시지가 표시되며, 이 데이터는 전적으로 사용자 머신에만 유지됩니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 경로 2: Oobabooga Text-Generation-WebUI 사용
+
+샘플링 파라미터, 모델 로더 및 학습(LoRA)에 대한 세밀한 제어를 원하는 파워 유저에게는 "Oobabooga" 인터페이스가 업계 표준입니다. **gemma 4 text generation webui 가이드**에서 강조했듯이, 이 도구는 NVIDIA GPU에서 더 나은 성능을 제공할 수 있는 EXL2 및 GPTQ를 포함한 더 많은 모델 형식을 지원합니다.
+
+### 원클릭 설치
+가장 쉬운 시작 방법은 독립형 포터블 빌드를 사용하는 것입니다.
+*   **Windows:** zip 파일을 다운로드하고 압축을 푼 뒤 `start_windows.bat`를 실행합니다.
+*   **Linux:** 터미널에서 `start_linux.sh`를 실행합니다.
+*   **MacOS:** `start_macos.sh`를 사용합니다.
+
+첫 실행 시 설치 프로그램이 GPU 제조사(NVIDIA, AMD 또는 Intel)를 묻습니다. 설치가 완료되면 UI에 `http://127.0.0.1:7860`에서 접속할 수 있습니다.
+
+| 기능 | Open WebUI | Text-Generation-WebUI |
+| :--- | :--- | :--- |
+| **최적 용도** | 일상적인 채팅 / RAG | 연구 / 성능 |
+| **모델 형식** | GGUF (Ollama 경유) | GGUF, EXL2, GPTQ, HF |
+| **모바일 지원** | 우수 (반응형) | 제한적 |
+| **확장 기능** | 도구, 함수 | TTS, 이미지 생성, 학습 |
+
+## 고급 기능: 지식 베이스 및 RAG
+
+현대 로컬 AI의 가장 강력한 측면 중 하나는 모델의 답변을 자신의 데이터에 근거하게 만드는 능력입니다. **gemma 4 text generation webui 가이드**는 Open WebUI의 "Knowledge(지식)" 기능을 사용하여 영구적인 문서 컬렉션을 생성할 것을 권장합니다.
+
+PDF나 텍스트 파일을 지식 베이스에 업로드하면 시스템이 문서를 "청크(chunks)"로 나누고 인덱싱합니다. 질문을 하면 UI는 가장 관련성 높은 청크를 찾아 Gemma 4에 컨텍스트로 제공합니다. 이는 모델이 "환각(hallucination)"을 일으키는 것을 방지하고 답변이 특정 파일을 기반으로 하도록 보장합니다.
+
+> **⚠️ 경고:** 대규모 지식 베이스는 초기 인덱싱 단계에서 상당한 디스크 공간과 CPU를 소모할 수 있습니다. 수백 개의 문서를 인덱싱할 계획이라면 최소 20GB의 여유 공간을 확보하세요.
+
+### 지식 베이스 사용 방법:
+1.  **Workspace** 탭으로 이동하여 **Knowledge**를 선택합니다.
+2.  **Add New Knowledge**를 클릭하고 파일(PDF, DOCX 또는 TXT)을 업로드합니다.
+3.  새 채팅에서 **#** (파운드) 키를 사용하여 AI가 참조하길 원하는 특정 지식 베이스를 태그합니다.
+
+## 맞춤형 페르소나 및 시스템 프롬프트
+
+Gemma 4는 다재다능한 모델이지만 특정 "페르소나"가 주어졌을 때 가장 잘 수행됩니다. **gemma 4 text generation webui 가이드**는 반복적인 작업을 위해 특화된 어시스턴트를 생성할 것을 권장합니다. 시스템 프롬프트를 정의함으로써 모델이 특정 어조, 전문 지식 또는 출력 형식을 갖도록 강제할 수 있습니다.
+
+예를 들어, "게임 설정 전문가" 페르소나는 다음과 같은 시스템 프롬프트를 가질 수 있습니다: *"당신은 RPG 세계관 구축 전문가입니다. 게임 메커니즘에 대한 질문을 받으면 상세한 분석을 제공하고 내러티브 요소를 제안하세요."*
+
+### Open WebUI에서 페르소나 생성하기:
+1.  **Workspace** > **Models** > **New Model**로 이동합니다.
+2.  기본 모델로 **Gemma 4**를 선택합니다.
+3.  **System Prompt** 필드에 사용자 지정 지침을 입력합니다.
+4.  모델을 저장합니다. 이제 메인 모델 드롭다운에 표시되어 빠르게 액세스할 수 있습니다.
+
+## 게이밍 PC를 위한 성능 최적화
+
+하드웨어를 최대한 활용하려면 **gemma 4 text generation webui 가이드**의 성능 팁을 따르는 것이 필수적입니다. 목표는 고품질 출력을 유지하면서 초당 토큰 수(TPS)를 최대화하는 것입니다.
+
+| 최적화 | 방법 | 영향 |
+| :--- | :--- | :--- |
+| **양자화** | 4비트(Q4_K_M) 또는 8비트(Q8_0) 사용 | VRAM 사용량을 50-70% 감소 |
+| **GPU 오프로딩** | `n-gpu-layers`를 -1(전체)로 설정 | 생성 속도 극대화 |
+| **Flash Attention** | 로더 설정에서 활성화 | 긴 컨텍스트에서 속도 향상 |
+| **컨텍스트 길이** | 4096 또는 8192로 제한 | "메모리 부족" 오류 방지 |
+
+생성 속도가 느려지면 `nvidia-smi`와 같은 도구를 사용하여 VRAM 사용량을 확인하세요. 사용량이 95% 이상이면 시스템이 느린 시스템 RAM으로 스와핑 중일 수 있습니다. 이 경우 더 작은 양자화 버전이나 더 작은 모델 크기를 시도해 보세요. [공식 Hugging Face 저장소](https://huggingface.co/models)에서 Gemma 4의 다양한 사전 양자화 버전을 찾을 수 있습니다.
+
+## FAQ
+
+**Q: 인터넷 연결 없이 Gemma 4를 실행할 수 있나요?**
+
+A: 네. 모델과 WebUI 파일을 다운로드하면 전체 설정이 100% 오프라인으로 실행됩니다. 이 **gemma 4 text generation webui 가이드**는 로컬 및 비공개 환경을 위해 특별히 설계되었습니다.
+
+**Q: 7B와 26B 모델의 차이점은 무엇인가요?**
+
+A: 7B 모델은 더 빠르고 VRAM을 적게 사용하므로 기본적인 채팅과 구형 GPU에 적합합니다. 26B 모델은 "Mixture of Experts" 아키텍처를 사용하여 추론 능력이 훨씬 뛰어나고 스마트하지만, 최소 16-18GB의 VRAM이 필요합니다.
+
+**Q: text-generation-webui의 "원클릭 설치 프로그램"을 사용해도 안전한가요?**
+
+A: 일반적으로 그렇습니다. 설치 프로그램은 오픈 소스이며 AI 커뮤니티에서 널리 사용됩니다. 모든 AI 종속성을 메인 시스템 파일과 별도로 유지하기 위해 "Conda" 환경을 생성하여 소프트웨어 충돌을 방지합니다.
+
+**Q: gemma 4 text generation webui 가이드를 사용하여 모델을 어떻게 업데이트하나요?**
+
+A: Open WebUI의 경우 `ollama pull gemma4`를 사용하여 Ollama 터미널을 통해 직접 업데이트를 가져올 수 있습니다. text-generation-webui의 경우 메인 폴더에 있는 `update_wizard_windows.bat` 파일을 사용하여 최신 개선 사항 및 버그 수정을 가져올 수 있습니다.

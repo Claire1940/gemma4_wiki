@@ -1,0 +1,124 @@
+export const metadata = {
+  title: "Gemma 4 vs Qwen 2.5: Comparativa completa de rendimiento 2026",
+  description: "Un análisis profundo del panorama de los LLM en 2026 comparando Gemma 4 de Google y la serie Qwen 2.5 de Alibaba. Descubre qué modelo local gana en gaming, programación y eficiencia de hardware.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+vs+Qwen+2.5+Comparison",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+Elegir el modelo de lenguaje de gran tamaño (LLM) local adecuado en 2026 se ha vuelto tan crítico como elegir la GPU correcta para un equipo de gaming de gama alta. Con el lanzamiento de la última potencia de pesos abiertos de Google, el debate entre **Gemma 4 vs Qwen 2.5** se ha intensificado entre desarrolladores, jugadores e investigadores de seguridad por igual. Ambas familias de modelos ofrecen un rendimiento increíble en hardware de consumo, pero atienden a flujos de trabajo y configuraciones de hardware muy diferentes.
+
+In esta guía exhaustiva, analizamos cómo se comparan **Gemma 4 vs Qwen 2.5** en diversos benchmarks, desde velocidades brutas de tokens por segundo (TPS) en las últimas tarjetas NVIDIA RTX serie 50 hasta su utilidad en tareas agénticas complejas como pentesting con IA y generación de código. Ya sea que busques un modelo compacto para ejecutarlo en un dispositivo de gaming portátil o un núcleo de razonamiento masivo para tu estación de trabajo doméstica, comprender los matices de estos dos titanes es esencial para optimizar tu stack de IA local en 2026.
+
+## Desglose arquitectónico y tamaños de modelos
+
+El panorama de los modelos abiertos en 2026 se define por la versatilidad. Gemma 4 de Google ha refinado la arquitectura "destilada", ofreciendo un razonamiento de alto rendimiento con menor número de parámetros. Mientras tanto, la serie Qwen 2.5 y la nueva Qwen 3 continúan superando los límites de lo posible con conteos masivos de parámetros y amplias capacidades de uso de herramientas.
+
+Al comparar la "huella" física de estos modelos, Gemma 4 suele ser elogiado por su razonamiento local más "limpio". Está diseñado para situarse tras una capa de gobernanza, lo que lo hace ideal para usuarios que desean un modelo que actúe como un núcleo de razonamiento controlado. Qwen, por el contrario, está diseñado para la era "agéntica", viniendo de serie con un ecosistema masivo de herramientas como Qwen-Agent y Qwen-Code.
+
+| Nivel de modelo | Variantes de Gemma 4 | Variantes de Qwen 2.5/3 | Hardware recomendado |
+|---|---|---|---|
+| **Ultra-ligero** | 1B (Solo texto) | 0.5B / 1.5B | Dispositivos móviles / Portátiles |
+| **Gama media** | 4B / 12B | 7B / 14B | Laptops de gama alta (16GB RAM) |
+| **Estación de trabajo** | 27B / 31B | 32B / 72B | RTX 5090 / Mac M4 Pro |
+| **Centro de datos** | Personalizado / Cloud | 480B (Qwen 3 Coder) | Multi-GPU / Memoria unificada |
+
+> **⚠️ Advertencia:** Ejecutar un modelo de más de 30B de parámetros con cuantización Q8 requiere más de 32GB de VRAM. Si tu modelo excede la capacidad de tu VRAM, experimentarás un "desbordamiento de CPU" (CPU spillover), lo que puede hundir tu rendimiento en un 70% o más.
+
+## Benchmarks de hardware: RTX 5090 vs. Apple M4 Max
+
+Para muchos usuarios, la elección entre **Gemma 4 vs Qwen 2.5** (y sus sucesores) se reduce a la velocidad bruta. En 2026, la NVIDIA RTX 5090 y la serie M4 de Apple son los objetivos principales para la inferencia local. Los benchmarks muestran que, si bien NVIDIA lidera en rendimiento bruto para modelos pequeños, la arquitectura de memoria unificada de Apple es superior para ejecutar modelos grandes de alta cuantización sin el temido desbordamiento de CPU.
+
+La siguiente tabla destaca el rendimiento de Qwen 3 Coder 30B (el sucesor de la línea 2.5) en diferentes configuraciones de hardware. Estas métricas reflejan el uso en el mundo real en entornos locales como LM Studio u Ollama.
+
+| Configuración de hardware | Cuantización del modelo | Tokens por segundo (TPS) | Notas |
+|---|---|---|---|
+| **RTX 5090 (32GB)** | Q4 (4-bit) | **157** | Extremadamente rápido; cabe en VRAM |
+| **RTX 5090 (32GB)** | Q8 (8-bit) | **31** | Sufre desbordamiento de CPU; lento |
+| **Mac M4 Pro (64GB)** | Q8 (8-bit) | **52** | Más rápido que la 5090 para Q8 |
+| **Mac M4 Max (128GB)** | Q4 (4-bit) | **110** | Rendimiento muy consistente |
+| **GPU Dual (5090+5060)** | Q8 (8-bit) | **50** | Mejor que una sola, pero alta latencia |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/0BHBoDABOfY"
+    title="NVIDIA users: QWEN3 is FREE, but you’ll pay double"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades multimodales y ventanas de contexto
+
+Un diferenciador significativo en la comparativa **Gemma 4 vs Qwen 2.5** es cómo cada familia maneja los datos multimodales como imágenes, PDFs y capturas de pantalla de interfaz de usuario. Gemma 4 incluye soporte nativo de visión en su línea de modelos principales, lo que simplifica el proceso para los usuarios que necesitan analizar evidencia visual junto con texto.
+
+Qwen adopta un enfoque más modular. Si bien los modelos de lenguaje Qwen 2.5 son de clase mundial para texto y código, las tareas visuales a menudo se delegan a la rama Qwen-VL (Vision-Language). Esto significa que es posible que debas cambiar de modelo según la tarea, mientras que Gemma 4 permite una ruta de razonamiento unificada de "un solo carril".
+
+### Comparación de ventana de contexto
+
+*   **Gemma 4:** Soporta oficialmente hasta **256K tokens** en los modelos 31B y 26B. Esto es ideal para el análisis de documentos extensos e investigación profunda.
+*   **Qwen 2.5/3:** Ofrece un contexto nativo de **256K**, pero la documentación del repositorio señala que puede extenderse a **1M de tokens** para tareas específicas de codificación a nivel de repositorio.
+
+> **💡 Consejo:** Aumentar tu ventana de contexto incrementa significativamente la huella en VRAM. Si estás llevando un modelo a su límite de 256K, cuenta con tener que bajar tu nivel de cuantización (por ejemplo, de Q8 a Q4) para mantenerlo funcionando en una GPU de consumo.
+
+## Pentesting con IA y flujos de trabajo de seguridad
+
+Para los profesionales de la seguridad, la elección entre estos modelos es un "problema de flujo de trabajo", no solo un problema de benchmarks. Gemma 4 suele preferirse como un "núcleo de razonamiento local gobernado". Su documentación enfatiza una historia "limpia" sobre el control local, lo cual es vital al manejar evidencia interna sensible como registros de servidor o informes redactados.
+
+Qwen, particularmente las variantes Qwen Code y Qwen-Agent, es la opción superior para el "razonamiento de mesa de trabajo". Si tu flujo de trabajo involucra la terminal, la escritura de scripts de ayuda u orquestar pasos de validación repetidos, las capacidades integradas de uso de herramientas de Qwen proporcionan una mayor superficie de acción "lista para usar".
+
+| Característica | Gemma 4 para Seguridad | Qwen para Seguridad |
+|---|---|---|
+| **Modo de razonamiento** | Modos de "Pensamiento" configurables | Controles explícitos `/think` y `/no_think` |
+| **Integración de herramientas** | Enfoque en llamada de funciones | Soporte nativo de MCP y Code Interpreter |
+| **Manejo de evidencia** | Multimodal nativo (Capturas/PDFs) | Requiere Qwen-VL para evidencia visual |
+| **Perfil de riesgo** | Naturalmente incita a la validación | Alta agencialidad; requiere salvaguardas estrictas |
+
+## Despliegue local y estrategia de cuantización
+
+Para sacar el máximo provecho de **Gemma 4 vs Qwen 2.5**, debes entender la cuantización. La cuantización es el proceso de reducir un modelo para que quepa en la memoria de tu tarjeta de video. En 2026, el estándar de oro para la inferencia local de alta calidad es **Q8 (8-bit)**, pero **Q4 (4-bit)** es el más común para usuarios con 16GB-24GB de VRAM.
+
+1.  **Identifica tu VRAM:** Usa herramientas como el Administrador de tareas o `nvidia-smi` para ver tu RAM de video total disponible.
+2.  **Selecciona tu cuantización:** Un modelo de 30B en Q4 ocupa aproximadamente 18GB. En Q8, ocupa más de 32GB.
+3.  **Busca MLX:** Si estás en Apple Silicon, busca siempre versiones **cuantizadas para MLX** en Hugging Face, ya que están optimizadas específicamente para la GPU y el ancho de banda de memoria de Mac.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/qcjrduz_YS8"
+    title="Which Gemma version is the right one for you?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## El veredicto: ¿Cuál deberías elegir?
+
+La respuesta final en la comparativa **Gemma 4 vs Qwen 2.5** depende enteramente de tu caso de uso específico y tu hardware.
+
+*   **Elige Gemma 4 si:** Necesitas un modelo local altamente gobernado para el análisis de datos sensibles, interpretación de evidencia multimodal (capturas de pantalla/PDFs) y una ruta de razonamiento "limpia" que encaje bien en planes de despliegue privados.
+*   **Elige Qwen 2.5 / Qwen 3 si:** Estás construyendo un stack centrado en agentes que requiere integración con la terminal, generación extensiva de código y la capacidad de alternar entre modos de "pensamiento" y "no pensamiento" para eficiencia operativa.
+
+Para obtener los últimos modelos y versiones cuantizadas por la comunidad, visita [Hugging Face](https://huggingface.co/models) para encontrar la variante específica que se ajuste a tu presupuesto de VRAM.
+
+## FAQ
+
+**P: ¿Qué modelo es mejor para programar, Gemma 4 o Qwen 2.5?**
+
+R: Aunque Gemma 4 es excelente para el razonamiento, Qwen 2.5 (y la serie Qwen 3 Coder) generalmente gana en tareas de programación debido a su entrenamiento extensivo en lenguajes de programación y sus funciones agénticas nativas de "Code Interpreter".
+
+**P: ¿Puedo ejecutar Gemma 4 vs Qwen 2.5 en una laptop con 16GB de RAM?**
+
+R: Sí, pero estarás limitado a las versiones más pequeñas. Puedes ejecutar cómodamente los modelos **Gemma 4B** o **Qwen 7B** con cuantización Q4 o Q8. Intentar ejecutar las versiones de 27B+ resultará en velocidades extremadamente lentas debido a los cuellos de botella de la RAM del sistema.
+
+**P: ¿Cuál es el beneficio del "Modo de Pensamiento" en estos modelos de 2026?**
+
+R: El "Modo de Pensamiento" permite al modelo realizar un razonamiento interno de cadena de pensamiento antes de proporcionar una respuesta final. Esto es crucial para tareas complejas como depurar código o planificar una auditoría de seguridad, aunque normalmente resulta en tiempos de respuesta inicial más lentos.
+
+**P: ¿Requieren estos modelos conexión a internet?**
+
+R: No. Una de las principales ventajas de comparar **Gemma 4 vs Qwen 2.5** es que ambos están diseñados para la inferencia local. Una vez que descargas los pesos del modelo de un proveedor como Hugging Face u Ollama, puedes ejecutarlos completamente fuera de línea para una máxima privacidad.

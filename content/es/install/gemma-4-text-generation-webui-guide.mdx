@@ -1,0 +1,123 @@
+export const metadata = {
+  title: "Guía de Gemma 4 Text Generation WebUI: Configuración local completa 2026",
+  description: "Aprenda a instalar y optimizar Gemma 4 usando Open WebUI y text-generation-webui. Una guía completa para el rendimiento de IA local y privada en 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Gemma+4+WebUI+Guide",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+Configurar un entorno de IA privado y de alto rendimiento nunca ha sido tan accesible como con esta **guía de gemma 4 text generation webui**. En 2026, el panorama de los modelos de lenguaje de gran tamaño (LLM) de código abierto se ha desplazado hacia soluciones centradas en lo local, lo que permite a jugadores y desarrolladores ejecutar modelos potentes como Gemma 4 de Google directamente en su propio hardware. Esta completa **guía de gemma 4 text generation webui** cubrirá todo, desde los requisitos de hardware hasta configuraciones avanzadas como la Generación Aumentada por Recuperación (RAG) y personas de IA personalizadas.
+
+Al alejarse de las suscripciones basadas en la nube, obtiene un control total sobre sus datos y un 100% de privacidad. Ya sea que busque construir una base de conocimientos local para el trasfondo de sus juegos o necesite un asistente de codificación que no comparta sus scripts patentados, las herramientas analizadas en esta guía proporcionan la interfaz necesaria para convertir un modelo básico en una experiencia pulida similar a ChatGPT.
+
+## Requisitos de hardware: Guía de Gemma 4 Text Generation WebUI
+
+Antes de sumergirse en la instalación, debe asegurarse de que su sistema pueda manejar la carga computacional. Gemma 4 viene en varios tamaños, desde el ligero modelo 7B hasta la sofisticada variante de 26B con Mezcla de Expertos (MoE). La siguiente tabla resume las especificaciones mínimas y recomendadas para diferentes tamaños de modelo basadas en la cuantización estándar de 4 bits (Q4).
+
+| Tamaño del modelo | VRAM mínima | GPU recomendada | RAM del sistema |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 7B** | 6GB | RTX 3060 / 4060 | 16GB |
+| **Gemma 4 13B** | 10GB | RTX 3080 / 4070 | 16GB |
+| **Gemma 4 26B (MoE)** | 18GB | RTX 3090 / 4090 | 32GB |
+| **Gemma 4 70B** | 40GB | A100 / Dual 3090s | 64GB |
+
+> **💡 Consejo:** Si carece de la VRAM necesaria para ejecutar el modelo 26B completamente en su GPU, puede usar el cargador `llama.cpp` para derivar algunas capas a la RAM de su sistema, aunque esto ralentizará significativamente la velocidad de generación.
+
+## Ruta 1: Instalación de Open WebUI a través de Docker
+
+Open WebUI es actualmente el "frontend" más popular para modelos locales, ofreciendo una interfaz elegante que imita las herramientas profesionales de IA en la nube. Se asienta sobre un motor llamado Ollama, que gestiona el procesamiento real del modelo. Seguir esta ruta de la **guía de gemma 4 text generation webui** se recomienda generalmente para usuarios que desean funciones como carga de documentos e historial de búsqueda.
+
+### Configuración paso a paso de Docker
+
+1.  **Instalar Docker Desktop:** Descargue e instale Docker para su sistema operativo (Windows, Mac o Linux). En Windows, asegúrese de que **WSL 2** esté habilitado durante el proceso de instalación.
+2.  **Verificar Ollama:** Asegúrese de que Ollama esté instalado y ejecutándose en la bandeja del sistema. Puede descargar el último modelo escribiendo `ollama pull gemma4:26b` en su terminal.
+3.  **Ejecutar el comando de Open WebUI:** Abra su terminal o símbolo del sistema y pegue el siguiente comando para descargar e iniciar la interfaz:
+    `docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main`
+4.  **Acceder al panel de control:** Abra su navegador y navegue a `localhost:3000`. Se le pedirá que cree una cuenta local; estos datos permanecen totalmente en su máquina.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Ruta 2: Uso de Oobabooga Text-Generation-WebUI
+
+Para los usuarios avanzados que desean un control granular sobre los parámetros de muestreo, los cargadores de modelos y el entrenamiento (LoRA), la interfaz "Oobabooga" es el estándar de la industria. Como se destaca en nuestra **guía de gemma 4 text generation webui**, esta herramienta admite más formatos de modelo, incluidos EXL2 y GPTQ, que pueden ofrecer un mejor rendimiento en GPUs NVIDIA.
+
+### Instalación en un clic
+La forma más fácil de comenzar es utilizando las versiones portátiles independientes.
+*   **Windows:** Descargue el archivo zip, extráigalo y ejecute `start_windows.bat`.
+*   **Linux:** Ejecute `start_linux.sh` desde la terminal.
+*   **MacOS:** Use `start_macos.sh`.
+
+Durante la primera ejecución, el instalador le preguntará qué proveedor de GPU tiene (NVIDIA, AMD o Intel). Una vez completada la instalación, se podrá acceder a la interfaz de usuario en `http://127.0.0.1:7860`.
+
+| Función | Open WebUI | Text-Generation-WebUI |
+| :--- | :--- | :--- |
+| **Ideal para** | Chat diario / RAG | Investigación / Rendimiento |
+| **Formatos de modelo** | GGUF (vía Ollama) | GGUF, EXL2, GPTQ, HF |
+| **Soporte móvil** | Excelente (Responsivo) | Limitado |
+| **Extensiones** | Herramientas, Funciones | TTS, Gen de imágenes, Entrenamiento |
+
+## Funciones avanzadas: Bases de conocimientos y RAG
+
+Uno de los aspectos más potentes de la IA local moderna es la capacidad de basar las respuestas del modelo en sus propios datos. La **guía de gemma 4 text generation webui** recomienda utilizar la función "Knowledge" (Conocimiento) en Open WebUI para crear colecciones de documentos permanentes.
+
+Cuando carga un archivo PDF o de texto a una base de conocimientos, el sistema divide el documento en "fragmentos" y los indexa. Cuando hace una pregunta, la interfaz busca los fragmentos más relevantes y se los entrega a Gemma 4 como contexto. Esto evita que el modelo tenga "alucinaciones" y garantiza que las respuestas se basen en sus archivos específicos.
+
+> **⚠️ Advertencia:** Las bases de conocimientos grandes pueden consumir un espacio significativo en el disco y CPU durante la fase inicial de indexación. Asegúrese de tener al menos 20 GB de espacio libre si planea indexar cientos de documentos.
+
+### Cómo usar las bases de conocimientos:
+1.  Navegue a la pestaña **Workspace** (Espacio de trabajo) y seleccione **Knowledge** (Conocimiento).
+2.  Haga clic en **Add New Knowledge** (Añadir nuevo conocimiento) y cargue sus archivos (PDF, DOCX o TXT).
+3.  En un nuevo chat, use la tecla **#** (almohadilla) para etiquetar la base de conocimientos específica que desea que la IA consulte.
+
+## Personas personalizadas e instrucciones del sistema
+
+Gemma 4 es un modelo versátil, pero funciona mejor cuando se le asigna una "persona" específica. La **guía de gemma 4 text generation webui** fomenta la creación de asistentes especializados para tareas repetitivas. Al definir una instrucción del sistema (system prompt), puede obligar al modelo a adoptar un tono, experiencia o formato de salida determinado.
+
+Por ejemplo, una persona de "Experto en trasfondo de juegos" podría tener una instrucción de sistema como: *"Eres un experto en la creación de mundos de RPG. Cuando se te pregunte sobre mecánicas de juego, proporciona desgloses detallados y sugiere ganchos narrativos."*
+
+### Creación de una persona en Open WebUI:
+1.  Vaya a **Workspace** > **Models** > **New Model**.
+2.  Seleccione **Gemma 4** como modelo base.
+3.  Ingrese sus instrucciones personalizadas en el campo **System Prompt**.
+4.  Guarde el modelo. Ahora aparecerá en su menú desplegable de modelos principales para un acceso rápido.
+
+## Optimización del rendimiento para PC gaming
+
+Para sacar el máximo provecho de su hardware, es esencial seguir los consejos de rendimiento de esta **guía de gemma 4 text generation webui**. El objetivo es maximizar los tokens por segundo (TPS) manteniendo una salida de alta calidad.
+
+| Optimización | Método | Impacto |
+| :--- | :--- | :--- |
+| **Cuantización** | Use 4-bit (Q4_K_M) o 8-bit (Q8_0) | Reduce el uso de VRAM entre un 50-70% |
+| **Descarga a GPU** | Establezca `n-gpu-layers` en -1 (Todas) | Maximiza la velocidad de generación |
+| **Flash Attention** | Habilitar en la configuración del cargador | Mejora la velocidad en contextos largos |
+| **Longitud de contexto** | Limitar a 4096 u 8192 | Previene errores de "Falta de memoria" |
+
+Si experimenta una generación lenta, verifique su uso de VRAM con una herramienta como `nvidia-smi`. Si está alcanzando el 95% o más, es posible que el sistema esté recurriendo a la lenta RAM del sistema. En este caso, pruebe con una cuantización más pequeña o un tamaño de modelo menor. Puede encontrar muchas versiones precuantizadas de Gemma 4 en el [repositorio oficial de Hugging Face](https://huggingface.co/models).
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 sin conexión a Internet?**
+
+R: Sí. Una vez que haya descargado el modelo y los archivos de la WebUI, toda la configuración funciona 100% fuera de línea. Esta **guía de gemma 4 text generation webui** está diseñada específicamente para entornos locales y privados.
+
+**P: ¿Cuál es la diferencia entre los modelos 7B y 26B?**
+
+R: El modelo 7B es más rápido y requiere menos VRAM, lo que lo hace ideal para chats básicos y GPUs más antiguas. El modelo 26B utiliza una arquitectura de "Mezcla de Expertos", lo que lo hace significativamente más inteligente y mejor en el razonamiento, pero requiere al menos 16-18 GB de VRAM.
+
+**P: ¿Es seguro usar el "Instalador en un clic" para text-generation-webui?**
+
+R: Generalmente, sí. El instalador es de código abierto y ampliamente utilizado por la comunidad de IA. Crea un entorno "Conda" para mantener todas las dependencias de la IA separadas de los archivos principales de su sistema, evitando conflictos de software.
+
+**P: ¿Cómo actualizo mis modelos usando la guía de gemma 4 text generation webui?**
+
+R: Para Open WebUI, puede descargar actualizaciones directamente a través de la terminal de Ollama usando `ollama pull gemma4`. Para text-generation-webui, puede usar el archivo `update_wizard_windows.bat` ubicado en la carpeta principal para obtener las últimas mejoras y correcciones de errores.

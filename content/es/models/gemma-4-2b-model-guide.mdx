@@ -1,0 +1,98 @@
+export const metadata = {
+  title: "Guía del modelo Gemma 4 2B: Manual completo de implementación de IA 2026",
+  description: "Aprenda a implementar y optimizar el modelo Gemma 4 E2B. Esta guía cubre los Per-Layer Embeddings (Incrustaciones por capa), requisitos de hardware y configuración multimodal para 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e3a8a/fff?text=Gemma+4+2B+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la familia Gemma 4 ha redefinido las expectativas de rendimiento del aprendizaje automático local, particularmente para los usuarios que buscan soluciones de alta eficiencia en hardware de consumo. Esta **guía del modelo gemma 4 2b** se centra en la variante E2B, un modelo denso que utiliza los innovadores Per-Layer Embeddings (PLE) para lograr el rendimiento de un modelo de 2 mil millones de parámetros manteniendo una huella computacional notablemente pequeña. Ya sea usted un desarrollador móvil o un entusiasta de la IA local, comprender cómo aprovechar estos parámetros "efectivos" es la clave para desbloquear el razonamiento avanzado en el dispositivo.
+
+A medida que avanzamos en 2026, la demanda de IA multimodal de baja latencia nunca ha sido tan alta. Esta **guía del modelo gemma 4 2b** le explicará los cambios arquitectónicos respecto a las generaciones anteriores, los requisitos de memoria específicos para varios niveles de cuantización y las mejores prácticas para integrar datos visuales y de audio en sus flujos de trabajo locales. Al final de este manual, tendrá una comprensión integral de cómo maximizar el potencial de la última oferta de pesos abiertos de Google DeepMind.
+
+## La familia Gemma 4: Descripción general de la arquitectura
+
+Gemma 4 introduce una amplia gama de tamaños de modelo para adaptarse a diferentes niveles de hardware, desde servidores de alta gama hasta dispositivos móviles con recursos limitados. A diferencia de las iteraciones anteriores, la serie Gemma 4 utiliza dos arquitecturas principales: Densa y Mezcla de Expertos (MoE - Mixture-of-Experts). Los modelos E2B y E4B son los miembros "pequeños pero poderosos" de la familia, diseñados específicamente para la eficiencia en el dispositivo.
+
+| Variante de modelo | Parámetros totales | Parámetros activos | Arquitectura | Caso de uso principal |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 - E2B** | Efectivamente 2B | 2 mil millones | Densa (PLE) | Smartphones e IoT |
+| **Gemma 4 - E4B** | Efectivamente 4B | 4 mil millones | Densa (PLE) | Laptops de gama alta |
+| **Gemma 4 - 31B** | 31 mil millones | 31 mil millones | Densa | Escritorio y servidores |
+| **Gemma 4 - 26B A4B** | 26 mil millones | 4 mil millones | MoE | Razonamiento de alto rendimiento |
+
+Uno de los cambios más significativos en 2026 es la estandarización del enfoque de "Capas entrelazadas" (Interleaving Layers). Los modelos Gemma 4 entrelazan la atención local (ventana deslizante) con la atención global (secuencia completa). En el modelo E2B, la ventana deslizante se fija en 512 tokens, lo que reduce significativamente el cómputo necesario y garantiza que la capa final sea siempre de atención global para un mejor recuerdo del contexto.
+
+## Guía del modelo Gemma 4 2B: Arquitectura técnica y PLE
+
+La "E" en E2B significa "Efectivo" (Effective). Esto es posible gracias a los Per-Layer Embeddings (PLE). En los modelos tradicionales, se utiliza una única tabla de búsqueda para las incrustaciones de tokens. En Gemma 4 E2B, cada una de las 35 capas del decodificador tiene su propia pequeña incrustación para cada token. Esto permite que el modelo almacene información semántica más matizada en el almacenamiento flash en lugar de consumir valiosa VRAM.
+
+> **💡 Consejo:** Debido a que PLE almacena datos en el almacenamiento flash, puede lograr un mayor rendimiento en dispositivos con RAM limitada. Sin embargo, asegúrese de que su medio de almacenamiento (SSD/UFS) tenga altas velocidades de lectura para obtener la mejor latencia de inferencia.
+
+### Mejoras de atención global
+Gemma 4 ha introducido varios "trucos" para hacer que las capas de atención global sean más eficientes:
+*   **K=V:** En las capas de atención global, las Claves (Keys) son equivalentes a los Valores (Values), lo que reduce los requisitos de memoria para el KV-Cache.
+*   **p-RoPE:** Las codificaciones posicionales rotativas podadas por baja frecuencia (Low-frequency-pruned Rotary Positional Encodings) se aplican a solo el 25% de los vectores, lo que permite al modelo manejar secuencias largas (hasta 256K de contexto) sin perder el significado semántico.
+*   **GQA:** La atención de consulta agrupada (Grouped Query Attention) utiliza 8 cabezales de consulta por cada cabezal KV en las capas globales, duplicando la dimensionalidad de las Claves para compensar la reducción en el número de cabezales.
+
+## Requisitos de hardware y planificación de memoria
+
+Al seguir esta **guía del modelo gemma 4 2b**, la planificación de la memoria es su primera prioridad. Si bien el modelo E2B es eficiente, la cantidad de VRAM requerida depende en gran medida del nivel de cuantización elegido. La cuantización reduce la precisión de los pesos del modelo (por ejemplo, de 16 bits a 4 bits) para ahorrar espacio, a menudo con una pérdida mínima en la capacidad de razonamiento.
+
+| Nivel de cuantización | Precisión | Memoria E2B (RAM/VRAM) | Memoria E4B (RAM/VRAM) |
+| :--- | :--- | :--- | :--- |
+| **BF16** | 16 bits | **9.6 GB** | 15 GB |
+| **SFP8** | 8 bits | **4.6 GB** | 7.5 GB |
+| **Q4_0** | 4 bits | **3.2 GB** | 5 GB |
+
+> **⚠️ Advertencia:** Los números de memoria enumerados anteriormente son para cargar los pesos estáticos. Debe tener en cuenta la VRAM adicional para el KV-Cache, que crece dinámicamente según la longitud de su instrucción (prompt) y la respuesta del modelo.
+
+Para despliegues móviles en 2026, la versión de 4 bits (Q4_0) del modelo E2B es el estándar de oro, ya que encaja cómodamente dentro de los límites de memoria de los smartphones de gama media, dejando espacio para otros procesos del sistema.
+
+## Capacidades multimodales: Visión y Audio
+
+Una característica destacada de la serie Gemma 4 es que todos los modelos son nativamente multimodales. El modelo E2B incluye un codificador de visión de 150 millones de parámetros basado en la arquitectura Vision Transformer (ViT). Esto permite al modelo "ver" y razonar sobre imágenes de diversos tamaños y relaciones de aspecto.
+
+### Presupuesto de procesamiento de imágenes
+Gemma 4 utiliza un método de cambio de tamaño adaptativo. Dependiendo de su presupuesto computacional, la imagen se redimensiona y se agrupa en "tokens suaves".
+
+| Presupuesto de tokens | Equivalente de resolución | Nivel de detalle |
+| :--- | :--- | :--- |
+| **70 Tokens** | 272 x 176 | Bajo (Miniatura) |
+| **280 Tokens** | 544 x 352 | Medio (Estándar) |
+| **1120 Tokens** | 1088 x 704 | Alto (Detallado) |
+
+### Integración de audio
+Los modelos E2B y E4B son únicos por su inclusión de un codificador de audio nativo. Utilizando una arquitectura "Conformer", Gemma 4 procesa audio crudo extrayendo características a través de un espectrograma de mel. Esto convierte al modelo E2B en una excelente opción para tareas de voz a texto y traducción en tiempo real en 2026.
+
+Los usuarios pueden encontrar más detalles técnicos en la [descripción general del modelo Gemma 4 en el portal oficial de Google AI for Developers](https://ai.google.dev/gemma/docs/core) para ayudar con implementaciones de API específicas.
+
+## Implementación: Ejecución de Gemma 4 de forma local
+
+Para comenzar con el modelo, puede descargar los pesos desde Kaggle o Hugging Face. Para la ejecución local, herramientas como Ollama o LM Studio siguen siendo las opciones más accesibles.
+
+1.  **Instalar el entorno de ejecución:** Asegúrese de tener la última versión de 2026 de su motor de inferencia preferido.
+2.  **Obtener el modelo:** Use el comando `ollama run gemma4:e2b` para descargar la versión cuantizada por defecto.
+3.  **Configurar el contexto:** Para razonamiento de formato largo, configure su ventana de contexto en al menos 8,192 tokens, aunque el modelo admite hasta 256K si el hardware lo permite.
+4.  **Probar la multimodalidad:** Proporcione al modelo una ruta de imagen local o una cadena codificada en base64 para probar sus capacidades de razonamiento visual.
+
+Esta **guía del modelo gemma 4 2b** recomienda comenzar con la variante ajustada por instrucciones (instruction-tuned) para aplicaciones basadas en chat, ya que ha sido optimizada para seguir las instrucciones humanas con mayor precisión que los pesos pre-entrenados básicos.
+
+## FAQ
+
+**P: ¿Cuál es la principal diferencia entre Gemma 3 y Gemma 4?**
+
+R: Gemma 4 introduce las variantes "E" (Efectivas) con Per-Layer Embeddings (PLE) y codificadores de audio nativos. También optimiza la atención global mediante el uso compartido de K=V y p-RoPE, lo que permite ventanas de contexto mucho más largas que la generación anterior.
+
+**P: ¿Recomienda la guía del modelo gemma 4 2b la cuantización de 4 bits para todas las tareas?**
+
+R: Para la mayoría de las tareas de razonamiento general y chat, la cuantización de 4 bits (Q4_0) ofrece el mejor equilibrio entre velocidad y uso de memoria. Sin embargo, si está realizando tareas matemáticas complejas o generación de código, una precisión de 8 o 16 bits puede proporcionar una mejor exactitud.
+
+**P: ¿Puedo ejecutar Gemma 4 E2B en un dispositivo Android o iOS?**
+
+R: Sí. El modelo E2B está diseñado específicamente para el despliegue en el dispositivo. Utilizando los marcos Google AI Edge o LiteRT-LM, los desarrolladores pueden integrar Gemma 4 directamente en aplicaciones móviles, aprovechando la aceleración local de la NPU.
+
+**P: ¿Cómo ahorra RAM el PLE si las tablas de incrustación son tan grandes?**
+
+R: Las tablas PLE se almacenan en la memoria flash (almacenamiento) en lugar de la RAM. El modelo solo "busca" las incrustaciones específicas que necesita para los tokens de entrada al inicio de la inferencia, lo que significa que la mayor parte de los parámetros no necesitan residir en la VRAM durante el cálculo.

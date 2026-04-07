@@ -1,0 +1,133 @@
+export const metadata = {
+  title: "Servidor de Discord Gemma 4: Guía completa de integración de IA local 2026",
+  description: "Aprenda a configurar un servidor de Discord con Gemma 4 utilizando hardware local. Guía detallada sobre los modelos de IA de código abierto de Google, la integración con Ollama y la configuración de OpenClaw.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Discord+Server+Setup",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la serie Gemma 4 de Google ha cambiado fundamentalmente el panorama de la inteligencia artificial local. Al ofrecer un rendimiento de vanguardia en un paquete compacto y de código abierto, los desarrolladores y entusiastas ahora pueden ejecutar agentes sofisticados sin depender de costosas API en la nube. Una de las formas más populares de aprovechar este poder es creando un bot para un **servidor de Discord Gemma 4** que actúe como un asistente privado de alta velocidad para su comunidad. Ya sea que busque automatizar la moderación, generar código al instante o simular una lógica de juego compleja, la integración de Gemma 4 en Discord proporciona una interfaz fluida para estos flujos de trabajo avanzados. En esta guía, le guiaremos a través de todo el proceso de configuración de su propio entorno de **servidor de Discord Gemma 4**, desde la selección del tamaño de modelo adecuado hasta la configuración del alojamiento local a través de Ollama y OpenClaw para una experiencia de IA sin costes y centrada en la privacidad en 2026.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Antes de sumergirse en la configuración técnica, es crucial entender qué versión de Gemma 4 se adapta mejor a su hardware y necesidades. Google ha optimizado estos modelos para la "inteligencia por parámetro", lo que significa que incluso las versiones más pequeñas superan con creces su categoría.
+
+| Variante del modelo | Parámetros totales | Ventana de contexto | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2.3B Efectivos | 128K | Dispositivos móviles y edge; ultra eficiente. |
+| **Gemma 4 E4B** | 4.5B Efectivos | 128K | Sólido rendimiento edge con soporte multimodal. |
+| **Gemma 4 26B** | 25.2B (3.8B Activos) | 256K | Modelo MoE altamente eficiente para estaciones de trabajo. |
+| **Gemma 4 31B** | 30.7B | 256K | Razonamiento de vanguardia y codificación compleja. |
+
+El modelo denso 31B está clasificado actualmente como uno de los mejores modelos de código abierto a nivel mundial, rivalizando con arquitecturas mucho más grandes en razonamiento, matemáticas y capacidades agénticas. Para un bot de Discord, se recomiendan los modelos 26B o 31B si dispone de la VRAM necesaria, ya que ofrecen los modos de "pensamiento" más estables para conversaciones de múltiples turnos.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Configuración de su bot para el servidor de Discord Gemma 4
+
+La forma más eficiente de ejecutar Gemma 4 en Discord en 2026 es mediante la combinación de **Ollama** (para el alojamiento del modelo) y **OpenClaw** (para actuar como pasarela hacia Discord). Esta configuración garantiza que ningún dato salga de su máquina local, proporcionando privacidad absoluta y cero costes de API.
+
+### Paso 1: Preparar su entorno local
+Primero, asegúrese de que su hardware esté listo. Ejecutar el modelo 31B normalmente requiere una GPU con al menos 24 GB de VRAM (como una RTX 3090/4090) para una inferencia fluida, aunque las versiones cuantizadas pueden ejecutarse con menos.
+
+1.  **Instalar Ollama:** Descargue la última versión desde el [sitio web oficial de Ollama](https://ollama.com).
+2.  **Descargar Gemma 4:** Abra su terminal y ejecute:
+    `ollama run gemma4:31b`
+3.  **Verificar el soporte multimodal:** Asegúrese de que puede pasar tanto texto como imágenes si planea usar las capacidades de visión de los modelos E4B o 31B.
+
+### Paso 2: Configurar el Portal de Desarrolladores de Discord
+Para conectar su IA local a Discord, debe crear una aplicación y obtener un token de bot.
+
+1.  Navegue al [Portal de Desarrolladores de Discord](https://discord.com/developers/applications).
+2.  Haga clic en **New Application** y asígnele un nombre (por ejemplo, "Agente Gemma 4").
+3.  En la pestaña **Bot**, haga clic en **Reset Token** para generar su token de bot único. **Mantenga esto en secreto.**
+4.  Active el **Message Content Intent** en la sección "Privileged Gateway Intents". Esto es obligatorio para que el bot pueda leer y responder mensajes.
+5.  En el generador de URL **OAuth2**, seleccione los alcances `bot` y `applications.commands`.
+6.  Otorgue al bot los permisos para: `Send Messages`, `View Channels`, `Embed Links`, `Attach Files` y `Read Message History`.
+
+> **⚠️ Advertencia:** Nunca comparta su token de bot públicamente. Si se filtra, cualquier persona puede tomar el control de su bot y potencialmente interrumpir su servidor.
+
+### Paso 3: Integración de OpenClaw
+OpenClaw actúa como el "cerebro" que conecta la inferencia local de Ollama con la API de Discord.
+
+| Requisito | Descripción |
+| :--- | :--- |
+| **Proveedor** | Establecer en **Ollama** |
+| **URL Base** | Usualmente `http://localhost:11434` |
+| **Modelo** | `gemma4:31b` (o el tamaño elegido) |
+| **Token de Discord** | El token generado en el Paso 2 |
+| **Lista de permitidos** | Su ID de usuario de Discord y el ID del servidor |
+
+Una vez configurado, deberá vincular el servicio enviando un mensaje directo (DM) a su bot dentro de Discord. Esto finaliza el "handshake" entre su hardware local y el servidor de Discord.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/pInnVUaUX7M"
+    title="Gemma 4 + OpenClaw + Ollama + Discord - Full Local AI Setup for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Análisis de rendimiento y benchmarks
+
+Gemma 4 no se trata solo de ser "abierto"; se trata de ser competitivo. En 2026, el modelo 31B ha demostrado que puede superar a modelos significativamente más grandes en tareas de razonamiento específicas. Esto lo hace ideal para un **servidor de Discord Gemma 4** donde los usuarios pueden hacer preguntas de programación complejas o requerir una planificación de varios pasos.
+
+| Benchmark | Gemma 4 31B | Gemma 4 26B (MoE) | Gemma 3 27B |
+| :--- | :--- | :--- | :--- |
+| **MMLU Pro** | **85.2%** | 82.6% | 67.6% |
+| **LiveCodeBench** | **80.0%** | 77.1% | 29.1% |
+| **GPQA Diamond** | **84.3%** | 82.3% | 42.4% |
+| **AIME 2026** | **89.2%** | 88.3% | 20.8% |
+
+La estadística más impresionante para los usuarios de Discord es la eficiencia. Gemma 4 utiliza aproximadamente **2.5 veces menos tokens** para tareas de salida en comparación con sus predecesores y competidores como Qwen 3.5. Esto se traduce en tiempos de respuesta más rápidos (menor latencia) cuando varios usuarios interactúan con el bot simultáneamente.
+
+## Funciones avanzadas: Modo de pensamiento y multimodalidad
+
+Una de las características destacadas de Gemma 4 es el "Modo de pensamiento" (Thinking Mode) dedicado. Cuando se habilita mediante el token `&lt;|think|&gt;`, el modelo genera una cadena de razonamiento interno antes de proporcionar una respuesta final.
+
+*   **Razonamiento interno:** El modelo desglosa la solicitud del usuario, identifica posibles errores y planifica la respuesta.
+*   **Resultado final:** El usuario recibe una respuesta pulida y precisa basada en esa lógica interna.
+
+Para aquellos que gestionan un **servidor de Discord Gemma 4** para desarrollo, las capacidades multimodales son igualmente impresionantes. Puede cargar una captura de pantalla de un error de interfaz de usuario o un fragmento de código escrito a mano, y el bot puede analizar la imagen y proporcionar una solución basada en texto o un bloque de código corregido.
+
+> **💡 Consejo:** Para obtener el mejor rendimiento multimodal, coloque siempre su imagen o archivo de audio **antes** del prompt de texto en el mensaje de Discord.
+
+## Comunidad y soporte oficial
+
+Si encuentra problemas al configurar su agente local, la **Google Developer Community Discord** es el centro principal de soporte. Dentro del canal `#gemma` en la sección "All things AI", puede encontrar desarrolladores compartiendo prompts de sistema optimizados, archivos de cuantización y scripts de integración.
+
+Unirse a la comunidad oficial le permite:
+1.  Mantenerse actualizado sobre los últimos lanzamientos de modelos Gemma 4.
+2.  Acceder a guías de ajuste fino (fine-tuning) para tareas específicas de gaming o programación.
+3.  Solucionar problemas específicos de hardware con otros usuarios de RTX o Mac Studio.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 en un dispositivo móvil?**
+
+R: Sí, los modelos Gemma 4 E2B y E4B están diseñados específicamente para la ejecución en el dispositivo. Si bien no alojarán un bot de servidor de Discord completo tan eficazmente como una estación de trabajo, pueden manejar tareas básicas de razonamiento y agénticas localmente en teléfonos inteligentes de gama alta en 2026.
+
+**P: ¿Necesito una clave de API de pago para usar Gemma 4 en Discord?**
+
+R: No. Debido a que Gemma 4 se lanza bajo la licencia permisiva Apache 2.0 y se puede alojar localmente a través de Ollama, los costes de API son nulos. Su único "coste" es la electricidad utilizada por su hardware.
+
+**P: ¿Cuál es el beneficio del "Modo de pensamiento" para los usuarios de Discord?**
+
+R: El Modo de pensamiento permite que el bot maneje instrucciones complejas y de varias partes con mayor precisión. En un **servidor de Discord Gemma 4**, esto significa menos alucinaciones y un mejor rendimiento en acertijos lógicos, desafíos de programación y planificación estratégica.
+
+**P: ¿Cómo actualizo mi bot a los últimos pesos de Gemma 4?**
+
+R: Si está utilizando Ollama, simplemente ejecute `ollama pull gemma4` en su terminal. Esto descargará cualquier peso actualizado u optimización proporcionada por Google DeepMind.

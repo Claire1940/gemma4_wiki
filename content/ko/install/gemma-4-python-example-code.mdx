@@ -1,0 +1,156 @@
+export const metadata = {
+  title: "Gemma 4 Python 예제 코드: 2026 로컬 AI 코딩 가이드",
+  description: "Python을 사용하여 Google의 Gemma 4를 로컬에 구현하는 방법을 배워보세요. 함수 호출, Ollama 통합 및 에이전트 워크플로우를 다루는 종합 가이드입니다.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Gemma+4+Python+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+로컬 AI를 활용한 개발 환경은 2026년에 들어서며 거대한 변화를 맞이했습니다. 구글의 최신 오픈 가중치 모델 출시와 함께, 데이터 프라이버시를 유지하고 API 비용을 절감하려는 엔지니어들에게 신뢰할 수 있는 **gemma 4 python 예제 코드**를 확보하는 것이 최우선 과제가 되었습니다. 자동화된 에이전트를 구축하든 단순한 스크립트 도우미를 만들든, **gemma 4 python 예제 코드**는 클라우드 기반 서비스의 반복적인 비용 없이 고성능 온디바이스 지능을 구현하는 데 필요한 기반을 제공합니다.
+
+이 가이드에서는 효율적인 2B 및 4B "Effective" 계층부터 강력한 26B MoE(Mixture of Experts) 아키텍처에 이르기까지, 이 모델 제품군을 배포하는 다양한 방법을 살펴봅니다. 다음 구현 단계를 따라가면 네이티브 함수 호출, 멀티모달 입력, 그리고 256,000 토큰에 달하는 거대한 컨텍스트 창을 자신의 하드웨어에서 직접 활용할 수 있습니다.
+
+## Gemma 4 모델 제품군 개요
+
+구현에 앞서, 자신의 하드웨어 프로필에 어떤 변형 모델이 적합한지 이해하는 것이 필수적입니다. 2026년 라인업은 모바일, 데스크톱 및 고처리량 서버 환경에 맞게 설계된 계층으로 나뉩니다.
+
+| 모델 변형 | 아키텍처 | 활성 파라미터 | 필요 VRAM (양자화) | 최적 용도 |
+|---|---|---|---|---|
+| **Gemma-4-31B** | Dense Transformer | 31B | 24GB - 32GB | 복잡한 추론, 심화 코딩 |
+| **Gemma-4-26B-A4B** | MoE (128 전문가) | 3.8B | 16GB - 24GB | 고처리량 서빙, 에이전트 |
+| **Gemma-4-E4B** | Dense Transformer | 4.5B | 8GB - 12GB | 온디바이스 지원, 로컬 UI |
+| **Gemma-4-E2B** | Dense Transformer | 2.3B | 4GB - 6GB | 모바일 앱, 기본 스크립트 |
+
+> **💡 팁:** 단일 RTX 3090 또는 4090을 사용하는 대부분의 개발자에게는 26B MoE 변형이 속도와 지능의 가장 좋은 균형을 제공합니다. 포워드 패스당 파라미터의 일부만 활성화하기 때문입니다.
+
+## Transformers를 통한 Gemma 4 Python 예제 코드 구현
+
+Hugging Face 생태계를 사용하여 Gemma 4를 실행하려면 최신 버전의 `torch`와 `transformers`를 설치해야 합니다. 이 방법은 모델의 내부 상태와 텐서를 정밀하게 제어하려는 개발자에게 선호됩니다.
+
+### 환경 설정
+
+먼저, 다음과 같은 의존성을 갖춘 Python 환경을 준비하세요.
+
+| 라이브러리 | 명령어 | 목적 |
+|---|---|---|
+| **PyTorch** | `pip install torch` | 핵심 텐서 연산 |
+| **Accelerate** | `pip install accelerate` | 멀티 GPU 및 메모리 관리 |
+| **Transformers** | `pip install transformers` | 모델 로드 및 추론 |
+
+### 기본 추론 스크립트
+
+다음 **gemma 4 python 예제 코드**는 `AutoModelForMultimodalLM` 클래스를 사용하여 모델을 로드하고 간단한 응답을 생성하는 방법을 보여줍니다.
+
+```python
+from transformers import AutoProcessor, AutoModelForMultimodalLM
+import torch
+
+MODEL_ID = "google/gemma-4-26B-A4B-it"
+
+# 자동 장치 매핑으로 모델 로드
+model = AutoModelForMultimodalLM.from_pretrained(
+    MODEL_ID, 
+    dtype="auto", 
+    device_map="auto"
+)
+processor = AutoProcessor.from_pretrained(MODEL_ID)
+
+# 간단한 프롬프트 준비
+messages = [
+    {"role": "user", "content": "Write a Python script to scrape a website."}
+]
+
+# 채팅 템플릿 적용 및 생성
+text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = processor(text=text, return_tensors="pt").to(model.device)
+outputs = model.generate(**inputs, max_new_tokens=512)
+
+print(processor.decode(outputs[0], skip_special_tokens=True))
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/02tjBAsGacs"
+    title="Google's New AI Runs Locally for Free (Gemma 4 Coding Demo)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 네이티브 함수 호출 및 도구 사용
+
+2026년 Gemma 4의 가장 눈에 띄는 기능 중 하나는 네이티브 함수 호출 지원입니다. 복잡한 정규식 파싱이 필요했던 이전 세대와 달리, Gemma 4는 구조화된 JSON 도구 호출을 직접 생성할 수 있습니다. 이를 통해 모델은 외부 API, 데이터베이스 또는 로컬 Python 환경과 상호 작용할 수 있습니다.
+
+### 도구 정의
+
+수동 JSON 스키마를 사용하거나 원시 Python 함수를 전달하여 도구를 정의할 수 있습니다. 모델의 "사고(thinking)" 프로세스는 실행 전 필요한 인수를 추론함으로써 이러한 호출의 정확도를 크게 향상시킵니다.
+
+| 방법 | 장점 | 사용 사례 |
+|---|---|---|
+| **JSON 스키마** | 명시적 제어 | 복잡한 중첩 객체, 엄격한 API |
+| **원시 Python** | 빠른 개발 | 단순 유틸리티, 수학, 로컬 스크립트 |
+
+### 예시: 날씨 API 도구
+
+에이전트 워크플로우를 위한 **gemma 4 python 예제 코드**를 제공할 때는 모델의 차례(호출 생성), 개발자의 차례(코드 실행), 최종 응답(결과 요약)의 3단계 주기를 처리하는 것이 중요합니다.
+
+```python
+def get_current_weather(location: str, unit: str = "celsius"):
+    """특정 위치의 현재 날씨를 가져옵니다."""
+    return {"temperature": 22, "condition": "Sunny"}
+
+# 모델은 다음과 같이 구조화된 블록을 생성합니다:
+# &lt;|tool_call|&gt;call:get_current_weather{location: "New York"}&lt;tool_call|&gt;
+```
+
+## Gradio를 활용한 로컬 코딩 어시스턴트 구축
+
+더 대화형인 경험을 위해, 많은 개발자가 **gemma 4 python 예제 코드**를 Gradio 기반 UI에 통합하고 있습니다. 이 설정은 한쪽에서 에이전트와 채팅하고 다른 쪽에서 실시간 코드 업데이트를 볼 수 있는 분할 창 레이아웃을 가능하게 합니다.
+
+### 로컬 어시스턴트의 주요 기능
+1. **라이브 에디터 통합**: 생성된 코드 블록을 기능적인 에디터로 자동 전송합니다.
+2. **샌드박스 실행**: 서브프로세스를 사용하여 코드를 로컬에서 실행하고 `stdout` 또는 `stderr`를 반환합니다.
+3. **멀티모달 컨텍스트**: UI 스크린샷을 업로드하고 모델에게 그에 맞는 Tailwind CSS 또는 React 코드를 생성하도록 요청합니다.
+
+> **⚠️ 경고:** AI가 생성한 코드를 실행할 때는 호스트 머신의 실수로 인한 데이터 손실이나 보안 침해를 방지하기 위해 항상 샌드박스 환경이나 임시 파일 시스템을 사용하십시오.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/h-LRknODV3M"
+    title="Gemma 4 Tested for Coding: Complex Web Apps"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 성능 테스트: 복잡한 웹 앱
+
+최근 26B 및 31B 모델 테스트 결과, 복잡한 웹 애플리케이션 생성에서 인상적인 성과를 보여주었습니다. 모델이 때때로 고도로 전문화된 로직(예: 디지털 오디오 워크스테이션의 실시간 오디오 합성)에서 어려움을 겪을 수 있지만, 다음과 같은 분야에서 탁월합니다.
+- **반응형 랜딩 페이지**: 텍스트 설명으로부터 깨끗한 HTML 및 Tailwind CSS 생성.
+- **동시성 스크립트**: 웹 크롤링 또는 API 모니터링을 위한 비동기 Python 함수 작성.
+- **버그 수정**: 기존 코드베이스의 로직 오류를 식별하고 설명이 포함된 패치 제공.
+
+더 고급 문서는 [공식 Google AI for Developers](https://ai.google.dev/gemma) 사이트를 방문하여 모델의 전체 기능을 탐색할 수 있습니다.
+
+## FAQ
+
+**Q: gemma 4 python 예제 코드를 실행하려면 고사양 GPU가 필요한가요?**
+
+A: 반드시 그렇지는 않습니다. 26B 및 31B 모델에는 RTX 3090(24GB VRAM)과 같은 GPU가 권장되지만, "Effective" 2B 및 4B 변형은 양자화를 통해 일반 CPU 및 모바일 하드웨어에서도 효율적으로 실행되도록 설계되었습니다.
+
+**Q: Gemma 4는 이미지와 코드를 동시에 처리할 수 있나요?**
+
+A: 네, Gemma 4는 네이티브 멀티모달 모델입니다. 텍스트 프롬프트와 함께 이미지(와이어프레임이나 버그 스크린샷 등)를 제공할 수 있으며, 모델은 두 입력을 모두 추론하여 해결책을 생성할 수 있습니다.
+
+**Q: Gemma 4가 생성한 코드는 상업적으로 무료로 사용할 수 있나요?**
+
+A: 네, Gemma 4는 Apache 2.0 라이선스로 출시되어 상업적 이용, 수정 및 배포가 가능하며, 다른 많은 독점 모델에서 발견되는 제한 사항이 없습니다.
+
+**Q: gemma 4 python 예제 코드에서 함수 호출의 정확도를 어떻게 높일 수 있나요?**
+
+A: "사고 모드(Thinking Mode)"를 활성화하면 모델이 도구 호출을 생성하기 전에 내부 추론 프로세스를 거칩니다. 이를 통해 올바른 매개변수를 식별하고 사용자 요청에 도구가 실제로 필요한지 여부를 결정하는 데 도움이 됩니다.

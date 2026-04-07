@@ -1,0 +1,121 @@
+export const metadata = {
+  title: "Requisitos de GPU para Gemma 4: Guía completa de hardware 2026",
+  description: "Conozca los requisitos específicos de GPU para Gemma 4 para cada tamaño de modelo. Desde el E2B apto para móviles hasta el buque insignia 31B, optimice su rendimiento de IA local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4b5563/fff?text=Gemma+4+GPU+Requirements",
+  date: "2026-04-05",
+  author: "Equipo de Gemma Wiki"
+}
+
+Ejecutar modelos de IA de alto rendimiento de forma local se ha convertido en un estándar para desarrolladores y entusiastas en 2026. Al evaluar los **requisitos de GPU para gemma 4**, es esencial reconocer que Google ha optimizado esta familia de modelos para escalar en una amplia gama de hardware, desde portátiles modestos hasta estaciones de trabajo de gama alta. Ya sea que busque privacidad, ahorro de costes o accesibilidad sin conexión, comprender los **requisitos de GPU para gemma 4** específicos para cada variante del modelo garantiza que seleccione la versión adecuada para su configuración actual sin enfrentarse a frustrantes cuellos de botella o bloqueos del sistema.
+
+El último lanzamiento de Google presenta cuatro tamaños de modelo distintos, cada uno con necesidades computacionales únicas. Mientras que los modelos más pequeños están diseñados para ejecutarse de manera eficiente en la RAM estándar del sistema, las versiones insignia más grandes exigen una potencia de procesamiento gráfico significativa para mantener velocidades de generación de tokens aceptables. En esta guía, desglosaremos exactamente qué hardware necesita para poner en marcha Gemma 4 en su máquina.
+
+## Analizando los requisitos de GPU de Gemma 4 para diferentes tamaños de modelo
+
+La familia Gemma 4 se categoriza en tres niveles principales: los modelos pequeños "Effective", el nivel medio "Mixture of Experts" (MoE) y el buque insignia "Dense". Cada nivel sirve para un propósito diferente, que va desde el procesamiento de texto simple en dispositivos móviles hasta tareas de razonamiento complejo que rivalizan con los servicios de IA basados en la nube más populares.
+
+| Variante del modelo | Parámetros | Arquitectura | Caso de uso recomendado |
+|---|---|---|---|
+| **Gemma 4 E2B** | 5B (2.3B Ef.) | Ligero | Dispositivos móviles, chatbots básicos, portátiles de gama baja |
+| **Gemma 4 E4B** | 8B (4B Ef.) | Ligero | Portátiles modernos, tareas de productividad estándar |
+| **Gemma 4 26B** | 26B (3.8B Act.) | **Mezcla de expertos** | Razonamiento complejo, programación, escritura creativa |
+| **Gemma 4 31B** | 31B | Buque insignia denso | Investigación de alto nivel, contenido extenso, análisis profundo |
+
+Los modelos "Effective" (E2B y E4B) son particularmente impresionantes porque utilizan un recuento de parámetros brutos más alto mientras mantienen la velocidad de modelos mucho más pequeños. Esto les permite rendir significativamente por encima de su categoría en los benchmarks, permaneciendo accesibles para usuarios que no tienen una tarjeta gráfica dedicada.
+
+## Requisitos detallados de GPU para Gemma 4 por nivel de hardware
+
+Cumplir con los **requisitos de GPU para gemma 4** no se trata solo de tener una tarjeta; se trata de tener suficiente RAM de vídeo (VRAM) para cargar los pesos del modelo. Si su GPU carece de suficiente VRAM, el sistema a menudo "descargará" capas a la RAM de su sistema, que es significativamente más lenta y resultará en una caída notable del rendimiento.
+
+| Nivel de hardware | RAM mínima | GPU recomendada | Expectativa de rendimiento |
+|---|---|---|---|
+| **Nivel de entrada** | 8 GB | Gráficos integrados | 10-20 tokens/seg (E2B/E4B) |
+| **Gama media** | 16-20 GB | **RTX 4070 / 5070** | 50-100 tokens/seg (26B MoE) |
+| **Gama alta** | 32 GB | **RTX 4090 / 5090** | 150+ tokens/seg (26B MoE) |
+| **Profesional** | 64 GB+ | **RTX 6000 Ada / A100** | Velocidad completa Flagship 31B |
+
+> **💡 Consejo profesional:** Si utiliza un Mac, la arquitectura de memoria unificada permite que el sistema use la RAM del sistema como VRAM. Para Gemma 4, un M2 o M3 Max con al menos 32 GB de RAM es el "punto ideal" para el modelo 26B.
+
+Para usuarios de Windows o Linux, se recomienda encarecidamente una GPU NVIDIA RTX debido a la colaboración entre Google y NVIDIA para optimizar estos modelos. Los benchmarks sugieren que una tarjeta de la serie RTX 50 puede ejecutar Gemma 4 hasta 2,7 veces más rápido que un Apple M3 Ultra en ciertas tareas multilingües.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/RoACSQsfeiE"
+    title="You Should Run the Gemma 4 AI Model on Your PC Because it is Catching Chat GPT!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento y velocidades de tokens
+
+Cuando cumple o supera los **requisitos de GPU para gemma 4**, la velocidad a la que la IA genera texto (medida en tokens por segundo) aumenta drásticamente. Como contexto, una velocidad de lectura típica es de unos 5 a 10 tokens por segundo. Las GPU de gama alta pueden generar texto mucho más rápido de lo que cualquier humano puede leer, lo cual es vital para aplicaciones como asistentes de programación locales o resúmenes de datos en tiempo real.
+
+| Tamaño del modelo | GPU utilizada | Tokens por segundo | Prueba de lógica (Pregunta de Alicia) |
+|---|---|---|---|
+| **Gemma 4 E2B** | RTX 5090 | **278** | Aprobada |
+| **Gemma 4 E4B** | RTX 5090 | **193** | Aprobada |
+| **Gemma 4 26B** | RTX 5090 | **183** | **Aprobada (Muy recomendada)** |
+| **Gemma 4 31B** | RTX 5090 | **2.2** | Aprobada (Muy lenta) |
+
+El modelo 26B Mixture of Experts es ampliamente considerado la "estrella del espectáculo" para 2026. Debido a que solo activa una parte de sus 26 mil millones de parámetros (aproximadamente 3,8 mil millones) en cualquier momento dado, ofrece la inteligencia de un modelo grande con la velocidad de uno pequeño. Esto le permite resolver acertijos lógicos complejos, como los famosos acertijos de "los hermanos de Alicia" o del "reloj de arena", en los que los modelos más pequeños suelen fallar.
+
+## Cómo ejecutar Gemma 4 localmente
+
+Si su sistema cumple con los **requisitos de GPU para gemma 4**, la forma más fácil de comenzar es usando una herramienta llamada **Ollama**. Esta utilidad de código abierto gestiona las complejidades de los pesos del modelo y la aceleración de hardware por usted.
+
+1.  **Descargar Ollama**: Visite el sitio oficial y descargue el instalador para Windows, Mac o Linux.
+2.  **Instalar el modelo**: Abra su terminal o símbolo del sistema y escriba `ollama pull gemma4`. Por defecto, esto suele descargar la versión E4B o 26B dependiendo de su hardware detectado.
+3.  **Ejecutar el modelo**: Escriba `ollama run gemma4` para iniciar una sesión de chat inmediatamente.
+4.  **Versiones específicas**: Si tiene una GPU potente y quiere el buque insignia, use `ollama run gemma4:31b`.
+
+Para aquellos que no están listos para instalar software local, pueden probar estos modelos de forma gratuita a través de [Google AI Studio](https://aistudio.google.com/). Esto le permite verificar las capacidades del modelo en un entorno de navegador antes de comprometerse con una descarga grande.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimizando su configuración para Gemma 4
+
+Incluso si cumple con los **requisitos de GPU para gemma 4** básicos, hay varias formas de optimizar aún más su experiencia. El rendimiento de la IA local está fuertemente influenciado por la refrigeración y las versiones de los controladores.
+
+*   **Actualizar controladores**: Asegúrese de estar utilizando los últimos controladores NVIDIA Game Ready o Studio. Google y NVIDIA lanzan actualizaciones con frecuencia que mejoran las velocidades de generación de tokens para la arquitectura Gemma.
+*   **Gestionar el uso de VRAM**: Cierre aplicaciones pesadas en memoria como Chrome o juegos de alta gama mientras ejecuta los modelos 26B o 31B. Si su VRAM está cerca de su capacidad, el modelo se ralentizará significativamente.
+*   **Usar cuantización**: La mayoría de las versiones locales de Gemma 4 utilizan pesos "cuantizados" (como de 4 u 8 bits). Esto reduce los **requisitos de GPU para gemma 4** al encoger el tamaño del modelo casi sin pérdida de inteligencia percibida.
+*   **Refrigeración**: Ejecutar el modelo 31B durante períodos prolongados supondrá una carga pesada para su GPU. Asegúrese de que su PC tenga un flujo de aire adecuado para evitar el estrangulamiento térmico.
+
+> **⚠️ Advertencia:** Intentar ejecutar el modelo 31B en una tarjeta con menos de 12 GB de VRAM puede causar que su sistema deje de responder mientras lucha por intercambiar datos entre la GPU y la RAM del sistema.
+
+## Capacidades multimodales: Imágenes y audio
+
+Un salto significativo en Gemma 4 es su soporte multimodal nativo. A diferencia de las versiones anteriores, los modelos E2B y E4B pueden procesar audio e imágenes directamente. Esto significa que puede arrastrar una captura de pantalla de un recibo al chat y el modelo puede resumir los artículos y costes localmente en su máquina.
+
+Los sistemas que cumplen con los **requisitos de GPU para gemma 4** de gama más alta verán una interpretación de imágenes casi instantánea. Esto es particularmente útil para tareas que requieren privacidad, como el análisis de documentos médicos o hojas de cálculo financieras personales, donde no desea que sus datos se envíen a un servidor en la nube.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Cuáles son los requisitos de GPU para gemma 4 mínimos absolutos para el modelo más pequeño?**
+
+R: El modelo Gemma 4 E2B puede ejecutarse con tan solo 5 GB de RAM del sistema utilizando solo una CPU. Sin embargo, para una experiencia fluida, se recomienda una GPU dedicada con al menos 4 GB de VRAM.
+
+**P: ¿Puedo ejecutar Gemma 4 en una Raspberry Pi?**
+
+R: Sí, la versión E2B está diseñada para ejecutarse en dispositivos de bajo consumo como la Raspberry Pi 5. Espere tiempos de respuesta más lentos, pero es totalmente funcional para tareas de texto básicas.
+
+**P: ¿Por qué el modelo 31B es mucho más lento que el modelo 26B en mi GPU?**
+
+R: El modelo 26B utiliza una arquitectura de "Mezcla de expertos", que solo procesa una fracción de los datos para cada solicitud. El modelo 31B es "Denso", lo que significa que calcula cada parámetro para cada token, requiriendo significativamente más potencia computacional bruta.
+
+**P: ¿Necesito una conexión a Internet para usar Gemma 4?**
+
+R: No. Una vez que haya descargado los pesos del modelo a través de Ollama o una herramienta similar, puede desconectarse de Internet por completo. Todo el procesamiento ocurre localmente en su hardware.

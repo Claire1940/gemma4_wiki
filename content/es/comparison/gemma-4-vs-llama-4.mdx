@@ -1,0 +1,127 @@
+export const metadata = {
+  title: "Gemma 4 vs Llama 4: El Duelo Definitivo de IA Local 2026",
+  description: "Una comparativa exhaustiva de Gemma 4 vs Llama 4. Explora benchmarks, requisitos de hardware y qué modelo gana para la IA de juegos locales en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+vs+Llama+4",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente a medida que avanzamos en 2026, con la batalla de alto nivel entre **Gemma 4 vs Llama 4** ocupando el centro del escenario tanto para desarrolladores como para entusiastas de los videojuegos. Ya sea que busques potenciar NPCs complejos y sin guion en un RPG personalizado o busques un asistente de programación local que no dependa de la nube, elegir entre la última familia de pesos abiertos de Google y el gigante establecido de Meta es una decisión crítica. En esta guía, desglosamos los matices de **gemma 4 vs llama 4**, centrándonos en su arquitectura, velocidad de inferencia en hardware de consumo como el MacBook Pro M4 y sus índices de inteligencia general para flujos de trabajo agénticos.
+
+## Arquitectura del Modelo: MoE vs. Potencias Densas
+
+La distinción principal en el debate de **gemma 4 vs llama 4** radica en cómo estos modelos gestionan sus parámetros. Google ha introducido una arquitectura de Mezcla de Expertos (MoE) altamente eficiente para sus modelos de nivel medio, mientras que el "Maverick" de Meta sigue siendo un coloso masivo de inspiración densa.
+
+Gemma 4 presenta dos niveles distintos. Los modelos "Effective" de 2B y 4B están diseñados para dispositivos móviles e IoT, utilizando incrustaciones por capa para maximizar la eficiencia de los parámetros. Sin embargo, las estrellas del espectáculo son los modelos 26B MoE y 31B Dense. La versión 26B solo activa 4B de parámetros durante la inferencia, lo que le permite funcionar a velocidades de vértigo manteniendo la base de conocimientos de un modelo mucho más grande.
+
+En contraste, Llama 4 Maverick es un gigante de 402B de parámetros con 17B de parámetros activos. Si bien ofrece una asombrosa ventana de contexto de 1,000k (1 millón) de tokens, su enorme tamaño lo hace difícil de encajar en cualquier cosa que no sean GPUs de estaciones de trabajo de alta gama o configuraciones de múltiples nodos.
+
+| Característica | Gemma 4 26B A4B (Razonamiento) | Llama 4 Maverick |
+|---|---|---|
+| **Creador** | Google DeepMind | Meta AI |
+| **Arquitectura** | Mezcla de Expertos (MoE) | Híbrido Denso / MoE Activo |
+| **Parámetros Activos** | **4 mil millones** | 17 mil millones |
+| **Parámetros Totales** | 27 mil millones | **402 mil millones** |
+| **Ventana de Contexto** | 256,000 Tokens | **1,000,000 Tokens** |
+| **Licencia** | Apache 2.0 | Licencia Comunitaria Llama |
+
+> **💡 Consejo:** Si estás ejecutando IA local para mods de juegos en una sola GPU, el Gemma 4 26B MoE suele ser la mejor opción debido a sus menores requisitos de VRAM para la inferencia activa.
+
+## Benchmarks de Rendimiento e Índice de Inteligencia
+
+Al comparar **gemma 4 vs llama 4** en términos de inteligencia pura, los resultados varían según la tarea específica. Según las evaluaciones recientes de 2026 de Artificial Analysis, Llama 4 Maverick sigue manteniendo la ventaja en razonamiento a gran escala y análisis de documentos extensos gracias a su ventana de contexto de 1M. Sin embargo, Gemma 4 ha cerrado la brecha significativamente en programación y planificación agéntica.
+
+El modelo Gemma 4 31B Dense ha sido optimizado para la calidad de salida, rivalizando con el rendimiento de modelos mucho más grandes en el rango de más de 100B. Para los jugadores, esto se traduce en diálogos más coherentes y mejor lógica en los directores de juego impulsados por IA. Mientras tanto, el modelo 26B MoE es el "rey de la velocidad", proporcionando inteligencia de vanguardia con una latencia significativamente menor.
+
+| Métrica de Benchmark | Gemma 4 26B A4B | Llama 4 Maverick |
+|---|---|---|
+| **Índice de Programación** | 88.4 | **91.2** |
+| **Índice Agéntico** | **85.1** | 84.7 |
+| **Tokens por Segundo** | **145 t/s (M4 Max)** | 42 t/s (A100) |
+| **Humanity's Last Exam** | 76.2% | **79.8%** |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/0vvlZjOw0wM"
+    title="Gemma 4 Local Guide: Ollama + llama.cpp on MacBook Pro M4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de Hardware Local para 2026
+
+Ejecutar estos modelos localmente requiere una comprensión clara de los límites de tu hardware. La serie "Effective" de Gemma 4 puede ejecutarse cómodamente en smartphones y portátiles modernos con tan solo 8GB de RAM. Sin embargo, para aprovechar al máximo la comparativa **gemma 4 vs llama 4**, lo más probable es que busques las variantes 26B o 31B.
+
+Para el Gemma 4 26B MoE, debes cargar los 26 mil millones de parámetros en la memoria, aunque solo 4 mil millones estén activos durante la fase real de "pensamiento". Esto requiere aproximadamente de 16GB a 20GB de VRAM dependiendo del nivel de cuantización (Q4_K_M vs Q8_0). Llama 4 Maverick es mucho más exigente; incluso con una fuerte cuantización de 4 bits, necesitarás más de 200GB de VRAM, lo que efectivamente lo deja fuera del mercado de consumo estándar a menos que se acceda a través de la API de un proveedor.
+
+### Especificaciones de Hardware Recomendadas
+
+1.  **Nivel de Entrada:** MacBook Pro M4 (16GB RAM) — Ejecuta Gemma 4 E2B/E4B a velocidades asombrosas.
+2.  **Gama Media:** RTX 5090 o MacBook Pro M4 Max (48GB+ RAM) — Ideal para Gemma 4 26B MoE con cuantización Q8_0.
+3.  **Entusiasta:** Dual RTX 6090 (Proyectado) o Mac Studio M4 Ultra — Necesario para variantes más grandes de Llama 4 o Gemma 31B sin cuantizar.
+
+> **⚠️ Advertencia:** Ejecutar modelos grandes como Llama 4 Maverick con RAM insuficiente provocará "disk swapping" (intercambio de disco), lo que puede reducir la velocidad de salida a menos de 1 token por segundo, haciéndolo inutilizable para aplicaciones en tiempo real.
+
+## Capacidades Multimodales: Visión y Audio
+
+uno de los desarrollos más emocionantes en la rivalidad **gemma 4 vs llama 4** es el soporte nativo para entradas multimodales. Gemma 4 fue construido desde cero utilizando la misma investigación detrás de Gemini 3, lo que significa que tiene marcadores de posición nativos de visión y audio integrados en su estructura de "turnos".
+
+En aplicaciones prácticas de juego, esto permite que una IA local "vea" una captura de pantalla de tu juego y proporcione consejos tácticos en tiempo real o describa el entorno a jugadores con discapacidad visual. Aunque Llama 4 Maverick también soporta visión, la integración de Gemma 4 con herramientas como `llama.cpp` y `Ollama` facilita mucho el despliegue de flujos de trabajo multimodales en máquinas locales.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Herramientas de Despliegue: Ollama vs. llama.cpp
+
+Para la mayoría de los usuarios, la elección entre **gemma 4 vs llama 4** se reducirá a la facilidad de uso. Google ha trabajado estrechamente con la comunidad de desarrolladores para asegurar que los pesos de Gemma 4 estén disponibles en [Hugging Face](https://huggingface.co/google) con soporte inmediato para los motores de inferencia más populares.
+
+*   **Ollama:** La forma más fácil de ejecutar Gemma 4. Un simple comando `ollama run gemma4:26b` te pone en marcha en segundos.
+*   **llama.cpp:** Para aquellos que desean el máximo rendimiento y un control granular sobre la cuantización. Al usar la versión "head" de llama.cpp, puedes utilizar el formato GGUF para ejecutar Gemma 4 con tasas de bits personalizadas (Q4, Q5 o Q8).
+*   **vLLM:** La opción preferida para el alojamiento local a nivel empresarial, ofreciendo un servicio de alto rendimiento para bucles agénticos.
+
+## Licencias e Impacto del Código Abierto
+
+La pieza final del rompecabezas **gemma 4 vs llama 4** es el marco legal. Por primera vez, Google ha lanzado Gemma 4 bajo la **licencia Apache 2.0**. Esta es una victoria masiva para la industria del videojuego, ya que permite el uso comercial, la modificación y la distribución sin restricciones, sin los obstáculos de la "licencia comunitaria" asociados con la familia Llama de Meta.
+
+Si bien Llama 4 Maverick de Meta es de "pesos abiertos", la Licencia Comunitaria de Llama contiene cláusulas que pueden ser restrictivas para empresas que alcanzan una cierta escala de usuarios activos mensuales. Para los desarrolladores independientes que buscan lanzar un juego con un LLM local integrado, la licencia Apache de Gemma 4 ofrece la tranquilidad necesaria.
+
+## Resumen de Diferencias Clave
+
+| Característica | Gemma 4 | Llama 4 |
+|---|---|---|
+| **Ideal Para** | Juegos Locales/Móvil | Empresas/Investigación |
+| **Uso Comercial** | **Sin restricciones (Apache 2.0)** | Restringido (Licencia Comunitaria) |
+| **Multilingüe** | 140+ Idiomas | 100+ Idiomas |
+| **Velocidad** | Alta (Arquitectura MoE) | Moderada (Arquitectura Densa) |
+
+En la batalla de **gemma 4 vs llama 4**, Google ha logrado hacerse un hueco para el "usuario avanzado local". Mientras que Llama 4 Maverick sigue siendo un titán de los benchmarks estándar de la industria, la eficiencia de Gemma 4, su destreza multimodal y su licencia permisiva lo convierten en la opción preferida para la próxima generación de juegos integrados con IA en 2026.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 en mi portátil gaming?**
+
+R: Sí, los modelos "Effective" 2B y 4B están diseñados específicamente para ejecutarse en portátiles de consumo e incluso en dispositivos móviles. Para el modelo 26B MoE, normalmente necesitarás al menos 16GB de VRAM o RAM del sistema (en sistemas de memoria unificada como Mac).
+
+**P: ¿Qué modelo es mejor para escribir código para mi juego?**
+
+R: En la comparativa de programación de **gemma 4 vs llama 4**, Llama 4 Maverick generalmente obtiene puntuaciones más altas en los benchmarks técnicos. Sin embargo, para uso local durante una sesión de desarrollo, Gemma 4 26B proporciona tiempos de respuesta mucho más rápidos, lo que puede ser más beneficioso para la depuración iterativa.
+
+**P: ¿Soporta Gemma 4 entradas de imágenes para el análisis de juegos?**
+
+R: Sí, Gemma 4 es multimodal y soporta visión. Puedes proporcionarle capturas de pantalla o fotogramas del juego para que analice elementos de la interfaz de usuario, diseños de mapas o posiciones de enemigos utilizando herramientas como llama.cpp.
+
+**P: ¿Es Llama 4 Maverick verdaderamente de código abierto?**
+
+R: Es un modelo de "pesos abiertos", pero utiliza la Licencia Comunitaria Meta Llama 4 en lugar de una licencia estándar aprobada por la OSI como Apache 2.0. Esto significa que existen límites de uso específicos, especialmente para entidades comerciales muy grandes.

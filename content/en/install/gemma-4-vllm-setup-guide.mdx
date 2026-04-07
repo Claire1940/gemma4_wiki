@@ -1,0 +1,191 @@
+export const metadata = {
+  title: "Gemma 4 vLLM Setup Guide: Master High-Speed AI Inference 2026",
+  description: "Learn how to deploy Google's Gemma 4 models using the vLLM framework for maximum performance, low latency, and advanced multimodal features. Updated 2026 guide.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+vLLM+Setup+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+Deploying state-of-the-art artificial intelligence locally has never been more accessible or more powerful than with the release of Google's latest model family. Following this **gemma 4 vllm setup guide** will allow you to harness the full potential of these models, whether you are running the compact E2B dense version or the massive 26B Mixture-of-Experts (MoE) variant. vLLM has quickly become the industry standard for LLM inference due to its revolutionary PagedAttention algorithm, which solves the common "memory hoarding" issues seen in traditional frameworks. By using this **gemma 4 vllm setup guide**, you can achieve up to 24x higher throughput compared to standard Hugging Face Transformers. In this comprehensive walkthrough, we will cover everything from hardware requirements and environment configuration to advanced features like "Thinking Mode" and multimodal vision processing, ensuring your local AI stack is optimized for the 2026 landscape.
+
+## Understanding the Gemma 4 Architecture
+
+Before diving into the technical installation, it is crucial to understand what makes Gemma 4 unique. Unlike previous generations, Gemma 4 utilizes a sophisticated Dual Attention mechanism that alternates between local sliding-window attention and global attention. This allows the model to handle massive context windows—up to 131,072 tokens—without the exponential memory cost usually associated with long-range dependencies.
+
+The model family is divided into two primary categories: Dense models for efficiency and Mixture-of-Experts (MoE) models for high-reasoning capabilities.
+
+| Model Variant | Total Parameters | Active Parameters | Recommended Use Case |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B IT** | 2B | 2B | Mobile apps, basic chatbots |
+| **Gemma 4 E4B IT** | 4B | 4B | Coding assistance, summarization |
+| **Gemma 4 26B-A4B IT** | 26B | 4B | Complex reasoning, tool calling |
+| **Gemma 4 31B IT** | 31B | 31B | Expert-level knowledge tasks |
+
+> **💡 Pro Tip:** The 26B-A4B MoE model is often the "sweet spot" for local users. It provides the intelligence of a 26B model but only uses the compute power of a 4B model during inference, significantly reducing latency.
+
+## Hardware Requirements for 2026
+
+To run Gemma 4 effectively, you need a GPU with sufficient VRAM to hold both the model weights and the KV (Key-Value) cache. vLLM is highly optimized for NVIDIA CUDA but now features robust support for AMD ROCm and Cloud TPUs.
+
+| Hardware Type | Minimum VRAM (BF16) | Recommended GPU/TPU |
+| :--- | :--- | :--- |
+| **NVIDIA (Dense 2B/4B)** | 24 GB | RTX 3090 / 4090 |
+| **NVIDIA (MoE 26B)** | 80 GB | A100 / H100 / B200 |
+| **AMD (All Models)** | 192 GB | MI300X / MI325X |
+| **Cloud TPU** | N/A | 4x Trillium / 1x Ironwood |
+
+If you are running on consumer hardware, you may need to use quantization (such as FP8 or NVFP4) to fit the larger 31B dense models into standard 24GB VRAM buffers.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/McLdlg5Gc9s"
+    title="What is vLLM? Efficient AI Inference for Large Language Models"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Step-by-Step Gemma 4 vLLM Setup Guide
+
+The most reliable way to install vLLM in 2026 is using the `uv` package manager, which is significantly faster than standard `pip`. Follow these steps to prepare your environment.
+
+### 1. Environment Preparation
+First, create a virtual environment and install the latest pre-release versions of vLLM and Transformers. Gemma 4 support requires the absolute latest nightly builds.
+
+```bash
+# Create and activate environment
+uv venv
+source .venv/bin/activate
+
+# Install vLLM with CUDA support
+uv pip install -U vllm --pre \
+  --extra-index-url https://download.pytorch.org/whl/nightly/cu124 \
+  --index-strategy unsafe-best-match
+
+# Ensure Transformers is updated to 5.5.0+
+uv pip install transformers==5.5.0
+```
+
+### 2. Launching the Inference Server
+Once installed, you can launch a local OpenAI-compatible server. This allows you to use Gemma 4 with any application that supports the OpenAI API.
+
+```bash
+# Basic launch for a 4B model
+vllm serve google/gemma-4-E4B-it \
+  --max-model-len 32768 \
+  --gpu-memory-utilization 0.90
+```
+
+For the larger 31B model, you should utilize Tensor Parallelism to split the model across multiple GPUs:
+
+```bash
+# Multi-GPU launch (2x GPUs)
+vllm serve google/gemma-4-31B-it \
+  --tensor-parallel-size 2 \
+  --max-model-len 16384 \
+  --kv-cache-dtype fp8
+```
+
+> **⚠️ Warning:** Always check your GPU memory usage after launching. If you encounter "Out of Memory" (OOM) errors, try reducing the `--max-model-len` or decreasing `--gpu-memory-utilization`.
+
+## Advanced Features: Thinking Mode and Tool Calling
+
+One of the standout features of Gemma 4 is its native "Thinking Mode." This allows the model to generate a structured reasoning chain before providing a final answer. In vLLM, this is handled by a specialized reasoning parser.
+
+To enable these capabilities, you must include specific flags when starting the server:
+
+```bash
+vllm serve google/gemma-4-31B-it \
+  --enable-auto-tool-choice \
+  --reasoning-parser gemma4 \
+  --tool-call-parser gemma4
+```
+
+### Using Thinking Mode via API
+When calling the server using the OpenAI SDK, you can trigger the reasoning process by passing `enable_thinking` in the extra body parameters.
+
+```python
+from openai import OpenAI
+
+client = OpenAI(base_url="http://localhost:8000/v1", api_key="EMPTY")
+
+response = client.chat.completions.create(
+    model="google/gemma-4-31B-it",
+    messages=[{"role": "user", "content": "Solve: If a snail climbs 3ft a day and slides 2ft at night, how long to climb 20ft?"}],
+    extra_body={"chat_template_kwargs": {"enable_thinking": True}}
+)
+
+# Access the reasoning chain
+print(response.choices[0].message.reasoning_content)
+# Access the final answer
+print(response.choices[0].message.content)
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/Vtp3lr9BKq4"
+    title="How to Run Gemma-4 26B A4B Locally using vLLM"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Multimodal Capabilities: Vision, Audio, and Video
+
+Gemma 4 is not just a text model; it features custom encoders for understanding images, audio, and video natively. This **gemma 4 vllm setup guide** wouldn't be complete without mentioning how to handle these multimodal inputs.
+
+### Dynamic Vision Resolution
+Gemma 4 uses a per-request configurable vision token budget. You can adjust the resolution based on how much detail you need versus how much VRAM you want to save.
+
+| Resolution Setting | Token Budget | Best For |
+| :--- | :--- | :--- |
+| **Low** | 70 - 140 | Icons, simple text OCR |
+| **Medium** | 280 | Standard photos, web screenshots |
+| **High** | 560 - 1120 | Detailed medical or satellite imagery |
+
+To set a default vision budget at launch, use:
+`--mm-processor-kwargs '{"max_soft_tokens": 280}'`
+
+### Audio and Video Inference
+For audio-heavy workloads, you can limit the number of multimodal items per prompt to save memory. For example, if you only need to process one video at a time:
+
+```bash
+vllm serve google/gemma-4-E2B-it \
+  --limit-mm-per-prompt image=4,video=1,audio=1
+```
+
+## Optimizing Performance and Throughput
+
+To get the most out of your setup, you should tune the vLLM server flags based on your specific goals. Whether you need the absolute lowest latency for a real-time assistant or the highest throughput for batch processing, these settings make a difference.
+
+| Goal | Recommended Flag | Effect |
+| :--- | :--- | :--- |
+| **Max Throughput** | `--async-scheduling` | Overlaps request scheduling with GPU decoding |
+| **Low Latency** | `--tensor-parallel-size 4` | Splits computation across more GPUs |
+| **Memory Saving** | `--kv-cache-dtype fp8` | Reduces KV cache memory usage by 50% |
+| **Consistency** | `--no-enable-prefix-caching` | Disables caching for more accurate benchmarking |
+
+For official documentation and deeper technical dives, visit the [vLLM Project Page](https://github.com/vllm-project/vllm) for the latest 2026 updates.
+
+## FAQ
+
+**Q: Can I run Gemma 4 on a single 24GB GPU?**
+
+A: Yes, you can run the Gemma 4 E2B and E4B models comfortably on a single 24GB GPU like the RTX 4090. To run the 31B version, you will likely need to use FP8 quantization or a dual-GPU setup with Tensor Parallelism.
+
+**Q: What is the benefit of "Thinking Mode"?**
+
+A: Thinking Mode forces the model to externalize its reasoning process. This significantly improves performance on logic, math, and coding tasks because the model can "correct" its internal logic before committing to a final answer.
+
+**Q: Why should I use vLLM instead of Hugging Face Transformers?**
+
+A: vLLM is specifically designed for high-performance serving. Its PagedAttention and continuous batching technologies allow it to handle many simultaneous users and long context windows with much higher efficiency than standard libraries.
+
+**Q: How do I update my gemma 4 vllm setup guide for the latest models?**
+
+A: Always ensure you are using the `--pre` flag during pip installation to get the latest nightly wheels, as support for new architectures like Gemma 4 is often merged into the main branch daily. Use `uv pip install -U vllm --pre` to stay current in 2026.

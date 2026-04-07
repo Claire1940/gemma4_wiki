@@ -1,0 +1,160 @@
+export const metadata = {
+  title: "Guía de configuración de Gemma 4 con Gradio: Construye tu asistente de IA local 2026",
+  description: "Aprende a configurar los modelos Gemma 4 de Google usando Gradio y Ollama. Esta guía completa cubre la instalación, herramientas agénticas y optimización del rendimiento.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e40af/fff?text=Gemma+4+Gradio+Setup",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+Construir un entorno de IA local nunca ha sido tan accesible como con el lanzamiento de la última familia de modelos de pesos abiertos de Google. Esta **guía de configuración de gemma 4 con gradio** proporciona todo lo que necesitas para desplegar un asistente de programación y razonamiento de alto rendimiento en tu propio hardware. Al combinar la potencia de Gemma 4 con la flexibilidad de la interfaz de usuario de Gradio, los usuarios pueden crear una interfaz multimodal que maneja texto, código e incluso datos visuales sin depender de costosas suscripciones en la nube. Ya seas un desarrollador que busca automatizar tareas repetitivas o un investigador que prueba los límites de la infraestructura de Gemini 3, esta **guía de configuración de gemma 4 con gradio** garantiza un proceso de instalación sin contratiempos. En las siguientes secciones, recorreremos los requisitos de hardware, la gestión de dependencias y la lógica específica de Python necesaria para poner en marcha tu agente local en 2026.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Antes de sumergirse en la configuración técnica, es esencial entender qué versión del modelo se adapta a tu hardware específico. Gemma 4 se lanza en varios tamaños, que van desde versiones "Effective" aptas para móviles hasta arquitecturas masivas de Mezcla de Expertos (MoE) diseñadas para tareas de alto rendimiento.
+
+Google ha optimizado estos modelos para maximizar la "inteligencia por parámetro", lo que significa que incluso las versiones más pequeñas de 4B y 8B rinden significativamente por encima de su categoría en pruebas de referencia de programación y razonamiento. Para quienes ejecutan configuraciones locales, la elección suele depender de la disponibilidad de VRAM y la complejidad de las tareas que pretenden realizar.
+
+| Variante del Modelo | Arquitectura | Parámetros Totales | Ventana de Contexto | Caso de Uso Principal |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma-4-E2B** | Transformador Denso | 5.1B | 128K Tokens | Móvil y dispositivos integrados |
+| **Gemma-4-E4B** | Transformador Denso | 7.9B | 128K Tokens | Escritorio local / Chat general |
+| **Gemma-4-26B-A4B** | MoE (128 Expertos) | 26B | 256K Tokens | Investigación de alto rendimiento |
+| **Gemma-4-31B** | Transformador Denso | 31B | 256K Tokens | Lógica compleja y programación |
+
+> **💡 Consejo:** Si tienes 12 GB de VRAM o menos, quédate con la versión cuantizada `gemma4:e4b`. Ofrece el mejor equilibrio entre velocidad y razonamiento para GPUs de consumo.
+
+## Requisitos previos y configuración del entorno local
+
+Para seguir esta **guía de configuración de gemma 4 con gradio**, necesitarás un entorno de Python funcional y el motor de inferencia Ollama. Ollama sirve como backend, encargándose del trabajo pesado de la cuantización y el servicio del modelo, mientras que Gradio proporciona la "piel" del frontend para la interacción con el usuario.
+
+### 1. Instalar Ollama
+Ollama es la forma más sencilla de ejecutar Gemma 4 localmente. Gestiona los pesos del modelo y proporciona una API compatible con OpenAI.
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull gemma4:e4b
+```
+
+### 2. Dependencias de Python
+Crea un entorno virtual e instala las librerías necesarias. Recomendamos usar `uv` para una resolución de paquetes más rápida, aunque `pip` funciona perfectamente.
+```bash
+pip install gradio requests pillow openai
+```
+
+| Librería | Versión (2026) | Propósito |
+| :--- | :--- | :--- |
+| **Gradio** | 6.0+ | Diseño de interfaz y componente de Chatbot |
+| **Requests** | 2.31+ | Comunicación API con Ollama |
+| **Pillow** | 10.0+ | Procesamiento de imágenes para tareas multimodales |
+| **OpenAI** | 1.x+ | Compatibilidad opcional con el backend |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/zQaXrXuXqX0"
+    title="Gemma4 + Claude Code: This New Open Source Gemini Model Can Do Anything"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Construyendo la interfaz de Gradio
+
+El núcleo de esta **guía de configuración de gemma 4 con gradio** consiste en crear un diseño de panel dividido. Este diseño permite tener un editor de código en vivo a la izquierda y un panel de chat multimodal a la derecha. Esto es particularmente útil para desarrolladores que quieren que la IA escriba código y verlo inmediatamente en un espacio de trabajo.
+
+### Lógica central del chat
+El bucle de interacción requiere un generador de streaming. Esto asegura que la respuesta del modelo aparezca token por token, proporcionando una mejor experiencia de usuario.
+
+```python
+def chat(message, history, editor_code, agentic_mode):
+    # Construir historial para el contexto
+    messages = [{"role": "system", "content": "Eres un asistente de IA servicial."}]
+    for turn in history:
+        messages.append(turn)
+    
+    # Inyectar el código actual del editor como contexto
+    if editor_code:
+        message += f"\n\nContexto del Editor:\n```{editor_code}```"
+    
+    messages.append({"role": "user", "content": message})
+    
+    # Petición a Ollama
+    payload = {
+        "model": "gemma4:e4b",
+        "messages": messages,
+        "stream": True
+    }
+    # ... lógica para transmitir la respuesta de vuelta a Gradio ...
+```
+
+### Diseño de la interfaz con Gradio Blocks
+El uso de `gr.Blocks` permite una interfaz personalizada con temas CSS. En la versión 2026 de Gradio, utilizamos componentes de chatbot mejorados que admiten descargas directas de archivos y una mejor funcionalidad de copiar y pegar.
+
+| Componente | Función | Configuración |
+| :--- | :--- | :--- |
+| **gr.Chatbot** | Mostrar conversación | `buttons=["copy"]` |
+| **gr.Code** | Editor en vivo | `interactive=True`, `language="python"` |
+| **gr.Image** | Entrada visual | `type="filepath"` |
+| **gr.Checkbox** | Alternar ajustes | Activar modos "Thinking" o "Agéntico" |
+
+## Funciones agénticas avanzadas: Uso de herramientas
+
+Una de las características destacadas de la familia Gemma 4 es su soporte nativo para flujos de trabajo agénticos. Al definir "herramientas", el modelo puede realizar acciones como ejecutar código Python en un entorno seguro (sandbox) o realizar cálculos matemáticos complejos.
+
+Para implementar esto, debes definir un esquema de herramientas y una función de ejecución. Cuando el modelo determina que necesita ejecutar código, devuelve un bloque `tool_calls` en lugar de texto sin formato.
+
+```python
+TOOLS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "run_python",
+            "description": "Ejecuta código Python en un subproceso y devuelve la salida.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "code": {"type": "string"}
+                }
+            }
+        }
+    }
+]
+```
+
+> **⚠️ Advertencia:** Ejecuta siempre el código generado por el modelo en un entorno aislado. Utiliza archivos temporales y establece límites de tiempo estrictos (por ejemplo, 5 segundos) para evitar procesos descontrolados o brechas de seguridad en tu máquina local.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/-NsQZcbCV8Q"
+    title="PaperClip + Hermes Agent + Gemma4: The Ultimate Open Source Swarm Intelligence"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimización del rendimiento para hardware de 2026
+
+Aunque Ollama es excelente por su facilidad de uso, los usuarios avanzados pueden querer explorar **vLLM** para el backend. vLLM utiliza PagedAttention™, lo que reduce significativamente el desperdicio de VRAM y aumenta el rendimiento hasta 24 veces en comparación con las implementaciones estándar. Esto es particularmente útil si estás sirviendo Gemma 4 a múltiples usuarios en una red de área local (LAN).
+
+Para obtener más información sobre el servicio de alto rendimiento, visita el [sitio web oficial de Ollama](https://ollama.com/) para las últimas actualizaciones sobre aceleración por GPU.
+
+## Preguntas Frecuentes (FAQ)
+
+**P: ¿Requiere esta guía de configuración de gemma 4 con gradio una GPU dedicada?**
+
+R: Aunque Gemma 4 puede ejecutarse en una CPU de gama alta mediante cuantización (por ejemplo, chips Apple serie M o procesadores modernos de AMD/Intel), se recomienda encarecidamente una GPU NVIDIA dedicada con al menos 8 GB de VRAM para obtener velocidades de streaming en tiempo real.
+
+**P: ¿Puedo usar esta configuración para tareas multimodales como el análisis de imágenes?**
+
+R: Sí. Gemma 4 admite visión nativa. Puedes subir imágenes a través del componente `gr.Image` de Gradio, codificarlas como Base64 y pasarlas a la API de Ollama dentro del campo `images` de tu solicitud.
+
+**P: ¿Cuál es la diferencia entre el modo "Thinking" y el modo "Agéntico"?**
+
+R: El modo Thinking permite que el modelo utilice un procesamiento interno de cadena de pensamiento antes de dar una respuesta, lo cual es ideal para acertijos lógicos. El modo Agéntico permite que el modelo interactúe realmente con tu sistema a través de herramientas como un ejecutor de código o un buscador web.
+
+**P: ¿Cómo actualizo el modelo si se lanza una nueva versión?**
+
+R: Simplemente ejecuta `ollama pull gemma4` en tu terminal. Ollama buscará automáticamente los pesos más recientes y actualizará tu manifiesto local manteniendo intacta tu configuración de Gradio.

@@ -1,0 +1,160 @@
+export const metadata = {
+  title: "Gemma 4 Gradio セットアップガイド：ローカルAIアシスタントの構築 2026",
+  description: "GradioとOllamaを使用してGoogleのGemma 4モデルを構成する方法を学びます。この包括的なガイドでは、インストール、エージェントツール、およびパフォーマンスの最適化について説明します。",
+  category: "ガイド",
+  image: "https://placehold.co/800x400/1e40af/fff?text=Gemma+4+Gradio+Setup",
+  date: "2026-04-07",
+  author: "Gemma Wiki チーム"
+}
+
+Googleの最新オープンウェイトモデルファミリーのリリースにより、ローカルAI環境の構築はかつてないほど身近なものになりました。この **Gemma 4 Gradio セットアップガイド** では、自身のハードウェア上に高性能なコーディングおよび推論アシスタントをデプロイするために必要なすべてを解説します。Gemma 4のパワーとGradio UIの柔軟性を組み合わせることで、高額なクラウドサブスクリプションに頼ることなく、テキスト、コード、さらには視覚データまで処理できるマルチモーダルなインターフェースを作成できます。反復的なタスクを自動化したい開発者であれ、Gemini 3インフラストラクチャの限界をテストする研究者であれ、この **Gemma 4 Gradio セットアップガイド** はスムーズなインストールプロセスを保証します。以下のセクションでは、2026年現在のローカルエージェントを稼働させるために必要なハードウェア要件、依存関係の管理、および特定のPythonロジックについて説明します。
+
+## Gemma 4 モデルファミリーの理解
+
+技術的な構成に入る前に、どのバージョンのモデルが特定のハードウェアに適しているかを理解することが重要です。Gemma 4は、モバイル向けの「Effective」バージョンから、高スループットタスク向けに設計された大規模な混合エキスパート（MoE）アーキテクチャまで、いくつかのサイズでリリースされています。
+
+Googleはこれらのモデルを「パラメータあたりの知能」を最大化するように最適化しています。つまり、比較的小さな4Bや8Bバージョンであっても、コーディングや推論のベンチマークにおいて、そのサイズを大きく上回る性能を発揮します。ローカルセットアップの場合、選択の基準は通常、VRAMの空き容量と実行しようとするタスクの複雑さによって決まります。
+
+| モデルバリアント | アーキテクチャ | 総パラメータ数 | コンテキストウィンドウ | 主な用途 |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma-4-E2B** | Dense Transformer | 5.1B | 128K トークン | モバイル & デバイス上 |
+| **Gemma-4-E4B** | Dense Transformer | 7.9B | 128K トークン | ローカルデスクトップ / 一般的なチャット |
+| **Gemma-4-26B-A4B** | MoE (128 エキスパート) | 26B | 256K トークン | 高スループットの研究 |
+| **Gemma-4-31B** | Dense Transformer | 31B | 256K トークン | 複雑なロジック & コーディング |
+
+> **💡 ヒント:** VRAMが12GB以下の場合は、`gemma4:e4b` の量子化バージョンを使用してください。これは、コンシューマー向けGPUにおいてスピードと推論能力の最高のバランスを提供します。
+
+## 事前準備とローカル環境のセットアップ
+
+この **Gemma 4 Gradio セットアップガイド** に従うには、機能するPython環境とOllama推論エンジンが必要です。Ollamaはバックエンドとして機能し、モデルの量子化やサービングといった重い処理を担当します。一方、Gradioはユーザーインタラクションのためのフロントエンドの「外装」を提供します。
+
+### 1. Ollamaのインストール
+Ollamaは、Gemma 4をローカルで実行するための最も簡単な方法です。モデルの重みを管理し、OpenAI互換のAPIを提供します。
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull gemma4:e4b
+```
+
+### 2. Pythonの依存関係
+仮想環境を作成し、必要なライブラリをインストールします。パッケージ解決が速い `uv` の使用をお勧めしますが、`pip` でも問題なく動作します。
+```bash
+pip install gradio requests pillow openai
+```
+
+| ライブラリ | バージョン (2026) | 目的 |
+| :--- | :--- | :--- |
+| **Gradio** | 6.0+ | UIレイアウトとチャットボットコンポーネント |
+| **Requests** | 2.31+ | OllamaとのAPI通信 |
+| **Pillow** | 10.0+ | マルチモーダルタスク用の画像処理 |
+| **OpenAI** | 1.x+ | オプションのバックエンド互換性 |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/zQaXrXuXqX0"
+    title="Gemma4 + Claude Code: この新しいオープンソースGeminiモデルは何でもできる"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Gradio インターフェースの構築
+
+この **Gemma 4 Gradio セットアップガイド** の核となるのは、スプリットペイン・レイアウトの作成です。このデザインにより、左側にライブコードエディタ、右側にマルチモーダルチャットパネルを配置できます。これは、AIにコードを書かせ、それをすぐにワークスペースで確認したい開発者にとって特に便利です。
+
+### コア・チャット・ロジック
+インタラクションループにはストリーミングジェネレーターが必要です。これにより、モデルのレスポンスがトークンごとに表示され、より優れたユーザーエクスペリエンスが提供されます。
+
+```python
+def chat(message, history, editor_code, agentic_mode):
+    # コンテキストのための履歴構築
+    messages = [{"role": "system", "content": "あなたは役に立つAIアシスタントです。"}]
+    for turn in history:
+        messages.append(turn)
+    
+    # エディタからの現在のコードをコンテキストとして注入
+    if editor_code:
+        message += f"\n\nContext from Editor:\n```{editor_code}```"
+    
+    messages.append({"role": "user", "content": message})
+    
+    # Ollamaへのリクエスト
+    payload = {
+        "model": "gemma4:e4b",
+        "messages": messages,
+        "stream": True
+    }
+    # ... Gradioにレスポンスをストリーミングで返すロジック ...
+```
+
+### Gradio Blocks によるUIレイアウト
+`gr.Blocks` を使用することで、カスタムCSSテーマを適用したインターフェースが可能になります。2026年版のGradioでは、直接のファイルダウンロードやコピー＆ペースト機能が向上した、改善されたチャットボットコンポーネントを活用します。
+
+| コンポーネント | 機能 | 設定 |
+| :--- | :--- | :--- |
+| **gr.Chatbot** | 会話を表示 | `buttons=["copy"]` |
+| **gr.Code** | ライブエディタ | `interactive=True`, `language="python"` |
+| **gr.Image** | 視覚的入力 | `type="filepath"` |
+| **gr.Checkbox** | 設定の切り替え | 「思考」または「エージェント」モードを有効化 |
+
+## 高度なエージェント機能：ツールの利用
+
+Gemma 4ファミリーの際立った特徴の一つは、エージェントワークフローのネイティブサポートです。「ツール」を定義することで、モデルはサンドボックス内でのPythonコードの実行や、複雑な数学計算などのアクションを実行できるようになります。
+
+これを実装するには、ツールスキーマと実行関数を定義する必要があります。モデルがコードを実行する必要があると判断すると、生のテキストの代わりに `tool_calls` ブロックを返します。
+
+```python
+TOOLS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "run_python",
+            "description": "サブプロセスでPythonコードを実行し、出力を返します。",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "code": {"type": "string"}
+                }
+            }
+        }
+    }
+]
+```
+
+> **⚠️ 警告:** モデルが生成したコードは、常にサンドボックス環境で実行してください。一時ファイルを使用し、厳格なタイムアウト（例：5秒）を設定して、ローカルマシンでのプロセスの暴走やセキュリティ侵害を防止してください。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/-NsQZcbCV8Q"
+    title="PaperClip + Hermes Agent + Gemma4: 究極のオープンソース群知能"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 2026年のハードウェア向けのパフォーマンス最適化
+
+Ollamaは使いやすさの面で優れていますが、パワーユーザーはバックエンドとして **vLLM** の探索を検討すると良いでしょう。vLLMは PagedAttention™ を利用しており、標準的な実装と比較してVRAMの無駄を大幅に削減し、スループットを最大24倍向上させます。これは、ローカルエリアネットワーク（LAN）上の複数のユーザーにGemma 4を提供する場合に特に有用です。
+
+高性能なサービングの詳細については、GPUアクセラレーションの最新アップデートが掲載されている [Ollama公式サイト](https://ollama.com/) をご覧ください。
+
+## FAQ
+
+**Q: この Gemma 4 Gradio セットアップガイドには専用のGPUが必要ですか？**
+
+A: Gemma 4は、量子化を使用することで高性能なCPU（Apple Mシリーズチップや最新のAMD/Intelプロセッサなど）でも動作しますが、リアルタイムのストリーミング速度を実現するためには、少なくとも8GBのVRAMを搭載した専用のNVIDIA GPUを強く推奨します。
+
+**Q: このセットアップを画像分析などのマルチモーダルなタスクに使用できますか？**
+
+A: はい。Gemma 4はネイティブでビジョン（視覚）をサポートしています。Gradioの `gr.Image` コンポーネントを介して画像をアップロードし、Base64としてエンコードして、Ollama APIリクエストの `images` フィールドに渡すことができます。
+
+**Q: 「思考（Thinking）」モードと「エージェント（Agentic）」モードの違いは何ですか？**
+
+A: 思考モードは、モデルが回答を出す前に内部的に思考の連鎖（chain-of-thought）処理を行うことを可能にし、論理パズルなどに適しています。エージェントモードは、モデルがコード実行やWeb検索などのツールを介して、実際にシステムと対話することを可能にします。
+
+**Q: 新しいバージョンがリリースされた場合、モデルをどのように更新すればよいですか？**
+
+A: ターミナルで `ollama pull gemma4` を実行するだけです。Ollamaは自動的に最新の重みを確認し、Gradioの設定を維持したままローカルのマニフェストを更新します。

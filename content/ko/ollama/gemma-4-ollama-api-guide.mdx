@@ -1,0 +1,139 @@
+export const metadata = {
+  title: "Gemma 4 Ollama API 가이드: 로컬 AI 설정 및 통합 (2026년)",
+  description: "Google의 Gemma 4를 마스터하기 위한 종합 Ollama API 가이드를 확인하세요. 2026년 최신 통합 단계와 함께 고성능 AI를 로컬에서 실행하는 방법을 배울 수 있습니다.",
+  category: "가이드",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Ollama+API+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki 팀"
+}
+
+자신의 하드웨어에서 강력한 인공지능을 직접 실행하는 것이 2026년만큼 접근하기 쉬웠던 적은 없었습니다. Google의 최신 오픈 가중치(open-weights) 모델이 출시됨에 따라, 개발자와 애호가들은 로컬 워크플로우를 간소화하기 위해 결정적인 **gemma 4 ollama api 가이드**를 찾고 있습니다. Gemma 4는 "파라미터당 지능"에서 엄청난 도약을 이루었으며, 이전에는 거대한 클라우드 클러스터가 필요했던 최첨단 수준의 추론 및 멀티모달 기능을 제공합니다. Ollama를 활용하면 비싼 구독료를 지불하지 않고도 완벽한 데이터 프라이버시를 유지할 수 있습니다.
+
+이 **gemma 4 ollama api 가이드**는 GPU에 적합한 모델 크기 선택부터 커스텀 애플리케이션에 REST API를 통합하는 방법까지 전체 생태계를 안내합니다. 자율 게임 에이전트를 구축하든 로컬 코딩 어시스턴트를 구축하든, Ollama를 통해 Gemma 4를 활용하는 방법을 이해하는 것은 현대 개발자에게 필수적인 첫 번째 단계입니다.
+
+## Gemma 4 모델 제품군 이해하기
+
+Google은 Gemma 4를 "Effective" 엣지 모델과 고성능 워크스테이션 모델의 두 가지 계층으로 구성했습니다. 속도와 추론 깊이의 균형을 맞추기 위해서는 올바른 버전을 선택하는 것이 중요합니다. E2B 및 E4B와 같은 변형의 "E"는 "Effective(유효)" 파라미터를 의미하며, 이는 전문가 혼합(Mixture-of-Experts, MoE)과 같은 구조적 최적화를 통해 체급을 훨씬 뛰어넘는 성능을 발휘하는 모델임을 나타냅니다.
+
+| 모델 변형 | 파라미터 | 컨텍스트 창 | 주요 사용 사례 |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2.3B Effective | 128K 토큰 | 모바일 기기, IoT 및 기본 채팅 |
+| **Gemma 4 E4B** | 4.5B Effective | 128K 토큰 | 노트북, 빠른 로컬 프로토타이핑 |
+| **Gemma 4 26B** | 25.2B (MoE) | 256K 토큰 | 복잡한 추론, 코딩 및 에이전트 |
+| **Gemma 4 31B** | 30.7B (Dense) | 256K 토큰 | 최첨단 워크스테이션 지능 |
+
+> **💡 팁:** 일반적인 게이밍 노트북이나 데스크톱 사용자에게는 **E4B** 모델이 "가장 적합한 선택(sweet spot)"입니다. 과도한 VRAM 오버헤드 없이도 뛰어난 지시어 이행 능력을 제공하기 때문입니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Gemma 4를 위한 Ollama 설정하기
+
+Ollama는 복잡한 모델 가중치와 로컬 환경 사이의 다리 역할을 합니다. 배포 프로세스를 몇 가지 CLI 명령으로 단순화하여 백엔드 오케스트레이션을 처리하므로, 사용자는 API 통합에만 집중할 수 있습니다.
+
+### 1. 설치
+먼저, [Ollama 공식 웹사이트](https://ollama.com)에서 최신 버전의 Ollama를 다운로드하세요.
+*   **Windows/macOS:** 표준 설치 프로그램을 실행하고 안내를 따릅니다.
+*   **Linux:** 한 줄 설치 스크립트를 사용합니다: `curl -fsSL https://ollama.com/install.sh | sh`
+
+### 2. 모델 가져오기(Pulling)
+설치가 완료되면 터미널 또는 명령 프롬프트를 엽니다. 기본 Gemma 4 모델(일반적으로 E4B 버전을 가리킴)을 다운로드하려면 다음을 실행하세요.
+`ollama pull gemma4`
+
+고도의 추론 능력을 갖춘 워크스테이션 모델과 같이 특정 버전이 필요한 경우 특정 태그를 사용하세요.
+`ollama pull gemma4:31b`
+
+## Gemma 4 Ollama API 가이드: 통합 단계
+
+이 설정의 진정한 위력은 로컬 REST API에 있습니다. 기본적으로 Ollama는 `11434` 포트에서 API를 제공합니다. 이를 통해 HTTP 요청을 지원하는 모든 프로그래밍 언어나 도구에서 프롬프트를 보낼 수 있습니다.
+
+### Generate 엔드포인트 사용하기
+`/api/generate` 엔드포인트는 간단한 단일 프롬프트 완성을 위해 사용됩니다.
+
+| 파라미터 | 유형 | 설명 |
+| :--- | :--- | :--- |
+| **model** | 문자열 | 모델 이름 (예: "gemma4") |
+| **prompt** | 문자열 | 모델에 전달할 텍스트 프롬프트 |
+| **stream** | 불리언 | 토큰이 생성되는 대로 반환할지 여부 |
+| **images** | 배열 | 멀티모달 작업을 위한 Base64 인코딩 이미지 |
+
+### Python 통합
+개발자의 경우, 공식 `ollama` Python 라이브러리가 모델과 상호작용하는 가장 효율적인 방법입니다. pip를 통해 설치하세요.
+`pip install ollama`
+
+```python
+import ollama
+
+# 예시: 로컬 채팅 완료
+response = ollama.chat(
+    model='gemma4',
+    messages=[
+        {'role': 'system', 'content': '당신은 유능한 비서입니다.'},
+        {'role': 'user', 'content': 'Gemma 4에서 전문가 혼합(Mixture of Experts) 아키텍처가 어떻게 작동하는지 설명해 주세요.'}
+    ]
+)
+print(response['message']['content'])
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/TiawD_Xd1pE"
+    title="Gemma 4 E4B - How to Run on Ollama | Fully Tested Setup Guide"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 하드웨어 요구 사항 및 성능 최적화
+
+2026년에 Gemma 4를 로컬에서 실행하려면 낮은 대기 시간을 보장하기 위한 특정 하드웨어 고려 사항이 필요합니다. 모델을 CPU에서 실행할 수도 있지만, 실시간 상호작용을 위해서는 충분한 VRAM을 갖춘 전용 GPU를 강력히 권장합니다.
+
+| 모델 크기 | 최소 RAM/VRAM | 권장 하드웨어 |
+| :--- | :--- | :--- |
+| **E2B / E4B** | 8GB | 최신 노트북 (M2/M3 Mac 또는 RTX 3060 이상) |
+| **26B (MoE)** | 16GB - 20GB | RTX 4070 Ti 또는 32GB 시스템 RAM이 장착된 데스크톱 |
+| **31B (Dense)** | 24GB 이상 | RTX 4090 또는 Mac Studio가 장착된 워크스테이션 |
+
+> **경고:** RAM이 8GB인 시스템에서 31B 모델을 실행하려고 하면 시스템이 하드 드라이브의 "스왑 공간(swap space)"을 사용하게 되어 생성 속도가 극도로 느려집니다(초당 1토큰 미만).
+
+## 고급 기능: 사고 모드 및 멀티모달리티
+
+Gemma 4는 모델이 최종 답변을 제공하기 전에 내부 추론 과정을 거칠 수 있도록 하는 정교한 "사고 모드(Thinking Mode)"를 도입했습니다. 이는 복잡한 수학이나 논리 퍼즐에 특히 유용합니다.
+
+### 사고 모드 활성화하기
+사고 프로세스를 트리거하려면 시스템 프롬프트의 시작 부분에 `&lt;|think|&gt;` 토큰을 포함할 수 있습니다. Ollama는 채팅 템플릿의 복잡성을 처리하지만, 사용자가 모델의 동작을 유도할 수 있습니다.
+*   **트리거:** 시스템 역할(system role)에 `&lt;|think|&gt;`를 포함합니다.
+*   **출력:** 모델은 `&lt;|channel>thought\n` 태그 내부에 내부 추론을 제공한 다음 최종 답변을 제공합니다.
+
+### 멀티모달 모범 사례
+Gemma 4는 기본적으로 멀티모달을 지원합니다. 이미지나 오디오를 사용할 때 최상의 성능을 얻으려면 다음을 따르세요.
+1.  **순서가 중요:** API 요청 시 항상 이미지나 오디오 데이터를 텍스트 프롬프트 **앞에** 배치하세요.
+2.  **해상도 예산:** OCR(텍스트 읽기)에는 높은 해상도 예산을 사용하고, 일반적인 이미지 캡셔닝에는 낮은 예산을 사용하여 계산 시간을 절약하세요.
+
+## 자주 묻는 질문 (FAQ)
+
+**Q: 이 gemma 4 ollama api 가이드는 인터넷 연결 없이도 작동하나요?**
+
+A: 네. `ollama pull` 명령을 사용하여 모델 가중치를 머신에 다운로드한 후에는 인터넷 연결을 완전히 끊을 수 있습니다. 모든 처리는 하드웨어에서 로컬로 이루어집니다.
+
+**Q: Gemma 4는 Ollama API를 통해 오디오 파일을 처리할 수 있나요?**
+
+A: Gemma 4 제품군의 소형 모델인 E2B 및 E4B에는 네이티브 오디오 인코더 파라미터가 포함되어 있습니다. API 요청 시 오디오 데이터를 전달할 수 있지만, 특정 오디오 형식에 대한 지원은 현재 Ollama 버전에 따라 다를 수 있습니다.
+
+**Q: Google에서 패치를 출시하면 Gemma 4 모델을 어떻게 업데이트하나요?**
+
+A: 단순히 `ollama pull gemma4` 명령을 다시 실행하면 됩니다. Ollama는 업데이트를 확인하고 변경된 필요한 "레이어"만 다운로드하여 시간과 대역폭을 절약합니다.
+
+**Q: API 요청 횟수에 제한이 있나요?**
+
+A: 아니요. 모델이 자신의 컴퓨터에서 실행되기 때문에 사용량 제한, 분당 토큰 제한, 구독료가 없습니다. 유일한 제한은 하드웨어의 처리 속도뿐입니다.

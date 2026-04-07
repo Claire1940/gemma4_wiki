@@ -1,0 +1,131 @@
+export const metadata = {
+  title: "Ventana de contexto de Gemma 4: Guía completa y benchmarks 2026",
+  description: "Explora las masivas mejoras en la ventana de contexto de Gemma 4. Aprende cómo los últimos modelos de IA de Google manejan 256k tokens localmente con benchmarks de alto rendimiento.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Context+Window",
+  date: "2026-04-05",
+  author: "Equipo de Gemma Wiki"
+}
+
+Google DeepMind ha transformado oficialmente el panorama de la inteligencia artificial local con el lanzamiento de la familia de modelos Gemma 4. Para desarrolladores y usuarios avanzados, la mejora más significativa reside en la **ventana de contexto de gemma 4**, que ahora admite hasta 256,000 tokens en sus variantes insignia. Esta expansión masiva permite al modelo procesar bases de código completas, manuales técnicos extensos o guiones de juegos complejos en un solo prompt. Comprender cómo funciona la **ventana de contexto de gemma 4** es esencial para cualquiera que busque alejarse de las suscripciones pagas en la nube hacia una configuración de IA local más privada.
+
+En esta guía, desglosaremos las especificaciones técnicas de la familia Gemma 4, compararemos las capacidades de contexto entre los diferentes tamaños de modelo y proporcionaremos un tutorial paso a paso sobre cómo desplegar estos modelos en tu propio hardware. Ya seas un gamer que busca integrar la IA en su flujo de trabajo de modding o un desarrollador que construye herramientas agénticas, la actualización de 2026 del ecosistema Gemma ofrece una potencia sin precedentes sin la factura mensual.
+
+## Tamaños de modelos Gemma 4 y especificaciones de contexto
+
+La familia Gemma 4 se divide en cuatro tamaños distintos, cada uno optimizado para diferentes perfiles de hardware. Mientras que los modelos "Edge" más pequeños están diseñados para dispositivos móviles y laptops, los modelos de estación de trabajo más grandes ofrecen la experiencia completa de la **ventana de contexto de gemma 4** de 256k.
+
+| Variante de modelo | Parámetros | Ventana de contexto | Ideal para |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2 Mil millones | 128,000 Tokens | Teléfonos, Raspberry Pi, Tablets |
+| **Gemma 4 E4B** | 4 Mil millones | 128,000 Tokens | Laptops estándar, PCs con 8GB RAM |
+| **Gemma 4 26B (MoE)** | 26 Mil millones | 256,000 Tokens | PCs de Gaming, 16GB+ RAM |
+| **Gemma 4 31B** | 31 Mil millones | 256,000 Tokens | Estaciones de trabajo, GPUs dedicadas |
+
+La "E" en E2B y E4B significa "Parámetros efectivos", lo que indica que estos modelos están altamente optimizados para dispositivos de borde (edge). A pesar de su menor tamaño, todavía cuentan con una ventana de contexto que supera a muchos modelos insignia antiguos. Sin embargo, para aquellos que necesitan analizar conjuntos de datos masivos, las versiones 26B y 31B son las opciones principales para utilizar la capacidad máxima de la **ventana de contexto de gemma 4**.
+
+> **💡 Consejo:** El modelo 26B utiliza una arquitectura de Mezcla de Expertos (MoE). Esto significa que solo activa unos 4 mil millones de parámetros durante la inferencia, ofreciéndote la velocidad de un modelo pequeño con la inteligencia de uno mucho más grande.
+
+## Benchmarks: Rendimiento en razonamiento y programación
+
+Gemma 4 no se trata solo de una memoria más grande; representa un salto generacional en la lógica y la capacidad de programación. En comparación con Gemma 3, el lanzamiento de 2026 muestra mejoras asombrosas en benchmarks especializados. La capacidad de la **ventana de contexto de gemma 4** para mantener la coherencia en prompts largos se refleja en su alta clasificación en la tabla de líderes de Arena AI.
+
+| Benchmark | Gemma 3 (Anterior) | Gemma 4 (2026) | Mejora |
+| :--- | :--- | :--- | :--- |
+| **Codeforces (Elo)** | 110 | **2150** | +1854% |
+| **Big Bench Hard** | 19.3% | **74.4%** | +285% |
+| **AM E2026 Math** | 20.8% | **89.2%** | +328% |
+| **LM Arena Elo** | ~1200 | **1452** | Top 3 Modelo Abierto |
+
+Estos números demuestran que Gemma 4 ya no es solo una alternativa "pequeña" a Gemini o GPT-4; es un modelo insignia competitivo por derecho propio. El salto en programación específicamente lo convierte en una opción de primer nivel para los desarrolladores de juegos que necesitan depurar miles de líneas de código localmente.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/vdnxDeUi1w8"
+    title="Google Gemma 4 is INSANE (FREE!)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de hardware para ejecutar Gemma 4
+
+Para aprovechar al máximo la **ventana de contexto de gemma 4**, debes asegurarte de que tu hardware pueda soportar la huella de memoria del modelo. Aunque los modelos son eficientes, cargar 256,000 tokens en memoria requiere una VRAM o RAM del sistema significativa.
+
+1.  **Nivel de entrada (E2B/E4B):** Mínimo 8GB de RAM. Estos modelos funcionan cómodamente en MacBooks modernos (M1/M2/M3) y laptops Windows de gama media.
+2.  **Gama media (26B MoE):** Mínimo 16GB a 20GB de RAM. Una RTX 3060 o 4060 con 12GB de VRAM puede acelerar significativamente los tiempos de respuesta.
+3.  **Gama alta (31B denso):** 32GB de RAM o una GPU dedicada con más de 20GB de VRAM (como una RTX 3090/4090). Esto es necesario para mantener la velocidad cuando la **ventana de contexto de gemma 4** está casi llena.
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B solo en CPU (sin GPU) funcionará, pero los tiempos de respuesta pueden caer a 1-2 tokens por segundo, lo que hace que las tareas de escritura de formato largo sean tediosas.
+
+## Cómo instalar y ejecutar Gemma 4 localmente
+
+La forma más sencilla de ejecutar Gemma 4 en 2026 es a través de **Ollama**, una herramienta de código abierto que gestiona los modelos y el alojamiento local. Sigue estos pasos para comenzar:
+
+### Paso 1: Descargar Ollama
+Visita el [sitio web oficial de Ollama](https://ollama.com) y descarga el instalador para Windows, macOS o Linux. La instalación es un proceso estándar de "Siguiente, Siguiente, Finalizar".
+
+### Paso 2: Obtener el modelo
+Abre tu terminal o símbolo del sistema y escribe el siguiente comando para descargar el modelo Gemma 4 predeterminado (generalmente la variante E4B):
+
+`ollama pull gemma4`
+
+Si deseas probar la versión más grande para testear la **ventana de contexto de gemma 4** completa, utiliza la etiqueta específica:
+
+`ollama pull gemma4:31b`
+
+### Paso 3: Ejecutar el modelo
+Una vez completada la descarga, puedes empezar a chatear inmediatamente escribiendo:
+
+`ollama run gemma4`
+
+### Paso 4: Usar una interfaz gráfica
+Si prefieres una interfaz de chat similar a ChatGPT, puedes conectar Ollama a **Open WebUI** o **LM Studio**. Esto te permite arrastrar y soltar imágenes y documentos directamente en la **ventana de contexto de gemma 4** para su análisis.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Características clave: Multimodal y Modo de pensamiento
+
+Gemma 4 introduce varias características que mejoran su utilidad más allá de la simple generación de texto. Estas son particularmente útiles cuando se combinan con la gran **ventana de contexto de gemma 4**.
+
+*   **Entrada multimodal:** Todos los modelos de Gemma 4 pueden "ver". Puedes subir capturas de pantalla de errores de juegos, maquetas de UI o notas escritas a mano, y el modelo las interpretará. Los modelos E más pequeños incluso admiten el procesamiento nativo de audio.
+*   **Modo de pensamiento (Thinking Mode):** Al habilitar el "modo de pensamiento", el modelo realiza un razonamiento interno de cadena de pensamiento antes de dar una respuesta. Esto es vital para problemas matemáticos complejos o acertijos de lógica donde el modelo necesita "mostrar su trabajo".
+*   **Llamada a funciones nativas:** Gemma 4 puede interactuar con otro software. Puedes proporcionarle un conjunto de herramientas (como una calculadora o una API de búsqueda web) y devolverá JSON estructurado para ejecutar esos comandos.
+*   **Licencia Apache 2.0:** A diferencia de versiones anteriores, Gemma 4 es totalmente abierto para uso comercial. Puedes construir y vender productos potenciados por Gemma 4 sin preocuparte por las licencias restrictivas de Google.
+
+## Casos de uso prácticos para gamers y desarrolladores
+
+La **ventana de contexto de gemma 4** abre nuevas posibilidades para flujos de trabajo locales que anteriormente solo eran posibles con costosas llamadas a API.
+
+*   **Asistente de modding local:** Suelta toda la documentación de la API de un juego en el prompt. Debido al límite de 256k, el modelo puede recordar toda la estructura mientras te ayuda a escribir nuevos scripts.
+*   **Diario centrado en la privacidad:** Usa el modelo para resumir notas personales o documentos sensibles. Dado que el modelo se ejecuta localmente, ningún dato sale de tu máquina.
+*   **Diálogo avanzado para NPCs:** Los desarrolladores de juegos pueden usar el modelo E2B para potenciar conversaciones de NPCs en tiempo real y sin guion que se ejecutan en el hardware del jugador con cero latencia de la nube.
+
+## FAQ
+
+**P: ¿La ventana de contexto de gemma 4 admite imágenes y texto al mismo tiempo?**
+
+R: Sí, Gemma 4 es nativamente multimodal. Puedes proporcionar un documento de texto grande y varias imágenes dentro de la misma ventana de contexto, y el modelo razonará sobre ambos tipos de datos.
+
+**P: ¿Cómo afecta la ventana de contexto de 256k al rendimiento?**
+
+R: A medida que la ventana de contexto se llena, el modelo requiere más RAM/VRAM para mantener la velocidad. Si excedes la memoria dedicada de tu hardware, el modelo se ralentizará a medida que intercambia datos con el almacenamiento en disco más lento del sistema.
+
+**P: ¿Es Gemma 4 realmente gratuito para uso comercial?**
+
+R: Sí. Google ha lanzado Gemma 4 bajo la licencia Apache 2.0. Esto significa que no hay límites de uso, ni suscripciones mensuales, y eres libre de modificar o redistribuir el modelo para tus propios productos comerciales.
+
+**P: ¿Puedo ejecutar Gemma 4 sin conexión a internet?**
+
+R: Absolutamente. Una vez que hayas descargado el modelo usando una herramienta como Ollama, puedes desconectarte de internet por completo. Todo el procesamiento ocurre en tu CPU y GPU local.

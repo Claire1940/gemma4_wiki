@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "Gemma 4 Transformers: La guía completa de la IA abierta de Google 2026",
+  description: "Explora los avances arquitectónicos de los transformadores Gemma 4. Desde ventanas de contexto de 256K hasta inteligencia multimodal lista para el edge, aprende cómo desplegar los últimos pesos abiertos de Google.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Transformers+Guide",
+  date: "2026-04-05",
+  author: "Gemma Wiki Team"
+}
+
+La llegada de **gemma 4 transformers** a principios de 2026 ha cambiado fundamentalmente el panorama de la inteligencia artificial de código abierto. Al pasar a una licencia permisiva Apache 2.0, Google finalmente ha eliminado las barreras restrictivas de "pesos abiertos" que anteriormente obstaculizaban la adopción comercial y el ajuste fino por parte de la comunidad. Esta nueva familia de **gemma 4 transformers** introduce una densidad de inteligencia por parámetro sin precedentes, lo que permite que el razonamiento complejo, la visión nativa y el procesamiento de audio de alta fidelidad se ejecuten localmente en hardware de consumo.
+
+Ya sea que seas un desarrollador que busca integrar comportamientos avanzados de NPC en un motor de juegos o un investigador que construye asistentes locales privados, la línea Gemma 4 ofrece un enfoque escalonado para el rendimiento. Con ventanas de contexto que alcanzan hasta 256,000 tokens y un modo de "pensamiento" especializado para el razonamiento de cadena de pensamiento (chain-of-thought), estos modelos representan la evolución arquitectónica más significativa de la serie desde su creación.
+
+## La línea de modelos Gemma 4
+
+Google ha dividido la familia Gemma 4 en dos niveles distintos: modelos **Workstation** para tareas locales pesadas y modelos **Edge** optimizados para dispositivos móviles, Raspberry Pis y configuraciones de una sola GPU. La característica destacada en todos los niveles es la integración nativa de capacidades multimodales, lo que significa que la visión y el audio están integrados en la arquitectura en lugar de estar "acoplados" mediante codificadores externos.
+
+| Nivel de Modelo | Cantidad de Parámetros | Tipo de Arquitectura | Mejor Caso de Uso |
+|---|---|---|---|
+| **Workstation 31B** | 31 mil millones | Densa | Programación, Razonamiento Complejo, RAG |
+| **Workstation 26B** | 26 mil millones (3.8B activos) | Mezcla de Expertos (MoE) | Inferencia Serverless de Alta Velocidad |
+| **Edge E4B** | 4 mil millones | Densa / PLE | Smartphones de Gama Alta, Laptops |
+| **Edge E2B** | 2 mil millones | Densa / PLE | IoT, Dispositivos Edge, Chat Básico |
+
+> **💡 Consejo:** Si tienes limitaciones de VRAM, el modelo MoE de 26B proporciona la inteligencia de un modelo denso de más de 27B, pero solo requiere la carga computacional de un modelo de 4B durante la inferencia activa.
+
+## Innovaciones arquitectónicas en Gemma 4 Transformers
+
+La razón principal por la que los **gemma 4 transformers** superan a modelos más grandes como Llama 3 o Qwen 2 es una serie de optimizaciones estructurales diseñadas para eludir los cuellos de botella tradicionales del hardware. Una de las adiciones más significativas es la **Topologías de Atención Intercalada**. Este método alterna entre capas locales (usando una ventana deslizante de 1024 tokens) y capas globales que escanean todo el contexto de 256K.
+
+### Optimización de memoria con PLE y K=V
+Para la computación en el edge, Google introdujo los **Per Layer Embeddings (PLE)** (Incrustaciones por Capa). Esto permite que el modelo almacene tensores de conocimiento masivos en almacenamiento flash más lento (eMMC/UFS) y recupere dinámicamente solo las "rebanadas de conocimiento" requeridas en la VRAM de alta velocidad durante la inferencia. Esta analogía de "almacenamiento en el sótano" permite que un modelo de 4B retenga el conocimiento del mundo de un modelo de 12B sin colapsar la memoria del dispositivo.
+
+| Característica | Implementación Técnica | Beneficio |
+|---|---|---|
+| **Ventana de Contexto** | 128K a 256K Tokens | Procesa novelas enteras o archivos legales |
+| **Codificación Posicional** | RoPE Truncado (Popey) | Mantiene el significado semántico en largas distancias |
+| **Codificación de Visión** | RoPE 2D y Patch-and-Pack | Entiende las relaciones de aspecto sin deformar las imágenes |
+| **Mecanismo de Atención** | Grouped Query Attention (GQA) | Reduce los requisitos de ancho de banda de memoria en un 50% |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades multimodales nativas
+
+A diferencia de las generaciones anteriores que requerían modelos ASR (Reconocimiento Automático de Voz) externos como Whisper, la familia **gemma 4 transformers** maneja el audio y la visión de forma nativa. Los modelos Edge (E2B y E4B) cuentan con un codificador de audio masivamente comprimido que es un 50% más pequeño que la versión anterior de Gemma 3N, pasando de 390MB a solo 87MB.
+
+### Visión y OCR
+La rama de visión utiliza un Vision Transformer modificado que admite relaciones de aspecto arbitrarias. Esto supone un cambio radical para las tareas de comprensión de documentos y OCR. En lugar de comprimir una captura de pantalla de 16:9 en un cuadrado de 1:1, el modelo procesa las dimensiones de altura y anchura de forma independiente, preservando la geometría de gráficos, tablas y elementos de la interfaz de usuario.
+
+### Audio y Traducción
+La arquitectura de conformador acústico permite al modelo:
+1.  **Transcribir voz:** ASR de alta precisión con baja latencia.
+2.  **Detectar intención:** Captura la prosodia emocional (por ejemplo, detectando sarcasmo o urgencia).
+3.  **Traducir nativamente:** Hablar en inglés y recibir una traducción de texto en japonés o en más de 30 idiomas compatibles directamente desde el mismo modelo.
+
+> **⚠️ Advertencia:** Aunque el modelo E2B es capaz de realizar traducciones de audio, los modelos Workstation más grandes suelen ofrecer mejores matices para la comprensión de documentos técnicos o legales.
+
+## Implementación de Gemma 4 para desarrolladores
+
+Con la licencia Apache 2.0, los desarrolladores ahora pueden desplegar **gemma 4 transformers** en aplicaciones comerciales sin temer a las cláusulas de "no competencia". Los modelos están disponibles en [Hugging Face](https://huggingface.co/models) y cuentan con soporte nativo del ecosistema de Google Cloud. 
+
+Para quienes ejecutan entornos locales, los modelos son compatibles con herramientas populares como:
+*   **Ollama:** Para un despliegue local sencillo en macOS, Linux y Windows.
+*   **LM Studio:** Para probar diferentes niveles de cuantización (Q4_K_M, etc.).
+*   **Transformers Library:** Utilizando el último autoprocesador para entradas multimodales.
+
+### Modo de pensamiento (Chain of Thought)
+Una de las características de software más impresionantes es el flag `enable_thinking`. Cuando se establece en verdadero, el modelo genera pasos de razonamiento interno antes de proporcionar una respuesta final. Esto reduce significativamente las alucinaciones en tareas matemáticas, de programación y de lógica pesada.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/uz4grj4Vlrs"
+    title="Gemma 4: Google's Most Capable Open AI Model Analysed"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Comparación con la competencia
+
+En el mercado de IA de 2026, Gemma 4 compite directamente con Llama 4 de Meta y Qwen 3.6 de Alibaba. Si bien Llama 4 Scout puede ofrecer ventanas de contexto brutas más grandes (hasta 10 millones de tokens), a menudo requiere clústeres de servidores masivos. El arma principal de Gemma 4 es su relación "inteligencia-peso", superando a modelos del doble de su tamaño en las tablas de clasificación de Chatbot Arena.
+
+| Modelo | Licencia | Contexto | Fortaleza |
+|---|---|---|---|
+| **Gemma 4 31B** | Apache 2.0 | 256K | Eficiencia/Multimodal |
+| **Llama 4 Scout** | Personalizada/Restrictiva | 10M | Contexto Infinito |
+| **Qwen 3.6 Plus** | Apache 2.0 | 128K | Lógica/Matemáticas |
+
+## Preguntas Frecuentes (FAQ)
+
+**Q: ¿Puedo ejecutar gemma 4 transformers en un smartphone estándar?**
+
+R: Sí, los modelos "Edge" E2B y E4B están diseñados específicamente para hardware móvil. Gracias a los Per Layer Embeddings (PLE), pueden ejecutarse en dispositivos con tan solo 8GB de RAM utilizando el almacenamiento flash del teléfono para la recuperación de conocimientos.
+
+**Q: ¿Qué hace que la licencia Apache 2.0 sea diferente de los lanzamientos anteriores de Gemma?**
+
+R: Los lanzamientos anteriores tenían términos personalizados que restringían el uso comercial si se alcanzaba un cierto umbral de usuarios o prohibían el uso del modelo para entrenar modelos competidores. La licencia Apache 2.0 es una licencia de código abierto estándar que permite modificar, distribuir y vender productos utilizando el modelo sin condiciones adicionales.
+
+**Q: ¿Admite Gemma 4 imagen a texto y audio a texto simultáneamente?**
+
+R: Sí, la arquitectura admite entradas multimodales intercaladas. Puedes proporcionar una imagen de una hoja de cálculo y una grabación de voz con instrucciones, y el modelo razonará a través de ambas modalidades para proporcionar una respuesta unificada.
+
+**Q: ¿Cómo activo la función de "pensamiento" en mi código?**
+
+R: Al usar la biblioteca Transformers o la API de Google Cloud, normalmente pasas un parámetro en la plantilla de chat como `enable_thinking: true`. Esto hará que el modelo emita su lógica dentro de etiquetas `<thought>` antes de la respuesta final.

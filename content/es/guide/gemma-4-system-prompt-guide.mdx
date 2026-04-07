@@ -1,0 +1,131 @@
+export const metadata = {
+  title: "Guía de System Prompt de Gemma 4: Domine las Personas de IA 2026",
+  description: "Domine los nuevos tokens de control y flujos de trabajo agénticos en Gemma 4. Esta guía exhaustiva cubre el modo de pensamiento, el uso de herramientas y estrategias de despliegue local.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1e3a8a/fff?text=Gemma+4+System+Prompt+Guide",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de Gemma 4 de Google el 2 de abril de 2026 ha cambiado fundamentalmente el panorama para los desarrolladores de IA de código abierto y los entusiastas de los LLM locales. Construida sobre las bases de investigación de Gemini 3 y lanzada bajo la permisiva licencia Apache 2.0, esta familia de modelos ofrece capacidades de razonamiento y multimodalidad sin precedentes. Para desbloquear todo su potencial, es esencial comprender una **guía de system prompt de gemma 4**, ya que el modelo introduce tokens de control específicos que dictan cómo piensa, actúa y utiliza herramientas externas. Ya sea que esté ejecutando el modelo ligero E2B en un dispositivo móvil o la masiva variante densa de 31B en un servidor, dominar la **guía de system prompt de gemma 4** garantiza que sus personas de IA se mantengan consistentes, privadas y altamente efectivas.
+
+En esta guía, desglosaremos los nuevos estándares de formato de prompts, exploraremos el revolucionario "Modo de Pensamiento" y le mostraremos cómo construir flujos de trabajo agénticos personalizados que se ejecutan completamente en su hardware local.
+
+## Entendiendo la Jerarquía de Prompts de Gemma 4
+
+Gemma 4 se aleja del formato heredado de versiones anteriores, adoptando un sistema estructurado basado en turnos. Esta estructura está diseñada para manejar conversaciones de múltiples turnos manteniendo una distinción clara entre las instrucciones del sistema, las entradas del usuario y las respuestas del modelo.
+
+El núcleo de cualquier **guía de system prompt de gemma 4** comienza con los cinco tokens de control principales. Estos tokens están reservados dentro del tokenizador y deben usarse con precisión para evitar "alucinaciones del modelo" o fallos en el formato.
+
+### Tokens de Diálogo Principales
+
+| Token | Propósito | Ejemplo de Uso |
+| :--- | :--- | :--- |
+| **system** | Define la personalidad y las reglas del modelo. | `system\nEres un asistente servicial.` |
+| **user** | Indica la entrada del usuario humano. | `user\n¿Cuál es la capital de Francia?` |
+| **model** | Indica la respuesta generada por el modelo. | `model\nLa capital es París.` |
+| **&lt;|turn>** | Marca el inicio de un turno de diálogo específico. | `&lt;|turn>system` |
+| **&lt;turn|&gt;** | Marca el final de un turno de diálogo específico. | `asistente servicial.&lt;turn|&gt;` |
+
+> **💡 Consejo:** Envuelva siempre sus instrucciones de sistema en los delimitadores `&lt;|turn>system` y `&lt;turn|&gt;`. Esto asegura que el modelo priorice estas instrucciones durante toda la sesión.
+
+## Activando el Modo de Pensamiento y Razonamiento
+
+Una de las características más potentes introducidas en 2026 es el "Modo de Pensamiento" nativo. Al incluir un token específico en su system prompt, puede forzar al modelo a participar en un razonamiento de Cadena de Pensamiento (CoT) antes de proporcionar una respuesta final. Esto es particularmente útil para matemáticas complejas, acertijos lógicos o planificación de múltiples pasos.
+
+Para activar esto, debe incluir el token `&lt;|think|&gt;` dentro de su turno de sistema.
+
+### El Flujo de Trabajo de Pensamiento
+Cuando el pensamiento está activado, el modelo genera contenido en un "canal de pensamiento" oculto antes de la respuesta real. Esto se indica mediante el token `&lt;|channel>thought`.
+
+```text
+&lt;|turn>system
+&lt;|think|&gt;Eres un tutor de lógica profesional.&lt;turn|&gt;
+&lt;|turn>user
+Resuelve para x: 2x + 10 = 20&lt;turn|&gt;
+&lt;|turn>model
+&lt;|channel>thought
+Restar 10 de ambos lados... dividir por 2... x = 5.
+&lt;channel|&gt;Para resolver para x, primero resta 10 de ambos lados para obtener 2x = 10. Luego, divide por 2. La respuesta es 5.&lt;turn|&gt;
+```
+
+### Eficiencia de Pensamiento Adaptativa
+Para los desarrolladores que buscan ahorrar en latencia y costes de computación, pueden usar una instrucción de pensamiento "LOW" (baja). Al decirle explícitamente al modelo que "piense de manera eficiente" o "mantenga el razonamiento breve" en el system prompt, las pruebas han mostrado una reducción en los tokens de pensamiento de aproximadamente un 20%.
+
+## Flujos de Trabajo Agénticos y Uso de Herramientas
+
+Gemma 4 es un "usuario de herramientas" nativo. Esto significa que se le puede pedir que llame a funciones externas —como consultar el clima, realizar una consulta en una base de datos o ejecutar un script de Python— y luego usar los resultados para informar su respuesta final. Este "apretón de manos" se gestiona a través de tokens de herramientas específicos.
+
+### Tokens del Ciclo de Vida de Uso de Herramientas
+
+| Par de Tokens | Descripción |
+| :--- | :--- |
+| **&lt;|tool> &lt;tool|&gt;** | Se utiliza para definir las herramientas disponibles en el system prompt. |
+| **&lt;|tool_call> &lt;tool_call|&gt;** | La solicitud del modelo para ejecutar una función específica. |
+| **&lt;|tool_response> &lt;tool_response|&gt;** | La retroalimentación de la aplicación que contiene el resultado de la herramienta. |
+
+Al construir un agente, debe proporcionar las definiciones de las herramientas en el system prompt utilizando un esquema JSON. El modelo entonces "detendrá" la generación cuando necesite llamar a una herramienta, permitiendo que su aplicación local ejecute el código y devuelva el resultado a la ventana de contexto.
+
+## Implementación Local con Open WebUI
+
+Para muchos usuarios, la forma más fácil de implementar una **guía de system prompt de gemma 4** es a través de una interfaz gráfica como Open WebUI. Al ejecutarse localmente a través de Docker, Open WebUI le permite crear "Personas Personalizadas" donde puede guardar system prompts complejos para un uso repetido.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Construyendo una Base de Conocimientos
+Open WebUI lleva a Gemma 4 más allá al permitir "Bases de Conocimiento". En lugar de volver a subir documentos en cada chat, puede indexar PDFs, hojas de cálculo y archivos de texto. Cuando le hace una consulta al modelo, este utiliza RAG (Generación Aumentada por Recuperación) para buscar en sus archivos locales y entregar los "fragmentos" relevantes a Gemma 4.
+
+1. **Subir Archivos:** Añada sus documentos a la sección "Knowledge" (Conocimiento) en el espacio de trabajo.
+2. **Etiquetar en el Chat:** Use la tecla `#` en el cuadro de chat para seleccionar su base de conocimientos.
+3. **Consultar Privadamente:** Haga preguntas sobre sus datos; el procesamiento permanece 100% local en su máquina.
+
+## Requisitos de Hardware para Gemma 4
+
+Elegir el tamaño de modelo adecuado depende en gran medida de su VRAM y RAM disponibles. Debido a que Gemma 4 utiliza técnicas avanzadas como Per-Layer Embeddings (PLE) y Shared KV Caching, es más eficiente que las generaciones anteriores, pero aún requiere recursos significativos para las variantes más grandes.
+
+| Tamaño del Modelo | Parámetros | RAM/VRAM Recomendada | Mejor Caso de Uso |
+| :--- | :--- | :--- | :--- |
+| **E2B** | 2.3B | 4GB - 8GB | Móvil, Raspberry Pi, IoT |
+| **E4B** | 4.5B | 8GB - 12GB | Laptops, Dispositivos Edge |
+| **26B A4B** | 26B (MoE) | 16GB - 24GB | Uso en servidor de baja latencia |
+| **31B Dense** | 31B | 32GB+ | Razonamiento de alta calidad |
+
+> **Advertencia:** Si está utilizando el modelo 31B, asegúrese de tener una GPU moderna con al menos 16GB de VRAM (como una RTX 4080 o 4090) para ejecutarlo con cuantización de 4 bits.
+
+## Mejores Prácticas para el System Prompting
+
+Para sacar el máximo provecho de su configuración, siga estos estándares de la industria de 2026 para la ingeniería de prompts:
+
+*   **Sea Explícito con los Roles:** En lugar de "Eres un escritor", use "Eres un editor técnico profesional especializado en libros blancos de ciberseguridad".
+*   **Gestione el Contexto de Pensamiento:** Para conversaciones estándar, elimine los "pensamientos" del modelo de los turnos anteriores antes de enviar el historial de vuelta al modelo. Esto evita que la ventana de contexto se llene con razonamientos redundantes.
+*   **Use el Delimitador de Cadena:** Al definir parámetros de herramientas, use el token `&lt;|'|&gt;` para encerrar valores de cadena. Esto evita que el modelo se confunda con caracteres especiales como comas o corchetes dentro de una cadena de texto.
+*   **Integración Multimodal:** Gemma 4 puede "ver" y "oír". Al hacer un prompt con una imagen, use el marcador de posición `&lt;|image|&gt;` para decirle al modelo exactamente en qué parte del texto deben considerarse los datos visuales.
+
+Para obtener más documentación técnica, puede visitar el portal oficial de [Google AI for Developers](https://ai.google.dev/gemma) para ver las especificaciones completas de la API.
+
+## FAQ
+
+**P: ¿Puedo usar Gemma 4 para proyectos comerciales?**
+
+R: Sí. Gemma 4 se lanza bajo la licencia Apache 2.0, que permite el uso comercial completo, la modificación y la distribución sin límites de uso ni políticas restrictivas.
+
+**P: ¿Cómo desactivo el "Modo de Pensamiento" si es demasiado lento?**
+
+R: Simplemente elimine el token `&lt;|think|&gt;` de su system prompt. Si el modelo continúa generando pensamientos, puede añadir un canal de pensamiento vacío (`&lt;|channel>thought&lt;channel|&gt;`) a su prompt para estabilizar su comportamiento.
+
+**P: ¿Cuál es la ventana de contexto máxima para Gemma 4?**
+
+R: Los modelos más grandes (26B y 31B) admiten hasta 256K tokens, mientras que los modelos edge más pequeños (E2B y E4B) admiten hasta 128K tokens. Esto le permite incluir libros enteros o bases de código en una sola sesión de la **guía de system prompt de gemma 4**.
+
+**P: ¿Requiere Gemma 4 una conexión a Internet?**
+
+R: No. Uno de los principales beneficios de Gemma 4 es que puede ejecutarse completamente fuera de línea utilizando herramientas como Ollama, LM Studio o Open WebUI, garantizando que sus datos permanezcan privados y seguros.

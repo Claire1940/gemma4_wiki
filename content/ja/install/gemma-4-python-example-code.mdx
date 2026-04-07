@@ -1,0 +1,156 @@
+export const metadata = {
+  title: "Gemma 4 Python サンプルコード：ローカル AI コーディングガイド 2026",
+  description: "Google の Gemma 4 を Python を使用してローカルに実装する方法を学びます。関数呼び出し、Ollama の統合、エージェントワークフローを網羅した包括的なガイドです。",
+  category: "チュートリアル",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Gemma+4+Python+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki チーム"
+}
+
+ローカル AI による開発は、2026 年に大きな転換期を迎えました。Google の最新オープンウェイトモデルのリリースにより、データのプライバシーを維持し、API コストを排除したいエンジニアにとって、信頼できる **gemma 4 python サンプルコード** を見つけることが最優先事項となっています。自動化エージェントを構築する場合でも、シンプルなスクリプトアシスタントを作成する場合でも、**gemma 4 python サンプルコード** は、クラウドベースのサービスの継続的なコストをかけることなく、高性能なオンデバイス・インテリジェンスを実現するための基礎を提供します。
+
+このガイドでは、効率的な 2B および 4B の「Effective」ティアから、強力な 26B Mixture of Experts (MoE) アーキテクチャまで、このモデルファミリーをデプロイするさまざまな方法を探ります。以下の実装ステップに従うことで、ネイティブの関数呼び出し、マルチモーダル入力、および 256,000 トークンという大規模なコンテキストウィンドウを、自身のハードウェア上で直接活用できるようになります。
+
+## Gemma 4 モデルファミリーの概要
+
+実装に入る前に、どのバリアントが自身のハードウェア構成に適しているかを理解することが重要です。2026 年のラインナップは、モバイル、デスクトップ、および高スループットのサーバー環境向けに設計されたティアに分かれています。
+
+| モデルバリアント | アーキテクチャ | アクティブパラメータ | 必要VRAM量 (量子化済) | 最適な用途 |
+|---|---|---|---|---|
+| **Gemma-4-31B** | Dense Transformer | 31B | 24GB - 32GB | 複雑な推論、高度なコーディング |
+| **Gemma-4-26B-A4B** | MoE (128 Experts) | 3.8B | 16GB - 24GB | 高スループットなサービング、エージェント |
+| **Gemma-4-E4B** | Dense Transformer | 4.5B | 8GB - 12GB | オンデバイス・アシスタンス、ローカルUI |
+| **Gemma-4-E2B** | Dense Transformer | 2.3B | 4GB - 6GB | モバイルアプリ、基本的なスクリプト |
+
+> **💡 ヒント:** 単一の RTX 3090 または 4090 を使用しているほとんどの開発者にとって、26B MoE バリアントは速度とインテリジェンスの最高のバランスを提供します。これは、1 回のフォワードパスにつきパラメータの一部のみをアクティブ化するためです。
+
+## Transformers を介した Gemma 4 Python サンプルコードの実装
+
+Hugging Face エコシステムを使用して Gemma 4 を実行するには、最新バージョンの `torch` と `transformers` をインストールする必要があります。この方法は、モデルの内部状態やテンソルを細かく制御したい開発者に適しています。
+
+### 環境セットアップ
+
+まず、Python 環境に以下の依存関係が用意されていることを確認してください。
+
+| ライブラリ | コマンド | 目的 |
+|---|---|---|
+| **PyTorch** | `pip install torch` | コアテンソル演算 |
+| **Accelerate** | `pip install accelerate` | マルチGPUとメモリ管理 |
+| **Transformers** | `pip install transformers` | モデルの読み込みと推論 |
+
+### 基本的な推論スクリプト
+
+以下の **gemma 4 python サンプルコード** は、`AutoModelForMultimodalLM` クラスを使用してモデルをロードし、シンプルな応答を生成する方法を示しています。
+
+```python
+from transformers import AutoProcessor, AutoModelForMultimodalLM
+import torch
+
+MODEL_ID = "google/gemma-4-26B-A4B-it"
+
+# 自動デバイスマッピングでモデルをロード
+model = AutoModelForMultimodalLM.from_pretrained(
+    MODEL_ID, 
+    dtype="auto", 
+    device_map="auto"
+)
+processor = AutoProcessor.from_pretrained(MODEL_ID)
+
+# シンプルなプロンプトを準備
+messages = [
+    {"role": "user", "content": "ウェブサイトをスクレイピングするPythonスクリプトを書いてください。"}
+]
+
+# チャットテンプレートを適用して生成
+text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = processor(text=text, return_tensors="pt").to(model.device)
+outputs = model.generate(**inputs, max_new_tokens=512)
+
+print(processor.decode(outputs[0], skip_special_tokens=True))
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/02tjBAsGacs"
+    title="Google's New AI Runs Locally for Free (Gemma 4 Coding Demo)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## ネイティブ関数呼び出しとツールの利用
+
+2026 年の Gemma 4 の際立った機能の一つは、関数呼び出しのネイティブサポートです。複雑な正規表現によるパースが必要だった以前の世代とは異なり、Gemma 4 は構造化された JSON ツール呼び出しを直接生成できます。これにより、モデルは外部 API、データベース、またはローカルの Python 環境と対話できるようになります。
+
+### ツールの定義
+
+ツールは、手動の JSON スキーマ、または生の Python 関数を渡すことで定義できます。モデルの「思考（Thinking）」プロセスは、実行前に必要な引数を推論することで、これらの呼び出しの精度を大幅に向上させます。
+
+| メソッド | メリット | ユースケース |
+|---|---|---|
+| **JSON スキーマ** | 明示的な制御 | 複雑な入れ子オブジェクト、厳密な API |
+| **生の Python** | 迅速な開発 | シンプルなユーティリティ、計算、ローカルスクリプト |
+
+### 例：天気 API ツール
+
+エージェントワークフロー用の **gemma 4 python サンプルコード** を提供する場合、「モデルのターン（呼び出しの生成）」、「開発者のターン（コードの実行）」、「最終応答（結果の要約）」という 3 段階のサイクルを処理することが重要です。
+
+```python
+def get_current_weather(location: str, unit: str = "celsius"):
+    """指定された場所の現在の天気を取得します。"""
+    return {"temperature": 22, "condition": "晴れ"}
+
+# モデルは構造化されたブロックを生成します:
+# &lt;|tool_call|&gt;call:get_current_weather{location: "New York"}&lt;tool_call|&gt;
+```
+
+## Gradio を使用したローカルコーディングアシスタントの構築
+
+よりインタラクティブな体験のために、多くの開発者が **gemma 4 python サンプルコード** を Gradio ベースの UI に統合しています。このセットアップにより、片側でエージェントとチャットし、もう片側でライブコードの更新を確認できる分割ペインレイアウトが可能になります。
+
+### ローカルアシスタントの主な機能
+1. **ライブエディタ統合**: 生成されたコードブロックを機能的なエディタに自動的にプッシュします。
+2. **サンドボックス実行**: サブプロセスを使用してコードをローカルで実行し、`stdout` または `stderr` を返します。
+3. **マルチモーダルコンテキスト**: UI のスクリーンショットをアップロードし、それに一致する Tailwind CSS または React コードの生成をモデルに依頼します。
+
+> **⚠️ 警告:** AI が生成したコードを実行するときは、ホストマシンでの予期しないデータの損失やセキュリティ侵害を防ぐために、常にサンドボックス環境または一時的なファイルシステムを使用してください。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/h-LRknODV3M"
+    title="Gemma 4 Tested for Coding: Complex Web Apps"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## パフォーマンス・テスト：複雑な Web アプリ
+
+26B および 31B モデルの最近のテストでは、複雑な Web アプリケーションの生成において印象的な結果が示されています。モデルは、非常に専門的なロジック（デジタル・オーディオ・ワークステーションでのリアルタイム音声合成など）に苦労することがありますが、以下のようなタスクに優れています。
+- **レスポンシブなランディングページ**: テキストの説明からクリーンな HTML と Tailwind CSS を生成。
+- **並行処理スクリプト**: ウェブスクレイピングや API 監視のための非同期 Python 関数を記述。
+- **バグ修正**: 既存のコードベースの論理エラーを特定し、解説付きのパッチを提供。
+
+さらに高度なドキュメントについては、[公式の Google AI for Developers](https://ai.google.dev/gemma) サイトにアクセスして、モデル機能の全範囲を確認してください。
+
+## FAQ
+
+**Q: gemma 4 python サンプルコードを実行するにはハイエンドの GPU が必要ですか？**
+
+A: 必ずしもそうではありません。26B および 31B モデルには RTX 3090 (24GB VRAM) などの GPU が推奨されますが、「Effective」な 2B および 4B バリアントは、量子化を使用することで標準的な CPU やモバイルハードウェアでも効率的に動作するように設計されています。
+
+**Q: Gemma 4 は画像とコードを同時に処理できますか？**
+
+A: はい、Gemma 4 はネイティブにマルチモーダルです。テキストプロンプトと一緒に画像（ワイヤーフレームやバグのスクリーンショットなど）を提供でき、モデルは両方の入力を通じて推論し、解決策を生成できます。
+
+**Q: Gemma 4 が生成したコードは商用利用可能ですか？**
+
+A: はい、Gemma 4 は Apache 2.0 ライセンスの下でリリースされており、他の多くのプロプライエタリなモデルに見られるような制限なしに、商用利用、改変、および配布が許可されています。
+
+**Q: gemma 4 python サンプルコードでの関数呼び出しの精度を向上させるにはどうすればよいですか？**
+
+A: 「思考モード（Thinking Mode）」を有効にすると、モデルはツール呼び出しを生成する前に内部的な推論プロセスを使用できるようになります。これにより、正しいパラメータを特定し、ユーザーのリクエストにツールが本当に必要かどうかを判断するのに役立ちます。

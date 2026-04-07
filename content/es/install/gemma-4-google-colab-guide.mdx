@@ -1,0 +1,154 @@
+export const metadata = {
+  title: "Guía de Gemma 4 para Google Colab: Domina el despliegue local de IA 2026",
+  description: "Aprende cómo desplegar, ajustar (fine-tune) y optimizar los modelos Gemma 4 de Google usando Google Colab. Una guía completa de 2026 para desarrolladores y entusiastas de la IA.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+Colab+Guide",
+  date: "2026-04-07",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de Gemma 4 ha revolucionado el panorama de la inteligencia artificial de código abierto, ofreciendo razonamiento de nivel de frontera y capacidades multimodales en un paquete compacto. Para los desarrolladores que buscan aprovechar este poder sin invertir en costoso hardware local, seguir una **guía de gemma 4 para google colab** exhaustiva es el camino más eficiente a seguir. Google Colab proporciona los recursos de GPU necesarios, como la Tesla T4, para ejecutar estos modelos de manera efectiva para inferencia y ajuste fino. Ya sea que estés construyendo un asistente de juegos impulsado por IA o un agente de razonamiento complejo, esta **guía de gemma 4 para google colab** te llevará a través de la configuración del entorno, la selección del modelo y las técnicas avanzadas de optimización requeridas para el éxito en 2026.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Gemma 4 introduce una diversa gama de arquitecturas diseñadas por Google DeepMind. A diferencia de las iteraciones anteriores, esta generación presenta tanto modelos Densos como de Mezcla de Expertos (MoE), permitiendo a los usuarios elegir entre potencia bruta y velocidad de inferencia. La familia se categoriza en cuatro tamaños principales, cada uno adecuado para diferentes tareas dentro del entorno de Colab.
+
+| Variante del modelo | Arquitectura | Parámetros totales | Mejor caso de uso |
+|---|---|---|---|
+| **Gemma 4 E2B** | Denso (PLE) | 2.3B Efectivos | En el dispositivo, móvil y chat básico |
+| **Gemma 4 E4B** | Denso (PLE) | 4.5B Efectivos | Programación, traducción y ASR |
+| **Gemma 4 26B A4B** | MoE | 25.2B (3.8B Activos) | Inferencia rápida, razonamiento complejo |
+| **Gemma 4 31B** | Denso | 30.7B | Investigación, análisis de contexto largo |
+
+La "E" en los modelos más pequeños significa parámetros "Efectivos", utilizando Incrustaciones por Capa (PLE) para maximizar la eficiencia. Mientras tanto, el modelo 26B A4B activa solo 4 mil millones de parámetros durante cualquier turno dado, lo que lo hace casi tan rápido como la variante E4B mientras mantiene la inteligencia de un modelo mucho más grande.
+
+## Configuración de tu entorno de Google Colab
+
+Para comenzar tu viaje con esta **guía de gemma 4 para google colab**, primero debes configurar tu entorno de ejecución. Los modelos Gemma 4, especialmente las variantes habilitadas para visión y audio, requieren aceleración por GPU.
+
+1.  **Abre Google Colab**: Crea un nuevo cuaderno en `colab.google.com`.
+2.  **Cambia el tipo de entorno de ejecución**: Navega a *Entorno de ejecución > Cambiar tipo de entorno de ejecución* y selecciona **T4 GPU**.
+3.  **Instala las dependencias**: Ejecuta el siguiente comando para instalar las últimas versiones del ecosistema Hugging Face y Unsloth para un rendimiento optimizado.
+
+```python
+!pip install -U transformers torch accelerate bitsandbytes
+!pip install --no-deps unsloth unsloth_zoo peft trl
+```
+
+> **⚠️ Advertencia:** Asegúrate siempre de que tu librería `transformers` esté actualizada a la versión 5.5.0 o superior para admitir las nuevas plantillas de chat de Gemma 4 y los tokens del modo "Thinking" (Pensamiento).
+
+## Ejecución de inferencia con Gemma 4
+
+Una de las características destacadas de Gemma 4 es su modo de razonamiento integrado. Esto permite que el modelo "piense" paso a paso antes de proporcionar una respuesta final. Para utilizar esto en Colab, necesitas cargar el modelo usando `AutoModelForCausalLM` y configurar los parámetros de muestreo específicos recomendados por Google.
+
+### Parámetros de muestreo recomendados
+
+Para obtener los resultados más consistentes y creativos, utiliza estas configuraciones estandarizadas:
+
+| Parámetro | Valor | Descripción |
+|---|---|---|
+| **Temperature** | 1.0 | Controla la aleatoriedad; 1.0 es el valor predeterminado para Gemma 4 |
+| **Top_p** | 0.95 | Muestreo de núcleo para filtrar tokens de baja probabilidad |
+| **Top_k** | 64 | Limita el vocabulario a los 64 tokens más probables |
+| **Max New Tokens** | 1024+ | Suficiente para cadenas de razonamiento largas |
+
+### Activación del modo de pensamiento (Thinking Mode)
+Para activar el proceso de razonamiento, debes incluir el token `&lt;|think|&gt;` al principio de tu mensaje de sistema. El modelo entonces emitirá su razonamiento interno dentro de las etiquetas `&lt;|channel>thought\n` antes de entregar la respuesta final.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/EpRTVXBq5vc"
+    title="Self-Host Your AI App on Google Colab"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Dominando la guía de Gemma 4 para Google Colab para el ajuste fino
+
+El ajuste fino (fine-tuning) es donde se desbloquea el verdadero potencial de Gemma 4. Usando la Adaptación de Bajo Rango (LoRA), puedes adaptar el modelo a conjuntos de datos especializados —como revistas médicas, documentos legales o guiones de juegos— sin necesidad de cantidades masivas de VRAM. Usar la librería Unsloth en tu configuración de la **guía de gemma 4 para google colab** puede reducir el uso de memoria hasta en un 70%.
+
+### Ajuste fino LoRA paso a paso
+
+1.  **Carga el modelo en 4 bits**: Esto es esencial para el límite de 16 GB de VRAM de la GPU T4.
+2.  **Añade adaptadores LoRA**: Dirígete a todas las capas lineales para asegurar que el modelo aprenda los matices de tus datos.
+3.  **Prepara el conjunto de datos**: Formatea tus datos en los roles estándar de `user` (usuario), `assistant` (asistente) y `system` (sistema).
+4.  **Entrena con SFTTrainer**: Utiliza la librería `trl` para gestionar el ciclo de entrenamiento.
+
+| Métrica de entrenamiento | Valor objetivo |
+|---|---|
+| **Tasa de aprendizaje** | 2e-4 |
+| **Optimizador** | adamw_8bit |
+| **Tamaño de lote** | 1 (con acumulación de gradientes) |
+| **Decaimiento de peso** | 0.01 |
+
+> **💡 Consejo:** Al ajustar modelos multimodales (Visión/Audio), coloca siempre el contenido que no es texto *antes* del texto en tu prompt para un rendimiento óptimo.
+
+## Capacidades multimodales: Visión y Audio
+
+Gemma 4 E2B y E4B son excepcionalmente capaces de procesar imágenes y audio directamente. Esto los hace perfectos para tareas como transcribir voz o analizar documentos PDF complejos.
+
+### Procesamiento de visión
+Gemma 4 admite resoluciones de imagen variables. Para tareas como OCR (Reconocimiento Óptico de Caracteres) o lectura de texto pequeño en capturas de pantalla de la interfaz de usuario de un juego, utiliza una configuración de "mayor presupuesto" (mayor resolución). Para una clasificación simple o subtitulado de imágenes, una resolución más baja es suficiente y significativamente más rápida.
+
+### Procesamiento de audio
+Los modelos pueden realizar Reconocimiento Automático de Voz (ASR) y traducción en más de 140 idiomas. Al solicitar audio, utiliza instrucciones específicas para asegurar que el modelo no añada relleno conversacional innecesario.
+
+```text
+Transcribe el siguiente segmento de voz en inglés a texto en inglés.
+* Solo entrega la transcripción.
+* Escribe dígitos para los números (ej., 2026 en lugar de dos mil veintiséis).
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/87aG24KWvM8"
+    title="Fine tuning Gemma with LoRA in Google Colab"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Despliegue y autohospedaje
+
+Una vez que hayas seguido esta **guía de gemma 4 para google colab** para entrenar o cargar tu modelo, es posible que quieras compartirlo. Herramientas como Ollama y Pingy Tunnel te permiten convertir un cuaderno de Colab en un punto de conexión de API en vivo.
+
+1.  **Instala Ollama**: Ejecuta el script de instalación dentro de una celda de tu cuaderno.
+2.  **Sirve el modelo**: Usa `ollama serve` en segundo plano.
+3.  **Crea un túnel**: Usa Pingy o Ngrok para generar una URL pública. Esta URL se puede usar para conectar tu modelo Gemma 4 alojado en Colab con aplicaciones o sitios web externos.
+
+> **💡 Consejo:** Recuerda que las sesiones de Colab son temporales. Si quieres conservar tu modelo ajustado, guarda siempre tus adaptadores LoRA en Google Drive o súbelos al Hugging Face Hub.
+
+## Consideraciones éticas y limitaciones
+
+Si bien Gemma 4 es una herramienta poderosa, es importante usarla de manera responsable. Google DeepMind ha implementado rigurosas evaluaciones de seguridad, pero los usuarios aún deben estar atentos a posibles alucinaciones o sesgos.
+
+*   **Precisión factual**: Gemma 4 no es una base de datos. Verifica siempre la información crítica.
+*   **Datos sensibles**: Evita introducir información personal o sensible en el ciclo de entrenamiento, especialmente cuando uses conjuntos de datos públicos.
+*   **Ventana de contexto**: Aunque los modelos admiten hasta 256K tokens, el rendimiento puede degradarse en los extremos de la ventana de contexto.
+
+Al seguir esta **guía de gemma 4 para google colab**, puedes aprovechar la tecnología de IA de vanguardia para construir, experimentar y desplegar modelos sofisticados con una sobrecarga mínima. La combinación de la arquitectura de última generación de Google y el cómputo accesible de Colab hace que 2026 sea el mejor año hasta ahora para el desarrollo de IA.
+
+## FAQ (Preguntas frecuentes)
+
+**P: ¿Puedo ejecutar el modelo Gemma 4 31B en una cuenta gratuita de Google Colab?**
+
+R: El modelo 31B es bastante grande y normalmente requiere una GPU A100 o H100 que se encuentra en Colab Pro. Sin embargo, puedes ejecutar la versión cuantizada de 4 bits del modelo 26B A4B (MoE) en una GPU T4 estándar.
+
+**P: ¿Cómo guardo mi progreso en esta guía de gemma 4 para google colab?**
+
+R: Usa `model.save_pretrained("mi_modelo")` para guardar localmente en el disco de Colab, luego usa el explorador de archivos para descargarlo o monta Google Drive y mueve los archivos allí.
+
+**P: ¿Gemma 4 admite entrada de video?**
+
+R: Sí, Gemma 4 puede analizar video procesando secuencias de fotogramas como imágenes. Esto es particularmente efectivo para las variantes multimodales E2B y E4B.
+
+**P: ¿Cuál es la mejor manera de mejorar el razonamiento del modelo?**
+
+R: Asegúrate de estar usando la plantilla de chat correcta y de haber habilitado el token `&lt;|think|&gt;`. Proporcionar ejemplos de pocos disparos (few-shot examples) —demostraciones de razonamiento paso a paso— en el prompt también mejora significativamente el rendimiento.
+
+Para más información y soporte de la comunidad, puedes visitar el [sitio oficial de desarrolladores de Google AI](https://ai.google.dev/gemma) o unirte al Discord de Unsloth para resolución de problemas técnicos.

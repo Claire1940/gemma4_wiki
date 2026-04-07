@@ -1,0 +1,131 @@
+export const metadata = {
+  title: "Gemma 4 System Prompt Guide: Master AI Personas 2026",
+  description: "Master the new control tokens and agentic workflows in Gemma 4. This comprehensive guide covers thinking mode, tool use, and local deployment strategies.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1e3a8a/fff?text=Gemma+4+System+Prompt+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+The release of Google's Gemma 4 on April 2, 2026, has fundamentally shifted the landscape for open-source AI developers and local LLM enthusiasts. Built on the research foundations of Gemini 3 and released under the permissive Apache 2.0 license, this model family offers unprecedented reasoning and multimodal capabilities. To unlock its full potential, understanding a **gemma 4 system prompt guide** is essential, as the model introduces specific control tokens that dictate how it thinks, acts, and uses external tools. Whether you are running the lightweight E2B model on a mobile device or the massive 31B dense variant on a server, mastering the **gemma 4 system prompt guide** ensures your AI personas remain consistent, private, and highly effective.
+
+In this guide, we will break down the new prompt formatting standards, explore the revolutionary "Thinking Mode," and show you how to build custom agentic workflows that run entirely on your local hardware.
+
+## Understanding the Gemma 4 Prompt Hierarchy
+
+Gemma 4 moves away from the legacy formatting of earlier versions, adopting a structured turn-based system. This structure is designed to handle multi-turn conversations while maintaining a clear distinction between system instructions, user inputs, and model responses.
+
+The core of any **gemma 4 system prompt guide** begins with the five primary control tokens. These tokens are reserved within the tokenizer and must be used precisely to prevent "model hallucinations" or formatting breakdowns.
+
+### Core Dialogue Tokens
+
+| Token | Purpose | Usage Example |
+| :--- | :--- | :--- |
+| **system** | Defines the model's persona and rules. | `system\nYou are a helpful assistant.` |
+| **user** | Indicates the input from the human user. | `user\nWhat is the capital of France?` |
+| **model** | Indicates the model's generated response. | `model\nThe capital is Paris.` |
+| **&lt;|turn>** | Marks the start of a specific dialogue turn. | `&lt;|turn>system` |
+| **&lt;turn|&gt;** | Marks the end of a specific dialogue turn. | `helpful assistant.&lt;turn|&gt;` |
+
+> **💡 Tip:** Always wrap your system instructions in the `&lt;|turn>system` and `&lt;turn|&gt;` delimiters. This ensures the model prioritizes these instructions throughout the entire session.
+
+## Enabling Thinking Mode and Reasoning
+
+One of the most powerful features introduced in 2026 is the native "Thinking Mode." By including a specific token in your system prompt, you can force the model to engage in Chain-of-Thought (CoT) reasoning before providing a final answer. This is particularly useful for complex math, logic puzzles, or multi-step planning.
+
+To activate this, you must include the `&lt;|think|&gt;` token within your system turn.
+
+### The Thinking Workflow
+When thinking is enabled, the model generates content in a hidden "thought channel" before the actual response. This is indicated by the `&lt;|channel>thought` token.
+
+```text
+&lt;|turn>system
+&lt;|think|&gt;You are a professional logic tutor.&lt;turn|&gt;
+&lt;|turn>user
+Solve for x: 2x + 10 = 20&lt;turn|&gt;
+&lt;|turn>model
+&lt;|channel>thought
+Subtract 10 from both sides... divide by 2... x = 5.
+&lt;channel|&gt;To solve for x, first subtract 10 from both sides to get 2x = 10. Then, divide by 2. The answer is 5.&lt;turn|&gt;
+```
+
+### Adaptive Thought Efficiency
+For developers looking to save on latency and compute costs, you can use a "LOW" thinking instruction. By explicitly telling the model to "think efficiently" or "keep reasoning brief" in the system prompt, testing has shown a reduction in thinking tokens by approximately 20%.
+
+## Agentic Workflows and Tool Use
+
+Gemma 4 is a native "tool-user." This means it can be prompted to call external functions—like checking the weather, querying a database, or running a Python script—and then use the results to inform its final answer. This "handshake" is managed through specific tool tokens.
+
+### Tool Use Lifecycle Tokens
+
+| Token Pair | Description |
+| :--- | :--- |
+| **&lt;|tool> &lt;tool|&gt;** | Used to define the available tools in the system prompt. |
+| **&lt;|tool_call> &lt;tool_call|&gt;** | The model's request to execute a specific function. |
+| **&lt;|tool_response> &lt;tool_response|&gt;** | The application's feedback containing the tool's result. |
+
+When building an agent, you must provide the tool definitions in the system prompt using a JSON schema. The model will then "halt" generation when it needs to call a tool, allowing your local application to execute the code and feed the result back into the context window.
+
+## Local Implementation with Open WebUI
+
+For many users, the easiest way to implement a **gemma 4 system prompt guide** is through a graphical interface like Open WebUI. Running locally via Docker, Open WebUI allows you to create "Custom Personas" where you can save complex system prompts for repeated use.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Building a Knowledge Base
+Open WebUI takes Gemma 4 further by allowing "Knowledge Bases." Instead of re-uploading documents in every chat, you can index PDFs, spreadsheets, and text files. When you prompt the model, it uses RAG (Retrieval-Augmented Generation) to search your local files and feed the relevant "chunks" to Gemma 4.
+
+1. **Upload Files:** Add your documents to the "Knowledge" section in the workspace.
+2. **Tag in Chat:** Use the `#` key in the chat box to select your knowledge base.
+3. **Query Privately:** Ask questions about your data; the processing stays 100% local on your machine.
+
+## Hardware Requirements for Gemma 4
+
+Choosing the right model size depends heavily on your available VRAM and RAM. Because Gemma 4 uses advanced techniques like Per-Layer Embeddings (PLE) and Shared KV Caching, it is more efficient than previous generations, but still requires significant resources for the larger variants.
+
+| Model Size | Parameters | Recommended RAM/VRAM | Best Use Case |
+| :--- | :--- | :--- | :--- |
+| **E2B** | 2.3B | 4GB - 8GB | Mobile, Raspberry Pi, IoT |
+| **E4B** | 4.5B | 8GB - 12GB | Laptops, Edge Devices |
+| **26B A4B** | 26B (MoE) | 16GB - 24GB | Low-latency server use |
+| **31B Dense** | 31B | 32GB+ | High-quality reasoning |
+
+> **Warning:** If you are using the 31B model, ensure you have a modern GPU with at least 16GB of VRAM (like an RTX 4080 or 4090) to run it with 4-bit quantization.
+
+## Best Practices for System Prompting
+
+To get the most out of your setup, follow these 2026 industry standards for prompt engineering:
+
+*   **Be Explicit with Roles:** Instead of "You are a writer," use "You are a professional technical editor specializing in cybersecurity white papers."
+*   **Manage Thought Context:** For standard conversations, strip the model's "thoughts" from previous turns before sending the history back to the model. This prevents the context window from filling up with redundant reasoning.
+*   **Use the String Delimiter:** When defining tool parameters, use the `&lt;|'|&gt;` token to enclose string values. This prevents the model from getting confused by special characters like commas or brackets within a text string.
+*   **Multimodal Integration:** Gemma 4 can "see" and "hear." When prompting with an image, use the `&lt;|image|&gt;` placeholder to tell the model exactly where in the text the visual data should be considered.
+
+For more technical documentation, you can visit the official [Google AI for Developers](https://ai.google.dev/gemma) portal to see the full API specifications.
+
+## FAQ
+
+**Q: Can I use Gemma 4 for commercial projects?**
+
+A: Yes. Gemma 4 is released under the Apache 2.0 license, which allows for full commercial use, modification, and distribution without usage caps or restrictive policies.
+
+**Q: How do I disable "Thinking Mode" if it's too slow?**
+
+A: Simply remove the `&lt;|think|&gt;` token from your system prompt. If the model continues to generate thoughts, you can add an empty thought channel (`&lt;|channel>thought&lt;channel|&gt;`) to your prompt to stabilize its behavior.
+
+**Q: What is the maximum context window for Gemma 4?**
+
+A: The larger models (26B and 31B) support up to 256K tokens, while the smaller edge models (E2B and E4B) support up to 128K tokens. This allows you to include entire books or codebases in a single **gemma 4 system prompt guide** session.
+
+**Q: Does Gemma 4 require an internet connection?**
+
+A: No. One of the primary benefits of Gemma 4 is that it can run entirely offline using tools like Ollama, LM Studio, or Open WebUI, ensuring your data remains private and secure.

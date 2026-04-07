@@ -1,0 +1,118 @@
+export const metadata = {
+  title: "Tutorial de Gemma 4 en Kaggle: Domina el Ajuste Fino y la Implementación 2026",
+  description: "Aprende a implementar los últimos modelos de código abierto de Google con nuestro tutorial de Gemma 4 en Kaggle. Explora la arquitectura, los pasos de ajuste fino y los flujos de trabajo agénticos.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Kaggle+Tutorial",
+  date: "2026-04-07",
+  author: "Equipo Wiki de Gemma"
+}
+
+El lanzamiento de la última familia de modelos de código abierto de Google marca un cambio masivo en cómo los desarrolladores y entusiastas de la IA abordan la implementación local de LLM. Si buscas un **tutorial completo de Gemma 4 en Kaggle**, has llegado al lugar correcto. Este **tutorial de Gemma 4 en Kaggle** está diseñado para guiarte a través de los matices de la línea de modelos de 2026, desde la variante E2B ultraeficiente hasta el potente modelo 31B Dense.
+
+Gemma 4 introduce la "era agéntica", ofreciendo soporte nativo para el razonamiento complejo, la planificación de múltiples pasos y el uso de herramientas. A diferencia de iteraciones anteriores, estos modelos se lanzan bajo la licencia Apache 2.0, lo que los convierte en una opción principal para desarrolladores que crean aplicaciones con prioridad local. Ya sea que los ejecutes en una estación de trabajo de alta gama o en un dispositivo móvil, comprender los avances arquitectónicos como los Per-Layer Embeddings (PLE) es esencial para optimizar el rendimiento.
+
+## Entendiendo la Familia de Modelos Gemma 4
+
+Antes de sumergirte en la implementación técnica, es vital comprender qué modelo se ajusta a tus limitaciones de hardware. La familia se divide entre modelos Dense y arquitecturas Mixture-of-Experts (MoE), cada una sirviendo a diferentes escenarios de implementación.
+
+| Variante del Modelo | Parámetros Efectivos | Parámetros Totales | Ventana de Contexto | Caso de Uso Principal |
+|---|---|---|---|---|
+| **Gemma 4 E2B** | **2.3B** | 5.1B | 128K Tokens | Dispositivos Móviles e IoT |
+| **Gemma 4 E4B** | **4.5B** | 8.0B | 128K Tokens | Laptops y GPUs de Consumo |
+| **Gemma 4 26B A4B** | **3.8B (Activo)** | 25.2B | 256K Tokens | Inferencia Rápida en Estaciones de Trabajo |
+| **Gemma 4 31B** | **30.7B** | 30.7B | 256K Tokens | Razonamiento de Alta Calidad |
+
+La "E" en E2B y E4B significa parámetros "efectivos". Estos modelos utilizan Per-Layer Embeddings (PLE), donde cada capa de decodificador tiene su propia pequeña tabla de incrustaciones. Esto permite que el modelo mantenga una alta inteligencia mientras mantiene bajo el costo computacional durante la inferencia, ya que las incrustaciones actúan como búsquedas rápidas en lugar de costosas multiplicaciones de matrices.
+
+> **💡 Consejo:** Usa el modelo E2B si trabajas con VRAM limitada (menos de 8GB). Proporciona un nivel sorprendente de razonamiento para su tamaño y soporta más de 140 idiomas de forma nativa.
+
+## Configurando Tu Entorno Kaggle
+
+Para seguir este **tutorial de Gemma 4 en Kaggle**, necesitas un entorno estable. Aunque Kaggle proporciona GPUs P100 o T4 gratuitas, para los modelos 31B más grandes, es posible que necesites buscar alquileres de GPU externos o instancias de alta memoria.
+
+1.  **Solicitar Acceso al Modelo**: Navega a la [página oficial de Gemma 4 en Kaggle](https://www.kaggle.com/models/google/gemma-4) y acepta el acuerdo de licencia.
+2.  **Configurar Secretos**: Agrega tu token de API de Hugging Face o Kaggle a tus variables de entorno para permitir la descarga fluida del modelo.
+3.  **Instalar Dependencias**: Asegúrate de que tu entorno esté actualizado con las últimas versiones de las bibliotecas Transformers y Accelerate.
+
+```python
+# Required installation for Gemma 4
+!pip install -U transformers torch accelerate bitsandbytes
+```
+
+Una vez que el entorno esté listo, puedes cargar el modelo usando cuantificación de 4 bits para ahorrar memoria. Esto es particularmente útil para las variantes 26B y 31B si estás ejecutando en hardware de consumo.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/cHpB0PTRx5A"
+    title="Fine-Tune Gemma-4 on Your Own Dataset Locally: Step-by-Step Tutorial"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Ajuste Fino de Gemma 4 con LoRA
+
+El ajuste fino es el proceso de tomar un modelo base y especializarlo para una tarea específica, como clasificar emociones o analizar datos históricos específicos. Este **tutorial de Gemma 4 en Kaggle** recomienda usar Low-Rank Adaptation (LoRA) porque solo entrena una pequeña fracción (a menudo menos del 1%) del total de parámetros.
+
+### Paso 1: Prepara Tu Conjunto de Datos
+Tu conjunto de datos debe estar en un formato estructurado, típicamente JSONL. Para obtener los mejores resultados en 2026, usa las plantillas ShareGPT o ChatML estándar. Esto asegura que el modelo comprenda la distinción entre los roles de sistema, usuario y asistente.
+
+### Paso 2: Configura los Parámetros de LoRA
+Al configurar tu script de entrenamiento, la siguiente configuración es un punto de partida estándar para los modelos E4B o 26B:
+
+| Parámetro | Valor Recomendado | Descripción |
+|---|---|---|
+| **Rango (r)** | **16** | Determina el tamaño de las capas del adaptador. |
+| **Alfa** | **32** | Factor de escala para los pesos de LoRA. |
+| **Módulos Objetivo** | **all-linear** | Aplica LoRA a todas las capas compatibles. |
+| **Tasa de Aprendizaje** | **2e-4** | Una tasa segura y estándar para actualizaciones estables. |
+| **Tamaño del Lote** | **2** | Mantiene bajo el uso de VRAM; usa acumulación de gradientes. |
+
+### Paso 3: Ejecuta el Entrenamiento
+Usar `SFTTrainer` de la biblioteca TRL es la forma más eficiente de manejar el ajuste fino supervisado. Durante el proceso de entrenamiento, monitorea el valor de "pérdida". Una ejecución de entrenamiento saludable debería ver la pérdida disminuir constantemente durante 1-3 épocas.
+
+> **⚠️ Advertencia:** Evita el sobreajuste manteniendo bajo el número de épocas en conjuntos de datos pequeños. Si el modelo comienza a repetir los datos de entrenamiento textualmente, reduce el número de épocas o aumenta la regularización de pesos (weight decay).
+
+## Características Avanzadas: Modo de Pensamiento y Multimodalidad
+
+Gemma 4 no es solo un modelo de texto; es una potencia multimodal. Las variantes E2B y E4B incluyen soporte nativo de audio y visión, lo que les permite "ver" y "escuchar" el mundo en tiempo real.
+
+### Razonamiento y Modo "Pensamiento"
+Una de las características destacadas de la actualización de 2026 es el modo de razonamiento incorporado. Al incluir el token `&lt;|think|&gt;` en tu prompt del sistema, el modelo generará pensamientos internos antes de proporcionar una respuesta final. Esto es crucial para tareas complejas de codificación o lógica donde un enfoque paso a paso previene las alucinaciones.
+
+### Mejores Prácticas para la Entrada Multimodal
+*   **Orden de Modalidad**: Siempre coloca los tokens de imagen o audio **antes** del texto en tu prompt para un procesamiento óptimo.
+*   **Presupuestos de Resolución**: Usa una resolución más baja para tareas simples como subtítulos y una resolución más alta para OCR o análisis de documentos.
+*   **Duración del Audio**: Mantén los segmentos de audio concisos para evitar exceder la ventana de contexto, especialmente en el modelo E2B más pequeño.
+
+## Evaluación del Rendimiento
+
+Para comprender por qué este **tutorial de Gemma 4 en Kaggle** se centra en estos modelos específicos, observa los resultados de las pruebas comparativas de 2026. Gemma 4 supera consistentemente a las generaciones anteriores en tareas de razonamiento y codificación.
+
+| Benchmark | Gemma 4 31B | Gemma 4 E4B | Gemma 3 27B |
+|---|---|---|---|
+| **MMLU Pro** | **85.2%** | 69.4% | 67.6% |
+| **GPQA Diamond** | **84.3%** | 58.6% | 42.4% |
+| **MATH-Vision** | **85.6%** | 59.5% | 46.0% |
+
+Estos números resaltan el enorme salto en la "densidad de inteligencia", particularmente en los modelos de parámetros "efectivos" más pequeños que rinden muy por encima de su categoría.
+
+## Preguntas Frecuentes
+
+**P: ¿Puedo ejecutar este tutorial de Gemma 4 en Kaggle en una CPU?**
+
+R: Sí, el modelo E2B más pequeño es lo suficientemente eficiente como para ejecutarse en CPUs modernas con suficiente RAM, aunque se recomienda encarecidamente una GPU para el proceso de ajuste fino para ahorrar tiempo.
+
+**P: ¿Cuál es la diferencia entre los modelos Dense y MoE en Gemma 4?**
+
+R: Los modelos Dense (como el 31B) activan todos los parámetros para cada token, ofreciendo la más alta calidad. Los modelos MoE (como el 26B A4B) solo activan un subconjunto de parámetros (3.8B), lo que les permite ejecutarse mucho más rápido mientras mantienen un alto nivel de inteligencia.
+
+**P: ¿Cómo manejo las "predicciones inválidas" después del ajuste fino?**
+
+R: Las predicciones inválidas a menudo ocurren debido a un formato de prompt incorrecto. Asegúrate de usar la plantilla de chat exacta requerida por Gemma 4 y de que tus datos de entrenamiento no trunquen las etiquetas de salida.
+
+**P: ¿Es Gemma 4 seguro para uso empresarial?**
+
+R: Sí, Gemma 4 se sometió a los mismos rigurosos protocolos de seguridad que los modelos propietarios Gemini de Google. Incluye filtros para datos sensibles y está diseñado para minimizar las violaciones de políticas incluso sin capas de seguridad externas.

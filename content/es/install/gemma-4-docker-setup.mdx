@@ -1,0 +1,140 @@
+export const metadata = {
+  title: "Configuración de Docker para Gemma 4: Guía completa de despliegue de modelos de IA 2026",
+  description: "Aprende a dominar la configuración de Docker para Gemma 4 utilizando las últimas funciones de Model Runner. Despliega modelos de IA de alto rendimiento localmente sin complicaciones de dependencias.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/2563eb/fff?text=Gemma+4+Docker+Setup+Guide",
+  date: "2026-04-05",
+  author: "Equipo de Gemma Wiki"
+}
+
+Dominar la **configuración de Docker para Gemma 4** es la jugada definitiva para desarrolladores y entusiastas de la IA en 2026. Con el lanzamiento del último modelo de vanguardia de Google, muchos buscan la forma más eficiente de ejecutar estos modelos de lenguaje de gran tamaño (LLM) localmente sin caer en el "infierno de las dependencias" de las versiones de Python, los controladores CUDA y las librerías en conflicto. Una **configuración de Docker para Gemma 4** adecuada garantiza que puedas aprovechar la IA de alto rendimiento para todo, desde el desarrollo de juegos locales y lógica de NPCs inteligentes hasta el procesamiento de datos privados, todo dentro de un entorno contenedorizado que se mantiene consistente en diferentes máquinas.
+
+En esta guía, te guiaremos a través del revolucionario flujo de trabajo "Model Runner" introducido por Docker. Este nuevo método elimina la necesidad de código de enlace complejo, permitiéndote obtener y ejecutar Gemma 4 tan fácilmente como lo harías con una imagen de servidor web estándar. Ya seas un ingeniero de DevOps experimentado o un aficionado que busca experimentar con IA local, seguir estos pasos pondrá tu entorno en funcionamiento en cuestión de minutos.
+
+## Entendiendo el motor Docker Model Runner
+
+La forma tradicional de ejecutar modelos de IA implicaba una pila de dependencias frágiles. Tenías que asegurarte de que tu máquina local tuviera la versión exacta de PyTorch, los controladores NVIDIA correctos y un entorno de Python específico. El nuevo Model Runner de Docker cambia las reglas del juego al empaquetar la complejidad del tiempo de ejecución dentro del propio contenedor.
+
+Cuando inicias una **configuración de Docker para Gemma 4**, ya no solo estás descargando pesos; estás descargando una unidad ejecutable estandarizada. Este enfoque proporciona una menor latencia porque los modelos se ejecutan localmente en tu hardware mientras se benefician del aislamiento y la portabilidad de Docker.
+
+### Beneficios clave del enfoque Model Runner
+*   **Cero dolores de cabeza en la configuración:** No más instalaciones manuales de CUDA o librerías.
+*   **API estandarizada:** Accede a tus modelos a través de un endpoint de API compatible con OpenAI de forma automática.
+*   **Privacidad local:** Tus datos nunca salen de tu máquina, lo que lo hace ideal para proyectos sensibles.
+*   **Integración con Compose:** Orqueste su modelo de IA junto con sus servicios de front-end y back-end con un solo archivo.
+
+## Guía paso a paso para la configuración de Docker para Gemma 4
+
+Antes de sumergirte en los comandos, asegúrate de tener instalada la última versión de Docker Desktop (edición 2026 o posterior). También debes habilitar la función experimental "Docker Model" en tus ajustes para acceder a las nuevas palabras clave de la CLI.
+
+### 1. Habilitar la función Model
+Navega a Docker Desktop Settings > Features in Development y activa el interruptor **Enable Docker Model**. Una vez activo, tu CLI reconocerá la palabra clave `model`.
+
+### 2. Obtener y ejecutar Gemma 4
+Puedes obtener el modelo directamente desde el registro. La sintaxis está diseñada para ser familiar para cualquiera que haya usado `docker pull`.
+
+| Comando | Acción | Descripción |
+| :--- | :--- | :--- |
+| `docker model pull google/gemma-4` | **Descargar** | Obtiene la imagen y los pesos de Gemma 4 en tu máquina local. |
+| `docker model ls` | **Listar** | Muestra todos los modelos de IA almacenados actualmente en tu caché local de Docker. |
+| `docker model run google/gemma-4` | **Ejecutar** | Inicia el modelo y te sitúa en una CLI de chat interactiva. |
+
+> **💡 Consejo:** La primera vez que ejecutes el modelo, puede tardar un momento en cargar los pesos en la VRAM de tu GPU. Las solicitudes posteriores serán significativamente más rápidas.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/4YA1n2zs6XA"
+    title="Run AI Models with Docker - No Setup, No Headaches"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Integración de Gemma 4 en Docker Compose
+
+El verdadero poder de una **configuración de Docker para Gemma 4** se hace realidad cuando se integra en una aplicación de stack completo. Al usar Docker Compose, puedes definir tu modelo de IA como un servicio con el que tu aplicación web o servidor de juegos puede comunicarse a través de redes internas.
+
+### Ejemplo de configuración de Docker Compose
+En tu archivo `docker-compose.yml`, defines el servicio del modelo usando la clave `provider: model`. Esto le indica a Docker que use el motor especializado Model Runner en lugar del motor de contenedores estándar.
+
+| Parámetro del servicio | Valor | Rol |
+| :--- | :--- | :--- |
+| **image** | `google/gemma-4` | La versión específica del modelo a desplegar. |
+| **provider** | `model` | Especifica el motor Docker Model Runner. |
+| **internal_dns** | `modelrunner.docker.internal` | La dirección que usan tus otros servicios para llamar a la API de IA. |
+
+```yaml
+services:
+  gemma-ai:
+    image: google/gemma-4
+    provider: model
+  
+  gaming-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - AI_ENDPOINT=http://modelrunner.docker.internal:12434/v1
+    depends_on:
+      - gemma-ai
+```
+
+Al apuntar tu aplicación a la dirección `modelrunner.docker.internal`, puedes realizar llamadas estándar a la API REST a tu instancia local de Gemma 4. Esto es perfecto para crear funciones impulsadas por IA como la generación dinámica de misiones o el comportamiento inteligente de los enemigos en tus proyectos de juegos.
+
+## Optimización del rendimiento para modelos de IA locales
+
+Ejecutar una **configuración de Docker para Gemma 4** requiere conciencia del hardware. Dado que Gemma 4 es un modelo de última generación, su rendimiento depende en gran medida de la RAM de tu sistema y la RAM de vídeo (VRAM) disponibles.
+
+### Recomendaciones de hardware para 2026
+Ejecutar estos modelos localmente consume muchos recursos. Usa la tabla a continuación para determinar qué versión de Gemma 4 se adapta a tu equipo.
+
+| Tamaño del modelo | VRAM mín. | GPU recomendada | Caso de uso |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 (2B)** | 4GB | RTX 3060 / 4050 | Chat de baja latencia, diálogo de NPCs. |
+| **Gemma 4 (7B)** | 10GB | RTX 3080 / 4070 | Lógica compleja, asistencia de programación. |
+| **Gemma 4 (27B)** | 24GB | RTX 4090 / A6000 | Razonamiento profundo, tareas de alta precisión. |
+
+> **⚠️ Advertencia:** Si intentas ejecutar un modelo que excede tu VRAM, Docker intentará descargar capas a la RAM de tu sistema, lo que disminuirá significativamente el rendimiento de tokens por segundo.
+
+## Solución de problemas de tu configuración de Docker para Gemma 4
+
+Incluso con el proceso simplificado de Model Runner, podrías encontrar problemas dependiendo de la configuración de tu sistema. La mayoría de los problemas con la **configuración de Docker para Gemma 4** provienen de software desactualizado o límites de asignación de recursos.
+
+| Problema común | Causa probable | Resolución |
+| :--- | :--- | :--- |
+| Comando `model` no encontrado | Docker Desktop desactualizado | Actualiza a la versión 4.30+ y habilita las funciones experimentales. |
+| Conexión rechazada | Conflicto de puertos | Asegúrate de que el puerto **12434** no esté siendo usado por otro servicio como Ollama. |
+| Tiempos de respuesta lentos | Sin aceleración por GPU | Verifica que Docker tenga permiso para acceder a tu GPU en los ajustes de Recursos. |
+| Fallo en el Pull | Autenticación del registro | Asegúrate de haber iniciado sesión en tu cuenta de Docker Hub o en el proveedor del modelo correspondiente. |
+
+Para obtener documentación técnica más detallada sobre la contenedorización, visita el [sitio web oficial de Docker](https://www.docker.com/) para explorar sus últimas herramientas de IA y actualizaciones del motor.
+
+## Personalización avanzada: Variables de entorno
+
+Una vez que tu **configuración de Docker para Gemma 4** sea funcional, puedes ajustar el comportamiento del modelo mediante variables de entorno. Estas se establecen normalmente en tu archivo `.env` o directamente dentro de la definición del servicio en Docker Compose.
+
+1.  **MODEL_TEMPERATURE**: Controla la creatividad de la respuesta (0.0 para determinista, 1.0 para altamente creativo).
+2.  **MAX_TOKENS**: Establece el límite para la longitud de la respuesta de la IA.
+3.  **SYSTEM_PROMPT**: Define la "personalidad" de la IA (por ejemplo, "Eres un guía útil en un RPG de fantasía").
+
+Al ajustar estas variables, puedes transformar una instancia genérica de Gemma 4 en una herramienta especializada adaptada a las necesidades específicas de tu aplicación. Esta flexibilidad es lo que hace que el enfoque basado en Docker sea superior a las aplicaciones de IA independientes estándar.
+
+## FAQ
+
+**P: ¿Necesito una conexión a Internet para usar mi configuración de Docker para Gemma 4?**
+
+R: Solo necesitas conexión a Internet para el `docker model pull` inicial. Una vez que el modelo se almacena localmente en tu máquina, puedes ejecutarlo completamente fuera de línea, garantizando una privacidad total y cero uso de datos.
+
+**P: ¿Puedo ejecutar varios modelos al mismo tiempo?**
+
+R: Sí, puedes descargar varios modelos como Llama 3.2 y Gemma 4. Sin embargo, ejecutarlos simultáneamente depende de la VRAM de tu GPU. Puedes cambiar entre ellos fácilmente deteniendo una sesión de `docker model run` e iniciando otra.
+
+**P: ¿Es la configuración de Docker para Gemma 4 compatible con Mac y Windows?**
+
+R: Sí, siempre que utilices Docker Desktop 2026 o posterior. En Mac, utiliza el Neural Engine de Apple Silicon (M1/M2/M3), mientras que en Windows aprovecha los backends de NVIDIA CUDA o WSL2 para la aceleración.
+
+**P: ¿Cómo actualizo mi modelo a la última versión?**
+
+R: Simplemente ejecuta `docker model pull google/gemma-4` de nuevo. Docker buscará capas actualizadas y descargará solo los cambios, de forma similar a como funcionan las capas de imagen estándar, asegurando que tu **configuración de Docker para Gemma 4** se mantenga al día con las últimas optimizaciones.

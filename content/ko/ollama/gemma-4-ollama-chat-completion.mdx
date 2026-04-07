@@ -1,0 +1,164 @@
+export const metadata = {
+  title: "Gemma 4 Ollama Chat Completion: 2026 전체 설정 가이드",
+  description: "개인용 로컬 AI를 위한 gemma 4 ollama chat completion 구성 방법을 알아보세요. API 통합, Open WebUI 및 하드웨어 최적화를 위한 단계별 가이드를 제공합니다.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Ollama+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki 팀"
+}
+
+2026년 현재, 프라이버시를 중시하는 개발자와 파워 유저들 사이에서 고성능 인공지능을 로컬에서 실행하는 것은 표준이 되었습니다. 구글의 최신 오픈 가중치 모델 출시와 함께 **gemma 4 ollama chat completion** 워크플로우를 설정하면, 데이터를 클라우드로 전송하지 않고도 강력한 추론 능력을 활용할 수 있습니다. 이 설정은 Ollama 추론 엔진의 효율성과 Gemma 4 제품군의 정교한 아키텍처를 결합하기 때문에 특히 효과적입니다.
+
+맞춤형 코딩 어시스턴트를 구축하든 개인용 지식 베이스를 구축하든, **gemma 4 ollama chat completion** 인터페이스를 마스터하는 것은 필수적입니다. Ollama에서 제공하는 OpenAI 호환 API 엔드포인트를 사용하면 최소한의 코드 변경만으로 Gemma 4를 LangChain, AutoGPT 또는 맞춤형 웹 인터페이스와 같은 기존 프레임워크에 바로 적용할 수 있습니다. 이 가이드는 로컬 AI 환경을 최대한 활용하는 데 필요한 설치, 구성 및 문제 해결 단계에 대한 포괄적인 안내를 제공합니다.
+
+## Gemma 4 모델 변체 이해하기
+
+첫 번째 **gemma 4 ollama chat completion** 요청을 시작하기 전에 하드웨어에 가장 적합한 모델 변체를 선택해야 합니다. Gemma 4는 모바일 친화적인 1B 모델부터 플래그십인 31B 파라미터 버전까지 다양한 크기로 제공됩니다.
+
+2026년에 특히 주목받는 26B 모델은 "전문가 혼합(Mixture of Experts, MoE)" 아키텍처를 사용합니다. 이를 통해 모델은 총 260억 개의 파라미터를 보유하면서도 추론 중에는 일부(약 40억 개)만 활성화하여, 과도한 컴퓨팅 성능 없이도 고품질의 논리적 사고를 제공합니다.
+
+| 모델 변체 | 파라미터 수 | 최소 VRAM | 권장 하드웨어 |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 1B** | 10억 개 | 2 GB | 모바일 기기, 라즈베리 파이 |
+| **Gemma 4 4B** | 40억 개 | 4 GB | 일반 노트북, 내장 GPU |
+| **Gemma 4 12B** | 120억 개 | 8 GB | 중급 게이밍 PC (RTX 3060+) |
+| **Gemma 4 26B (MoE)** | 260억 개 | 16 GB | 하이엔드 데스크탑, Apple M2/M3 Pro |
+| **Gemma 4 31B** | 310억 개 | 20 GB+ | 워크스테이션, RTX 4090, Apple M3 Max |
+
+> **💡 팁:** 무엇을 선택해야 할지 모르겠다면 현대적인 소비자용 하드웨어에서 일반적인 채팅 작업에는 **4B** 변체가 가장 다재다능하며, 복잡한 코딩과 추론에는 **26B**가 우수합니다.
+
+## 로컬 추론을 위한 Ollama 설치
+
+Ollama는 로컬 AI를 구동하는 엔진 역할을 합니다. GPU 가속의 복잡함을 처리하고 채팅 완성을 위해 필요한 REST API를 제공합니다.
+
+### 단계별 설치 방법
+
+1.  **Ollama 다운로드:** 공식 사이트를 방문하여 Windows, macOS 또는 Linux용 설치 프로그램을 다운로드합니다.
+2.  **설치 프로그램 실행:** Windows에서는 `.exe` 파일을 실행하고 안내를 따릅니다. macOS에서는 애플리케이션을 폴더로 드래그합니다. Linux 사용자는 사이트에서 제공하는 한 줄의 `curl` 명령어를 사용할 수 있습니다.
+3.  **서비스 확인:** 터미널이나 명령 프롬프트를 열고 `ollama --version`을 입력하여 설치가 성공했는지 확인합니다.
+4.  **모델 가져오기:** 다음 명령어를 실행하여 특정 Gemma 4 가중치를 다운로드합니다.
+    `ollama pull gemma4:12b` (`12b`를 원하는 크기로 변경하세요).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Chat Completion API 구성하기
+
+Ollama는 `http://localhost:11434/v1/chat/completions`에서 OpenAI 호환 엔드포인트를 노출합니다. 이는 Gemma 4를 타사 애플리케이션에 통합하는 기본 방법입니다.
+
+요청을 보낼 때 JSON 페이로드는 표준 채팅 형식을 따릅니다. 그러나 2026년의 일반적인 문제 중 하나는 Gemma 4의 "사고(Thinking)" 또는 "추론(Reasoning)" 모드와 관련이 있으며, 클라이언트가 추론 토큰을 지원하지 않을 경우 내용 필드가 비어 있는 결과가 발생할 수 있습니다.
+
+### API 요청 예시
+
+성공적인 **gemma 4 ollama chat completion**을 위해 `curl` 또는 Python 요청에서 다음과 같은 구조를 사용하십시오.
+
+```json
+{
+  "model": "gemma4:26b",
+  "messages": [
+    {"role": "system", "content": "당신은 유능한 비서입니다."},
+    {"role": "user", "content": "양자 얽힘에 대해 설명해줘."}
+  ],
+  "reasoning_effort": "none",
+  "stream": false
+}
+```
+
+| 파라미터 | 타입 | 설명 |
+| :--- | :--- | :--- |
+| **model** | 문자열 | 가져온 모델의 정확한 이름 (예: `gemma4:4b`) |
+| **messages** | 배열 | 역할(system, user, assistant)이 포함된 메시지 객체 목록 |
+| **reasoning_effort** | 문자열 | 일부 버전의 내용 비어 있음 버그를 피하려면 **"none"**으로 설정 |
+| **stream** | 불리언 | 실시간 토큰 생성을 원하면 **true**로 설정 |
+
+> **⚠️ 경고:** API 응답의 `content` 필드는 비어 있지만 `reasoning` 필드가 가득 차 있다면, Ollama 버전을 업데이트하거나 요청 페이로드에서 `reasoning_effort`를 "none"으로 설정하십시오.
+
+## Open WebUI로 UI 강화하기
+
+터미널은 테스트에 적합하지만, 전문적인 **gemma 4 ollama chat completion** 경험을 위해서는 그래픽 인터페이스가 필요한 경우가 많습니다. Open WebUI는 로컬에서 ChatGPT와 유사한 경험을 제공하는 무료 오픈 소스 대시보드입니다.
+
+### Docker를 통한 설치
+
+2026년에는 Docker를 사용하는 것이 Open WebUI를 배포하는 가장 효율적인 방법입니다. 모든 종속성이 메인 운영 체제와 격리되도록 보장합니다.
+
+1.  **Docker Desktop 설치:** 해당 OS에 맞는 버전을 다운로드하여 설치합니다.
+2.  **명령어 실행:** 터미널에서 다음을 실행합니다.
+    `docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main`
+3.  **대시보드 접속:** 브라우저를 열고 `http://localhost:3000`으로 이동합니다.
+4.  **Ollama 연결:** Open WebUI는 실행 중인 Ollama 서비스를 자동으로 감지하고 모델 드롭다운에 Gemma 4를 나열합니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 고급 기능: 지식 베이스 및 멀티모달 입력
+
+Open WebUI 내에서 **gemma 4 ollama chat completion**을 사용할 때의 큰 장점 중 하나는 "지식 베이스(Knowledge Bases)"를 생성할 수 있다는 것입니다. 이 기능은 검색 증강 생성(RAG)을 사용하여 AI가 로컬 문서(PDF, 스프레드시트, 텍스트 파일)를 서버로 보내지 않고도 참조할 수 있게 합니다.
+
+### 지식 베이스 만들기
+*   **문서 업로드:** "작업 공간(Workspace)" 섹션으로 이동하여 "지식(Knowledge)"을 선택합니다.
+*   **인덱싱:** Open WebUI가 로컬에서 파일을 청크(chunk)로 나누고 인덱싱합니다.
+*   **쿼리:** 새 채팅에서 `#` 기호와 지식 베이스 이름을 입력합니다. 이제 Gemma 4가 해당 문서를 바탕으로 질문에 답변합니다.
+
+### 멀티모달 기능
+Gemma 4는 본질적으로 멀티모달입니다. 이미지를 채팅 인터페이스로 직접 드래그 앤 드롭할 수 있습니다. 모델은 다음을 수행할 수 있습니다.
+1.  **사진 묘사:** 복잡한 장면에서 세부 정보 추출.
+2.  **OCR 작업:** 스크린샷이나 손글씨 메모에서 텍스트 읽기.
+3.  **데이터 분석:** 이미지로 제공된 차트와 그래프 해석.
+
+## 일반적인 API 문제 해결
+
+완벽한 설정이라 하더라도 성능 병목 현상이나 연결 오류가 발생할 수 있습니다. 2026년에 가장 자주 발생하는 문제를 해결하려면 이 체크리스트를 따르십시오.
+
+| 문제 | 예상 원인 | 해결책 |
+| :--- | :--- | :--- |
+| **연결 거부 (Connection Refused)** | Ollama 서비스 미실행 | 터미널에서 `ollama serve` 실행 |
+| **높은 지연 시간 (High Latency)** | 모델이 CPU에서 실행 중 | GPU 드라이버(CUDA/ROCm) 최신 상태 확인 |
+| **메모리 부족 (OOM)** | VRAM 초과 | 더 작은 모델로 교체 (예: 26B에서 12B로) |
+| **빈 내용 응답 (Empty Content)** | 추론 모드 충돌 | API 호출 시 `reasoning_effort: "none"` 사용 |
+
+> **💡 팁:** Apple Silicon 사용자(M1/M2/M3)는 12B 및 26B 모델을 원활하게 실행하기 위해 최소 16GB의 통합 메모리를 확보해야 합니다. 시스템이 CPU와 GPU 간에 메모리를 공유하기 때문입니다.
+
+## 핵심 요약
+
+**gemma 4 ollama chat completion** 생태계는 클라우드 기반 AI에 대한 강력하고 프라이빗한 대안을 제공합니다. 하드웨어에 맞는 올바른 모델 크기를 선택하고 Open WebUI와 같은 도구를 활용하면 완전히 오프라인으로 작동하는 정교한 AI 워크스테이션을 구축할 수 있습니다.
+
+*   **프라이버시:** 데이터가 기기를 떠나지 않으므로 민감한 문서 처리에 이상적입니다.
+*   **비용:** 구독료나 토큰당 비용 없이 완전히 무료로 사용할 수 있습니다.
+*   **다재다능함:** 텍스트, 이미지 및 긴 컨텍스트의 문서 분석을 지원합니다.
+*   **통합:** OpenAI 호환 API를 통해 거의 모든 현대적 AI 개발 도구와 호환됩니다.
+
+추가적인 기술 문서는 [공식 Ollama GitHub 저장소](https://github.com/ollama/ollama)를 방문하여 2026년 내내 업데이트되는 최신 성능 패치와 모델 릴리스 소식을 확인하세요.
+
+## 자주 묻는 질문 (FAQ)
+
+**Q: 전용 GPU가 없는 노트북에서 Gemma 4를 실행할 수 있나요?**
+
+A: 네, Ollama는 CPU에서 Gemma 4를 실행할 수 있지만 속도가 현저히 느려집니다. GPU 없이 사용할 만한 경험을 원하신다면 **1B** 또는 **4B** 변체를 권장합니다. Apple Silicon Mac 사용자는 통합 아키텍처 덕분에 대형 모델을 매우 효율적으로 처리하므로 예외입니다.
+
+**Q: Gemma 4 모델을 최신 버전으로 어떻게 업데이트하나요?**
+
+A: 터미널에서 `ollama pull gemma4:[버전]`을 실행하여 로컬 가중치를 업데이트할 수 있습니다. Ollama는 모델 레이어의 변경 사항을 확인하고 필요한 업데이트만 다운로드하여 시간과 대역폭을 절약합니다.
+
+**Q: 왜 gemma 4 ollama chat completion 요청이 404 오류를 반환하나요?**
+
+A: 404 오류는 일반적으로 JSON 페이로드의 모델 이름이 Ollama에 설치된 모델과 정확히 일치하지 않을 때 발생합니다. `ollama list`를 실행하여 설치된 모델의 정확한 이름을 확인하고 API 요청에서 동일한 문자열을 사용하고 있는지 확인하세요.
+
+**Q: Gemma 4를 상업적 프로젝트에 사용할 수 있나요?**
+
+A: 네. Gemma 4는 Apache 2.0 라이선스로 출시되어 매우 허용 범위가 넓으며, 표준 라이선스 약관을 준수하는 한 로열티 없이 상업적 이용, 수정 및 배포가 가능합니다.

@@ -1,0 +1,164 @@
+export const metadata = {
+  title: "Gemma 4 Ollama Chat Completion: Full Setup Guide 2026",
+  description: "Learn how to configure gemma 4 ollama chat completion for private, local AI. Step-by-step guide for API integration, Open WebUI, and hardware optimization.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Ollama+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+Running high-performance artificial intelligence locally has become the standard for privacy-conscious developers and power users in 2026. With the release of Google’s latest open-weight models, setting up a **gemma 4 ollama chat completion** workflow allows you to leverage massive reasoning capabilities without ever sending data to the cloud. This setup is particularly effective because it combines the efficiency of the Ollama inference engine with the sophisticated architecture of the Gemma 4 family.
+
+Whether you are building a custom coding assistant or a private knowledge base, mastering the **gemma 4 ollama chat completion** interface is essential. By using the OpenAI-compatible API endpoint provided by Ollama, you can drop Gemma 4 into existing frameworks like LangChain, AutoGPT, or custom web interfaces with minimal code changes. This guide provides a comprehensive walkthrough of the installation, configuration, and troubleshooting steps required to get the most out of your local AI environment.
+
+## Understanding Gemma 4 Model Variants
+
+Before initiating your first **gemma 4 ollama chat completion** request, you must select the model variant that best matches your hardware. Gemma 4 is distributed in several sizes, ranging from mobile-friendly 1B models to the flagship 31B parameter version.
+
+The 26B model is a standout in 2026, utilizing a "Mixture of Experts" (MoE) architecture. This allows the model to possess 26 billion total parameters while only activating a fraction (roughly 4 billion) during inference, providing high-quality logic without requiring extreme computational power.
+
+| Model Variant | Parameter Count | Minimum VRAM | Recommended Hardware |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 1B** | 1 Billion | 2 GB | Mobile devices, Raspberry Pi |
+| **Gemma 4 4B** | 4 Billion | 4 GB | Standard laptops, Integrated GPUs |
+| **Gemma 4 12B** | 12 Billion | 8 GB | Mid-range gaming PCs (RTX 3060+) |
+| **Gemma 4 26B (MoE)** | 26 Billion | 16 GB | High-end desktops, Apple M2/M3 Pro |
+| **Gemma 4 31B** | 31 Billion | 20 GB+ | Workstations, RTX 4090, Apple M3 Max |
+
+> **💡 Tip:** If you are unsure which to choose, the **4B** variant is the most versatile for general chat tasks on modern consumer hardware, while the **26B** is superior for complex coding and reasoning.
+
+## Installing Ollama for Local Inference
+
+Ollama serves as the engine that powers your local AI. It handles the complexities of GPU acceleration and provides the REST API necessary for chat completions.
+
+### Step-by-Step Installation
+
+1.  **Download Ollama:** Visit the official site and download the installer for Windows, macOS, or Linux.
+2.  **Run the Installer:** On Windows, execute the `.exe` and follow the prompts. On macOS, drag the application to your folder. Linux users can use the one-line `curl` command provided on the site.
+3.  **Verify the Service:** Open your terminal or command prompt and type `ollama --version` to ensure the installation was successful.
+4.  **Pull the Model:** Download the specific Gemma 4 weights by running:
+    `ollama pull gemma4:12b` (Replace `12b` with your preferred size).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Configuring the Chat Completion API
+
+Ollama exposes an OpenAI-compatible endpoint at `http://localhost:11434/v1/chat/completions`. This is the primary method for integrating Gemma 4 into third-party applications. 
+
+When sending a request, the JSON payload follows the standard chat format. However, a common issue in 2026 involves the "Thinking" or "Reasoning" mode of Gemma 4, which can sometimes result in empty content fields if the client doesn't support reasoning tokens.
+
+### Sample API Request
+
+To ensure a successful **gemma 4 ollama chat completion**, use the following structure in your `curl` or Python requests:
+
+```json
+{
+  "model": "gemma4:26b",
+  "messages": [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "Explain quantum entanglement."}
+  ],
+  "reasoning_effort": "none",
+  "stream": false
+}
+```
+
+| Parameter | Type | Description |
+| :--- | :--- | :--- |
+| **model** | String | The exact name of the pulled model (e.g., `gemma4:4b`) |
+| **messages** | Array | List of message objects with roles (system, user, assistant) |
+| **reasoning_effort** | String | Set to **"none"** to avoid empty content bugs in some versions |
+| **stream** | Boolean | Set to **true** for real-time token generation |
+
+> **⚠️ Warning:** If you notice that the `content` field in your API response is empty but the `reasoning` field is full, update your Ollama version or set `reasoning_effort` to "none" in your request payload.
+
+## Enhancing the UI with Open WebUI
+
+While the terminal is excellent for testing, a professional **gemma 4 ollama chat completion** experience often requires a graphical interface. Open WebUI is a free, open-source dashboard that provides a ChatGPT-like experience locally.
+
+### Installation via Docker
+
+Using Docker is the most efficient way to deploy Open WebUI in 2026. It ensures all dependencies are isolated from your main operating system.
+
+1.  **Install Docker Desktop:** Download and install it for your OS.
+2.  **Run the Command:** Execute the following in your terminal:
+    `docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui ghcr.io/open-webui/open-webui:main`
+3.  **Access the Dashboard:** Open your browser and navigate to `http://localhost:3000`.
+4.  **Connect to Ollama:** Open WebUI should automatically detect your running Ollama service and list Gemma 4 in the model dropdown.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Advanced Features: Knowledge Bases and Multimodal Input
+
+One of the significant advantages of using **gemma 4 ollama chat completion** within Open WebUI is the ability to create "Knowledge Bases." This feature uses Retrieval-Augmented Generation (RAG) to allow the AI to reference your local documents (PDFs, spreadsheets, text files) without sending them to a server.
+
+### Creating a Knowledge Base
+*   **Upload Documents:** Navigate to the "Workspace" section and select "Knowledge."
+*   **Indexing:** Open WebUI chunks and indexes your files locally.
+*   **Querying:** In a new chat, use the `#` symbol followed by the name of your knowledge base. Gemma 4 will now answer questions based specifically on those documents.
+
+### Multimodal Capabilities
+Gemma 4 is inherently multimodal. You can drag and drop images directly into the chat interface. The model can:
+1.  **Describe Photos:** Extracting details from complex scenes.
+2.  **OCR Tasks:** Reading text from screenshots or handwritten notes.
+3.  **Data Analysis:** Interpreting charts and graphs provided as images.
+
+## Troubleshooting Common API Issues
+
+Even with a perfect setup, you may encounter performance bottlenecks or connectivity errors. Follow this checklist to resolve the most frequent issues in 2026.
+
+| Issue | Likely Cause | Solution |
+| :--- | :--- | :--- |
+| **Connection Refused** | Ollama service not running | Run `ollama serve` in the terminal |
+| **High Latency** | Model running on CPU | Ensure GPU drivers (CUDA/ROCm) are updated |
+| **Out of Memory (OOM)** | VRAM exceeded | Switch to a smaller model (e.g., 26B to 12B) |
+| **Empty Content Response** | Reasoning mode conflict | Use `reasoning_effort: "none"` in API call |
+
+> **💡 Tip:** Apple Silicon users (M1/M2/M3) should ensure they have at least 16GB of Unified Memory to run the 12B and 26B models smoothly, as the system shares memory between the CPU and GPU.
+
+## Summary of Key Takeaways
+
+The **gemma 4 ollama chat completion** ecosystem offers a powerful, private alternative to cloud-based AI. By selecting the correct model size for your hardware and utilizing tools like Open WebUI, you can build a sophisticated AI workstation that works entirely offline. 
+
+*   **Privacy:** No data leaves your machine, making it ideal for sensitive documents.
+*   **Cost:** Completely free to use with no subscription or per-token fees.
+*   **Versatility:** Supports text, images, and long-context document analysis.
+*   **Integration:** The OpenAI-compatible API ensures compatibility with almost all modern AI developer tools.
+
+For further technical documentation, visit the [official Ollama GitHub repository](https://github.com/ollama/ollama) to stay updated on the latest performance patches and model releases throughout 2026.
+
+## FAQ
+
+**Q: Can I run Gemma 4 on a laptop without a dedicated GPU?**
+
+A: Yes, Ollama can run Gemma 4 on a CPU, but it will be significantly slower. For a usable experience without a GPU, stick to the **1B** or **4B** variants. Apple Silicon Mac users are the exception, as their integrated architecture handles larger models very efficiently.
+
+**Q: How do I update my Gemma 4 model to the latest version?**
+
+A: You can update your local weights by running `ollama pull gemma4:[version]` in your terminal. Ollama will check for changes in the model layers and only download the necessary updates, saving time and bandwidth.
+
+**Q: Why does my gemma 4 ollama chat completion request return a 404 error?**
+
+A: A 404 error usually indicates that the model name in your JSON payload does not exactly match the model pulled in Ollama. Run `ollama list` to see the exact names of your installed models and ensure your API request uses the identical string.
+
+**Q: Is it possible to use Gemma 4 for commercial projects?**
+
+A: Yes. Gemma 4 is released under the Apache 2.0 license, which is highly permissive and allows for commercial use, modification, and distribution without royalties, provided you follow the standard license terms.

@@ -1,0 +1,121 @@
+export const metadata = {
+  title: "Requisitos de RAM para Gemma 4: Guía completa de hardware 2026",
+  description: "Conoce los requisitos específicos de RAM para Gemma 4 en cada tamaño de modelo. Desde el E2B móvil hasta el buque insignia 31B, optimiza tu configuración de IA local para un rendimiento máximo.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+RAM+Guide",
+  date: "2026-04-05",
+  author: "Equipo de la Wiki de Gemma 4"
+}
+
+Ejecutar inteligencia artificial potente de forma local ha pasado de ser un pasatiempo de nicho a un flujo de trabajo estándar para desarrolladores y usuarios preocupados por la privacidad. Con el lanzamiento de la familia Gemma 4 por parte de Google el 2 de abril de 2026, la barrera de entrada para el razonamiento de alto nivel nunca ha sido tan baja. Sin embargo, antes de comenzar a descargar estos modelos de pesos abiertos, comprender los **requisitos de RAM para Gemma 4** es esencial para asegurar que tu hardware pueda manejar la carga computacional. A diferencia de las soluciones basadas en la nube, los LLM locales dependen en gran medida de la memoria de tu sistema y de la VRAM de la GPU para funcionar sin interrupciones. Ya sea que busques ejecutar los modelos ligeros de borde en un dispositivo móvil o el masivo buque insignia 31B en una estación de trabajo, conocer los **requisitos de RAM para Gemma 4** te ahorrará horas de resolución de problemas y posibles fallos del sistema. Esta guía desglosa cada variante del modelo y el hardware específico necesario para lograr una inferencia fluida en 2026.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Google DeepMind diseñó Gemma 4 para ser versátil, ofreciendo cuatro tamaños distintos adaptados a diferentes capacidades de hardware. Estos modelos están construidos sobre las mismas bases de investigación que Gemini 3, pero están optimizados para la ejecución local bajo la licencia permisiva Apache 2.0.
+
+La familia se divide en dos categorías: modelos "Effective" (E) para dispositivos de borde y modelos de alto número de parámetros para estaciones de trabajo de escritorio. Los modelos E2B y E4B son increíblemente eficientes, diseñados para ejecutarse en hardware con recursos limitados como teléfonos inteligentes, tabletas e incluso unidades Raspberry Pi. En el extremo superior, los modelos 26B Mixture of Experts (MoE) y 31B Dense proporcionan un razonamiento de vanguardia que rivaliza con las API comerciales en la nube.
+
+| Variante del modelo | Recuento de parámetros | Caso de uso principal | Arquitectura |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 mil millones (Efectivos) | Dispositivos móviles/IoT | Dense ligero |
+| **Gemma 4 E4B** | 4 mil millones (Efectivos) | Portátiles estándar | Dense ligero |
+| **Gemma 4 26B** | 26 mil millones | Escritorios de gama alta | Mezcla de expertos (MoE) |
+| **Gemma 4 31B** | 31 mil millones | Estaciones de trabajo de IA | Buque insignia Dense completo |
+
+## Requisitos de RAM para Gemma 4 detallados
+
+La cantidad de RAM que necesitas es directamente proporcional al tamaño de los pesos del modelo y a la ventana de contexto que pretendas utilizar. Aunque los modelos están muy optimizados, siguen requiriendo un "espacio de trabajo" significativo en tu memoria para almacenar los parámetros activos durante una conversación.
+
+Para obtener la mejor experiencia, recomendamos usar una GPU dedicada con suficiente VRAM para alojar el modelo completo. Sin embargo, Gemma 4 es capaz de ejecutarse en la RAM del sistema (inferencia por CPU) si tienes un procesador lo suficientemente rápido y una capacidad de memoria suficiente.
+
+| Tamaño del modelo | RAM mínima (Sistema) | VRAM recomendada (GPU) | Ventana de contexto óptima |
+|---|---|---|---|
+| **E2B** | 5 GB | 2 GB - 4 GB | 128,000 Tokens |
+| **E4B** | 8 GB - 10 GB | 6 GB - 8 GB | 128,000 Tokens |
+| **26B (MoE)** | 16 GB - 20 GB | 12 GB - 16 GB | 256,000 Tokens |
+| **31B (Dense)** | 24 GB - 32 GB | 20 GB - 24 GB | 256,000 Tokens |
+
+> **⚠️ Advertencia:** Ejecutar un modelo que exceda tu RAM disponible causará "swapping" (intercambio), donde el sistema utiliza tu SSD como memoria temporal. Esto resultará en tiempos de respuesta extremadamente lentos, cayendo a menudo a menos de una palabra por segundo.
+
+## Cómo ejecutar Gemma 4 localmente
+
+La forma más eficiente de desplegar estos modelos en 2026 es a través de **Ollama**, una herramienta optimizada que gestiona la instalación y ejecución de IA local. Ollama ofrece soporte nativo para Gemma 4, permitiéndote descargar versiones específicas con comandos sencillos en la terminal.
+
+### Guía de instalación paso a paso
+
+1.  **Descarga Ollama:** Visita el [sitio web oficial de Ollama](https://ollama.com) y descarga el instalador para Windows, macOS o Linux.
+2.  **Verifica el hardware:** Asegúrate de que tu sistema cumpla con los **requisitos de RAM para Gemma 4** para el modelo específico que deseas usar.
+3.  **Abre la terminal:** Inicia tu Símbolo del sistema, PowerShell o Terminal.
+4.  **Descarga el modelo:** Usa el comando `ollama pull gemma4` para el modelo E4B predeterminado. Para versiones más grandes, usa `ollama pull gemma4:31b`.
+5.  **Ejecuta la inferencia:** Escribe `ollama run gemma4` para comenzar a chatear de inmediato.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento: Gemma 3 frente a Gemma 4
+
+El salto en el rendimiento respecto a la generación anterior es asombroso. Google ha mejorado significativamente las capacidades de razonamiento y codificación de estos modelos. El modelo 31B se encuentra actualmente en el top tres de todos los modelos de código abierto en la tabla de clasificación de texto de Arena AI.
+
+| Benchmark | Gemma 3 (Anterior) | Gemma 4 (2026) | Ganancia de rendimiento |
+|---|---|---|---|
+| **Big Bench Reasoning** | 19.3% | **74.4%** | +285% |
+| **AM E2026 Math** | 20.8% | **89.2%** | +328% |
+| **Codeforces Elo** | 110 | **2150** | Clase Élite |
+
+La arquitectura de Mezcla de Expertos (MoE) en el modelo 26B es particularmente destacable. Aunque tiene 26 mil millones de parámetros totales, solo activa aproximadamente 4 mil millones durante la inferencia. Esto le permite mantener la velocidad de un modelo más pequeño mientras ofrece la calidad de salida de uno mucho más grande, convirtiéndolo en el "punto ideal" para usuarios con 16 GB a 32 GB de RAM.
+
+## Capacidades multimodales y de programación
+
+Gemma 4 no se limita a la simple generación de texto. En 2026, el soporte multimodal es estándar en toda la familia. Esto significa que puedes alimentar al modelo con imágenes, capturas de pantalla o documentos, y este puede interpretar los datos visuales con alta precisión.
+
+*   **Comprensión de imágenes:** Sube recibos, gráficos o notas escritas a mano para un resumen instantáneo.
+*   **Procesamiento de audio:** Los modelos más pequeños E2B y E4B pueden procesar archivos de audio de forma nativa, perfecto para transcripciones o aplicaciones de comandos de voz.
+*   **Flujos de trabajo agénticos:** Con llamadas a funciones nativas, Gemma 4 puede devolver datos JSON estructurados, permitiéndole interactuar con herramientas y API externas.
+*   **Modo de pensamiento:** Los usuarios pueden activar un "Modo de pensamiento" que obliga al modelo a realizar un razonamiento paso a paso antes de proporcionar una respuesta final, lo cual es ideal para acertijos lógicos y matemáticos complejos.
+
+> **💡 Consejo:** Si usas Gemma 4 para programar, activa siempre el Modo de pensamiento. Reduce significativamente los errores lógicos en la generación de Python y JavaScript al permitir que el modelo "redacte" su lógica internamente primero.
+
+## Optimizando tu hardware para Gemma 4
+
+Para aprovechar al máximo tu configuración y cumplir con los **requisitos de RAM para Gemma 4**, considera cómo asignas tus recursos. Si tienes una GPU NVIDIA, asegúrate de tener instalados los controladores CUDA más recientes. Para los usuarios de Mac, la arquitectura de Memoria Unificada de los chips de la serie M (M2, M3, M4) es excepcionalmente buena para los LLM porque la GPU puede acceder a todo el grupo de RAM del sistema.
+
+1.  **VRAM vs. RAM del sistema:** Prioriza la VRAM. Una GPU con 12 GB de VRAM superará siempre a un sistema con 64 GB de RAM DDR5.
+2.  **Cuantización:** Si estás ligeramente por debajo de los requisitos de RAM, busca versiones "cuantizadas" de los modelos (por ejemplo, Q4_K_M). Estas versiones comprimen los pesos para ahorrar memoria con una pérdida mínima de calidad.
+3.  **Aplicaciones en segundo plano:** Cierra aplicaciones pesadas como Chrome o editores de video antes de ejecutar el modelo 31B para evitar fallos.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/vdnxDeUi1w8"
+    title="Google Gemma 4 is INSANE (FREE!)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 en un portátil con 16 GB de RAM?**
+
+R: Sí, puedes ejecutar cómodamente el **Gemma 4 E4B** y la variante **26B MoE**. El modelo 26B es muy eficiente y suele usar alrededor de 17 GB de memoria, lo que puede requerir cerrar otras aplicaciones en segundo plano en un sistema de 16 GB para evitar ralentizaciones.
+
+**P: ¿Hay alguna forma de probar Gemma 4 sin cumplir con los requisitos de RAM para Gemma 4?**
+
+R: Si tu hardware no está listo para la ejecución local, puedes usar Google AI Studio (aistudio.google.com). Te permite ejecutar los modelos 26B y 31B de forma gratuita en tu navegador utilizando la infraestructura en la nube de Google.
+
+**P: ¿Gemma 4 requiere conexión a internet?**
+
+R: Una vez que el modelo se descarga a través de una herramienta como Ollama, no se requiere conexión a internet. Todo el procesamiento ocurre localmente en tu máquina, garantizando la total privacidad de los datos.
+
+**P: ¿Cuál es la diferencia entre los modelos 26B y 31B?**
+
+R: El modelo 26B utiliza una arquitectura de "Mezcla de expertos", lo que lo hace más rápido y eficiente en el uso de la memoria. El modelo 31B es un modelo "Dense", lo que significa que utiliza todos sus parámetros para cada consulta, proporcionando una calidad de razonamiento ligeramente superior a costa de mayores **requisitos de RAM para Gemma 4** y velocidades de inferencia más lentas.

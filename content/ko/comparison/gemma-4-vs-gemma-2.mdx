@@ -1,0 +1,129 @@
+export const metadata = {
+  title: "Gemma 4 vs Gemma 2: 전체 비교 및 업그레이드 가이드 2026",
+  description: "gemma 4 vs gemma 2 비교를 통해 주요 차이점을 살펴보세요. 새로운 MoE 아키텍처, 멀티모달 지원, 로컬 배포 팁에 대해 알아봅니다.",
+  category: "가이드",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+vs+Gemma+2+Comparison",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+오픈소스 인공지능의 지형은 Google의 최신 모델 제품군 출시와 함께 극적으로 변화했습니다. **gemma 4 vs gemma 2**를 비교해 보면, 이전 세대에서 2026년 표준으로의 전환은 단순한 점진적 업데이트 그 이상임을 분명히 알 수 있습니다. Gemma 4는 "에이전트형(agentic)" 워크플로우, 네이티브 멀티모달 지원, 그리고 개발자와 로컬 애호가 모두에게 힘을 실어주는 더 관대한 라이선스 모델로의 근본적인 변화를 도입했습니다.
+
+고사양 게이밍 PC에서 모델을 실행하든 모바일 기기에서 실행하든, **gemma 4 vs gemma 2**의 미묘한 차이를 이해하는 것은 로컬 AI 스택을 최적화하는 데 필수적입니다. 이 포괄적인 가이드에서는 이 새로운 오픈 웨이트 시대를 정의하는 아키텍처 변화, 성능 벤치마크 및 배포 전략을 자세히 설명합니다. 방대한 250,000 토큰 컨텍스트 창부터 혁신적인 "Effective(유효)" 파라미터 모델까지, 이 두 세대가 어떻게 대비되는지 알아야 할 모든 것을 담았습니다.
+
+## Gemma 제품군의 진화: 아키텍처 및 라이선스
+
+**gemma 4 vs gemma 2** 비교에서 가장 즉각적인 변화는 라이선스입니다. Gemma 2가 커스텀 "Gemma 이용 약관" 하에 운영되었던 것과 달리, Gemma 4는 **Apache 2.0 라이선스**로 출시되었습니다. 이는 Google DeepMind의 획기적인 행보로, 상업적 이용 및 재배포에 있어 훨씬 더 큰 자유를 제공합니다.
+
+아키텍처 측면에서 Gemma 4는 많은 Gemma 2 변체에서 볼 수 있었던 순수 Dense 구조에서 벗어났습니다. Gemma 2가 작은 크기(9B 및 27B 모델 등)에서 높은 성능을 내기 위해 증류(distillation)에 집중했다면, Gemma 4는 효율성을 극대화하기 위해 **Mixture of Experts (MoE)** 방식과 **Per-Layer Embeddings (PLE)**를 활용합니다.
+
+| 기능 | Gemma 2 (레거시) | Gemma 4 (2026 표준) |
+| :--- | :--- | :--- |
+| **라이선스** | 커스텀 오픈 웨이트 | **Apache 2.0** |
+| **최대 컨텍스트 창** | 8k - 32k 토큰 | **250k 토큰** |
+| **네이티브 모달리티** | 텍스트 전용 (대부분) | **비전 및 오디오 네이티브** |
+| **아키텍처** | 주로 Dense | **Dense, MoE 및 PLE** |
+| **주요 초점** | 추론 효율성 | **에이전트 로직 및 멀티모달** |
+
+## 모델 라인업 분석
+
+Gemma 4는 IoT 기기부터 기업급 로컬 워크스테이션에 이르기까지 더 넓은 범위의 하드웨어를 지원하도록 제품군을 다양화했습니다. **gemma 4 vs gemma 2**를 비교할 때, 명칭 체계 또한 "Active(활성)" 및 "Effective(유효)" 파라미터 수를 반영하도록 진화했습니다.
+
+### 파워하우스: 31B Dense 및 26B A4B
+Gemma 4 제품군의 플래그십 모델은 최첨단 추론을 위해 설계되었습니다. **31B Dense** 모델은 순수 출력 품질에 최적화되어 있으며, **26B A4B** (Active 4 Billion)는 Mixture of Experts 아키텍처를 사용합니다. 26B A4B 모델은 총 260억 개의 파라미터를 포함하지만 단일 추론 단계에서는 40억 개만 활성화하므로, 더 큰 모델의 지식 베이스를 유지하면서도 훨씬 작은 모델의 속도로 실행될 수 있습니다.
+
+### 모바일 챔피언: E2B 및 E4B
+이 모델들에서 "E"는 **Effective Parameters (유효 파라미터)**를 의미합니다. 이 모델들은 Per-Layer Embeddings를 활용하여 고밀도 정보를 귀중한 VRAM 대신 플래시 스토리지에 저장할 수 있게 해줍니다. 덕분에 E2B 및 E4B 모델은 메모리가 제한적인 스마트폰과 노트북을 위한 최적의 선택이 됩니다.
+
+> **💡 팁:** RAM이 16GB 이하인 경우, 부드러운 로컬 성능을 위해 **Gemma 4 E4B** 또는 **26B A4B**가 최선의 선택입니다.
+
+## 기술 심층 분석: Gemma 4가 더 빠른 이유는?
+
+**gemma 4 vs gemma 2** 성능 차이의 핵심 요소는 모델이 어텐션(attention)을 처리하는 방식에 있습니다. Gemma 4는 정교한 "인터리빙 레이어(Interleaving Layer)" 전략을 도입했습니다. 이는 **로컬 어텐션**(슬라이딩 윈도우)과 **글로벌 어텐션**을 번갈아 사용합니다.
+
+작은 E2B 모델에서는 4:1 패턴(로컬 레이어 4개당 글로벌 레이어 1개)을 따르며, 큰 모델은 5:1 패턴을 사용합니다. 이는 Gemma 2의 더 경직된 어텐션 구조에 비해 계산 오버헤드를 크게 줄여줍니다.
+
+### 글로벌 어텐션 향상
+Gemma 4는 글로벌 어텐션 레이어를 더 효율적으로 만들기 위해 몇 가지 "트릭"을 구현했습니다:
+1. **K=V:** 글로벌 레이어에서 Key를 Value와 동일하게 설정하여 K-캐시에 필요한 메모리를 절반으로 줄였습니다.
+2. **p-RoPE:** 저주파가 프루닝된 회전식 위치 인코딩(Rotary Positional Encoding)으로, 위치 데이터를 차원의 25%에만 적용하여 긴 컨텍스트 대화에서도 의미론적 의미를 보존합니다.
+3. **Grouped Query Attention (GQA):** Gemma 4는 글로벌 레이어에서 KV 헤드당 8개의 Query 헤드를 사용하여 메모리 사용량을 더욱 최적화합니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 멀티모달 기능: 보고 듣기
+
+**gemma 4 vs gemma 2**에서 가장 중요한 기능적 차이점은 아마도 비전과 오디오에 대한 네이티브 지원일 것입니다. Gemma 2가 주로 텍스트 투 텍스트 모델이었던 것과 달리, Gemma 4는 본질적으로 멀티모달입니다.
+
+*   **비전 인코더:** Vision Transformer (ViT)를 기반으로 하는 Gemma 4는 적응형 크기 조정과 2D RoPE를 사용하여 다양한 종횡비의 이미지를 처리할 수 있습니다. 이미지 패치를 언어 모델이 이해할 수 있는 "소프트 토큰"으로 풀링합니다.
+*   **오디오 인코더:** 작은 모델(E2B 및 E4B)은 **Conformer** 오디오 인코더를 탑재하고 있습니다. 이를 통해 모델은 원시 오디오를 멜-스펙트로그램으로 변환한 뒤 임베딩으로 바꾸어 "들을" 수 있으며, 외부 플러그인 없이 실시간 음성-텍스트 변환 및 번역이 가능합니다.
+
+## 로컬 배포: Open WebUI로 Gemma 4 설정하기
+
+**gemma 4 vs gemma 2**의 도약을 경험하는 가장 좋은 방법 중 하나는 **Open WebUI**와 같은 로컬 인터페이스를 사용하는 것입니다. 이 설정을 통해 ChatGPT와 같은 클라우드 기반 서비스에 필적하는 기능과 함께 자신의 머신에서 완전히 비공개로 Gemma 4를 실행할 수 있습니다.
+
+### 로컬 설정을 위한 전제 조건
+더 큰 Gemma 4 모델(26B MoE 등)을 실행하려면 일반적으로 다음이 필요합니다:
+*   머신에 설치된 **Docker Desktop**.
+*   모델을 서빙하기 위한 백엔드 엔진인 **Ollama**.
+*   최소 **16GB RAM** (31B Dense 모델의 경우 32GB 권장).
+
+### 단계별 설치 가이드
+1.  **Docker 설치:** Docker Desktop을 다운로드하고 WSL 2가 활성화되어 있는지 확인합니다(Windows 기준).
+2.  **Open WebUI 실행:** 터미널에서 다음 명령어를 사용하세요:
+    `docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/data --name open-webui ghcr.io/open-webui/open-webui:main`
+3.  **Gemma 4 가져오기:** 터미널에 `ollama pull gemma4:26b`를 입력하여 Mixture of Experts 변체를 다운로드합니다.
+4.  **대시보드 접속:** 브라우저에서 `localhost:3000`을 엽니다.
+
+> **⚠️ 경고:** 8GB RAM만 있는 머신에서 31B Dense 모델을 실행하면 시스템이 극도로 느려집니다. 저사양 하드웨어에서는 E4B 또는 26B A4B 버전을 사용하세요.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/aQ1rblXB91U"
+    title="Gemma 4 Just Got Way More Powerful with Open WebUI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 사용 사례: 왜 Gemma 4로 업그레이드해야 할까?
+
+현재 기본 챗봇용으로 Gemma 2를 사용하고 있다면 업그레이드할 가치가 있는지 궁금할 수 있습니다. 그 답은 Gemma 4의 "에이전트(Agentic)" 시대 역량에 있습니다.
+
+### 1. 문서 지식 베이스
+대화 전반에 걸친 장기 기억 유지에 어려움을 겪었던 Gemma 2와 달리, Gemma 4를 Open WebUI와 결합하면 **지식 베이스(Knowledge Bases)**를 구축할 수 있습니다. 수십 개의 PDF나 스프레드시트를 한 번만 업로드하면 모델이 이를 인덱싱합니다. 25만 토큰의 컨텍스트 창 덕분에 향후 어떤 대화에서도 이 문서들을 정확하게 참조할 수 있습니다.
+
+### 2. 커스텀 페르소나
+Gemma 4는 시스템 프롬프트에 매우 잘 반응합니다. 일관성을 유지하는 "전문 이메일 어시스턴트"나 "파이썬 코딩 전문가" 페르소나를 만들 수 있습니다. 복잡한 다단계 지침을 따르는 모델의 능력은 **gemma 4 vs gemma 2** 비교에서 큰 도약을 보여줍니다.
+
+### 3. 이미지 및 데이터 분석
+네이티브 비전 인코더를 사용하면 차트 스크린샷을 채팅창에 끌어다 놓을 수 있습니다. Gemma 4는 추세를 분석하고, 텍스트를 추출하며, 데이터 시각화 개선 사항을 제안할 수도 있습니다.
+
+## FAQ
+
+**Q: 휴대폰에서 Gemma 4를 실행할 수 있나요?**
+
+A: 네! **Gemma 4 E2B** 및 **E4B** 모델은 모바일 기기용으로 특별히 설계되었습니다. 이들은 Per-Layer Embeddings를 사용하여 RAM 사용량을 최소화하므로, 음성 지원 및 번역과 같은 온디바이스 작업에 매우 효율적입니다.
+
+**Q: 코딩에서 gemma 4 vs gemma 2의 성능 차이가 체감되나요?**
+
+A: 확실히 그렇습니다. Gemma 4의 26B 및 31B 모델은 훨씬 더 다양한 코드베이스로 훈련되었으며 도구 사용(tool use)을 네이티브로 지원합니다. 이를 통해 Gemma 2보다 훨씬 효과적으로 다회차 코딩 파이프라인을 계획하고 실행할 수 있습니다.
+
+**Q: Gemma 4를 사용하려면 인터넷 연결이 필요한가요?**
+
+A: 아니요. Ollama나 유사한 도구를 통해 웨이트를 다운로드하고 나면, Gemma 4는 100% 로컬에서 실행됩니다. 이는 민감한 문서와 데이터 분석에 대해 완전한 프라이버시를 보장합니다.
+
+**Q: 16GB RAM 노트북에는 어떤 모델을 선택해야 하나요?**
+
+A: **Gemma 4 26B A4B**가 16GB 시스템에서 지능과 속도의 가장 좋은 균형을 제공합니다. 한 번에 40억 개의 파라미터만 활성화하기 때문에 고품질의 추론을 제공하면서도 반응 속도가 빠릅니다.

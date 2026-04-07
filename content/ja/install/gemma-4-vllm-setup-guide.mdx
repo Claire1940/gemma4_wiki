@@ -1,0 +1,191 @@
+export const metadata = {
+  title: "Gemma 4 vLLM セットアップガイド：2026年版 高速AI推論マスター",
+  description: "vLLMフレームワークを使用して、GoogleのGemma 4モデルをデプロイし、最高のパフォーマンス、低遅延、高度なマルチモーダル機能を実現する方法を学びます。2026年最新ガイド。",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+vLLM+Setup+Guide",
+  date: "2026-04-07",
+  author: "Gemma Wiki Team"
+}
+
+Googleの最新モデルファミリーのリリースにより、ローカル環境での最先端AIのデプロイは、かつてないほど身近で強力なものになりました。この**Gemma 4 vLLM セットアップガイド**に従うことで、コンパクトなE2B Dense（高密度）バージョンから巨大な26B Mixture-of-Experts (MoE) バリアントまで、これらのモデルの可能性を最大限に引き出すことができます。vLLMは、従来のフレームワークで見られた「メモリの占有」問題を解決する画期的なPagedAttentionアルゴリズムにより、LLM推論の業界標準となりました。この**Gemma 4 vLLM セットアップガイド**を活用することで、標準的なHugging Face Transformersと比較して最大24倍のスループットを実現できます。この包括的なウォークスルーでは、ハードウェア要件や環境設定から、「思考モード（Thinking Mode）」やマルチモーダル・ビジョン処理などの高度な機能まで、2026年の環境に最適化されたローカルAIスタックの構築方法を解説します。
+
+## Gemma 4 アーキテクチャの理解
+
+技術的なインストールの前に、Gemma 4をユニークにしている要素を理解することが重要です。以前の世代とは異なり、Gemma 4はローカルなスライディングウィンドウ・アテンションとグローバル・アテンションを交互に繰り返す、洗練されたDual Attentionメカニズムを採用しています。これにより、長期的な依存関係に伴うメモリコストの指数関数的な増加を抑えつつ、最大131,072トークンという大規模なコンテキストウィンドウを処理することが可能になりました。
+
+モデルファミリーは主に2つのカテゴリに分けられます。効率重視のDense（高密度）モデルと、高度な推論能力を持つMixture-of-Experts (MoE) モデルです。
+
+| モデル・バリアント | 総パラメータ数 | アクティブ・パラメータ数 | 推奨されるユースケース |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B IT** | 2B | 2B | モバイルアプリ、基本的なチャットボット |
+| **Gemma 4 E4B IT** | 4B | 4B | コーディング支援、要約 |
+| **Gemma 4 26B-A4B IT** | 26B | 4B | 複雑な推論、ツール呼び出し |
+| **Gemma 4 31B IT** | 31B | 31B | 専門家レベルの知識タスク |
+
+> **💡 プロのヒント:** 26B-A4B MoEモデルは、ローカルユーザーにとって「スイートスポット」となることが多いモデルです。26Bモデル並みの知能を提供しながら、推論時には4Bモデル分の計算リソースしか使用しないため、レイテンシを大幅に削減できます。
+
+## 2026年のハードウェア要件
+
+Gemma 4を効果的に実行するには、モデルの重みとKV（Key-Value）キャッシュの両方を保持するのに十分なVRAMを備えたGPUが必要です。vLLMはNVIDIA CUDAに高度に最適化されていますが、現在はAMD ROCmやCloud TPUも強力にサポートしています。
+
+| ハードウェアタイプ | 最小VRAM (BF16) | 推奨GPU/TPU |
+| :--- | :--- | :--- |
+| **NVIDIA (Dense 2B/4B)** | 24 GB | RTX 3090 / 4090 |
+| **NVIDIA (MoE 26B)** | 80 GB | A100 / H100 / B200 |
+| **AMD (全モデル)** | 192 GB | MI300X / MI325X |
+| **Cloud TPU** | N/A | 4x Trillium / 1x Ironwood |
+
+コンシューマー向けハードウェアで実行する場合、より大きな31B Denseモデルを標準的な24GB VRAMバッファに収めるために、量子化（FP8やNVFP4など）が必要になる場合があります。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/McLdlg5Gc9s"
+    title="What is vLLM? Efficient AI Inference for Large Language Models"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## ステップバイステップ Gemma 4 vLLM セットアップガイド
+
+2026年においてvLLMをインストールする最も信頼性の高い方法は、標準の`pip`よりも大幅に高速な`uv`パッケージマネージャーを使用することです。以下の手順に従って環境を準備してください。
+
+### 1. 環境の準備
+まず、仮想環境を作成し、vLLMとTransformersの最新プレリリース版をインストールします。Gemma 4のサポートには、最新のナイトリービルドが必要です。
+
+```bash
+# 環境の作成と有効化
+uv venv
+source .venv/bin/activate
+
+# CUDAサポート付きでvLLMをインストール
+uv pip install -U vllm --pre \
+  --extra-index-url https://download.pytorch.org/whl/nightly/cu124 \
+  --index-strategy unsafe-best-match
+
+# Transformersが5.5.0以上に更新されていることを確認
+uv pip install transformers==5.5.0
+```
+
+### 2. 推論サーバーの起動
+インストールが完了したら、ローカルのOpenAI互換サーバーを起動できます。これにより、OpenAI APIをサポートするあらゆるアプリケーションでGemma 4を使用できるようになります。
+
+```bash
+# 4Bモデルの基本的な起動
+vllm serve google/gemma-4-E4B-it \
+  --max-model-len 32768 \
+  --gpu-memory-utilization 0.90
+```
+
+より大きな31Bモデルの場合は、Tensor Parallelism（テンソル並列）を利用して、モデルを複数のGPUに分割して実行する必要があります。
+
+```bash
+# マルチGPUでの起動 (GPU 2枚)
+vllm serve google/gemma-4-31B-it \
+  --tensor-parallel-size 2 \
+  --max-model-len 16384 \
+  --kv-cache-dtype fp8
+```
+
+> **⚠️ 警告:** 起動後は常にGPUメモリの使用量を確認してください。「Out of Memory (OOM)」エラーが発生した場合は、`--max-model-len`を減らすか、`--gpu-memory-utilization`を下げてみてください。
+
+## 高度な機能：思考モードとツール呼び出し
+
+Gemma 4の際立った機能の1つは、ネイティブの「思考モード（Thinking Mode）」です。これにより、モデルは最終的な回答を出す前に、構造化された推論チェーンを生成できます。vLLMでは、これは専用の推論パーサーによって処理されます。
+
+これらの機能を有効にするには、サーバー起動時に特定のフラグを含める必要があります。
+
+```bash
+vllm serve google/gemma-4-31B-it \
+  --enable-auto-tool-choice \
+  --reasoning-parser gemma4 \
+  --tool-call-parser gemma4
+```
+
+### API経由での思考モードの使用
+OpenAI SDKを使用してサーバーを呼び出す際、`extra_body`パラメータに`enable_thinking`を渡すことで推論プロセスをトリガーできます。
+
+```python
+from openai import OpenAI
+
+client = OpenAI(base_url="http://localhost:8000/v1", api_key="EMPTY")
+
+response = client.chat.completions.create(
+    model="google/gemma-4-31B-it",
+    messages=[{"role": "user", "content": "問題：カタツムリが昼に3フィート登り、夜に2フィート滑り落ちる場合、20フィート登るのに何日かかるか？"}],
+    extra_body={"chat_template_kwargs": {"enable_thinking": True}}
+)
+
+# 推論チェーンにアクセス
+print(response.choices[0].message.reasoning_content)
+# 最終的な回答にアクセス
+print(response.choices[0].message.content)
+```
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/Vtp3lr9BKq4"
+    title="How to Run Gemma-4 26B A4B Locally using vLLM"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## マルチモーダル機能：ビジョン、オーディオ、ビデオ
+
+Gemma 4は単なるテキストモデルではありません。画像、音声、ビデオをネイティブに理解するためのカスタムエンコーダーを備えています。この**Gemma 4 vLLM セットアップガイド**を完成させるには、これらマルチモーダル入力の処理方法についても触れる必要があります。
+
+### ダイナミック・ビジョン解像度
+Gemma 4は、リクエストごとに設定可能なビジョントークンバジェットを使用します。保存したいVRAM量と必要な詳細度に基づいて、解像度を調整できます。
+
+| 解像度設定 | トークンバジェット | 最適な用途 |
+| :--- | :--- | :--- |
+| **低 (Low)** | 70 - 140 | アイコン、単純なテキストOCR |
+| **中 (Medium)** | 280 | 標準的な写真、ウェブのスクリーンショット |
+| **高 (High)** | 560 - 1120 | 詳細な医療画像や衛星写真 |
+
+起動時にデフォルトのビジョンバジェットを設定するには、以下を使用します：
+`--mm-processor-kwargs '{"max_soft_tokens": 280}'`
+
+### 音声およびビデオの推論
+音声中心のワークロードでは、メモリを節約するためにプロンプトあたりのマルチモーダルアイテム数を制限できます。例えば、一度に1つのビデオのみを処理する場合：
+
+```bash
+vllm serve google/gemma-4-E2B-it \
+  --limit-mm-per-prompt image=4,video=1,audio=1
+```
+
+## パフォーマンスとスループットの最適化
+
+セットアップを最大限に活用するには、特定の目的に基づいてvLLMサーバーのフラグを調整する必要があります。リアルタイムアシスタントのために絶対的な低レイテンシが必要な場合でも、バッチ処理のために高いスループットが必要な場合でも、これらの設定が違いを生みます。
+
+| 目的 | 推奨フラグ | 効果 |
+| :--- | :--- | :--- |
+| **最大スループット** | `--async-scheduling` | リクエストのスケジューリングとGPUデコードをオーバーラップさせる |
+| **低レイテンシ** | `--tensor-parallel-size 4` | 計算をより多くのGPUに分割する |
+| **メモリ節約** | `--kv-cache-dtype fp8` | KVキャッシュのメモリ使用量を50%削減する |
+| **一貫性** | `--no-enable-prefix-caching` | 正確なベンチマークのためにキャッシュを無効化する |
+
+公式ドキュメントやより深い技術的詳細については、[vLLM プロジェクトページ](https://github.com/vllm-project/vllm)で最新の2026年版アップデートを確認してください。
+
+## FAQ
+
+**Q: Gemma 4を24GBのGPU 1枚で実行できますか？**
+
+A: はい、RTX 4090のような24GBのGPU 1枚で、Gemma 4 E2Bおよび E4Bモデルを快適に実行できます。31Bバージョンを実行するには、FP8量子化を使用するか、テンソル並列を使用したデュアルGPUセットアップが必要になる可能性が高いです。
+
+**Q: 「思考モード」の利点は何ですか？**
+
+A: 思考モードは、モデルに推論プロセスを外部化させます。モデルが最終的な回答を出す前に自身の内部論理を「修正」できるため、論理、数学、コーディングタスクのパフォーマンスが大幅に向上します。
+
+**Q: なぜHugging Face TransformersではなくvLLMを使うべきなのですか？**
+
+A: vLLMは高性能なサービングに特化して設計されています。PagedAttentionと連続バッチング技術により、標準的なライブラリよりもはるかに高い効率で、多くの同時ユーザーと長いコンテキストウィンドウを処理できます。
+
+**Q: 最新モデルに合わせて Gemma 4 vLLM セットアップガイドを更新するにはどうすればよいですか？**
+
+A: Gemma 4のような新しいアーキテクチャのサポートは日々メインブランチにマージされるため、pipインストール時に必ず`--pre`フラグを使用して最新のナイトリービルドを取得するようにしてください。2026年現在、最新の状態を保つには `uv pip install -U vllm --pre` を使用してください。
