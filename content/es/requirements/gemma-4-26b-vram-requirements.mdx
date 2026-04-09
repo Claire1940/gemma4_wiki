@@ -1,0 +1,129 @@
+export const metadata = {
+  title: "Requisitos de VRAM de Gemma 4 26B: Guía de Hardware y Configuración 2026",
+  description: "Conozca los requisitos específicos de VRAM para Gemma 4 26B en inferencia local. Descubra cómo el modelo MoE de 26B de Google rinde en tareas de gaming y multimodales.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+26B+VRAM+Guide",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la familia Gemma 4 de Google ha causado una gran conmoción en las comunidades locales de IA y gaming en 2026. Mientras los entusiastas del código abierto se apresuran a alojar estos potentes modelos, comprender los **requisitos de VRAM de gemma 4 26b** se ha convertido en el principal obstáculo para los usuarios domésticos. La versión 26B es un modelo de Mezcla de Expertos (MoE), que utiliza 4 mil millones de parámetros activos por token, lo que lo convierte en una potencia increíblemente eficiente para su tamaño. Sin embargo, incluso con su arquitectura eficiente, los **requisitos de VRAM de gemma 4 26b** dictan exactamente qué tipo de hardware de GPU necesitará para lograr velocidades fluidas en 2026.
+
+Ya sea que busque generar lógica de juego compleja, construir entornos 3D interactivos o ejecutar un asistente multimodal, el modelo Gemma 4 26B ofrece una capacidad "byte por byte" que rivaliza con modelos significativamente más grandes en escala. En esta guía completa, desglosaremos los umbrales de VRAM para varios niveles de cuantización, compararemos el MoE de 26B con su hermano denso de 31B y proporcionaremos configuraciones de hardware recomendadas para una experiencia local sin interrupciones.
+
+## Descripción General de la Familia de Modelos Gemma 4
+
+Antes de profundizar en las especificaciones de hardware, es esencial entender dónde se sitúa el modelo 26B dentro de la línea Gemma 4 de 2026. Google ha lanzado cuatro tamaños distintos para satisfacer diferentes niveles de hardware, desde versiones ligeras para dispositivos móviles hasta modelos de investigación de alta resistencia.
+
+| Nombre del Modelo | Parámetros | Tipo | Ventana de Contexto | Mejor Caso de Uso |
+|---|---|---|---|---|
+| **Gemma 4 E2B** | 2.3B Efectivos | Denso | 128K | Dispositivos Móviles y Edge |
+| **Gemma 4 E4B** | 4.5B Efectivos | Denso | 128K | Programación Básica y Chat |
+| **Gemma 4 26B** | **26B Total** | **MoE** | **256K** | **Lógica Compleja y Multimodal** |
+| **Gemma 4 31B** | 31B Total | Denso | 256K | Investigación de Gama Alta |
+
+El modelo 26B es particularmente único porque utiliza una arquitectura de Mezcla de Expertos (MoE). Aunque tiene 26 mil millones de parámetros totales, solo 4 mil millones están activos en un momento dado. Esto permite velocidades de inferencia más rápidas que un modelo denso tradicional de 26B, aunque el modelo completo debe residir en la VRAM para evitar las enormes penalizaciones de rendimiento de la descarga a la memoria RAM del sistema.
+
+## Requisitos de VRAM de Gemma 4 26B por Cuantización
+
+La cantidad de RAM de video (VRAM) que necesita está directamente ligada a la "cuantización" o profundidad de bits del modelo. En 2026, la mayoría de los usuarios prefieren Q8 (8 bits) para una calidad casi sin pérdidas o Q4_K_M (4 bits) para una eficiencia máxima en GPUs de gaming de consumo.
+
+| Nivel de Cuantización | VRAM Estimada Necesaria | GPU Recomendada (2026) | Nota de Rendimiento |
+|---|---|---|---|
+| **FP16 (Original)** | **~54 GB** | 2x RTX 5090 o A6000 | Máxima Precisión |
+| **Q8_0 (8 bits)** | **~28 GB** | RTX 5090 (32GB) | Estándar de Oro en Calidad |
+| **Q6_K (6 bits)** | **~21 GB** | RTX 4090 / 5080 | Excelente Equilibrio |
+| **Q4_K_M (4 bits)** | **~16 GB** | RTX 4080 Super / 5070 Ti | Mínimo para PCs de Gaming |
+
+> **⚠️ Advertencia:** Estas estimaciones no incluyen el consumo de VRAM requerido por el sistema operativo y la ventana de contexto. Una ventana de contexto de 256K puede añadir varios gigabytes de uso de VRAM, por lo que siempre debe apuntar a tener entre 2 y 4 GB de "margen" por encima del tamaño del modelo.
+
+Para los usuarios que deseen cumplir con los **requisitos de VRAM de gemma 4 26b** en cuantización Q8, una sola RTX 5090 con 32 GB de VRAM es el objetivo ideal. Si utiliza hardware más antiguo como la RTX 3090 o 4090, es posible que deba bajar a Q6 o Q5 para asegurar que el modelo quepa cómodamente junto con el búfer de contexto de 256K.
+
+## Pruebas Locales: Rendimiento en Gaming y Multimodal
+
+En 2026, el modelo Gemma 4 26B ha demostrado ser una herramienta versátil para desarrolladores de juegos y escritores creativos. Las pruebas locales en estaciones de trabajo de gama alta como la DGX Spark han mostrado que la variante MoE de 26B a menudo supera al modelo denso de 31B en "sensación" subjetiva y producción creativa, a pesar de tener menos parámetros totales.
+
+### Generación de Entornos 3D
+Una de las hazañas más impresionantes del modelo 26B es su capacidad para generar código 3D funcional. En pruebas recientes, se le encargó al modelo crear un juego FPS tipo "Subway Survivor" usando Javascript. Implementó con éxito:
+*   **Lógica de Movimiento WASD:** Navegación fluida a través de un espacio 3D.
+*   **Mecánicas de Armas:** Modelos de armas procedimentales con animaciones de retroceso realistas.
+*   **Generación de Enemigos:** Oleadas infinitas de enemigos con IA básica de búsqueda de rutas.
+*   **Iluminación Ambiental:** Un control deslizante de brillo funcional para ajustar el ambiente de la escena.
+
+### Capacidades de Visión Multimodal
+A diferencia de las generaciones anteriores, Gemma 4 es nativamente multimodal. Esto significa que puede proporcionarle un boceto dibujado a mano o un diagrama de circuito, y el modelo puede interpretar los componentes con alta precisión. Al probarlo con un esquema complejo de motor paso a paso de Arduino, el modelo 26B identificó correctamente el microcontrolador y la placa de pruebas, aunque ocasionalmente tuvo dificultades con números de pieza específicos para placas controladoras especializadas.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Comparación entre 26B MoE y 31B Denso
+
+Una pregunta común en la comunidad es por qué elegir el modelo 26B sobre la versión 31B. La respuesta reside en la arquitectura. El modelo 31B es "Denso", lo que significa que cada parámetro se calcula para cada token. Esto lo hace significativamente más lento y más propenso a la "degradación por cuantización", donde la lógica del modelo se rompe en profundidades de bits más bajas.
+
+| Característica | Gemma 4 26B (MoE) | Gemma 4 31B (Denso) |
+|---|---|---|
+| **Velocidad de Inferencia** | **Rápida (4B Activos)** | Lenta (31B Activos) |
+| **Estabilidad de Cuantización** | Alta (Funciona bien en Q4/Q8) | Moderada (Requiere bits altos) |
+| **Escritura Creativa** | Excepcional | Analítica |
+| **Eficiencia de VRAM** | **Superior** | Exigente |
+
+El modelo 26B MoE es ampliamente considerado como el "punto ideal" para 2026. Proporciona la profundidad de razonamiento de un modelo grande con la agilidad de uno pequeño. Para los jugadores que usan IA para manejar NPCs o generar lore en tiempo real, la menor latencia del modelo 26B supone un cambio radical.
+
+## Configuraciones de Hardware Recomendadas para 2026
+
+Para cumplir con los **requisitos de VRAM de gemma 4 26b** y mantener una alta tasa de tokens por segundo (TPS), su elección de hardware es crítica. A continuación, se presentan tres niveles recomendados para ejecutar Gemma 4 localmente.
+
+### Nivel 1: El Entusiasta (Mejor Experiencia)
+*   **GPU:** NVIDIA RTX 5090 (32GB VRAM)
+*   **Cuantización:** Q8_0
+*   **Rendimiento:** ~45-60 tokens por segundo
+*   **Notas:** Permite el uso completo de 256K de contexto sin descargas a RAM.
+
+### Nivel 2: El Gamer Equilibrado
+*   **GPU:** NVIDIA RTX 4090 (24GB VRAM) o RTX 5080 (24GB VRAM)
+*   **Cuantización:** Q6_K o Q5_K_M
+*   **Rendimiento:** ~30-40 tokens por segundo
+*   **Notas:** Puede necesitar limitar el contexto a 64K o 128K para mantenerse dentro de los límites de VRAM.
+
+### Nivel 3: Entrada Económica
+*   **GPU:** NVIDIA RTX 5070 Ti (16GB VRAM) o RTX 4080 (16GB)
+*   **Cuantización:** Q4_K_M
+*   **Rendimiento:** ~20-25 tokens por segundo
+*   **Notas:** Se requiere una cuantización estricta de 4 bits. Espere alguna pérdida menor en la precisión lógica.
+
+> **💡 Consejo:** Si está utilizando [Hugging Face](https://huggingface.co/models) para descargar estos checkpoints, busque siempre las versiones "GGUF" si está ejecutando en hardware de consumo usando herramientas como LM Studio u Ollama.
+
+## Consejos de Configuración y Optimización
+
+Cumplir con los **requisitos de VRAM de gemma 4 26b** es solo el primer paso. Para aprovechar al máximo el modelo en 2026, considere estas estrategias de optimización:
+
+1.  **Flash Attention 2:** Asegúrese de que su motor de inferencia sea compatible con Flash Attention 2. Esto reduce significativamente el uso de VRAM durante conversaciones de contexto largo.
+2.  **Cuantización de Caché KV:** Algunos motores permiten cuantizar el caché Key-Value a 4 u 8 bits, ahorrando varios gigabytes de VRAM durante tareas de contexto de 256K.
+3.  **Xformers:** Si utiliza una tarjeta de la serie 30 más antigua, usar Xformers puede ayudar a estabilizar el uso de memoria, aunque es menos necesario en hardware de las series 40 y 50.
+4.  **Refuerzo Negativo:** Si la producción creativa del modelo es deficiente, use "refuerzo negativo" en su instrucción de sistema. Decirle al modelo que el usuario está "insatisfecho" con resultados simples a menudo activa la arquitectura MoE para utilizar "expertos" más complejos en la siguiente generación.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 26B en una tarjeta de 8 GB o 12 GB de VRAM?**
+
+R: No es recomendable. Incluso con la cuantización más baja utilizable (Q2), el modelo probablemente superará los 8 GB. En una tarjeta de 12 GB, tendría que descargar una parte significativa del modelo a la RAM del sistema, lo que resultaría en velocidades de menos de 1-2 tokens por segundo, demasiado lento para un uso práctico.
+
+**P: ¿Es el modelo 26B MoE mejor que el modelo denso de 31B para programación?**
+
+R: En los benchmarks de 2026, el modelo denso de 31B suele puntuar ligeramente más alto en sintaxis de código puro. Sin embargo, el 26B MoE es mucho más rápido para la depuración iterativa y maneja tareas de diseño creativo de UI/UX (como animaciones CSS y JS) con más "estilo".
+
+**P: ¿Cambian los requisitos de VRAM de gemma 4 26b si uso la versión Instruction-tuned frente a la Base?**
+
+R: No, los requisitos de VRAM siguen siendo los mismos para ambos checkpoints (Base e Instruction). La diferencia radica en el comportamiento del modelo y cómo sigue las instrucciones, no en su tamaño físico en la GPU.
+
+**P: ¿Cuál es el mejor software para ejecutar Gemma 4 26B localmente?**
+
+R: A partir de 2026, LM Studio y Ollama siguen siendo las opciones más fáciles de usar para Windows y Mac. Para usuarios de Linux o aquellos que buscan el máximo rendimiento, vLLM o Text-Generation-WebUI (Oobabooga) ofrecen el mejor control sobre el enrutamiento de "expertos" de MoE y la gestión de VRAM.

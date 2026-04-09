@@ -1,0 +1,109 @@
+export const metadata = {
+  title: "Requisitos de VRAM para inferencia local de Gemma 4 31B: Guía de hardware 2026",
+  description: "Domina los requisitos de VRAM para la inferencia local de Gemma 4 31B en 2026. Especificaciones detalladas de hardware, guías de cuantización y comparativas de rendimiento para IA local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+31B+VRAM+Requirements",
+  date: "2026-04-08",
+  author: "Equipo de Gemma Wiki"
+}
+
+Ejecutar modelos de lenguaje de altos parámetros en hardware de consumo se ha vuelto significativamente más accesible en 2026, pero calcular los **gemma 4 31b vram requirements local inference** que demandan las configuraciones sigue siendo una prioridad absoluta para desarrolladores y entusiastas. El Gemma 4 31B de Google DeepMind representa un salto masivo en el rendimiento de modelos densos, rivalizando con arquitecturas mucho más grandes en lógica y razonamiento multimodal. Sin embargo, debido a que es un modelo denso —lo que significa que activa los 31 mil millones de parámetros para cada token generado— las necesidades de **gemma 4 31b vram requirements local inference** son más rígidas que las de sus homólogos "Sparse Mixture of Experts" (MoE). Para lograr velocidades de generación fluidas y utilizar la masiva ventana de contexto de 256k, los usuarios deben seleccionar cuidadosamente sus niveles de cuantización y configuraciones de hardware. Esta guía desglosa los objetivos esenciales de VRAM, las estrategias de descarga (offloading) en la RAM del sistema y los mejores entornos de software local para ejecutar Gemma 4 de manera eficiente.
+
+## Arquitectura y rendimiento de Gemma 4 31B
+
+El Gemma 4 31B está construido como un modelo denso tradicional, lo que lo distingue de la variante 26B que utiliza un mecanismo de enrutamiento para activar solo 4 mil millones de parámetros a la vez. Esta arquitectura densa convierte al 31B en una potencia absoluta para tareas pesadas de lógica compleja, razonamiento multimodal profundo y codificación. Cuenta con una capa de atención alterna local y global, lo que ayuda a gestionar su amplia ventana de contexto de 256k de manera más eficiente que las generaciones anteriores.
+
+En los puntos de referencia (benchmarks) de 2026, la variante 31B supera consistentemente a sus competidores en el rango de 30B-35B. A continuación se muestra una comparación de cómo se sitúa el modelo frente a otros modelos locales populares.
+
+| Benchmark | Gemma 4 31B (Denso) | Gemma 4 26B (MoE) | Qwen 3.5 35B |
+| :--- | :--- | :--- | :--- |
+| **MMLU** | **85.2** | 82.6 | 84.1 |
+| **GPQA Diamond** | **84.3** | 82.3 | 81.5 |
+| **Live Codebench V6** | **80.0** | 77.1 | 78.9 |
+| **Arquitectura** | **Denso** | MoE disperso | Denso |
+
+> **💡 Consejo:** Si tu objetivo principal es la velocidad, la variante 26B MoE ofrece más de 40 tokens por segundo en tarjetas de gama media, mientras que el 31B se centra en la máxima precisión y profundidad de razonamiento a un ritmo más pausado.
+
+## Requisitos detallados de VRAM para inferencia local de Gemma 4 31B
+
+Para ejecutar Gemma 4 31B completamente en una GPU, generalmente necesitas una tarjeta con al menos 24 GB de VRAM (como una RTX 3090, 4090 o la más reciente 5090). Sin embargo, el uso de la cuantización QXL de la serie G permite que el modelo se ajuste a tamaños menores con un ligero compromiso en el rendimiento. Para los usuarios con tarjetas de 16 GB como la RTX 5060Ti o 4080, es necesario un enfoque híbrido utilizando `llama.cpp` para descargar algunas capas a la RAM del sistema.
+
+| Nivel de cuantización | Uso de VRAM (Aprox.) | Hardware recomendado | Impacto en el rendimiento |
+| :--- | :--- | :--- | :--- |
+| **Q8_0 (8 bits)** | **32.5 GB** | Dual RTX 5080 o A6000 | Calidad casi sin pérdidas |
+| **Q4_K_M (4 bits)** | **19.2 GB** | RTX 5090 / 4090 24GB | Equilibrio velocidad/calidad |
+| **QXL (G-Series)** | **16.8 GB** | RTX 5060Ti 16GB + 64GB RAM | Más lento (3-4 tokens/seg) |
+| **Q2_K (2 bits)** | **11.5 GB** | RTX 4070 12GB | Pérdida significativa de lógica |
+
+Al evaluar las necesidades de **gemma 4 31b vram requirements local inference**, recuerda que la ventana de contexto también consume memoria. Una ventana de contexto de 32k puede añadir varios gigabytes de presión a la VRAM, razón por la cual muchos usuarios de 16 GB prefieren limitar su contexto a 8k para mantener una tasa de generación estable de 4-5 tokens por segundo.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/JmCiKKw6bMA"
+    title="Gemma 4 31B vs 26B-A4B: 16GB VRAM Local Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Configuración local y del software
+
+Para maximizar la eficiencia de tu hardware, el ecosistema de software que elijas es tan importante como la propia GPU. En 2026, los dos métodos más fiables para ejecutar Gemma 4 son `llama.cpp` por su flexibilidad pura y `Open Web UI` para funciones avanzadas como la llamada a herramientas (tool calling) y la búsqueda web.
+
+### Uso de llama.cpp para la descarga a RAM
+Si los pesos de tu modelo exceden tu VRAM (por ejemplo, intentar ajustar 16.8 GB de pesos en 16 GB de VRAM), `llama.cpp` es el estándar de oro. Te permite especificar exactamente cuántas capas mantener en la GPU.
+
+1.  **Descarga los pesos GGUF**: Busca las variantes QXL o Q4_K_M.
+2.  **Configura el Layer Offloading**: Usa la bandera `-ngl` para enviar tantas capas como sea posible a la GPU.
+3.  **Gestiona el contexto**: Reduce la ventana de contexto (por ejemplo, `-c 8192`) si experimentas bloqueos o velocidades extremadamente lentas.
+
+### Llamada a herramientas avanzada con Open Web UI
+Mientras que `llama.cpp` proporciona el motor, `Open Web UI` proporciona el cerebro para la llamada a herramientas. Esto es esencial para tareas como la búsqueda web o la interacción con archivos locales.
+
+*   **Búsqueda web**: Integra APIs como Tavily o Exa a través del Panel de Administración.
+*   **Capacidades de visión**: Gemma 4 31B es multimodal. Puedes subir imágenes a Open Web UI y el modelo puede describirlas o incluso convertirlas en código funcional.
+*   **Prompts de sistema**: El modelo 31B tiene una excelente adherencia a los prompts de sistema (por ejemplo, actuar como un personaje específico o restringir su base de conocimientos).
+
+> **⚠️ Advertencia:** Evita usar el Protocolo de Contexto de Modelo (MCP) en llama.cpp si requieres alta estabilidad; a principios de 2026, sigue siendo menos estable que la llamada a herramientas nativa que se encuentra en Open Web UI.
+
+## Capacidades multimodales y de razonamiento
+
+Una de las características destacadas de Gemma 4 31B es su capacidad para procesar algo más que texto. Admite imágenes y texto como entrada, con soporte para video y audio desplegándose en toda la familia Gemma. En las pruebas locales, el modelo 31B mostró un razonamiento espacial superior en comparación con la variante 26B MoE. Por ejemplo, cuando se le pidió identificar el número de dedos en un emoji de mano complejo, el 31B identificó correctamente la anatomía, mientras que los modelos más pequeños o dispersos a menudo alucinaban recuentos de dedos estándar.
+
+### Escritura creativa y codificación
+El modelo destaca en las pruebas de "aguja en un pajar" (needle in a haystack), encontrando información específica dentro de PDFs densos sin alucinar. En la escritura creativa, demuestra un dominio sofisticado del suspenso y los finales abiertos (cliffhangers), siguiendo restricciones complejas (como recuentos de palabras e inclusión de palabras clave específicas) con alta fidelidad.
+
+Para los desarrolladores, la función de imagen a código es un cambio de juego. Puedes proporcionar una captura de pantalla de la interfaz de usuario de un sitio web y Gemma 4 31B puede generar una recreación "fiel al píxel" utilizando HTML, CSS y JavaScript. Aunque este proceso es lento en configuraciones de 16 GB de VRAM (a menudo cayendo a 1.4 tokens por segundo), la precisión a menudo rivaliza con los modelos en la nube de primer nivel.
+
+## Optimizando el flujo de trabajo para 2026
+
+Si estás trabajando en un dispositivo secundario, como un MacBook o un portátil poco potente, aún puedes aprovechar la potencia de los **gemma 4 31b vram requirements local inference** de una estación de trabajo principal. Utilizando la funcionalidad "Linking" de LM Studio, puedes crear una conexión cifrada entre dispositivos. Esto permite que el dispositivo más débil envíe prompts a la potente máquina Linux o Windows que alberga la RTX 5090/5060Ti y reciba el resultado localmente.
+
+| Característica | Impacto en inferencia local | Estrategia de optimización |
+| :--- | :--- | :--- |
+| **Ventana de contexto** | Alto uso de VRAM/RAM | Truncar el medio de la conversación |
+| **Cuantización** | Afecta la lógica/razonamiento | Usar Q4_K_M o superior para programar |
+| **RAM del sistema** | Impacta la velocidad de generación | Usar DDR5-6000+ para una descarga más rápida |
+| **Sub-agentes** | Gestiona tareas grandes | Usar ventanas de contexto frescas para sub-tareas |
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 31B en una tarjeta de 12 GB de VRAM?**
+
+R: Sí, pero necesitarás usar una cuantización fuerte (como Q2_K o Q3_K_S) y descargar una parte significativa del modelo a la RAM del sistema. Espera velocidades de generación de alrededor de 1-2 tokens por segundo, lo que puede ser demasiado lento para un chat interactivo pero aceptable para procesamiento en segundo plano.
+
+**P: ¿Cómo cambian las necesidades de gemma 4 31b vram requirements local inference con la ventana de contexto de 256k?**
+
+R: La ventana de contexto de 256k es un límite máximo, no un requisito. Sin embargo, llenar esa ventana requiere cantidades masivas de memoria caché KV. Para un modelo de 31B, intentar usar el contexto completo de 256k requeriría significativamente más de 24 GB de VRAM, a menos que se utilice una compresión de caché KV de 4 bits especializada.
+
+**P: ¿Es el modelo 31B mejor que el 26B para programar?**
+
+R: Generalmente, sí. Aunque el modelo 26B MoE es más rápido, el modelo denso 31B proporciona una lógica más consistente y maneja mejor las librerías 3D complejas como Three.js sin los errores de "derretimiento" o "coches invisibles" que se ven a menudo en modelos más pequeños.
+
+**P: ¿Cuál es el mejor SO para ejecutar Gemma 4 localmente?**
+
+R: Linux (específicamente Ubuntu) ofrece típicamente el mejor rendimiento para `llama.cpp` y herramientas de IA basadas en `python` debido a una mejor gestión de la VRAM y una menor sobrecarga del sistema en comparación con Windows. Sin embargo, Windows sigue siendo viable con configuraciones de WSL2 de alto rendimiento.
+
+Para más información sobre los desarrollos de IA de Google, visita el [blog oficial de Google DeepMind](https://deepmind.google/technologies/gemma/) para las últimas actualizaciones sobre la familia de modelos Gemma.

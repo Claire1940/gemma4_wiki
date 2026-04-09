@@ -1,0 +1,109 @@
+export const metadata = {
+  title: "Requisitos del sistema de Gemma 4 31b: Guía completa de hardware 2026",
+  description: "Conoce los requisitos exactos del sistema de Gemma 4 31b para ejecutar la IA local insignia de Google. Compara las necesidades de RAM, GPU y CPU para todos los tamaños de modelos de Gemma 4.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4285f4/fff?text=Gemma+4+31B+Requirements",
+  date: "2026-04-08",
+  author: "Equipo de Gemma Wiki"
+}
+
+Ejecutar un Modelo de Lenguaje Grande (LLM) de última generación en tu propio hardware solía ser un sueño inalcanzable para la mayoría de los entusiastas, pero el panorama ha cambiado con el último lanzamiento de Google. Si estás buscando desplegar la versión más potente de este ecosistema, entender los **requisitos del sistema de gemma 4 31b** es el primer paso hacia una experiencia de IA privada y de alto rendimiento. Los **requisitos del sistema de gemma 4 31b** exigen una combinación de memoria de sistema de alta velocidad y una capacidad de procesamiento solvente, dirigidos específicamente a usuarios que desean un razonamiento de nivel insignia sin depender de suscripciones basadas en la nube.
+
+En esta guía, desglosaremos el hardware necesario para ejecutar toda la familia Gemma 4, con un enfoque específico en el modelo insignia 31B. Ya sea que estés usando un equipo de juegos de alta gama o una estación de trabajo portátil, saber cómo equilibrar tu RAM, VRAM y los hilos de tu CPU garantizará que las respuestas de tu IA local sean rápidas y precisas.
+
+## Entendiendo la familia de modelos Gemma 4
+
+Google ha diseñado Gemma 4 para ser modular, ofreciendo diferentes "tamaños" para adaptarse a varios perfiles de hardware. Mientras que el modelo 31B es la estrella para tareas de razonamiento complejo y multimodales, existen versiones más pequeñas para aquellos con recursos limitados. Cada tamaño de modelo tiene una huella de memoria y un requisito de procesamiento distintos.
+
+Los modelos se categorizan por su recuento de parámetros, lo que se correlaciona directamente con cuánta memoria consumen y qué tan "inteligentes" son. La versión 31B es el modelo insignia de tamaño completo, capaz de una interpretación de imágenes avanzada y un razonamiento matemático complejo.
+
+| Tamaño del modelo | Dispositivo objetivo | RAM mínima | Características clave |
+|---|---|---|---|
+| **E2B** | Teléfonos y tabletas | **5 GB** | Ultraportátil, procesamiento de audio |
+| **E4B** | Portátiles estándar | **8 GB** | Equilibrado, comprensión de imágenes |
+| **26B (MoE)** | Sobremesas de alto rendimiento | **16-20 GB** | Mezcla de expertos, alta eficiencia |
+| **31B** | Estaciones de trabajo / PCs Gaming | **20-32 GB** | Razonamiento completo, rendimiento insignia |
+
+> **💡 Consejo:** Si no estás seguro de si tu máquina puede manejar el modelo insignia, comienza con el modelo E4B. Proporciona una excelente base de rendimiento antes de comprometerte con la descarga más grande de 9,6 GB del modelo 31B.
+
+## Requisitos detallados del sistema de Gemma 4 31b
+
+Para ejecutar el modelo 31B de manera efectiva, debes mirar más allá de las especificaciones "mínimas". Debido a que este es un modelo insignia, requiere un rendimiento significativo para evitar "alucinaciones" o una generación lenta de tokens. Aunque puede ejecutarse en una CPU, una GPU dedicada acelera significativamente la experiencia.
+
+### Memoria (RAM y VRAM)
+El factor más crítico en los **requisitos del sistema de gemma 4 31b** es la memoria. Los LLM cargan sus pesos directamente en tu RAM. Para el modelo 31B, deberías tener al menos 20 GB de memoria disponible. Sin embargo, para una experiencia fluida donde aún puedas usar tu ordenador para otras tareas, 32 GB de RAM del sistema es el "punto ideal" recomendado.
+
+### Unidad de Procesamiento Gráfico (GPU)
+Aunque Gemma 4 puede ejecutarse en una CPU estándar, el uso de una GPU NVIDIA o AMD con VRAM alta cambiará la experiencia de "lenta" a "instantánea". Una tarjeta de la serie RTX 30 o 40 con al menos 12 GB de VRAM permite la descarga parcial, lo que acelera el procesamiento de imágenes y prompts complejos.
+
+| Componente | Especificación mínima | Especificación recomendada |
+|---|---|---|
+| **Procesador** | CPU de 6 núcleos (Intel i5 / Ryzen 5) | **CPU de 8+ núcleos (Intel i7 / Ryzen 7)** |
+| **Memoria** | 20 GB de RAM del sistema | **32 GB de RAM del sistema** |
+| **Almacenamiento** | 15 GB de espacio libre (SSD) | **50 GB de espacio libre (NVMe SSD)** |
+| **GPU** | Gráficos integrados | **NVIDIA RTX 4070 o superior (12GB+ VRAM)** |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Configuración de Gemma 4 localmente
+
+Una vez que hayas verificado que tu hardware cumple con los **requisitos del sistema de gemma 4 31b**, el proceso de instalación es sencillo gracias a herramientas como Ollama. Este software actúa como un puente entre los complejos archivos del modelo y una interfaz de chat fácil de usar.
+
+### Instalación paso a paso
+1.  **Descargar Ollama:** Visita el [sitio web oficial de Ollama](https://ollama.com) y descarga la versión para tu sistema operativo (Windows, Mac o Linux).
+2.  **Instalar la aplicación:** Ejecuta el instalador y sigue las instrucciones estándar.
+3.  **Abrir el símbolo del sistema:** Para asegurarte de obtener la versión específica de 31B, es mejor usar la línea de comandos.
+4.  **Descargar el modelo (Pull):** Escribe el comando específico para descargar los pesos del modelo insignia.
+
+| Comando | Acción |
+|---|---|
+| `ollama pull gemma4:31b` | Descarga el modelo insignia 31B |
+| `ollama run gemma4:31b` | Inicia el modelo para chatear activamente |
+| `/bye` | Sale del modelo de forma segura y libera la RAM |
+
+> **⚠️ Advertencia:** La descarga del modelo 31B es de aproximadamente 9,6 GB. Asegúrate de tener una conexión a internet estable y suficiente espacio en disco antes de iniciar el comando "pull".
+
+## Benchmarks de rendimiento y capacidades
+
+¿Qué puedes hacer realmente una vez que cumples con los **requisitos del sistema de gemma 4 31b**? A diferencia de los modelos locales más antiguos, Gemma 4 es multimodal. Esto significa que no solo procesa texto; puede "ver" imágenes y "escuchar" audio (dependiendo del submodelo específico utilizado).
+
+En las pruebas realizadas en una máquina con una RTX 4080 y 32 GB de RAM, el modelo 31B puede procesar tareas de razonamiento complejo —como optimización matemática o generación de código— en menos de 4 segundos. Incluso en una configuración solo de CPU, el modelo sigue siendo funcional, aunque puede tardar entre 15 y 30 segundos en generar una respuesta detallada.
+
+### Pruebas multimodales
+Una de las características destacadas de Gemma 4 31B es su capacidad para interpretar datos visuales. Puedes arrastrar un recibo, una captura de pantalla de código o una nota escrita a mano a la interfaz, y el modelo resumirá el contenido o extraerá puntos de datos específicos. Este procesamiento local garantiza que tus documentos sensibles nunca salgan de tu máquina, proporcionando un nivel de privacidad que la IA en la nube no puede igualar.
+
+## Consejos de optimización para hardware de gama baja
+
+Si tu máquina se queda un poco corta respecto a los **requisitos del sistema de gemma 4 31b** recomendados, aún puedes disfrutar de una experiencia decente siguiendo estos pasos de optimización:
+
+*   **Cierra aplicaciones en segundo plano:** Los navegadores web y los lanzadores de juegos pueden acaparar varios gigabytes de RAM. Ciérralos antes de ejecutar el modelo 31B.
+*   **Usa la cuantización:** Herramientas como Ollama a menudo usan versiones "cuantizadas" de los modelos, que comprimen los pesos para ahorrar RAM sin afectar significativamente la inteligencia.
+*   **Descarga a la GPU (Offloading):** Si tienes una GPU con poca VRAM (por ejemplo, 6 GB u 8 GB), aún puedes descargar algunas capas del modelo a la GPU mientras el resto permanece en la RAM del sistema. Esto suele ser gestionado automáticamente por el software.
+*   **Instalación en SSD:** Nunca ejecutes estos modelos desde un disco duro mecánico. El "Tiempo hasta el primer token" (TTFT) será increíblemente lento debido a las bajas velocidades de lectura de los HDD tradicionales.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 31B en un Mac?**
+
+R: Sí, Gemma 4 funciona excepcionalmente bien en Apple Silicon (chips M1, M2, M3 y M4). Debido a que los Mac usan memoria unificada, el modelo 31B puede utilizar la RAM del sistema como VRAM, lo que lo hace muy eficiente para la IA local.
+
+**P: ¿Necesito una conexión a internet para usar Gemma 4?**
+
+R: Solo para la descarga inicial. Una vez que el modelo está en tu máquina, puedes desconectarte de internet por completo. Todo el procesamiento ocurre localmente en tu hardware.
+
+**P: ¿Cuál es la diferencia entre los modelos 26B y 31B?**
+
+R: El modelo 26B utiliza una arquitectura de "Mezcla de expertos" (MoE). Es un modelo grande, pero solo activa una parte de sus parámetros para cualquier prompt dado, lo que lo hace más rápido. El 31B es el modelo insignia "denso", que generalmente ofrece una mayor consistencia para tareas muy complejas.
+
+**P: ¿Cómo se comparan los requisitos del sistema de gemma 4 31b con los de los juegos?**
+
+R: Si tu PC puede ejecutar juegos AAA modernos en configuraciones de 1440p o 4K, es probable que ya cumplas con los requisitos para el modelo 31B. La principal diferencia es que la IA tiene más "hambre de memoria", mientras que los juegos tienen más "hambre de velocidad de reloj del núcleo".

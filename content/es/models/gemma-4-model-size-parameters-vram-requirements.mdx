@@ -1,0 +1,127 @@
+export const metadata = {
+  title: "Parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4: Guía completa 2026",
+  description: "Explore el desglose completo de los modelos Gemma 4 de Google, incluidos el recuento de parámetros, los requisitos de VRAM para la ejecución local y los puntos de referencia de rendimiento.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+VRAM+Guide",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+Google ha cambiado fundamentalmente el panorama de la inteligencia artificial de código abierto con el lanzamiento de la familia Gemma 4. Para los desarrolladores y aficionados a la IA, comprender los **parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4** es esencial para determinar qué hardware es necesario para ejecutar estos potentes modelos de "pensamiento" de forma local. Construida sobre las bases de investigación de Gemini 3, esta nueva generación introduce multimodalidad nativa y una licencia Apache 2.0, lo que la hace más accesible que nunca para proyectos comerciales y personales. Ya sea que busque integrar la IA en un mod de juego o construir un asistente de programación local, los **parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4** varían significativamente entre los cuatro niveles disponibles.
+
+En esta guía, desglosaremos las especificaciones técnicas de los niveles Workstation y Edge, proporcionaremos estimaciones detalladas de VRAM para diferentes niveles de cuantización y exploraremos las innovaciones arquitectónicas que permiten a estos modelos realizar tareas de razonamiento complejo en hardware de consumo.
+
+## La jerarquía de modelos de Gemma 4
+
+El lanzamiento de Gemma 4 se divide en dos categorías principales: modelos Workstation para tareas de alto rendimiento y modelos Edge para eficiencia en dispositivos más pequeños. Cada nivel sirve para un propósito específico, desde ejecutarse en un servidor de gama alta hasta funcionar en un dispositivo móvil o una Raspberry Pi.
+
+### Nivel Workstation: Razonamiento de alto rendimiento
+El nivel Workstation consta de dos modelos de gran potencia diseñados para tareas complejas como la generación de código, la comprensión de documentos y el razonamiento de largo aliento.
+
+1.  **Gemma 4 31B Dense**: Un modelo denso tradicional con 31 mil millones de parámetros. Incluye mejoras arquitectónicas como la normalización de valores y un mecanismo de atención refinado optimizado para ventanas de contexto largas.
+2.  **Gemma 4 26B MoE**: Un modelo de Mezcla de Expertos (Mixture of Experts) que utiliza 26 mil millones de parámetros totales. Sin embargo, solo 3.8 mil millones de parámetros están activos en un momento dado, proporcionando la inteligencia de un modelo mucho más grande con la velocidad y los costes de computación de uno más pequeño.
+
+### Nivel Edge: IA eficiente en el dispositivo
+Los modelos Edge están diseñados para aplicaciones de baja latencia en el dispositivo donde la privacidad y la velocidad son primordiales.
+
+1.  **Gemma 4 E4B**: Un modelo de 4 mil millones de parámetros capaz de manejar visión, audio y llamadas a funciones de forma nativa.
+2.  **Gemma 4 E2B**: El modelo más pequeño de la familia, optimizado para una eficiencia extrema en hardware móvil manteniendo las capacidades de "pensamiento".
+
+| Nivel del modelo | Recuento de parámetros | Tipo de arquitectura | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Workstation 31B** | 31 Mil millones | Denso | Programación, Agentes de servidor |
+| **Workstation 26B** | 26 Mil millones (Total) | MoE (3.8B Activos) | Razonamiento rápido, Investigación |
+| **Edge E4B** | 4 Mil millones | Denso | Apps móviles, Asistentes locales |
+| **Edge E2B** | 2 Mil millones | Denso | IoT, Raspberry Pi, Dispositivos Edge |
+
+## Parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4
+
+Al ejecutar estos modelos localmente, la VRAM es el principal cuello de botella. La cantidad de memoria que necesita depende en gran medida de la "precisión" o cuantización del modelo. Mientras que FP16 (16 bits) proporciona la más alta calidad, la mayoría de los usuarios optarán por la cuantización de 4 u 8 bits para que los modelos más grandes quepan en GPUs de consumo como la RTX 3090 o 4090.
+
+### Tabla de estimación de VRAM
+
+La siguiente tabla describe los **parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4** estimados para cada modelo en niveles de cuantización comunes.
+
+| Nombre del modelo | FP16 (Sin comprimir) | 8-bit (Cuantizado) | 4-bit (Comprimido) | GPU recomendada |
+| :--- | :--- | :--- | :--- | :--- |
+| **31B Dense** | ~64 GB | ~34 GB | ~18-20 GB | RTX 3090 / 4090 (24GB) |
+| **26B MoE** | ~54 GB | ~28 GB | ~15-17 GB | RTX 3090 / 4090 (24GB) |
+| **E4B Edge** | ~9 GB | ~5 GB | ~3 GB | RTX 3060 (12GB) |
+| **E2B Edge** | ~5 GB | ~3 GB | ~2 GB | GTX 1660 o GPU móvil |
+
+> **💡 Consejo:** Para ahorrar VRAM sin sacrificar demasiada calidad, busque archivos GGUF "Q4_K_M" o "Q5_K_M" cuando use herramientas como Ollama o LM Studio. Estos ofrecen el mejor equilibrio entre tamaño e inteligencia.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Innovaciones arquitectónicas en Gemma 4
+
+Gemma 4 no es solo una actualización de tamaño; es una evolución estructural. Google ha integrado varias características que anteriormente se añadían de forma externa en versiones anteriores o modelos de la competencia.
+
+### Multimodalidad nativa
+A diferencia de los modelos anteriores que requerían codificadores externos para visión o audio (como Whisper), Gemma 4 maneja estas entradas de forma nativa. Esto reduce la huella de memoria total porque no es necesario cargar varios modelos separados en la VRAM.
+
+*   **Soporte de audio**: Los modelos Edge (E2B y E4B) cuentan con un codificador de audio masivamente comprimido. Se ha reducido de 681 millones de parámetros en versiones anteriores a solo 305 millones, disminuyendo significativamente el uso de disco y memoria.
+*   **Mejoras en visión**: El nuevo codificador de visión maneja relaciones de aspecto nativas, lo que lo hace muy superior para tareas de OCR (Reconocimiento Óptico de Caracteres) y comprensión de documentos.
+
+### Cadena de pensamiento larga (Thinking)
+Gemma 4 introduce un modo de "pensamiento", que permite al modelo realizar un razonamiento de cadena de pensamiento largo antes de proporcionar una respuesta final. Esto es particularmente útil para problemas de programación complejos o demostraciones matemáticas. En entornos locales, puede activar esta función a través de la plantilla de chat, aunque aumenta el tiempo hasta el primer token mientras el modelo "delibera".
+
+### Mezcla de expertos (MoE)
+El modelo 26B MoE destaca para usuarios con capacidad de cómputo limitada. Al usar 128 "pequeños expertos" y activar solo 8 por token (más un experto compartido), el modelo logra el rendimiento de un modelo de más de 27B parámetros mientras mantiene la velocidad de inferencia de un modelo de 4B.
+
+> **⚠️ Advertencia:** Aunque los modelos MoE son más rápidos de ejecutar, todavía requieren suficiente VRAM para almacenar *todos* los pesos del modelo (26B parámetros) a menos que se utilicen técnicas específicas de descarga (offloading).
+
+## Ventana de contexto y sobrecarga de memoria
+
+Otro factor crítico en los **parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4** es la ventana de contexto. A medida que se alimentan más datos al modelo (como historiales de chat largos o documentos grandes), la caché KV (Key-Value) crece, consumiendo VRAM adicional.
+
+*   **Modelos Edge**: Cuentan con una ventana de contexto de 128K.
+*   **Modelos Workstation**: Cuentan con una ventana de contexto de 256K.
+
+Ejecutar un modelo con su ventana de contexto completa de 256K puede requerir significativamente más VRAM que los pesos del modelo base por sí solos. Para jugadores y desarrolladores que construyen sistemas RAG (Generación Aumentada por Recuperación) locales, a menudo es mejor limitar el contexto a 32K o 64K si la memoria es escasa.
+
+| Longitud del contexto | VRAM adicional (Estimada) |
+| :--- | :--- |
+| **8K Tokens** | ~0.5 - 1.0 GB |
+| **32K Tokens** | ~2.0 - 4.0 GB |
+| **128K Tokens** | ~8.0 - 12.0 GB |
+
+## Cómo ejecutar Gemma 4 localmente
+
+Si tiene el hardware para cumplir con los **parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4**, configurar el modelo es sencillo en 2026.
+
+1.  **Seleccione su modelo**: Elija un modelo basado en su GPU. Si tiene una tarjeta de 8GB, quédese con los modelos E4B o E2B. Si tiene 24GB, el 31B Dense o el 26B MoE en cuantización de 4 o 5 bits funcionarán bien.
+2.  **Descargue un ejecutor local**: Use [Ollama](https://ollama.com/) o LM Studio. Estas herramientas gestionan la cuantización y la VRAM por usted.
+3.  **Active el pensamiento (Thinking)**: Si usa la biblioteca Transformers, asegúrese de configurar `enable_thinking=True` en su plantilla de chat para acceder a las capacidades avanzadas de razonamiento.
+4.  **Entrenamiento consciente de la cuantización (QAT)**: Google ha lanzado puntos de control QAT específicos. Estos son modelos entrenados para ser comprimidos, lo que significa que un modelo QAT de 4 bits a menudo superará a un modelo estándar de 4 bits creado después del entrenamiento.
+
+## Conclusión
+
+El lanzamiento de Gemma 4 representa un gran salto para la comunidad de pesos abiertos. Al proporcionar una licencia Apache 2.0 y capacidades multimodales nativas, Google ha hecho posible construir sistemas de IA sofisticados y privados en hardware de consumo. Comprender los **parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4** es el primer paso para desbloquear este potencial. Ya sea que esté desplegando un modelo E2B en una Raspberry Pi para domótica o ejecutando un modelo 31B Dense como compañero de programación local, la flexibilidad de esta familia garantiza que haya un ajuste para cada configuración de hardware.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 en una computadora portátil para juegos estándar?**
+
+R: Sí. La mayoría de las laptops modernas para juegos con una RTX 3060 (6GB u 8GB de VRAM) pueden ejecutar cómodamente los modelos E4B o E2B. Para ejecutar los modelos Workstation 31B más grandes, probablemente necesitaría usar un proveedor en la nube o una computadora de escritorio de gama alta con una RTX 3090/4090.
+
+**P: ¿Cuál es la diferencia entre los modelos Dense y MoE en Gemma 4?**
+
+R: El modelo Dense (31B) utiliza todos sus parámetros para cada cálculo, lo que lo hace muy "inteligente" pero más lento. El modelo MoE (26B) solo activa una fracción de sus parámetros (3.8B) para cada cálculo, lo que lo hace mucho más rápido y económico de ejecutar, manteniendo altos niveles de inteligencia.
+
+**P: ¿Gemma 4 soporta otros idiomas además del inglés?**
+
+R: Sí, Gemma 4 es totalmente multilingüe. Fue preentrenado en 140 idiomas y cuenta con un ajuste de instrucciones específico para 35 idiomas, lo que lo convierte en una excelente opción para aplicaciones globales.
+
+**P: ¿Por qué los requisitos de VRAM para el modelo 26B MoE son tan altos si solo hay 3.8B parámetros activos?**
+
+R: Aunque solo 3.8B parámetros están "activos" durante el cálculo de un solo token, el conjunto completo de 26B parámetros normalmente debe residir en la VRAM para evitar la penalización masiva de latencia al mover datos de la RAM del sistema a la VRAM de la GPU durante el proceso de inferencia. Para un rendimiento óptimo, los **parámetros de tamaño de modelo y requisitos de VRAM de Gemma 4** para los modelos MoE deben calcularse en función del recuento total de parámetros.

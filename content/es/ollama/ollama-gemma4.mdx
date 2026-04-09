@@ -1,0 +1,143 @@
+export const metadata = {
+  title: "Ollama Gemma4: Ejecuta la potente IA de Google localmente en 2026",
+  description: "Aprende cómo instalar y optimizar los modelos Gemma 4 de Google usando Ollama. Guía completa sobre despliegue local de IA, requisitos de hardware y funciones multimodales.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Ollama+Gemma+4+Guide",
+  date: "2026-04-08",
+  author: "Ollama Wiki Team"
+}
+
+Ejecutar IA de vanguardia ya no requiere una suscripción masiva a la nube ni una conexión constante a internet. Con el lanzamiento de **ollama gemma4**, los usuarios ahora pueden aprovechar los modelos de pesos abiertos más avanzados de Google directamente en su propio hardware. Este avance permite una privacidad total de los datos y cero límites de uso, convirtiendo a **ollama gemma4** en la solución ideal para desarrolladores, gamers y entusiastas de la privacidad por igual en 2026. Al ejecutar estos modelos de forma local, te aseguras de que ningún dato salga de tu máquina, proporcionando un entorno seguro para la programación, la escritura creativa y el análisis de datos.
+
+Google DeepMind lanzó la familia Gemma 4 el 2 de abril de 2026, basándose en la investigación utilizada para Gemini 3. Estos modelos ofrecen una "inteligencia por parámetro" líder en la industria, lo que significa que rinden tan bien como modelos diez veces más grandes. Ya sea que uses un equipo de gaming de gama alta o un portátil modesto, existe una versión de este modelo diseñada para adaptarse a tus limitaciones específicas de hardware.
+
+## Entendiendo la familia de modelos Gemma 4
+
+El ecosistema Gemma 4 se divide en cuatro tamaños distintos, que van desde los modelos ligeros "Edge" hasta las versiones insignia de alta potencia. Elegir el adecuado depende enteramente de tu RAM y VRAM disponibles. A diferencia de las generaciones anteriores, incluso los modelos más pequeños de esta línea admiten entradas multimodales, incluyendo imágenes y audio.
+
+| Variante del modelo | Parámetros totales | Ventana de contexto | Ideal para |
+|---|---|---|---|
+| **Gemma 4 E2B** | 5.1 mil millones | 128,000 Tokens | Teléfonos, Tablets, Raspberry Pi |
+| **Gemma 4 E4B** | 8.0 mil millones | 128,000 Tokens | Portátiles estándar, PCs con 8GB RAM |
+| **Gemma 4 26B** | 25.2 mil millones (MoE) | 256,000 Tokens | Estaciones de trabajo, 16GB-24GB RAM |
+| **Gemma 4 31B** | 30.7 mil millones | 256,000 Tokens | GPUs de gama alta, 32GB+ RAM |
+
+El modelo 26B utiliza una arquitectura de **Mezcla de Expertos (MoE)**. Esto significa que, aunque tiene un recuento total de parámetros elevado, solo activa aproximadamente 3.8 mil millones de parámetros durante cualquier tarea de inferencia individual. Esto da como resultado un modelo increíblemente rápido que mantiene las capacidades de razonamiento de un sistema mucho más grande.
+
+> **💡 Consejo:** Si no estás seguro de por dónde empezar, descarga el modelo E4B. Ofrece el mejor equilibrio entre velocidad e inteligencia para la mayoría del hardware de consumo moderno.
+
+## Cómo instalar Ollama Gemma4 localmente
+
+Para ejecutar estos modelos, necesitarás **Ollama**, una herramienta gratuita de código abierto que gestiona los pesos de los modelos y el servicio de API local. A partir de abril de 2026, debes asegurarte de estar ejecutando la versión 0.20 de Ollama o superior para soportar la nueva arquitectura Gemma 4.
+
+### Paso 1: Descargar e instalar Ollama
+Navega al sitio web oficial de Ollama y descarga el instalador para tu sistema operativo.
+*   **Windows:** Ejecuta el instalador `.exe` y sigue el asistente de configuración estándar.
+*   **macOS:** Descarga el archivo `.zip`, extráelo y mueve la aplicación Ollama a tu carpeta de "Aplicaciones".
+*   **Linux:** Usa el comando oficial de curl proporcionado en el sitio web para instalar a través de la terminal.
+
+### Paso 2: Obtener el modelo
+Una vez que Ollama esté funcionando, abre tu terminal o símbolo del sistema. Para instalar la versión predeterminada del modelo, escribe el siguiente comando:
+
+`ollama pull gemma4`
+
+Si tienes una máquina potente y quieres la versión insignia 31B, usa:
+
+`ollama pull gemma4:31b`
+
+### Paso 3: Ejecutar el modelo
+Después de que termine la descarga (el modelo E4B pesa aproximadamente 9.6 GB), puedes comenzar una conversación inmediatamente escribiendo:
+
+`ollama run gemma4`
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de hardware y optimización
+
+Ejecutar **ollama gemma4** de manera efectiva requiere comprender las limitaciones de tu sistema. Aunque los modelos están altamente optimizados, las variantes más grandes de 26B y 31B funcionan mejor cuando se pueden cargar por completo en la VRAM (RAM de video) de una GPU dedicada.
+
+| Componente | Mínimo (E2B/E4B) | Recomendado (26B/31B) |
+|---|---|---|
+| **RAM** | 8 GB DDR4/DDR5 | 32 GB DDR5 |
+| **GPU** | Gráficos integrados | RTX 3080 / 4070 (12GB+ VRAM) |
+| **Almacenamiento** | 10 GB de espacio SSD | 30 GB de espacio SSD NVMe |
+| **SO** | Windows 10/11, macOS 13+ | Linux (Ubuntu/Arch) o Windows 11 |
+
+Si las respuestas se sienten lentas, puedes optimizar el rendimiento ajustando la configuración interna. Google recomienda una **Temperatura de 1.0** y un **Top P de 0.95** para casos de uso general. Si estás usando el modelo para lógica estricta o matemáticas, bajar la temperatura a 0.2 puede reducir las "alucinaciones" y proporcionar resultados más consistentes.
+
+## Funciones avanzadas: Multimodal y Modo de Pensamiento
+
+Una de las características más destacadas del lanzamiento de **ollama gemma4** es su soporte nativo para entradas multimodales. Puedes arrastrar y soltar imágenes directamente en la interfaz de chat de Ollama (o pasarlas a través de la API) para hacer preguntas sobre gráficos, capturas de pantalla o notas escritas a mano.
+
+### Procesamiento nativo de imágenes
+El modelo puede manejar diversas resoluciones de imagen. Para tareas de alta precisión como OCR (Reconocimiento Óptico de Caracteres) o la lectura de texto pequeño en un documento, debes establecer un presupuesto de tokens más alto para las imágenes. Para una clasificación simple, un presupuesto menor ahorrará memoria y acelerará el procesamiento.
+
+### Modo de Pensamiento (Thinking Mode)
+Para razonamientos complejos, Gemma 4 incluye un "Modo de Pensamiento". Cuando está habilitado, el modelo mostrará su cadena interna de pensamiento antes de proporcionar la respuesta final. Esto es particularmente útil para:
+1.  **Programación compleja:** Depuración de lógica intrincada en Python o C++.
+2.  **Optimización matemática:** Resolución de problemas de lógica o asignación de presupuestos.
+3.  **Planificación estratégica:** Redacción de hojas de ruta de proyectos a largo plazo con múltiples dependencias.
+
+> **⚠️ Advertencia:** Al crear aplicaciones utilizando la API de Ollama, asegúrate de no incluir la salida de "pensamiento" en el historial de conversación enviado de vuelta al modelo, ya que esto puede confundir la ventana de contexto en chats de varios turnos.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eoKJEKj_VWQ"
+    title="Ollama + Gemma 4 is INSANE!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento 2026
+
+El modelo Gemma 4 31B ha establecido nuevos récords para modelos de pesos abiertos en 2026. Actualmente ocupa el puesto #3 entre los modelos abiertos a nivel mundial en la clasificación Arena AI, superando a muchos modelos propietarios que son significativamente más grandes.
+
+| Benchmark | Puntuación Gemma 4 31B | Puntuación Gemma 4 26B |
+|---|---|---|
+| **MMLU Pro** | 85.2% | 81.4% |
+| **Live Codebench V6** | 80.0% | 76.5% |
+| **GPQA (Ciencia)** | 84.3% | 79.1% |
+| **HumanEval (Código)** | 88.7% | 84.2% |
+
+Estos puntajes indican que **ollama gemma4** es más que capaz de manejar tareas de nivel profesional. El salto en el rendimiento de programación es especialmente notable; el modelo 31B ahora puede manejar consultas complejas de arquitectura de software que anteriormente requerían una instancia de GPT-4 o Claude 3.5 basada en la nube.
+
+## Mejores prácticas para el despliegue local
+
+Para sacar el máximo provecho de tu configuración local de IA, sigue estas pautas de implementación:
+
+1.  **Actualiza regularmente:** Ollama lanza parches de rendimiento con frecuencia. Usa `ollama update` o descarga el instalador más reciente con regularidad.
+2.  **Usa almacenamiento SSD:** Los modelos locales realizan operaciones pesadas de lectura/escritura. Ejecutarlos desde un disco duro mecánico (HDD) resultará en un retraso significativo durante la carga del modelo.
+3.  **Gestiona el contexto:** Aunque la ventana de contexto de 256,000 tokens es masiva, llenarla por completo ralentizará los tiempos de respuesta. Proporciona al modelo solo la información que necesita para la tarea específica.
+4.  **Aprovecha la salida estructurada:** Gemma 4 admite salida JSON nativa. Esto es esencial si estás usando el modelo para alimentar un script de automatización local o un NPC de juego personalizado.
+
+Siguiendo esta guía, podrás desplegar con éxito **ollama gemma4** y disfrutar de los beneficios de un asistente de IA de clase mundial sin los riesgos de privacidad o los costos asociados con los proveedores de la nube.
+
+## FAQ
+
+**P: ¿Es Ollama Gemma4 completamente gratuito?**
+
+R: Sí. Tanto Ollama como los pesos del modelo Gemma 4 son gratuitos para descargar y usar. No hay tarifas de suscripción, costos de API ni límites de uso porque el modelo se ejecuta completamente en tu propio hardware.
+
+**P: ¿Puedo ejecutar Gemma 4 sin una GPU dedicada?**
+
+R: Sí, puedes ejecutar los modelos más pequeños E2B y E4B en una CPU estándar con al menos 8GB de RAM. Sin embargo, los modelos 26B y 31B serán significativamente más lentos sin una GPU dedicada que maneje los requisitos de procesamiento paralelo.
+
+**P: ¿Soporta Gemma 4 otros idiomas además del inglés?**
+
+R: Absolutamente. Gemma 4 fue entrenado en más de 140 idiomas, lo que lo hace altamente efectivo para la traducción, la creación de contenido multilingüe y proyectos globales de programación.
+
+**P: ¿Cómo uso la función de reconocimiento de imágenes en Ollama?**
+
+R: En la aplicación de escritorio o terminal de Ollama, simplemente puedes proporcionar la ruta de una imagen o arrastrarla a la ventana de chat. El modelo entonces "verá" la imagen, permitiéndote hacer preguntas sobre su contenido, como "¿Qué está escrito en este recibo?" o "Explica este diagrama arquitectónico".

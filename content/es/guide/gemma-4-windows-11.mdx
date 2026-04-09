@@ -1,0 +1,122 @@
+export const metadata = {
+  title: "Gemma 4 Windows 11: Cómo ejecutar la IA local de Google 2026",
+  description: "Aprenda a instalar y optimizar el modelo de IA Gemma 4 de Google en Windows 11. Guía completa para la configuración local de LLM usando LM Studio para 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Windows+11+Guide",
+  date: "2026-04-08",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con el lanzamiento de los últimos modelos de código abierto de Google. Para los usuarios que buscan aprovechar la integración de **gemma 4 windows 11**, la capacidad de ejecutar modelos de razonamiento de alto rendimiento de forma local ya no es un lujo reservado para los centros de datos. Estos nuevos modelos ofrecen una alternativa privada, segura e increíblemente rápida a las suscripciones basadas en la nube. Ya sea un desarrollador que busca asistencia para programar o un aficionado que explora el reconocimiento visual, la configuración de sistemas **gemma 4 windows 11** le permite acceder a una IA de vanguardia sin necesidad de conexión a internet.
+
+En esta guía exhaustiva, recorreremos los requisitos de hardware, el entorno de software y los pasos específicos necesarios para que Gemma 4 funcione en su máquina local. Desde la versión ligera de 2B parámetros hasta el potente modelo de 31B que rivaliza con los líderes de la industria, Google ha proporcionado una solución escalable para cada nivel de hardware disponible en 2026.
+
+## Entendiendo la jerarquía de modelos de Gemma 4
+
+Google ha estructurado el lanzamiento de Gemma 4 para atender diversos casos de uso, que van desde dispositivos móviles hasta estaciones de trabajo de alta gama. A diferencia de las iteraciones anteriores, la arquitectura "Effective" utilizada en el modelo 4B le permite rendir significativamente por encima de su categoría de peso al utilizar una base de 8B parámetros manteniendo la velocidad de un modelo más pequeño.
+
+| Variante del modelo | Parámetros | Mejor caso de uso | Nivel de hardware |
+|---|---|---|---|
+| **Gemma 4 2B** | 2 mil millones | Chat básico, integración móvil | Nivel de entrada / Portátil |
+| **Gemma 4 E4B** | 8B (Efectivo 4B) | Propósito general, tareas visuales | Sobremesa de gama media |
+| **Gemma 4 26B** | 26 mil millones | Razonamiento complejo, programación profunda | Sobremesa de gama alta |
+| **Gemma 4 31B** | 31 mil millones | Investigación, flujos de trabajo agénticos | Entusiasta / Estación de trabajo |
+
+El modelo 31B es particularmente notable. En los puntos de referencia de 2026, se ha clasificado consistentemente entre los tres primeros en las tablas de clasificación mundiales de LLM, superando a modelos con recuentos de parámetros significativamente mayores. Esta eficiencia lo convierte en la opción principal para los usuarios que desean un rendimiento de "frontera" en un entorno local de Windows 11.
+
+## Requisitos del sistema para Windows 11
+
+Antes de intentar ejecutar Gemma 4, asegúrese de que su sistema cumpla con las especificaciones necesarias. La IA local depende en gran medida de la VRAM (RAM de vídeo) que se encuentra en su tarjeta gráfica. Aunque la RAM del sistema puede utilizarse como respaldo, esto resultará en "tokens por segundo" (TPS) significativamente más lentos.
+
+| Componente | Mínimo (Modelos 2B/4B) | Recomendado (Modelos 26B/31B) |
+|---|---|---|
+| **Sistema Operativo** | Windows 11 (Última versión) | Windows 11 Pro |
+| **Procesador** | CPU de 6 núcleos (Intel i5 / Ryzen 5) | CPU de 12 núcleos (Intel i9 / Ryzen 9) |
+| **Tarjeta Gráfica** | 8GB VRAM (RTX 3060 o superior) | 24GB VRAM (RTX 4090 / 5090) |
+| **RAM del Sistema** | 16GB DDR4/DDR5 | 64GB+ DDR5 |
+| **Almacenamiento** | 20GB de espacio SSD | 100GB+ NVMe SSD |
+
+> **💡 Consejo:** Si tiene VRAM limitada, busque versiones "Quantized" (cuantizadas) de los modelos (Q4_K_M o Q8_0) que comprimen el tamaño del modelo con una pérdida mínima de inteligencia.
+
+## Guía de instalación paso a paso
+
+Para ejecutar configuraciones de **gemma 4 windows 11** de manera eficiente, recomendamos usar **LM Studio**, que proporciona una interfaz fácil de usar para gestionar Modelos de Lenguaje Extensos (LLM) locales.
+
+### 1. Prepare su entorno
+Asegúrese de que los controladores de su GPU estén actualizados. Para los usuarios de NVIDIA, el kit de herramientas CUDA debe actualizarse a la última versión de 2026 para garantizar la compatibilidad con la nueva arquitectura de Gemma.
+
+### 2. Instale LM Studio
+Navegue al [sitio web oficial de LM Studio](https://lmstudio.ai/) y descargue el instalador para Windows. Siga las instrucciones de instalación estándar.
+
+### 3. Actualización de Runtimes
+Una vez instalado LM Studio, busque actualizaciones dentro de la aplicación. Es fundamental que esté ejecutando el último motor de ejecución; los motores más antiguos pueden fallar al cargar las estructuras de tensores específicas utilizadas en los módulos de razonamiento y visión de Gemma 4.
+
+### 4. Descarga del modelo
+En la barra de búsqueda de LM Studio, escriba "Gemma 4". Verá varias opciones de Google y colaboradores de la comunidad como Unsloth o Bloke.
+*   Seleccione **Gemma 4 E4B** para un equilibrio entre velocidad e inteligencia.
+*   Elija un nivel de **Cuantización** (se recomienda 8 bits para alta calidad; 4 bits para velocidad en hardware de gama baja).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eS9RJbnYiF0"
+    title="Cómo ejecutar Google Gemma 4 AI LOCALMENTE en su computadora"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Características clave de Gemma 4 en Windows 11
+
+Ejecutar **gemma 4 windows 11** localmente proporciona acceso a varias funciones "agénticas" y multimodales que anteriormente estaban restringidas a las API de la nube.
+
+### Capacidades multimodales (Visión y Audio)
+Gemma 4 puede "ver" y "oír". Al cargar una imagen en la interfaz de chat local, el modelo puede describir escenas, identificar objetos o incluso resolver problemas matemáticos escritos a mano. En las pruebas de 2026, Gemma 4 identificó con éxito especies raras, como el ualabí blanco, donde otros modelos los identificaron incorrectamente como canguros comunes.
+
+### Funciones agénticas y llamada a herramientas
+El modelo admite "Function Calling" (llamada a funciones), lo que le permite interactuar con su sistema de archivos de Windows 11 o herramientas externas. A través del Protocolo de Contexto de Modelo (MCP), Gemma 4 puede:
+*   Realizar búsquedas web para proporcionar datos en tiempo real.
+*   Generar imágenes llamando a instancias locales de Stable Diffusion.
+*   Ejecutar scripts de Python para automatizar la gestión de archivos locales.
+
+### Ventana de contexto amplia
+Con soporte para hasta **256,000 tokens**, puede introducir libros enteros o repositorios masivos de código en la memoria del modelo. Esto lo convierte en una herramienta excepcional para desarrolladores que trabajan en aplicaciones de Windows a gran escala.
+
+> **⚠️ Advertencia:** El uso de la ventana de contexto completa de 256k requiere cantidades masivas de memoria del sistema. Supervise su Administrador de tareas para evitar bloqueos del sistema durante el procesamiento de textos largos.
+
+## Optimizando el rendimiento para IA local
+
+Para aprovechar al máximo su experiencia con **gemma 4 windows 11**, debe ajustar la configuración de inferencia dentro del software elegido.
+
+1.  **Descarga de GPU (GPU Offloading):** Asegúrese de que "GPU Offload" esté configurado al "Máximo" en los ajustes de LM Studio. Esto obliga al modelo a ejecutarse completamente en la VRAM de su tarjeta gráfica.
+2.  **Política de desbordamiento de contexto:** Si excede su límite de VRAM, establezca la política en "Truncate" para evitar que la aplicación se bloquee.
+3.  **Flash Attention:** Habilite Flash Attention en los ajustes experimentales para aumentar la velocidad de procesamiento hasta en un 20% en hardware NVIDIA compatible.
+
+| Ajuste de optimización | Valor recomendado | Impacto |
+|---|---|---|
+| **Temperatura** | 0.7 | Equilibra la creatividad y la lógica |
+| **Penalización de repetición** | 1.1 | Evita que la IA repita frases en bucle |
+| **Recuento de hilos** | Coincidir con núcleos físicos | Optimiza las tareas basadas en CPU |
+
+## Alternativas a la instalación local
+
+Si su hardware no puede sostener un entorno local de **gemma 4 windows 11**, aún puede experimentar con el modelo a través de **Google AI Studio**. Visitando `aistudio.google.com`, puede acceder a los modelos 26B y 31B de forma gratuita utilizando la infraestructura en la nube de Google. Esta es una excelente manera de probar las capacidades del modelo antes de comprometerse con una actualización de hardware para el alojamiento local.
+
+## Preguntas frecuentes
+
+**P: ¿Es Gemma 4 completamente gratuito para usar en Windows 11?**
+
+R: Sí, Gemma 4 es un modelo de código abierto lanzado bajo una licencia permisiva por Google. Puede descargarlo y ejecutarlo localmente sin tarifas de suscripción ni límites de uso, siempre que tenga el hardware necesario.
+
+**P: ¿Puedo ejecutar Gemma 4 en un portátil?**
+
+R: Sí, las versiones 2B y E4B de Gemma 4 están diseñadas para ejecutarse en portátiles modernos con al menos 8GB de VRAM o 16GB de memoria de sistema unificada (como las que se encuentran en los ultrabooks de gama alta).
+
+**P: ¿Cómo se compara Gemma 4 con GPT-4?**
+
+R: Si bien GPT-4 es un modelo mucho más grande alojado en la nube, el modelo Gemma 4 31B ofrece un rendimiento comparable en tareas de razonamiento y programación, al tiempo que brinda los beneficios de privacidad y acceso sin conexión en su máquina **gemma 4 windows 11**.
+
+**P: ¿Soporta Gemma 4 otros idiomas además del inglés?**
+
+R: Sí, Gemma 4 ha sido entrenado en un conjunto de datos multilingüe diverso, lo que le permite chatear, traducir y razonar en docenas de idiomas con fluidez.

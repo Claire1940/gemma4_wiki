@@ -1,0 +1,101 @@
+export const metadata = {
+  title: "Gemma 4 Model Sizes Parameters VRAM Requirements 2026: Setup Guide",
+  description: "A comprehensive breakdown of Google's Gemma 4 AI models. Learn about parameters, VRAM requirements for 8GB to 96GB GPUs, and native multimodal features.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Model+Guide",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+The release of Google’s Gemma 4 has sent shockwaves through the local AI community, offering a significant leap in native multimodality and reasoning capabilities. When planning your local AI setup, understanding the **gemma 4 model sizes parameters vram requirements 2026** is essential for balancing performance and cost. Google’s latest release has fundamentally changed the landscape by moving to a true Apache 2.0 license, and mastering the **gemma 4 model sizes parameters vram requirements 2026** ensures you can deploy these models effectively on anything from a Raspberry Pi to a high-end workstation.
+
+Whether you are a developer building agentic workflows or a hobbyist running local LLMs, the Gemma 4 family offers four distinct models tailored for different hardware constraints. From the lightweight "Edge" models to the heavy-duty "Workstation" variants, this guide provides the technical data you need to choose the right version for your specific GPU or server environment in 2026.
+
+## Overview of Gemma 4 Model Tiers
+
+Gemma 4 is categorized into two primary tiers: **Workstation** and **Edge**. The Workstation models are designed for high-performance tasks like coding assistance, complex reasoning, and server-side deployment. The Edge models are optimized for low-latency, on-device applications such as mobile assistants and IoT devices.
+
+One of the most significant changes in 2026 is the inclusion of native audio and vision across the family, though the specific implementation varies by model size. Unlike previous iterations where modality was often "bolted on," Gemma 4 integrates these features at the architectural level.
+
+| Model Tier | Model Name | Parameters | Architecture Type | Key Focus |
+|---|---|---|---|---|
+| **Workstation** | Gemma 4 31B | **31 Billion** | Dense | Coding & Logic |
+| **Workstation** | Gemma 4 26B MoE | **26 Billion** | Mixture of Experts | Efficiency & Speed |
+| **Edge** | Gemma 4 E4B | **4 Billion** | Dense | Mobile Multimodality |
+| **Edge** | Gemma 4 E2B | **2 Billion** | Dense | Ultra-low Latency |
+
+## Analyzing Gemma 4 Model Sizes Parameters VRAM Requirements 2026
+
+VRAM remains the biggest bottleneck for local AI users. In 2026, the introduction of Quantized Aware Training (QAT) checkpoints has made it easier to run larger models on consumer hardware without a massive drop in intelligence. However, the **gemma 4 model sizes parameters vram requirements 2026** still dictate which GPU you need to achieve usable tokens-per-second (TPS).
+
+The 26B Mixture of Experts (MoE) model is particularly interesting because while it has 26 billion total parameters, only **3.8 billion are active** at any given time. This allows it to punch well above its weight class in terms of intelligence while maintaining the compute speed of a much smaller model.
+
+### Hardware Compatibility and VRAM Estimates
+
+| Model Size | Quantization | VRAM Required | Recommended GPU |
+|---|---|---|---|
+| **E2B / E4B** | FP16 / BF16 | **4GB - 8GB** | RTX 4060 / RTX 5050 |
+| **26B MoE** | 4-bit (Q4_K_M) | **14GB - 16GB** | RTX 4080 / RTX 5070 |
+| **31B Dense** | 4-bit (Q4_K_M) | **18GB - 20GB** | RTX 3090 / RTX 4090 |
+| **31B Dense** | FP16 (Full) | **64GB+** | RTX 6000 Ada / H100 |
+
+> **💡 Tip:** If you are limited to an 8GB VRAM GPU, prioritize the E4B model or use a highly quantized 26B MoE with system RAM offloading. While offloading is slower, the MoE architecture's low active parameter count makes it more tolerable than traditional dense models.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Architectural Innovations: MoE and Native Reasoning
+
+The architecture of Gemma 4 represents a shift toward "thinking" models. The Workstation models feature a **256K context window**, a massive upgrade from the 32K window seen in the Gemma 3 series. This allows for massive document analysis and project-wide coding refactoring.
+
+### The 128-Expert MoE System
+The 26B MoE model utilizes 128 "tiny" experts. For every token processed, the model activates eight experts plus one "shared" expert that is always on. This granularity allows the model to specialize in specific tasks (like Python coding or Japanese translation) more effectively than models with fewer, larger experts.
+
+### Native Multimodality
+Gemma 4 eliminates the need for external tools like Whisper for audio or separate CLIP models for vision.
+*   **Vision:** The new vision encoder handles native aspect ratios, meaning you don't need to crop or resize images before input. This is a game-changer for OCR and document understanding.
+*   **Audio:** The Edge models (E2B and E4B) feature a massively compressed audio encoder, reduced by 50% compared to previous versions. This enables real-time speech-to-text and speech-to-translated-text on-device.
+
+## Setting Up Gemma 4 for Coding and Agents
+
+For developers using Gemma 4 as a local coding assistant, the 31B Dense model is the gold standard. It has been trained on over 140 languages and optimized for "Chain of Thought" (CoT) reasoning. In 2026, many IDE plugins now support a "thinking" toggle for Gemma 4, allowing the model to deliberate before generating code.
+
+1.  **Select your Agent:** Tools like ADER or VS Code Copilot (Local) are recommended.
+2.  **Enable Thinking:** Use the chat template `enable_thinking=true` to trigger long-form reasoning for complex bugs.
+3.  **Manage Context:** Even with 256K context, clearing your chat history periodically prevents hallucination and keeps the TPS high on consumer hardware.
+
+> **⚠️ Warning:** Running the 31B Dense model on 8GB VRAM will result in speeds as low as 2-3 tokens per second due to heavy system RAM offloading. For a smooth experience on 8GB cards, stick to the E4B or the 26B MoE with 4-bit quantization.
+
+## Deployment and Commercial Use
+
+The shift to the **Apache 2.0 license** is perhaps the most important update for the **gemma 4 model sizes parameters vram requirements 2026** discussion. Unlike previous versions with "no-compete" clauses, Gemma 4 can be modified, fine-tuned, and deployed commercially without restriction.
+
+Google has also made it easier to scale these models using Cloud Run. By utilizing G4 GPUs (Nvidia RTX 6000 Pro), you can host the full-weight 31B model in a serverless environment that scales to zero when not in use. This provides a cost-effective way for startups to leverage high-end "workstation" intelligence without maintaining 24/7 hardware.
+
+For more technical documentation and weight downloads, you can visit the official [Hugging Face Gemma Collection](https://huggingface.co/google) to explore the latest QAT checkpoints.
+
+## FAQ
+
+**Q: What is the minimum VRAM required to run Gemma 4 E4B?**
+
+A: You can run the E4B model comfortably on a GPU with 6GB to 8GB of VRAM using standard 4-bit or 8-bit quantization. It is designed to be highly efficient for mobile and edge devices.
+
+**Q: Does Gemma 4 support image and audio input simultaneously?**
+
+A: Yes, the Gemma 4 architecture is natively multimodal. This means you can provide interleaved inputs, such as a video file (processed as multiple images) and an accompanying audio track, for complex reasoning tasks.
+
+**Q: How does the 26B MoE compare to the 31B Dense model?**
+
+A: The 26B MoE is faster and requires less compute per token because it only activates 3.8B parameters at a time. However, the 31B Dense model typically performs better on rigid logic and coding tasks where the full weight of the parameters is beneficial.
+
+**Q: Can I use Gemma 4 for commercial applications?**
+
+A: Yes. Thanks to the Apache 2.0 license released in 2026, you are free to use, modify, and distribute Gemma 4 for commercial purposes without the restrictive clauses found in earlier versions.

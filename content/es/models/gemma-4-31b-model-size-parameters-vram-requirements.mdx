@@ -1,0 +1,117 @@
+export const metadata = {
+  title: "Requisitos de VRAM y Parámetros del Tamaño del Modelo Gemma 4 31B: Guía Completa 2026",
+  description: "Desglose detallado de los requisitos de VRAM y parámetros del tamaño del modelo Gemma 4 31B de Google, actualizaciones de arquitectura y recomendaciones de hardware para despliegue local en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+31B+Requirements",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+Google ha transformado fundamentalmente el panorama de la IA de pesos abiertos con el lanzamiento de la familia Gemma 4. A medida que los desarrolladores e investigadores buscan integrar estas potentes herramientas en sus flujos de trabajo locales, comprender los **requisitos de vram y parámetros del tamaño del modelo gemma 4 31b** es esencial para un despliegue exitoso. Esta última iteración introduce un sistema de niveles divididos que consiste en modelos "Workstation" para tareas pesadas y modelos "Edge" para dispositivos móviles e IoT.
+
+El modelo Gemma 4 31B se posiciona como la oferta densa insignia, proporcionando mejoras arquitectónicas significativas respecto a las generaciones anteriores. Ya sea que su objetivo sea ejecutar el modelo denso 31B o la variante altamente eficiente 26B Mixture of Experts (MoE), conocer los **requisitos de vram y parámetros del tamaño del modelo gemma 4 31b** le garantiza contar con el hardware necesario para manejar ventanas de contexto de 256K y procesamiento multimodal nativo. En esta guía, desglosaremos las especificaciones técnicas, los umbrales de VRAM y las estrategias de optimización para 2026.
+
+## Descripción General de la Familia de Modelos Gemma 4
+
+El lanzamiento de Gemma 4 se categoriza en dos grupos distintos según sus casos de uso previstos. Los modelos Workstation están diseñados para GPUs de gama alta y entornos de servidor, mientras que los modelos Edge están optimizados para hardware de bajo consumo.
+
+| Nivel del Modelo | Nombre del Modelo | Parámetros Totales | Parámetros Activos | Soporte Nativo |
+|---|---|---|---|---|
+| **Workstation** | Gemma 4 31B | **31 Mil millones** | 31 Mil millones | Visión, Texto, Razonamiento |
+| **Workstation** | Gemma 4 26B MoE | **26 Mil millones** | 3.8 Mil millones | Visión, Texto, Razonamiento |
+| **Edge** | Gemma 4 E4B | **4 Mil millones** | 4 Mil millones | Visión, Audio, Texto |
+| **Edge** | Gemma 4 E2B | **2 Mil millones** | 2 Mil millones | Visión, Audio, Texto |
+
+> **💡 Consejo:** Aunque el modelo 31B es un modelo "denso" (utiliza todos los parámetros para cada token), el modelo 26B MoE ofrece una inteligencia similar con costos de cómputo significativamente menores, lo que lo hace ideal para usuarios con potencia de procesamiento limitada pero alta disponibilidad de VRAM.
+
+## Requisitos de VRAM y Parámetros del Tamaño del Modelo Gemma 4 31B
+
+Ejecutar el modelo denso 31B requiere una inversión sustancial en hardware, particularmente si tiene la intención de utilizar la ventana de contexto completa de 256K. El uso de VRAM se determina principalmente por la precisión del modelo (nivel de cuantización) y la longitud de los datos de entrada.
+
+### Estimaciones de VRAM por Cuantización
+
+| Precisión | Tamaño del Modelo (Aprox) | VRAM Recomendada (Inferencia) | VRAM Recomendada (Contexto 256K) |
+|---|---|---|---|
+| **FP16 (Sin comprimir)** | ~62 GB | **80 GB+** | 96 GB+ |
+| **8-bit (INT8)** | ~31 GB | **40 GB** | 48 GB |
+| **4-bit (GGUF/EXL2)** | ~18 GB | **24 GB** | 32 GB |
+
+Para los usuarios que buscan ejecutar el modelo sin pérdida de calidad, se recomienda una NVIDIA H100 o una RTX 6000 Ada (96GB). Sin embargo, gracias a los checkpoints de **Entrenamiento Consciente de la Cuantización (QAT)** lanzados por Google, las versiones de 4 bits mantienen una precisión notablemente alta, lo que permite que el modelo encaje en hardware de consumo como la RTX 4090 o RTX 5090.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Innovaciones Arquitectónicas en Gemma 4
+
+Google ha integrado investigaciones del proyecto Gemini 3 en Gemma 4, alejándose del enfoque multimodal "acoplado" visto en modelos abiertos anteriores. El modelo denso 31B presenta varias actualizaciones clave:
+
+1.  **Normalización de Valores:** Estabilidad mejorada durante la generación de contexto largo.
+2.  **Procesamiento Nativo de Relación de Aspecto:** El codificador de visión ahora maneja imágenes y documentos en sus dimensiones originales, mejorando significativamente el OCR y la comprensión de documentos.
+3.  **Contexto Ampliado:** Los modelos Workstation admiten hasta **256K tokens**, lo que permite el análisis de bases de código completas o documentos PDF extensos.
+4.  **Razonamiento Integrado:** Capacidades nativas de "Cadena de Pensamiento" (CoT) que permiten al modelo pensar antes de responder, las cuales pueden activarse mediante la plantilla de chat.
+
+### La Alternativa 26B MoE
+
+Si su hardware no puede manejar la carga de cómputo completa del modelo denso 31B, el 26B Mixture of Experts (MoE) es una alternativa viable. Utiliza 128 "pequeños expertos", con solo 8 activos por token. Esto resulta en la inteligencia de un modelo de clase 27B pero con la "velocidad" de un modelo de 4B. Tenga en cuenta que, aunque es más rápido, sus **requisitos de vram** siguen siendo similares al modelo 31B porque los 26B parámetros deben residir en la memoria.
+
+## Recomendaciones de Hardware para 2026
+
+Para aprovechar al máximo los **requisitos de vram y parámetros del tamaño del modelo gemma 4 31b**, su elección de hardware debe alinearse con su caso de uso específico.
+
+*   **Uso Profesional/Servidor:** Dual NVIDIA RTX 6000 Ada o H100 (80GB/96GB). Esta configuración permite la inferencia FP16 sin cuantizar y la ventana de contexto máxima de 256K.
+*   **Uso de Consumo de Gama Alta:** NVIDIA RTX 4090 (24GB) o RTX 5090. Necesitará usar cuantización de 4 o 5 bits. Esto es perfecto para asistentes de programación locales o agentes de IA personales.
+*   **Uso en Edge/Pequeña Escala:** Para aquellos con VRAM limitada (8GB - 16GB), se recomiendan encarecidamente los modelos E4B o E2B. Estos modelos incluyen soporte nativo de audio, del cual carecen actualmente los modelos workstation más grandes.
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B en la memoria RAM del sistema (inferencia por CPU) es posible a través de llama.cpp, pero espere tasas de tokens por segundo (TPS) extremadamente lentas, a menudo por debajo de 1-2 TPS.
+
+## Licencia Comercial: Apache 2.0
+
+Uno de los cambios más significativos en Gemma 4 es el paso a una **licencia Apache 2.0** completa. A diferencia de las versiones anteriores que tenían cláusulas de "no competencia" o restricciones personalizadas, Gemma 4 es verdaderamente abierto.
+
+*   **Modificar y Ajustar:** Puede adaptar el modelo 31B para datos específicos de la industria.
+*   **Despliegue Comercial:** Use el modelo en productos de pago sin pagar regalías a Google.
+*   **Sin Condiciones:** Este movimiento posiciona a Gemma 4 como un competidor directo de los ecosistemas Llama y Qwen.
+
+## Optimización de Gemma 4 para Rendimiento Local
+
+Para maximizar la eficiencia al lidiar con los **requisitos de vram y parámetros del tamaño del modelo gemma 4 31b**, considere las siguientes técnicas de optimización:
+
+### Flash Attention y Caché KV
+Asegúrese de que su motor de inferencia (Ollama, LM Studio o vLLM) tenga habilitado Flash Attention. Esto reduce la huella de memoria del mecanismo de atención, lo cual es crítico cuando se utiliza la ventana de contexto de 256K.
+
+### Entrenamiento Consciente de la Cuantización (QAT)
+Busque siempre las versiones "QAT" de los pesos en Hugging Face. Estos pesos están entrenados para ser comprimidos, lo que significa que un modelo QAT de 4 bits casi siempre superará a un modelo estándar de cuantización post-entrenamiento (PTQ) de 4 bits.
+
+| Característica | Cuantización Estándar | Cuantización QAT |
+|---|---|---|
+| **Precisión Lógica** | Moderada | **Alta** |
+| **Perplejidad** | Mayor (Peor) | **Menor (Mejor)** |
+| **Uso de VRAM** | Igual | Igual |
+
+## Preguntas Frecuentes (FAQ)
+
+**P: ¿Cuáles son los requisitos mínimos de VRAM para el modelo Gemma 4 31B?**
+
+R: Para ejecutar el modelo con cuantización de 4 bits, necesita al menos 24GB de VRAM. Para una precisión FP16 completa, se requieren de 80GB a 96GB de VRAM, especialmente si se utiliza la ventana de contexto larga.
+
+**P: ¿Soporta el modelo Gemma 4 31B entrada de audio?**
+
+R: No, el soporte nativo de audio es actualmente exclusivo de los modelos Edge (E2B y E4B). El modelo Workstation 31B soporta texto y visión de forma nativa.
+
+**P: ¿Cómo se compara el modelo 26B MoE con el modelo denso 31B?**
+
+R: El modelo 26B MoE es más rápido y requiere menos potencia de cómputo por token, pero aún requiere una VRAM significativa para mantener a todos los expertos en memoria. El modelo denso 31B es generalmente más robusto para tareas complejas de programación y razonamiento.
+
+**P: ¿Puedo usar Gemma 4 para aplicaciones comerciales?**
+
+R: Sí. Gemma 4 se publica bajo la licencia Apache 2.0, que permite el uso comercial, la modificación y la distribución sin las cláusulas restrictivas encontradas en versiones anteriores.
+
+Para obtener más información sobre los últimos modelos de IA y guías de hardware local, visite el [blog oficial de Google AI](https://blog.google/technology/ai/) o consulte los pesos en Hugging Face.

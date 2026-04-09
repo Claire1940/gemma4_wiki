@@ -1,0 +1,120 @@
+export const metadata = {
+  title: "Especificaciones del modelo Gemma 4: Guía completa de rendimiento 2026",
+  description: "Explora las especificaciones completas del modelo Gemma 4, que presenta arquitecturas Dense de 31B y MoE de 26B. Infórmate sobre el despliegue local, las ventanas de contexto y el rendimiento de la IA móvil.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Specifications",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la familia de modelos abiertos más reciente de Google ha cambiado fundamentalmente el panorama para los entusiastas y desarrolladores de IA local. Comprender las **especificaciones del modelo gemma 4** es esencial para cualquiera que busque aprovechar una inteligencia de nivel de frontera sin las limitaciones de las suscripciones en la nube o las preocupaciones por la privacidad de los datos. Construida sobre la investigación de clase mundial detrás de Gemini 3, esta nueva generación de modelos está diseñada para ejecutarse de forma nativa en todo, desde computadoras de escritorio de alta gama hasta teléfonos inteligentes estándar.
+
+A medida que profundizamos en las **especificaciones del modelo gemma 4**, queda claro que Google ha priorizado la "era agéntica". Estos modelos no son solo generadores de texto; son motores de razonamiento sofisticados capaces de realizar planificación de múltiples pasos y uso de herramientas. Al ofrecer una gama de tamaños—desde el ligero E2B hasta el modelo insignia 31B Dense—Google garantiza que haya una opción de alto rendimiento para cada configuración de hardware. Ya sea que estés analizando bases de código masivas o buscando un asistente privado para tu dispositivo móvil, Gemma 4 proporciona la arquitectura necesaria para tener éxito en 2026.
+
+## Descripción general de la familia de modelos Gemma 4
+
+Gemma 4 se categoriza en cuatro versiones distintas, cada una optimizada para casos de uso específicos y limitaciones de hardware. A diferencia de las iteraciones anteriores, esta familia introduce una arquitectura de "Mezcla de Expertos" (MoE) junto con los modelos densos tradicionales, proporcionando un "punto ideal" para los usuarios que necesitan alta inteligencia con una menor carga computacional.
+
+| Variante del modelo | Parámetros totales | Parámetros activos | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 31B Dense** | 31 mil millones | 31 mil millones | Razonamiento de frontera, salida de alta calidad |
+| **Gemma 4 26B MoE** | 26 mil millones | 3.8 mil millones | Programación local rápida, agentes de escritorio |
+| **Gemma 4 E4B** | 4 mil millones | 4 mil millones | Razonamiento móvil avanzado, IoT |
+| **Gemma 4 E2B** | 2 mil millones | 2 mil millones | Tareas móviles en tiempo real, dispositivos de borde |
+
+> **💡 Consejo:** Para la mayoría de los usuarios con una Mac moderna (M2/M3) o una PC con 24 GB de VRAM, la versión 26B MoE ofrece el mejor equilibrio entre velocidad e inteligencia.
+
+## Análisis profundo de las especificaciones del modelo Gemma 4
+
+La columna vertebral técnica de Gemma 4 es su enorme ventana de contexto y el soporte nativo para entradas multimodales. En el pasado, ejecutar un modelo con una ventana de contexto de un cuarto de millón de tokens requería clústeres de servidores masivos. En 2026, Gemma 4 trae esta capacidad a tu hardware personal.
+
+### Ventana de contexto y flujos de trabajo agénticos
+Los modelos más grandes (31B y 26B) cuentan con una ventana de contexto de hasta **256,000 tokens**. Esto permite que el modelo "lea" y retenga información de libros enteros, repositorios de código complejos o conversaciones de larga duración sin perder el hilo de la instrucción inicial. Esto es vital para los flujos de trabajo agénticos donde la IA debe planificar múltiples pasos y utilizar herramientas externas para completar una tarea.
+
+### Capacidades multimodales
+Aunque muchos modelos abiertos tienen dificultades con datos que no son de texto, Gemma 4 cuenta con soporte nativo para visión y audio.
+*   **Soporte de visión:** Todos los modelos pueden procesar imágenes para extraer texto, describir escenas o analizar gráficos.
+*   **Soporte de audio:** Los modelos "Effective" (E2B y E4B) incluyen procesamiento de audio nativo, lo que les permite "escuchar" y responder a comandos verbales directamente en el dispositivo.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Puntos de referencia de rendimiento y clasificaciones
+
+En el competitivo mundo de la IA de código abierto, Gemma 4 ha tenido un impacto inmediato en las tablas de clasificación de Arena AI. El modelo 31B Dense actualmente se sitúa como el **tercer mejor modelo abierto** a nivel mundial, superando con frecuencia a modelos que son significativamente más grandes en conteo de parámetros.
+
+| Categoría de Benchmark | Rango Gemma 4 31B | Rango Gemma 4 26B | Fortaleza clave |
+| :--- | :--- | :--- | :--- |
+| **Razonamiento general** | #3 | #6 | Manejo de lógica compleja |
+| **Programación (Python/JS)** | #2 | #4 | Generación de código zero-shot |
+| **Multilingüe** | #3 | #5 | Soporte para más de 140 idiomas |
+| **Eficiencia móvil** | N/A | N/A | E2B supera a modelos 12 veces más grandes |
+
+La eficiencia del modelo E2B (Effective 2 Billion) es particularmente notable. Los benchmarks de la comunidad indican que puede superar a los modelos de 27B parámetros de la generación anterior en tareas de razonamiento específicas, a pesar de ser una fracción de su tamaño. Esta eficiencia es una piedra angular de las **especificaciones del modelo gemma 4**, haciendo que la IA de alto nivel sea accesible en hardware de consumo.
+
+## Requisitos de hardware para el despliegue local
+
+Para ejecutar Gemma 4 de manera efectiva, debes hacer coincidir el tamaño del modelo con tu VRAM (RAM de video) o RAM del sistema disponible. Debido a que los modelos se lanzan bajo la licencia Apache 2.0, puedes usar varios ejecutores locales como [LM Studio](https://lmstudio.ai/) o Edge Gallery de Google para alojar estos modelos de forma privada.
+
+| Tamaño del modelo | VRAM recomendada | Espacio de almacenamiento | Expectativa de rendimiento |
+| :--- | :--- | :--- | :--- |
+| **31B Dense** | 24GB+ | ~22GB | Lento pero extremadamente preciso |
+| **26B MoE** | 16GB - 24GB | ~18GB | Muy rápido, excelente para chat |
+| **E4B** | 8GB (Móvil/PC) | ~4GB | Ágil, maneja bien las imágenes |
+| **E2B** | 4GB (Móvil) | ~2GB | Respuestas instantáneas, listo para audio |
+
+> **⚠️ Advertencia:** Intentar ejecutar el modelo 31B Dense en hardware con menos de 16 GB de VRAM resultará en una "descarga" significativa a la RAM del sistema, que es más lenta, reduciendo drásticamente los tokens por segundo.
+
+## Uso nativo de herramientas y programación
+
+Una de las actualizaciones más significativas en las **especificaciones del modelo gemma 4** es el soporte nativo para llamadas a funciones y uso de herramientas. Esto significa que al modelo se le puede dar acceso a tu sistema de archivos local, navegadores web o APIs especializadas para realizar acciones en tu nombre.
+
+1.  **Planificar:** El modelo desglosa una solicitud compleja (por ejemplo, "Organiza mis fotos por fecha y ubicación") en subtareas.
+2.  **Actuar:** Identifica las herramientas necesarias (por ejemplo, un script de Python para datos EXIF).
+3.  **Ejecutar:** Ejecuta el código localmente y verifica los resultados.
+4.  **Refinar:** Si ocurre un error, el modelo utiliza sus capacidades de razonamiento para depurar y reintentar.
+
+Este sistema de "bucle cerrado" es lo que define la era agéntica, permitiendo que Gemma 4 actúe como un asistente digital genuino en lugar de solo una interfaz de chat.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/hk6go5jioTk"
+    title="Gemma 4   Google just made AI free forever"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Seguridad y preparación empresarial
+
+Desarrollado por Google DeepMind, Gemma 4 se somete a los mismos protocolos rigurosos de seguridad que los modelos propietarios de Gemini. Para los usuarios empresariales, esto proporciona una base confiable para construir herramientas internas. Dado que los modelos se ejecutan localmente, los datos sensibles nunca abandonan el entorno controlado, cumpliendo con los requisitos de privacidad de los sectores legal, médico y financiero.
+
+La licencia Apache 2.0 mejora aún más esto al permitir que las empresas modifiquen, distribuyan y utilicen los modelos comercialmente sin pagar regalías ni preocuparse por la fatiga de las suscripciones. Este movimiento de Google democratiza efectivamente la IA de vanguardia para la comunidad global de desarrolladores en 2026.
+
+## FAQ
+
+**P: ¿Cuáles son las especificaciones mínimas del modelo gemma 4 para un teléfono inteligente?**
+
+R: Para ejecutar los modelos E2B o E4B en un teléfono, generalmente necesitas un dispositivo con al menos 8 GB de RAM y un procesador moderno (como el Tensor G3 o Snapdragon 8 Gen 3). Los modelos ocupan entre 2 GB y 4 GB de espacio de almacenamiento.
+
+**P: ¿Puede Gemma 4 funcionar sin conexión a Internet?**
+
+R: Sí. Una vez que hayas descargado los pesos del modelo (usando herramientas como LM Studio o Edge Gallery), Gemma 4 se ejecuta completamente en tu hardware local. Puedes usarlo en modo avión o en áreas remotas con cero conectividad.
+
+**P: ¿Cómo se compara el modelo 26B MoE con el modelo 31B Dense?**
+
+R: El 26B MoE (Mezcla de Expertos) solo activa 3.8 mil millones de parámetros en cualquier momento dado, lo que lo hace significativamente más rápido y requiere menos hardware. El modelo 31B Dense utiliza todos los parámetros para cada respuesta, lo que resulta en una mayor calidad y mejor razonamiento a costa de la velocidad y mayores requisitos de VRAM.
+
+**P: ¿Admite Gemma 4 otros idiomas además del inglés?**
+
+R: Sí, Gemma 4 admite nativamente más de 140 idiomas. Es altamente capaz en tareas multilingües, incluyendo traducción y razonamiento cross-lingual, lo que lo convierte en uno de los modelos abiertos más versátiles disponibles en 2026.

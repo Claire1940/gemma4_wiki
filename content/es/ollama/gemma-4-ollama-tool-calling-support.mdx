@@ -1,0 +1,147 @@
+export const metadata = {
+  title: "Soporte de Llamada a Herramientas de Gemma 4 en Ollama: Guía Completa de Integración 2026",
+  description: "Aprenda a implementar el soporte de llamada a herramientas de Gemma 4 en Ollama para tareas de IA multimodales. Explore comparativas, arquitectura y guías de configuración para 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Ollama+Support",
+  date: "2026-04-08",
+  author: "Gemma 4 Wiki Team"
+}
+
+El lanzamiento de la familia de modelos más reciente de Google DeepMind ha causado un gran impacto en la comunidad de IA, particularmente con la llegada del **soporte de llamada a herramientas de gemma 4 en ollama**. Esta actualización marca un hito significativo para los desarrolladores que desean ejecutar modelos multimodales de alto rendimiento en hardware local sin sacrificar la capacidad de interactuar con APIs externas. Al aprovechar el **soporte de llamada a herramientas de gemma 4 en ollama**, los usuarios ahora pueden cerrar la brecha entre las respuestas estáticas del modelo y las acciones dinámicas del mundo real. Ya sea que esté construyendo un asistente de codificación automatizado o una herramienta compleja de reconocimiento de imágenes, la integración de Gemma 4 en el ecosistema de Ollama proporciona una base sólida para la próxima generación de inteligencia en el dispositivo. En esta guía, desglosaremos las mejoras arquitectónicas, los datos de referencia y las instrucciones paso a paso para que su entorno esté completamente operativo en 2026.
+
+## Entendiendo la Familia de Modelos Gemma 4
+
+Gemma 4 no es solo un modelo único; es una familia versátil de inteligencias multimodales diseñada para escalar desde dispositivos móviles hasta estaciones de trabajo de gama alta. La arquitectura ha evolucionado significativamente desde Gemma 3, duplicando la ventana de contexto y optimizando el marco de mezcla de expertos (MoE) para reducir los costes de inferencia manteniendo altas capacidades de razonamiento.
+
+| Variante del Modelo | Parámetros | Tamaño Efectivo | Ventana de Contexto |
+|---|---|---|---|
+| **Gemma 4 2B** | 5.1 Mil millones | **2.3 Mil millones** | 128k Tokens |
+| **Gemma 4 4.5B** | 8.0 Mil millones | **4.5 Mil millones** | 128k Tokens |
+| **Gemma 4 26B MoE** | 26 Mil millones | **4.0 Mil millones** | 256k Tokens |
+| **Gemma 4 31B Dense** | 31 Mil millones | **31 Mil millones** | 256k Tokens |
+
+El modelo 26B MoE (Mixture of Experts) es particularmente impresionante para los usuarios locales. A pesar de su total de 26 mil millones de parámetros, solo se activan 4 mil millones durante cualquier tarea de inferencia dada. Esto permite tener la inteligencia de un modelo masivo con la velocidad y el consumo de memoria de uno mucho más pequeño, lo que lo convierte en el candidato principal para las implementaciones locales de **soporte de llamada a herramientas de gemma 4 en ollama**.
+
+## Desbloqueando el Soporte de Llamada a Herramientas de Gemma 4 en Ollama para Desarrolladores
+
+La llamada a herramientas, a menudo denominada llamada a funciones, es la capacidad de un modelo de IA para reconocer cuándo necesita usar una herramienta externa para responder a una solicitud. Esto podría implicar buscar en la web, ejecutar un fragmento de código o consultar una base de datos. Con las últimas actualizaciones de 2026, el **soporte de llamada a herramientas de gemma 4 en ollama** permite que el modelo genere un JSON estructurado que se asigna directamente a sus funciones predefinidas.
+
+Esta capacidad es multimodal, lo que significa que Gemma 4 puede mirar una imagen —como una captura de pantalla de una interfaz de usuario— y decidir "hacer clic" en un botón llamando a una función específica asociada con ese elemento de la interfaz. Este es un salto masivo con respecto a la llamada a herramientas basada solo en texto.
+
+> **💡 Consejo:** Al usar la llamada a herramientas, asegúrese de que las definiciones de sus funciones sean descriptivas. El modelo depende del campo "description" de su esquema JSON para comprender cuándo invocar una herramienta específica.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/c3hba327nJY"
+    title="Gemma 4 is INSANE— Run with (Ollama + Open WebUI)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Salto Arquitectónico: Gemma 4 vs. Gemma 3
+
+El salto de Gemma 3 a Gemma 4 implica algo más que simplemente más parámetros. La "receta" subyacente de cómo se estructuran las capas se ha refinado para una mejor estabilidad y comprensión multimodal. Uno de los cambios más críticos es la expansión de la ventana de contexto a 256k tokens para los modelos más grandes, lo que permite procesar bases de código masivas o documentos extensos en una sola pasada.
+
+| Característica | Gemma 3 (27B) | Gemma 4 (31B) |
+|---|---|---|
+| **Ventana de Contexto** | 128k Tokens | **256k Tokens** |
+| **Tamaño de Caché KV** | Menor Capacidad | **840 Kilobytes** |
+| **Cabezales de Atención** | Estándar | **32 Cabezales / 4 Cabezales KV** |
+| **Dim. de Incrustación** | 4096 | **5376** |
+| **Tamaño de Vocabulario** | 256k | **262k** |
+
+La introducción de 32 cabezales de atención junto con 4 cabezales de clave-valor (KV) permite que Gemma 4 mantenga el enfoque en secuencias mucho más largas. Esta arquitectura garantiza que cuando utilice el **soporte de llamada a herramientas de gemma 4 en ollama**, el modelo no "olvide" las instrucciones iniciales o las herramientas disponibles a mitad de una conversación larga.
+
+## Paso a Paso: Configuración de Ollama y Open WebUI
+
+Para aprovechar al máximo Gemma 4, recomendamos una configuración que involucre a Ollama para el backend y Open WebUI para una interfaz limpia, similar a GPT. Esta configuración es ideal para probar el **soporte de llamada a herramientas de gemma 4 en ollama** en un entorno visual.
+
+### 1. Prepare su Entorno
+Asegúrese de que su entorno Linux o WSL2 esté actualizado. Necesitará la biblioteca `zstd` para manejar los pesos comprimidos del modelo.
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install zstandard -y
+```
+
+### 2. Instale e Inicie Ollama
+Puede instalar Ollama a través de su script oficial. Una vez instalado, inicie el servicio en segundo plano para permitir que otras aplicaciones se comuniquen con él.
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+ollama serve > ollama.log 2>&1 &
+```
+
+### 3. Despliegue Open WebUI
+Open WebUI proporciona la mejor interfaz para interacciones multimodales. Puede ejecutarlo fácilmente a través de Python o Docker. Para esta guía, asumimos una instalación local de Python.
+
+```bash
+pip install open-webui
+export OLLAMA_BASE_URL=http://127.0.0.1:11434
+open-webui serve > webui.log 2>&1 &
+```
+
+### 4. Descargue el Modelo Gemma 4
+Diríjase a su terminal y descargue la versión específica de Gemma 4 que desee utilizar. Para la mayoría de los usuarios con 24 GB de VRAM, el modelo 31B es el estándar de oro.
+
+```bash
+ollama pull gemma4:31b
+```
+
+## Comparativas de Rendimiento: Una Nueva Frontera
+
+En 2026, las comparativas son más que simples números; representan la capacidad del modelo para manejar la lógica y el "pensamiento" multimodal. Gemma 4 muestra una mejora asombrosa con respecto a su predecesor, particularmente en la comparativa GPQ Diamond, que pone a prueba el razonamiento de nivel experto.
+
+| Comparativa | Gemma 3 (27B) | Gemma 4 (26B MoE) | Gemma 4 (31B) |
+|---|---|---|---|
+| **GPQ Diamond** | 42.0 | 76.8 | **84.2** |
+| **MMLU** | 71.2 | 79.5 | **82.1** |
+| **HumanEval** | 65.4 | 81.2 | **88.5** |
+
+Estos puntajes indican que el **soporte de llamada a herramientas de gemma 4 en ollama** no es solo un truco publicitario; el modelo posee la lógica subyacente para comprender instrucciones complejas y ejecutarlas con precisión. El salto en las puntuaciones de HumanEval (codificación) es particularmente relevante para el uso de herramientas, ya que se traduce en una mejor generación de JSON y menos errores de sintaxis al llamar a funciones.
+
+## Capacidades Multimodales: Más Allá del Texto
+
+Una de las características destacadas de Gemma 4 es su capacidad para procesar video y audio de forma nativa. Mientras que los modelos más pequeños (2B y 4.5B) pueden manejar video con audio, los modelos más grandes están optimizados para el análisis de fotogramas de video de alta resolución sin audio.
+
+*   **Detección de Objetos:** Gemma 4 puede identificar objetos específicos y proporcionar coordenadas de cuadros delimitadores.
+*   **OCR (Reconocimiento Óptico de Caracteres):** Puede leer texto de imágenes borrosas o con poca luz con alta precisión.
+*   **Navegación de GUI:** El modelo puede encontrar botones específicos (por ejemplo, "Ver receta") y proporcionar las coordenadas exactas para un clic programático.
+
+> **Advertencia:** Ejecutar el modelo 31B requiere al menos 20 GB de VRAM. Si su GPU es más pequeña, elija las variantes 26B MoE o 4.5B para evitar ralentizaciones significativas o bloqueos del sistema.
+
+## Configuración de Inferencia Recomendada
+
+Para obtener los resultados más "creativos" pero precisos de su implementación de **soporte de llamada a herramientas de gemma 4 en ollama**, debe ajustar sus parámetros de inferencia. Google DeepMind sugiere valores específicos para la familia Gemma 4 para evitar que el modelo se vuelva demasiado repetitivo o caótico.
+
+| Parámetro | Valor Recomendado | Descripción |
+|---|---|---|
+| **Temperatura** | 1.0 | Los valores más altos aumentan la aleatoriedad; 1.0 es el punto ideal para el razonamiento. |
+| **Top-P** | 0.95 | Asegura que el modelo solo considere los tokens más probables. |
+| **Top-K** | 64 | Limita el vocabulario a las 64 palabras más probables. |
+| **Penalización de Repetición** | 1.1 | Evita que el modelo se quede atascado en bucles. |
+
+Puede configurar estos parámetros directamente en su archivo Modelfile de Ollama o dentro del panel de configuración de Open WebUI. Para la llamada a herramientas específicamente, mantener la temperatura en 1.0 garantiza que el modelo pueda explorar diferentes estrategias de llamada a funciones si la primera falla.
+
+Para obtener más documentación técnica y los pesos del modelo, puede visitar el [Repositorio oficial de Hugging Face de Gemma 4](https://huggingface.co/google/gemma-4) para explorar los puntos de control base y ajustados por instrucciones.
+
+## FAQ
+
+**P: ¿Soporta Gemma 4 la llamada a herramientas en el modelo 2B?**
+
+R: Sí, el **soporte de llamada a herramientas de gemma 4 en ollama** se extiende a toda la familia, incluido el modelo 2B "Effective". Sin embargo, el modelo 2B puede tener dificultades con cadenas de funciones muy complejas y de varios pasos en comparación con la versión 31B.
+
+**P: ¿Puedo ejecutar Gemma 4 en un Mac?**
+
+R: Absolutamente. Ollama está altamente optimizado para Apple Silicon (M1, M2, M3, M4). Un Mac con 32 GB de Memoria Unificada puede ejecutar cómodamente el modelo 26B MoE con un rendimiento excelente.
+
+**P: ¿Es necesario el ajuste fino (fine-tuning) para la llamada a herramientas?**
+
+R: Para la mayoría de las tareas generales, no. Las versiones ajustadas por instrucciones (IT) de Gemma 4 ya son excelentes siguiendo las instrucciones del sistema para el uso de herramientas. El ajuste fino solo se recomienda si tiene terminología muy especializada de la industria o formatos de funciones patentados.
+
+**P: ¿Cómo maneja Gemma 4 la entrada de video?**
+
+R: El modelo trata el video como una secuencia de fotogramas. Puede resumir la acción, detectar objetos a través de los fotogramas e incluso responder preguntas sobre la pista de audio en las variantes de modelos más pequeños.

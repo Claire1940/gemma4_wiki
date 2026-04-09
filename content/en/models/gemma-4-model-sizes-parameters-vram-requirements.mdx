@@ -1,0 +1,109 @@
+export const metadata = {
+  title: "Gemma 4 Model Sizes Parameters VRAM Requirements: Full Guide 2026",
+  description: "Explore the new Gemma 4 lineup including 31B Dense and 26B MoE models. Learn about parameter counts, VRAM requirements, and local hardware optimization for 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Gemma+4+Model+Guide+2026",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+Google’s release of Gemma 4 in early 2026 has fundamentally shifted the landscape of open-weights artificial intelligence. By moving to a true Apache 2.0 license, Google has invited developers and gaming enthusiasts to integrate their most advanced models into commercial projects, mods, and local assistants without the restrictive "non-compete" clauses of previous generations. Understanding the **gemma 4 model sizes parameters vram requirements** is now a critical task for anyone looking to run these models on consumer hardware. 
+
+Whether you are a developer looking to build a voice-responsive NPC or a power user seeking a local coding co-pilot, the Gemma 4 family offers a tiered approach designed to scale from mobile devices to high-end workstations. This guide breaks down the technical specifications of the four primary models, providing a clear roadmap for hardware compatibility. We will analyze the **gemma 4 model sizes parameters vram requirements** to ensure you select the version that maximizes performance without exceeding your GPU's memory limits in 2026.
+
+## The Gemma 4 Model Lineup: Tiers and Architecture
+
+The Gemma 4 family is divided into two distinct categories: **Workstation** models for heavy-duty tasks and **Edge** models for high-efficiency, on-device applications. Unlike the previous Gemma 3 series, every model in the 4.0 ecosystem features native multi-modality, meaning vision, audio, and reasoning capabilities are baked into the architecture rather than added as external plugins.
+
+### Workstation Tier: 31B Dense and 26B MoE
+The Workstation tier is designed for users with significant VRAM availability. The 31B Dense model is the flagship for pure logic and coding, featuring meaningful architectural upgrades like value normalization and a refined attention mechanism optimized for its massive 256K context window. 
+
+The 26B Mixture of Experts (MoE) model takes a different approach. While it has 26 billion total parameters, it only activates roughly 3.8 billion parameters per token. This allows it to offer the intelligence of a much larger model with the inference speed of a small one, provided you have enough VRAM to hold the entire weight set.
+
+### Edge Tier: E4B and E2B
+The Edge models, E4B (~4 billion parameters) and E2B (~2 billion parameters), are the stars of on-device AI. These models are specifically optimized for low-latency tasks like real-time speech-to-text translation and document understanding. Despite their small size, they maintain a 128K context window, making them highly capable for long-form dialogue in gaming or mobile productivity apps.
+
+| Model Name | Tier | Parameter Count | Architecture Type | Context Window |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | Workstation | 31 Billion | Dense | 256K |
+| **Gemma 4 26B MoE** | Workstation | 26 Billion (3.8B Active) | Mixture of Experts | 256K |
+| **Gemma 4 E4B** | Edge | ~4 Billion | Dense | 128K |
+| **Gemma 4 E2B** | Edge | ~2 Billion | Dense | 128K |
+
+## Gemma 4 Model Sizes Parameters VRAM Requirements
+
+Calculating the exact **gemma 4 model sizes parameters vram requirements** depends heavily on your choice of quantization. In 2026, Quantized Aware Training (QAT) checkpoints released by Google allow these models to maintain high accuracy even at 4-bit or 8-bit precision. 
+
+Running a model in full FP16 (16-bit) precision is generally unnecessary for most gaming or coding applications and doubles the VRAM requirement compared to 8-bit. For most users, 4-bit (bitsandbytes or GGUF) is the "sweet spot" for fitting large models on consumer GPUs like the RTX 5080 or 6080 series.
+
+| Model | 4-bit Quant (Recommended) | 8-bit Quant | FP16 (Full Precision) |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | **~18 GB** | ~33 GB | ~64 GB |
+| **Gemma 4 26B MoE** | **~16 GB** | ~28 GB | ~54 GB |
+| **Gemma 4 E4B** | **~3 GB** | ~5 GB | ~9 GB |
+| **Gemma 4 E2B** | **~1.5 GB** | ~2.5 GB | ~4.5 GB |
+
+> **⚠️ Warning:** While the 26B MoE model only uses 3.8B parameters for "thinking," the entire 26B parameter set must usually reside in VRAM to avoid massive performance bottlenecks. Do not attempt to run this on an 8GB card without heavy system RAM offloading.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Key Architectural Innovations in 2026
+
+The Gemma 4 series isn't just a parameter bump; it introduces several "native" features that previously required separate models or complex pipelines.
+
+### Native Audio and Vision
+In previous versions, if you wanted a model to "hear," you had to bolt on a tool like Whisper. Gemma 4 includes a native audio encoder that is 50% smaller than the one found in Gemma 3N. This drastically reduces the disk space and VRAM overhead for voice-first applications. The vision encoder has also been overhauled to support native aspect ratio processing, allowing the model to "see" documents and screenshots without distorting the image.
+
+### Chain of Thought "Thinking"
+A standout feature in the 2026 release is the integrated "thinking" mode. By enabling a specific flag in the chat template (`enable_thinking=true`), the model can perform long chain-of-thought reasoning before delivering a final answer. This is particularly effective for complex coding tasks or strategy-heavy gaming scenarios where the AI needs to weigh multiple variables.
+
+### Agentic Function Calling
+Gemma 4 has function calling "baked in" at the architectural level. This allows the model to interact with external tools—such as a game engine's API or a web browser—with much higher reliability than models that simply follow "instructions" to format text. 
+
+## Hardware Recommendations for Local Deployment
+
+To get the most out of the **gemma 4 model sizes parameters vram requirements**, your hardware choice is paramount. While the Edge models can run on a Raspberry Pi or a high-end smartphone, the Workstation models require modern GPU architecture.
+
+1. **The Entry-Level Setup (8GB VRAM):** You are limited to the E4B and E2B models. These will run lightning-fast and are perfect for simple chat interfaces or basic image recognition.
+2. **The Mid-Range Setup (16GB - 24GB VRAM):** This is the ideal range for the 26B MoE model at 4-bit quantization. You can also run the 31B Dense model with some light quantization (4-bit or 5-bit). This setup is perfect for local coding and advanced AI agents.
+3. **The Professional Setup (48GB+ VRAM):** Using cards like the RTX 6000 Pro or dual GPU configurations allows you to run the 31B Dense model at 8-bit or higher, providing maximum reasoning capabilities for complex data analysis.
+
+> **💡 Tip:** If you are VRAM-constrained, use tools like LM Studio or Ollama to offload specific layers to your system RAM. While this is slower, it allows you to run the 31B model on hardware that would otherwise be incompatible.
+
+## Multilingual Support and Coding Prowess
+
+Google trained Gemma 4 on a massive dataset encompassing 140 languages for pre-training. For its instruction-tuned variants, 35 languages are natively supported for high-quality post-training tasks. This makes Gemma 4 one of the most versatile open-weights models for global applications.
+
+In coding benchmarks, the 31B Dense model has shown parity with much larger proprietary models. It excels at:
+*   **Code Generation:** Writing boilerplate or complex functions from scratch.
+*   **Refactoring:** Improving existing code for better performance or readability.
+*   **Documentation:** Understanding large codebases via its 256K context window.
+
+For more technical details on implementation, you can visit the [Official Google AI Blog](https://blog.google/technology/ai/) for the latest whitepapers and developer documentation.
+
+## FAQ
+
+**Q: What is the minimum VRAM required for the Gemma 4 31B model?**
+
+A: At 4-bit quantization, you need approximately 18GB of VRAM. For a smooth experience with some context overhead, a 24GB card like the RTX 3090, 4090, or 5090 is recommended.
+
+**Q: Does Gemma 4 support commercial use?**
+
+A: Yes. Gemma 4 is released under the Apache 2.0 license, which allows for modification, distribution, and commercial use without the restrictive clauses found in earlier "open weights" licenses.
+
+**Q: Can I run the audio features on the E2B model?**
+
+A: Yes, the Edge models (E2B and E4B) feature a highly compressed, native audio encoder. This allows for speech-to-text and speech-to-translated-text tasks to run entirely on-device with very low latency.
+
+**Q: How does the 26B MoE model differ from the 31B Dense model in terms of VRAM?**
+
+A: While the 26B MoE has fewer total parameters, its VRAM footprint is similar to the 31B model because all "experts" must be loaded into memory for efficient inference. However, because it only activates 3.8B parameters per token, it is significantly faster (higher tokens per second) than the 31B Dense model on the same hardware. Understanding these **gemma 4 model sizes parameters vram requirements** is key to balancing speed versus raw reasoning depth.

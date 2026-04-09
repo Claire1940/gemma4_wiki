@@ -1,0 +1,132 @@
+export const metadata = {
+  title: "Requisitos de memoria de Gemma 4 31b: Guía de configuración local 2026",
+  description: "Domina los requisitos de memoria de gemma 4 31b para el alojamiento local de IA. Conoce las especificaciones de VRAM, consejos de cuantización y optimización de hardware para el modelo abierto más reciente de Google.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+31B+Memory+Requirements",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+La llegada de la familia de modelos Gemma 4 a principios de 2026 ha causado un gran impacto en las comunidades locales de IA y gaming. Como el lanzamiento de código abierto más ambicioso de Google hasta la fecha, el modelo 31B Dense ofrece un rendimiento que rivaliza con los gigantes propietarios, pero conlleva exigencias de hardware significativas. Si eres un desarrollador o un usuario avanzado que busca integrar lógica de LLM avanzada en sus proyectos locales, comprender los **requisitos de memoria de gemma 4 31b** es el primer paso hacia una implementación estable. Ejecutar un modelo de esta escala requiere un equilibrio delicado entre la capacidad de VRAM y la precisión de la cuantización. En esta guía, desglosaremos los **requisitos de memoria de gemma 4 31b** exactos para diversas configuraciones, asegurando que no encuentres errores de "Memoria insuficiente" (OOM) durante tu primera fase de inferencia.
+
+## La jerarquía del modelo Gemma 4
+
+Antes de profundizar en las especificaciones de hardware, es importante entender dónde se sitúa el modelo 31B dentro de la línea de 2026. Google lanzó cuatro tamaños distintos para adaptarse a diferentes niveles de hardware, que van desde versiones ligeras para móviles hasta el robusto modelo denso.
+
+| Variante del modelo | Parámetros | Tipo | Ventana de contexto | Caso de uso clave |
+|---|---|---|---|---|
+| **Gemma 4 E2B** | 2.3B Efectivos | Embeddings por capa | 128K | Dispositivos móviles/Edge |
+| **Gemma 4 E4B** | 4.5B Efectivos | Embeddings por capa | 128K | Smartphones de gama alta |
+| **Gemma 4 26B** | 26B (4B Activos) | Mezcla de expertos (MoE) | 256K | Escritorio local / Inferencia rápida |
+| **Gemma 4 31B** | 31B | **Denso** | 256K | Escritura creativa / Programación compleja |
+
+La variante 31B es un modelo "completamente denso", lo que significa que cada parámetro está activo durante cada paso de procesamiento. Esto proporciona la máxima calidad y lo convierte en la opción preferida para el ajuste fino (fine-tuning), pero también significa que los **requisitos de memoria de gemma 4 31b** son sustancialmente más altos que los de la versión 26B MoE.
+
+## Requisitos de memoria detallados de Gemma 4 31b
+
+Para ejecutar el modelo Gemma 4 31B localmente, tu principal cuello de botella será la memoria de acceso aleatorio de video (VRAM). Aunque técnicamente el modelo puede ejecutarse en la RAM del sistema utilizando formatos GGUF y descarga de CPU (CPU offloading), el rendimiento suele ser demasiado lento para aplicaciones en tiempo real como NPCs de juegos o narración interactiva.
+
+### Estimaciones de VRAM por cuantización
+
+La cuantización es el proceso de reducir la precisión de los pesos del modelo (por ejemplo, de 16 bits a 4 bits) para ahorrar memoria. En 2026, las cuantizaciones de 4 y 8 bits siguen siendo el estándar para los entusiastas del hogar.
+
+| Nivel de cuantización | VRAM estimada (Solo modelo) | VRAM total recomendada | Impacto en el rendimiento |
+|---|---|---|---|
+| **FP16 (Sin comprimir)** | ~62.0 GB | 80 GB | **Ninguno** (Calidad total) |
+| **Q8_0 (8 bits)** | ~33.5 GB | 40 GB - 48 GB | Mínimo |
+| **Q4_K_M (4 bits)** | ~18.5 GB | 24 GB (RTX 3090/4090) | Perceptible en lógica compleja |
+| **Q2_K (2 bits)** | ~11.0 GB | 16 GB | Significativo (Usar solo si es necesario) |
+
+> **💡 Consejo:** Para obtener el mejor equilibrio entre velocidad e inteligencia, apunta a una **cuantización Q6_K o Q8_0**. Esto normalmente requiere una configuración multi-GPU o una tarjeta de grado profesional como la NVIDIA A6000 o H100.
+
+### El papel de la longitud del contexto
+El modelo Gemma 4 31B admite una ventana de contexto masiva de 256K. Sin embargo, llenar ese contexto requiere VRAM adicional para el caché KV (Key-Value). Si planeas usar la ventana completa de 256K, debes esperar agregar entre 8 GB y 16 GB adicionales de sobrecarga de VRAM por encima de los pesos del modelo.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento en tareas creativas y de gaming
+
+En pruebas del mundo real realizadas en 2026, el modelo Gemma 4 31B ha mostrado una capacidad notable para generar lógica de juego compleja y descripciones visuales. En pruebas de FPS de "Subway Survival", el modelo implementó con éxito el retroceso de armas, destellos de disparo y lógica de generación infinita de enemigos usando JavaScript.
+
+### Capacidades de programación y lógica
+El modelo 31B Dense destaca donde los modelos más pequeños fallan, particularmente en mantener el estado a largo plazo. Cuando se le encargó construir una simulación interactiva de una "Colonia de Hormigas", el modelo implementó con éxito:
+*   **Sistemas de feromonas** con lógica de evaporación.
+*   **Ciclos de día/noche** que afectaban el comportamiento de las hormigas.
+*   **Métricas de salud de la colonia** y "cascadas de muerte".
+
+Aunque el modelo 26B MoE es más rápido, el modelo 31B Dense proporciona una narrativa más cohesiva y menos "alucinaciones" en estructuras de código complejas. Si tu hardware cumple con los **requisitos de memoria de gemma 4 31b**, el salto en calidad es palpable.
+
+## Estrategias de optimización de hardware para 2026
+
+Si tu GPU actual se queda corta por poco, hay varias optimizaciones a nivel de software que puedes emplear para exprimir el modelo 31B en tu sistema.
+
+### 1. Flash Attention 2
+Asegúrate de tener Flash Attention 2 habilitado en tu entorno (por ejemplo, a través de Transformers o vLLM). Esto reduce significativamente la huella de memoria del mecanismo de atención, lo cual es vital dada la ventana de contexto de 256K de Gemma 4.
+
+### 2. División Multi-GPU
+Si tienes dos tarjetas de 16 GB (como dos RTX 4080), puedes dividir el modelo entre ambas. Herramientas como [LM Studio](https://lmstudio.ai/) u Ollama manejan esto automáticamente. Esto te permite ejecutar la cuantización de 8 bits cómodamente, lo cual sería imposible en una sola tarjeta de consumo.
+
+### 3. Descarga de capas (Layer Offloading)
+Para usuarios con RAM de sistema DDR5 de alta velocidad, puedes descargar capas específicas a tu CPU. Si bien esto reduce los **requisitos de memoria de gemma 4 31b** para tu GPU, disminuirá significativamente tus tokens por segundo (t/s). En 2026, un modelo 31B ejecutándose puramente en una CPU moderna podría alcanzar solo 1-2 t/s, en comparación con los más de 20 t/s en una GPU dedicada.
+
+> **⚠️ Advertencia:** Evita ejecutar el modelo 31B con menos de 16 GB de VRAM. Incluso con una cuantización pesada de 2 bits, la pérdida de "inteligencia" hace que el modelo rinda peor que la variante 4.5B, que es más pequeña y eficiente.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/-3DmzBdUVm4"
+    title="Gemma 4 Dances Into the Future - Google's Most Powerful 31B Open Model Installed Locally"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Funciones multimodales y de visión
+
+Gemma 4 31B es nativamente multimodal. Puede "ver" imágenes y analizar fotogramas de video con alta precisión. En pruebas de benchmark, identificó correctamente componentes en diagramas de circuitos complejos de Arduino y describió rutinas de baile sincronizadas de videoclips con detalle atlético.
+
+| Característica | Capacidad de 31B Dense |
+|---|---|
+| **OCR (Manuscrito)** | Transcribe perfectamente ecuaciones físicas desordenadas a LaTeX. |
+| **Análisis de video** | Detecta movimiento, iluminación y entorno (ej. "estadio de fútbol americano"). |
+| **Diseño UI/UX** | Puede construir un sitio web funcional a partir de un boceto dibujado a mano. |
+| **Multilingüe** | Soporta más de 140 idiomas con matices culturales. |
+
+Debido a que el codificador de visión también consume VRAM, debes contabilizar entre 1 y 2 GB de memoria adicional al procesar imágenes de alta resolución o fotogramas de video.
+
+## Pasos de instalación local (Ubuntu/Linux)
+
+Para aquellos que utilizan hardware de grado profesional como la NVIDIA H100 (80 GB), la instalación es sencilla a través de la biblioteca de Hugging Face.
+
+1.  **Crear un entorno virtual:** Usa `conda create -n gemma4 python=3.10`.
+2.  **Instalar prerrequisitos:** `pip install transformers torch accelerate`.
+3.  **Autenticación:** Inicia sesión en Hugging Face usando `huggingface-cli login` para acceder a los pesos de Gemma 4.
+4.  **Descargar y cargar:** Usa el método `from_pretrained` con `device_map="auto"` para distribuir automáticamente el modelo entre la VRAM disponible.
+
+## FAQ (Preguntas frecuentes)
+
+**P: ¿Puedo ejecutar Gemma 4 31B en una RTX 4090?**
+
+R: Sí, pero solo con cuantización de 4 bits (Q4_K_M). La RTX 4090 tiene 24 GB de VRAM, y el modelo de 4 bits requiere aproximadamente entre 18 y 20 GB. Esto deja muy poco espacio para ventanas de contexto largas, por lo que es posible que debas limitar tu contexto a 8K o 16K tokens.
+
+**P: ¿Por qué el modelo 31B Dense se siente más lento que el modelo 26B MoE?**
+
+R: El modelo 26B MoE (Mezcla de Expertos) solo activa unos 4 mil millones de parámetros durante la inferencia. En cambio, el modelo 31B Dense calcula cada uno de los parámetros para cada palabra que genera. Aunque el modelo 31B es más inteligente, es matemáticamente mucho más "costoso" de ejecutar.
+
+**P: ¿Cuáles son los requisitos de memoria de gemma 4 31b para usuarios de Mac?**
+
+R: Para usuarios de Mac Studio o MacBook Pro con Memoria Unificada, se debe apuntar a al menos 64 GB de RAM. Dado que Apple Silicon comparte la memoria entre la CPU y la GPU, necesitas suficiente espacio para el sistema operativo, los pesos del modelo (aprox. 34 GB para 8 bits) y el caché KV.
+
+**P: ¿Hay alguna forma de probar Gemma 4 31B gratis sin el hardware?**
+
+R: Sí, en 2026, varios proveedores como NVIDIA NIM y OpenRouter ofrecen acceso vía API a Gemma 4 31B. Esto te permite probar las capacidades del modelo antes de invertir en el costoso hardware necesario para una configuración local.

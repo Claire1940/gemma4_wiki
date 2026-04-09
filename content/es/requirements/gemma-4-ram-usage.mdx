@@ -1,0 +1,102 @@
+export const metadata = {
+  title: "Uso de RAM de Gemma 4: Requisitos de hardware y guía de optimización 2026",
+  description: "Conozca el uso exacto de RAM de Gemma 4 para diferentes tamaños de parámetros y niveles de cuantización. Optimice su configuración de IA local para el mejor rendimiento en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+RAM+Usage+Guide",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento del último modelo de código abierto de Google ha causado una gran conmoción en la comunidad de IA, pero para los usuarios locales, entender el **uso de RAM de gemma 4** es el factor más crítico para una experiencia fluida. A diferencia de las iteraciones anteriores, esta serie de modelos introduce arquitecturas de parámetros "Effective" (Efectivas) que superan con creces su categoría, rivalizando con modelos de billones de parámetros mientras siguen siendo accesibles en hardware de consumo. Sin embargo, si planea desplegar estos modelos en su propia máquina, gestionar su **uso de RAM de gemma 4** de manera efectiva marcará la diferencia entre una inferencia ultrarrápida y un bloqueo total del sistema.
+
+En esta guía completa, desglosaremos los requisitos de hardware para cada "versión" del modelo, desde la ligera versión 2B hasta la potente variante 31B. Ya sea que sea un desarrollador que busca funciones de agentes o un aficionado que desea ejecutar una IA con capacidad de visión en una computadora portátil, seguir estos pasos de optimización garantizará que su hardware esté a la altura de la tarea en 2026.
+
+## Uso de RAM de Gemma 4: Desglose por tamaño de modelo
+
+Google ha lanzado Gemma 4 en varios tamaños para adaptarse a diferentes niveles de hardware. El desarrollo más interesante es el modelo "E4B" (Effective 4 Billion). Aunque se comercializa como un modelo 4B, en realidad contiene aproximadamente 8 mil millones de parámetros, utilizando una arquitectura especializada para mantener la velocidad de un modelo más pequeño con la inteligencia de uno más grande. Esto significa que el **uso de RAM de gemma 4** para la variante E4B es aproximadamente el doble que el de los modelos Gemma 3 4B anteriores.
+
+| Variante del modelo | Recuento de parámetros | RAM est. (Cuant. 4 bits) | RAM est. (Cuant. 8 bits) |
+|---|---|---|---|
+| **Gemma 4 2B** | 2 mil millones | **2.5 GB** | **4.0 GB** |
+| **Gemma 4 E4B** | 4B (8B Total) | **6.5 GB** | **10.5 GB** |
+| **Gemma 4 26B** | 26 mil millones | **18.0 GB** | **32.0 GB** |
+| **Gemma 4 31B** | 31 mil millones | **22.0 GB** | **38.0 GB** |
+
+> **⚠️ Advertencia:** Estas estimaciones son solo para los pesos del modelo. También debe tener en cuenta el consumo del sistema operativo y el caché KV requerido para conversaciones largas.
+
+## Entendiendo el impacto de los parámetros "Effective"
+
+El modelo E4B es un referente en la línea de 2026. Durante las pruebas locales, los usuarios han notado que, si bien la velocidad de inferencia sigue siendo alta (a menudo superando los 50 tokens por segundo en GPU de gama media), el tamaño del archivo es significativamente mayor de lo esperado. Por ejemplo, una versión cuantizada de 8 bits de Gemma 4 E4B ocupa aproximadamente 10 GB, mientras que la generación anterior era de solo 5 GB.
+
+Este aumento de tamaño se debe a la capacidad del modelo para "pensar profundamente" y utilizar funciones de agentes. Puede acceder a herramientas de búsqueda web, realizar tareas de codificación complejas e incluso procesar datos de audio y visión. Para manejar estas capacidades multimodales, el modelo requiere más "espacio" en la memoria de su sistema.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eS9RJbnYiF0"
+    title="Cómo ejecutar Google Gemma 4 AI LOCALMENTE en su computadora"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Ventana de contexto y escalado de memoria
+
+Una de las características más impresionantes de Gemma 4 es su soporte para una ventana de contexto de hasta **256,000 tokens**. Esto permite a la IA "recordar" libros enteros o bases de código masivas durante una sola sesión. Sin embargo, utilizar la ventana de contexto completa aumenta drásticamente el **uso de RAM de gemma 4**.
+
+1.  **Contexto pequeño (4k - 8k tokens):** Impacto mínimo en la RAM; adecuado para chats básicos.
+2.  **Contexto medio (32k - 64k tokens):** Requiere de 2 a 4 GB adicionales de VRAM/RAM para el caché KV.
+3.  **Contexto grande (128k - 256k tokens):** Puede requerir más de 16 GB de memoria dedicada solo para el contexto, aparte de los pesos del modelo.
+
+Si está ejecutando el modelo 31B con una ventana de contexto completa, es probable que necesite una GPU de grado profesional o una Mac con Memoria Unificada (64 GB o superior) para evitar ralentizaciones significativas.
+
+## Especificaciones de hardware recomendadas para 2026
+
+Para ejecutar estos modelos de manera efectiva, debe hacer coincidir el tamaño del modelo con su hardware disponible. A continuación, se muestra una tabla de recomendaciones para varios perfiles de usuario.
+
+| Perfil de usuario | Modelo recomendado | Hardware mínimo |
+|---|---|---|
+| **Móvil / PC económico** | Gemma 4 2B (Q4) | 8GB RAM / Smartphone moderno |
+| **Gaming de gama media** | Gemma 4 E4B (Q8) | 16GB RAM / RTX 3060 (12GB VRAM) |
+| **Usuario avanzado / Dev** | Gemma 4 26B (Q4) | 32GB RAM / RTX 4080 (16GB VRAM) |
+| **Estación de trabajo / Pro de IA** | Gemma 4 31B (Q8) | 64GB RAM / Dual RTX 3090/4090 |
+
+> **💡 Consejo:** Si está utilizando [LM Studio](https://lmstudio.ai/), verifique siempre el indicador de "Memory Requirements" antes de descargar un modelo. Le dirá si el modelo cabe completamente en la VRAM de su GPU o si se "desbordará" hacia la memoria RAM del sistema, que es más lenta.
+
+## Cómo optimizar el uso de RAM de Gemma 4
+
+Si encuentra que su sistema tiene dificultades para mantenerse al día con las demandas del modelo, hay varios pasos que puede seguir para reducir la huella de memoria:
+
+### Use cuantización (Compresión)
+La cuantización es el proceso de reducir la precisión de los pesos del modelo. Pasar de una cuantización de 8 bits (Q8) a una de 4 bits (Q4) puede reducir su **uso de RAM de gemma 4** casi a la mitad con solo un impacto menor en la inteligencia. Para la mayoría de los usuarios, los formatos Q4_K_M o Q5_K_M proporcionan el mejor equilibrio entre rendimiento e inteligencia.
+
+### Descargar capas a la GPU (Offloading)
+Si tiene una tarjeta gráfica dedicada pero no tiene suficiente VRAM para contener todo el modelo, herramientas como LM Studio le permiten "descargar" un número específico de capas a la GPU. Esto divide la carga de trabajo entre su VRAM y la RAM del sistema, permitiéndole ejecutar modelos más grandes como la versión 26B en hardware que de otro modo no podría soportarlo.
+
+### Actualice sus entornos de ejecución
+Asegúrese de estar utilizando la última versión de su ejecutor de IA local. Google actualiza frecuentemente los kernels de Gemma. El uso de motores desactualizados puede resultar en una asignación de memoria ineficiente, lo que hace que el modelo use más RAM de la necesaria. Busque siempre "Runtime Updates" o "Framework Updates" dentro de su software preferido.
+
+## Funciones multimodales y de agentes
+
+El alto **uso de RAM de gemma 4** está justificado por la versatilidad del modelo. En pruebas locales, el modelo E4B pudo identificar correctamente un "Wallaby blanco" a partir de una fotografía, una tarea con la que incluso algunos modelos propietarios más grandes tienen dificultades. Además, el modelo admite "Llamada de funciones" (Function Calling), lo que le permite interactuar con el sistema de archivos de su computadora o realizar búsquedas en la web si se configura correctamente a través del [MCP de Hugging Face](https://huggingface.co/).
+
+Ejecutar estas funciones simultáneamente requiere un entorno de memoria estable. Si nota que el modelo "alucina" o se corta a mitad de una frase, a menudo es una señal de que su sistema se ha quedado sin RAM disponible y está luchando por intercambiar datos desde el archivo de paginación.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 en una computadora portátil con 8 GB de RAM?**
+
+R: Sí, puede ejecutar el modelo Gemma 4 2B o una versión altamente comprimida (Q2 o Q3) del modelo E4B. Sin embargo, para una experiencia fluida con el modelo 4B, se recomiendan encarecidamente 16 GB de RAM para manejar la sobrecarga de parámetros "Effective".
+
+**P: ¿Aumenta el uso de RAM de gemma 4 al usar funciones de visión?**
+
+R: Sí. El procesamiento de imágenes requiere memoria adicional para contener los tokens visuales. Al cargar imágenes de alta resolución para que la IA las analice, espere un aumento temporal en el uso de RAM de aproximadamente 500 MB a 1 GB por imagen.
+
+**P: ¿Hay alguna forma de usar Gemma 4 sin usar la RAM de mi máquina local?**
+
+R: Absolutamente. Puede usar [Google AI Studio](https://aistudio.google.com/) para chatear con los modelos Gemma 4 26B y 31B de forma gratuita en un entorno de nube. Esta es una excelente manera de probar las capacidades del modelo antes de decidir qué versión descargar para uso local.
+
+**P: ¿Por qué el modelo Gemma 4 E4B es más grande que el modelo Gemma 3 4B?**
+
+R: La "E" significa "Effective" (Efectivo). Aunque actúa como un modelo 4B en términos de velocidad, tiene la arquitectura de un modelo 8B. Esto resulta en capacidades superiores de razonamiento y visión, pero requiere más espacio de almacenamiento y RAM.

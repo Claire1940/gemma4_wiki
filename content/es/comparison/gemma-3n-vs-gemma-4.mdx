@@ -1,0 +1,122 @@
+export const metadata = {
+  title: "Gemma 3n vs Gemma 4: La Comparativa Definitiva de Modelos de IA 2026",
+  description: "Una comparativa profunda entre Gemma 3n de Google y la serie Gemma 4. Explora benchmarks, rendimiento móvil y capacidades agénticas para 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+3n+vs+Gemma+4+Comparison",
+  date: "2026-04-08",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado drásticamente en 2026, con Google liderando el camino a través de sus lanzamientos de modelos especializados. Al evaluar **gemma 3n vs gemma 4**, los desarrolladores y entusiastas de la IA se enfrentan a una elección entre un rendimiento móvil hiperoptimizado y un razonamiento agéntico de alto nivel. Mientras que Gemma 3n se centra en llevar la potencia de Gemini Nano a la comunidad de código abierto, la serie Gemma 4 introduce un nuevo paradigma de "inteligencia por parámetro", desafiando a modelos veinte veces más grandes. Comprender los matices de **gemma 3n vs gemma 4** es esencial para cualquiera que busque desplegar IA local en dispositivos edge o construir flujos de trabajo automatizados complejos. Esta guía desglosa los cambios arquitectónicos, los resultados de los benchmarks y las aplicaciones en el mundo real de estas dos potentes familias para ayudarte a decidir qué modelo se adapta a los requisitos específicos de tu proyecto en 2026.
+
+## Evolución Arquitectónica: Enfoque Nano vs. Agéntico
+
+La distinción principal en el debate **gemma 3n vs gemma 4** comienza con su propósito fundamental. Gemma 3n, donde la "n" significa su linaje directo de los modelos de tamaño Nano, está construido específicamente para los entornos más limitados. Utiliza la innovadora arquitectura MatFormer, un sistema "dos en uno" que permite a los desarrolladores escalar dinámicamente entre la calidad máxima y un consumo de recursos ultrabajo sin cambiar de modelo. Esto lo convierte en una herramienta quirúrgica para desarrolladores de aplicaciones móviles en plataformas Android y Chrome.
+
+Por el contrario, la serie Gemma 4 está diseñada para "flujos de trabajo agénticos". Estos modelos no están diseñados solo para chatear; están construidos para actuar. Con soporte para salidas JSON estructuradas, uso avanzado de herramientas y razonamiento de múltiples pasos, Gemma 4 es la opción superior para los desarrolladores que construyen agentes autónomos. La serie ofrece una gama de tamaños, incluyendo un modelo Mixture-of-Experts (MoE) de 26B que solo activa 3.8B de parámetros durante la inferencia, proporcionando un aumento masivo de eficiencia sobre los modelos densos tradicionales.
+
+| Característica | Gemma 3n | Gemma 4 (31B Denso) |
+| :--- | :--- | :--- |
+| **Enfoque Principal** | Eficiencia Móvil/Edge | Razonamiento Agéntico y Código |
+| **Arquitectura** | MatFormer (2 en 1) | Variantes Densas y MoE |
+| **Ventana de Contexto** | Optimizado para RAM de Dispositivo | Hasta 256K Tokens |
+| **Multimodal** | Audio, Video, Imagen, Texto | Imagen Avanzada y Razonamiento Visual |
+| **Licencia** | Apache 2.0 | Apache 2.0 |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de Rendimiento e Índice de Inteligencia
+
+Al comparar **gemma 3n vs gemma 4** en inteligencia bruta, Gemma 4 toma una ventaja significativa en tareas complejas. En las pruebas de 2026, el modelo Gemma 4 31B logró una puntuación MMLU Pro de 85.2, situándolo en el nivel superior de los modelos de código abierto. Aunque queda ligeramente por detrás de competidores como Qwen 3.5 en puntos puros de "índice de inteligencia", lo compensa con la eficiencia de tokens. Gemma 4 utiliza aproximadamente 2.5 veces menos tokens de salida para tareas similares, lo que resulta en generaciones más rápidas y menores costes operativos.
+
+Gemma 3n, sin embargo, domina en velocidad de "prefill". En procesadores móviles, es aproximadamente 1.5 veces más rápido procesando entradas iniciales que los modelos 4B anteriores. Esto lo hace ideal para interacciones en tiempo real donde la latencia es el factor más crítico, como asistentes de voz o herramientas de traducción en vivo.
+
+| Benchmark | Gemma 3n (Preview) | Gemma 4 (31B) |
+| :--- | :--- | :--- |
+| **MMLU Pro** | ~68-72 (Estimado) | **85.2** |
+| **Matemáticas (GSM8K)** | Fuerte Rendimiento Móvil | **Razonamiento de Nivel Superior** |
+| **Código (LiveCode)** | Fragmentos Básicos | **80% de Precisión** |
+| **Velocidad de Prefill** | **1.5x más rápido que G3** | Inferencia de Alta Eficiencia |
+
+> **💡 Consejo:** Si tu aplicación requiere lógica compleja o codificación extensa, Gemma 4 es el claro ganador. Para resúmenes de texto simples o interacciones de interfaz de usuario en el dispositivo, Gemma 3n ofrece una mejor capacidad de respuesta.
+
+## Capacidades Multimodales: Audio vs. Razonamiento Visual
+
+Un hito importante en la comparativa **gemma 3n vs gemma 4** es cómo manejan las entradas que no son de texto. Gemma 3n es el primero de la serie en entender nativamente entradas de audio y video en el dispositivo. Esto permite a los usuarios apuntar la cámara de un teléfono a un objeto y hacer preguntas en tiempo real, con el modelo procesando los datos visuales y auditivos localmente sin intervención de la nube.
+
+Gemma 4 centra su potencia multimodal en el razonamiento visual profundo. Puede analizar múltiples imágenes simultáneamente para encontrar patrones compartidos o extraer datos estructurados de diagramas complejos. En las pruebas de estrés de 2026, Gemma 4 fue capaz de generar código SVG de alta calidad para componentes de interfaz de usuario complejos e incluso simular física en juegos basados en navegador, demostrando un nivel de conciencia espacial rara vez visto en modelos de su tamaño.
+
+### Resultados de Pruebas de Gemma 4 en el Mundo Real
+*   **Tarea de Clon de MacOS:** Generó con éxito una interfaz de usuario funcional con una barra de herramientas, terminal y aplicación de configuración.
+*   **Simulador de F1:** Creó un renderizado 3D en código de navegador puro con movimiento físico básico.
+*   **Pintura SVG:** Capacidad excepcional para representar ambiente y movimiento (por ejemplo, viento en los árboles) a través de código.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eJFJRyXEHZ0"
+    title="Announcing Gemma 3n Preview: Powerful, Efficient, Mobile-First AI"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Despliegue y Requisitos de Hardware
+
+La elección entre **gemma 3n vs gemma 4** a menudo se reduce al hardware que tengas disponible. Gemma 3n está diseñado para vivir en tu smartphone o dentro de una sesión del navegador Chrome. Está optimizado para NPUs (Unidades de Procesamiento Neuronal) móviles y aspira a una huella de memoria mínima.
+
+Gemma 4, particularmente las versiones 26B y 31B, es más adecuado para hardware de clase de escritorio o servidores locales. Sin embargo, la optimización de Google ha llegado a un punto en el que el modelo 26B puede ejecutarse en un Mac Studio M2 Ultra a velocidades que superan los 300 tokens por segundo. Para aquellos que utilizan APIs en la nube, Gemma 4 es increíblemente asequible, con tarifas tan bajas como $0.14 por millón de tokens de entrada.
+
+| Variante del Modelo | Hardware Ideal | Requisito de Memoria |
+| :--- | :--- | :--- |
+| **Gemma 3n** | Smartphones, Tablets, IoT | **< 4GB RAM** |
+| **Gemma 4 (2B/4B)** | Teléfonos de Gama Alta, Laptops | **4GB - 8GB RAM** |
+| **Gemma 4 (26B MoE)** | Mac Studio, PC con GPU RTX | **16GB - 24GB RAM** |
+| **Gemma 4 (31B Denso)** | Estaciones de Trabajo de IA | **32GB+ RAM** |
+
+> **Advertencia:** Ejecutar el modelo Gemma 4 31B en portátiles de consumo sin VRAM dedicada puede provocar una ralentización significativa del rendimiento. Comprueba siempre tus núcleos CUDA o Metal disponibles antes del despliegue local.
+
+## Habilidades Agénticas y Uso de Herramientas
+
+Una de las características más emocionantes introducidas junto a Gemma 4 en 2026 son las "Habilidades de Agente". Esto permite al modelo encadenar diferentes herramientas para ejecutar tareas de múltiples pasos. Por ejemplo, puedes pedirle al modelo que extraiga datos estructurados de tus archivos locales, los procese y genere una visualización, todo en un solo flujo.
+
+Mientras que Gemma 3n admite llamadas a funciones básicas (como añadir un elemento a un calendario o crear una nota), Gemma 4 es capaz de una planificación mucho más compleja. Puede decidir el orden de las operaciones y manejar errores en la ejecución de herramientas de forma autónoma. Para los desarrolladores que buscan construir la próxima generación de asistentes de IA, las capacidades agénticas de Gemma 4 representan un salto significativo.
+
+Puedes explorar estos modelos más a fondo en el sitio oficial [Google AI Studio](https://aistudio.google.com/) para probar sus capacidades de razonamiento de forma gratuita.
+
+## Resumen de Casos de Uso
+
+Para concluir la comparativa **gemma 3n vs gemma 4**, veamos los mejores escenarios para cada uno:
+
+*   **Elige Gemma 3n si:** Estás construyendo una aplicación móvil que necesita funcionar sin conexión, requieres procesamiento de entrada de audio/video o necesitas el tiempo de respuesta más rápido absoluto para tareas simples.
+*   **Elige Gemma 4 si:** Estás desarrollando un asistente de programación, un agente web complejo o una herramienta de investigación local que requiere un razonamiento profundo y una salida de datos estructurados de alta calidad.
+
+La era de la IA de 2026 se define por la capacidad de elección. Ya sea que necesites la eficiencia móvil de 3n o el razonamiento potente de 4, Google ha proporcionado un marco robusto para el futuro de la inteligencia de código abierto.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 en mi teléfono Android?**
+
+R: Sí, las versiones más pequeñas de 2B y 4B de Gemma 4 están diseñadas para dispositivos móviles. Sin embargo, para la mejor experiencia en el dispositivo con audio y video, Gemma 3n está optimizado específicamente para ese entorno.
+
+**P: ¿Cuál es la principal diferencia en la arquitectura de gemma 3n vs gemma 4?**
+
+R: Gemma 3n utiliza la arquitectura MatFormer, que le permite ser más flexible con el uso de recursos en dispositivos móviles. Gemma 4 utiliza una mezcla de arquitecturas densas y Mixture-of-Experts (MoE) para maximizar la inteligencia y el razonamiento agéntico.
+
+**P: ¿Es Gemma 4 mejor programando que las versiones anteriores?**
+
+R: Absolutamente. Gemma 4 ha mostrado mejoras significativas en los benchmarks de codificación, logrando hasta un 80% en las pruebas de LiveCode. Es muy capaz de generar código de interfaz de usuario de nivel de producción y lógica compleja.
+
+**P: ¿Son estos modelos gratuitos para proyectos comerciales?**
+
+R: Tanto Gemma 3n como Gemma 4 se publican bajo la permisiva licencia Apache 2.0, lo que significa que son gratuitos tanto para uso personal como comercial en 2026.

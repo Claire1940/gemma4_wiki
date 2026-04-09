@@ -1,0 +1,97 @@
+export const metadata = {
+  title: "Requisitos de VRAM de Gemma 4 31b: Guía completa de benchmarks de GPU 2026",
+  description: "Explora los requisitos oficiales de VRAM de Gemma 4 31b y los benchmarks de rendimiento para RTX 3090, 4090 y 5090. Aprende cómo optimizar tu configuración de IA local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+31B+VRAM+Guide",
+  date: "2026-04-08",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la familia Gemma 4 por parte de Google ha causado un gran impacto en la comunidad de IA de código abierto, ofreciendo "byte por byte" algunos de los modelos más capaces jamás vistos. Sin embargo, para los entusiastas del hardware y los usuarios de LLM locales, el principal obstáculo sigue siendo los **requisitos de VRAM de gemma 4 31b**. Ejecutar un modelo de esta magnitud requiere un delicado equilibrio entre la memoria bruta de la GPU y técnicas de cuantización inteligentes. Ya sea que busques construir un agente de IA local o un asistente de programación de alta velocidad, entender los **requisitos de VRAM de gemma 4 31b** es esencial para asegurar que tu hardware pueda manejar los 31 mil millones de parámetros densos sin colapsar tu sistema.
+
+En esta guía, desglosamos el consumo de memoria específico para varios niveles de cuantización, comparamos el rendimiento de la serie insignia RTX 50 y proporcionamos una hoja de ruta para los usuarios que ejecutan Gemma 4 tanto en entornos Linux como macOS.
+
+## Entendiendo la arquitectura del modelo Gemma 4
+
+Antes de sumergirse en las especificaciones de hardware, es importante distinguir entre los dos pesos pesados de la línea Gemma 4. Google ha lanzado cuatro tamaños distintos: un modelo de 2.3B, uno de 4.5B, un Mixture of Experts (MoE) de 26B-A4B y el masivo modelo denso de 31B. 
+
+El modelo 31B es una arquitectura "densa", lo que significa que los 31 mil millones de parámetros están activos durante cada paso de inferencia. Esto resulta en capacidades de razonamiento superiores, pero impone una carga mucho mayor en la memoria de tu GPU en comparación con la versión MoE de 26B, que solo activa 4 mil millones de parámetros a la vez. Para aquellos que priorizan la salida de mayor calidad, el modelo 31B es el estándar de oro, pero exige una VRAM significativa para mantener velocidades aceptables de tokens por segundo (t/s).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/VYc47oqBnqI"
+    title="RTX 3090 vs 4090 vs 5090 vs Mac: Gemma 4 Benchmarks That Will Surprise You"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de VRAM de Gemma 4 31b y especificaciones de hardware
+
+La cantidad de VRAM que necesitas está directamente ligada a la "profundidad de bits" o cuantización del modelo. Una versión completa de 16 bits (FP16) de Gemma 4 31B requeriría teóricamente más de 60 GB de VRAM, lo cual es inaccesible para la mayoría de las GPU de consumo sin configuraciones multi-GPU. Sin embargo, el uso de cuantización de 4 u 8 bits (formatos GGUF o EXL2) hace que la ejecución local sea posible en tarjetas de consumo de gama alta.
+
+| Nivel de cuantización | Uso estimado de VRAM (Solo modelo) | GPU recomendada |
+|---|---|---|
+| **4-bit (Q4_K_M)** | ~17.5 GB - 19 GB | RTX 3090 / 4090 (24GB) |
+| **6-bit (Q6_K)** | ~24 GB - 26 GB | RTX 5090 (32GB) |
+| **8-bit (Q8_0)** | ~32 GB - 34 GB | RTX 5090 / Dual 3090s |
+| **FP16 (Original)** | ~62 GB+ | 2x RTX 6000 Ada / A100 |
+
+> **💡 Consejo:** Siempre deja de 2 a 4 GB de "margen" en tu VRAM para la Ventana de Contexto (KV Cache). Si planeas usar la longitud de contexto completa de 256K de Gemma 4 31B, tus requisitos de VRAM aumentarán significativamente más allá del tamaño base del modelo.
+
+## Rendimiento de benchmarks de GPU: 3090 vs. 4090 vs. 5090
+
+Al probar los **requisitos de VRAM de gemma 4 31b** en escenarios del mundo real, la RTX 5090 destaca como la clara ganadora en 2026. Debido a que la 5090 cuenta con 32 GB de VRAM de alta velocidad, puede albergar cómodamente una versión de 4 o 5 bits del modelo 31B, dejando mucho espacio para una gran ventana de contexto y el consumo del sistema.
+
+### Velocidades de generación de tokens (Modelo denso 31B)
+
+| Modelo de GPU | Capacidad de VRAM | Velocidad de generación (t/s) |
+|---|---|---|
+| **RTX 5090** | 32 GB | **64.88 t/s** |
+| **RTX 4090** | 24 GB | **42.30 t/s** |
+| **RTX 3090** | 24 GB | **35.70 t/s** |
+
+Como se muestra en los datos, la RTX 5090 es un caso excepcional, rindiendo casi un 50% más rápido que la 4090. Esto se debe en gran medida al aumento del ancho de banda de memoria y a las mejoras arquitectónicas que se encuentran en las tarjetas de la serie 50 Blackwell. Aunque la 3090 y la 4090 siguen siendo muy capaces de ejecutar Gemma 4 31B, probablemente se verán limitadas a cuantizaciones de 4 bits para mantenerse dentro de su búfer de 24 GB de VRAM.
+
+## Ejecución de Gemma 4 en macOS (Apple Silicon)
+
+Para los usuarios de Mac, los **requisitos de VRAM de gemma 4 31b** se gestionan a través de la Memoria Unificada. Debido a que el Apple Silicon permite que la GPU acceda a la RAM total del sistema, los usuarios con un M3 Max o M4 Ultra a menudo pueden ejecutar modelos más grandes que sus contrapartes de PC.
+
+Sin embargo, la velocidad es la contrapartida. Un M3 Max con 36 GB de RAM unificada puede cargar el modelo 31B en cuantización de 8 bits, pero las velocidades de generación suelen ser menores que las del hardware dedicado de NVIDIA, oscilando a menudo entre 10 y 15 t/s dependiendo de la carga actual del sistema. Para la mejor experiencia en Mac, se recomienda usar [llama.cpp](https://github.com/ggerganov/llama.cpp) o LM Studio para gestionar la asignación de memoria de manera efectiva.
+
+## Optimización de Gemma 4 para inferencia local
+
+Si encuentras que tu hardware tiene dificultades con el modelo 31B, hay varias rutas de optimización que puedes tomar:
+
+1.  **Usa cuantización de 4 bits:** Este es el "punto ideal" para las tarjetas de 24 GB. Pierdes muy poca precisión de razonamiento mientras ganas enormes cantidades de espacio de memoria.
+2.  **Limitación de contexto:** Si no necesitas que el modelo recuerde el equivalente a un libro masivo de datos, limita tu ventana de contexto a 8K o 16K tokens. Esto reduce drásticamente el consumo de VRAM durante conversaciones largas.
+3.  **Flash Attention:** Asegúrate de que tu motor de inferencia (como llama.cpp o vLLM) tenga habilitado Flash Attention. Esto optimiza la forma en que la GPU procesa el mecanismo de atención, reduciendo tanto la VRAM como el tiempo de cómputo.
+4.  **Considera el modelo MoE de 26B:** Si la velocidad es tu prioridad y solo tienes 16 GB o 24 GB de VRAM, el modelo Gemma 4 26B-A4B es significativamente más rápido. En los benchmarks, la RTX 5090 alcanza más de 180 t/s en el modelo MoE, en comparación con solo 64 t/s en el modelo denso de 31B.
+
+> **⚠️ Advertencia:** Quedarse sin VRAM (Error OOM) puede causar inestabilidad en el sistema o forzar al modelo a descargarse en la RAM del sistema (formato GGUF), lo que ralentizará las velocidades de generación a un paso de tortuga (a menudo menos de 1 t/s).
+
+## Preparándose para el futuro con Gemma 4
+
+A medida que avanzamos en 2026, el ecosistema de software para Gemma 4 continúa madurando. Herramientas como las API NIM de NVIDIA permiten a los usuarios delegar parte del cómputo a la nube mientras mantienen los datos sensibles de forma local, lo que puede ser una solución viable para aquellos que no cumplen con todos los **requisitos de VRAM de gemma 4 31b**.
+
+Para la mayoría de los usuarios, los 24 GB de VRAM que se encuentran en la RTX 3090 y 4090 siguen siendo el punto de entrada para el trabajo "serio" de IA local. Si estás construyendo un nuevo equipo específicamente para los modelos abiertos de Google, los 32 GB de VRAM de la RTX 5090 son el objetivo recomendado para asegurar que puedes ejecutar el modelo 31B en profundidades de bits altas sin concesiones.
+
+## FAQ
+
+**Q: ¿Puedo ejecutar Gemma 4 31B en una RTX 4080 con 16 GB de VRAM?**
+
+A: Es extremadamente difícil ejecutar el modelo 31B en 16 GB. Necesitarías una cuantización de 3 bits muy agresiva, lo que degrada significativamente la inteligencia del modelo. Para tarjetas de 16 GB, los modelos Gemma 4 4.5B o 26B MoE son opciones mucho mejores.
+
+**Q: ¿Cuál es la diferencia entre los modelos 31B Dense y 26B MoE?**
+
+A: El modelo 31B Dense utiliza todos sus parámetros para cada tarea, lo que lo hace mejor en razonamiento complejo. El modelo 26B MoE (Mixture of Experts) solo utiliza 4 mil millones de parámetros activos por token, lo que lo hace mucho más rápido pero ligeramente menos capaz en tareas de lógica "profunda". Ambos tienen una ventana de contexto de 256K.
+
+**Q: ¿Soporta Gemma 4 31B entrada multimodal?**
+
+A: Sí, Gemma 4 es multimodal. Puede "ver" imágenes y procesarlas junto con el texto. Esto aumenta ligeramente el requisito de VRAM cuando se procesa una imagen, ya que el codificador visual también debe cargarse en memoria.
+
+**Q: ¿Cuál es el mejor software para ejecutar Gemma 4 localmente en 2026?**
+
+A: Llama.cpp sigue siendo la herramienta más versátil para la mayoría de los usuarios. Para aquellos que prefieren una interfaz gráfica, LM Studio y Ollama ofrecen un excelente soporte para los modelos Gemma 4 y gestionan la cuantización automáticamente.
