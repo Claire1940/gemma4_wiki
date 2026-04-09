@@ -1,0 +1,111 @@
+export const metadata = {
+  title: "Gemma 3 vs Gemma 4: 2026年最新AIモデル完全比較",
+  description: "GoogleのGemma 3とGemma 4 AIモデルを比較。パフォーマンスのベンチマーク、ハードウェア要件、そしてあなたのPC環境に最適なローカルLLMはどちらかをご紹介します。",
+  category: "ガイド",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+3+vs+Gemma+4+Comparison",
+  date: "2026-04-09",
+  author: "Gemma Wiki チーム"
+}
+
+ローカル人工知能の状況は、Googleの最新オープンウェイトモデルのリリースによって劇的に変化しました。**gemma3 vs gemma4**を評価する際、ユーザーは効率性と推論能力の飛躍的な向上に注目しています。Gemma 3は堅牢なマルチモーダル機能と多様なサイズでの多言語対応の向上を実現しましたが、Gemma 4はChatGPTのようなトップクラスの商用クラウドモデルに匹敵する世代的な突破口を象徴しています。ローカルでハードウェアを動かしている開発者や愛好家にとって、トークン毎秒（TPS）のパフォーマンスと論理の正確性を最適化するために、**gemma3 vs gemma4**のニュアンスを理解することは不可欠です。Gemma 4は、より洗練されたMixture of Experts (MoE) アーキテクチャと「Effective（効果的）」なパラメータスケーリングを導入することで、前世代の限界をターゲットにしており、小型モデルでも複雑なコーディングや論理タスクにおいてそのサイズを遥かに超える実力を発揮します。
+
+## アーキテクチャの違いとモデルティア
+
+Gemmaモデルの第3世代から第4世代への移行により、より多様な専門バージョンが登場しました。Gemma 3は標準的なDense（密）サイズ（1B、4B、12B、27B）に焦点を当てていましたが、Gemma 4は「Effective」モデルと非常に効率的なMixture of Experts (MoE) バリアントを導入しています。これらの新しい構造により、モデルは特定のタスクに必要なパラメータのみをアクティブにすることができ、知性を損なうことなく速度を大幅に向上させます。
+
+| 特徴 | Gemma 3 (27B) | Gemma 4 (26B MoE) | Gemma 4 (31B Dense) |
+| :--- | :--- | :--- | :--- |
+| **アーキテクチャ** | Dense (密結合) | Mixture of Experts (MoE) | Dense (密結合) |
+| **アクティブパラメータ** | 270億 | **38億** | 310億 |
+| **コンテキスト長** | 128k トークン | **256k トークン** | 256k トークン |
+| **最適なユースケース** | ハイエンドデスクトップ | 高速な推論 | 最大限の知性 |
+| **論理スコア** | 中程度 | **高い** | 極めて高い |
+
+> **💡 ヒント:** 速度と知性の最高のバランスを求めているなら、Gemma 4 26B MoEモデルが現在のローカルハードウェアにおける「スイートスポット」です。大型モデルの論理性と小型モデルの速度を兼ね備えています。
+
+## パフォーマンスベンチマーク：世代間の飛躍
+
+直接的な比較テストにおいて、Gemma 4はほぼすべての指標でGemma 3を上回っています。Live CodeBench v6のようなコーディングベンチマークでは、小型のGemma 4モデルでさえ、最大のGemma 3モデルを圧倒することが示されています。これは主に、トレーニングデータの改善と、最新のRTX GPU向けにこれらのモデルを最適化するためのGoogleとNvidiaの協力によるものです。
+
+| ベンチマーク | Gemma 3 (27B) | Gemma 4 (2B Effective) | Gemma 4 (26B MoE) |
+| :--- | :--- | :--- | :--- |
+| **一般知識** | 67% | 60% | **82%** |
+| **コード生成** | 29% | 44% | **80%** |
+| **論理 (アリスの質問)** | 失敗することが多い | **合格** | **合格** |
+| **数学 (砂時計)** | 失敗 | 失敗 | **合格** |
+
+「アリスの質問」（兄弟に関する論理パズル）は、LLMの古典的なテストです。Gemma 3はこのようななぞなぞに必要な水平思考に苦労することが多かったのに対し、小型の「Effective」バージョンを含むGemma 4モデルは、これを一貫して解くことができます。これは、単なるパターンマッチングではなく、より深いレベルの内部推論が行われていることを示しています。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/RoACSQsfeiE"
+    title="You Should Run the Gemma 4 AI Model on Your PC Because it is Catching Chat GPT!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## ハードウェアの最適化と速度
+
+**gemma3 vs gemma4**の比較における最も重要なアップデートの一つは、ローカルハードウェアへの最適化です。GoogleはNvidiaと密接に協力し、Gemma 4が消費者向けのRTXカードで非常にスムーズに動作するようにしました。実際、RTX 5090や同様のハイエンドPCでGemma 4を実行すると、Apple M3 Ultraよりも最大2.7倍高速な結果が得られます。
+
+| ハードウェア | モデルサイズ | トークン毎秒 (TPS) |
+| :--- | :--- | :--- |
+| **RTX 5090** | 2B Effective | **278 TPS** |
+| **RTX 5090** | 4B Effective | **193 TPS** |
+| **RTX 5090** | 26B MoE | **183 TPS** |
+| **RTX 5090** | 31B Dense | 2.2 TPS |
+
+31B Denseモデルは、トークンごとに310億個のパラメータすべてをGPUが処理する必要があるため、大幅に遅くなります。逆に、26B MoEモデルは一度に38億個のアクティブパラメータしか使用しないため、はるかに大きなモデルと同等の知性を提供しながら、183 TPSという驚異的な速度を維持できます。
+
+## マルチモーダル機能とローカル展開
+
+Gemma 3は、ローカルデバイスにマルチモーダル機能（画像を見たり、音声を聞いたりする能力）をもたらした先駆者でした。Gemma 4はこれを洗練させ、Raspberry Piやスマートフォンなどのリソースが限られたデバイスでもマルチモーダル機能をより効率的に利用できるようにしています。ユーザーはOllamaのようなツールを使用してこれらのモデルを展開でき、タスクに応じて異なるバージョンを簡単に切り替えることができます。
+
+1. **Ollamaのインストール** — Windows、Mac、またはLinuxでGemmaをローカルに実行する最も簡単な方法です。
+2. **Gemma 4のダウンロード** — MoEバージョンの場合は、コマンド `ollama run gemma4:26b` を使用します。
+3. **GPUアクセラレーションの設定** — GoogleとNvidiaの最適化を活用するために、Nvidiaドライバーが最新であることを確認してください。
+4. **IDEとの統合** — APIトークンのコストを節約するために、VS CodeやCursorのローカルバックエンドとしてGemma 4を使用します。
+
+> **⚠️ 警告:** 31B Denseモデルは最高の知性を提供しますが、膨大なVRAMを必要とします。8GBから16GBのVRAMを持つほとんどのユーザーには、4B Effectiveまたは26B MoEモデルを強くお勧めします。
+
+## ユースケースに合わせた最適なバージョンの選択
+
+**gemma3 vs gemma4**のどちらを選ぶかは、通常、特定のハードウェアと、モデルが「Instruction Tuned（対話用）」である必要があるか、それとも「Pre-trained（独自のデータで微調整するための事前学習済み）」である必要があるかによって決まります。
+
+*   **モバイル/SBC用:** Gemma 4 2B Effectiveモデルを使用してください。Raspberry Piには十分小さく、基本的な論理には十分な賢さを持っています。
+*   **コーディング/開発用:** Gemma 4 26B MoEが明らかに勝者であり、ほぼすべてのコーディングベンチマークで旧型のGemma 3 27Bを上回っています。
+*   **クリエイティブライティング用:** Gemma 4の指示追従能力の向上により、「すべての行が特定の文字で始まる詩を書く」といった複雑な制約も処理できます。
+
+技術仕様の詳細については、[Google DeepMindの公式ブログ](https://deepmind.google/technologies/gemma/)にアクセスして、Gemmaエコシステムの最新アップデートを確認してください。
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/qcjrduz_YS8"
+    title="Which Gemma version is the right one for you?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## FAQ
+
+**Q: Gemma 4は商用プロジェクトで無料で使用できますか？**
+
+A: はい。Gemma 3と同様に、Gemma 4はオープンウェイトライセンスの下でリリースされており、Googleの許容利用ポリシーに従う限り、個人利用および商用利用の両方が可能です。
+
+**Q: コーディングにはgemma3とgemma4のどちらが適していますか？**
+
+A: Gemma 4の方がコーディングには大幅に優れています。ベンチマークでは、最小のGemma 4モデルでさえ、コード生成やデバッグのタスクにおいて最大のGemma 3モデルを凌駕しています。
+
+**Q: Gemma 4を実行するにはNvidiaのGPUが必要ですか？**
+
+A: Gemma 4はCUDAを介してNvidiaハードウェア向けに高度に最適化されていますが、ROCmを介したAMD GPUや、Metalアクセラレーションを使用したApple Silicon (M1/M2/M3) でも実行可能です。ただし、パフォーマンスの向上はNvidia RTXカードで最も顕著です。
+
+**Q: Gemma 4の「Effective Parameters（効果的なパラメータ）」とはどういう意味ですか？**
+
+A: 「Effective Parameters」とは、圧縮および最適化技術を指します。これにより、内部パラメータ数が多いモデル（例：8B）を、そのサイズに見合った知性を失うことなく、より小さなモデル（例：4B）のリソース要件と速度で動作するように調整されています。

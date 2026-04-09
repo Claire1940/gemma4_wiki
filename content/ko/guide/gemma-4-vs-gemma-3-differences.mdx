@@ -1,0 +1,120 @@
+export const metadata = {
+  title: "Gemma 4 vs Gemma 3 차이점: 2026년 AI 비교 가이드 완벽 정리",
+  description: "성능 벤치마크, 아키텍처 업그레이드, 2026년 로컬 하드웨어 최적화 등 Gemma 4와 Gemma 3의 주요 차이점을 살펴보세요.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+vs+Gemma+3+Differences",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+구글의 최신 오픈 모델 제품군이 출시되면서 로컬 인공지능의 지형이 극적으로 변화했습니다. 클라우드 기반 서비스에 의존하지 않고 자신의 하드웨어에서 고성능 AI를 활용하려는 개발자, 게이머, 연구원들에게 **Gemma 4 vs Gemma 3 차이점**을 이해하는 것은 필수적입니다. Gemma 3가 오픈 가중치(open-weights) 모델의 견고한 토대를 마련했다면, Gemma 4는 추론 능력, 멀티모달 지원, 그리고 '에이전틱(agentic)' 워크플로우에서 거대한 도약을 이루어냈습니다. 이 새로운 세대는 이전 버전들이 처리하기 어려워했던 복잡한 논리와 다단계 계획을 수행하도록 설계되었습니다. 이 종합 가이드에서는 **Gemma 4 vs Gemma 3 차이점**을 분석하여 2026년 여러분의 로컬 PC 설정과 특정 사용 사례에 가장 적합한 모델이 무엇인지 결정하는 데 도움을 드리고자 합니다.
+
+## 아키텍처 측면에서의 Gemma 4 vs Gemma 3 차이점 분석
+
+Gemma 3에서 Gemma 4로 전환되면서 가장 즉각적으로 나타난 변화는 아키텍처의 다양성입니다. Gemma 3가 주로 고밀도(Dense) 모델에 집중했다면, Gemma 4는 정교한 전문가 혼합(Mixture of Experts, MoE) 모델과 '이펙티브(Effective)' 파라미터 스케일링을 도입했습니다. 이를 통해 모델은 추론 주기 동안 전체 파라미터의 일부만 활성화함으로써 소비자용 하드웨어에서 훨씬 빠르게 실행될 수 있습니다.
+
+또한 처음으로 구글은 이 모델들을 오픈 소스인 **Apache 2.0 라이선스**로 출시했습니다. 이는 과거의 보다 제한적인 라이선스에서 크게 변화한 것으로, 커뮤니티 주도의 변형 모델 및 최적화 생태계가 더욱 활성화되도록 장려합니다.
+
+| 기능 | Gemma 3 (27B) | Gemma 4 (31B Dense) | Gemma 4 (26B MoE) |
+|---|---|---|---|
+| **아키텍처** | Dense | Dense | Mixture of Experts (MoE) |
+| **활성 파라미터** | 270억 개 | 310억 개 | **38억 개** |
+| **컨텍스트 윈도우** | 8k - 32k 토큰 | **256k 토큰** | **256k 토큰** |
+| **라이선스** | Gemma 이용 약관 | **Apache 2.0** | **Apache 2.0** |
+| **논리/추론** | 표준 수준 | 프론티어 수준 | 고속 추론 |
+
+## 성능 벤치마크: 세대 간의 도약
+
+두 세대 간의 성능 격차는 놀랍습니다. MMLU 및 LiveCodeBench와 같은 표준화된 벤치마크에서 **Gemma 4 vs Gemma 3 차이점**은 정확도 면에서 두 자릿수 퍼센트의 증가로 나타납니다. 예를 들어, 주력 모델이었던 Gemma 3 27B는 주요 추론 과제에서 약 67%를 기록했었습니다. 반면 새로운 Gemma 4 31B Dense 모델은 이 수치를 85%까지 끌어올려 GPT-5.2나 Claude 4 Opus와 같은 폐쇄형 소스 거대 모델들과 대등한 수준에 도달했습니다.
+
+Gemma 4 제품군의 소형 모델들조차 특정 코딩 작업에서는 Gemma 3의 가장 큰 버전들보다 뛰어난 성능을 보입니다. 이는 주로 개선된 학습 데이터와 단순한 패턴 매칭보다 논리적 일관성을 우선시하는 '에이전틱' 설계 철학 덕분입니다.
+
+| 벤치마크 지표 | Gemma 3 (27B) | Gemma 4 (4B Effective) | Gemma 4 (31B Dense) |
+|---|---|---|---|
+| **추론 정확도** | 67% | 70% | **85%** |
+| **LiveCodeBench v6** | 29% | 44% | **80%** |
+| **다국어 지원** | 20개 이상 언어 | **140개 이상 언어** | **140개 이상 언어** |
+
+> **💡 팁:** 속도와 지능의 최적의 균형을 찾고 있다면, 24GB VRAM GPU를 사용하는 대부분의 사용자에게 26B MoE 모델이 '스위트 스팟(가장 적절한 지점)'입니다.
+
+## 로컬 하드웨어 최적화: Nvidia vs. Apple
+
+가장 중요한 **Gemma 4 vs Gemma 3 차이점** 중 하나는 하드웨어별 최적화 수준입니다. 구글은 Nvidia와 직접 협력하여 Gemma 4가 RTX 기반 PC에서 탁월하게 작동하도록 보장했습니다. 이러한 협력은 Ollama나 LM Studio와 같은 로컬 추론 엔진을 사용할 때 이전 세대와 비교하여 상당한 속도 향상을 가져왔습니다.
+
+테스트 결과에 따르면 RTX 5090은 Gemma 4 26B MoE 모델을 초당 180토큰이 넘는 속도로 실행할 수 있습니다. 반면 M3 Ultra와 같은 하이엔드 Mac 하드웨어조차 뒤처지고 있으며, Nvidia GPU는 이러한 특정 모델에서 최대 2.7배의 속도 우위를 제공합니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/RoACSQsfeiE"
+    title="You Should Run the Gemma 4 AI Model on Your PC"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### RTX 5090 기반 속도 테스트 (2026년 하드웨어)
+
+| 모델 변형 | 토큰 속도 (TPS) | 기능 참고 사항 |
+|---|---|---|
+| **Gemma 4 2B Effective** | 278+ | 모바일/IoT용으로 압도적으로 빠름 |
+| **Gemma 4 4B Effective** | 193 | 기본 채팅/RP용으로 우수함 |
+| **Gemma 4 26B MoE** | **183** | 코딩 및 복잡한 논리에 최적 |
+| **Gemma 4 31B Dense** | 2.2 | 매우 느림; 배치 처리용으로 설계됨 |
+
+## 새로운 기능: 멀티모달 및 에이전틱 워크플로우
+
+Gemma 4는 단순한 텍스트 모델이 아닙니다. 이는 멀티모달 상호작용으로의 이동을 의미합니다. '이펙티브(Effective)' 2B 및 4B 모델은 이제 오디오 및 시각 처리를 기본적으로 지원합니다. 이를 통해 모델은 실시간으로 세상을 '보고' '들을' 수 있으며, 환경 자극에 반응해야 하는 임베디드 시스템이나 고급 게임 NPC에 이상적입니다.
+
+또한, '에이전틱' 시대에 초점을 맞춤으로써 Gemma 4는 도구 사용(tool use)을 기본적으로 지원합니다. 외부 API나 코드 인터프리터와 상호작용하기 위해 복잡한 프롬프팅이 필요했던 Gemma 3와 달리, Gemma 4는 다단계 작업을 자율적으로 계획하고 실행할 수 있습니다. 이는 파일 시스템 관리, 코드 작성 및 테스트, 또는 사용자를 대신해 게임을 플레이하는 [로컬 AI 에이전트](https://developer.nvidia.com/blog/)의 강력한 백엔드가 됩니다.
+
+> **⚠️ 경고:** 31B Dense 모델을 로컬에서 실행하려면 상당한 VRAM이 필요합니다. 급격한 속도 저하를 피하려면 최소 32GB에서 48GB 이상의 총 메모리(시스템 + 비디오)를 확보하십시오.
+
+## "앨리스"와 "모래시계" 논리 퍼즐 해결
+
+논리 퍼즐은 **Gemma 4 vs Gemma 3 차이점**을 관찰할 수 있는 고전적인 방법입니다. 이전 세대의 오픈 모델들은 관계 논리 테스트인 "앨리스" 질문과 수학적 계획 테스트인 "모래시계" 문제에서 자주 실패했습니다.
+
+1.  **앨리스 질문:** "앨리스에게는 5명의 남자 형제와 3명의 여자 형제가 있습니다. 앨리스의 남자 형제에게는 몇 명의 여자 형제가 있을까요?"
+    *   *Gemma 3 결과:* 종종 실패하여 "3명"이라고 답함.
+    *   *Gemma 4 결과:* 앨리스 자신을 여자 형제에 포함시켜 정확히 "4명"이라고 식별함.
+2.  **모래시계 문제:** 7분짜리 모래시계와 11분짜리 모래시계를 사용하여 15분을 측정하는 문제.
+    *   *Gemma 3 결과:* 대개 불가능한 단계를 환각(hallucination)함.
+    *   *Gemma 4 결과 (26B/31B):* 타이밍 단계를 성공적으로 매핑함.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 내 PC에 맞는 Gemma 4 모델 선택하기
+
+Gemma 4에는 네 가지 뚜렷한 버전이 있으므로, 적절한 모델 선택은 하드웨어와 목표에 따라 달라집니다.
+
+*   **Effective 2B & 4B:** 메모리 효율성을 극대화하도록 설계되었습니다. 라즈베리 파이 사용자, 모바일 개발자 또는 전용 GPU가 없는 노트북에서 AI를 실행하려는 사용자에게 적합합니다. 작은 크기에도 불구하고 140개 이상의 언어를 기본적으로 처리합니다.
+*   **26B 전문가 혼합(MoE):** 2026년 라인업의 주인공입니다. 어느 시점에서든 38억 개의 파라미터만 활성화되므로, 소형 모델의 속도로 거대 모델의 지능을 제공합니다. 로컬 코딩 어시스턴트 및 복잡한 롤플레이에 이상적입니다.
+*   **31B Dense:** '프론티어' 모델입니다. 무엇보다 출력 품질을 우선시합니다. 절대적으로 최고의 추론 능력이 필요하고 응답을 기다리는 데 문제가 없다면 이 버전을 사용하십시오.
+
+## 자주 묻는 질문 (FAQ)
+
+**Q: 라이선스와 관련하여 Gemma 4 vs Gemma 3의 주요 차이점은 무엇인가요?**
+
+A: Gemma 4는 Apache 2.0 라이선스로 출시되어 Gemma 3에서 사용된 맞춤형 Gemma 라이선스보다 훨씬 더 허용적입니다. 이를 통해 더 광범위한 상업적 이용과 용이한 커뮤니티 수정이 가능해졌습니다.
+
+**Q: Mac에서 Gemma 4를 실행할 수 있나요?**
+
+A: 네, Gemma 4는 Mac 하드웨어에서 실행 가능하지만, Nvidia RTX GPU에 고도로 최적화되어 있습니다. 벤치마크에 따르면 RTX 5090은 이러한 특정 모델을 로컬에서 실행할 때 M3 Ultra보다 최대 2.7배 더 빠를 수 있습니다.
+
+**Q: Gemma 4는 이미지와 오디오를 지원하나요?**
+
+A: 네, Effective 2B 및 4B 모델은 기본 멀티모달 지원을 포함하고 있어 실시간 작업을 위해 시각 및 오디오 입력을 처리할 수 있습니다.
+
+**Q: 26B MoE 모델이 31B Dense 모델보다 더 좋나요?**
+
+A: 사용자의 요구에 따라 다릅니다. 26B MoE는 훨씬 빠르며(RTX 5090 기준 183 TPS vs 2.2 TPS) 대부분의 논리 테스트를 통과합니다. 하지만 31B Dense 모델은 복잡한 글쓰기나 심층 분석을 위해 가능한 최고의 지능과 뉘앙스를 제공합니다.

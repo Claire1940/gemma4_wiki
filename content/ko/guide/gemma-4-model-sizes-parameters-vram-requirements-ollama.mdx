@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Gemma 4 모델 크기 파라미터 VRAM 요구 사양 Ollama 2026 가이드",
+  description: "Gemma 4 모델 크기, 파라미터, VRAM 요구 사양 및 Ollama 가이드를 상세히 살펴보세요. 워크스테이션 및 엣지 티어, 성능 벤치마크, 로컬 설정 방법을 알아봅니다.",
+  category: "가이드",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Model+Guide",
+  date: "2026-04-09",
+  author: "Gemma Wiki 팀"
+}
+
+구글의 최신 오픈 웨이트(open-weight) 모델 제품군 출시는 로컬 LLM 커뮤니티에 엄청난 파장을 일으켰습니다. **gemma 4 model sizes parameters vram requirements ollama**를 이해하는 것은 이 강력한 모델을 일반 소비자 하드웨어에 배포하려는 개발자와 애호가들에게 필수적입니다. 이전 버전과 달리 Gemma 4는 진정한 Apache 2.0 라이선스로 출시되어 상업적 이용, 미세 조정(fine-tuning) 및 수정이 제한 없이 가능합니다. 이러한 변화는 구글을 Llama 및 Qwen 생태계의 직접적인 경쟁자로 자리매김하게 했습니다. 이 종합 가이드에서는 **gemma 4 model sizes parameters vram requirements ollama**를 상세히 분석하여 현재 GPU 설정에 맞는 버전을 결정하고, 업계 표준인 Ollama 인터페이스를 사용하여 원활하게 실행하는 방법을 도와드립니다.
+
+## Gemma 4 모델 티어: 워크스테이션 vs. 엣지
+
+구글은 Gemma 4 제품군을 **워크스테이션(Workstation)**과 **엣지(Edge)**라는 두 가지 고유한 티어로 분류했습니다. 이러한 구분을 통해 H100이 장착된 거대한 서버에서 실행하든, 휴대용 라즈베리 파이에서 실행하든 상관없이 특정 컴퓨팅 제약 조건에 최적화된 모델을 사용할 수 있습니다.
+
+워크스테이션 티어는 복잡한 코딩 지원, 문서 이해, 긴 컨텍스트 추론과 같은 고부하 작업을 위해 설계되었습니다. 이 모델들은 Gemini 3 플래그십 시리즈의 최신 연구 결과를 활용하여 오픈 소스 세계에 하이엔드 상용급 성능을 제공합니다. 반대로 엣지 티어는 극강의 효율성에 초점을 맞춰 비전 및 오디오 인코더의 크기를 획기적으로 줄여 모바일 기기와 싱글 보드 컴퓨터에 적합하도록 설계되었습니다.
+
+### 핵심 모델 사양
+
+| 모델명 | 총 파라미터 | 활성 파라미터 | 모델 유형 | 컨텍스트 창 |
+|---|---|---|---|---|
+| **Gemma 4 31B** | 310억 개 | 310억 개 | Dense | 256K |
+| **Gemma 4 26B MoE** | 260억 개 | **38억 개** | Mixture of Experts | 256K |
+| **Gemma 4 E4B** | 40억 개 | 40억 개 | Edge / Dense | 128K |
+| **Gemma 4 E2B** | 20억 개 | 20억 개 | Edge / Dense | 128K |
+
+> **💡 팁:** 26B MoE 모델은 훨씬 더 큰 모델의 지능을 제공하면서도 4B 모델 수준의 추론 속도를 유지하므로, 중급 GPU 사용자들에게 가장 매력적인 선택지입니다.
+
+## Gemma 4 파라미터 및 아키텍처
+
+Gemma 4의 아키텍처는 Gemma 3 시리즈와 큰 차이를 보입니다. 가장 주목할 만한 업그레이드 중 하나는 26B 변형 모델에 128개 전문가 기반의 전문가 혼합(MoE, Mixture of Experts) 시스템을 도입한 것입니다. 토큰당 단 8개의 전문가와 1개의 공유 전문가만 활성화함으로써 모델은 엄청난 효율성 향상을 달성했습니다.
+
+또한 구글은 아키텍처에 네이티브 멀티모달리티를 직접 통합했습니다. 오디오를 위한 Whisper나 비전을 위한 별도의 CLIP 모델과 같은 외부 도구를 "덧붙이는" 대신, Gemma 4는 텍스트, 이미지, 오디오 입력을 네이티브하게 처리합니다. 그 결과 OCR(광학 문자 인식) 및 실시간 음성 번역과 같은 작업에서 훨씬 더 높은 정확도를 보여줍니다.
+
+### 아키텍처 주요 특징:
+*   **네이티브 오디오 지원:** 엣지 모델(E2B 및 E4B)은 이전 버전의 681M 파라미터에서 305M으로 대폭 압축된 오디오 인코더를 탑재하고 있습니다.
+*   **비전 향상:** 새로운 비전 인코더는 네이티브 종횡비 처리를 지원하므로 이미지를 자르거나 왜곡하지 않아 문서 이해 능력이 크게 향상되었습니다.
+*   **사고의 사슬 (CoT):** 내장된 "생각하기" 기능을 통해 모델은 최종 답변을 내놓기 전에 복잡한 쿼리를 논리적으로 추론할 수 있습니다.
+*   **함수 호출 (Function Calling):** 에이전트 워크플로우에 최적화되어 있어 외부 도구 및 API와 즉각적으로 상호작용할 수 있습니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 로컬 호스팅을 위한 VRAM 요구 사양
+
+**VRAM 요구 사양**을 파악하는 것은 모델을 다운로드하기 전 가장 중요한 단계입니다. 구글이 양자화 인식 훈련(QAT) 체크포인트를 출시했기 때문에, 사용자는 지능 손실을 최소화하면서 더 낮은 정밀도(4비트 또는 8비트 등)로 Ollama를 통해 모델을 실행할 수 있습니다.
+
+워크스테이션 모델(31B 또는 26B MoE)을 FP16 풀 정밀도로 실행하려면 전문가급 하드웨어가 필요합니다. 그러나 대부분의 게이머와 로컬 AI 애호가들에게는 Ollama를 통한 4비트 또는 6비트 양자화가 표준 RTX 카드에서 이 모델들을 사용할 수 있게 해줍니다.
+
+### 예상 VRAM 사용량 (Ollama 양자화 기준)
+
+| 모델 티어 | 양자화 | 필요 VRAM | 권장 GPU |
+|---|---|---|---|
+| **E2B (2B)** | Q4_K_M | **~1.8 GB** | GTX 1060 / 모바일 |
+| **E4B (4B)** | Q4_K_M | **~3.2 GB** | RTX 3060 (8GB) |
+| **26B MoE** | Q4_K_M | **~16.5 GB** | RTX 3090 / 4090 |
+| **31B Dense** | Q4_K_M | **~20.0 GB** | RTX 3090 / 4090 |
+| **31B Dense** | FP16 | **~64.0 GB** | RTX 6000 Ada / H100 |
+
+> **⚠️ 경고:** VRAM 한계치에 근접하게 모델을 실행하면 시스템 RAM으로 "오프로딩(offloading)"이 발생하여 생성 속도가 초당 50토큰에서 2토큰 미만으로 급격히 느려질 수 있습니다.
+
+## Ollama에서 Gemma 4 실행하기
+
+Ollama는 Windows, Mac 또는 Linux에서 **gemma 4 model sizes parameters vram requirements ollama**를 관리하는 가장 사용자 친화적인 방법입니다. 플랫폼이 자동으로 양자화를 처리하고 특정 하드웨어에 최적화된 모델 실행을 보장합니다.
+
+### 단계별 설치 방법
+1.  **Ollama 다운로드:** 공식 사이트를 방문하여 2026년 버전을 설치합니다.
+2.  **모델 가져오기:** 터미널을 열고 MoE 버전은 `ollama run gemma4:26b`, 경량 엣지 버전은 `ollama run gemma4:2b`를 입력합니다.
+3.  **사고 기능 설정:** "사고의 사슬(Chain of Thought)" 추론을 활성화하려면 Modelfile을 수정하여 추론 시스템 프롬프트를 포함할 수 있습니다.
+4.  **멀티모달 입력:** E2B 및 E4B 모델의 경우, Open WebUI와 같은 Ollama 호환 웹 UI에 이미지나 오디오 파일을 직접 드래그 앤 드롭하여 네이티브 비전 및 오디오 기능을 활용할 수 있습니다.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/FQTorLqMyMU"
+    title="Which Ollama Model Is Best For YOU?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 성능 벤치마크 및 활용 사례
+
+Gemma 4는 단순히 효율성만 추구하지 않았습니다. 벤치마크에서도 압도적인 성능을 보여줍니다. 특히 31B Dense 모델은 **SweetBench Pro** 및 **MMU Pro**에서 놀라운 결과를 기록하며, 코딩 및 수학적 추론 분야에서 Llama 3 시리즈의 더 큰 모델들을 능가하는 경우가 많습니다.
+
+### 각 크기별 최적의 활용 사례:
+*   **31B Dense:** 로컬 소프트웨어 개발, IDE 통합(코파일럿 스타일), 140개 언어를 지원하는 복잡한 다국어 번역에 가장 적합합니다.
+*   **26B MoE:** 복잡한 지시사항을 따르는 능력을 유지하면서도 빠른 속도가 우선시되는 범용 챗봇에 이상적입니다.
+*   **E4B / E2B:** "보이스 퍼스트(Voice-First)" AI 비서에 완벽합니다. 기기 내에서 네이티브 오디오 전사 및 번역을 지원하므로 개인정보 보호가 중요한 모바일 앱에 적합합니다.
+
+## 미세 조정 및 상업적 잠재력
+
+Apache 2.0 라이선스로의 전환은 2026년 AI 환경에서 가장 중요한 업데이트일 것입니다. 개발자들은 이제 "경쟁 금지" 조항에 대한 걱정 없이 Gemma 4 기본 모델을 가져와 법률, 의료 또는 게임과 같은 특정 산업에 맞게 미세 조정할 수 있습니다.
+
+이 모델들은 **Gemini 3 연구**를 기반으로 구축되었기 때문에 LoRA(Low-Rank Adaptation) 미세 조정에 매우 뛰어난 반응을 보입니다. 작은 E2B 모델조차도 아주 적은 학습 데이터만으로 세계적인 수준의 NPC 대화 생성기나 전용 시스템 모니터로 특화될 수 있습니다.
+
+> **💡 팁:** MoE 모델을 미세 조정할 때는 전문가들이 단일 경로로 "붕괴(collapsing)"되는 것을 방지하기 위해 학습 스크립트가 희소(sparse) 아키텍처와 호환되는지 확인하세요.
+
+## 자주 묻는 질문 (FAQ)
+
+**Q: Gemma 4를 실행하기 위한 최소 VRAM은 얼마인가요?**
+
+A: 가장 작은 버전인 Gemma 4 E2B를 실행하려면 Ollama에서 Q4 양자화를 사용할 때 약 1.8GB의 VRAM만 있으면 됩니다. 이는 거의 모든 최신 노트북이나 고사양 스마트폰과 호환되는 수준입니다.
+
+**Q: Gemma 4는 로컬에서 오디오 입력을 지원하나요?**
+
+A: 네, 엣지 모델(E2B 및 E4B)은 네이티브 오디오 지원 기능을 갖추고 있습니다. Whisper와 같은 외부 모델 없이도 음성 인식(ASR) 및 음성 직번역을 수행할 수 있습니다.
+
+**Q: 26B MoE 모델이 31B Dense 모델보다 더 좋나요?**
+
+A: 하드웨어 상황에 따라 다릅니다. 26B MoE는 더 빠르고 토큰당 계산량이 적지만, 31B Dense 모델은 활성 파라미터 수가 더 많기 때문에 복잡한 코딩이나 논리 작업에서 일반적으로 더 높은 절대적 정확도를 제공합니다.
+
+**Q: Gemma 4를 상업적 제품에 사용할 수 있나요?**
+
+A: 물론입니다. 2026년에 발표된 Apache 2.0 라이선스 덕분에 아무런 제약 없이 Gemma 4를 상업적으로 수정, 미세 조정 및 배포할 수 있어 스타트업과 기업용 애플리케이션에 최적의 선택입니다.
+
+더 자세한 기술 문서와 가중치 다운로드는 Hugging Face의 [공식 Google AI 저장소](https://huggingface.co/google)를 확인하세요.

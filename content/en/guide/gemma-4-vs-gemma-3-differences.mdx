@@ -1,0 +1,120 @@
+export const metadata = {
+  title: "Gemma 4 vs Gemma 3 Differences: Complete AI Comparison Guide 2026",
+  description: "Explore the major Gemma 4 vs Gemma 3 differences, including performance benchmarks, architecture upgrades, and local hardware optimization for 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+vs+Gemma+3+Differences",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+The landscape of local artificial intelligence has shifted dramatically with the release of Google's latest open model family. Understanding the **gemma 4 vs gemma 3 differences** is essential for developers, gamers, and researchers who want to leverage high-performance AI on their own hardware without relying on cloud-based services. While Gemma 3 established a solid foundation for open-weights models, Gemma 4 introduces a massive leap in reasoning capabilities, multimodal support, and "agentic" workflows. This new generation is designed to handle complex logic and multi-step planning that previous versions struggled to process. In this comprehensive guide, we will break down the **gemma 4 vs gemma 3 differences** to help you determine which model best fits your local PC setup and specific use cases in 2026.
+
+## Analyzing Gemma 4 vs Gemma 3 Differences in Architecture
+
+The most immediate change in the transition from Gemma 3 to Gemma 4 is the architectural diversity. While Gemma 3 focused primarily on dense models, Gemma 4 introduces a sophisticated Mixture of Experts (MoE) model and "Effective" parameter scaling. This allows the models to run much faster on consumer hardware by only activating a fraction of their total parameters during any given inference cycle.
+
+For the first time, Google has released these models under an open-source **Apache 2.0 license**, a significant shift from the more restrictive licenses of the past. This encourages a more vibrant ecosystem of community-driven variants and optimizations.
+
+| Feature | Gemma 3 (27B) | Gemma 4 (31B Dense) | Gemma 4 (26B MoE) |
+|---|---|---|---|
+| **Architecture** | Dense | Dense | Mixture of Experts (MoE) |
+| **Active Parameters** | 27 Billion | 31 Billion | **3.8 Billion** |
+| **Context Window** | 8k - 32k Tokens | **256k Tokens** | **256k Tokens** |
+| **License** | Gemma Terms of Use | **Apache 2.0** | **Apache 2.0** |
+| **Logic/Reasoning** | Standard | Frontier-Level | High-Speed Reasoning |
+
+## Performance Benchmarks: A Generational Leap
+
+The performance gap between the two generations is startling. In standardized benchmarks like MMLU and LiveCodeBench, the **gemma 4 vs gemma 3 differences** manifest as a double-digit percentage increase in accuracy. For instance, the flagship Gemma 3 27B model previously scored around 67% on key reasoning tasks. The new Gemma 4 31B Dense model has pushed that figure to 85%, placing it within striking distance of closed-source giants like GPT-5.2 and Claude 4 Opus.
+
+Even the smaller models in the Gemma 4 family are outperforming the largest versions of Gemma 3 in specific coding tasks. This is largely due to the improved training data and the "agentic" design philosophy, which prioritizes logical consistency over simple pattern matching.
+
+| Benchmark Metric | Gemma 3 (27B) | Gemma 4 (4B Effective) | Gemma 4 (31B Dense) |
+|---|---|---|---|
+| **Reasoning Accuracy** | 67% | 70% | **85%** |
+| **LiveCodeBench v6** | 29% | 44% | **80%** |
+| **Multilingual Support** | 20+ Languages | **140+ Languages** | **140+ Languages** |
+
+> **💡 Tip:** If you are looking for the best balance of speed and intelligence, the 26B MoE model is the "sweet spot" for most users with 24GB VRAM GPUs.
+
+## Local Hardware Optimization: Nvidia vs. Apple
+
+One of the most critical **gemma 4 vs gemma 3 differences** is the level of hardware-specific optimization. Google collaborated directly with Nvidia to ensure that Gemma 4 runs exceptionally well on RTX-powered PCs. This collaboration has resulted in significant speedups compared to the previous generation, especially when utilizing local inference engines like Ollama or LM Studio.
+
+Testing shows that an RTX 5090 can run the Gemma 4 26B MoE model at speeds exceeding 180 tokens per second. In contrast, even high-end Mac hardware like the M3 Ultra trails behind, with Nvidia GPUs offering up to a 2.7x speed advantage for these specific models.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/RoACSQsfeiE"
+    title="You Should Run the Gemma 4 AI Model on Your PC"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Speed Testing on RTX 5090 (2026 Hardware)
+
+| Model Variant | Token Speed (TPS) | Capability Note |
+|---|---|---|
+| **Gemma 4 2B Effective** | 278+ | Blindingly fast for mobile/IoT |
+| **Gemma 4 4B Effective** | 193 | Excellent for basic chat/RP |
+| **Gemma 4 26B MoE** | **183** | Best for coding and complex logic |
+| **Gemma 4 31B Dense** | 2.2 | Very slow; intended for batch processing |
+
+## New Capabilities: Multimodal and Agentic Workflows
+
+Gemma 4 isn't just a text model; it represents a move toward multimodal interaction. The "Effective" 2B and 4B models now feature native support for audio and vision processing. This allows the model to "see" and "hear" the world in real-time, making it ideal for embedded systems or advanced gaming NPCs that need to react to environmental stimuli.
+
+Furthermore, the "agentic" era focus means Gemma 4 natively supports tool use. Unlike Gemma 3, which often required complex prompting to interact with external APIs or code interpreters, Gemma 4 can plan and execute multi-step actions autonomously. This makes it a powerful backend for [local AI agents](https://developer.nvidia.com/blog/) that manage your file system, write and test code, or play games on your behalf.
+
+> **⚠️ Warning:** Running the 31B Dense model locally requires significant VRAM. Ensure you have at least 32GB to 48GB of total memory (System + Video) to avoid extreme slowdowns.
+
+## Solving the "Alice" and "Hourglass" Logic Puzzles
+
+A classic way to observe the **gemma 4 vs gemma 3 differences** is through logic puzzles. Previous generations of open models frequently failed the "Alice" question (a test of relational logic) and the "Hourglass" problem (a test of mathematical planning).
+
+1.  **The Alice Question:** "Alice has five brothers and three sisters. How many sisters does Alice's brother have?"
+    *   *Gemma 3 Result:* Often failed, answering "three."
+    *   *Gemma 4 Result:* Correctly identifies that the sisters include Alice herself, answering "four."
+2.  **The Hourglass Problem:** Measuring 15 minutes using a 7-minute and 11-minute hourglass.
+    *   *Gemma 3 Result:* Usually hallucinated impossible steps.
+    *   *Gemma 4 Result (26B/31B):* Successfully maps out the timing steps.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Choosing the Right Gemma 4 Model for Your PC
+
+Since there are four distinct versions of Gemma 4, selecting the right one depends on your hardware and your goals.
+
+*   **Effective 2B & 4B:** These are engineered for maximum memory efficiency. They are the go-to choices for Raspberry Pi users, mobile developers, or those running AI on a laptop without a dedicated GPU. Despite their small size, they handle over 140 languages natively.
+*   **26B Mixture of Experts (MoE):** This is the star of the 2026 lineup. With only 3.8B active parameters at any time, it offers the intelligence of a massive model with the speed of a tiny one. It is ideal for local coding assistants and complex roleplay.
+*   **31B Dense:** This is the "frontier" model. It prioritizes output quality over everything else. If you need the absolute best reasoning possible and don't mind waiting for the response, this is the version to use.
+
+## FAQ
+
+**Q: What are the main gemma 4 vs gemma 3 differences regarding licensing?**
+
+A: Gemma 4 is released under the Apache 2.0 license, which is much more permissive than the custom Gemma license used for Gemma 3. This allows for broader commercial use and easier community modification.
+
+**Q: Can I run Gemma 4 on a Mac?**
+
+A: Yes, Gemma 4 runs on Mac hardware, but it is highly optimized for Nvidia RTX GPUs. Benchmarks show that an RTX 5090 can be up to 2.7x faster than an M3 Ultra when running these specific models locally.
+
+**Q: Does Gemma 4 support images and audio?**
+
+A: Yes, the Effective 2B and 4B models include native multimodal support, allowing them to process vision and audio inputs for real-time tasks.
+
+**Q: Is the 26B MoE model better than the 31B Dense model?**
+
+A: It depends on your needs. The 26B MoE is significantly faster (183 TPS vs 2.2 TPS on an RTX 5090) and still passes most logic tests. However, the 31B Dense model provides the highest possible intelligence and nuance for complex writing or deep analysis.

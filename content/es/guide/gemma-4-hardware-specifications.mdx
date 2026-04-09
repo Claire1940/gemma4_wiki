@@ -1,0 +1,115 @@
+export const metadata = {
+  title: "Especificaciones de Hardware de Gemma 4: Guía Completa de IA Local 2026",
+  description: "Explora las especificaciones oficiales de hardware y los puntos de referencia de rendimiento de Gemma 4. Aprende cómo ejecutar los últimos modelos abiertos de Google localmente en tu PC.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/312e81/fff?text=Gemma+4+Hardware+Specs",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+Con el lanzamiento de la última familia de modelos de pesos abiertos de Google, comprender las **especificaciones de hardware de Gemma 4** es esencial para cualquier entusiasta que busque alejarse de las suscripciones basadas en la nube. A diferencia de las iteraciones anteriores, Gemma 4 está diseñado específicamente para la era de los agentes, ofreciendo razonamiento localizado y capacidades multimodales que rivalizan con gigantes propietarios como GPT-5.2. Ya seas un desarrollador que construye flujos de trabajo complejos o un jugador que desea un asistente de IA privado en su segundo monitor, cumplir con las **especificaciones de hardware de Gemma 4** garantiza que aproveches al máximo estos modelos de vanguardia de 2026.
+
+En esta guía, desglosamos las cuatro versiones distintas de Gemma 4, sus requisitos de VRAM y las optimizaciones de hardware específicas que Google y NVIDIA han implementado para que la ejecución local sea más rápida que nunca.
+
+## Descripción General de la Familia de Modelos Gemma 4
+
+Google ha diversificado la línea Gemma para atender desde dispositivos IoT de bajo consumo hasta PCs de estaciones de trabajo de alta gama. La familia se divide en tres categorías: Effective, Mixture of Experts (MoE) y modelos Dense. Cada uno sirve para un propósito específico, que va desde la generación de texto increíblemente rápida hasta el razonamiento de alta precisión.
+
+| Variante del Modelo | Parámetros Totales | Parámetros Activos | Ventana de Contexto | Mejor Caso de Uso |
+| :--- | :--- | :--- | :--- | :--- |
+| **Effective 2B** | 5 Mil millones | 2.3 Mil millones | 128,000 | Dispositivos Móviles e IoT |
+| **Effective 4B** | 8 Mil millones | 4.0 Mil millones | 128,000 | Chatbots Rápidos y Agentes Básicos |
+| **26B MoE** | 26 Mil millones | 3.8 Mil millones | **256,000** | Programación y Lógica Compleja |
+| **31B Dense** | 31 Mil millones | 31 Mil millones | **256,000** | Razonamiento de Alta Calidad |
+
+Por primera vez en la serie, estos modelos se lanzan bajo una **licencia Apache 2.0**, otorgando a los usuarios una libertad sin precedentes para uso comercial y personal.
+
+## Especificaciones de Hardware Recomendadas para Gemma 4
+
+Ejecutar estos modelos localmente requiere un equilibrio entre VRAM de alta velocidad y una arquitectura de GPU moderna. Si bien puedes ejecutar los modelos más pequeños en una Raspberry Pi o un teléfono móvil, las versiones de "inteligencia de frontera" exigen **especificaciones de hardware de Gemma 4** más robustas para mantener tasas aceptables de tokens por segundo (t/s).
+
+| Componente | Mínimo (Modelos 2B/4B) | Recomendado (Modelos 26B/31B) |
+| :--- | :--- | :--- |
+| **Tarjeta Gráfica (GPU)** | NVIDIA RTX 3060 (12GB VRAM) | **NVIDIA RTX 5090 (32GB VRAM)** |
+| **Memoria del Sistema (RAM)** | 16GB DDR5 | 64GB DDR5 |
+| **Procesador (CPU)** | Intel i5 o Ryzen 5 (Serie 7000) | Intel i9 o Ryzen 9 (Serie 9000) |
+| **Almacenamiento** | 20GB de Espacio en SSD | 100GB+ NVMe Gen5 |
+
+> **💡 Consejo:** Si estás construyendo un equipo dedicado a la IA en 2026, prioriza la capacidad de VRAM sobre la velocidad de reloj bruta. Los modelos 26B y 31B requieren una sobrecarga de memoria significativa para utilizar la ventana de contexto completa de 256,000 tokens.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/RoACSQsfeiE"
+    title="You Should Run the Gemma 4 AI Model on Your PC Because it is Catching Chat GPT!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de Rendimiento: RTX 5090 vs. Mac M3 Ultra
+
+En 2026, la colaboración entre Google y NVIDIA ha alcanzado un nuevo máximo. Mientras que la arquitectura de Memoria Unificada de Apple era anteriormente el estándar de oro para los LLM locales, las nuevas optimizaciones para las GPU de NVIDIA han cambiado el panorama. En un PC equipado con una RTX 5090, Gemma 4 se ejecuta hasta **2.7 veces más rápido** que en un Mac M3 Ultra.
+
+Los siguientes benchmarks demuestran las diferencias de velocidad en toda la familia de modelos cuando se ejecutan en las **especificaciones de hardware de Gemma 4** de gama alta:
+
+| Variante del Modelo | Plataforma de Hardware | Velocidad (Tokens por Segundo) |
+| :--- | :--- | :--- |
+| **Effective 2B** | RTX 5090 | **278 t/s** |
+| **Effective 4B** | RTX 5090 | **193 t/s** |
+| **26B MoE** | RTX 5090 | **183 t/s** |
+| **31B Dense** | RTX 5090 | **2.2 t/s** |
+
+Como se muestra en la tabla, el modelo **26B Mixture of Experts (MoE)** es el "punto ideal" para la mayoría de los usuarios. Proporciona casi la misma velocidad que el modelo 4B pero ofrece la inteligencia de una red densa mucho más grande al activar solo 3.8 mil millones de parámetros en cualquier momento dado.
+
+## Funciones Avanzadas: Flujos de Trabajo Multimodales y Agénticos
+
+Gemma 4 no es solo una actualización basada en texto; está construido para la "era agéntica". Esto significa que los modelos admiten de forma nativa el uso de herramientas, lo que les permite interactuar con tu sistema de archivos local, navegadores web y otras aplicaciones de software para realizar una planificación de varios pasos.
+
+### Capacidades Clave en 2026:
+*   **Soporte Multilingüe:** Admite de forma nativa más de 140 idiomas con alta precisión.
+*   **Entrada Multimodal:** Los modelos Effective 2B y 4B incluyen soporte nativo para visión y audio, lo que permite que la IA "vea" tu pantalla o "escuche" tus comandos de voz en tiempo real.
+*   **Lógica Agéntica:** Rendimiento mejorado en acertijos lógicos complejos (como las preguntas de "Alice" o el "Reloj de arena") donde los modelos abiertos anteriores a menudo fallaban.
+*   **Contexto Extendido:** Una ventana de un cuarto de millón de tokens te permite cargar bases de código completas o novelas largas para un análisis localizado.
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B Dense en hardware con menos de 24 GB de VRAM resultará en ralentizaciones extremas (menos de 1 t/s) ya que el sistema intercambia memoria a la memoria RAM del sistema, que es más lenta.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Configuración de Gemma 4 Localmente
+
+Para comenzar con Gemma 4, puedes usar herramientas de implementación local populares como **Ollama**, **LM Studio** o **NVIDIA AI Workbench**. Debido a que los modelos están optimizados para CUDA, los usuarios de NVIDIA verán las ganancias de rendimiento más significativas.
+
+1.  **Descarga los Pesos:** Visita el GitHub oficial de [Google DeepMind](https://github.com/google-deepmind/gemma) o Hugging Face para obtener los archivos del modelo.
+2.  **Actualiza los Controladores:** Asegúrate de estar ejecutando los últimos controladores NVIDIA Game Ready o Studio para utilizar las optimizaciones específicas de Gemma.
+3.  **Elige tu Interfaz:** Para programación, usa la integración **Codeex**. Para chat general, Ollama ofrece la configuración de línea de comandos más sencilla.
+
+Las **especificaciones de hardware de Gemma 4** permiten que estos modelos se ejecuten en todo, desde una NVIDIA Jetson Nano hasta un servidor DGX Spark, convirtiéndolo en uno de los lanzamientos de IA más versátiles de 2026.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 en una GPU más antigua como la RTX 2060?**
+
+R: Sí, puedes ejecutar los modelos Effective 2B y 4B en una RTX 2060. Sin embargo, es probable que te veas limitado a longitudes de contexto más cortas, y los modelos 26B/31B no serán funcionales debido a las limitaciones de VRAM.
+
+**P: ¿Cuáles son las especificaciones mínimas de hardware de Gemma 4 para la ventana de contexto de 256k?**
+
+R: Para utilizar eficazmente una ventana de contexto de 256,000 tokens con el modelo 26B MoE, recomendamos al menos 32 GB de VRAM (como una RTX 5090 o configuraciones duales RTX 3090/4090) para evitar una degradación significativa del rendimiento.
+
+**P: ¿Es Gemma 4 mejor que ChatGPT?**
+
+R: En benchmarks como Live Codebench v6, el modelo Gemma 4 31B obtiene una puntuación de aproximadamente el 85%, lo cual es muy cercano a los modelos comerciales en la nube. La principal ventaja es que Gemma 4 se ejecuta localmente, garantizando que tus datos nunca salgan de tu máquina.
+
+**P: ¿Gemma 4 admite la generación de imágenes?**
+
+R: Gemma 4 es principalmente un LLM (Modelo de Lenguaje Grande) multimodal capaz de entender imágenes y audio. Si bien puede describir imágenes o escribir prompts para generadores de imágenes, no genera imágenes de forma nativa como Stable Diffusion.

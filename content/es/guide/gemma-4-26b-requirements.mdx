@@ -1,0 +1,102 @@
+export const metadata = {
+  title: "Requisitos de Gemma 4 26B: Guía de Rendimiento y Hardware 2026",
+  description: "Explore los requisitos oficiales de Gemma 4 26B, los benchmarks de hardware y los consejos de optimización para ejecutar localmente los últimos modelos de código abierto de Google.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Gemma+4+26B+Requirements+Guide",
+  date: "2026-04-09",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la familia de modelos más reciente de Google ha establecido un nuevo estándar para el rendimiento de la IA de código abierto en 2026. Comprender los **requisitos de gemma 4 26b** es esencial para los desarrolladores y entusiastas que buscan desplegar estos potentes modelos de Mezcla de Expertos (MoE) en hardware local. Ya sea que su objetivo sea ejecutar la variante 26B MoE o el modelo denso de 31B, la sinergia del hardware es la clave para lograr velocidades de tokens utilizables. Esta guía detalla la VRAM, la potencia de la CPU y el almacenamiento necesarios para manejar los **requisitos de gemma 4 26b** de manera efectiva. Con la configuración adecuada, estos modelos ofrecen un rendimiento comparable al de sistemas propietarios mucho más grandes, manteniendo la flexibilidad de una licencia Apache 2.0.
+
+## Resumen de la familia Gemma 4
+
+La línea Gemma 4 es diversa y ofrece cuatro tamaños distintos diseñados para todo, desde computación perimetral móvil hasta despliegues en estaciones de trabajo de alta gama. El modelo 26B es particularmente único porque utiliza una arquitectura de Mezcla de Expertos. Aunque tiene 26 mil millones de parámetros totales, solo 4 mil millones están activos durante cualquier paso de inferencia individual, lo que le permite ejecutarse significativamente más rápido que los modelos densos tradicionales de un tamaño similar.
+
+| Variante del modelo | Recuento de parámetros | Ventana de contexto | Mejor caso de uso |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2.3B Efectivos | 128K | Dispositivos móviles y Edge |
+| **Gemma 4 E4B** | 4.5B Efectivos | 128K | Laptops y GPUs de consumo |
+| **Gemma 4 26B (MoE)** | **26B (4B Activos)** | **256K** | **Estaciones de trabajo / Hosting local** |
+| **Gemma 4 31B (Denso)** | 31B Parámetros | 256K | Investigación avanzada y programación |
+
+## Requisitos mínimos y recomendados de Gemma 4 26B
+
+Para ejecutar el modelo Gemma 4 26B, su principal cuello de botella será la memoria de video (VRAM). Debido a que este es un modelo de 26B parámetros, incluso con su eficiente arquitectura MoE, todos los pesos del modelo deben caber en la memoria para un rendimiento óptimo. El uso de métodos de cuantización como Q4, Q8 o formatos de enteros de 4 bits puede reducir significativamente la huella de memoria sin una pérdida masiva de capacidad cognitiva.
+
+| Componente | Mínimo (Cuantizado) | Recomendado (Cuantización alta/completa) |
+|---|---|---|
+| **GPU (VRAM)** | 16GB VRAM (Q4_K_M) | **24GB+ VRAM (Q8 o FP16)** |
+| **RAM del sistema** | 32GB DDR5 | **64GB+ DDR5** |
+| **Almacenamiento** | 20GB de espacio SSD | **50GB NVMe M.2 SSD** |
+| **SO** | Windows 11 / Linux | **Ubuntu 24.04 LTS** |
+
+> **💡 Sugerencia:** Si tiene menos de 16GB de VRAM, considere usar el modelo Gemma 4 E4B, que puede proporcionar excelentes resultados en tarjetas de 8GB manteniendo altas velocidades.
+
+## Benchmarks de rendimiento y velocidades de tokens
+
+Las pruebas en hardware de consumo de alta gama en 2026 muestran que el modelo 26B MoE es excepcionalmente eficiente. En una RTX 5090 móvil o una 4090 de escritorio, los usuarios pueden esperar tiempos de respuesta rápidos. La lógica de "Parámetros Activos" significa que el modelo solo "paga" el coste computacional de 4 mil millones de parámetros mientras se beneficia de la base de conocimientos de 26 mil millones.
+
+1. **Impacto de la cuantización**: Ejecutar en Q8 (8 bits) proporciona una experiencia casi sin pérdidas, pero requiere aproximadamente 28GB de memoria (incluyendo la sobrecarga del contexto).
+2. **Velocidad de inferencia**: En una DGX Spark o una estación de trabajo similar, el modelo 26B puede alcanzar velocidades de **22-28 tokens por segundo**.
+3. **Capacidad multimodal**: Estos modelos son nativamente multimodales, lo que significa que pueden procesar imágenes y texto simultáneamente. Esto aumenta ligeramente el requisito de VRAM al procesar entradas visuales de alta resolución.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimización para el despliegue local
+
+Cumplir con los **requisitos de gemma 4 26b** es solo el primer paso. Para aprovechar al máximo el modelo, debe utilizar motores de inferencia modernos. Herramientas como LM Studio, Ollama o Llama.cpp se han actualizado en 2026 para admitir las peculiaridades arquitectónicas específicas de la familia Gemma 4.
+
+*   **Flash Attention**: Active siempre Flash Attention 2 en la configuración de su entorno para reducir el uso de memoria durante conversaciones de contexto largo.
+*   **Gestión del contexto**: Aunque el modelo admite un contexto de hasta 256K, asignar tanta memoria consumirá su VRAM. Para la mayoría de las tareas, un límite de 32K o 64K es un mejor equilibrio.
+*   **Descarga de capas (Layer Offloading)**: Si su GPU no tiene suficiente VRAM para el modelo completo, puede descargar capas específicas a la RAM de su sistema (CPU), aunque esto ralentizará drásticamente los tokens por segundo.
+
+## Comparativa: 26B MoE vs. 31B Denso
+
+Muchos usuarios se preguntan si deberían optar por el modelo denso 31B en lugar del 26B MoE. Aunque el modelo 31B es técnicamente más "denso en conocimiento", es significativamente más difícil de ejecutar. Los **requisitos de gemma 4 26b** son mucho más permisivos para los usuarios domésticos porque la arquitectura MoE permite un procesamiento más rápido en hardware de consumo.
+
+| Característica | 26B MoE | 31B Denso |
+|---|---|---|
+| **VRAM requerida** | Menor (debido a parámetros activos) | **Mayor** |
+| **Velocidad de inferencia** | **Muy rápida** | Más lenta / Pesada |
+| **Profundidad de razonamiento** | Alta | **Muy alta** |
+| **Estabilidad local** | Excelente en 2026 | Requiere ajuste de alta gama |
+
+> **⚠️ Advertencia:** El modelo denso 31B ha mostrado cierta inestabilidad con ciertas cuantizaciones Q8. Si encuentra una salida de texto incoherente, intente cambiar a la versión 26B MoE o a un proveedor de GGUF diferente.
+
+## Casos de uso en el mundo real en 2026
+
+El modelo Gemma 4 26B no es solo para chatear; sus capacidades de programación y escritura creativa son de primer nivel para su clase de tamaño. En las pruebas, el modelo generó con éxito entornos 3D en JavaScript e incluso lógica simple para un juego de disparos en primera persona con retroceso de armas funcional.
+
+*   **Programación**: Superior en Python y JS, capaz de corregir errores lógicos complejos a través de la salida del terminal.
+*   **Escritura creativa**: Capaz de interpretar imágenes para crear narrativas psicológicas profundas con nombres de personajes consistentes.
+*   **Tareas de visión**: Puede identificar componentes de circuitos (como placas Arduino y motores) a partir de una sola fotografía, aunque puede tener dificultades con números de serie muy específicos.
+
+Para obtener más documentación técnica, puede visitar el [repositorio oficial de Google DeepMind](https://github.com/google-deepmind/gemma) para ver las últimas actualizaciones sobre los pesos y la arquitectura del modelo.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 26B en una GPU de 12GB?**
+
+R: Sí, pero debe usar una cuantización de alta compresión como 3 bits o 4 bits (Q3_K_S o Q4_0). También deberá limitar la ventana de contexto a unos 8,000 tokens para evitar errores de falta de memoria.
+
+**P: ¿Qué es el recuento de parámetros "Efectivos" en los modelos más pequeños?**
+
+R: La "E" en modelos como E2B significa parámetros Efectivos. Estos modelos utilizan incrustaciones (embeddings) por capa para maximizar la eficiencia en dispositivos móviles. Aunque el recuento total de parámetros es mayor, el coste computacional es equivalente al de un modelo mucho más pequeño.
+
+**P: ¿Admite Gemma 4 26B el razonamiento o la Cadena de Pensamiento (CoT)?**
+
+R: Sí, las versiones ajustadas para instrucciones de los modelos 26B y 31B admiten el razonamiento. En herramientas como LM Studio, es posible que deba modificar el prompt del sistema para habilitar explícitamente el analizador de razonamiento para que aparezca la cadena de pensamiento.
+
+**P: ¿Cuáles son los requisitos específicos de gemma 4 26b para teléfonos móviles?**
+
+R: El modelo 26B es generalmente demasiado pesado para los teléfonos móviles estándar en 2026. Para el despliegue móvil, se recomienda encarecidamente utilizar los modelos Gemma 4 E2B o E4B, que pueden ejecutarse a más de 40 tokens por segundo en dispositivos Android de alta gama como el ROG Phone 9 Pro.

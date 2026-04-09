@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Gemma 4 Benchmark: Guía Completa de Rendimiento y Pruebas de IA Local 2026",
+  description: "Analiza los últimos resultados del benchmark de Gemma 4. Explora las métricas de rendimiento para los modelos 2B, 4B, 26B y 31B, incluyendo puntuaciones de MMLU Pro y pruebas en hardware local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e3a8a/fff?text=Gemma+4+Benchmark+2026",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la última serie de código abierto de Google ha causado un gran impacto en la comunidad tecnológica, especialmente para aquellos que siguen de cerca los resultados del **gemma4 benchmark**. Esta nueva familia de modelos, publicada bajo la permisiva licencia Apache 2.0, se centra intensamente en la "inteligencia por parámetro", permitiendo que los modelos más pequeños rivalicen con el rendimiento de sistemas masivos heredados. Ya sea que seas un desarrollador local que busca flujos de trabajo agénticos o un investigador que pone a prueba los límites del razonamiento, los datos del **gemma4 benchmark** sugieren un salto significativo respecto a las iteraciones anteriores. Estos modelos admiten más de 140 idiomas y ofrecen una ventana de contexto masiva de 256K, lo que los hace sumamente versátiles para tareas complejas de varios pasos.
+
+En esta guía, desglosaremos las métricas de rendimiento específicas en los cuatro tamaños de modelo principales: la versión móvil ultraeficiente 2B, el modelo multimodal para edge 4B, el modelo de Mezcla de Expertos (MoE) altamente eficiente 26B y el buque insignia denso 31B. También examinaremos cómo estos modelos manejan desafíos de programación del mundo real, acertijos de lógica y el despliegue en hardware local en estaciones de trabajo modernas.
+
+## La Línea de Modelos Gemma 4: Especificaciones y Casos de Uso
+
+Comprender la arquitectura de estos modelos es esencial antes de profundizar en las cifras brutas. Google ha optimizado cada variante para restricciones de hardware específicas, que van desde dispositivos móviles hasta servidores locales multi-GPU. El modelo 26B es particularmente interesante porque utiliza una arquitectura de Mezcla de Expertos (MoE), activando solo unos 3.8 mil millones de parámetros durante la inferencia, lo que proporciona un impulso masivo a la velocidad sin sacrificar la calidad del razonamiento.
+
+| Tamaño del Modelo | Tipo de Arquitectura | Caso de Uso Principal | Características Clave |
+|---|---|---|---|
+| **Gemma 4 2B** | Denso | Móvil y Edge | Ultraeficiente, funciona en smartphones estándar |
+| **Gemma 4 4B** | Multimodal | Edge Avanzado | Sólidas capacidades multimodales (excluyendo audio) |
+| **Gemma 4 26B** | MoE (Mezcla de Expertos) | Escritorio/Estación de Trabajo | 3.8B parámetros activos, alto rendimiento de tokens |
+| **Gemma 4 31B** | Buque Insignia Denso | Servidor Local de Gama Alta | Rendimiento cercano a los mejores modelos abiertos, 60 capas |
+
+> **💡 Consejo:** Al elegir un modelo para despliegue local, la variante 26B MoE ofrece el mejor equilibrio entre velocidad e inteligencia, especialmente en hardware con VRAM limitada.
+
+## Analizando los Resultados del Gemma 4 Benchmark
+
+El salto en el rendimiento de Gemma 3 a Gemma 4 es uno de los mayores saltos generacionales vistos en los últimos años. En pruebas estandarizadas, el modelo insignia 31B ha demostrado puntuaciones excepcionales en MMLU Pro y en entornos específicos de programación. Por ejemplo, la puntuación de MMLU Pro aumentó de 67 en la generación anterior a un asombroso 85.2 en la suite actual de **gemma4 benchmark**.
+
+| Categoría de Benchmark | Gemma 3 (27B) | Gemma 4 (31B) | % de Mejora |
+|---|---|---|---|
+| **MMLU Pro** | 67.0 | **85.2** | +27.1% |
+| **Codeforces ELO** | 1100 | **2150** | +95.4% |
+| **LiveCodeBench V6** | 29.1 | **80.0** | +174.9% |
+| **GPQA (Matemáticas)** | 42.5 | **58.2** | +36.9% |
+
+Estas cifras indican que el modelo 31B está actualmente clasificado entre los tres mejores modelos abiertos en la tabla de clasificación de LM Arena. Si bien modelos como Qwen 3.5 27B pueden mantener una ligera ventaja en puntos brutos de "índice de inteligencia" (42 frente a 31), Gemma 4 demuestra ser significativamente más eficiente. Utiliza aproximadamente 2.5 veces menos tokens de salida para tareas similares, lo que resulta en menores costos y velocidades de generación más rápidas en el mundo real.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Programación en el Mundo Real y Generación Front-End
+
+Más allá de los benchmarks sintéticos, el modelo Gemma 4 31B ha sido sometido a rigurosas pruebas de desarrollo front-end. En varios ensayos utilizando el arnés Kilo CLI, el modelo tuvo la tarea de crear clones de UI complejos y simulaciones interactivas.
+
+### Clones de UI Complejos
+Cuando se le pidió crear una interfaz de sistema operativo al estilo Mac OS, el modelo generó con éxito una barra de herramientas funcional, una pantalla de carga y aplicaciones básicas como una calculadora y una terminal. Aunque algunos componentes funcionales más profundos (como menús de configuración interactivos) fueron limitados, la fidelidad visual fue comparable a modelos mucho más grandes como Opus 4.5.
+
+### Simulación y Lógica de Juego
+En una prueba de "F1 Donut Simulator", el modelo manejó el renderizado 3D en código puro de navegador. Aunque el movimiento basado en la física no fue perfecto, la profundidad técnica para un modelo de este tamaño fue impresionante. También destacó en la creación de juegos de "Car Board", implementando interacciones en tiempo real, gestión de estado y lógica de puntuación por turnos con alta precisión.
+
+| Tipo de Tarea | Calificación de Rendimiento | Notas |
+|---|---|---|
+| **Generación de SVG** | 8/10 | Estructura excelente; problemas menores con animaciones complejas. |
+| **Diseño CSS/UI** | 9/10 | Clonó diseños de Airbnb y Mac OS con alta precisión. |
+| **Lógica de Juego** | 8.5/10 | Fuerte gestión de estado; la física necesita un refinamiento menor. |
+| **Seguimiento de Instrucciones** | 9/10 | Se adhirió a reglas de diseño estrictas y restricciones de interacción. |
+
+## Rendimiento y Despliegue en Hardware Local
+
+Uno de los aspectos más atractivos del **gemma4 benchmark** es lo bien que funcionan los modelos en hardware de consumo y prosumidor. Por ejemplo, el modelo 26B puede ejecutarse en una Mac Studio M2 Ultra a velocidades que superan los 300 tokens por segundo. Esto lo convierte en una opción viable para el día a día de los desarrolladores que prefieren mantener sus datos de forma local.
+
+Para comenzar con el despliegue local, puedes usar herramientas populares como Ollama, LM Studio o Hugging Face. Para aquellos que utilizan equipos con GPU basados en Linux, se recomienda actualizar a la última compilación nocturna de VLLM para garantizar el soporte adecuado de llamadas a herramientas (tool-calling).
+
+### Requisitos de Hardware para Gemma 4
+*   **Modelos 2B/4B:** Pueden ejecutarse cómodamente en smartphones modernos o GPUs de gama baja (8GB VRAM).
+*   **26B MoE:** Más adecuado para configuraciones de 16GB-24GB de VRAM; extremadamente rápido debido al bajo recuento de parámetros activos.
+*   **31B Denso:** Requiere más de 24GB de VRAM para un rendimiento óptimo; se beneficia significativamente de configuraciones multi-GPU utilizando paralelismo de tensores.
+
+> **⚠️ Advertencia:** Asegúrate de que tu librería Transformers esté actualizada a la última versión. Volver a versiones anteriores puede causar problemas de compatibilidad con la nueva arquitectura de Gemma.
+
+## Acertijos de Lógica y Pruebas de Razonamiento Ético
+
+Una parte crítica de cualquier **gemma4 benchmark** es probar cómo el modelo maneja las preguntas "trampa" y los dilemas éticos. En una serie de pruebas de lógica, el modelo 31B mostró resultados mixtos pero generalmente positivos.
+
+1.  **La prueba de las "Peppermints":** Cuando se le pidió contar la letra 'p' y las vocales en "peppermint", el modelo tuvo dificultades inicialmente, fallando al contar las letras con un 100% de precisión. Esto sigue siendo un obstáculo común para muchos LLM.
+2.  **Comparaciones Matemáticas:** El modelo identificó correctamente que 420.7 es mayor que 420.69, evitando los errores comunes de "punto flotante" que se ven en modelos más débiles.
+3.  **Programación de Horarios (Pico de Gato):** El modelo rastreó perfectamente el horario de un gato a través de múltiples bloques de tiempo, identificando correctamente la actividad del gato en una marca de tiempo específica.
+4.  **Dilemas Éticos:** En un escenario complejo de "Armagedón" que involucraba trabajo forzado y sacrificio, el modelo proporcionó un análisis utilitario pero finalmente se negó a "ejecutar" acciones violentas, citando sus protocolos de seguridad principales.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Habilidades de Agente e Inteligencia en el Dispositivo
+
+Google ha introducido "habilidades de agente" junto con el lanzamiento de Gemma 4, permitiendo que los modelos funcionen como agentes autónomos directamente en dispositivos móviles. Este sistema permite al modelo:
+*   **Ejecutar Tareas de Varios Pasos:** Encadenar herramientas para resolver consultas complejas sin computación en la nube.
+*   **Procesar Datos Estructurados:** Extraer información de archivos locales y generar visualizaciones.
+*   **Razonamiento Visual:** Analizar y comparar múltiples imágenes para encontrar patrones compartidos o sintetizar información.
+
+Para los desarrolladores, acceder a estas capacidades es más fácil a través de [Google AI Studio](https://aistudio.google.com/), donde puedes probar los modelos de forma gratuita. Además, Kilo CLI proporciona un excelente arnés para aquellos que buscan integrar el uso de herramientas agénticas en sus propias aplicaciones locales.
+
+## FAQ
+
+**P: ¿Cómo se compara el benchmark de Gemma 4 con el de Gemma 3?**
+
+R: Las mejoras son masivas. El modelo 31B muestra un aumento del 27% en las puntuaciones de MMLU Pro y casi el doble de rendimiento en benchmarks de programación como Codeforces en comparación con la versión anterior de 27B.
+
+**P: ¿Puede Gemma 4 ejecutarse en un smartphone estándar?**
+
+R: Sí, los modelos 2B y 4B están optimizados específicamente para dispositivos móviles y edge. Están diseñados para manejar habilidades de agente en el dispositivo y razonamiento multimodal sin necesidad de una conexión a Internet.
+
+**P: ¿Cuál es la ventana de contexto para estos modelos?**
+
+R: Todos los modelos de la serie Gemma 4 admiten una ventana de contexto de hasta 256K tokens, aunque el rendimiento puede variar según el hardware específico y la cuantización utilizada durante el despliegue local.
+
+**P: ¿Es Gemma 4 verdaderamente de código abierto?**
+
+R: Sí, se publica bajo la licencia Apache 2.0, que es una licencia estándar de código abierto. Esto permite tanto el uso personal como comercial con muy pocas restricciones en comparación con las licencias anteriores de Google.

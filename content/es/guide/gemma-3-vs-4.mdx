@@ -1,0 +1,107 @@
+export const metadata = {
+  title: "Gemma 3 vs 4: Comparando la evolución de los modelos abiertos de Google 2026",
+  description: "Una comparativa profunda entre Gemma 3 y Gemma 4. Explore los puntos de referencia de rendimiento, la eficiencia de parámetros y las capacidades de agentes para el desarrollo de IA local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+3+vs+4+Comparison",
+  date: "2026-04-09",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado rápidamente con el lanzamiento de las últimas familias de modelos de Google. Para desarrolladores e investigadores, la elección entre **gemma 3 vs 4** representa una decisión significativa al equilibrar la inteligencia bruta con la eficiencia operativa. Mientras que Gemma 3 introdujo una robusta multimodalidad y ventanas de contexto ampliadas, Gemma 4 empuja los límites de la "inteligencia por parámetro", permitiendo que modelos más pequeños superen a sus predecesores 20 veces más grandes.
+
+En esta guía exhaustiva, analizamos los saltos arquitectónicos y las métricas de rendimiento en el mundo real que definen el debate **gemma 3 vs 4**. Ya sea que esté construyendo flujos de trabajo de agentes en un dispositivo móvil o desplegando motores de razonamiento de alta densidad en una estación de trabajo local, comprender estos matices es fundamental. Siga estas comparaciones para determinar qué familia de modelos se adapta a su flujo de desarrollo específico de 2026.
+
+## Evolución arquitectónica y tamaños de modelos
+
+La transición de Gemma 3 a Gemma 4 marca un cambio hacia la eficiencia especializada. Gemma 3 se centró en proporcionar una progresión lineal de tamaños (de 1B a 27B) para cubrir todo, desde teléfonos móviles hasta computadoras de escritorio de alta gama. Gemma 4, sin embargo, introduce un enfoque de Mezcla de Expertos (MoE) en su nivel intermedio, específicamente el modelo 26B, que solo activa aproximadamente 3.8 mil millones de parámetros durante la inferencia.
+
+| Característica | Serie Gemma 3 | Serie Gemma 4 |
+| :--- | :--- | :--- |
+| **Tamaño Insignia** | 27B (Denso) | **31B (Denso)** |
+| **Nivel de Eficiencia** | 12B (Denso) | **26B (MoE / 3.8B Activos)** |
+| **Nivel Edge/Móvil** | 1B (Texto) / 4B (Multimodal) | **2B (Ultraeficiente) / 4B (Edge más potente)** |
+| **Ventana de Contexto Máx.** | 128K | **256K** |
+| **Soporte de Idiomas** | 100+ Idiomas | **140+ Idiomas** |
+
+> **💡 Consejo:** Si está ejecutando modelos localmente en hardware como un Mac Studio M2 Ultra, se recomienda encarecidamente el modelo Gemma 4 26B, ya que puede procesar casi 300 tokens por segundo debido a su arquitectura MoE.
+
+## Benchmarks de rendimiento: Gemma 3 vs 4
+
+Al observar el delta de rendimiento entre **gemma 3 vs 4**, las mejoras más sorprendentes aparecen en razonamiento, matemáticas y codificación. Los modelos Gemma 4 están construidos específicamente para "flujos de trabajo de agentes", lo que significa que destacan en el uso de herramientas, la generación de salidas JSON estructuradas y el seguimiento de instrucciones de planificación de varios pasos.
+
+En benchmarks estándar como MMLU Pro, el modelo Gemma 4 31B ha demostrado una puntuación de 85.2, situándose cerca de la cima de la tabla de clasificación de modelos abiertos. Aunque Gemma 3 27B sigue siendo un modelo muy capaz para la conversación general y la escritura creativa, carece de la precisión quirúrgica que se encuentra en la lógica de codificación de Gemma 4.
+
+| Benchmark | Gemma 3 (27B) | Gemma 4 (31B) |
+| :--- | :--- | :--- |
+| **MMLU Pro** | 78.4 | **85.2** |
+| **HumanEval (Codificación)** | 72.1% | **80.0%** |
+| **GPQA (Ciencia)** | 41.2 | **48.5** |
+| **Índice de Eficiencia** | Estándar | **2.5x menos tokens para la misma tarea** |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades de agentes y ejecución local
+
+Una de las características destacadas de Gemma 4 es la introducción de "Agent Skills" (habilidades de agente) a través del marco de la aplicación Gemini. Esto permite que el modelo funcione completamente en el dispositivo sin computación en la nube. En una comparativa **gemma 3 vs 4**, Gemma 4 es significativamente mejor en el "encadenamiento de herramientas": la capacidad de decidir qué herramientas locales usar y en qué orden para completar una solicitud compleja del usuario.
+
+### Mejoras clave en los flujos de trabajo de agentes de Gemma 4:
+1.  **Salidas JSON estructuradas:** Esencial para desarrolladores que necesitan que la IA interactúe con otros componentes de software.
+2.  **Razonamiento de múltiples pasos:** El modelo puede planificar una secuencia de acciones en lugar de simplemente responder a una sola instrucción.
+3.  **Razonamiento visual:** Gemma 4 puede analizar y sintetizar información a través de múltiples imágenes, en lugar de solo describirlas individualmente.
+
+> **⚠️ Advertencia:** Aunque Gemma 4 es altamente eficiente, asegúrese de que su entorno local cumpla con los requisitos de la licencia Apache 2.0 y tenga controladores actualizados para la inferencia MoE para evitar cuellos de botella en el rendimiento.
+
+## Casos de uso: Eligiendo su modelo
+
+Decidir entre **gemma 3 vs 4** a menudo se reduce al hardware disponible y a la complejidad de la tarea. Gemma 3 sigue siendo un punto de entrada fantástico para quienes están aprendiendo el ecosistema, pero Gemma 4 es la elección definitiva para agentes locales a nivel de producción.
+
+| Caso de uso | Modelo recomendado | ¿Por qué? |
+| :--- | :--- | :--- |
+| **Integración en aplicaciones móviles** | Gemma 4 2B | Ultraeficiente y diseñado para razonamiento en el borde. |
+| **Desarrollo web local** | Gemma 4 31B | Superior en la generación de código de interfaz de usuario y CSS listos para producción. |
+| **Chat multilingüe general** | Gemma 3 12B | Excelente equilibrio para portátiles de gama alta con menos VRAM. |
+| **Simulación física compleja** | Gemma 4 31B | Maneja la gestión de estados y la lógica de juegos con mayor precisión. |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/qcjrduz_YS8"
+    title="Which Gemma version is the right one for you?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Rendimiento en programación y Front-End
+
+En pruebas del mundo real, Gemma 4 ha mostrado una capacidad notable para clonar interfaces complejas, como sistemas operativos al estilo macOS o diseños web similares a Airbnb. Mientras que Gemma 3 sentó las bases para estas tareas, Gemma 4 maneja las partes "complicadas" de los movimientos dinámicos y la generación de SVG con mucha más elegancia.
+
+Al pedir a los modelos que construyan sistemas interactivos, como un visor de productos de 360 grados, Gemma 4 implementa con éxito la gestión de estados e incluso añade toques visuales avanzados como sombras y animaciones que frecuentemente faltaban en los resultados de Gemma 3. Para los desarrolladores que utilizan [Google AI Studio](https://aistudio.google.com/), estos modelos están disponibles actualmente para pruebas gratuitas, proporcionando una entrada de bajo costo al rendimiento de alto nivel.
+
+## FAQ
+
+**P: ¿Es Gemma 4 compatible con las implementaciones de Gemma 3?**
+
+R: Sí, por lo general. Ambos modelos utilizan arquitecturas similares y están disponibles a través de Hugging Face, Ollama y LM Studio. Sin embargo, es posible que deba actualizar su motor de inferencia para admitir la implementación específica de MoE (Mezcla de Expertos) de Gemma 4 para el modelo 26B.
+
+**P: ¿Qué modelo es mejor para un dispositivo móvil con RAM limitada?**
+
+R: En el duelo **gemma 3 vs 4** para móviles, Gemma 4 2B es el ganador. Está diseñado específicamente para la ultraeficiencia en dispositivos finales, manteniendo capacidades de razonamiento que rivalizan con los modelos más antiguos Gemma 3 4B y 7B.
+
+**P: ¿Puede Gemma 4 ejecutarse completamente sin conexión?**
+
+R: Absolutamente. Una de las principales fortalezas de la serie Gemma 4 es su rendimiento local. Con la cuantización adecuada, incluso el modelo 31B puede ejecutarse en hardware de consumo de gama alta sin ninguna conexión a Internet.
+
+**P: ¿Soporta Gemma 4 más idiomas que Gemma 3?**
+
+R: Sí, Gemma 4 ha ampliado sus datos de entrenamiento para soportar más de 140 idiomas, en comparación con los más de 100 idiomas soportados por la familia Gemma 3.

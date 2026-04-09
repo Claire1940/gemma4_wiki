@@ -1,0 +1,107 @@
+export const metadata = {
+  title: "Gemma 3 vs 4: 2026년 구글 오픈 모델 진화 비교",
+  description: "Gemma 3와 Gemma 4의 심층 비교 분석. 로컬 AI 개발을 위한 성능 벤치마크, 파라미터 효율성 및 에이전트 기능을 살펴보세요.",
+  category: "가이드",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+3+vs+4+Comparison",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+오픈소스 인공지능의 지형은 구글의 최신 모델 제품군 출시와 함께 급격히 변화했습니다. 개발자와 연구자들에게 **gemma 3 vs 4**의 선택은 순수 지능과 운영 효율성 사이의 균형을 맞추는 중요한 결정입니다. Gemma 3가 강력한 멀티모달 기능과 확장된 컨텍스트 창을 도입했다면, Gemma 4는 "파라미터당 지능"의 한계를 뛰어넘어 더 작은 모델이 자신보다 20배 큰 이전 모델보다 뛰어난 성능을 발휘할 수 있게 합니다.
+
+이 종합 가이드에서는 **gemma 3 vs 4** 논쟁을 정의하는 아키텍처의 도약과 실제 성능 지표를 분석합니다. 모바일 기기에서 에이전트 워크플로우를 구축하든, 로컬 워크스테이션에 고밀도 추론 엔진을 배포하든, 이러한 미묘한 차이를 이해하는 것이 중요합니다. 이 비교를 통해 2026년 여러분의 특정 개발 파이프라인에 어떤 모델 제품군이 적합한지 결정해 보세요.
+
+## 아키텍처 진화 및 모델 크기
+
+Gemma 3에서 Gemma 4로의 전환은 특화된 효율성을 향한 변화를 나타냅니다. Gemma 3는 휴대전화부터 고사양 데스크톱까지 모든 분야를 아우르기 위해 선형적인 크기 발전(1B~27B)에 집중했습니다. 반면, Gemma 4는 중간 단계, 특히 26B 모델에 MoE(Mixture of Experts) 방식을 도입하여 추론 시 약 38억 개의 파라미터만 활성화합니다.
+
+| 기능 | Gemma 3 시리즈 | Gemma 4 시리즈 |
+| :--- | :--- | :--- |
+| **플래그십 크기** | 27B (Dense) | **31B (Dense)** |
+| **효율성 티어** | 12B (Dense) | **26B (MoE / 3.8B 활성)** |
+| **엣지/모바일 티어** | 1B (텍스트) / 4B (멀티모달) | **2B (초효율) / 4B (강력한 엣지)** |
+| **최대 컨텍스트 창** | 128K | **256K** |
+| **언어 지원** | 100개 이상의 언어 | **140개 이상의 언어** |
+
+> **💡 팁:** Mac Studio M2 Ultra와 같은 하드웨어에서 모델을 로컬로 실행하는 경우, Gemma 4 26B 모델을 강력히 추천합니다. MoE 아키텍처 덕분에 초당 거의 300토큰을 처리할 수 있기 때문입니다.
+
+## 성능 벤치마크: Gemma 3 vs 4
+
+**gemma 3 vs 4**의 성능 차이를 살펴보면 추론, 수학, 코딩 분야에서 가장 눈에 띄는 개선이 나타납니다. Gemma 4 모델은 "에이전트 워크플로우"를 위해 특별히 제작되었으며, 이는 도구 사용, 구조화된 JSON 출력 생성, 다단계 계획 지침 준수에 탁월함을 의미합니다.
+
+MMLU Pro와 같은 표준 벤치마크에서 Gemma 4 31B 모델은 85.2점을 기록하며 오픈 모델 순위표 상위권에 올랐습니다. Gemma 3 27B는 일반적인 대화 및 창의적 글쓰기에 여전히 뛰어난 모델이지만, Gemma 4의 코딩 로직에서 볼 수 있는 정밀함은 부족합니다.
+
+| 벤치마크 | Gemma 3 (27B) | Gemma 4 (31B) |
+| :--- | :--- | :--- |
+| **MMLU Pro** | 78.4 | **85.2** |
+| **HumanEval (코딩)** | 72.1% | **80.0%** |
+| **GPQA (과학)** | 41.2 | **48.5** |
+| **효율성 지수** | 표준 | **동일 작업 시 2.5배 적은 토큰 사용** |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 에이전트 기능 및 로컬 실행
+
+Gemma 4의 돋보이는 기능 중 하나는 Gemini 앱 프레임워크를 통한 "에이전트 스킬(Agent Skills)" 도입입니다. 이를 통해 클라우드 컴퓨팅 없이 기기에서 완전히 모델을 작동할 수 있습니다. **gemma 3 vs 4** 비교에서 Gemma 4는 "도구 체이닝(tool chaining)"—복잡한 사용자 요청을 완료하기 위해 어떤 로컬 도구를 어떤 순서로 사용할지 결정하는 능력—에서 훨씬 뛰어납니다.
+
+### Gemma 4 에이전트 워크플로우의 주요 개선 사항:
+1.  **구조화된 JSON 출력:** AI가 다른 소프트웨어 구성 요소와 상호 작용해야 하는 개발자에게 필수적입니다.
+2.  **다단계 추론:** 모델이 단일 프롬프트에 응답하는 대신 일련의 행동 계획을 세울 수 있습니다.
+3.  **시각적 추론:** Gemma 4는 여러 이미지를 개별적으로 설명하는 대신 이미지를 분석하고 통찰력을 합성할 수 있습니다.
+
+> **⚠️ 경고:** Gemma 4는 효율성이 높지만, 성능 병목 현상을 피하려면 로컬 환경이 Apache 2.0 라이선스 요구 사항을 지원하고 MoE 추론을 위한 최신 드라이버가 설치되어 있는지 확인하세요.
+
+## 유스케이스: 모델 선택하기
+
+**gemma 3 vs 4** 중 하나를 선택하는 것은 종종 사용 가능한 하드웨어와 작업의 복잡성에 따라 달라집니다. Gemma 3는 생태계를 배우는 사람들에게 여전히 훌륭한 입문점이지만, 프로덕션 수준의 로컬 에이전트에게는 Gemma 4가 확실한 선택입니다.
+
+| 유스케이스 | 추천 모델 | 이유 |
+| :--- | :--- | :--- |
+| **모바일 앱 통합** | Gemma 4 2B | 초효율적이며 엣지 추론에 최적화됨. |
+| **로컬 웹 개발** | Gemma 4 31B | 프로덕션급 UI 코드 및 CSS 생성에 탁월함. |
+| **일반 다국어 채팅** | Gemma 3 12B | VRAM이 낮은 고사양 노트북에 최적의 균형. |
+| **복잡한 물리 시뮬레이션** | Gemma 4 31B | 상태 관리 및 게임 로직을 더 높은 정확도로 처리함. |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/qcjrduz_YS8"
+    title="Which Gemma version is the right one for you?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 코딩 및 프런트엔드 성능
+
+실제 테스트에서 Gemma 4는 macOS 스타일의 운영 체제나 Airbnb와 유사한 웹 레이아웃과 같은 복잡한 인터페이스를 복제하는 놀라운 능력을 보여주었습니다. Gemma 3가 이러한 작업의 토대를 마련했다면, Gemma 4는 동적 움직임과 SVG 생성의 까다로운 부분을 훨씬 더 매끄럽게 처리합니다.
+
+360도 제품 뷰어와 같은 대화형 시스템 구축을 요청했을 때, Gemma 4는 상태 관리를 성공적으로 구현하고 Gemma 3 출력에서 자주 누락되었던 그림자 및 애니메이션과 같은 고급 시각적 효과까지 추가했습니다. [Google AI Studio](https://aistudio.google.com/)를 사용하는 개발자는 현재 이 모델들을 무료로 테스트할 수 있어 고성능 모델에 쉽게 접근할 수 있습니다.
+
+## FAQ
+
+**Q: Gemma 4는 Gemma 3 구현과 하위 호환이 되나요?**
+
+A: 예, 일반적으로 그렇습니다. 두 모델 모두 유사한 아키텍처를 사용하며 Hugging Face, Ollama, LM Studio를 통해 사용할 수 있습니다. 다만, 26B 모델의 경우 Gemma 4 특유의 MoE(Mixture of Experts) 구현을 지원하도록 추론 엔진을 업데이트해야 할 수도 있습니다.
+
+**Q: RAM이 제한된 모바일 기기에는 어떤 모델이 더 좋나요?**
+
+A: 모바일용 **gemma 3 vs 4** 대결에서는 Gemma 4 2B가 승자입니다. 이전 Gemma 3 4B 및 7B 모델에 필적하는 추론 능력을 유지하면서 엣지 기기에서의 초효율성을 위해 특별히 설계되었습니다.
+
+**Q: Gemma 4를 완전히 오프라인으로 실행할 수 있나요?**
+
+A: 물론입니다. Gemma 4 시리즈의 핵심 장점 중 하나는 로컬 성능입니다. 적절한 양자화를 거치면 31B 모델조차 인터넷 연결 없이 고사양 소비자용 하드웨어에서 실행할 수 있습니다.
+
+**Q: Gemma 4는 Gemma 3보다 더 많은 언어를 지원하나요?**
+
+A: 예, Gemma 4는 Gemma 3 제품군이 지원하는 100개 이상의 언어에 비해 확장된 학습 데이터를 통해 140개 이상의 언어를 지원합니다.

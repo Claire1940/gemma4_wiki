@@ -1,0 +1,126 @@
+export const metadata = {
+  title: "Gemma 4 Model Sizes Parameters VRAM Requirements Ollama 2026 Guide",
+  description: "Explore the complete Gemma 4 model sizes parameters vram requirements ollama guide. Learn about workstation and edge tiers, performance benchmarks, and local setup.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Model+Guide",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+The release of Google's newest open-weight family has sent shockwaves through the local LLM community. Understanding the **gemma 4 model sizes parameters vram requirements ollama** is essential for developers and hobbyists looking to deploy these powerful models on consumer hardware. Unlike previous iterations, Gemma 4 arrives with a true Apache 2.0 license, allowing for unrestricted commercial use, fine-tuning, and modification. This shift positions Google as a direct competitor to the Llama and Qwen ecosystems. In this comprehensive guide, we will break down the **gemma 4 model sizes parameters vram requirements ollama** to help you determine which version fits your current GPU setup and how to get it running smoothly using the industry-standard Ollama interface.
+
+## Gemma 4 Model Tiers: Workstation vs. Edge
+
+Google has categorized the Gemma 4 family into two distinct tiers: **Workstation** and **Edge**. This separation ensures that whether you are running a massive server with H100s or a portable Raspberry Pi, there is a model optimized for your specific compute constraints.
+
+The Workstation tier is designed for heavy-duty tasks like complex coding assistance, document understanding, and long-context reasoning. These models leverage the latest research from the Gemini 3 flagship series, bringing high-end commercial performance to the open-source world. Conversely, the Edge tier focuses on extreme efficiency, drastically reducing the footprint of vision and audio encoders to fit on mobile devices and single-board computers.
+
+### Core Model Specifications
+
+| Model Name | Total Parameters | Active Parameters | Model Type | Context Window |
+|---|---|---|---|---|
+| **Gemma 4 31B** | 31 Billion | 31 Billion | Dense | 256K |
+| **Gemma 4 26B MoE** | 26 Billion | **3.8 Billion** | Mixture of Experts | 256K |
+| **Gemma 4 E4B** | 4 Billion | 4 Billion | Edge / Dense | 128K |
+| **Gemma 4 E2B** | 2 Billion | 2 Billion | Edge / Dense | 128K |
+
+> **💡 Tip:** The 26B MoE model offers the intelligence of a much larger model while maintaining the inference speed of a 4B model, making it the "sweet spot" for users with mid-range GPUs.
+
+## Gemma 4 Parameters and Architecture
+
+The architecture of Gemma 4 represents a significant departure from the Gemma 3 series. One of the most notable upgrades is the move to a 128-expert Mixture of Experts (MoE) system for the 26B variant. By activating only eight experts per token plus one shared expert, the model achieves massive efficiency gains.
+
+Furthermore, Google has integrated native multimodality directly into the architecture. Instead of "bolting on" external tools like Whisper for audio or separate CLIP models for vision, Gemma 4 handles text, image, and audio inputs natively. This results in much higher accuracy for tasks like OCR (Optical Character Recognition) and real-time speech translation.
+
+### Architectural Highlights:
+*   **Native Audio Support:** The Edge models (E2B and E4B) feature a massively compressed audio encoder, reduced from 681M parameters in previous versions to just 305M.
+*   **Vision Enhancements:** The new vision encoder supports native aspect ratio processing, meaning it no longer crops or distorts images, significantly improving document understanding.
+*   **Chain of Thought (CoT):** Built-in "thinking" capabilities allow the model to reason through complex queries before providing a final answer.
+*   **Function Calling:** Optimized for agentic workflows, the models can interact with external tools and APIs out of the box.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Arrived!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## VRAM Requirements for Local Hosting
+
+Determining your **VRAM requirements** is the most critical step before downloading these models. Because Google has released Quantized Aware Training (QAT) checkpoints, users can run these models at lower precision (like 4-bit or 8-bit) with minimal loss in intelligence.
+
+If you plan to run the Workstation models (31B or 26B MoE) at full FP16 precision, you will need professional-grade hardware. However, for most gamers and local AI enthusiasts, 4-bit or 6-bit quantization via Ollama makes these models accessible on standard RTX cards.
+
+### Estimated VRAM Usage (Ollama Quantized)
+
+| Model Tier | Quantization | VRAM Required | Recommended GPU |
+|---|---|---|---|
+| **E2B (2B)** | Q4_K_M | **~1.8 GB** | GTX 1060 / Mobile |
+| **E4B (4B)** | Q4_K_M | **~3.2 GB** | RTX 3060 (8GB) |
+| **26B MoE** | Q4_K_M | **~16.5 GB** | RTX 3090 / 4090 |
+| **31B Dense** | Q4_K_M | **~20.0 GB** | RTX 3090 / 4090 |
+| **31B Dense** | FP16 | **~64.0 GB** | RTX 6000 Ada / H100 |
+
+> **⚠️ Warning:** Running models near your VRAM limit will cause "offloading" to system RAM, which can slow down generation speeds from 50 tokens per second to less than 2 tokens per second.
+
+## Running Gemma 4 on Ollama
+
+Ollama remains the most user-friendly way to manage **gemma 4 model sizes parameters vram requirements ollama** on Windows, Mac, or Linux. The platform automatically handles the quantization and ensures the model is optimized for your specific hardware.
+
+### Step-by-Step Installation
+1.  **Download Ollama:** Visit the official site and install the 2026 version.
+2.  **Pull the Model:** Open your terminal and type `ollama run gemma4:26b` for the MoE version or `ollama run gemma4:2b` for the lightweight edge version.
+3.  **Configure Thinking:** To enable the "Chain of Thought" reasoning, you can modify the Modelfile to include the reasoning system prompt.
+4.  **Multimodal Input:** For the E2B and E4B models, you can drag and drop images or audio files directly into the Ollama-compatible web UIs (like Open WebUI) to utilize the native vision and audio features.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/FQTorLqMyMU"
+    title="Which Ollama Model Is Best For YOU?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Performance Benchmarks and Use Cases
+
+Gemma 4 isn't just about efficiency; it's a powerhouse in benchmarks. The 31B Dense model, in particular, has shown incredible results in **SweetBench Pro** and **MMU Pro**, often outperforming larger models from the Llama 3 series in coding and mathematical reasoning.
+
+### Best Use Cases for Each Size:
+*   **31B Dense:** Best for local software development, IDE integration (Co-pilot style), and complex multilingual translation (supporting 140 languages).
+*   **26B MoE:** Ideal for general-purpose chatbots where speed is a priority without sacrificing the ability to follow complex instructions.
+*   **E4B / E2B:** Perfect for "Voice-First" AI assistants. Since these models support native audio transcription and translation on-device, they are the go-to choice for privacy-focused mobile apps.
+
+## Fine-Tuning and Commercial Potential
+
+The move to the Apache 2.0 license is perhaps the most significant update for the 2026 AI landscape. Developers can now take the Gemma 4 base models and fine-tune them for specific industries—such as legal, medical, or gaming—without worrying about "don't compete" clauses.
+
+Because the models are built on **Gemini 3 research**, they respond exceptionally well to Low-Rank Adaptation (LoRA) fine-tuning. Even the small E2B model can be specialized into a world-class NPC dialogue generator or a dedicated system monitor with very little training data.
+
+> **💡 Tip:** When fine-tuning the MoE model, ensure your training script is compatible with sparse architectures to avoid "collapsing" the experts into a single dense path.
+
+## FAQ
+
+**Q: What is the minimum VRAM needed for Gemma 4?**
+
+A: To run the smallest version, the Gemma 4 E2B, you only need about 1.8 GB of VRAM when using Q4 quantization in Ollama. This makes it compatible with almost any modern laptop or even high-end smartphones.
+
+**Q: Does Gemma 4 support audio input locally?**
+
+A: Yes, the Edge models (E2B and E4B) have native audio support. They can perform speech-to-text (ASR) and even direct speech-to-translated-text without needing an external model like Whisper.
+
+**Q: Is the 26B MoE model better than the 31B Dense model?**
+
+A: It depends on your hardware. The 26B MoE is faster and requires less compute per token, but the 31B Dense model generally offers higher absolute accuracy for complex coding and logic tasks due to its larger active parameter count.
+
+**Q: Can I use Gemma 4 for commercial products?**
+
+A: Absolutely. Thanks to the Apache 2.0 license released in 2026, you can modify, fine-tune, and deploy Gemma 4 commercially with no strings attached, making it a top choice for startups and enterprise applications.
+
+For more technical documentation and weight downloads, check the [official Google AI repository](https://huggingface.co/google) on Hugging Face.

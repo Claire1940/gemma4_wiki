@@ -1,0 +1,120 @@
+export const metadata = {
+  title: "Requisitos de VRAM y tamaños de los modelos Gemma 4: Guía completa 2026",
+  description: "Explora las especificaciones técnicas completas de la serie de IA Gemma 4 de Google. Conoce los requisitos de VRAM de los tamaños de los modelos Gemma 4 para hardware local y despliegue en la nube.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+VRAM+Guide",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+Google ha transformado fundamentalmente el panorama de la IA local con el lanzamiento de la serie Gemma 4, una potente familia de modelos de código abierto diseñados para razonamiento avanzado y flujos de trabajo de alta eficiencia. Para los desarrolladores y entusiastas del hardware, comprender los **requisitos de VRAM de los tamaños de los modelos gemma 4** es esencial para optimizar el rendimiento en GPUs de consumo o dispositivos perimetrales (edge) móviles. Construidos bajo la permisiva licencia Apache 2.0, estos modelos enfatizan la "inteligencia por parámetro", permitiendo que las variantes más pequeñas superen a modelos antiguos de casi veinte veces su tamaño. Ya sea que estés construyendo un asistente de juegos agéntico o un compañero de programación local, conocer los **requisitos de VRAM de los tamaños de los modelos gemma 4** específicos te asegura seleccionar el nivel de cuantización adecuado para tu memoria disponible. Esta guía desglosa los cuatro tamaños distintos (2B, 4B, 26B y 31B) al tiempo que proporciona especificaciones de hardware estimadas para las configuraciones de 2026.
+
+## La familia de modelos Gemma 4: Arquitectura y eficiencia
+
+La línea Gemma 4 se categoriza en cuatro niveles principales, cada uno de los cuales sirve a un nicho específico, desde la eficiencia móvil hasta el rendimiento de nivel insignia. A diferencia de las generaciones anteriores, Google ha utilizado una mezcla de arquitecturas densas y de Mezcla de Expertos (MoE) para maximizar el rendimiento y minimizar el recuento de parámetros activos durante la inferencia.
+
+| Variante del modelo | Arquitectura | Ventana de contexto | Mejor caso de uso |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 2B** | Densa ultraeficiente | 128K | Dispositivos móviles y Edge |
+| **Gemma 4 4B** | Densa multimodal | 128K | Rendimiento Edge y tareas de visión |
+| **Gemma 4 26B** | Mezcla de Expertos (MoE) | 256K | Agentes de escritorio locales de alta velocidad |
+| **Gemma 4 31B** | Densa insignia | 256K | Razonamiento y programación de alto nivel |
+
+La variante 26B es particularmente notable por su eficiencia; aunque posee 26 mil millones de parámetros totales, solo activa aproximadamente 4 mil millones durante la inferencia. Esto le permite funcionar a velocidades increíbles —hasta 300 tokens por segundo en hardware como el Mac Studio M2 Ultra— convirtiéndolo en uno de los modelos más rápidos de su clase para 2026.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de VRAM de los tamaños de los modelos Gemma 4 para configuración local
+
+Al ejecutar estos modelos localmente, el principal cuello de botella es la memoria RAM de video (VRAM). La cantidad de memoria requerida depende en gran medida del nivel de cuantización (la precisión de los pesos del modelo). Mientras que FP16 (precisión completa) ofrece la calidad más alta, la mayoría de los usuarios en 2026 utilizan cuantizaciones de 4 bits (Q4) u 8 bits (Q8) para ajustar modelos más grandes en GPUs de consumo como las series RTX 50 o 60.
+
+### Requisitos estimados de VRAM por cuantización
+
+| Tamaño del modelo | 4 bits (Q4_K_M) | 8 bits (Q8_0) | FP16 (Sin comprimir) |
+| :--- | :--- | :--- | :--- |
+| **Variante 2B** | ~1.8 GB | ~2.5 GB | ~5.0 GB |
+| **Variante 4B** | ~3.2 GB | ~4.8 GB | ~9.0 GB |
+| **26B (MoE)** | ~16.5 GB | ~28.5 GB | ~52.0 GB |
+| **31B (Densa)** | ~19.0 GB | ~33.0 GB | ~65.0 GB |
+
+> **💡 Sugerencia:** Si tienes exactamente 16GB de VRAM, el modelo 26B MoE con cuantización Q4 es tu mejor opción para equilibrar una alta inteligencia y una velocidad fluida. Para tarjetas con 24GB de VRAM (como la 3090/4090/5090), el modelo 31B en Q4 o Q5 encaja cómodamente con espacio para una ventana de contexto amplia.
+
+## Benchmarks de rendimiento y pruebas en el mundo real
+
+El modelo insignia 31B ha mostrado una resistencia notable en las pruebas comparativas, obteniendo un 85.2 en MMLU Pro y situándose entre los tres mejores modelos de código abierto en la clasificación de LM Arena. Sin embargo, la verdadera historia está en la eficiencia. En comparación con competidores como Qwen 3.5, los modelos Gemma 4 a menudo utilizan 2.5 veces menos tokens para completar tareas similares, lo que conduce a tiempos de generación más rápidos y menores costos operativos en entornos de nube.
+
+### Capacidades de juego y simulación
+En 2026, muchos usuarios están aprovechando Gemma 4 para la generación procedimental de juegos y simulaciones 3D. Las pruebas han demostrado que el modelo es capaz de:
+*   **Simulaciones físicas:** Creación de simuladores de derrapes (donuts) de F1 funcionales y lógica de construcción de coches con física en tiempo real.
+*   **Clones de Front-end:** Generación de clones de alta fidelidad de plataformas como Airbnb o interfaces de Mac OS con componentes de aplicación funcionales (aunque simplificados).
+*   **Renderizado 3D:** Escritura de código JavaScript puro para escenas de metro en 3D y simuladores de combate aéreo con trazadores de proyectiles y lógica de retroceso.
+
+> **⚠️ Advertencia:** Aunque Gemma 4 es excelente en estructuras de código, las generaciones de "un solo intento" (one-shot) para juegos complejos como clones de Minecraft todavía están fuera del alcance del tamaño 31B. Se espera que debas iterar sobre el código generado para obtener mecánicas de juego totalmente funcionales.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Flujos de trabajo multimodales y agénticos
+
+Una característica destacada de la serie Gemma 4 es su capacidad multimodal. Incluso el modelo 4B más pequeño puede procesar datos visuales, lo que le permite analizar diagramas de circuitos, identificar componentes de hardware o interpretar bocetos de sitios web hechos a mano. Esto lo convierte en un candidato ideal para "Habilidades de Agente" integradas en dispositivos móviles.
+
+La aplicación Gemini actualizada de Google permite que Gemma 4 se ejecute completamente en el dispositivo, ejecutando tareas de varios pasos sin computación en la nube. Esto incluye:
+1.  **Uso de herramientas:** Encadenar aplicaciones para extraer datos, procesarlos y generar una visualización.
+2.  **Razonamiento visual:** Comparar múltiples imágenes para extraer patrones en lugar de simplemente describirlas.
+3.  **Salida estructurada:** Generación de JSON confiable para que los desarrolladores lo utilicen en tuberías programáticas.
+
+## Cómo instalar y ejecutar Gemma 4 localmente
+
+Gracias a los pesos abiertos, puedes instalar Gemma 4 en casi cualquier sistema operativo siempre que cumplas con los **requisitos de VRAM de los tamaños de los modelos gemma 4**. Las herramientas populares en 2026 incluyen:
+
+*   **Ollama:** La forma más fácil para usuarios de macOS y Linux de ejecutar modelos a través de la línea de comandos.
+*   **LM Studio:** Un enfoque basado en GUI para Windows y Mac que permite una fácil selección de cuantización.
+*   **Kilo CLI:** Un arnés de código abierto muy recomendado para potenciar las capacidades agénticas y de uso de herramientas del modelo.
+
+Para aquellos que no tienen hardware de alta gama, [Google AI Studio](https://aistudio.google.com/) ofrece acceso gratuito para probar los modelos, mientras que los proveedores de la nube como OpenRouter ofrecen precios competitivos a aproximadamente $0.14 por millón de tokens de entrada para la variante 31B.
+
+## Recomendaciones de hardware para 2026
+
+Para aprovechar al máximo la serie Gemma 4, tu elección de hardware debe alinearse con el tamaño del modelo que pretendes usar.
+
+| Nivel de hardware | Modelo recomendado | Cuantización | Expectativa de rendimiento |
+| :--- | :--- | :--- | :--- |
+| **Móvil/Portátil (8GB RAM)** | 2B o 4B | Q4 / Q8 | Respuesta instantánea, chat básico |
+| **PC de gama media (12-16GB VRAM)** | 26B MoE | Q4 | Alta velocidad, ideal para programar |
+| **Entusiasta (24GB+ VRAM)** | 31B Densa | Q6 / Q8 | Alto razonamiento, agentes complejos |
+| **Estación de trabajo (Mac M2/M3 Ultra)** | 31B Densa | FP16 | Desarrollo a nivel de producción |
+
+## FAQ
+
+**P: ¿Cuáles son los requisitos mínimos de VRAM de los tamaños de los modelos gemma 4 para una experiencia jugable?**
+
+R: Para una experiencia fluida, el modelo 2B requiere tan solo 2GB de VRAM con cuantización de 4 bits. Sin embargo, para tareas avanzadas como programación o razonamiento complejo, se recomienda el modelo 26B MoE, que requiere al menos 16GB de VRAM para funcionar de manera efectiva.
+
+**P: ¿Es Gemma 4 mejor para la lógica de juegos que las versiones anteriores?**
+
+R: Sí, Gemma 4 muestra un salto masivo en razonamiento espacial y simulación física. Puede generar reglas de juego funcionales, gestión de estados y mecánicas de movimiento fluidas en código de navegador puro de manera mucho más confiable que Gemma 2 o 3.
+
+**P: ¿Puedo ejecutar el modelo 31B en una GPU estándar de 8GB?**
+
+R: No, el modelo 31B es demasiado grande para una tarjeta de 8GB de VRAM, incluso con una cuantización pesada. Tendrías que usar la RAM del sistema (formato GGUF a través de llama.cpp), lo que ralentizará significativamente los tokens por segundo hasta casi detenerse.
+
+**P: ¿Gemma 4 admite otros idiomas además del inglés?**
+
+R: Sí, los modelos admiten más de 140 idiomas y cuentan con una ventana de contexto ampliada de hasta 256K, lo que los hace excelentes para traducciones de largo formato y desarrollo de aplicaciones globales.

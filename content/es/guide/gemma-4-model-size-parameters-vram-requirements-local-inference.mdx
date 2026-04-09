@@ -1,0 +1,117 @@
+export const metadata = {
+  title: "Parámetros de tamaño del modelo Gemma 4, requisitos de VRAM e inferencia local 2026",
+  description: "Una guía exhaustiva sobre los parámetros de tamaño del modelo Gemma 4, los requisitos de VRAM y los puntos de referencia de inferencia local para el hardware de 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Local+Inference",
+  date: "2026-04-09",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la última serie de pesos abiertos de Google ha transformado el panorama tanto para los entusiastas de la IA local como para los desarrolladores. Comprender las especificaciones de los **parámetros de tamaño del modelo gemma 4 requisitos de vram inferencia local** es crucial para cualquiera que busque ejecutar estos potentes modelos en hardware de consumo. A medida que nos adentramos en 2026, la eficiencia de la arquitectura Gemma 4 permite realizar tareas agénticas sofisticadas, pero solo si el hardware está configurado correctamente. Esta guía ofrece una inmersión profunda en los datos de **parámetros de tamaño del modelo gemma 4 requisitos de vram inferencia local**, comparando varios niveles de cuantización y configuraciones de hardware para garantizar que obtengas el mejor rendimiento de tu estación de trabajo local. Ya sea que utilices una RTX 4060 de 8 GB o un equipo con doble 3090, optimizar tu configuración es la clave para lograr velocidades de tokens por segundo utilizables.
+
+## Arquitectura de parámetros y tamaño del modelo Gemma 4
+
+Gemma 4 introduce una arquitectura por niveles diseñada para escalar desde dispositivos móviles hasta estaciones de trabajo empresariales de alta gama. Los conteos de parámetros se han refinado en 2026 para maximizar la relación "inteligencia por parámetro", haciendo que las variantes de 27B y 30B sean particularmente populares para tareas locales de programación y razonamiento.
+
+| Nivel del modelo | Parámetros estimados | Caso de uso principal | Hardware recomendado |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 Nano** | 3.5 mil millones | Móvil / Chat básico | Smartphones / GPU de 4GB |
+| **Gemma 4 Small** | 12 mil millones | Chat avanzado / Lógica | GPU de 8GB - 12GB |
+| **Gemma 4 Medium** | 30 mil millones | Programación / Tareas agénticas | GPU de 16GB - 24GB |
+| **Gemma 4 Large** | 80 mil millones | Investigación / Razonamiento complejo | Doble 3090/4090 o Mac Studio |
+
+El modelo de 30B parámetros se considera el "punto ideal" para la inferencia local en 2026. Proporciona suficiente densidad para manejar refactorizaciones complejas y diseño de interfaces de usuario sin la latencia extrema asociada con los modelos de más de 70B en hardware de consumo.
+
+## Requisitos de VRAM para inferencia local
+
+El cuello de botella más significativo para ejecutar Gemma 4 localmente es la memoria RAM de video (VRAM). Aunque los datos brutos de **parámetros de tamaño del modelo gemma 4 requisitos de vram inferencia local** sugieren huellas de memoria masivas para modelos no cuantizados, las técnicas modernas de cuantización como GGUF y EXL2 hacen que estos modelos sean accesibles.
+
+Para calcular tus necesidades, recuerda que un modelo de 32 bits (FP32) requiere aproximadamente 4 bytes por parámetro. Un modelo de 30B necesitaría teóricamente 120 GB de VRAM a precisión completa. Sin embargo, casi nadie ejecuta modelos locales en FP32.
+
+| Nivel de cuantización | VRAM necesaria (Modelo 30B) | Pérdida de calidad | Impacto en velocidad |
+| :--- | :--- | :--- | :--- |
+| **Q8_0 (8 bits)** | ~32 GB | Despreciable | Bajo |
+| **Q4_K_M (4 bits)** | ~18 GB | Mínima | **Más rápido** |
+| **Q2_K (2 bits)** | ~10 GB | Notoria | Alto |
+
+> **⚠️ Advertencia:** Si el tamaño de tu modelo excede tu VRAM, el sistema "descargará" capas a la memoria RAM del sistema. Esto resulta en una caída masiva de velocidad, pasando a menudo de más de 50 tokens por segundo a tan solo 2-5 tokens por segundo.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/K75j8MkwgJ0"
+    title="Optimize Your AI - Quantization Explained"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimización de Gemma 4 en GPUs con 8GB de VRAM
+
+Ejecutar un modelo de 20B o 30B en una tarjeta de 8 GB (como la RTX 4060) se consideraba imposible, pero las optimizaciones de 2026 han cambiado las reglas del juego. Para ejecutar Gemma 4 en hardware limitado, debes utilizar una cuantización agresiva y gestión de contexto.
+
+1.  **Usa cuantización de 4 bits (Q4_K_M):** Este es el estándar de la industria para equilibrar inteligencia y memoria.
+2.  **Activa Flash Attention:** Configurar `flash_attention=true` en tu motor de inferencia (como LM Studio u Ollama) reduce significativamente la sobrecarga de memoria durante conversaciones largas.
+3.  **Cuantización de caché KV:** Al cuantizar la "memoria" de la conversación (el caché KV) a 8 bits o incluso 4 bits, puedes ahorrar hasta 10 GB de VRAM en tareas de contexto largo.
+4.  **Limita la ventana de contexto:** Aunque Gemma 4 admite hasta 128k tokens, limitar tu contexto local a 8k o 16k evitará desbordamientos de VRAM.
+
+## Benchmarking del rendimiento de inferencia local
+
+En los puntos de referencia de 2026, Gemma 4 compite directamente con otros pesos pesados como Qwen 3 Coders y OSS 20B. Al analizar el rendimiento de los **parámetros de tamaño del modelo gemma 4 requisitos de vram inferencia local**, la métrica de "Tokens por segundo" (TPS) es el estándar de oro para la usabilidad.
+
+| Modelo (Clase 30B) | GPU 8GB (Con descarga) | GPU 24GB (VRAM completa) | Éxito en llamadas a herramientas |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 Medium** | 4-7 TPS | 45-60 TPS | **Alto** |
+| **Qwen 3 Coder** | 5-10 TPS | 50-65 TPS | Muy alto |
+| **OSS 20B** | 8-12 TPS | 70+ TPS | Medio |
+| **Neatron 3 Nano** | 15-20 TPS | 90+ TPS | Bajo (Alucina) |
+
+Como se muestra, aunque Gemma 4 es ligeramente más lento que algunos modelos de programación optimizados como Qwen 3, sus capacidades de razonamiento y la precisión en la llamada a herramientas lo convierten en una opción superior para flujos de trabajo agénticos donde el éxito al primer intento es más importante que la velocidad bruta.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/m3PQd11aI_c"
+    title="Best Local Coding AI for 8GB VRAM (2026 Benchmark)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Técnicas avanzadas de cuantización de contexto
+
+Una de las características innovadoras de los motores de inferencia de 2026 es la capacidad de cuantizar el historial de la conversación en sí. Anteriormente, a medida que el chat se alargaba, el "contexto" consumía más VRAM que el propio modelo.
+
+> **💡 Consejo:** Usar `OLLAMA_KV_CACHE_TYPE=q8_0` puede reducir la huella de memoria de una ventana de contexto de 32k de 15 GB a aproximadamente 5 GB, permitiendo que modelos más grandes quepan en GPUs más pequeñas.
+
+Al configurar Gemma 4, busca siempre los "K-Quants" (marcados con una 'K' en nombres de archivo como `gemma-4-30b.Q4_K_M.gguf`). Estos utilizan "salas de correo" especializadas para diferentes tipos de datos dentro del modelo: los números pequeños obtienen un almacenamiento preciso, mientras que los números más grandes y menos críticos se almacenan de manera más eficiente. Esto asegura que el equilibrio de los **parámetros de tamaño del modelo gemma 4 requisitos de vram inferencia local** siga siendo óptimo para tu hardware específico.
+
+## Hardware recomendado para IA local en 2026
+
+Si estás construyendo una PC específicamente para Gemma 4 en 2026, prioriza la VRAM sobre la velocidad de reloj bruta. Los modelos de IA se preocupan más por el ancho de la "tubería" (ancho de banda de memoria) y el tamaño del "cubo" (capacidad de VRAM).
+
+*   **Nivel de entrada:** NVIDIA RTX 4060 Ti (16GB). Esta tarjeta permite ejecutar Gemma 4 Medium (30B) en cuantización Q4 sin descarga a RAM, manteniendo altas velocidades.
+*   **Gama media:** NVIDIA RTX 5070 (20GB+). Ideal para ejecutar cuantizaciones Q6 o Q8 con una ventana de contexto amplia.
+*   **Gama alta:** Doble RTX 3090/4090 (48GB en total). Esta configuración permite ejecutar Gemma 4 Large (80B) con cuantización de 4 bits, proporcionando un nivel de inteligencia tipo GPT-4o en tu escritorio local.
+
+Para obtener más información sobre los pesos de los modelos y los últimos lanzamientos, visita el [Hugging Face Model Hub](https://huggingface.co/models) para encontrar cuantizaciones optimizadas por la comunidad para Gemma 4.
+
+## Preguntas frecuentes (FAQ)
+
+**P: ¿Cuál es la VRAM mínima para ejecutar Gemma 4 Medium (30B)?**
+
+R: Técnicamente, puedes ejecutarlo en una tarjeta de 4 GB descargando el 90% a la RAM del sistema, pero será tan lento que no resultará utilizable (menos de 1 token por segundo). Para una experiencia fluida, se recomienda un mínimo de 12 GB de VRAM para cuantización Q4, aunque 16 GB es la base ideal para el perfil de **parámetros de tamaño del modelo gemma 4 requisitos de vram inferencia local** 30B.
+
+**P: ¿Admite Gemma 4 el formato GGUF para LM Studio?**
+
+R: Sí, a partir de 2026, Gemma 4 es totalmente compatible con el backend llama.cpp, lo que significa que los archivos GGUF son el estándar para la inferencia local. Esto permite una fácil descarga de capas entre tu CPU y GPU.
+
+**P: ¿Hay una caída significativa de calidad entre la cuantización Q8 y Q4?**
+
+R: En la mayoría de los puntos de referencia, la diferencia entre 8 bits y 4 bits es inferior al 1-2% en pruebas de lógica y razonamiento. Sin embargo, bajar a 2 bits (Q2) provoca "alucinaciones" significativas y pérdida de coherencia, especialmente en tareas de programación.
+
+**P: ¿Cómo activo Flash Attention para Gemma 4?**
+
+R: En la mayoría de los servidores de IA local de 2026 (como Ollama o KoboldCPP), puedes activarlo en el menú de configuración o usando el comando `--flash-attn`. Esto es esencial para mantener la velocidad a medida que crece el contexto de tu conversación.

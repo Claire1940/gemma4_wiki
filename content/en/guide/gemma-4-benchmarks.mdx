@@ -1,0 +1,117 @@
+export const metadata = {
+  title: "Gemma 4 Benchmarks: Ultimate Local AI Performance Guide 2026",
+  description: "Explore the latest Gemma 4 benchmarks for E2B, E4B, and 31B models. Detailed performance analysis for PC, mobile, and agentic coding tasks in 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/2563eb/fff?text=Gemma+4+Benchmarks+2026",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+The landscape of local artificial intelligence has shifted dramatically with the release of Google’s latest open-weight models. If you are a developer, gamer, or AI enthusiast looking for the most efficient way to run LLMs on your own hardware, this deep dive into the latest **gemma 4 benchmarks** is essential reading. Unlike previous generations, the 2026 lineup introduces a specialized "Effective" parameter architecture designed to maximize intelligence while minimizing the hardware footprint. By analyzing **gemma 4 benchmarks** across different quantizations and devices, we can see exactly how these models stack up against heavyweights like Llama and Mistral.
+
+From the ultra-compact E2B model to the powerhouse 31B dense variant, the performance gains over the previous Gemma 3 generation are staggering. Whether you are running these models on a high-end desktop with a mobile RTX 5090 or a flagship Android device like the Asus ROG Phone 9 Pro, the efficiency of the new architecture allows for real-time reasoning and multimodal interactions that were previously impossible on consumer-grade gear.
+
+## The Gemma 4 Model Lineup: Technical Specifications
+
+The 2026 Gemma 4 family is divided into two primary categories: the "E" (Effective) models and the dense/MOE (Mixture of Experts) models. The E-series models, specifically the E2B and E4B, utilize per-layer embeddings to optimize parameter efficiency. This means that while their total parameter count (including embeddings) might be higher, their "effective" count for processing is much lower, allowing them to run at lightning speeds on mobile devices.
+
+| Model | Effective Parameters | Total Parameters (w/ Embeddings) | Context Window | Modality |
+|---|---|---|---|---|
+| **E2B** | 2.3 Billion | 5.1 Billion | 128K | Text, Image, Audio |
+| **E4B** | 4.5 Billion | 8 Billion | 128K | Text, Image, Audio |
+| **26B (MOE)** | 26 Billion | N/A | 128K | Text, Image |
+| **31B (Dense)** | 31 Billion | 31 Billion | 256K | Text, Image |
+
+> **💡 Tip:** If you are running on a device with limited VRAM (under 8GB), the E2B model at Q8 quantization is your best bet for maintaining high token-per-second speeds without sacrificing too much reasoning capability.
+
+## Local Hardware and Gemma 4 Benchmarks
+
+When testing **gemma 4 benchmarks** in a local environment using tools like LM Studio or VLLM, hardware configuration plays a pivotal role. In 2026, the standard for high-end local inference involves the RTX 50-series GPUs. Testing on a laptop-class RTX 5090 reveals that the E2B model can reach speeds exceeding 77 tokens per second (t/s) at Q8 quantization.
+
+### PC Inference Performance (Tokens Per Second)
+
+| Model | Quantization | Hardware | Speed (t/s) | VRAM Usage |
+|---|---|---|---|---|
+| **E2B** | Q8 | RTX 5090 (Mobile) | **77.4** | ~6.4 GB |
+| **E4B** | Q8 | RTX 5090 (Mobile) | **38.5** | ~9.3 GB |
+| **31B** | Q8 | 4x Desktop GPUs | **35.0** | ~32 GB+ |
+
+The E4B model, while slower than its smaller sibling, offers a significant jump in reasoning quality. Results from these **gemma 4 benchmarks** show that the E4B is far more capable of handling complex "malicious compliance" tasks, such as generating 3D code for driving simulators or subway scenes, even when the initial prompt is simple.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/j1EchjiViOs"
+    title="Gemma 4 Small Models Are INSANE – E2B & E4B Hands-On Testing!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Mobile Performance: On-Device Benchmarking
+
+One of the most impressive aspects of the 2026 release is the focus on mobile-specific **gemma 4 benchmarks**. Using the Google Edge Gallery application on an Asus ROG Phone 9 Pro (equipped with 24GB of RAM), the models demonstrate that high-quality AI is no longer tethered to the cloud.
+
+The E2B model on the ROG Phone 9 Pro clocks in at approximately 48 tokens per second. This speed is more than enough for fluid, real-time chat and agentic tasks like controlling the phone’s UI autonomously. The E4B model, being heavier, runs at about 20 tokens per second on the same hardware. While slower, it provides the necessary "thinking" overhead to process visual screenshots and execute precise actions like searching for specific terms in a browser.
+
+### Mobile Benchmark Summary (Asus ROG Phone 9 Pro)
+
+1. **E2B (Q8):** 48 tokens per second — Ideal for instant messaging and basic automation.
+2. **E4B (Q8):** 20 tokens per second — Best for complex reasoning and visual analysis.
+3. **Multimodal Capabilities:** Both models natively understand speech and images on-device.
+
+## Coding and Agentic Reasoning Capabilities
+
+The jump from Gemma 3 to Gemma 4 is most visible in coding and reasoning tasks. Standard coding and reasoning **gemma 4 benchmarks** show massive improvements in metrics like MMLU Pro and Codeforces ELO.
+
+| Benchmark | Gemma 3 (27B) | Gemma 4 (31B) | Improvement |
+|---|---|---|---|
+| **MMLU Pro** | 67% | **85%** | +18% |
+| **Codeforces ELO** | 110 | **2150** | +1854% |
+| **Livecodebench V6** | 29.1 | **80.0** | +50.9% |
+
+In practical tests, the E4B model was able to generate a functional 3D subway scene using geometric shapes and custom lighting materials after just a few troubleshooting iterations. Even the tiny E2B model successfully created a working Tic-Tac-Toe game and a number guessing game on its first attempt. For developers, this means the [official Gemma GitHub](https://github.com/google/gemma_pytorch) models are now viable for building local agentic frameworks that can write, test, and fix code without human intervention.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Safety, Refusals, and "God Mode"
+
+A recurring theme in the 2026 **gemma 4 benchmarks** is the tension between Google's strict safety protocols and the model's reasoning depth. During the "Armageddon with a twist" ethical dilemma test, the 31B model demonstrated advanced utilitarian reasoning, acknowledging that sacrificing a few to save billions is mathematically sound. However, it ultimately refused to "blast a captain out of an airlock" due to its core safety guidelines.
+
+Interestingly, testers have noted that these safety layers are often "thin." While the model may refuse a direct request for violence, advanced prompting techniques or "God Mode" wrappers can often bypass these refusals, highlighting that the underlying intelligence is much less restricted than the output filter suggests.
+
+> **⚠️ Warning:** When deploying Gemma 4 in agentic environments, ensure you have secondary safety parsers in place, as the model's native refusals can be inconsistent when faced with complex, multi-step prompts.
+
+## Conclusion: Is Gemma 4 the New Local King?
+
+The comprehensive **gemma 4 benchmarks** reveal a family of models that have finally closed the gap between mobile efficiency and desktop-class intelligence. The E2B model is a game-changer for on-device applications, providing high-speed inference on smartphones that rivals last year’s mid-range desktop performance. Meanwhile, the 31B variant has become a premier choice for developers needing a dense, reasoning-heavy model that respects local privacy.
+
+If you are looking at **gemma 4 benchmarks**, which demonstrate a near 2000-point jump in Codeforces ELO, it is clear that Google has successfully transitioned Gemma from a "capable" model to a "state-of-the-art" powerhouse for 2026.
+
+## FAQ
+
+**Q: What is the difference between E2B and regular 2B models?**
+
+A: The "E" stands for Effective parameters. While the E2B has a total of 5.1 billion parameters including large embedding tables for quick lookups, it only uses 2.3 billion parameters effectively during the main computation layers. This makes it much faster and more efficient for on-device deployment than a traditional 5B model.
+
+**Q: Can Gemma 4 run on a standard 8GB VRAM GPU?**
+
+A: Yes, both the E2B and E4B models fit comfortably within 8GB of VRAM when using Q8 or lower quantizations. The E2B model typically uses around 6.4GB, leaving room for system overhead.
+
+**Q: Does Gemma 4 support 256K context on all models?**
+
+A: No. The smaller E2B and E4B models are generally optimized for a 128K context window. The larger 31B dense model is the primary variant that supports the full 256K context window, making it better for analyzing massive codebases or long documents.
+
+**Q: How does Gemma 4 handle multimodal inputs like audio?**
+
+A: The smaller E2B and E4B models have native audio and image understanding. In 2026 benchmarks, these models were shown to understand spoken questions and respond via text or browser-based text-to-speech with very low latency, though the audio capability is sometimes excluded in specific MOE variants.

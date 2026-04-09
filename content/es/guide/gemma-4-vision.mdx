@@ -1,0 +1,114 @@
+export const metadata = {
+  title: "Gemma 4 Vision: Guía definitiva de integración de IA 2026",
+  description: "Domina las nuevas capacidades de Gemma 4 Vision. Aprende sobre los modelos de código abierto Apache 2.0, flujos de trabajo agénticos y razonamiento multimodal para hardware local.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1a1a2e/fff?text=Gemma+4+Vision+Guide",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de las capacidades de **Gemma 4 vision** marca un cambio masivo en la forma en que los desarrolladores y usuarios avanzados interactúan con los modelos de IA de código abierto. Basada en la misma investigación de clase mundial que Gemini 3, esta nueva familia de modelos está diseñada específicamente para ejecutarse localmente en tu propio hardware, incluyendo portátiles, computadoras de escritorio e incluso dispositivos móviles. Ya sea que estés construyendo agentes de juegos complejos o agilizando flujos de trabajo creativos, **Gemma 4 vision** proporciona el razonamiento multimodal necesario para "ver" y "oír" el mundo en tiempo real. Al alejarse de las restricciones propietarias y adoptar una licencia Apache 2.0, Google ha empoderado a la comunidad para construir soluciones de IA soberanas que no requieren la carga constante de datos a la nube. En esta guía, exploraremos las especificaciones técnicas de la familia Gemma 4 y cómo implementar bucles agénticos avanzados para una detección de objetos y razonamiento superiores.
+
+## Entendiendo la familia de modelos Gemma 4
+
+La actualización de 2026 al ecosistema Gemma introduce varios tamaños de modelo distintos, cada uno optimizado para restricciones de hardware y objetivos de rendimiento específicos. Desde el masivo modelo Dense de 31B diseñado para un razonamiento de alta calidad hasta los modelos "Effective" de 2B y 4B destinados a la eficiencia en móviles e IoT, hay una versión adecuada para cada proyecto.
+
+| Nombre del modelo | Parámetros | Tipo | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | 31 mil millones | Dense | Máxima calidad de salida y razonamiento profundo |
+| **Gemma 4 26B** | 26 mil millones | MoE (3.8B activos) | Razonamiento local de alta velocidad y codificación |
+| **Gemma 4 E4B** | 4 mil millones | Effective | Visión móvil y audio en tiempo real |
+| **Gemma 4 E2B** | 2 mil millones | Effective | Dispositivos IoT y eficiencia de memoria baja |
+
+El modelo Mixture of Experts (MoE) de 26B es particularmente digno de mención para jugadores y desarrolladores, ya que solo activa 3.8 mil millones de parámetros en cualquier momento dado. Esto permite velocidades de inferencia excepcionalmente rápidas mientras se mantiene la "inteligencia de frontera" que se espera de un modelo mucho más grande.
+
+## Implementando la era agéntica
+
+Gemma 4 está diseñada para lo que los expertos llaman la "era agéntica". Esto significa que el modelo no es solo un chatbot; es un planificador capaz de realizar lógica de múltiples pasos y uso de herramientas. Al usar **Gemma 4 vision** en un flujo de trabajo agéntico, el modelo puede analizar una escena, identificar qué información falta y llamar a herramientas externas —como modelos de segmentación de imágenes— para encontrar la respuesta.
+
+> **Advertencia:** Los modelos estándar de visión-lenguaje (VLM) suelen tener dificultades con el conteo preciso o la localización de objetos ocluidos. Siempre envuelve tus tareas de visión en un bucle agéntico para requisitos de alta precisión.
+
+### El flujo de trabajo del bucle agéntico
+1.  **Planificación y enrutamiento:** Gemma 4 analiza la consulta del usuario y determina si puede responder directamente o si necesita herramientas especializadas.
+2.  **Ejecución de herramientas:** Si es necesario, el modelo llama a una herramienta como Falcon Perception para segmentar la imagen o detectar cajas delimitadoras específicas.
+3.  **Razonamiento visual:** El modelo toma los datos segmentados y realiza un análisis secundario para garantizar la precisión.
+4.  **Salida final:** El agente compila los hallazgos en una respuesta en lenguaje natural, a menudo admitiendo más de 140 idiomas de forma nativa.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Razonamiento multimodal avanzado: Gemma 4 + Falcon Perception
+
+Si bien **Gemma 4 vision** es potente por sí solo, su verdadero potencial se desbloquea cuando se combina con un modelo de segmentación de imágenes dedicado como Falcon Perception. Esta combinación permite que la IA supere errores comunes en el análisis visual, como "alucinar" el número de artículos en una escena concurrida.
+
+| Característica | Gemma 4 solo | Gemma 4 + Falcon Perception |
+| :--- | :--- | :--- |
+| **Comprensión de escenas** | **Excelente** | **Excelente** |
+| **Conteo de objetos** | Promedio/Deficiente | **Alta precisión** |
+| **Localización de objetos** | Limitada | **Cajas delimitadoras precisas** |
+| **Velocidad de inferencia** | **Muy rápida** | Moderada (Aumento de latencia) |
+| **Lógica/Razonamiento** | **Sólido** | **Sólido** |
+
+Al usar la versión "Effective 4B" (E4B) de Gemma 4 junto con el modelo Falcon Perception de 300M de parámetros, los usuarios pueden ejecutar un flujo multimodal completo localmente en GPUs Nvidia o Apple Silicon (chips de la serie M). Esta configuración es ideal para aplicaciones en tiempo real como el seguimiento de objetos en juegos o el análisis de video automatizado.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/VFYnD1WREdU"
+    title="Gemma 4 Vision Agent | Object Detection + VLM Pipeline"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de hardware para el despliegue local
+
+Para aprovechar al máximo **Gemma 4 vision**, debes hacer coincidir el tamaño del modelo con tu VRAM disponible. Debido a que estos modelos son de código abierto bajo la licencia Apache 2.0, puedes descargar los pesos directamente de los repositorios oficiales y ejecutarlos a través de herramientas como MLX u Ollama.
+
+| Tipo de hardware | Modelo recomendado | VRAM mínima |
+| :--- | :--- | :--- |
+| **Móvil/IoT** | Gemma 4 E2B | 2GB - 4GB |
+| **Portátil moderno (Mac/PC)** | Gemma 4 E4B | 8GB |
+| **PC de juegos (RTX 3060+)** | Gemma 4 26B MoE | 12GB - 16GB |
+| **Estación de trabajo (A6000/H100)** | Gemma 4 31B Dense | 24GB+ |
+
+> **💡 Consejo:** Si estás ejecutando en Apple Silicon, utiliza las versiones optimizadas para MLX de estos modelos para aprovechar al máximo la memoria unificada y el Neural Engine.
+
+## Construyendo tu primer agente de visión
+
+Sigue estos pasos para configurar un agente local de **Gemma 4 vision** capaz de realizar análisis de imágenes complejos:
+
+1.  **Configuración del entorno:** Instala Python 3.10+ y los controladores CUDA o Metal necesarios para tu GPU.
+2.  **Descarga de pesos:** Obtén los pesos de Gemma 4 E4B y los pesos de Falcon Perception de los repositorios oficiales de Google DeepMind o TII.
+3.  **Define herramientas:** Crea un "Enrutador de planes" que permita a Gemma decidir cuándo activar el modelo de segmentación.
+4.  **Implementa la cadena de percepción:** Usa el modelo de segmentación para generar máscaras binarias para los objetos, luego envía esas máscaras de vuelta a Gemma para el razonamiento final.
+5.  **Prueba y refina:** Comienza con tareas de conteo simples (por ejemplo, "¿Cuántas manzanas hay en este tazón?") antes de pasar a un razonamiento espacial complejo.
+
+Para aquellos interesados en la seguridad empresarial de alto nivel, Gemma 4 se sometió a las mismas pruebas rigurosas que los modelos propietarios de Google, lo que la convierte en una base confiable para entornos de datos privados. Puedes encontrar más información y documentación oficial en la plataforma [Google Open Source](https://opensource.google/).
+
+## FAQ
+
+**P: ¿Es Gemma 4 vision completamente gratuito para uso comercial?**
+
+R: Sí, Gemma 4 se lanza bajo la licencia Apache 2.0, que permite el uso comercial, la modificación y la distribución sin los términos restrictivos que se encuentran en muchos otros modelos de "pesos abiertos".
+
+**P: ¿Puedo ejecutar Gemma 4 vision sin conexión a Internet?**
+
+R: Absolutamente. Uno de los objetivos de diseño principales de la familia Gemma 4 es la ejecución local. Una vez que hayas descargado los pesos del modelo, no es necesario que ningún dato salga de tu dispositivo.
+
+**P: ¿Cómo maneja Gemma 4 los diferentes idiomas en las tareas de visión?**
+
+R: El modelo admite de forma nativa más de 140 idiomas. Puedes darle instrucciones al modelo en un idioma (por ejemplo, francés) y pedirle que describa una imagen o proporcione un razonamiento en otro (por ejemplo, español).
+
+**P: ¿Cuál es la ventana de contexto máxima para los modelos Gemma 4 más grandes?**
+
+R: Los modelos 26B y 31B admiten una ventana de contexto de hasta 250,000 (un cuarto de millón) tokens, lo que te permite procesar bases de código masivas o interacciones agénticas de larga duración junto con datos visuales.

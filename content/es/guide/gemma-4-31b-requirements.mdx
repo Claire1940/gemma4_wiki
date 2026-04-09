@@ -1,0 +1,124 @@
+export const metadata = {
+  title: "Requisitos de Gemma 4 31b: Guía completa de configuración de IA local 2026",
+  description: "Conozca los requisitos exactos de Gemma 4 31b para ejecutar la IA local insignia de Google. Explore especificaciones de hardware, pasos de instalación y consejos de rendimiento para 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4c1d95/fff?text=Gemma+4+31B+Requirements",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+Ejecutar inteligencia artificial de alto rendimiento de forma local ha evolucionado de ser un pasatiempo de nicho a una práctica estándar para usuarios avanzados que priorizan la privacidad. Para lograr los mejores resultados con el último lanzamiento de código abierto de Google, comprender los **requisitos de gemma 4 31b** es el primer paso hacia una experiencia fluida. Estos modelos permiten el razonamiento complejo, el análisis de imágenes y el procesamiento de documentos sin enviar nunca datos a la nube. Sin embargo, los **requisitos de gemma 4 31b** son significativamente más altos que los de sus hermanos menores, lo que exige un hardware robusto para mantener velocidades aceptables de tokens por segundo. En esta guía, desglosaremos el hardware necesario, los prerrequisitos de software y el proceso de instalación paso a paso para poner en marcha el modelo insignia 31B en su máquina en 2026.
+
+## Especificaciones de Hardware para Gemma 4
+
+La familia Gemma 4 se categoriza por el recuento de parámetros, que va desde el ligero E2B hasta el modelo insignia 31B. Mientras que los modelos más pequeños están diseñados para dispositivos móviles y portátiles de gama de entrada, la versión 31B es un modelo "insignia" que requiere hardware de consumo de grado profesional o estaciones de trabajo dedicadas.
+
+El principal cuello de botella para la IA local es la Memoria de Acceso Aleatorio (RAM) y la Memoria de Vídeo (VRAM). Debido a que el modelo 31B debe cargarse completamente en la memoria para funcionar, los usuarios con 8GB o 16GB de RAM probablemente tendrán dificultades o enfrentarán una latencia extrema.
+
+### Hardware Mínimo vs. Recomendado
+
+| Componente | Requisito Mínimo | Recomendado para 31B |
+|---|---|---|
+| **RAM del Sistema** | 20GB DDR4 | 32GB+ DDR5 |
+| **GPU (VRAM)** | 12GB (Descarga parcial) | 24GB (Descarga total) |
+| **Almacenamiento** | 25GB de espacio libre | 50GB NVMe SSD |
+| **Procesador** | CPU de 6 núcleos (Moderno) | 8 núcleos+ (Ryzen 7 / Core i7) |
+
+> **💡 Consejo:** Si carece de una GPU de gama alta, aún puede ejecutar el modelo en la RAM del sistema utilizando una CPU, pero el tiempo de respuesta será significativamente más lento. Para una velocidad similar a la de un "chat", se recomienda encarecidamente una GPU dedicada con alta VRAM.
+
+## Entendiendo la Familia Gemma 4
+
+Google diseñó Gemma 4 para que fuera modular. Aunque esta guía se centra en los **requisitos de gemma 4 31b**, es útil entender dónde se sitúa este modelo en la jerarquía. El modelo 31B es un modelo denso insignia, lo que significa que utiliza su recuento total de parámetros para cada consulta, lo que conduce a una mayor precisión en matemáticas complejas, programación y razonamiento lógico en comparación con la versión 26B "Mixture of Experts" (MoE).
+
+| Tamaño del Modelo | Mejor Caso de Uso | Hardware Ideal |
+|---|---|---|
+| **E2B / E4B** | Móvil, Chat básico, Audio | Teléfonos, Laptops con 8GB RAM |
+| **26B (MoE)** | Rendimiento equilibrado, Escritura creativa | 16GB - 20GB RAM |
+| **31B (Insignia)** | Programación, Lógica compleja, Contexto amplio | 32GB RAM / 24GB VRAM |
+
+El modelo 31B está específicamente ajustado para usuarios que necesitan el nivel más alto de precisión disponible en un formato local de código abierto. Destaca en la interpretación de capturas de pantalla, el análisis de hojas de cálculo y el mantenimiento de conversaciones largas sin perder el contexto.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Guía de Instalación de Software
+
+Para cumplir con los **requisitos de gemma 4 31b** en el lado del software, necesitará un cargador de modelos. La herramienta más popular y fácil de usar en 2026 es **Ollama**. Actúa como el motor que gestiona los pesos y la ejecución del modelo.
+
+### Paso 1: Instalar Ollama
+1. Navegue al sitio web oficial de Ollama y descargue la versión para su sistema operativo (Windows, macOS o Linux).
+2. Ejecute el instalador y siga las instrucciones estándar de "Siguiente".
+3. Una vez instalado, asegúrese de que el icono de Ollama sea visible en su barra de tareas o barra de menú.
+
+### Paso 2: Obtener el Modelo 31B
+El comando predeterminado "Gemma 4" suele descargar la versión E4B más pequeña. Para dirigirse específicamente al modelo insignia, debe usar la terminal o el símbolo del sistema.
+
+1. Abra el **Símbolo del sistema** (Windows) o la **Terminal** (Mac/Linux).
+2. Escriba el siguiente comando y presione Enter:
+   `ollama pull gemma4:31b`
+3. El sistema comenzará a descargar los pesos del modelo, que ocupan aproximadamente entre 18GB y 22GB. Asegúrese de tener una conexión a internet estable.
+
+### Paso 3: Verificar la ejecución
+Una vez finalizada la descarga, puede ejecutar el modelo directamente en la terminal escribiendo:
+`ollama run gemma4:31b`
+
+Si su sistema cumple con los **requisitos de gemma 4 31b**, el modelo debería inicializarse en pocos segundos. Si la aplicación se cierra inesperadamente o el texto aparece a razón de una palabra cada diez segundos, es posible que su hardware esté teniendo problemas con la carga de memoria.
+
+## Configuración Avanzada: Open WebUI y Docker
+
+Aunque la terminal es funcional, la mayoría de los usuarios prefieren una interfaz gráfica similar a ChatGPT. **Open WebUI** es un panel de control gratuito y de código abierto que se conecta a Ollama, proporcionando funciones como carga de documentos, análisis de imágenes e historial de chat.
+
+Para instalar Open WebUI, debe usar **Docker**, que mantiene la instalación aislada y limpia.
+
+1. **Instalar Docker Desktop:** Descárguelo del sitio oficial de Docker. En Windows, asegúrese de que WSL 2 esté habilitado durante la configuración.
+2. **Ejecutar el comando:** Abra su terminal y pegue el comando oficial de Docker para Open WebUI (disponible en su GitHub). Esto descargará la interfaz y la vinculará a su instancia local de Ollama.
+3. **Acceder a la interfaz:** Abra su navegador web y navegue a `localhost:3000`.
+
+> **⚠️ Advertencia:** Ejecutar simultáneamente Docker (Open WebUI) y el modelo 31B aumenta los **requisitos de gemma 4 31b** totales de RAM. Asegúrese de no estar ejecutando aplicaciones pesadas en segundo plano, como juegos AAA modernos o editores de vídeo.
+
+## Optimizando el Rendimiento para 31B
+
+Si nota que el modelo 31B funciona con lentitud, existen varias formas de optimizar su entorno local. El rendimiento suele estar ligado a cómo se "cuantiza" (comprime) el modelo y qué parte del mismo se descarga en su GPU.
+
+*   **Descarga de GPU (Offloading):** En la configuración de Ollama, puede especificar cuántas "capas" del modelo deben ser procesadas por su tarjeta gráfica. Si tiene una RTX 3080 o 4090, descargar tantas capas como sea posible a la VRAM aumentará drásticamente la velocidad.
+*   **Bases de Conocimiento:** Usando Open WebUI, puede crear "Bases de Conocimiento". Esto permite que la IA haga referencia a PDFs o hojas de cálculo específicas. En lugar de volver a subir archivos cada vez, la interfaz los indexa, lo cual es más eficiente en memoria para el modelo 31B.
+*   **Personas Personalizadas:** Puede establecer "Prompts de Sistema" para definir cómo se comporta el modelo. Para el modelo 31B, proporcionar una personalidad clara (por ejemplo, "Programador Profesional") ayuda al modelo a utilizar su mayor recuento de parámetros de manera más efectiva.
+
+| Técnica de Optimización | Beneficio | Dificultad |
+|---|---|---|
+| **Descarga a VRAM** | Aumento masivo de velocidad | Media |
+| **Cuantización** | Menor uso de RAM | Alta |
+| **Instalación en SSD** | Tiempos de carga más rápidos | Fácil |
+| **Ajuste de WSL 2** | Mejor estabilidad en Windows | Media |
+
+## ¿Por qué elegir el modelo 31B?
+
+Dados los altos **requisitos de gemma 4 31b**, muchos usuarios se preguntan si los modelos 26B o 4B son suficientes. El modelo 31B se elige principalmente por sus capacidades "zero-shot": la habilidad de realizar una tarea correctamente a la primera sin necesidad de múltiples ejemplos. Es significativamente mejor siguiendo instrucciones complejas y evita las "alucinaciones" (inventar datos) que a menudo afectan a los modelos más pequeños.
+
+Además, al ejecutarse localmente, es la opción ideal para manejar documentos sensibles, registros médicos o código propietario. No se envían datos a los servidores de Google, lo que garantiza el 100% de privacidad para sus proyectos más críticos.
+
+## Preguntas Frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 31B en una laptop con 16GB de RAM?**
+
+R: Generalmente no se recomienda. Aunque el modelo podría cargar, probablemente usará la "memoria de intercambio" (swap) de su disco duro, lo que resultará en un rendimiento extremadamente lento (menos de 1 token por segundo). Los modelos 26B o 4B son mucho más adecuados para sistemas de 16GB.
+
+**P: ¿Requiere Gemma 4 31B una conexión a internet?**
+
+R: Solo para la descarga inicial. Una vez que el modelo se ha obtenido vía Ollama e instalado en su máquina, puede desconectarse de internet por completo. Todo el procesamiento ocurre localmente en su hardware.
+
+**P: ¿Cuál es la diferencia entre los modelos 26B y 31B?**
+
+R: El modelo 26B utiliza una arquitectura de "Mezcla de Expertos" (Mixture of Experts), lo que significa que solo activa una parte de sus parámetros para cada tarea. El 31B es un modelo "denso" que utiliza todos sus parámetros, lo que generalmente lo hace más inteligente y confiable para tareas de razonamiento difíciles, aunque tiene mayores **requisitos de gemma 4 31b** de hardware.
+
+**P: ¿Hay alguna forma de probar el modelo 31B antes de instalarlo?**
+
+R: Sí, puede usar Google AI Studio (a-studio.google.com) para probar el modelo Gemma 4 31B en su navegador de forma gratuita. Esta es una excelente manera de ver si la inteligencia del modelo satisface sus necesidades antes de comprometerse a la gran descarga y a las actualizaciones de hardware.

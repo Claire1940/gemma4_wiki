@@ -1,0 +1,117 @@
+export const metadata = {
+  title: "Benchmarks de Gemma 4: Guía definitiva de rendimiento de IA local 2026",
+  description: "Explore los últimos benchmarks de Gemma 4 para los modelos E2B, E4B y 31B. Análisis detallado de rendimiento para PC, móviles y tareas de codificación agéntica en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/2563eb/fff?text=Gemma+4+Benchmarks+2026",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con el lanzamiento de los últimos modelos de pesos abiertos de Google. Si eres un desarrollador, gamer o entusiasta de la IA que busca la forma más eficiente de ejecutar LLM en tu propio hardware, esta inmersión profunda en los últimos **benchmarks de gemma 4** es una lectura esencial. A diferencia de las generaciones anteriores, la línea de 2026 introduce una arquitectura especializada de parámetros "Efectivos" diseñada para maximizar la inteligencia minimizando al mismo tiempo la huella de hardware. Al analizar los **benchmarks de gemma 4** en diferentes cuantizaciones y dispositivos, podemos ver exactamente cómo se comparan estos modelos con pesos pesados como Llama y Mistral.
+
+Desde el modelo ultra compacto E2B hasta la potente variante densa de 31B, las ganancias de rendimiento sobre la generación anterior Gemma 3 son asombrosas. Ya sea que estés ejecutando estos modelos en un escritorio de gama alta con una RTX 5090 móvil o en un dispositivo Android insignia como el Asus ROG Phone 9 Pro, la eficiencia de la nueva arquitectura permite un razonamiento en tiempo real e interacciones multimodales que antes eran imposibles en equipos de consumo.
+
+## La línea de modelos Gemma 4: Especificaciones técnicas
+
+La familia Gemma 4 de 2026 se divide en dos categorías principales: los modelos "E" (Efectivos) y los modelos densos/MOE (Mezcla de Expertos). Los modelos de la serie E, específicamente el E2B y el E4B, utilizan embeddings por capa para optimizar la eficiencia de los parámetros. Esto significa que, aunque su recuento total de parámetros (incluyendo embeddings) pueda ser mayor, su recuento "efectivo" para el procesamiento es mucho menor, lo que les permite funcionar a velocidades de vértigo en dispositivos móviles.
+
+| Modelo | Parámetros Efectivos | Parámetros Totales (con Embeddings) | Ventana de Contexto | Modalidad |
+|---|---|---|---|---|
+| **E2B** | 2.3 Mil millones | 5.1 Mil millones | 128K | Texto, Imagen, Audio |
+| **E4B** | 4.5 Mil millones | 8 Mil millones | 128K | Texto, Imagen, Audio |
+| **26B (MOE)** | 26 Mil millones | N/A | 128K | Texto, Imagen |
+| **31B (Denso)** | 31 Mil millones | 31 Mil millones | 256K | Texto, Imagen |
+
+> **💡 Consejo:** Si estás operando en un dispositivo con VRAM limitada (menos de 8GB), el modelo E2B en cuantización Q8 es tu mejor opción para mantener altas velocidades de tokens por segundo sin sacrificar demasiada capacidad de razonamiento.
+
+## Hardware local y benchmarks de Gemma 4
+
+Al probar los **benchmarks de gemma 4** en un entorno local utilizando herramientas como LM Studio o VLLM, la configuración del hardware juega un papel fundamental. En 2026, el estándar para la inferencia local de gama alta involucra las GPUs de la serie RTX 50. Las pruebas en una RTX 5090 de clase portátil revelan que el modelo E2B puede alcanzar velocidades que superan los 77 tokens por segundo (t/s) con cuantización Q8.
+
+### Rendimiento de inferencia en PC (Tokens por segundo)
+
+| Modelo | Cuantización | Hardware | Velocidad (t/s) | Uso de VRAM |
+|---|---|---|---|---|
+| **E2B** | Q8 | RTX 5090 (Móvil) | **77.4** | ~6.4 GB |
+| **E4B** | Q8 | RTX 5090 (Móvil) | **38.5** | ~9.3 GB |
+| **31B** | Q8 | 4x GPUs de Escritorio | **35.0** | ~32 GB+ |
+
+El modelo E4B, aunque más lento que su hermano menor, ofrece un salto significativo en la calidad del razonamiento. Los resultados de estos **benchmarks de gemma 4** muestran que el E4B es mucho más capaz de manejar tareas complejas de "cumplimiento malicioso", como generar código 3D para simuladores de conducción o escenas de metro, incluso cuando el prompt inicial es simple.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/j1EchjiViOs"
+    title="Gemma 4 Small Models Are INSANE – E2B & E4B Hands-On Testing!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Rendimiento móvil: Benchmarking en el dispositivo
+
+Uno de los aspectos más impresionantes del lanzamiento de 2026 es el enfoque en los **benchmarks de gemma 4** específicos para móviles. Utilizando la aplicación Google Edge Gallery en un Asus ROG Phone 9 Pro (equipado con 24GB de RAM), los modelos demuestran que la IA de alta calidad ya no está atada a la nube.
+
+El modelo E2B en el ROG Phone 9 Pro alcanza aproximadamente 48 tokens por segundo. Esta velocidad es más que suficiente para un chat fluido en tiempo real y tareas agénticas como controlar la interfaz del teléfono de forma autónoma. El modelo E4B, al ser más pesado, funciona a unos 20 tokens por segundo en el mismo hardware. Aunque es más lento, proporciona el margen de "pensamiento" necesario para procesar capturas de pantalla visuales y ejecutar acciones precisas como buscar términos específicos en un navegador.
+
+### Resumen de Benchmark Móvil (Asus ROG Phone 9 Pro)
+
+1. **E2B (Q8):** 48 tokens por segundo — Ideal para mensajería instantánea y automatización básica.
+2. **E4B (Q8):** 20 tokens por segundo — El mejor para razonamiento complejo y análisis visual.
+3. **Capacidades Multimodales:** Ambos modelos comprenden de forma nativa el habla y las imágenes en el dispositivo.
+
+## Capacidades de codificación y razonamiento agéntico
+
+El salto de Gemma 3 a Gemma 4 es más visible en las tareas de codificación y razonamiento. Los **benchmarks de gemma 4** estándar de codificación y razonamiento muestran mejoras masivas en métricas como MMLU Pro y Codeforces ELO.
+
+| Benchmark | Gemma 3 (27B) | Gemma 4 (31B) | Mejora |
+|---|---|---|---|
+| **MMLU Pro** | 67% | **85%** | +18% |
+| **Codeforces ELO** | 110 | **2150** | +1854% |
+| **Livecodebench V6** | 29.1 | **80.0** | +50.9% |
+
+In pruebas prácticas, el modelo E4B fue capaz de generar una escena de metro en 3D funcional utilizando formas geométricas y materiales de iluminación personalizados después de solo unas pocas iteraciones de solución de problemas. Incluso el diminuto modelo E2B creó con éxito un juego de Tres en Raya funcional y un juego de adivinar números en su primer intento. Para los desarrolladores, esto significa que los modelos del [GitHub oficial de Gemma](https://github.com/google/gemma_pytorch) son ahora viables para construir frameworks agénticos locales que pueden escribir, probar y corregir código sin intervención humana.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Seguridad, rechazos y "Modo Dios"
+
+Un tema recurrente en los **benchmarks de gemma 4** de 2026 es la tensión entre los estrictos protocolos de seguridad de Google y la profundidad de razonamiento del modelo. Durante la prueba del dilema ético "Armagedón con un giro", el modelo 31B demostró un razonamiento utilitario avanzado, reconociendo que sacrificar a unos pocos para salvar a miles de millones es matemáticamente sólido. Sin embargo, finalmente se negó a "lanzar a un capitán por una esclusa de aire" debido a sus pautas de seguridad fundamentales.
+
+Curiosamente, los evaluadores han notado que estas capas de seguridad son a menudo "delgadas". Si bien el modelo puede rechazar una solicitud directa de violencia, las técnicas de prompting avanzado o los wrappers de "Modo Dios" a menudo pueden eludir estos rechazos, lo que resalta que la inteligencia subyacente está mucho menos restringida de lo que sugiere el filtro de salida.
+
+> **⚠️ Advertencia:** Al desplegar Gemma 4 en entornos agénticos, asegúrate de tener parsers de seguridad secundarios, ya que los rechazos nativos del modelo pueden ser inconsistentes cuando se enfrenta a prompts complejos de varios pasos.
+
+## Conclusión: ¿Es Gemma 4 el nuevo rey local?
+
+Los exhaustivos **benchmarks de gemma 4** revelan una familia de modelos que finalmente ha cerrado la brecha entre la eficiencia móvil y la inteligencia de clase de escritorio. El modelo E2B cambia las reglas del juego para las aplicaciones en el dispositivo, proporcionando una inferencia de alta velocidad en smartphones que rivaliza con el rendimiento de los equipos de escritorio de gama media del año pasado. Mientras tanto, la variante 31B se ha convertido en una opción de primer nivel para los desarrolladores que necesitan un modelo denso y con gran capacidad de razonamiento que respete la privacidad local.
+
+Si observamos los **benchmarks de gemma 4**, que demuestran un salto de casi 2000 puntos en Codeforces ELO, está claro que Google ha transicionado con éxito a Gemma de ser un modelo "capaz" a una potencia de "estado del arte" para 2026.
+
+## FAQ
+
+**P: ¿Cuál es la diferencia entre los modelos E2B y los modelos 2B regulares?**
+
+R: La "E" significa parámetros Efectivos (Effective). Aunque el E2B tiene un total de 5.1 mil millones de parámetros, incluyendo grandes tablas de embedding para búsquedas rápidas, solo utiliza 2.3 mil millones de parámetros de manera efectiva durante las capas principales de computación. Esto lo hace mucho más rápido y eficiente para el despliegue en dispositivos que un modelo tradicional de 5B.
+
+**P: ¿Puede Gemma 4 ejecutarse en una GPU estándar de 8GB de VRAM?**
+
+R: Sí, tanto el modelo E2B como el E4B caben cómodamente en 8GB de VRAM cuando se utilizan cuantizaciones Q8 o inferiores. El modelo E2B suele utilizar alrededor de 6.4GB, dejando espacio para los procesos del sistema.
+
+**P: ¿Soporta Gemma 4 un contexto de 256K en todos los modelos?**
+
+R: No. Los modelos más pequeños E2B y E4B están optimizados generalmente para una ventana de contexto de 128K. El modelo denso 31B más grande es la variante principal que soporta la ventana de contexto completa de 256K, lo que lo hace mejor para analizar bases de código masivas o documentos largos.
+
+**P: ¿Cómo maneja Gemma 4 las entradas multimodales como el audio?**
+
+R: Los modelos más pequeños E2B y E4B tienen comprensión nativa de audio e imagen. En los benchmarks de 2026, estos modelos demostraron comprender preguntas habladas y responder a través de texto o síntesis de voz basada en navegador con una latencia muy baja, aunque la capacidad de audio a veces se excluye en variantes MOE específicas.

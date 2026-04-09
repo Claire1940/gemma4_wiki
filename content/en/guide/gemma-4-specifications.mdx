@@ -1,0 +1,133 @@
+export const metadata = {
+  title: "Gemma 4 Specifications: Google's Open AI Model Guide 2026",
+  description: "Explore the full Gemma 4 specifications, including parameter counts, 256K context window, and performance benchmarks for Google's latest open-source AI family.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/2563eb/fff?text=Gemma+4+Specifications",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+The landscape of local artificial intelligence has shifted dramatically with the release of Google's latest open-source family. Understanding the **gemma 4 specifications** is essential for developers, privacy-conscious users, and tech enthusiasts who want to run high-performance models without a subscription. This new generation of AI is built upon the research of Gemini 3, offering a permissive Apache 2.0 license that allows for unrestricted personal and commercial use. 
+
+Whether you are looking to integrate AI into your local coding workflow or want a private assistant on your mobile device, the **gemma 4 specifications** provide a scalable solution across four distinct model sizes. By moving away from cloud-dependent systems like ChatGPT, users can now access advanced reasoning, multimodal capabilities, and massive context windows entirely offline. In this comprehensive guide, we will break down the technical details, hardware requirements, and benchmark performance of the entire Gemma 4 lineup.
+
+## Deep Dive into Gemma 4 Specifications
+
+Google has structured this release to cover everything from low-power edge devices to high-end workstations. The family consists of four main models, each optimized for specific "intelligence per parameter" ratios. This means smaller models in this generation frequently outperform models ten to twenty times their size from previous years.
+
+### The Four Model Tiers
+
+| Model Name | Parameter Count | Architecture | Primary Use Case |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 Billion (Effective) | Ultra-efficient Dense | Mobile phones & IoT devices |
+| **Gemma 4 E4B** | 4 Billion (Effective) | Multimodal Dense | High-performance edge reasoning |
+| **Gemma 4 26B MoE** | 26 Billion Total | Mixture of Experts | Desktop/Mac Studio local AI |
+| **Gemma 4 31B** | 31 Billion | Flagship Dense | High-quality research & coding |
+
+The **Gemma 4 26B MoE** (Mixture of Experts) is particularly noteworthy. While it has a total of 26 billion parameters, it only activates approximately 3.8 billion during any single inference step. This allows it to maintain the intelligence of a large model while operating with the speed and memory efficiency of a much smaller one.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/hk6go5jioTk"
+    title="Gemma 4 Google just made AI free forever"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Technical Architecture and Context Window
+
+One of the most impressive aspects of the **gemma 4 specifications** is the massive context window. The flagship models support up to **256,000 tokens**, which is enough to process an entire book or a complex codebase in a single prompt. This is a significant leap for open-source models, which have historically struggled with long-range dependency and memory management.
+
+### Multimodal Capabilities
+Unlike many local models that are limited to text, Gemma 4 is natively multimodal. 
+*   **Text & Image:** All four models can process and understand visual data, allowing for local OCR, image description, and spatial reasoning.
+*   **Audio Support:** The smaller edge models (E2B and E4B) include native audio understanding, making them ideal for voice-activated assistants that run without an internet connection.
+*   **Language Support:** The models are trained on over 140 languages, ensuring global utility for translation and multilingual content generation.
+
+> **💡 Expert Tip:** When running the 26B MoE model on a Mac with Apple Silicon, you can achieve speeds of up to 300 tokens per second, making it feel significantly faster than cloud-based alternatives.
+
+## Performance Benchmarks and Rankings
+
+In the world of AI, raw numbers only tell half the story. The real-world performance of Gemma 4 shows it competing with, and sometimes beating, proprietary models. On the **LM Arena leaderboard**, the 31B flagship model currently ranks as the #3 open model globally.
+
+### Key Benchmark Scores
+
+| Benchmark | Gemma 4 31B Score | Significance |
+|---|---|---|
+| **MMLU Pro** | 85.2 | General knowledge and reasoning |
+| **LiveCodeBench** | 80.0% | Real-world coding and logic |
+| **Math Benchmarks** | Top Tier | Complex problem solving |
+| **Intelligence Index** | 31 | Efficiency per parameter |
+
+While models like Quen 3.5 may score slightly higher on certain intelligence indices, Gemma 4 is designed for efficiency. It uses roughly 2.5 times fewer tokens for similar tasks compared to its closest competitors, leading to faster generations and lower computational costs when deployed in the cloud.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Hardware Requirements for Local Execution
+
+To take full advantage of the **gemma 4 specifications**, you need the right hardware. Because these models run locally, your GPU VRAM or Unified Memory is the primary bottleneck.
+
+1.  **Mobile Devices:** The E2B and E4B models can run on modern smartphones (iOS and Android) using tools like Google's Edge Gallery or specialized mobile LLM runners.
+2.  **Laptops/Desktops:** 
+    *   **8GB - 16GB RAM:** Ideal for the E4B or quantized versions of the 26B MoE.
+    *   **32GB+ RAM:** Necessary for the full 26B MoE or 31B Dense models.
+3.  **Software Tools:** You can easily deploy these models using [LM Studio](https://lmstudio.ai/), Ollama, or Hugging Face. These platforms allow you to download the model weights and start chatting in a matter of minutes.
+
+## Agentic Workflows and Tool Use
+
+Google has optimized Gemma 4 for "agentic" behavior. This means the model isn't just a chatbot; it can act as an agent that uses tools to complete multi-step tasks. The **gemma 4 specifications** include support for structured JSON output and function calling, which are critical for developers building automated systems.
+
+For example, you can give the model access to your local file system (via a secure harness like Kilo CLI) and ask it to:
+*   Analyze a folder of images and sort them by content.
+*   Write, test, and debug a Python script locally.
+*   Extract data from local documents and format it into a spreadsheet.
+
+The "Agent Skills" feature allows users to define specific capabilities that the model can call upon. Because this happens on-device, sensitive data never leaves your hardware, providing a level of security that cloud-based AI simply cannot match.
+
+## Comparison with Proprietary Models
+
+When comparing the **gemma 4 specifications** to models like ChatGPT (GPT-4o) or Claude 3.5, the primary advantage is control. While GPT-4o may still hold an edge in extremely complex, multi-step logical reasoning, Gemma 4 closes the gap for 90% of daily tasks.
+
+| Feature | Gemma 4 (Local) | ChatGPT (Cloud) |
+|---|---|---|
+| **Privacy** | 100% Private (Local) | Data sent to cloud |
+| **Subscription** | **Free** (Apache 2.0) | $20/month for Pro |
+| **Internet** | Not Required | Required |
+| **Token Limits** | Unlimited (Hardware bound) | Strict usage caps |
+| **Customization** | Full System Prompts | Limited by safety layers |
+
+> **Warning:** Running the 31B Dense model requires significant cooling and power. Ensure your workstation is well-ventilated if you plan on performing long-form generations or batch processing.
+
+## Conclusion: The Future of Local AI
+
+The release of Gemma 4 marks a turning point in the democratization of artificial intelligence. By providing high-tier **gemma 4 specifications** under an open license, Google has empowered developers and creators to build tools that are private, fast, and free from subscription fatigue. Whether you are coding a new game, managing private data, or just looking for a capable assistant that works in flight mode, Gemma 4 is the new gold standard for local LLMs in 2026.
+
+## FAQ
+
+**Q: What are the minimum gemma 4 specifications to run on a phone?**
+
+A: To run Gemma 4 on a mobile device, you should target the E2B or E4B models. These require approximately 2GB to 4GB of available RAM and can run entirely offline in flight mode using apps like Google’s Edge Gallery.
+
+**Q: Is Gemma 4 really free for commercial use?**
+
+A: Yes, Gemma 4 is released under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0), which is one of the most permissive open-source licenses. You can use it for personal projects, business applications, and commercial products without paying royalties to Google.
+
+**Q: How does the 26B MoE model differ from the 31B Dense model?**
+
+A: The 26B MoE (Mixture of Experts) model uses a sparse architecture where only a fraction of the parameters (about 3.8B) are active during inference, making it faster and easier to run on consumer hardware. The 31B Dense model activates all parameters for every request, offering higher reasoning quality but requiring much more powerful hardware.
+
+**Q: Can Gemma 4 generate code as well as ChatGPT?**
+
+A: In many front-end and general coding tasks, Gemma 4 performs exceptionally well, often matching the quality of proprietary models. While it may struggle with highly niche or extremely complex architectural logic compared to the very largest cloud models, it is more than capable for daily programming, debugging, and script generation.
