@@ -1,0 +1,127 @@
+export const metadata = {
+  title: "Límite de tokens de Gemma 4: Guía completa de la ventana de contexto 2026",
+  description: "Explore el límite de tokens de Gemma 4 y las capacidades de su ventana de contexto. Aprenda a optimizar los últimos modelos de IA de código abierto de Google para el rendimiento local y tareas de programación.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Token+Limit+Guide",
+  date: "2026-04-11",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la última familia de modelos de código abierto de Google ha causado un gran impacto en la comunidad local de IA, especialmente en lo que respecta al **límite de tokens de gemma 4** y su enorme salto en las capacidades de razonamiento. Ya sea que usted sea un desarrollador que construye agentes autónomos o un usuario avanzado que busca abandonar las costosas suscripciones mensuales, comprender el **límite de tokens de gemma 4** es esencial para maximizar el rendimiento del modelo. A diferencia de las iteraciones anteriores, esta actualización de 2026 proporciona una expansión significativa en las ventanas de contexto, lo que permite un análisis de documentos más profundo y flujos de trabajo de programación más complejos sin la necesidad de una poda constante de los prompts.
+
+En esta guía completa, desglosaremos las especificaciones técnicas de los cuatro tamaños de modelo principales, exploraremos cómo la ventana de contexto afecta los resultados en el mundo real y proporcionaremos una configuración paso a paso para ejecutar estos modelos localmente utilizando herramientas como Ollama y Openclaw.
+
+## Especificaciones del modelo Gemma 4 y ventanas de contexto
+
+Google DeepMind ha estructurado la familia Gemma 4 para servir tanto a dispositivos móviles "edge" como a estaciones de trabajo de alto rendimiento. El factor más crítico para la mayoría de los usuarios es la ventana de contexto: la cantidad de información que la IA puede "recordar" durante una sola conversación.
+
+El **límite de tokens de gemma 4** varía según la versión del modelo que esté ejecutando. Los modelos "E" (Edge) más pequeños están optimizados para la eficiencia, mientras que los modelos más grandes 26B y 31B están diseñados para un procesamiento de trabajo pesado.
+
+| Versión del modelo | Parámetros | Parámetros activos (Inferencia) | Ventana de contexto (Tokens) | Caso de uso principal |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2 mil millones | 2 mil millones | **128,000** | Teléfonos móviles, chat básico |
+| **Gemma 4 E4B** | 4 mil millones | 4 mil millones | **128,000** | Portátiles, asistentes locales |
+| **Gemma 4 26B** | 26 mil millones | 3.8 mil millones (MoE) | **256,000** | Programación, razonamiento complejo |
+| **Gemma 4 31B** | 31 mil millones | 31 mil millones | **256,000** | Investigación de vanguardia |
+
+> **💡 Consejo:** Si trabaja con bases de código grandes o documentos PDF extensos, priorice los modelos 26B o 31B para aprovechar al máximo la ventana de contexto de 256K.
+
+## Comprendiendo la expansión del límite de tokens
+
+En el mundo de los Modelos de Lenguaje de Gran Tamaño (LLM), un "token" equivale aproximadamente a 0,75 palabras. Un límite de tokens más alto significa que el modelo puede procesar instrucciones más largas y mantener la coherencia en diálogos extendidos. El salto de Gemma 3 a Gemma 4 representa una mejora masiva en la "densidad de inteligencia".
+
+El **límite de tokens de gemma 4** de 256,000 tokens en los modelos insignia permite a los usuarios ingresar aproximadamente 190,000 palabras en un solo prompt. Esto es suficiente para ingerir un manual técnico completo o varias docenas de archivos de código fuente simultáneamente. Esto lo convierte en un competidor directo de modelos de vanguardia como Claude 4.6 y GPT-5.4, pero con el beneficio adicional de ejecutarse completamente fuera de línea y de forma gratuita.
+
+### Por qué las ventanas de contexto son importantes para los desarrolladores
+Para quienes utilizan Gemma 4 para la ingeniería de software, el límite de 256K cambia las reglas del juego. Los modelos anteriores a menudo "olvidaban" el comienzo de un script cuando llegaban al final de una larga sesión de depuración. Con el **límite de tokens de gemma 4** actualizado, el modelo conserva la estructura completa de su proyecto, lo que genera significativamente menos alucinaciones y una generación de código más limpia.
+
+## Benchmarks de rendimiento: Una nueva era para el código abierto
+
+Gemma 4 no se trata solo de ventanas más grandes; se trata de lo que el modelo hace con esos tokens. En el día del lanzamiento, a principios de abril de 2026, el modelo 31B ocupó el puesto #3 en la clasificación de Arena AI, superando a modelos con recuentos de parámetros significativamente más altos.
+
+| Benchmark | Puntuación Gemma 3 | Puntuación Gemma 4 | Mejora |
+| :--- | :--- | :--- | :--- |
+| **AIM 2026 (Matemáticas)** | 20.8% | **89.2%** | +328% |
+| **Livecode Bench V6** | 29.1% | **80.0%** | +175% |
+| **HumanEval** | 62.4% | **91.5%** | +46% |
+
+La versión 26B utiliza una arquitectura de "Mezcla de Expertos" (MoE). Esto significa que, aunque tiene 26 mil millones de parámetros, solo "activa" unos 3.8 mil millones por cada token. Esto le permite ejecutarse a la velocidad de un modelo de 4B mientras ofrece la inteligencia de un sistema mucho más grande.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/vUfRufToiHg"
+    title="Google Just Made Their AI Free, Private, and Yours (Gemma 4)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de hardware para ejecución local
+
+Ejecutar Gemma 4 localmente requiere un equilibrio entre RAM y potencia de GPU. Debido a que estos modelos son de "pesos abiertos", puede ejecutarlos en cualquier cosa, desde una Raspberry Pi hasta una Mac Studio de alta gama. Sin embargo, para alcanzar el máximo **límite de tokens de gemma 4** sin ralentizaciones severas, debe seguir estas recomendaciones de hardware.
+
+### Especificaciones recomendadas para 2026
+1. **Gemma 4 E4B (Predeterminado):** 8 GB de RAM. Se ejecuta sin problemas en la mayoría de las computadoras portátiles modernas e incluso en los últimos dispositivos insignia de iPhone/Android.
+2. **Gemma 4 26B (MoE):** 18 GB a 24 GB de VRAM/RAM. Este es el "punto óptimo" para los desarrolladores que utilizan configuraciones MacBook Pro (M3/M4/Neo) o NVIDIA 4090.
+3. **Gemma 4 31B:** 32 GB+ de RAM. Requerido para precisión completa o tareas de alto contexto donde el modelo necesita mantener una gran cantidad de datos en memoria.
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B con menos de 16 GB de RAM resultará en una "paginación" extrema, lo que hará que el modelo responda a una velocidad de menos de una palabra por segundo.
+
+## Configuración paso a paso: Ejecutar Gemma 4 gratis
+
+Para evitar los costos de API y las preocupaciones de privacidad, siga estos tres pasos para poner en marcha Gemma 4 en su máquina local utilizando [Ollama](https://ollama.com), el estándar de la industria para la gestión local de LLM.
+
+### Paso 1: Instalar Ollama
+Descargue la última versión de Ollama (v0.20.0 o superior) para Windows, macOS o Linux. Esta versión incluye soporte nativo para la arquitectura Gemma 4 y sus métodos de cuantización específicos.
+
+### Paso 2: Descargar el modelo
+Abra su terminal y use el siguiente comando para descargar el modelo. El comando predeterminado descarga la versión E4B, que pesa aproximadamente 3.3 GB.
+
+`ollama pull gemma4`
+
+Para la versión de mayor rendimiento, use:
+
+`ollama pull gemma4:26b`
+
+### Paso 3: Conectar a Openclaw
+Openclaw es un asistente de IA personal de código abierto que actúa como puente entre su modelo local y sus aplicaciones de mensajería favoritas (Telegram, Discord, Slack).
+1. Instale Openclaw desde el sitio oficial.
+2. Apunte el proveedor a "Ollama".
+3. Seleccione su modelo Gemma 4 descargado.
+4. Ahora tiene un agente de IA privado con un enorme **límite de tokens de gemma 4** a su disposición.
+
+## Capacidades multimodales y llamadas a funciones nativas
+
+Una de las características más impresionantes de la línea Gemma 4 es que incluso los modelos más pequeños (E2B y E4B) admiten entradas multimodales. Esto significa que puede alimentar al modelo con imágenes o archivos de audio junto con sus prompts de texto.
+
+*   **Visión:** Identifique objetos en una habitación, analice gráficos o depure capturas de pantalla de la interfaz de usuario.
+*   **Audio:** Transcriba y resuma notas de voz o reuniones directamente en su dispositivo.
+*   **Llamada a funciones:** Gemma 4 puede interactuar de forma nativa con herramientas externas, como consultar su calendario local, ejecutar comandos de shell o escribir archivos en su disco duro.
+
+Este flujo de trabajo "agéntico" es donde brillan las ventanas de contexto de 128K y 256K. El modelo puede mirar todo su directorio de archivos, comprender el contexto y ejecutar comandos en múltiples archivos sin perder el hilo.
+
+## Por qué Google lanzó Gemma 4 de forma gratuita
+
+Muchos usuarios se preguntan por qué un gigante como Google lanzaría una herramienta tan poderosa bajo la licencia Apache 2.0. El consenso en la comunidad tecnológica es que Google está siguiendo la "Estrategia Android". Al abrir el código de los pesos, permiten que la comunidad global de desarrolladores optimice los modelos, encuentre errores y cree un ecosistema masivo que, en última instancia, alimenta el volante de inercia de Google Cloud.
+
+Para el usuario final, esto significa libertad total. Puede modificar, redistribuir e incluso comercializar sus propias aplicaciones creadas sobre Gemma 4 sin pagar regalías ni enfrentar restricciones de uso.
+
+## FAQ (Preguntas frecuentes)
+
+**P: ¿Cuál es el límite exacto de tokens de gemma 4 para la versión móvil?**
+
+R: Los modelos Gemma 4 E2B y E4B, diseñados para dispositivos móviles y edge, tienen una ventana de contexto de 128,000 tokens. Esto equivale aproximadamente a 90,000 palabras.
+
+**P: ¿Gemma 4 requiere conexión a Internet?**
+
+R: No. Una vez que haya descargado los pesos del modelo a través de Ollama u otro proveedor, Gemma 4 se ejecuta 100% fuera de línea. Esto garantiza que sus datos permanezcan privados y seguros en su propio hardware.
+
+**P: ¿Puedo usar Gemma 4 para proyectos de programación comerciales?**
+
+R: Sí. Gemma 4 se publica bajo la licencia Apache 2.0, que permite el uso comercial, la modificación y la redistribución prácticamente sin restricciones.
+
+**P: ¿Cómo se mantiene tan rápido el modelo 26B MoE?**
+
+R: La arquitectura de Mezcla de Expertos (MoE) solo utiliza una fracción de sus parámetros totales (aproximadamente 3.8 mil millones) para procesar cada token individual. Esto le brinda la calidad de razonamiento de un modelo 26B con la velocidad de inferencia de un modelo 4B mucho más pequeño.

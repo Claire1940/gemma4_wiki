@@ -1,0 +1,100 @@
+export const metadata = {
+  title: "Gemma 4 KoboldCPP: Guía de Rendimiento de IA Local 2026",
+  description: "Aprende a optimizar Gemma 4 en KoboldCPP. Explora la arquitectura MoE de 26B, los requisitos de hardware y cómo gestionar el nuevo modo de pensamiento para un rendimiento máximo.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+KoboldCPP+Guide",
+  date: "2026-04-11",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de los modelos de lenguaje grandes locales ha cambiado drásticamente con el lanzamiento de la última arquitectura de Google. Si buscas ejecutar configuraciones de **gemma 4 koboldcpp** en tu máquina local, es probable que te interese el equilibrio entre el razonamiento de alto nivel y la compatibilidad con hardware de consumo. Gemma 4 introduce un sofisticado diseño de Mezcla de Expertos (MoE) que permite a los usuarios acceder a la inteligencia de un modelo de 26B manteniendo las velocidades de inferencia asociadas típicamente con modelos mucho más pequeños de 4B. Esta guía te llevará a través de los matices técnicos de la integración de **gemma 4 koboldcpp**, asegurando que puedas aprovechar la nueva licencia Apache 2.0 y las funciones agénticas sin sucumbir a los cuellos de botella de latencia que a menudo plagan los despliegues de IA local no optimizados.
+
+## Entendiendo la Arquitectura de Gemma 4
+
+Google se ha alejado de la estructura tradicional de modelo monolítico en favor de variantes especializadas más eficientes. Al seleccionar una versión de Gemma 4 para ejecutar dentro de KoboldCPP, es vital entender las convenciones de nomenclatura de parámetros "Activos" y "Efectivos". Estos prefijos determinan cuánta VRAM necesitarás y qué tan rápido responderá el modelo a prompts complejos.
+
+El modelo destacado de la línea 2026 es el **26BA4B**. Este es un modelo de Mezcla de Expertos (MoE) que contiene 26 mil millones de parámetros totales pero solo "activa" aproximadamente de 3.8 a 4 mil millones de parámetros durante cualquier paso de procesamiento individual. Para el usuario final, esto significa que obtienes las capacidades de razonamiento profundo de un modelo grande con la agilidad de un asistente ligero.
+
+### Comparativa de Variantes del Modelo
+
+| Nombre de la Variante | Parámetros Totales | Parámetros Activos | Mejor Caso de Uso |
+| :--- | :--- | :--- | :--- |
+| **26BA4B** | 26 mil millones | ~3.8 mil millones | PC de escritorio, tareas de alto razonamiento |
+| **E4B** | 7.9 mil millones | 4 mil millones (Efectivos) | Portátiles, estaciones de trabajo de gama media |
+| **E2B** | 5.1 mil millones | 2 mil millones (Efectivos) | Móvil, IoT, Raspberry Pi |
+
+La serie "E" (Efectiva) utiliza Incrustaciones por Capa (PLE) para ajustar una lógica más compleja en huellas de memoria más pequeñas. Por ejemplo, el modelo E2B puede ejecutarse con tan solo 1.5 GB de RAM cuando se utiliza cuantización de 2 bits, lo que lo convierte en un candidato ideal para computación en el borde o para actuar como director de juego en segundo plano en RPGs.
+
+## Configuración de Gemma 4 KoboldCPP para una Velocidad Óptima
+
+Para que **gemma 4 koboldcpp** funcione eficientemente, debes centrarte en el formato GGUF, que sigue siendo el estándar de oro para la inferencia local en hardware de consumo. La capacidad de KoboldCPP para descargar capas tanto a la CPU como a la GPU lo convierte en el envoltorio ideal para la arquitectura MoE.
+
+1.  **Descargar los pesos GGUF**: Busca versiones cuantizadas de los modelos 26BA4B o E4B. Para la mayoría de los usuarios con 16GB a 24GB de VRAM, una cuantización Q4_K_M o Q5_K_M ofrece el mejor equilibrio entre inteligencia y velocidad.
+2.  **Configurar la Ventana de Contexto**: Aunque Google anuncia una ventana de contexto de 256K, el hardware local a menudo tiene dificultades con los requisitos de la caché KV a esas longitudes. Comienza con un contexto de 8K o 16K en KoboldCPP para mantener una alta tasa de tokens por segundo.
+3.  **Ajustar el Hilado (Threading)**: Si estás ejecutando en una configuración con mucha CPU (como una mini-PC Ryzen), asegúrate de que tu conteo de hilos coincida con tus núcleos físicos (no hilos lógicos) para evitar la saturación de la caché durante el proceso de cambio de expertos de la MoE.
+
+> **Advertencia:** El uso de la ventana de contexto completa de 256K en hardware de consumo puede provocar un consumo masivo de RAM y una caída significativa en la precisión de recuperación de información. Limítate a lo que tu hardware pueda cachear de forma realista.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/OUpETXU0oIc"
+    title="Gemma 4 on a Laptop/PC: Is the 26B MoE Actually Useable?"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Gestión del Modo de Pensamiento Nativo
+
+Una adición importante a Gemma 4 es el "Modo de Pensamiento Nativo", la respuesta de Google a los modelos con gran capacidad de razonamiento como O1. Aunque este modo mejora significativamente el rendimiento en lógica y matemáticas, introduce una "traza de razonamiento" que puede ser increíblemente lenta en hardware local.
+
+Al ejecutar el stack de **gemma 4 koboldcpp**, el modo de pensamiento puede crear un cuello de botella donde la CPU procesa miles de tokens internos antes de que aparezca la primera palabra de la respuesta real. En GPUs de gama alta, esto es manejable, pero en una portátil estándar o mini-PC, puede resultar en un retraso de 3 a 10 minutos.
+
+### Benchmarks de Rendimiento de Hardware (2026)
+
+| Configuración de Hardware | Variante del Modelo | Latencia del Modo de Pensamiento | Tokens por Segundo |
+| :--- | :--- | :--- | :--- |
+| **RTX 5090 (32GB VRAM)** | 26BA4B (Q8) | < 5 Segundos | 45+ |
+| **Ryzen 7840HS (64GB RAM)** | 26BA4B (Q4) | 3-5 Minutos | 8-12 |
+| **Ryzen 7840HS (64GB RAM)** | E2B (Q4) | Tiempo real | 25+ |
+| **M3 Max (64GB Unificada)** | 26BA4B (Q6) | < 15 Segundos | 30+ |
+
+Si notas que el modelo se "detiene", es probable que sea el proceso de pensamiento en acción. Para asistentes listos para producción o juegos de rol ágiles, a menudo es mejor desactivar el monólogo interno o cambiar al modelo E2B, que maneja la traza de razonamiento de manera mucho más eficiente en silicio de bajo consumo.
+
+## Capacidades Agénticas y Uso de Herramientas
+
+Gemma 4 está diseñado con un enfoque nativo en flujos de trabajo "agénticos". Esto significa que el modelo es mejor siguiendo salidas JSON estructuradas y utilizando herramientas externas sin necesidad de ingeniería de prompts compleja. Para los usuarios de KoboldCPP, esto se traduce en fichas de personajes más fiables y una mejor integración con scripts externos o motores de juegos.
+
+El modelo maneja las llamadas a herramientas de forma nativa, reduciendo la frecuencia de sintaxis "alucinada" que a menudo rompe los flujos de trabajo automatizados. Si estás construyendo un agente local para gestionar tu hogar inteligente o actuar como un NPC complejo, la variante MoE de 26B proporciona el conocimiento del mundo necesario para manejar instrucciones ambiguas manteniendo bajo el coste de cómputo.
+
+> **💡 Consejo:** Al usar Gemma 4 para datos estructurados, utiliza siempre la función "Grammar" en KoboldCPP para forzar el formato JSON. Esto asegura que las capacidades nativas de uso de herramientas del modelo estén perfectamente alineadas con los requisitos de tu aplicación.
+
+## Requisitos de Hardware para Despliegue Local
+
+Ejecutar una instancia de **gemma 4 koboldcpp** requiere una planificación cuidadosa con respecto a tu presupuesto de memoria. Debido a que el modelo 26B es un MoE, ocupa todo el espacio de parámetros de 26B en tu VRAM/RAM, incluso si solo usa 4B de parámetros para el cálculo. No puedes "cargar" solo los parámetros activos; el modelo completo debe residir en la memoria.
+
+*   **Variantes 26B**: Requieren al menos 24GB de VRAM para una cuantización cómoda de 4 bits. Si usas RAM del sistema, 32GB es el mínimo absoluto, aunque se recomiendan 64GB para permitir ventanas de contexto más grandes.
+*   **Variantes E4B**: Son el "punto ideal" para tarjetas de 16GB de VRAM (como la RTX 4060 Ti 16GB o RTX 5070).
+*   **Variantes E2B**: Pueden ejecutarse en casi cualquier cosa, incluyendo tarjetas de VRAM de 8GB más antiguas o smartphones modernos con 12GB de RAM.
+
+Para más información sobre los pesos del modelo y la documentación oficial, puedes visitar el [repositorio de Google AI Gemma](https://ai.google.dev/gemma) para explorar los libros blancos técnicos.
+
+## FAQ
+
+**P: ¿Es Gemma 4 verdaderamente "código abierto" ahora?**
+
+R: Sí, Gemma 4 se publica bajo la **licencia Apache 2.0**, que es mucho más permisiva que las versiones anteriores. Aunque los datos de entrenamiento siguen siendo una "caja negra", los pesos pueden usarse, modificarse y distribuirse con fines comerciales sin los asteriscos restrictivos de "pesos abiertos" del pasado.
+
+**P: ¿Por qué mi respuesta de Gemma 4 KoboldCPP tarda tanto en empezar?**
+
+R: Probablemente se deba al **Modo de Pensamiento Nativo**. El modelo genera una traza de razonamiento interna antes de proporcionar la respuesta final. Si estás en una CPU o una GPU de gama baja, este proceso puede tardar varios minutos. Puedes intentar desactivar el "pensamiento" en tu prompt o cambiar a la variante de modelo E2B, que es más eficiente.
+
+**P: ¿Puedo ejecutar el modelo 26B con 16GB de RAM?**
+
+R: No se recomienda. Incluso con una cuantización fuerte de 2 bits, el modelo 26B tendrá dificultades para caber en 16GB de RAM una vez que se tiene en cuenta el sistema operativo y la caché KV. Para sistemas de 16GB, las variantes **E4B** o **E2B** proporcionarán una experiencia mucho más fluida y fiable.
+
+**P: ¿Soporta Gemma 4 entrada de imagen o audio en KoboldCPP?**
+
+R: Las variantes **E2B y E4B** están diseñadas con soporte multimodal nativo. Aunque KoboldCPP es principalmente una herramienta de inferencia de texto, las actualizaciones de 2026 han ampliado el soporte para adaptadores de visión (estilo LLaVA) que funcionan en conjunto con la arquitectura Gemma, permitiendo el análisis de imágenes y el procesamiento básico de audio.

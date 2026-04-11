@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "Longitud de contexto de Gemma 4: Guía técnica completa y especificaciones 2026",
+  description: "Explora la impresionante longitud de contexto de Gemma 4 y las especificaciones del modelo. Descubre cómo la IA de código abierto de Google de 2026 revoluciona el procesamiento local para desarrolladores y jugadores.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e3a8a/fff?text=Gemma+4+Context+Length+Guide",
+  date: "2026-04-11",
+  author: "Equipo de Gemma Wiki"
+}
+
+A medida que avanzamos en 2026, el panorama de la inteligencia artificial local ha sido completamente transformado por el último lanzamiento de pesos abiertos de Google. Comprender la **longitud de contexto de gemma 4** es esencial para cualquier desarrollador, modder o usuario avanzado que busque aprovechar un razonamiento de alto nivel sin el elevado precio de los modelos de frontera basados en la nube. Con la **longitud de contexto de gemma 4** alcanzando hasta 256,000 tokens en sus versiones más grandes, los usuarios ahora pueden procesar bases de código completas, extensas biblias de lore para RPG o complejos flujos de trabajo agénticos de múltiples pasos directamente en su propio hardware. Este salto en el rendimiento garantiza que la inteligencia de "nivel de frontera" ya no esté restringida por suscripciones de 20 dólares al mes, sino que esté disponible mediante una inversión única en hardware.
+
+En esta guía exhaustiva, desglosaremos los límites de tokens específicos para cada tamaño de modelo, los requisitos de hardware para ejecutarlos y cómo estos modelos se comparan con la competencia líder en el mercado de IA de 2026. Ya sea que estés utilizando una Raspberry Pi o una MacBook Neo de gama alta, Gemma 4 ofrece una solución a medida para tus necesidades de IA local.
+
+## Comprendiendo la longitud de contexto de Gemma 4
+
+La actualización más significativa en la cuarta generación de Gemma es la expansión de la ventana de contexto. En iteraciones anteriores, los modelos locales a menudo tenían dificultades al "olvidar" el inicio de una conversación o al no poder procesar documentos extensos. La **longitud de contexto de gemma 4** resuelve esto de manera efectiva al proporcionar suficiente "memoria" para manejar entradas de datos sustanciales en un solo prompt.
+
+Google ha dividido la familia en cuatro tamaños distintos, cada uno con una capacidad de contexto específica diseñada para equilibrar la velocidad y el uso de memoria.
+
+| Variante del modelo | Recuento de parámetros | Longitud de contexto (Tokens) | Caso de uso principal |
+|---|---|---|---|
+| **Gemma 4 31B Dense** | 31 mil millones | **256,000** | Razonamiento de alta calidad y ajuste fino |
+| **Gemma 4 26B MoE** | 26 mil millones | **256,000** | Inferencia de alta velocidad y baja latencia |
+| **Gemma 4 E4B** | 4 mil millones | **128,000** | Dispositivos móviles y smartphones avanzados |
+| **Gemma 4 E2B** | 2 mil millones | **128,000** | Dispositivos Edge y Raspberry Pi |
+
+> **💡 Consejo:** Si estás construyendo un asistente de juego local que necesita recordar miles de líneas de diálogo o notas sobre la creación del mundo, prioriza el modelo 31B Dense para aprovechar al máximo la ventana de contexto máxima.
+
+## Arquitectura del modelo: Denso vs. Mezcla de Expertos (MoE)
+
+El lanzamiento de 2026 introduce una arquitectura de "Mezcla de Expertos" (MoE) a la familia Gemma. Mientras que el modelo 31B Dense es una potencia en cuanto a precisión, el modelo 26B MoE está diseñado para usuarios que necesitan los beneficios de la **longitud de contexto de gemma 4** sin la enorme carga computacional.
+
+El modelo 26B MoE solo activa aproximadamente **3.8 mil millones de parámetros** durante cualquier paso de inferencia individual. Esto le permite ejecutarse de manera significativamente más rápida que la versión 31B Dense, manteniendo la capacidad de "ver" 256k tokens de información. Esto es particularmente útil para aplicaciones en tiempo real, como NPCs impulsados por IA en videojuegos o herramientas de completado de código en vivo.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/vUfRufToiHg"
+    title="Google acaba de hacer su IA gratuita, privada y tuya (Gemma 4)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento y requisitos de hardware
+
+A pesar de su tamaño reducido en comparación con los gigantes de billones de parámetros, Gemma 4 rinde muy por encima de su categoría. En la tabla de clasificación de texto Arena AI, el modelo 31B Dense ocupa actualmente el **tercer puesto** entre todos los modelos de código abierto a nivel mundial. Esto es un testimonio de la filosofía de "densidad de inteligencia" de Google, donde empaquetan más poder de razonamiento en menos parámetros.
+
+Para ejecutar estos modelos de manera efectiva, debes hacer coincidir el tamaño del modelo con tu VRAM o RAM del sistema disponible.
+
+| Tipo de hardware | Modelo recomendado | RAM/VRAM mínima | Expectativa de rendimiento |
+|---|---|---|---|
+| **Raspberry Pi 5** | E2B (2 mil millones) | **8GB** | Funcional pero lento |
+| **Smartphone moderno** | E4B (4 mil millones) | **12GB** | Respuesta casi instantánea |
+| **Laptop Gaming** | 26B MoE | **18GB** | Tareas agénticas de alta velocidad |
+| **Workstation/Mac Studio** | 31B Dense | **32GB+** | Razonamiento de nivel de frontera |
+
+Para aquellos que buscan el mejor rendimiento absoluto, el modelo 31B Dense puede ser "jailbroken" o ejecutarse en un estado sin filtrar, aunque esto normalmente requiere al menos **18GB de memoria dedicada** para mantener la estabilidad durante operaciones de contexto largo.
+
+## Multimodalidad y flujos de trabajo agénticos
+
+Una de las características destacadas de la actualización de 2026 es que la **longitud de contexto de gemma 4** no es solo para texto. Todos los modelos de la familia son nativamente multimodales. Esto significa que puedes introducir imágenes, audio e incluso archivos de vídeo en esa ventana de 128k o 256k tokens.
+
+### Capacidades multimodales clave:
+*   **Procesamiento de visión:** Identificar objetos en una habitación o analizar capturas de pantalla de la interfaz de usuario para pruebas automatizadas.
+*   **Audio nativo:** Los modelos E2B y E4B admiten entrada directa de audio para reconocimiento de voz y traducción sin necesidad de una conexión a la nube.
+*   **Herramientas agénticas:** Gemma 4 admite nativamente **llamada a funciones** (function calling) y salida JSON estructurada. Esto permite que la IA actúe como un "agente" que puede usar herramientas externas, explorar archivos locales o ejecutar código.
+
+> **⚠️ Advertencia:** Aunque los modelos locales ofrecen privacidad, ejecutar consultas multimodales de alto contexto puede agotar rápidamente la batería en dispositivos móviles. Supervisa siempre tu temperatura térmica al procesar archivos de vídeo localmente.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/CseJ4ZUZzNI"
+    title="La NUEVA actualización de Gemma 4 es INCREÍBLE"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Comparando Gemma 4 con modelos de frontera
+
+En 2026, la brecha entre el código abierto y los modelos "cerrados" como Claude 4.6 o GPT-5.4 es más estrecha que nunca. Si bien los modelos de frontera aún lideran en tareas complejas de ingeniería de software (obteniendo puntuaciones superiores a 80 frente al 68% de Gemma en benchmarks de programación), Gemma 4 suele ser "suficientemente bueno" para el 90% de las tareas diarias.
+
+La principal ventaja de usar Gemma 4 es el coste. Mientras que ejecutar una instancia de alto volumen de un modelo de frontera puede costar miles de dólares al mes en tarifas de tokens, Gemma 4 es **completamente gratuito** de ejecutar una vez que posees el hardware. Para los desarrolladores que crean aplicaciones en [Google AI Studio](https://aistudio.google.com/), la transición de las pruebas en la nube al despliegue local es ahora fluida gracias a la licencia Apache 2.0.
+
+## Cómo empezar con Gemma 4
+
+¿Listo para probar la **longitud de contexto de gemma 4** por ti mismo? Hay varias formas de desplegar estos modelos dependiendo de tu experiencia técnica:
+
+1.  **Google AI Studio:** La forma más rápida de probar los modelos 31B y 26B sin ninguna instalación local.
+2.  **Ollama / LM Studio:** Ideal para usuarios de escritorio que desean una instalación de "un solo clic" para ejecutar modelos localmente en Windows, Mac o Linux.
+3.  **Hugging Face:** Accede a los pesos puros para ajuste fino o despliegues especializados.
+4.  **AI Edge Gallery:** Específicamente para desarrolladores de Android que buscan integrar los modelos E2B o E4B en aplicaciones móviles.
+
+Debido a la **licencia Apache 2.0**, tienes total libertad para modificar, redistribuir y comercializar tus propias versiones de Gemma 4. Esto ya ha dado lugar a un "Gemmaverse" de más de 100,000 variantes ajustadas y optimizadas para todo, desde la investigación médica hasta la escritura creativa.
+
+## FAQ
+
+**P: ¿Cuál es la longitud de contexto máxima de gemma 4?**
+
+R: La longitud de contexto máxima para los modelos más grandes (31B Dense y 26B MoE) es de **256,000 tokens**. Los modelos edge más pequeños (E2B y E4B) admiten hasta **128,000 tokens**.
+
+**P: ¿Puedo ejecutar Gemma 4 en mi iPhone o dispositivo Android?**
+
+R: Sí, los modelos E2B y E4B están específicamente optimizados para el silicio móvil. Los dispositivos Apple lideran actualmente en velocidad de inferencia debido a su integración vertical, pero los teléfonos Android de gama alta que utilizan chipsets Snapdragon o MediaTek también proporcionan una latencia casi nula.
+
+**P: ¿Es Gemma 4 realmente privado?**
+
+R: Sí. Dado que puedes descargar los pesos del modelo y ejecutarlos completamente fuera de línea, ningún dato sale nunca de tu dispositivo. Esto lo convierte en la opción ideal para procesar datos personales sensibles o bases de código patentadas.
+
+**P: ¿Cómo ayuda la arquitectura de "Mezcla de Expertos" en los videojuegos?**
+
+R: La arquitectura MoE permite un "Tiempo hasta el primer token" (TTFT) mucho más rápido. En un contexto de juego, esto significa que los NPCs pueden responder a las acciones del jugador casi instantáneamente sin las largas pausas asociadas a menudo con los LLM densos y más grandes.

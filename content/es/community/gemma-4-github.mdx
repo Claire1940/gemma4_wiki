@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "Gemma 4 GitHub: Guía Completa del Modelo de Código Abierto 2026",
+  description: "Explora la nueva familia de modelos Gemma 4 en GitHub. Aprende sobre la licencia Apache 2.0, capacidades multimodales y requisitos de hardware para despliegue local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+GitHub+Guide",
+  date: "2026-04-11",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de Gemma 4 ha transformado fundamentalmente el panorama de la inteligencia artificial de código abierto, proporcionando a los desarrolladores un acceso sin precedentes a capacidades de razonamiento de nivel de frontera y funciones multimodales. Para aquellos que buscan el repositorio **gemma 4 github**, este lanzamiento representa más que una simple actualización de versión; es la primera vez que Google proporciona sus pesos abiertos de primer nivel bajo una verdadera licencia Apache 2.0. Este movimiento permite el uso comercial, la modificación y la distribución sin restricciones, convirtiéndolo en la herramienta más flexible del ecosistema actual de IA.
+
+Ya sea que busques integrar flujos de trabajo agénticos avanzados en tu software o ejecutar un asistente de programación local de alto rendimiento, los recursos de **gemma 4 github** proporcionan todo lo necesario para comenzar. Construida a partir de la misma investigación de clase mundial detrás de Gemini 3, esta familia de modelos está optimizada para la "era agéntica", contando con soporte nativo para lógica compleja, planificación de múltiples pasos y uso de herramientas desde el primer momento. En esta guía, desglosaremos las innovaciones arquitectónicas, los requisitos de hardware y las estrategias de despliegue para los cuatro modelos principales de la línea Gemma 4 de 2026.
+
+## Descripción General de la Familia de Modelos Gemma 4
+
+El ecosistema Gemma 4 se divide en dos niveles distintos: modelos de Estación de Trabajo (Workstation) y modelos de Borde (Edge). Cada nivel está diseñado para resolver problemas específicos, que van desde el razonamiento local de alta gama hasta el procesamiento eficiente en dispositivos móviles y hardware IoT.
+
+| Nombre del Modelo | Parámetros | Tipo | Ventana de Contexto | Caso de Uso Principal |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | 31 Mil millones | Denso | 256K Tokens | Razonamiento centrado en calidad, programación, análisis extenso |
+| **Gemma 4 26B MoE** | 26B (3.8B Activos) | Mezcla de Expertos | 256K Tokens | Rendimiento rápido en estaciones de trabajo, pipelines locales |
+| **Gemma 4 E4B** | 4 Mil millones | Edge | 128K Tokens | Dispositivos móviles, IoT de alta gama, visión en tiempo real |
+| **Gemma 4 E2B** | 2 Mil millones | Edge | 128K Tokens | Dispositivos de bajo consumo, Raspberry Pi, asistentes de voz |
+
+> **💡 Consejo:** Si tienes VRAM limitada, comienza con el modelo 26B MoE. Ofrece la inteligencia de un modelo mucho más grande pero solo activa 3.8 mil millones de parámetros por token, lo que lo hace increíblemente rápido en GPUs de consumo.
+
+## Características Clave e Innovaciones Arquitectónicas
+
+Una de las actualizaciones más significativas que se encuentran en la documentación de **gemma 4 github** es el paso hacia la multimodalidad nativa. A diferencia de versiones anteriores donde los componentes de visión o audio se "añadían" utilizando pipelines externos como Whisper, Gemma 4 integra estas capacidades directamente en la arquitectura.
+
+### Multimodalidad Nativa
+Los modelos Edge (E2B y E4B) están diseñados específicamente para "ver y oír" el mundo. Cuentan con un codificador de audio masivamente comprimido —un 50% más pequeño que las iteraciones anteriores— lo que reduce el espacio en disco de 390MB a solo 87MB. Esta eficiencia permite la transcripción y traducción en tiempo real directamente en el dispositivo sin necesidad de una conexión a la nube.
+
+### Flujos de Trabajo Agénticos y Llamada a Funciones
+Gemma 4 está construido para agentes. No solo sigue instrucciones; planifica y actúa. La familia de modelos incluye llamada a funciones nativa, lo que permite que la IA interactúe con herramientas externas y APIs de manera fluida. Este es un salto masivo para los desarrolladores que construyen asistentes autónomos que necesitan gestionar calendarios, buscar en bases de datos o ejecutar código.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de Hardware para Despliegue Local
+
+Para ejecutar Gemma 4 de manera efectiva en 2026, debes hacer coincidir el tamaño del modelo con tu hardware disponible. Aunque la licencia Apache 2.0 que se encuentra en la página de **gemma 4 github** te permite instalar los modelos en cualquier lugar, el rendimiento variará según la configuración de tu GPU y RAM.
+
+| Nivel de Modelo | VRAM Mínima de GPU | RAM Recomendada | Hardware Objetivo |
+| :--- | :--- | :--- | :--- |
+| **Edge (2B/4B)** | 4GB - 8GB | 8GB | Móvil, Raspberry Pi, Laptop |
+| **Workstation (26B MoE)** | 16GB - 24GB | 32GB | RTX 3090 / 4090, Mac Studio |
+| **Workstation (31B)** | 24GB+ | 64GB | RTX 6000 Ada, A100/H100 |
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B Denso a precisión completa requiere una memoria significativa. Para la mayoría de las configuraciones de consumo, se recomienda utilizar los puntos de control de Entrenamiento Consciente de Cuantización (QAT) de 4 u 8 bits proporcionados por Google para mantener la calidad reduciendo el uso de VRAM.
+
+## Implementación de Gemma 4 a través de GitHub
+
+El repositorio oficial [Google DeepMind GitHub](https://github.com/google/gemma) contiene los pesos y las guías de implementación para toda la familia Gemma 4. Los desarrolladores pueden elegir entre varios frameworks para comenzar, incluyendo PyTorch, JAX y Keras.
+
+### Pasos para Inicializar el Modelo
+1.  **Clonar el Repositorio:** Accede a los últimos pesos y scripts desde la página de **gemma 4 github**.
+2.  **Instalar Dependencias:** Asegúrate de tener la última versión de la librería Transformers (típicamente se requiere v4.40+ para soporte nativo de MoE).
+3.  **Descargar Pesos:** Usa el CLI de Hugging Face o la descarga directa desde GitHub para obtener la versión específica del modelo (por ejemplo, `gemma-4-31b-it` para la versión ajustada a instrucciones).
+4.  **Habilitar Razonamiento:** Para los modelos de pensamiento, asegúrate de que tu plantilla de chat incluya el parámetro `enable_thinking=True` para activar el procesamiento de cadena de pensamiento extendida.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Landed!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de Rendimiento y Soporte Multilingüe
+
+Gemma 4 ha establecido nuevos récords para modelos abiertos en 2026, particularmente en los benchmarks MMU Pro y SweetBench Pro. Estas pruebas miden la capacidad del modelo para manejar tareas agénticas complejas de múltiples turnos y la comprensión de documentos.
+
+### Capacidades Multilingües
+Los modelos soportan más de 140 idiomas para el pre-entrenamiento y 35 idiomas para el ajuste de instrucciones post-entrenamiento. Esto convierte a Gemma 4 en una opción ideal para aplicaciones globales. En las pruebas, el modelo E2B manejó con éxito solicitudes multilingües complejas, como buscar un restaurante en francés y responder en inglés, con una alta precisión.
+
+### Visión y OCR
+El nuevo codificador de visión maneja el procesamiento de relación de aspecto nativo. A diferencia de los modelos más antiguos que recortaban o estiraban las imágenes para ajustarlas a una entrada cuadrada, Gemma 4 mantiene las dimensiones originales. Esto conduce a un rendimiento significativamente mejor en:
+*   **OCR (Reconocimiento Óptico de Caracteres):** Lectura de texto de documentos o capturas de pantalla.
+*   **Comprensión de Documentos:** Análisis de diseños y datos dentro de PDFs.
+*   **Razonamiento de Video:** Procesamiento de entradas de imágenes múltiples entrelazadas para comprender movimiento o secuencias.
+
+## Por qué es Importante la Licencia Apache 2.0
+
+Antes del lanzamiento de Gemma 4, muchos de los pesos abiertos de Google estaban bajo licencias "personalizadas" que restringían la competencia comercial o el uso en ciertos sectores. Al pasar a la licencia Apache 2.0, Google ha eliminado estas barreras. Ahora puedes tomar el código del repositorio **gemma 4 github**, ajustarlo con tus datos privados y vender el producto resultante sin pagar regalías ni temer la revocación de la licencia.
+
+Este cambio ha provocado un aumento en las variantes impulsadas por la comunidad. A las pocas semanas del lanzamiento, el ecosistema superó las 100,000 versiones ajustadas de Gemma, que van desde asistentes médicos especializados hasta herramientas de escritura creativa.
+
+## FAQ (Preguntas Frecuentes)
+
+**P: ¿Dónde puedo encontrar el repositorio oficial de gemma 4 github?**
+
+R: El repositorio oficial es mantenido por Google DeepMind en GitHub. Allí puedes encontrar los pesos del modelo, los scripts de instalación y las guías de despliegue. También está disponible a través de Hugging Face para una fácil integración con la librería Transformers.
+
+**P: ¿Requiere Gemma 4 una conexión a Internet para funcionar?**
+
+R: No. Una de las principales ventajas de Gemma 4 es que está diseñado para ejecutarse localmente en tu propio hardware. Una vez que hayas descargado los pesos de GitHub, puedes realizar razonamiento, análisis de visión y transcripción de audio completamente fuera de línea.
+
+**P: ¿Cuál es la diferencia entre los modelos Denso y MoE?**
+
+R: El modelo 31B Denso utiliza todos sus parámetros para cada cálculo, priorizando la calidad de salida y el razonamiento profundo. El modelo 26B de Mezcla de Expertos (MoE) solo activa unos 3.8 mil millones de parámetros a la vez, lo que le permite ejecutarse mucho más rápido y en hardware de gama más baja mientras mantiene una inteligencia de alto nivel.
+
+**P: ¿Puedo usar Gemma 4 para proyectos comerciales de videojuegos?**
+
+R: Sí. Gracias a la licencia Apache 2.0, puedes integrar Gemma 4 en tus juegos comerciales para tareas como diálogos dinámicos de NPCs, generación procedimental de misiones o interacción de voz en tiempo real sin ninguna tarifa de licencia.

@@ -1,0 +1,132 @@
+export const metadata = {
+  title: "Razonamiento de Gemma 4: Guía Avanzada de Agentes de IA y Lógica 2026",
+  description: "Explore las avanzadas capacidades de razonamiento de gemma 4. Conozca los modelos 31B y 26B, los flujos de trabajo agénticos y el rendimiento de IA local para desarrolladores y jugadores.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/0f172a/fff?text=Gemma+4+Reasoning+Guide",
+  date: "2026-04-11",
+  author: "Gemma Wiki Team"
+}
+
+El lanzamiento de la última familia de modelos de código abierto de Google marca un cambio significativo en la forma en que los desarrolladores y entusiastas de la tecnología abordan la inteligencia artificial local. Para aprovechar eficazmente el poder del **razonamiento de gemma 4**, uno debe comprender el cambio del recuento bruto de parámetros a la eficiencia de inteligencia por parámetro. Estos modelos, lanzados bajo la permisiva licencia Apache 2.0, están diseñados específicamente para flujos de trabajo agénticos, planificación de múltiples pasos y deducciones lógicas complejas. Al utilizar las avanzadas capacidades de **razonamiento de gemma 4**, los modelos más pequeños están superando ahora a sus homólogos casi veinte veces más grandes en evaluaciones comparativas específicas. Ya sea que esté construyendo un motor de juego interactivo o un asistente de codificación local, estos modelos proporcionan las herramientas necesarias para ejecutar tareas cognitivas de alto nivel directamente en hardware de consumo.
+
+## Desglose de la familia de modelos Gemma 4
+
+Google ha diversificado la línea Gemma 4 para adaptarse a diferentes limitaciones de hardware y requisitos de rendimiento. La familia incluye cuatro modelos distintos que van desde versiones ultra eficientes para dispositivos periféricos hasta modelos insignia de alta densidad. Comprender las fortalezas específicas de cada uno es crucial para optimizar su flujo de trabajo.
+
+| Variante del modelo | Parámetros | Mejor caso de uso | Fortaleza clave |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 2B** | 2 mil millones | Dispositivos móviles y periféricos | Uso de memoria ultra eficiente |
+| **Gemma 4 4B** | 4 mil millones | IoT en tiempo real y visión | Rendimiento periférico multimodal |
+| **Gemma 4 26B (MoE)** | 26 mil millones | Desarrollo de escritorio | 3.8B parámetros activos (Rápido) |
+| **Gemma 4 31B (Dense)** | 31 mil millones | Razonamiento de frontera | Calidad de salida de primer nivel |
+
+El modelo Mixture of Experts (MoE) de 26B es particularmente digno de mención para los desarrolladores. Al activar solo aproximadamente 3.8 mil millones de parámetros durante la inferencia, mantiene la velocidad de un modelo más pequeño mientras conserva la amplia base de conocimientos de un sistema mucho más grande. Esto lo convierte en un candidato ideal para tareas de razonamiento local donde la latencia es una preocupación primordial.
+
+## Inmersión profunda en el razonamiento y la lógica de Gemma 4
+
+El atractivo principal de esta serie reside en su entrenamiento especializado para la consistencia lógica. En las evaluaciones comparativas líderes de la industria, el modelo insignia 31B ha demostrado una destreza excepcional. Por ejemplo, en el benchmark MMLU Pro, logró una puntuación de 85.2, situándose entre los modelos de código abierto de élite disponibles en 2026.
+
+El **razonamiento de gemma 4** destaca en matemáticas y planificación espacial, que son esenciales para tareas de codificación complejas. En las pruebas de LiveCodeBench, el modelo aseguró una tasa de éxito del 80%, demostrando que puede manejar una lógica de programación intrincada que anteriormente requería clústeres masivos basados en la nube.
+
+> **💡 Consejo:** Para maximizar la salida lógica del modelo 31B, utilice el arnés Kilo CLI. Está diseñado específicamente para resaltar las capacidades agénticas del modelo y la precisión en el uso de herramientas.
+
+### Comparación de rendimiento en benchmarks
+
+| Benchmark | Puntuación Gemma 4 31B | Promedio de la industria (Clase 30B) |
+| :--- | :--- | :--- |
+| **MMLU Pro** | **85.2** | 78.5 |
+| **LiveCodeBench** | **80.0%** | 65.0% |
+| **GPQA (Ciencia)** | **Alto** | Medio |
+| **HumanEval** | **88.4** | 81.2 |
+
+La eficiencia del **razonamiento de gemma 4** también se refleja en su uso de tokens. En comparación con rivales como Qwen 3.5, Gemma 4 utiliza aproximadamente 2.5 veces menos tokens de salida para tareas similares. Esta eficiencia se traduce directamente en velocidades de generación más rápidas y menores costos operativos para los usuarios empresariales.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Flujos de trabajo agénticos y uso de herramientas
+
+La "Era Agéntica" requiere modelos que hagan más que solo responder preguntas; deben planificar y actuar. Gemma 4 admite el uso nativo de herramientas y salidas JSON estructuradas, lo que le permite interactuar con API externas y entornos de software sin problemas.
+
+1.  **Planificación de múltiples pasos**: El modelo puede desglosar una instrucción compleja (p. ej., "Construir una aplicación full-stack") en pasos individuales y ejecutables.
+2.  **Salida estructurada**: Al generar JSON válido, el modelo garantiza que sus "pensamientos" puedan ser analizados por otros programas sin errores.
+3.  **Gestión de contexto**: Con una ventana de contexto de 256K, el modelo puede "razonar" a través de bases de código completas o documentos técnicos largos en una sola sesión.
+4.  **Soporte de idiomas**: El soporte nativo para más de 140 idiomas garantiza que la lógica agéntica se mantenga consistente en aplicaciones globales.
+
+Estas características permiten la creación de agentes autónomos que pueden navegar por la web, editar archivos y depurar código con una intervención humana mínima.
+
+## Rendimiento en el mundo real en juegos y simulación
+
+Para la comunidad de jugadores, el **razonamiento de gemma 4** ofrece posibilidades emocionantes para la generación de contenido procedimental y la lógica de NPC. Durante las pruebas, el modelo 31B generó con éxito un simulador de donuts de F1 funcional con movimiento basado en física y renderizado 3D en código de navegador puro. Aunque no perfeccionó cada matiz de la física de alta gama, el hecho de que un modelo de este tamaño pueda conceptualizar y ejecutar tal simulación es un testimonio de su razonamiento espacial.
+
+Además, el modelo ha sido probado en tareas de lógica de juegos, como la creación de un juego de coches de estilo cartón. Implementó con éxito:
+*   Sistemas de interacción en tiempo real.
+*   Gestión de estados para puntuación por turnos.
+*   Mecánicas de movimiento fluido y reglas de colisión.
+
+Estas capacidades sugieren que los juegos futuros podrían usar Gemma 4 para potenciar NPCs altamente inteligentes que reaccionen a las acciones del jugador con estrategias complejas y razonadas en lugar de simples rutas programadas.
+
+## Rendimiento local e integración móvil
+
+Uno de los aspectos más "asombrosos" del lanzamiento de Gemma 4 es la capacidad de ejecutar estos modelos completamente en el dispositivo. El modelo 26B puede procesar aproximadamente 300 tokens por segundo en un Mac Studio M2 Ultra. Este rendimiento de alta velocidad es esencial para aplicaciones en tiempo real donde la privacidad de los datos es primordial.
+
+Google también ha introducido "Agent Skills" a través de la aplicación Gemini en dispositivos móviles. Esto permite que los modelos más pequeños 2B y 4B razonen a través de tareas localmente en su teléfono.
+
+| Característica | Local (En el dispositivo) | Nube (API) |
+| :--- | :--- | :--- |
+| **Privacidad** | **100% Privado** | Datos enviados al servidor |
+| **Latencia** | Extremadamente baja (depende del hardware) | Depende de la red |
+| **Costo** | Gratis (tras la compra del hardware) | **$0.14 - $0.40 por 1M tokens** |
+| **Req. de Internet** | Ninguno | Requerido |
+
+> **⚠️ Advertencia:** Ejecutar el modelo 31B requiere una VRAM significativa. Asegúrese de que su sistema cumpla con los requisitos mínimos (normalmente 24GB+ para cuantización de 4 bits) antes de intentar la instalación local a través de Ollama o LM Studio.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Primeros pasos con Gemma 4
+
+Los desarrolladores pueden comenzar a experimentar con Gemma 4 a través de varias plataformas. Para aquellos que prefieren un entorno gestionado, [Google AI Studio](https://aistudio.google.com/) ofrece un nivel gratuito para probar las capacidades de razonamiento del modelo 31B. Si busca integrar el modelo en una canalización local, los pesos están disponibles en Hugging Face.
+
+### Pasos de instalación para uso local
+
+1.  **Descargar un ejecutor**: Instale [Ollama](https://ollama.com/) o LM Studio.
+2.  **Seleccionar el modelo**: Busque "Gemma 4" y elija el nivel de cuantización que se ajuste a la VRAM de su GPU.
+3.  **Configurar el entorno**: Establezca la ventana de contexto a la longitud deseada (hasta 256K).
+4.  **Ejecutar**: Inicie el modelo y comience a probar instrucciones de lógica compleja para observar el motor de **razonamiento de gemma 4** en acción.
+
+Para los usuarios empresariales, los precios de la API siguen siendo competitivos, aproximadamente 14 centavos por cada 1 millón de tokens de entrada y 40 centavos por cada 1 millón de tokens de salida para el modelo insignia 31B. Esto lo convierte en una de las formas más rentables de desplegar inteligencia de nivel de frontera en 2026.
+
+## FAQ
+
+**P: ¿Cómo se compara el razonamiento de gemma 4 con modelos más grandes como GPT-4?**
+
+R: Aunque Gemma 4 es significativamente más pequeño en recuento de parámetros, su "inteligencia por parámetro" es mucho mayor. En tareas específicas de razonamiento y codificación, el modelo 31B rinde a un nivel comparable al de modelos propietarios mucho más grandes, especialmente cuando se utilizan herramientas agénticas.
+
+**P: ¿Puedo ejecutar Gemma 4 en mi smartphone?**
+
+R: Sí. Los modelos Gemma 4 2B y 4B "Effective" están diseñados específicamente para dispositivos móviles e IoT. Admiten entradas multimodales (audio y visión) y pueden procesar la lógica completamente en el dispositivo sin conexión a Internet.
+
+**P: ¿Es Gemma 4 realmente de código abierto?**
+
+R: Sí, Google ha lanzado Gemma 4 bajo la licencia Apache 2.0. Esto permite tanto el uso personal como comercial, incluyendo la capacidad de modificar y redistribuir los modelos.
+
+**P: ¿Cuál es la mejor manera de mejorar el razonamiento de gemma 4 para tareas específicas?**
+
+R: El ajuste fino es el método más eficaz. Debido a que los pesos son abiertos, los desarrolladores pueden usar técnicas como LoRA (Low-Rank Adaptation) para especializar el modelo en dominios específicos, como la lógica médica, el razonamiento legal o mecánicas de juego avanzadas.

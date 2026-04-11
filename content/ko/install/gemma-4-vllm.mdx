@@ -1,0 +1,133 @@
+export const metadata = {
+  title: "Gemma 4 vLLM: 로컬 AI 설정 및 성능 가이드 2026",
+  description: "vLLM을 사용하여 Google의 Gemma 4 모델을 배포하는 방법을 알아보세요. 26B MoE 아키텍처, 하드웨어 요구 사항 및 2026년 에이전틱 성능을 살펴봅니다.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+vLLM+Guide",
+  date: "2026-04-11",
+  author: "Gemma Wiki Team"
+}
+
+Google의 최신 모델 제품군 출시는 로컬 AI 애호가와 개발자들의 지형을 완전히 바꿔 놓았습니다. **gemma 4 vllm** 설정을 로컬 환경에 통합하면 고속 코딩 어시스턴트부터 게임 내 복잡한 에이전틱 워크플로우에 이르기까지 전례 없는 추론 능력을 활용할 수 있습니다. 큰 인기를 끌었던 Gemma 3 라인업의 후속작인 이번 버전은 개선된 Apache 2 라이선스와 벤치마크 성능의 비약적인 향상을 도입하여 개인용 온디바이스 인텔리전스를 위한 최상위 선택지가 되었습니다.
+
+핸드헬드 게임 기기에서 가벼운 2B 모델을 실행하든, 고충실도 NPC 로직을 위해 거대한 31B Dense 모델을 배포하든, **gemma 4 vllm** 최적화의 미묘한 차이를 이해하는 것이 필수적입니다. 이 종합 가이드에서는 2026년 AI 시대를 정의하는 혁신적인 Mixture of Experts (MoE) 아키텍처에 특히 초점을 맞춰 Gemma 4 라인업의 하드웨어 요구 사항, 설치 단계 및 실제 성능 지표를 분석합니다.
+
+## Gemma 4 모델 제품군: 사양 및 아키텍처
+
+Google은 다양한 하드웨어 프로필에 맞게 다양한 모델 범위를 제공했습니다. 2026년 출시의 눈에 띄는 특징은 26B Mixture of Experts 모델에 "A4B"(Active 4 Billion) 파라미터를 포함했다는 점입니다. 이를 통해 사용자는 40억 개의 파라미터 연산에 필요한 계산 능력만 사용하면서도 260억 개의 파라미터 모델의 지식 베이스에 접근할 수 있습니다.
+
+| 모델명 | 파라미터 | 아키텍처 | 최적의 사용 사례 |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 2B** | 20억 개 | Dense / 멀티모달 | 모바일 기기, 엣지 컴퓨팅 |
+| **Gemma 4 4B** | 40억 개 | Dense / 멀티모달 | 저사양 GPU, 스팀덱, 노트북 |
+| **Gemma 4 26B A4B** | 260억 개 | Mixture of Experts | 고속 코딩, 창의적 글쓰기 |
+| **Gemma 4 31B** | 310억 개 | Dense | 복잡한 추론, 논리 퍼즐 |
+
+표준 Apache 2 라이선스로의 전환은 커뮤니티의 큰 승리이며, 개발자가 이전 세대의 제한적인 라이선스 허들 없이 상업용 게임 프로젝트에 이러한 모델을 통합할 수 있도록 보장합니다. 또한 컨텍스트 윈도우가 크게 확장되어 가장 큰 모델은 확장된 컨텍스트 안정성을 위해 P-rope를 활용하여 최대 256K 토큰을 지원합니다.
+
+## 로컬에서 Gemma 4 vLLM 설정하기
+
+이러한 모델을 최대한 활용하려면 vLLM과 같은 고성능 추론 서버를 사용하는 것이 권장됩니다. vLLM은 PagedAttention 및 연속 배칭(continuous batching)을 사용하여 처리량을 극대화하며, 이는 게임 중에 백그라운드에서 정보를 처리해야 하는 로컬 에이전트를 실행할 때 매우 중요합니다.
+
+### 전제 조건 및 설치
+
+시작하기 전에 환경이 업데이트되었는지 확인하세요. Gemma 4 아키텍처에는 vLLM의 최신 나이틀리(nightly) 빌드와 업데이트된 Transformers 라이브러리가 필요합니다.
+
+1.  **가상 환경 생성:** 종속성 충돌을 피하기 위해 Python 3.10 이상을 사용하세요.
+2.  **vLLM 설치:** Gemma 4 커널과의 호환성을 보장하기 위해 소스에서 빌드하거나 최신 나이틀리 pip 휠을 사용하는 것이 강력히 권장됩니다.
+3.  **Hugging Face 로그인:** 가중치를 다운로드하려면 Hugging Face의 읽기 토큰이 필요합니다.
+
+> **⚠️ 경고:** vLLM을 설치할 때 `transformers` 라이브러리가 이전 버전으로 되돌아가지 않도록 주의하세요. 그렇지 않으면 로딩 단계에서 Gemma 4 모델이 실패할 수 있습니다.
+
+### 2026년 권장 하드웨어
+
+이 모델들을 전체 정밀도(FP16/BF16)로 실행하려면 상당한 VRAM이 필요합니다. 양자화(GGUF/EXL2)를 통해 이러한 요구 사항을 줄일 수 있지만, 다음 표는 vLLM을 통한 비압축 서빙에 필요한 VRAM을 요약한 것입니다.
+
+| 모델 크기 | 최소 VRAM (추론) | 권장 GPU |
+| :--- | :--- | :--- |
+| **2B / 4B** | 8 GB - 12 GB | RTX 4060 Ti / 5060 |
+| **26B A4B (MoE)** | 48 GB - 52 GB | RTX 6000 Ada / Dual RTX 3090/4090 |
+| **31B Dense** | 64 GB+ | Nvidia H100 / A100 / Quad GPU Setup |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## 성능 벤치마크: 논리, 코딩 및 비전
+
+Gemma 3에서 Gemma 4로의 도약은 통계적으로 유의미합니다. MMLU Pro와 같은 테스트에서 31B 모델은 점수가 67점에서 85점으로 상승했으며, 이는 일반적인 세계 지식과 추론 능력이 비약적으로 발전했음을 의미합니다.
+
+### 에이전틱 및 코딩 능력
+게이머와 개발자에게 코딩 성능은 가장 인상적인 부분입니다. JavaScript 시뮬레이션 테스트에서 **gemma 4 vllm** 설정은 완벽하게 작동하는 2D "뱀 대 쥐(Snake vs. Rat)" 시뮬레이션을 생성하는 데 성공했습니다. 모델은 다음을 처리했습니다:
+*   **코드 계획:** 낮/밤 주기를 위한 독립적인 시스템 구성.
+*   **경로 찾기:** 쥐를 위한 지능적인 "도망" 로직 구현.
+*   **시각적 자산:** 게임 환경을 위한 SVG 기반 렌더링 생성.
+
+### 다국어 및 비전 테스트
+Gemma 4는 140개 이상의 언어를 지원합니다. 다국어 테스트에서 수십 개의 언어로 동시에 정형화된 출력 형식을 유지하면서 현지 문화와 음식(예: 인도네시아 렌당)에 대한 미묘한 설명을 제공하는 능력을 보여주었습니다.
+
+비전 측면에서 멀티모달 2B 및 4B 모델은 복잡한 도로 표지판을 해석하고, 손으로 쓴 물리학 방정식에 대해 OCR(광학 문자 인식)을 수행하며, 프랑스어나 아랍어로 된 의료 문서를 분석할 수 있습니다. 그러나 오디오 지원은 현재 더 작은 "Edge" 모델(E2 및 E4)로 제한되어 있다는 점에 유의해야 합니다.
+
+## 고급 vLLM 구성
+
+Gemma 4를 서빙할 때 속도와 컨텍스트 길이의 균형을 맞추기 위해 특정 파라미터를 조정할 수 있습니다. 26B MoE 모델의 경우 멀티 GPU 장비에서 `tensor_parallel_size`를 2 또는 4로 사용하는 것이 이상적입니다.
+
+```bash
+# 26B MoE 실행 예시 커맨드
+python -m vllm.entrypoints.openai.api_server \
+  --model google/gemma-4-26b-a4b \
+  --tensor-parallel-size 4 \
+  --max-model-len 131072 \
+  --gpu-memory-utilization 0.90 \
+  --enable-auto-tool-calling
+```
+
+> **💡 팁:** "컨텍스트 드롭(Context Drop)"(모델이 대화의 초기 부분을 잊어버리는 현상)이 발생하면 KV 캐시 설정을 조정하거나 최신 vLLM 버전에 내장된 P-rope 스케일링 기능을 사용하세요.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/eggkmAbii8M"
+    title="Gemma-4 26B A4B + vLLM: Best MoE Model of 2026: Running Locally"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Gemma 4와 업계 표준 비교
+
+Google의 클라우드 기반 Gemini 모델은 거대한 컨텍스트 윈도우를 제공하지만, 로컬 Gemma 4 변체는 프런티어 모델이 따라올 수 없는 수준의 개인 정보 보호 및 사용자 정의 가능성을 제공합니다. Qwen 3.5 또는 Llama 4(예상)와 같은 다른 오픈 웨이트 모델과 비교할 때, Gemma 4는 도구 호출(tool-calling) 및 Hermes Agent와 같은 에이전틱 프레임워크에서 제 성능을 발휘합니다.
+
+| 특징 | Gemma 4 31B | Gemini (클라우드) | Qwen 3.5 |
+| :--- | :--- | :--- | :--- |
+| **개인 정보 보호** | **100% 로컬** | 낮음 (데이터 로깅) | **100% 로컬** |
+| **컨텍스트 품질** | 높음 (최대 128k) | 탁월함 (1M+) | 보통 |
+| **속도** | 빠름 (MoE 변체) | 가변적 | 빠름 |
+| **도구 호출** | 고급 | 프런티어급 | 좋음 |
+
+공식 모델 가중치 및 문서를 확인하려면 [Hugging Face의 Gemma 모델](https://huggingface.co/google) 페이지를 방문하여 로컬 배포를 시작해 보세요.
+
+## FAQ
+
+**Q: RTX 4090 한 장으로 gemma 4 vllm을 실행할 수 있나요?**
+
+A: 2B 및 4B 모델은 쉽게 실행할 수 있습니다. 26B A4B MoE 또는 31B Dense 모델의 경우, 모델을 24GB VRAM에 맞추기 위해 4비트 또는 8비트 양자화(GGUF 또는 AWQ 등)를 사용해야 합니다.
+
+**Q: Gemma 4가 이미지 생성을 지원하나요?**
+
+A: 아니요, Gemma 4는 이미지를 *이해*(비전)할 수 있는 멀티모달 LLM이지만 기본적으로 이미지를 생성하지는 않습니다. 하지만 SVG용 코드를 작성하거나 Stable Diffusion 에이전트를 위한 지침을 작성할 수는 있습니다.
+
+**Q: A4B Mixture of Experts 아키텍처의 장점은 무엇인가요?**
+
+A: A4B(Active 4 Billion) 아키텍처는 모델이 260억 개의 파라미터 지식 용량을 가지고 있지만 토큰당 8개의 전문가만 활성화한다는 것을 의미합니다. 그 결과 높은 정확도를 유지하면서도 기존 26B Dense 모델에 비해 훨씬 빠른 추론 속도를 제공합니다.
+
+**Q: Gemma 4를 실행하는 유일한 방법이 vLLM인가요?**
+
+A: 아니요, Ollama, LM Studio 또는 KoboldCPP를 사용할 수도 있습니다. 하지만 vLLM은 우수한 처리량과 OpenAI 호환 API 덕분에 일반적으로 "에이전틱" 워크플로우 및 다중 사용자 환경에서 선호됩니다.

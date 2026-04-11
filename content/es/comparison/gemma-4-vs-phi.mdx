@@ -1,0 +1,111 @@
+export const metadata = {
+  title: "Gemma 4 vs Phi: Guía definitiva de comparación de modelos de IA 2026",
+  description: "Una inmersión profunda en la batalla de los modelos de lenguaje pequeños. Compara Gemma 4 y Phi para programación, flujos de trabajo agénticos y rendimiento local en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+vs+Phi+Comparison",
+  date: "2026-04-11",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado drásticamente en 2026, centrándose en la rivalidad de alto nivel entre **gemma 4 vs phi**. A medida que los desarrolladores y los entusiastas del procesamiento local se alejan de los modelos masivos dependientes de la nube, el enfoque se ha desplazado hacia la "inteligencia por parámetro". La serie Gemma 4 de Google y la línea Phi de Microsoft representan la cúspide de esta filosofía de eficiencia primero. Ya sea que estés construyendo un agente autónomo, un asistente de programación local o una IA integrada en dispositivos móviles, comprender los matices de **gemma 4 vs phi** es esencial para optimizar tu hardware y flujo de trabajo.
+
+En esta guía exhaustiva, analizamos los avances arquitectónicos, los resultados de los benchmarks y los escenarios de despliegue en el mundo real que definen a estas dos potencias. Desde las variantes móviles 2B ultra eficientes hasta los pesos pesados densos de 31B, desglosamos qué modelo reina de forma suprema para tus necesidades técnicas específicas.
+
+## Evolución arquitectónica: MoE vs. Capas densas
+
+Uno de los puntos de discusión más significativos en el debate **gemma 4 vs phi** es la implementación de la Mezcla de Expertos (MoE). El modelo Gemma 4 26B utiliza una arquitectura MoE altamente eficiente que solo activa aproximadamente 3.8 mil millones de parámetros durante la inferencia. Esto le permite ofrecer la "capacidad cerebral" de un modelo mucho más grande mientras mantiene la velocidad y los bajos requisitos de VRAM de uno más pequeño.
+
+En contraste, la serie Phi tradicionalmente ha apostado por datos sintéticos de alta calidad y arquitecturas densas. Si bien los modelos Phi a menudo superan las expectativas para su tamaño en razonamiento puro, el enfoque de Gemma 4 hacia los flujos de trabajo agénticos y la salida de JSON estructurado le otorga una ventaja distintiva en entornos de producción.
+
+| Característica | Gemma 4 (26B/31B) | Serie Phi (Proyectada 2026) |
+|---|---|---|
+| **Arquitectura** | Mezcla de Expertos (26B) / Densa (31B) | Principalmente Densa |
+| **Ventana de Contexto** | **256K Tokens** | 128K Tokens |
+| **Licencia** | Apache 2.0 | MIT / Variantes Propietarias |
+| **Idiomas** | Más de 140 soportados | Principalmente centrada en inglés |
+| **Optimización** | Nativa de TPU/GPU | Nativa de DirectX/Windows |
+
+> **💡 Consejo:** Si tu proyecto requiere procesar documentos masivos o bases de código extensas, la ventana de contexto de 256K de Gemma 4 la convierte en la opción superior frente a las iteraciones actuales de Phi.
+
+## Benchmarks de rendimiento: Inteligencia por parámetro
+
+Al evaluar **gemma 4 vs phi**, los benchmarks puros solo cuentan la mitad de la historia. Sin embargo, el modelo Gemma 4 31B ha establecido un nuevo estándar para los modelos abiertos en 2026. Con una impresionante puntuación de **85.2 en MMLU Pro**, compite directamente con modelos veinte veces más grandes. En benchmarks de matemáticas pesadas como GPQA y pruebas centradas en programación como LiveCodeBench, Gemma 4 se sitúa consistentemente en el top tres de todos los modelos de código abierto.
+
+Mientras que los modelos Phi suelen destacar en el razonamiento de "sentido común" y la lógica de formato corto, Gemma 4 se centra en la planificación de múltiples pasos. Esto lo hace particularmente eficaz para tareas "agénticas", donde la IA debe decidir qué herramientas usar, en qué orden y cómo formatear el resultado final.
+
+| Benchmark | Gemma 4 31B | Phi-4 (Equivalente) |
+|---|---|---|
+| **MMLU Pro** | **85.2** | 82.1 |
+| **LiveCodeBench** | **80.0%** | 76.5% |
+| **GPQA (Ciencia)** | **Alto** | Medio-Alto |
+| **Índice de Eficiencia** | 31 | 28 |
+
+## Programación y lógica de juegos en el mundo real
+
+Para los desarrolladores, la verdadera prueba de **gemma 4 vs phi** reside en la generación de código. Pruebas recientes muestran que Gemma 4 puede generar componentes de interfaz de usuario complejos y funcionales con una precisión sorprendente. En una reciente prueba de estrés, el modelo clonó con éxito una interfaz al estilo Mac OS, incluyendo una barra de herramientas funcional, una calculadora y una terminal. Aunque tuvo dificultades con el anidamiento profundo de carpetas, la fidelidad visual y la generación de SVG fueron de primer nivel para un modelo de 31B.
+
+En el ámbito del desarrollo de videojuegos, Gemma 4 ha demostrado la capacidad de manejar lógica de juego compleja, como la creación de un simulador de física estilo cartón o un simulador de "donuts" de F1. El modelo implementa la gestión de estados, reglas de puntuación y mecánicas de movimiento fluidas que se sienten listas para producción en lugar de ser solo conceptuales.
+
+### Casos de uso para despliegue local
+1. **Clonación de interfaces UI Front-end:** Generación de componentes React o Tailwind a partir de descripciones de texto.
+2. **Habilidades de agentes locales:** Uso del marco "Agent Skills" de Gemini para ejecutar tareas directamente en un dispositivo móvil sin acceso a la nube.
+3. **Razonamiento multimodal:** Análisis y síntesis de información a través de múltiples imágenes simultáneamente.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de hardware y velocidad de tokens
+
+Un factor crítico en la comparación **gemma 4 vs phi** es el rendimiento local. Gemma 4 está optimizado para ejecutarse en hardware de consumo masivo. Por ejemplo, el modelo MoE 26B puede alcanzar casi **300 tokens por segundo** en un Mac Studio M2 Ultra. Este nivel de velocidad permite interacciones en tiempo real que antes solo eran posibles a través de costosas llamadas API a GPT-4 o Claude 3.5.
+
+Para los usuarios móviles, los modelos Gemma 4 2B y 4B están diseñados para ejecutarse completamente en el dispositivo. Esto habilita las "Agent Skills" (Habilidades de Agente), donde el modelo puede consultar datos estructurados en tu teléfono, procesarlos y generar visualizaciones sin enviar nunca datos a un servidor remoto.
+
+| Hardware | Modelo recomendado | Velocidad esperada |
+|---|---|---|
+| **Sobremesa de gama alta (RTX 5090)** | Gemma 4 31B | 150+ t/s |
+| **Portátil de gama alta (M3/M4 Max)** | Gemma 12B / 26B | 100+ t/s |
+| **Dispositivo móvil (Pixel 10/iPhone 17)** | Gemma 4 2B / 4B | 40+ t/s |
+| **Dispositivos Edge/IoT** | Gemma 1B (Solo texto) | Ultra-rápido |
+
+> **⚠️ Advertencia:** Al ejecutar el modelo denso 31B, asegúrate de tener al menos 24GB de VRAM para un rendimiento óptimo. El uso de cuantización (4-bit u 8-bit) puede ayudar a que el modelo quepa en GPUs más pequeñas con una pérdida mínima de rendimiento.
+
+## Tokenomics y precios en la nube
+
+Aunque la ejecución local es lo más destacado, muchos desarrolladores siguen utilizando estos modelos a través de API para el escalado. Gemma 4 ofrece una estructura de precios altamente competitiva. El modelo 31B suele costar alrededor de **14 centavos por cada millón de tokens de entrada** y **40 centavos por cada millón de tokens de salida**.
+
+La eficiencia de Gemma 4 se destaca aún más por su relación "token-por-tarea". En muchos escenarios, Gemma 4 utiliza 2.5 veces menos tokens de salida que competidores como Qwen o Phi para lograr el mismo resultado. Esto se traduce en menores costos y tiempos de generación más rápidos en aplicaciones del mundo real.
+
+## Cómo empezar con Gemma 4
+
+Si has decidido que Gemma 4 es la opción adecuada para tu proyecto por encima de la serie Phi, sigue estos pasos para desplegarlo:
+
+1. **Google AI Studio:** La forma más rápida de probar Gemma 4 gratis. Accede a la interfaz web para experimentar con prompts y parámetros.
+2. **Ollama / LM Studio:** Para usuarios locales, descarga los pesos GGUF o Safetensors. Usa el comando `ollama run gemma4:31b` para iniciar una sesión local.
+3. **Kilo CLI:** Un arnés de código abierto diseñado específicamente para aprovechar las capacidades agénticas de la serie Gemma. Es muy recomendable para el uso de herramientas y llamadas a funciones.
+4. **Hugging Face:** Accede a los pesos originales para realizar ajustes finos (fine-tuning) con los datos específicos de tu dominio.
+
+## FAQ
+
+**P: En la batalla de gemma 4 vs phi, ¿cuál es mejor para programar?**
+
+R: Aunque ambos son potentes, Gemma 4 31B tiene actualmente una ligera ventaja en la generación de código front-end y en la salida de JSON estructurado. Su capacidad para manejar SVG complejos y la gestión de estados lo convierte en el favorito de los desarrolladores web.
+
+**P: ¿Puedo ejecutar Gemma 4 en mi teléfono?**
+
+R: Sí. Los modelos Gemma 4 2B y 4B están optimizados específicamente para dispositivos móviles y edge. Soportan el marco "Agent Skills", lo que permite un procesamiento de IA totalmente local en el dispositivo sin necesidad de conexión a Internet.
+
+**P: ¿Es Gemma 4 realmente de código abierto?**
+
+R: Gemma 4 se publica bajo la permisiva licencia Apache 2.0. Esto significa que puedes usarlo para proyectos comerciales, modificar los pesos y distribuir tus versiones sin los términos restrictivos que a menudo se encuentran en modelos de "pesos abiertos" pero no de "código abierto".
+
+**P: ¿Cómo se compara la ventana de contexto entre gemma 4 vs phi?**
+
+R: Gemma 4 cuenta con una enorme ventana de contexto de 256K, que es significativamente mayor que los 128K estándar que se encuentran en muchas variantes de Phi. Esto hace que Gemma 4 sea mucho más adecuado para analizar documentos largos o grandes repositorios de código.

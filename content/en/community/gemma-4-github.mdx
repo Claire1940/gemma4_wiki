@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "Gemma 4 GitHub: Complete Open Source Model Guide 2026",
+  description: "Explore the new Gemma 4 model family on GitHub. Learn about Apache 2.0 licensing, multi-modal capabilities, and hardware requirements for local deployment.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+GitHub+Guide",
+  date: "2026-04-11",
+  author: "Gemma Wiki Team"
+}
+
+The release of Gemma 4 has fundamentally shifted the landscape of open-source artificial intelligence, providing developers with unprecedented access to frontier-level reasoning and multi-modal capabilities. For those searching for the **gemma 4 github** repository, this release represents more than just a version update; it is the first time Google has provided its premier open weights under a true Apache 2.0 license. This move allows for unrestricted commercial use, modification, and distribution, making it the most flexible tool in the current AI ecosystem.
+
+Whether you are looking to integrate advanced agentic workflows into your software or run a high-performance local coding assistant, the **gemma 4 github** resources provide everything necessary to get started. Built from the same world-class research behind Gemini 3, this family of models is optimized for the "agentic era," featuring native support for complex logic, multi-step planning, and tool use right out of the box. In this guide, we will break down the architectural innovations, hardware requirements, and deployment strategies for the four primary models in the 2026 Gemma 4 lineup.
+
+## The Gemma 4 Model Family Overview
+
+The Gemma 4 ecosystem is divided into two distinct tiers: Workstation models and Edge models. Each tier is designed to solve specific problems, ranging from high-end local reasoning to efficient on-device processing for mobile and IoT hardware.
+
+| Model Name | Parameters | Type | Context Window | Primary Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | 31 Billion | Dense | 256K Tokens | Quality-focused reasoning, coding, long-form analysis |
+| **Gemma 4 26B MoE** | 26 Billion (3.8B Active) | Mixture of Experts | 256K Tokens | High-speed workstation performance, local pipelines |
+| **Gemma 4 E4B** | 4 Billion | Edge | 128K Tokens | Mobile devices, high-end IoT, real-time vision |
+| **Gemma 4 E2B** | 2 Billion | Edge | 128K Tokens | Low-power devices, Raspberry Pi, voice assistants |
+
+> **💡 Tip:** If you have limited VRAM, start with the 26B MoE model. It offers the intelligence of a much larger model but only activates 3.8 billion parameters per token, making it incredibly fast on consumer-grade GPUs.
+
+## Key Features and Architectural Innovations
+
+One of the most significant upgrades found in the **gemma 4 github** documentation is the move toward native multi-modality. Unlike previous versions where vision or audio components were "bolted on" using external pipelines like Whisper, Gemma 4 integrates these capabilities directly into the architecture.
+
+### Native Multi-Modality
+The Edge models (E2B and E4B) are specifically engineered to "see and hear" the world. They feature a massively compressed audio encoder—50% smaller than previous iterations—which reduces disk space from 390MB to just 87MB. This efficiency allows for real-time transcription and translation directly on-device without needing a cloud connection.
+
+### Agentic Workflows and Function Calling
+Gemma 4 is built for agents. It doesn't just follow instructions; it plans and acts. The model family includes native function calling, allowing the AI to interact with external tools and APIs seamlessly. This is a massive leap forward for developers building autonomous assistants that need to manage calendars, search databases, or execute code.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Hardware Requirements for Local Deployment
+
+To run Gemma 4 effectively in 2026, you must match the model size to your available hardware. While the Apache 2.0 license found on the **gemma 4 github** page allows you to install the models anywhere, performance will vary based on your GPU and RAM configuration.
+
+| Model Tier | Minimum GPU VRAM | Recommended RAM | Target Hardware |
+| :--- | :--- | :--- | :--- |
+| **Edge (2B/4B)** | 4GB - 8GB | 8GB | Mobile, Raspberry Pi, Laptop |
+| **Workstation (26B MoE)** | 16GB - 24GB | 32GB | RTX 3090 / 4090, Mac Studio |
+| **Workstation (31B Dense)** | 24GB+ | 64GB | RTX 6000 Ada, A100/H100 |
+
+> **⚠️ Warning:** Running the 31B Dense model at full precision requires significant memory. For most consumer setups, using the 4-bit or 8-bit Quantized Aware Training (QAT) checkpoints provided by Google is recommended to maintain quality while reducing VRAM usage.
+
+## Implementing Gemma 4 via GitHub
+
+The official [Google DeepMind GitHub](https://github.com/google/gemma) repository contains the weights and implementation guides for the entire Gemma 4 family. Developers can choose between several frameworks to get started, including PyTorch, JAX, and Keras.
+
+### Steps to Initialize the Model
+1.  **Clone the Repository:** Access the latest weights and scripts from the **gemma 4 github** page.
+2.  **Install Dependencies:** Ensure you have the latest version of the Transformers library (v4.40+ is typically required for native MoE support).
+3.  **Download Weights:** Use the Hugging Face CLI or direct download from GitHub to pull the specific model version (e.g., `gemma-4-31b-it` for the instruction-tuned version).
+4.  **Enable Reasoning:** For the thinking models, ensure your chat template includes the `enable_thinking=True` parameter to trigger the long chain-of-thought processing.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/5aqF1HVpjdc"
+    title="Gemma 4 Has Landed!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Performance Benchmarks and Multilingual Support
+
+Gemma 4 has set new records for open models in 2026, particularly in the MMU Pro and SweetBench Pro benchmarks. These tests measure the model's ability to handle complex, multi-turn agentic tasks and document understanding.
+
+### Multilingual Capabilities
+The models support over 140 languages for pre-training and 35 languages for post-training instruction tuning. This makes Gemma 4 an ideal choice for global applications. In testing, the E2B model successfully handled complex multilingual requests, such as finding a restaurant in French and replying in English, with high accuracy.
+
+### Vision and OCR
+The new vision encoder handles native aspect ratio processing. Unlike older models that would crop or stretch images to fit a square input, Gemma 4 maintains the original dimensions. This leads to significantly better performance in:
+*   **OCR (Optical Character Recognition):** Reading text from documents or screenshots.
+*   **Document Understanding:** Analyzing layouts and data within PDFs.
+*   **Video Reasoning:** Processing interleaved multi-image inputs to understand motion or sequences.
+
+## Why the Apache 2.0 License Matters
+
+Before the release of Gemma 4, many of Google's open weights were under "custom" licenses that restricted commercial competition or usage in certain sectors. By moving to the Apache 2.0 license, Google has removed these barriers. You can now take the code from the **gemma 4 github** repository, fine-tune it on your private data, and sell the resulting product without paying royalties or fearing license revocation.
+
+This change has led to a surge in community-driven variants. Within weeks of launch, the ecosystem surpassed 100,000 fine-tuned versions of Gemma, ranging from specialized medical assistants to creative writing tools.
+
+## FAQ
+
+**Q: Where can I find the official gemma 4 github repository?**
+
+A: The official repository is maintained by Google DeepMind on GitHub. You can find the model weights, installation scripts, and deployment guides there. It is also available via Hugging Face for easy integration with the Transformers library.
+
+**Q: Does Gemma 4 require an internet connection to work?**
+
+A: No. One of the primary advantages of Gemma 4 is that it is designed to run locally on your own hardware. Once you have downloaded the weights from GitHub, you can perform reasoning, vision analysis, and audio transcription entirely offline.
+
+**Q: What is the difference between the Dense and MoE models?**
+
+A: The 31B Dense model uses all its parameters for every calculation, prioritizing output quality and deep reasoning. The 26B Mixture of Experts (MoE) model only activates about 3.8 billion parameters at a time, allowing it to run much faster and on lower-end hardware while maintaining high-level intelligence.
+
+**Q: Can I use Gemma 4 for commercial gaming projects?**
+
+A: Yes. Thanks to the Apache 2.0 license, you can integrate Gemma 4 into your commercial games for tasks like dynamic NPC dialogue, procedural quest generation, or real-time voice interaction without any licensing fees.

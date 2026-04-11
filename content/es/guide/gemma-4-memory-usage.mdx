@@ -1,0 +1,113 @@
+export const metadata = {
+  title: "Uso de Memoria de Gemma 4: Guía de Rendimiento de IA Local 2026",
+  description: "Explore los requisitos de hardware y el uso de memoria de gemma 4 para los últimos modelos de código abierto de Google. Optimice su configuración de IA local para la era de los agentes.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+Memory+Usage",
+  date: "2026-04-09",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente con el lanzamiento de la última familia de pesos abiertos de Google. Para entusiastas y desarrolladores, entender el **uso de memoria de gemma 4** es el primer paso para construir flujos de trabajo potentes y agénticos en hardware personal. Ya sea que esté utilizando un equipo de gaming de alta gama o una computadora portátil, la eficiencia de estos modelos determina qué tan efectivamente puede utilizar sus ventanas de contexto de 256k y sus capacidades de planificación de múltiples pasos. Esta guía desglosa el **uso de memoria de gemma 4** en toda la familia de modelos, desde las versiones ligeras listas para móviles hasta los modelos densos de clase de vanguardia diseñados para el dominio en escritorio.
+
+## Descripción General de la Familia de Modelos Gemma 4
+
+Google ha reestructurado la línea Gemma para adaptarse a diferentes niveles de hardware. A diferencia de las iteraciones anteriores, Gemma 4 introduce un cambio significativo en las licencias, pasando a la licencia Apache 2.0, lo que la hace más accesible para desarrolladores de todo el mundo. La familia se divide en cuatro modelos principales, cada uno con un perfil de **uso de memoria de gemma 4** distinto.
+
+| Variante del Modelo | Arquitectura | Parámetros | Hardware Objetivo |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | Denso | 31 Mil millones | Desktops de alta gama / Estaciones de trabajo |
+| **Gemma 4 26B** | MoE (Mezcla de Expertos) | 26B (3.8B Activos) | PCs de gaming de gama media / Laptops |
+| **Gemma 4 E4B** | Denso Efectivo | 4 Mil millones | Dispositivos móviles premium / IoT |
+| **Gemma 4 E2B** | Denso Efectivo | 2 Mil millones | Móviles económicos / Hardware de gama baja |
+
+El modelo 26B Mixture of Experts (MoE) es particularmente notable para quienes se preocupan por la velocidad. Aunque tiene un total de 26 mil millones de parámetros, solo activa 3.8 mil millones por token, lo que le permite proporcionar un razonamiento de alto nivel sin la enorme sobrecarga de cómputo típicamente asociada con modelos más grandes.
+
+## Analizando el Uso de Memoria de Gemma 4 para Despliegue Local
+
+Al desplegar estos modelos localmente, la VRAM (RAM de video) es su recurso más preciado. La cantidad de memoria requerida depende en gran medida del nivel de cuantización que elija. Aunque FP16 (16 bits) proporciona la mayor precisión, la mayoría de los usuarios locales encontrarán que la cuantización de 4 u 8 bits ofrece un mejor equilibrio entre el **uso de memoria de gemma 4** y la calidad de los resultados.
+
+### Requisitos Estimados de VRAM
+
+| Tamaño del Modelo | FP16 (Sin cuantización) | Cuantización de 8 bits | 4 bits (GGUF/EXL2) |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 31B** | ~64 GB VRAM | ~34 GB VRAM | **~18-20 GB VRAM** |
+| **Gemma 4 26B MoE** | ~52 GB VRAM | ~28 GB VRAM | **~14-16 GB VRAM** |
+| **Gemma 4 E4B** | ~8.5 GB VRAM | ~5 GB VRAM | **~3 GB VRAM** |
+| **Gemma 4 E2B** | ~4.5 GB VRAM | ~2.5 GB VRAM | **~1.5 GB VRAM** |
+
+> **💡 Consejo:** Para el modelo 31B, se recomienda una tarjeta de 24 GB de VRAM como la RTX 3090 o 4090 para manejar tanto los pesos del modelo como una ventana de contexto funcional.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Impacto de la Ventana de Contexto en la Memoria
+
+Una de las características más impresionantes de Gemma 4 es su soporte para una ventana de contexto de hasta 256,000 tokens. Sin embargo, los usuarios deben tener en cuenta que el caché KV (Key-Value) consume una memoria significativa a medida que aumenta la longitud de la conversación. Utilizar la ventana completa de 256k puede duplicar o triplicar fácilmente el **uso de memoria de gemma 4** total en comparación con una ventana estándar de 8k.
+
+Para gestionar esto, Gemma 4 utiliza "P rope" (Position-based Rotary Positional Embeddings) para un contexto extendido. Esto ayuda a mantener la calidad en rangos largos, pero no elimina los requisitos de memoria física del caché. Si nota que su sistema se queda sin VRAM durante sesiones largas, considere reducir el `max_model_len` en su configuración de VLLM o Transformers.
+
+## Estrategias de Optimización para Equipos de Gaming
+
+Si usted es un gamer que busca ejecutar estos modelos junto con sus títulos favoritos, o simplemente está tratando de maximizar una configuración de GPU única, siga estos pasos de optimización:
+
+1.  **Use cuantización de 4 bits:** Herramientas como Unsloth o AutoGPTQ pueden reducir la huella del modelo 26B MoE para que quepa cómodamente en tarjetas de 16 GB de VRAM.
+2.  **Habilite el paralelismo de tensores:** Si tiene varias GPU (por ejemplo, dos RTX 3060), use un tamaño de paralelo de tensor de 2 para dividir la carga de trabajo y la memoria.
+3.  **Monitoree con NVTOP:** Use herramientas de línea de comandos como `nvtop` o `btop` para observar su consumo de VRAM en tiempo real.
+4.  **Descargue a la RAM del sistema:** Aunque es mucho más lento, los formatos GGUF le permiten fragmentar partes del modelo en la memoria DDR4/DDR5 de su sistema si su GPU no es suficiente.
+
+> **⚠️ Advertencia:** Fragmentar un modelo en la RAM del sistema disminuirá significativamente los tokens por segundo (TPS). Es mejor utilizarlo para tareas que no sean en tiempo real, como el análisis de código.
+
+## Benchmarks: Gemma 3 vs. Gemma 4
+
+El salto en el rendimiento respecto a la generación anterior es asombroso. Google DeepMind ha logrado aumentar las capacidades de razonamiento manteniendo el **uso de memoria de gemma 4** relativamente estable en comparación con la variante Gemma 3 27B.
+
+| Benchmark | Gemma 3 27B | Gemma 4 31B | Mejora |
+| :--- | :--- | :--- | :--- |
+| **MMLU Pro** | 67.0 | **85.0** | +26.8% |
+| **Codeforces ELO** | 1110 | **2150** | +93.7% |
+| **LiveCodeBench V6** | 29.1 | **80.0** | +174.9% |
+
+Estos números sugieren que Gemma 4 no es solo una actualización marginal; es un salto de "clase de vanguardia" que lleva el razonamiento y la codificación de nivel GPT-4 a las máquinas locales. Para obtener más documentación técnica, visite la [página oficial de Google DeepMind Gemma](https://deepmind.google/technologies/gemma/) para ver los últimos artículos de investigación.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Multimodalidad y Flujos de Trabajo Agénticos
+
+Los modelos "Effective" 2B y 4B están diseñados específicamente para la era agéntica. Cuentan con soporte nativo para el uso de herramientas, lo que les permite actuar como agentes autónomos que pueden planificar y ejecutar tareas. A pesar de su pequeño tamaño, admiten más de 140 idiomas e incluyen soporte nativo de visión y audio (aunque el audio está excluido en algunas versiones específicas de 4B).
+
+Debido a que estos modelos más pequeños tienen una huella de **uso de memoria de gemma 4** muy baja, son ideales para agentes en segundo plano "siempre activos". Puede tener un modelo 2B monitoreando el chat de su transmisión o asistiendo con el modding de juegos sin afectar el rendimiento de sus aplicaciones principales.
+
+## Preguntas Frecuentes (FAQ)
+
+**P: ¿Puedo ejecutar Gemma 4 31B en una GPU con 8 GB de VRAM?**
+
+R: No, el modelo 31B es demasiado grande para 8 GB de VRAM incluso con cuantización de 4 bits. Tendría que descargar la mayor parte del modelo a la RAM del sistema, lo que sería extremadamente lento. Para una tarjeta de 8 GB, el Gemma 4 E4B o el 26B MoE (con una cuantización fuerte) son mejores opciones.
+
+**P: ¿Aumenta el uso de memoria de gemma 4 con diferentes idiomas?**
+
+R: La huella de memoria de los pesos del modelo sigue siendo la misma independientemente del idioma utilizado. Sin embargo, la eficiencia del tokenizador en más de 140 idiomas significa que puede usar menos tokens para ciertos idiomas en comparación con modelos más antiguos, lo que potencialmente ahorra espacio en el caché KV.
+
+**P: ¿Cuál es el mejor cargador para Gemma 4?**
+
+R: VLLM es actualmente el motor recomendado para un alto rendimiento, pero para la mayoría de los usuarios locales, las últimas versiones nocturnas de Transformers o los cargadores basados en GGUF como LM Studio y Ollama proporcionan el camino más fácil para gestionar el **uso de memoria de gemma 4**.
+
+**P: ¿Es el 26B MoE más rápido que el modelo denso 31B?**
+
+R: Sí. Debido a que la arquitectura MoE solo activa 3.8 mil millones de parámetros por paso de inferencia, ofrece significativamente más tokens por segundo (TPS) que el modelo denso 31B, siempre que tenga suficiente VRAM para almacenar el conjunto completo de parámetros de 26B.

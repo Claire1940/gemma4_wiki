@@ -1,0 +1,102 @@
+export const metadata = {
+  title: "Requisitos de Gemma 4 4b: Guía completa de hardware de PC y configuración 2026",
+  description: "Conozca los requisitos exactos de Gemma 4 4b para ejecutar localmente el último modelo de IA abierta de Google. Especificaciones de hardware, necesidades de RAM y optimizaciones de GPU para 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4f46e5/fff?text=Gemma+4+4B+Requirements",
+  date: "2026-04-11",
+  author: "Gemma Wiki Team"
+}
+
+Ejecutar modelos de IA de alto rendimiento de forma local se ha convertido en el nuevo estándar para jugadores, desarrolladores y entusiastas de la privacidad en 2026. Con el lanzamiento de la última familia de pesos abiertos de Google, comprender los **requisitos de gemma 4 4b** es esencial para cualquiera que busque evitar las suscripciones en la nube y las preocupaciones sobre el intercambio de datos. A diferencia de las generaciones anteriores, Gemma 4 ofrece un salto masivo en razonamiento y eficiencia, pero debe asegurarse de que su equipo esté a la altura. Ya sea que lo use para asistencia en codificación, reconocimiento de imágenes o modding de juegos locales, contar con un hardware que cumpla con los **requisitos de gemma 4 4b** garantiza una experiencia fluida y de baja latencia sin necesidad de una conexión a internet activa.
+
+## Descripción general de la familia de modelos Gemma 4
+
+Google ha diversificado la línea Gemma 4 en cuatro tamaños distintos para adaptarse a diferentes niveles de hardware. El modelo "4B", conocido específicamente como **Effective 4B (E4B)**, es el punto ideal para la mayoría de los usuarios de escritorio modernos. Aunque se comercializa como un modelo de 4 mil millones de parámetros por eficiencia, en realidad utiliza una arquitectura de 8 mil millones de parámetros con optimizaciones inteligentes para funcionar con la huella de un modelo mucho más pequeño.
+
+| Nivel del modelo | Parámetros (Efectivos) | Parámetros (Reales) | Mejor caso de uso |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2.3 mil millones | 5 mil millones | Móviles, SBCs, Raspberry Pi |
+| **Gemma 4 E4B** | 4.0 mil millones | 8 mil millones | **PCs de juegos estándar, Portátiles** |
+| **Gemma 4 26B** | 3.8B (Activos) | 26 mil millones (MoE) | Sobremesas de gama alta, trabajo de desarrollo |
+| **Gemma 4 31B** | 31 mil millones | 31 mil millones | Estaciones de trabajo, equipos con RTX 5090 |
+
+## Requisitos de Gemma 4 4b: Especificaciones mínimas vs. recomendadas
+
+Para ejecutar el modelo E4B de manera efectiva, su sistema debe manejar tanto los pesos del modelo como la ventana de contexto (la "memoria" de la conversación). Mientras que el modelo E2B puede arreglárselas con 5 GB de RAM, los **requisitos de gemma 4 4b** son un poco más exigentes para mantener un alto rendimiento de tokens por segundo (TPS).
+
+| Componente | Requisito mínimo | Recomendado (2026) |
+|---|---|---|
+| **RAM** | 8 GB DDR4/DDR5 | 16 GB+ DDR5 |
+| **GPU** | 4 GB VRAM (GTX 1660) | 8 GB+ VRAM (RTX serie 40 o 50) |
+| **CPU** | CPU moderna de 4 núcleos | 8 núcleos (Ryzen 7 / Core i7) |
+| **Almacenamiento** | 10 GB de espacio libre | NVMe SSD (Gen 4 o Gen 5) |
+| **SO** | Windows 11, macOS, Linux | Windows 11 (con WSL2) |
+
+> **💡 Consejo:** Si no tiene una GPU dedicada, aún puede ejecutar Gemma 4 E4B en su CPU, pero espere tiempos de respuesta significativamente más lentos. Para obtener la mejor experiencia, se recomienda encarecidamente descargar el modelo a la VRAM.
+
+## Optimizaciones de Nvidia y rendimiento
+
+Una de las actualizaciones más significativas en 2026 es la colaboración entre Google y Nvidia. Gemma 4 está específicamente optimizado para los núcleos Tensor que se encuentran en el hardware RTX. En evaluaciones comparativas recientes, una PC con RTX 5090 pudo ejecutar modelos Gemma 4 hasta 2,7 veces más rápido que una Mac M3 Ultra. 
+
+Cumplir con los **requisitos de gemma 4 4b** con su GPU permite que el modelo utilice el "Modo de pensamiento" (Thinking Mode) y el procesamiento multimodal (audio/imagen) casi sin retrasos. Si supera los **requisitos de gemma 4 4b** y utiliza una tarjeta como la RTX 4080 o 5070, puede esperar velocidades que superen los 190 tokens por segundo, lo que hace que la IA se sienta instantánea.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/RoACSQsfeiE"
+    title="You Should Run the Gemma 4 AI Model on Your PC Because it is Catching Chat GPT!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Cómo instalar y probar Gemma 4 localmente
+
+Una de las formas más fáciles de comenzar, una vez que haya verificado que su PC cumple con los **requisitos de gemma 4 4b**, es a través de **Ollama**. Esta herramienta de código abierto simplifica el proceso de descarga y ejecución de modelos de lenguaje de gran tamaño (LLM) a través de una interfaz de línea de comandos o una interfaz de usuario web local.
+
+1.  **Descargue Ollama:** Visite el [sitio web oficial de Ollama](https://ollama.com) y descargue el instalador para su sistema operativo.
+2.  **Instale el modelo:** Abra su terminal o símbolo del sistema y escriba: `ollama run gemma4:4b`.
+3.  **Verifique el uso de hardware:** Mientras se ejecuta el modelo, abra su Administrador de tareas (Windows) o Monitor de actividad (Mac) para asegurarse de que el modelo esté utilizando su GPU en lugar de solo la RAM del sistema.
+4.  **Pruebe el razonamiento:** Intente la "Pregunta de Alice" (por ejemplo, "Alice tiene 3 hermanos y 2 hermanas. ¿Cuántas hermanas tiene su hermano?") para ver cómo maneja la lógica el modelo en comparación con versiones anteriores.
+
+> **⚠️ Advertencia:** Verificar sus **requisitos de gemma 4 4b** antes de la descarga es vital porque el comando "pull" predeterminado puede descargar un archivo más grande de 9,6 GB que podría abrumar a los sistemas con solo 8 GB de RAM total.
+
+## Casos de uso avanzados para juegos y desarrollo
+
+Cumplir con los **requisitos de gemma 4 4b** abre posibilidades únicas para los jugadores de 2026. A diferencia de las IA basadas en la nube, una instancia local de Gemma 4 se puede integrar directamente en motores de juego como Unreal Engine 6 o Unity sin incurrir en costes de API.
+
+*   **NPCs dinámicos:** Use el modelo E4B para generar diálogos en tiempo real para NPCs que no dependan de un guion preescrito.
+*   **Asistente de modding local:** Proporcione al modelo los archivos de código de su juego para ayudar a depurar scripts o generar nuevas descripciones de objetos.
+*   **Streaming centrado en la privacidad:** Use las funciones multimodales para analizar su pantalla o los registros de chat localmente mientras transmite, asegurando que no se envíen datos de los espectadores a servidores externos.
+
+Optimizar para los **requisitos de gemma 4 4b** también le permite ejecutar versiones de "Mezcla de expertos" (MoE) como el modelo 26B si tiene al menos 20 GB de RAM, lo que proporciona un salto masivo en inteligencia para tareas de razonamiento complejas.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## FAQ
+
+**P: ¿Puedo ejecutar Gemma 4 4B en una portátil sin una GPU dedicada?**
+
+R: Sí, pero dependerá de la RAM y la CPU de su sistema. Para cumplir con los **requisitos de gemma 4 4b** para una experiencia fluida en una portátil, debe tener al menos 16 GB de RAM DDR5 de alta velocidad para compensar la falta de VRAM.
+
+**P: ¿Gemma 4 4B admite entrada de imagen y audio?**
+
+R: Sí, el modelo Gemma 4 E4B es multimodal. Puede procesar capturas de pantalla, recibos e incluso archivos de audio localmente en su máquina, siempre que tenga una interfaz compatible como Google AI Studio o una interfaz de usuario Gradio local.
+
+**P: ¿Es Gemma 4 4B mejor que GPT-4?**
+
+R: Si bien Gemma 4 4B es altamente eficiente y supera a modelos anteriores como Gemma 3 27B, generalmente está diseñado para la velocidad y la utilidad local. Para tareas de razonamiento masivas y complejas, los modelos Gemma 4 31B o 26B están más cerca del rendimiento de los modelos en la nube de primer nivel como GPT-4 o Claude 3.5.
+
+**P: ¿Cuánto espacio en disco ocupa el modelo 4B?**
+
+R: La descarga estándar para el modelo E4B es de aproximadamente 5 GB a 9 GB, dependiendo del nivel de cuantificación utilizado. Recomendamos mantener al menos 15 GB de espacio libre en un SSD para el modelo y sus archivos de caché temporales.
