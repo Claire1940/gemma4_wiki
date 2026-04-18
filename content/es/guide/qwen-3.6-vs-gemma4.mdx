@@ -1,0 +1,104 @@
+export const metadata = {
+  title: "Qwen 3.6 vs Gemma 4: Guía de Rendimiento y Benchmarks de IA Local 2026",
+  description: "Una comparación exhaustiva de Qwen 3.6 vs Gemma 4 para entusiastas de la IA local. Descubre qué modelo gana en velocidad, llamada a herramientas y eficiencia de hardware.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Qwen+3.6+vs+Gemma+4+Benchmarks",
+  date: "2026-04-19",
+  author: "Equipo de Qwen Wiki"
+}
+
+El panorama de los LLM locales ha cambiado drásticamente en 2026, y el debate en torno a **qwen 3.6 vs gemma4** se ha convertido en el punto focal tanto para desarrolladores como para jugadores. A medida que avanzamos hacia flujos de trabajo agénticos más complejos —donde la IA no solo chatea, sino que realmente realiza tareas dentro de nuestros sistemas— la velocidad y la fiabilidad se han convertido en las métricas definitivas. El lanzamiento de Qwen 3.6 marca una desviación significativa de los modelos densos anteriores, moviéndose hacia una arquitectura de Mezcla de Expertos (MoE) que promete velocidades vertiginosas sin sacrificar la potencia intelectual necesaria para llamadas a herramientas complejas.
+
+In esta guía, profundizamos en los benchmarks técnicos de **qwen 3.6 vs gemma4** en una variedad de hardware de consumo. Ya sea que estés utilizando una configuración económica de doble 3060 o un equipo de gama alta con 8 GPUs que incluya las últimas tarjetas 4090 y 5060 Ti, comprender cómo estos modelos utilizan la VRAM y el ancho de banda PCIe es esencial. Exploraremos por qué los modelos MoE "dispersos" (sparse) están dominando actualmente la escena y cuál deberías elegir para tu agente local Hermes o para la integración de NPCs en juegos.
+
+## El auge de la arquitectura MoE dispersa
+
+El desarrollo más crítico en la rivalidad **qwen 3.6 vs gemma4** es la transición de modelos densos a arquitecturas de Mezcla de Expertos (MoE) dispersas. En generaciones anteriores, como Qwen 3.5 27B o las iteraciones iniciales de Gemma, los modelos eran "densos", lo que significa que cada parámetro se activaba para cada token generado. Esto conducía a una alta precisión pero a un rendimiento notoriamente lento, creando a menudo un cuello de botella en los bucles agénticos donde la velocidad es primordial.
+
+Qwen 3.6 (específicamente la variante 35B A3B) y Gemma 4 Sparse (26B A4B) utilizan solo una fracción de sus parámetros para cada paso de inferencia. Esto les permite "devorar" tokens a una velocidad que antes era impensable en hardware de consumo. Si bien los modelos densos como el Gemma 4 31B todavía ofrecen una fiabilidad increíble, a menudo quedan relegados a tareas donde la latencia no es una preocupación.
+
+| Característica | Qwen 3.6 (35B A3B) | Gemma 4 (Sparse) | Gemma 4 (Denso) |
+|---|---|---|---|
+| **Arquitectura** | MoE Dispersa | MoE Dispersa | Denso |
+| **Fortaleza Principal** | Llamada a Herramientas / Precisión | Velocidad Bruta de Tokens | Profundidad de Razonamiento |
+| **Requisito VRAM (Q4)** | ~16GB - 20GB | ~15GB - 18GB | ~22GB+ |
+| **Uso Recomendado** | Agentes Locales / Hermes | Chat de Alta Velocidad | Análisis de Documentos |
+
+## Rendimiento de Gama Alta: El Benchmark de la 4090
+
+Para aquellos que tienen la suerte de contar con una NVIDIA 4090 insignia, la brecha de rendimiento en el enfrentamiento **qwen 3.6 vs gemma4** se vuelve asombrosa. En benchmarks locales recientes utilizando Llama C++, el modelo Gemma 4 Sparse alcanzó un pico de más de 10,000 tokens por segundo durante el procesamiento de prompts. Este es un número transformador para la IA local, permitiendo que un agente lea y comprenda cantidades masivas de contexto casi instantáneamente.
+
+Sin embargo, Qwen 3.6 no se queda atrás, alcanzando más de 8,000 tokens por segundo en el mismo hardware. Aunque Gemma 4 gana en velocidad bruta, muchos usuarios informan que Qwen 3.6 mantiene una mayor fiabilidad cuando se trata de seguir instrucciones de sistema complejas y ejecutar llamadas a herramientas.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/xS5wao4H4u4"
+    title="Qwen3.6 vs Gemma4 Local Ai Benchmarking"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Hardware de Gama Media y la 5060 Ti
+
+La introducción de la 5060 Ti de 16GB ha proporcionado un nuevo "punto ideal" para la IA local. Al comparar **qwen 3.6 vs gemma4** en estas tarjetas, el búfer de 16GB de VRAM es el factor decisivo. Una sola 5060 Ti puede ejecutar cómodamente una cuantización Q2 o Q3 de Qwen 3.6, pero para obtener la mejor experiencia, se recomienda una configuración de doble tarjeta.
+
+> **⚠️ Advertencia:** Al ejecutar estos modelos, asegúrate de que el modelo completo quepa en tu VRAM. Si el modelo se "desborda" hacia la RAM del sistema (GTT), el rendimiento caerá de miles de tokens por segundo a tan solo 20-30 tokens por segundo debido a las limitaciones del bus PCIe.
+
+### Rendimiento Dual 3060 vs. Dual 5060 Ti
+
+| Hardware | Modelo | Procesamiento de Prompt (Pico) | Generación de Texto (Salida) |
+|---|---|---|---|
+| **Dual 3060 (12GB)** | Gemma 4 Sparse (Q4) | **3,200 TPS** | 73 TPS |
+| **Dual 3060 (12GB)** | Qwen 3.6 (Q4) | **2,280 TPS** | 71 TPS |
+| **Dual 5060 Ti (16GB)** | Qwen 3.6 (Q4) | **3,500 TPS** | 90 TPS |
+
+## El cuello de botella de VRAM y PCIe
+
+Un error común al realizar benchmarks de **qwen 3.6 vs gemma4** es ignorar el impacto del bus PCIe. Si estás usando un equipo multi-GPU con risers x1 (comunes en construcciones de estilo minería), debes ajustar el modelo completamente dentro de la VRAM de tus tarjetas.
+
+Durante las pruebas, una cuantización Q8 de Qwen 3.6 que requería 35.8GB de espacio se ejecutó en un sistema con solo 32GB de VRAM. Debido a que el modelo tuvo que comunicarse con la RAM del sistema a través de una conexión lenta PCIe x1, la velocidad de procesamiento del prompt se desplomó de 3,500 tokens por segundo a apenas 118 tokens por segundo.
+
+Para evitar esto, calcula siempre tus necesidades de VRAM antes de seleccionar una cuantización:
+1. **Cuantización Q4:** El mejor equilibrio entre velocidad e inteligencia para tarjetas de 24GB.
+2. **Cuantización Q2:** Úsala si solo tienes una tarjeta de 12GB o 16GB.
+3. **Cuantización Q8:** Solo recomendada para configuraciones multi-3090/4090 donde la precisión es la única prioridad.
+
+## Casos de Uso Agénticos: Por qué Qwen 3.6 gana para los Gamers
+
+Si bien Gemma 4 ostenta la corona de la velocidad bruta (el hito de los 10k tokens por segundo), el consenso en la comunidad de desarrolladores es que Qwen 3.6 es la opción superior para casos de uso "agénticos". Si estás construyendo un agente de IA local para gestionar tus mods de juegos, actuar como un dador de misiones procedimentales o manejar tareas complejas de visión por computadora, las capacidades de llamada a herramientas de Qwen son significativamente más robustas.
+
+El modelo Qwen 3.6 35B A3B está específicamente ajustado para entender cuándo llamar a una función y cómo formatear los argumentos correctamente. En pruebas con el framework Hermes Agent, Gemma 4 a menudo tenía dificultades para activar las herramientas correctas, esencialmente "fallando rápido". Qwen 3.6, aunque ligeramente más lento, completó con éxito tareas complejas de varios pasos que Gemma 4 simplemente no pudo navegar.
+
+> **💡 Consejo:** Para obtener la mejor experiencia de agente local, usa Qwen 3.6 con una ventana de contexto de 64K o 128K. Esto permite que el modelo recuerde conversaciones largas y estados de juego complejos sin necesidad de "compactación" frecuente o limpieza de memoria.
+
+## Optimizando tu configuración local
+
+Para sacar el máximo provecho de tu hardware al ejecutar estos modelos, sigue estos pasos de optimización:
+
+1. **Usa Llama C++ o vLLM:** Estos backends son actualmente los más optimizados para arquitecturas MoE.
+2. **Activa Flash Attention:** Asegúrate de que Flash Attention esté habilitado para reducir el uso de VRAM durante el procesamiento de contextos largos.
+3. **Revisa tus Risers:** Si usas múltiples GPUs, asegúrate de usar al menos risers PCIe Gen 4 si esperas que viajen datos entre las tarjetas.
+4. **Elección de Cuantización:** Para la comparación **qwen 3.6 vs gemma4**, el formato GGUF Q4_K_M sigue siendo el estándar de oro para calidad vs. rendimiento.
+
+Puedes encontrar más documentación técnica y pesos de los modelos en [Hugging Face](https://huggingface.co/), que sirve como el centro principal para las últimas cuantizaciones de estos modelos.
+
+## FAQ
+
+**P: ¿Puedo ejecutar Qwen 3.6 en una sola NVIDIA 3060 de 12GB?**
+
+R: Sí, pero necesitarás usar una cuantización más baja como Q2 o Q3. Para una experiencia Q4 de alta calidad, generalmente necesitas al menos 20GB de VRAM, lo que hace que las 3090, 4090 o las configuraciones de doble tarjeta sean más ideales.
+
+**P: ¿Por qué Gemma 4 alcanza los 10,000 tokens por segundo mientras que Qwen 3.6 es más lento?**
+
+R: Gemma 4 Sparse utiliza un recuento de parámetros "activos" por token más pequeño en comparación con Qwen 3.6. Si bien esto lo hace más rápido en el rendimiento bruto, a veces puede resultar en una menor precisión para la lógica compleja o la llamada a herramientas.
+
+**P: ¿Qué modelo es mejor para un agente "Hermes" de juegos local?**
+
+R: En el meta actual de **qwen 3.6 vs gemma4**, Qwen 3.6 es ampliamente considerado la mejor opción para agentes debido a su superior fiabilidad en la llamada a herramientas y el seguimiento de instrucciones, incluso si es ligeramente más lento que Gemma 4 Sparse.
+
+**P: ¿Importa el ancho de banda PCIe si mi modelo cabe enteramente en la VRAM?**
+
+R: Si el modelo cabe al 100% en la VRAM, el ancho de banda PCIe tiene un impacto mínimo en la velocidad de generación. Sin embargo, todavía afecta el tiempo de carga inicial del modelo y la velocidad del primer "bloque" de procesamiento del prompt.

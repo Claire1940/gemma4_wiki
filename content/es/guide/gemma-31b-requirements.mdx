@@ -1,0 +1,100 @@
+export const metadata = {
+  title: "Requisitos de Gemma 31B: El mejor hardware para el modelo abierto de Google 2026",
+  description: "Explora los requisitos esenciales de Gemma 31B para el despliegue local. Conoce las necesidades de VRAM, el impacto de la cuantización y los benchmarks del último modelo denso de Google.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e293b/fff?text=Gemma+31B+Requirements",
+  date: "2026-04-19",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la familia Gemma 4 de Google ha causado un gran impacto en la comunidad de IA de código abierto, especialmente con la introducción del modelo denso 31B de alto rendimiento. Para los desarrolladores y entusiastas del gaming que buscan integrar IA avanzada en sus flujos de trabajo locales, comprender los **requisitos de gemma 31b** es el primer paso hacia un despliegue exitoso. Este modelo representa un salto significativo en capacidad, rivalizando con modelos mucho más grandes mientras mantiene una huella relativamente compacta.
+
+Sin embargo, ejecutar localmente un modelo denso de 31 mil millones de parámetros no es una tarea sencilla. A diferencia de sus homólogos más pequeños, el modelo 31B exige configuraciones de hardware específicas para lograr velocidades de tokens por segundo utilizables. En esta guía, desglosaremos los **requisitos precisos de gemma 31b**, comparando el rendimiento del hardware local frente a las alternativas basadas en la nube y explorando cómo este modelo maneja tareas complejas relacionadas con el gaming, como la generación procedimental y el procesamiento de lógica en tiempo real.
+
+## Comprendiendo la familia Gemma 4
+
+Google ha lanzado cuatro tamaños distintos en la familia Gemma 4, cada uno optimizado para diferentes casos de uso. Mientras que los modelos E2B y E4B están diseñados para dispositivos edge e integración móvil, el modelo 26B Mixture of Experts (MoE) y el 31B Denso son los verdaderos pesos pesados. El modelo 31B es particularmente digno de mención porque es un modelo "denso", lo que significa que cada parámetro está activo durante cada paso de inferencia. Esto conduce a mayores capacidades de razonamiento, pero ejerce una presión mucho mayor sobre la memoria y la potencia de procesamiento de su sistema.
+
+| Tamaño del Modelo | Arquitectura | Ventana de Contexto | Mejor Caso de Uso |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2.3B Efectivos | 128K | Móvil/Edge |
+| **Gemma 4 E4B** | 4.5B Efectivos | 128K | Chatbots Básicos |
+| **Gemma 4 26B** | MoE (4B activos) | 256K | Inferencia Local Rápida |
+| **Gemma 4 31B** | **Denso** | **256K** | **Razonamiento Complejo/Programación** |
+
+> **⚠️ Advertencia:** No confundas el MoE 26B con el modelo Denso 31B. Aunque el modelo 26B es más rápido debido a que solo tiene 4 mil millones de parámetros activos, el modelo 31B ofrece una profundidad superior en tareas lógicas y creativas a cambio de mayores exigencias de hardware.
+
+## Requisitos esenciales de Gemma 31B para hardware local
+
+Para ejecutar el modelo 31B con comodidad, debes priorizar la Memoria de Acceso Aleatorio de Vídeo (VRAM). Debido a que el modelo es denso, lo ideal es que todo el conjunto de pesos quepa en la memoria de tu GPU para evitar el enorme cuello de botella que supone delegar tareas a la memoria RAM del sistema.
+
+Para un despliegue completo de 16 bits (FP16), necesitarías más de 60 GB de VRAM, lo cual está fuera del alcance de la mayoría de las GPU de consumo. Por lo tanto, la mayoría de los usuarios recurrirán a la "cuantización", un proceso que comprime los pesos del modelo. Para cumplir con los **requisitos de gemma 31b** en un equipo de gaming estándar, se recomienda encarecidamente una cuantización de 4 bits (Q4_K_M) u 8 bits (Q8_0).
+
+### Estimaciones de VRAM por nivel de cuantización
+
+| Cuantización | VRAM Necesaria (Modelo) | VRAM Total Recomendada | Impacto en el Rendimiento |
+| :--- | :--- | :--- | :--- |
+| **4-bit (Q4)** | ~18 GB | 24 GB (RTX 3090/4090) | Mínimo |
+| **6-bit (Q6)** | ~25 GB | 32 GB (GPU Dual) | Despreciable |
+| **8-bit (Q8)** | ~32 GB | 48 GB (RTX 6000 Ada) | Casi Nativo |
+| **16-bit (FP16)** | ~62 GB | 80 GB (A100/H100) | Nativo |
+
+Si planeas utilizar la ventana de contexto completa de 256K, debes tener en cuenta la VRAM adicional para la caché KV. En longitudes de contexto elevadas, los requisitos de memoria pueden dispararse significativamente, requiriendo potencialmente entre 4 GB y 8 GB adicionales de VRAM dependiendo de la complejidad del prompt.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/BjqjvfAzSQ4"
+    title="Gemma 4 Is HERE – Testing Google’s New 26B & 31B Open Models!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento en Gaming y Programación
+
+La verdadera prueba de fuego para cumplir con los **requisitos de gemma 31b** es cómo se comporta el modelo en escenarios del mundo real. En pruebas recientes, el modelo 31B demostró una capacidad notable para generar código de juego funcional y escenas 3D complejas. Por ejemplo, cuando se le encargó crear un shooter en primera persona "Subway Survival" usando JavaScript, el modelo implementó con éxito:
+
+*   **Lógica de retroceso de armas:** Movimiento de cámara y recuperación realistas.
+*   **Generación procedimental de enemigos:** Bucles infinitos de enemigos dentro de un entorno 3D.
+*   **Controles de iluminación:** Deslizadores de brillo funcionales utilizando variables CSS y JS.
+*   **Análisis multimodal:** La capacidad de interpretar bocetos de interfaz de usuario dibujados a mano y convertirlos en código HTML/CSS limpio y funcional.
+
+Sin embargo, el rendimiento local puede ser variable. En sistemas de gama alta como el DGX Spark, el modelo MoE 26B suele alcanzar velocidades de 22 a 28 tokens por segundo. En contraste, el modelo denso 31B a menudo tiene dificultades para mantener altas velocidades localmente, cayendo frecuentemente a 5-8 tokens por segundo dependiendo del proveedor de cuantización. Para muchos usuarios, esto hace que el modelo 31B sea más adecuado para tareas de "pensamiento" o generación de contenido offline en lugar de chats en tiempo real.
+
+## Compatibilidad de software y configuración
+
+Cumplir con los **requisitos de hardware de gemma 31b** es solo la mitad de la batalla; también necesitas el stack de software adecuado. Dado que la familia Gemma 4 se publica bajo la licencia Apache 2.0, es muy accesible en varias plataformas.
+
+1.  **LM Studio:** La forma más fácil de ejecutar Gemma 31B localmente. Asegúrate de usar la última versión para evitar los errores de "caracteres rotos" vistos en los primeros lanzamientos de GGUF.
+2.  **Nvidia NIM:** Para aquellos con hardware de grado empresarial, los microservicios de Nvidia ofrecen rutas de inferencia optimizadas que pueden aumentar significativamente la velocidad de los modelos densos.
+3.  **OpenRouter:** Si tu máquina local no cumple con los **requisitos de gemma 31b**, los proveedores en la nube como OpenRouter te permiten acceder al modelo a través de API por una fracción del coste de las actualizaciones de hardware.
+
+> **💡 Consejo:** Si encuentras resultados incoherentes o idiomas extraños al ejecutar el modelo 31B localmente, es probable que se trate de un error de cuantización. Intenta cambiar de un Q4_K_M a un Q8 estándar o FP16 (si la VRAM lo permite) para verificar la integridad del modelo.
+
+## Escritura creativa y razonamiento visual
+
+Más allá de la programación, el modelo 31B destaca en el "Razonamiento Visual". En pruebas que involucraban diagramas de circuitos complejos (como un Arduino con múltiples sensores), el modelo fue capaz de identificar componentes como el Arduino Uno y varios cables puente. Aunque ocasionalmente identificó erróneamente sensores específicos (por ejemplo, confundiendo sensores de sonido con zumbadores), mostró un alto nivel de conciencia espacial.
+
+En la escritura creativa, el modelo mantiene una profunda consistencia narrativa. Al recibir una foto de una pareja en una habitación de estilo victoriano, generó un drama psicológico de diez capítulos titulado "La Distancia Silenciosa", con arcos de personajes matizados y temas consistentes como "grietas en la porcelana" y "el peso del silencio". Este nivel de profundidad es un resultado directo de la arquitectura densa, que permite asociaciones más complejas que los modelos MoE más dispersos.
+
+Para aprovechar al máximo estas funciones, puedes encontrar los pesos oficiales del modelo en el [repositorio de Hugging Face de Google](https://huggingface.co/google), que sirve como la autoridad principal para los últimos lanzamientos de Gemma.
+
+## FAQ (Preguntas Frecuentes)
+
+**P: ¿Cuáles son los requisitos mínimos de gemma 31b para un portátil?**
+
+R: Para ejecutar Gemma 31B en un portátil, generalmente necesitas un equipo de gaming de gama alta con una RTX 3080/4080 (16 GB de VRAM) y al menos 32 GB de RAM de sistema. Probablemente necesitarás usar una cuantización de 3 o 4 bits para ajustar el modelo dentro de los límites de la VRAM.
+
+**P: ¿Es el modelo 31B mejor que el MoE 26B para gaming?**
+
+R: Depende de la tarea. Para NPCs en tiempo real, el MoE 26B es mejor debido a su mayor velocidad. Para la creación de mundos, generación de lore y programación de misiones complejas, la arquitectura densa del modelo 31B proporciona resultados más fiables y creativos.
+
+**P: ¿Puedo ejecutar Gemma 31B solo con CPU?**
+
+R: Aunque es posible utilizando el formato GGUF y la RAM del sistema, el rendimiento será extremadamente lento (probablemente menos de 1 token por segundo). Para cualquier uso práctico, una GPU dedicada es una parte fundamental de los **requisitos de gemma 31b**.
+
+**P: ¿Admite Gemma 31B entrada multimodal?**
+
+R: Sí, el modelo Gemma 4 31B es multimodal. Puede "ver" imágenes, interpretar diagramas e incluso analizar bocetos de interfaces de usuario para ayudar a generar el código o las descripciones correspondientes.

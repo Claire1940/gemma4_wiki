@@ -1,0 +1,114 @@
+export const metadata = {
+  title: "KoboldCPP Gemma 4: Optimization and Setup Guide 2026",
+  description: "Learn how to optimize KoboldCPP Gemma 4 for maximum performance. Explore Multi-Token Prediction, speculative decoding, and hardware requirements for 2026.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=KoboldCPP+Gemma+4+Setup",
+  date: "2026-04-19",
+  author: "Gemma Wiki Team"
+}
+
+When it comes to local AI deployment, using **koboldcpp gemma 4** represents the cutting edge of open-weight performance in 2026. As Google continues to refine its Gemma lineup, the community has found that running these models through versatile backends like KoboldCPP offers the best balance of accessibility and customization. However, many users have noticed discrepancies in how this model performs compared to Google's internal benchmarks, largely due to the way specific acceleration features are handled in public releases.
+
+If you are looking to set up **koboldcpp gemma 4** for roleplay, coding, or creative writing, understanding the underlying architecture is essential for achieving high tokens-per-second (TPS). This guide dives deep into the technical nuances of the Gemma 4 release, the controversy surrounding its Multi-Token Prediction (MTP) features, and how you can squeeze every bit of power out of your local hardware to run these advanced Large Language Models (LLMs).
+
+## Understanding Gemma 4 Architecture in KoboldCPP
+
+Gemma 4 is built upon a refined transformer architecture that emphasizes efficiency on edge devices. For users of KoboldCPP, the primary way to interact with this model is through the GGUF (GPT-Generated Unified Format) quantization. This format allows the model to be split between your system RAM and VRAM, making it possible to run even the larger variants of Gemma 4 on consumer-grade GPUs.
+
+One of the most significant discussions in 2026 revolves around the removal of Multi-Token Prediction (MTP) from the public SafeTensor and GGUF versions of the model. While Google’s internal versions utilize MTP to effectively "time travel" by predicting multiple future tokens simultaneously, the versions available on Hugging Face for use in tools like KoboldCPP have had this feature pruned. This was reportedly done to ensure compatibility with the `llama.cpp` backend, which serves as the foundation for KoboldCPP.
+
+| Feature | Public GGUF Version | Google Internal / Light RT |
+|---|---|---|
+| **Multi-Token Prediction** | Disabled/Removed | **Enabled** |
+| **Compatibility** | High (KoboldCPP, LM Studio) | Low (Framework-specific) |
+| **Inference Speed** | Standard | **2x - 3x Faster** |
+| **Architecture** | Standard Transformer | MTP-Enhanced Transformer |
+
+> **Warning:** Running the public version of Gemma 4 in KoboldCPP will not natively grant you the speed boosts seen in Google’s Light RT framework demos due to the lack of baked-in MTP code.
+
+## Multi-Token Prediction vs. Speculative Decoding
+
+To understand why **koboldcpp gemma 4** performance varies, we must look at how LLMs handle token generation. Traditionally, a model predicts one token at a time. This is a linear, resource-heavy process. In 2026, two primary methods have emerged to bypass this bottleneck: Speculative Decoding and Multi-Token Prediction.
+
+### Speculative Decoding (SD)
+Speculative decoding is a technique you can use today in KoboldCPP. It involves using a smaller "draft" model (like a Gemma 4 1B variant) to predict tokens ahead of a larger "target" model (like Gemma 4 9B or 27B). The larger model then verifies these tokens in a single pass. If the draft model is accurate, you see a massive jump in TPS.
+
+### Multi-Token Prediction (MTP)
+MTP is different because it is baked into the model's architecture during training. Instead of needing a separate draft model, the main model is trained to predict the next $n$ tokens at once. While this is more efficient to deploy, it is harder for open-source tools to implement because every model architecture handles MTP slightly differently.
+
+| Method | Requirements | Ease of Setup | Speed Gain |
+|---|---|---|---|
+| **Speculative Decoding** | Two models loaded in VRAM | Moderate | **Up to 2x** |
+| **MTP (Native)** | Single model support | Difficult (Current) | **Up to 3x** |
+| **Standard Inference** | Single model | Very Easy | Baseline |
+
+## How to Set Up KoboldCPP for Gemma 4
+
+To get the most out of your **koboldcpp gemma 4** installation, you need to ensure you are using the latest version of the KoboldCPP executable, which includes the most recent `llama.cpp` patches for Gemma's unique tokenizer requirements.
+
+1.  **Download the GGUF:** Visit the [official Gemma Hugging Face repository](https://huggingface.co/google/gemma-4) and locate the GGUF weights. Choose a quantization level that fits your VRAM (Q4_K_M or Q6_K are generally recommended).
+2.  **Configure GPU Offloading:** In the KoboldCPP launcher, set the "GPU Layers" to the maximum your card can handle. This ensures the heavy lifting is done by your CUDA or ROCm cores.
+3.  **Select the Context Size:** Gemma 4 supports large context windows. For most users, 8,192 or 16,384 tokens is the "sweet spot" before performance begins to degrade on consumer hardware.
+4.  **Enable Flash Attention:** Ensure "Flash Attention" is checked in the settings to reduce memory overhead during long conversations.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jGgoX3Y3TeA"
+    title="Google Is Lying To Us About Gemma 4."
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Recommended Hardware Specs for 2026
+
+Running **koboldcpp gemma 4** effectively requires a balance of fast VRAM and sufficient system memory. Because Gemma 4 utilizes a sophisticated vocabulary, the memory overhead for the tokenizer is slightly higher than previous generations.
+
+| Component | Minimum (9B Model) | Recommended (27B Model) |
+|---|---|---|
+| **GPU** | RTX 3060 (12GB) | **RTX 4090 (24GB)** |
+| **RAM** | 16GB DDR4 | **64GB DDR5** |
+| **VRAM** | 8GB | **24GB+** |
+| **Storage** | NVMe Gen4 SSD | **NVMe Gen5 SSD** |
+
+> **💡 Tip:** If you are VRAM-limited, try using "Row Split" mode in KoboldCPP to distribute the model across multiple smaller GPUs if available.
+
+## Maximizing Tokens Per Second (TPS)
+
+Even without native MTP support in the GGUF files, you can still achieve impressive speeds with **koboldcpp gemma 4** by utilizing speculative decoding. By loading a smaller Gemma 4 1B model as a "draft" model within KoboldCPP, you can simulate the performance gains of MTP.
+
+To do this, use the `--speculative-model` flag in the command line or select a secondary model in the "Experimental" tab of the GUI. This allows the 1B model to suggest tokens, which the 9B or 27B model then confirms. In 2026, this remains the most effective workaround for the missing MTP code in public weights.
+
+Another factor is the choice of quantization. While Q8_0 provides the highest logic precision, the speed trade-off is often not worth it for general creative writing. Most users will find that **Q4_K_S** or **Q5_K_M** provides a significant speed boost while maintaining 99% of the model's original intelligence.
+
+## Troubleshooting Common Gemma 4 Issues
+
+Many users encounter "gibberish" output or repetitive loops when first running Gemma 4. This is often due to incorrect prompt formats or tokenizer mismatches.
+
+*   **Prompt Format:** Gemma 4 uses a specific `<start_of_turn>` and `<end_of_turn>` syntax. Ensure your KoboldCPP "Instruction Template" is set to "Gemma" to avoid logic breakdowns.
+*   **Context Overfill:** If the model starts forgetting the beginning of the conversation, check if your "Context Size" in the launcher matches the model's native limits.
+*   **Low TPS:** If your speed is below 5 TPS, check if "MMAP" is enabled. Disabling MMAP can sometimes help if you are running the model entirely on an older HDD instead of an SSD.
+
+> **Note:** Community developers are currently working on Pull Requests (PRs) for `llama.cpp` to re-implement MTP support for Gemma 4. Keep your KoboldCPP updated to the latest 2026 builds to benefit from these patches as they go live.
+
+## FAQ
+
+**Q: Why is the KoboldCPP Gemma 4 performance slower than the official Google benchmarks?**
+
+A: Google's benchmarks often utilize Multi-Token Prediction (MTP) and their proprietary Light RT framework. The public GGUF versions used in KoboldCPP have MTP removed for better compatibility with standard tools, resulting in lower out-of-the-box speeds.
+
+**Q: Can I run Gemma 4 on an AMD GPU?**
+
+A: Yes, KoboldCPP supports ROCm for AMD GPUs. Ensure you download the specific "ROCm" version of the KoboldCPP executable for the best performance on hardware like the RX 7900 XTX.
+
+**Q: What is the best quantization for a 12GB VRAM card?**
+
+A: For a 12GB card, the Gemma 4 9B model at **Q8_0** or the 27B model at **Q3_K_M** (with partial offloading) are your best options.
+
+**Q: Does Gemma 4 support "Time Travel" token generation?**
+
+A: "Time travel" is a colloquial term for Multi-Token Prediction. While the architecture supports it, the current public weights in KoboldCPP do not have this feature enabled. You must use Speculative Decoding to achieve similar results.
+
+By following this guide, you can ensure your **koboldcpp gemma 4** setup is optimized for the hardware of 2026. Stay tuned to community forums for the latest GGUF updates and MTP implementation news.

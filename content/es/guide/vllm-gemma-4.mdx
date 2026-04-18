@@ -1,0 +1,116 @@
+export const metadata = {
+  title: "vLLM Gemma 4: Guía de configuración y prueba de modelos de IA locales 2026",
+  description: "Aprenda a implementar los modelos Gemma 4 de Google utilizando vLLM. Explore benchmarks, variantes de modelos y requisitos de hardware local para 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=vLLM+Gemma+4+Guide",
+  date: "2026-04-19",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la línea Gemma 4 de Google ha provocado una gran agitación en las comunidades de IA local y de videojuegos, proporcionando un salto de rendimiento masivo respecto a la serie anterior Gemma 3. Para los entusiastas que buscan ejecutar estos modelos en su propio hardware, configurar un entorno de **vllm gemma 4** es el estándar de oro para lograr una inferencia de alto rendimiento y baja latencia. Esta última entrega introduce una variedad de tamaños de modelos, que van desde las variantes ligeras de 2B "en el dispositivo" hasta los potentes modelos densos de 31B, todo ello mientras se cambia a una licencia Apache 2 más permisiva.
+
+Ya sea que esté construyendo un marco de trabajo agéntico para interacciones dinámicas de NPC en un motor de juego personalizado o simplemente desee un asistente privado de alto razonamiento, la integración de **vllm gemma 4** ofrece la flexibilidad necesaria para las aplicaciones de IA modernas. Con un soporte multilingüe mejorado para 140 idiomas y una ventana de contexto masiva de hasta 256k tokens en los modelos más grandes, Gemma 4 se posiciona como una opción de primer nivel para la implementación local en 2026. Esta guía le llevará a través de los requisitos técnicos, los resultados de los benchmarks y las pruebas de lógica del mundo real para ayudarle a sacar el máximo provecho de estos nuevos modelos.
+
+## Entendiendo la línea de modelos Gemma 4
+
+Google ha diversificado la familia Gemma 4 para satisfacer diferentes limitaciones de hardware y casos de uso. La línea incluye tanto modelos densos como arquitecturas de Mezcla de Expertos (MoE), que permiten una generación más rápida al activar solo una fracción del total de parámetros durante la inferencia.
+
+| Variante del modelo | Recuento de parámetros | Tipo de arquitectura | Características clave |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 E2B** | 2.1 mil millones | Denso / Multimodal | Optimizado para móviles y GPUs de gama baja |
+| **Gemma 4 E4B** | 4.5 mil millones | Denso / Multimodal | Equilibrado para tareas agénticas en el dispositivo |
+| **Gemma 4 26B** | 26 mil millones | Denso | Alto razonamiento para estaciones de trabajo de gama media |
+| **Gemma 4 A4B** | 31 mil millones (Total) | MoE (8 Expertos) | Alta velocidad con 4B parámetros activos |
+| **Gemma 4 31B** | 31 mil millones | Denso | Razonamiento y codificación de última generación |
+
+La variante "A4B" es particularmente interesante para quienes utilizan una configuración de **vllm gemma 4**, ya que utiliza ocho expertos activos. Esto permite que el modelo mantenga la calidad de un modelo denso mucho más grande mientras opera a velocidades cercanas a las de un modelo de 4B parámetros. Sin embargo, los usuarios deben tener en cuenta que los modelos más pequeños de 2B y 4B son totalmente multimodales (excluyendo el audio), lo que los hace ideales para tareas de reconocimiento visual en entornos de juego locales.
+
+## Configuración de vLLM para Gemma 4
+
+Para ejecutar Gemma 4 de manera efectiva, debe asegurarse de que su pila de software esté actualizada. Debido a que estos modelos utilizan nuevos ajustes arquitectónicos como P-rope para el contexto extendido, es posible que las versiones anteriores de vLLM no reconozcan los archivos de configuración del modelo.
+
+### Instalación y dependencias
+
+Siga estos pasos para preparar su entorno:
+
+1.  **Actualizar vLLM:** Es probable que deba actualizar a la última versión nocturna (nightly build) o compilar desde el código fuente para obtener soporte completo para la rama Gemma 4.
+2.  **Actualizar Transformers:** Asegúrese de que su biblioteca `transformers` esté actualizada. Tenga en cuenta que algunas instalaciones de vLLM podrían intentar revertir su versión de transformers; debe asegurarse manualmente de que se mantengan en la última versión para evitar errores de compatibilidad.
+3.  **Asignación de GPU:** Para configuraciones multi-GPU, use el comando `export CUDA_VISIBLE_DEVICES` para alinear su hardware con la configuración de bloques de vLLM.
+
+> **⚠️ Advertencia:** Verifique siempre su versión de `transformers` después de instalar vLLM. Una discrepancia de versiones es la causa más común de errores de "Modelo no encontrado" o "Carga de pesos" durante la inicialización.
+
+### Ejemplo de bloque de configuración
+
+Al lanzar el modelo, deberá definir su tamaño de paralelo de tensores y la longitud máxima del modelo. A continuación se muestra una configuración estándar para ejecutar el modelo 31B en un equipo multi-GPU:
+
+| Parámetro | Valor recomendado | Descripción |
+| :--- | :--- | :--- |
+| **--model** | google/gemma-4-31b-it | La ruta del modelo en HuggingFace |
+| **--tensor-parallel-size** | 4 | Número de GPUs para fragmentar el modelo |
+| **--max-model-len** | 131072 | Establece la ventana de contexto (ejemplo de 128k) |
+| **--gpu-memory-utilization** | 0.95 | Porcentaje de VRAM a asignar |
+| **--port** | 8000 | Puerto para acceso a la API vía Open WebUI o Hermes |
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/48K3sqsvGww"
+    title="Gemma 4 Local Ai Test"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento: Gemma 3 vs. Gemma 4
+
+El salto en el rendimiento del modelo Gemma 3 de 27B al Gemma 4 de 31B es asombroso. En casi todos los benchmarks estandarizados, Gemma 4 muestra mejoras de dos dígitos, particularmente en codificación y razonamiento complejo.
+
+| Benchmark | Gemma 3 (27B) | Gemma 4 (31B) | Mejora |
+| :--- | :--- | :--- | :--- |
+| **MMLU Pro** | 67.0 | **85.0** | +26.8% |
+| **Codeforces ELO** | 1110 | **2150** | +93.7% |
+| **LiveCodeBench V6** | 29.1 | **80.0** | +174.9% |
+| **HumanEval** | 62.5 | **88.2** | +41.1% |
+
+Estos números sugieren que Google ha mejorado significativamente la calidad de los datos y las recetas de entrenamiento para el lanzamiento de 2026. El salto en Codeforces ELO es especialmente relevante para los desarrolladores que utilizan un backend de **vllm gemma 4** para generar scripts o solucionar problemas de código de juegos localmente.
+
+## Pruebas de lógica y razonamiento en el mundo real
+
+Si bien los benchmarks proporcionan una base, las pruebas en el mundo real revelan los matices del modelo. Durante las pruebas locales del modelo Gemma 4 31B, se utilizaron varios acertijos lógicos clásicos para medir su "sentido común" y precisión matemática.
+
+### El dilema ético "Armagedón"
+En un escenario complejo que involucra un asteroide errante y una tripulación que no ha dado su consentimiento, Gemma 4 demostró un estilo de razonamiento "utilitarista". Identificó correctamente que salvar miles de millones de vidas pesa más que las vidas de unos pocos miembros de la tripulación. Sin embargo, como muchos modelos de Google, tiene sólidas salvaguardas de seguridad internas. Inicialmente se negó a "lanzar a un capitán por una esclusa de aire", citando protocolos de seguridad fundamentales contra la promoción de la violencia.
+
+> **💡 Consejo:** Si necesita un modelo para escritura creativa o juegos de rol "sin filtros", es posible que deba buscar versiones ajustadas (fine-tuned) como las de la familia Hermes, ya que los modelos base de Gemma 4 están fuertemente alineados para la seguridad.
+
+### Precisión matemática y lingüística
+*   **Contando letras:** En un fallo sorprendente, el modelo tuvo dificultades para contar el número de letras "p" en la palabra "peppermint", afirmando que solo había dos (hay tres). Esto indica que incluso en 2026, los problemas de tokenización todavía afectan a algunas tareas lingüísticas de los LLM.
+*   **Comparaciones matemáticas:** El modelo identificó correctamente que **420.7** es mayor que **420.69**, una tarea que históricamente confundía a las generaciones anteriores de IA.
+*   **Generación de SVG:** Cuando se le pidió que creara un SVG de un gato caminando sobre una cerca, Gemma 4 produjo una imagen vectorial reconocible, aunque estructuralmente cuestionable, dentro de un límite estricto de 2k tokens.
+
+## Capacidades agénticas y perspectivas futuras
+
+El verdadero poder de una implementación de **vllm gemma 4** reside en su potencial agéntico. Con el auge de marcos de trabajo como Hermes Agent, los usuarios ahora pueden dar al modelo objetivos de alto nivel —como "Refactorizar todo este directorio del juego"— y alejarse mientras el modelo ejecuta las tareas de forma autónoma.
+
+Se espera que el modelo A4B MoE sea el favorito para estos flujos de trabajo agénticos. Debido a que es rápido y tiene excelentes capacidades de llamada a herramientas (tool-calling), puede interactuar con sistemas de archivos locales y APIs con un retraso mínimo. Además, la inclusión de P-rope para la gestión del contexto significa que a medida que su "conversación" con el agente crece, es menos probable que el modelo pierda el hilo de las instrucciones anteriores, un problema común en la generación anterior de Gemma 3.
+
+Para los jugadores, esto significa NPCs más inmersivos que pueden recordar horas de interacción de juego sin la "degradación del contexto" que anteriormente conducía a diálogos repetitivos o sin sentido. La ventana de contexto de 256k asegura que documentos enteros del lore del juego puedan mantenerse en la memoria activa.
+
+## FAQ
+
+**P: ¿Puedo ejecutar vllm gemma 4 en una sola GPU de consumo?**
+
+R: Sí, puede ejecutar los modelos E2B y E4B en una sola GPU con tan solo 8GB a 12GB de VRAM. Para los modelos 31B, normalmente necesitará al menos dos GPUs de 24GB (como la RTX 3090 o 4090) o un Mac Studio con mucha VRAM.
+
+**P: ¿Soporta Gemma 4 el procesamiento de audio localmente?**
+
+R: Actualmente, las funciones multimodales de los modelos E2B y E4B incluyen visión y texto, pero el audio está excluido de la línea para dispositivos. Necesitaría usar un motor de STT (Speech-to-Text) separado como Whisper para alimentar los datos de audio al modelo.
+
+**P: ¿Por qué mi configuración de vLLM sigue rechazando ciertas instrucciones?**
+
+R: Los modelos base de Google están fuertemente ajustados para la seguridad. Si su configuración de **vllm gemma 4** está rechazando prompts para un caso de uso específico de juegos o escritura creativa, considere usar un "God mode" para fines de prueba o espere a que se lance en HuggingFace una versión "sin censura" ajustada por la comunidad.
+
+**P: ¿Cómo puedo mejorar la velocidad del modelo 31B?**
+
+R: Usar la versión A4B Mixture of Experts (MoE) es la mejor manera de mejorar la velocidad. Además, asegurarse de que su `tensor-parallel-size` coincida con su número de GPUs físicas optimizará la distribución de la carga de trabajo y aumentará los tokens por segundo.

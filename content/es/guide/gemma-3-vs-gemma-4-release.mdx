@@ -1,0 +1,106 @@
+export const metadata = {
+  title: "Lanzamiento de Gemma 3 vs Gemma 4: Comparativa Completa y Guía 2026",
+  description: "Explora las principales diferencias en el lanzamiento de Gemma 3 vs Gemma 4, incluyendo cambios en la arquitectura, Mixture of Experts y requisitos de hardware local para 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+3+vs+Gemma+4+Release",
+  date: "2026-04-19",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado drásticamente con el reciente ciclo de **lanzamiento de gemma 3 vs gemma 4**. El 2 de abril de 2026, Google sorprendió a la comunidad de desarrolladores al lanzar Gemma 4, una familia de modelos construida sobre la investigación de vanguardia originalmente reservada para Gemini 3. Este movimiento marca un alejamiento significativo de las iteraciones anteriores, ofreciendo un nivel de potencia y accesibilidad que anteriormente estaba bloqueado tras costosos muros de pago de API. Comprender los matices del **lanzamiento de gemma 3 vs gemma 4** es esencial para desarrolladores, investigadores y entusiastas de la tecnología que desean aprovechar la IA local sin la carga de una conectividad a internet constante o la facturación por token.
+
+En esta guía completa, desglosaremos las mejoras arquitectónicas, el cambio hacia un modelo de licencia más permisivo y cómo el nuevo sistema Mixture of Experts (MoE) permite que Gemma 4 supere a sus predecesores consumiendo solo una fracción de los recursos informáticos. Ya sea que estés construyendo un asistente de juegos local o una herramienta empresarial segura, la evolución de Gemma 3 a Gemma 4 representa un nuevo estándar de oro para la inteligencia en el dispositivo en 2026.
+
+## Analizando el impacto del lanzamiento de Gemma 3 vs Gemma 4
+
+La transición de la era de Gemma 3 al lanzamiento de Gemma 4 representa más que un simple incremento de versión; es una revisión completa de cómo Google aborda los modelos abiertos. Mientras que Gemma 3 estableció una base sólida para una IA ligera y capaz, Gemma 4 introduce "Mixture of Experts" (MoE) y variantes "densas" significativamente optimizadas que cierran la brecha entre la ejecución local y el rendimiento de nivel en la nube.
+
+Uno de los cambios más sorprendentes en el **lanzamiento de gemma 3 vs gemma 4** es la accesibilidad de los pesos del modelo. A diferencia de los modelos basados en la nube donde tus datos deben viajar a un servidor remoto, Gemma 4 te permite descargar los pesos del modelo directamente a tu hardware. Esto permite la ejecución local en GPUs de consumo e incluso en teléfonos inteligentes de alta gama, garantizando que tus datos nunca salgan de tu dispositivo.
+
+| Característica | Serie Gemma 3 | Serie Gemma 4 (2026) |
+|---|---|---|
+| **Arquitectura Principal** | Transformers Densos Estándar | Mixture of Experts (MoE) y Denso Optimizado |
+| **Parámetros Máximos** | 27B (Denso) | 31B (Denso) / 26B (MoE) |
+| **Licencias** | Términos personalizados de Google | **Apache 2.0** (Código Abierto) |
+| **Soporte Multilingüe** | Limitado | Más de 140 idiomas |
+| **Entradas Multimodales** | Principalmente Texto | Texto, Imagen y Audio |
+
+## El cambio arquitectónico: Mixture of Experts (MoE)
+
+El logro técnico definitivo de la línea Gemma 4 es la introducción del modelo 26B MoE. En los modelos tradicionales como los que se encuentran en la generación Gemma 3, cada parámetro (los "diales matemáticos" de la IA) se activa para cada palabra procesada. Esto hace que los modelos más grandes sean increíblemente lentos y consuman mucha energía.
+
+Gemma 4 resuelve esto mediante el uso de un sistema "despachador". El modelo 26B contiene 128 subredes especializadas, o "expertos". Cuando se introduce un prompt, el despachador identifica qué ocho expertos son los más adecuados para esa tarea específica. En consecuencia, aunque el modelo tiene el conocimiento de 26 mil millones de parámetros, solo utiliza la potencia computacional de aproximadamente 3.8 mil millones de parámetros en cualquier momento dado.
+
+> **💡 Consejo:** Utiliza el modelo 26B MoE si tienes VRAM limitada pero requieres las capacidades de razonamiento de un sistema mucho más grande. Ofrece la mejor relación "inteligencia por vatio" en la línea de 2026.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/ZtOwUtO8568"
+    title="La verdadera razón por la que Google regaló Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento y utilidad en el mundo real
+
+Al comparar los benchmarks del **lanzamiento de gemma 3 vs gemma 4**, el progreso en razonamiento y programación es evidente. Google utilizó pruebas estandarizadas como AIME (para matemáticas) y HumanEval (para programación) para demostrar que los modelos Gemma 4 están rindiendo muy por encima de su categoría de peso.
+
+Las puntuaciones de "Arena AI" son particularmente notables. Esta plataforma utiliza pruebas humanas a ciegas para clasificar los modelos según las preferencias. El modelo Gemma 4 26B MoE logró una puntuación de 1441, que está notablemente cerca de la puntuación de 1452 del modelo 31B Dense. Esto demuestra que la arquitectura MoE proporciona una calidad casi idéntica a un modelo denso completo mientras requiere significativamente menos cómputo.
+
+| Benchmark | Gemma 4 26B (MoE) | Gemma 4 31B (Denso) | Importancia |
+|---|---|---|---|
+| **Arena AI** | 1441 | **1452** | Preferencia humana y lógica |
+| **GPQA Diamond** | 58.2% | **61.4%** | Razonamiento científico de nivel de posgrado |
+| **LiveCodeBench** | 42.1% | **44.8%** | Programación competitiva del mundo real |
+
+## Requisitos de hardware local para 2026
+
+Uno de los objetivos principales del **lanzamiento de gemma 3 vs gemma 4** fue hacer que la IA de alta calidad funcionara en dispositivos cotidianos. Las variantes E2B y E4B están diseñadas específicamente para este propósito. Al dar a cada capa de la red neuronal su propia señal dedicada, Google ha logrado que estos modelos más pequeños sean más inteligentes sin aumentar su tamaño.
+
+Por ejemplo, el modelo E2B puede ejecutarse con menos de 1.5 GB de RAM. Esto es más pequeño que muchos juegos móviles modernos o aplicaciones de redes sociales, y aun así soporta 140 idiomas y entiende entradas multimodales.
+
+1. **Modelo E2B:** Requiere 1.5 GB de RAM. Ideal para integración móvil y funciones de chat básicas.
+2. **Modelo E4B:** Requiere 3 GB de RAM. Adecuado para computadoras portátiles de gama baja y dispositivos periféricos (edge).
+3. **Modelo 26B MoE:** Requiere 16 GB+ de VRAM. Diseñado para estaciones de trabajo y desarrolladores que utilizan herramientas como Ollama.
+4. **Modelo 31B Denso:** Requiere 24 GB+ de VRAM. La variante de "potencia bruta" para la máxima precisión en tareas complejas.
+
+## Libertad de código abierto: La licencia Apache 2.0
+
+Quizás el cambio más significativo en el **lanzamiento de gemma 3 vs gemma 4** es la licencia. Las versiones anteriores de Gemma utilizaban una licencia personalizada que creaba "áreas grises" para las grandes empresas. Muchos equipos legales dudaban en adoptar Gemma debido a los posibles umbrales de ingresos o restricciones de uso.
+
+Gemma 4 ha pasado a la **licencia Apache 2.0**. Esta es una licencia de código abierto estándar de la industria que permite:
+*   **Uso Comercial:** Construir y vender productos sin pagar un centavo a Google.
+*   **Modificación:** Ajustar el modelo con tus datos privados para crear herramientas especializadas.
+*   **Distribución:** Empaquetar el modelo en tu software y distribuirlo libremente.
+*   **Privacidad:** Dado que el modelo se ejecuta localmente, tus datos patentados nunca tocan los servidores de Google.
+
+> **⚠️ Advertencia:** Aunque la licencia es permisiva, asegúrate siempre de incluir el texto original de la licencia en la distribución de tu software para cumplir con los requisitos de Apache 2.0.
+
+## Por qué el lanzamiento de Gemma 4 es importante para el futuro
+
+Podrías preguntarte por qué un gigante como Google regalaría tecnología construida sobre la misma investigación que su buque insignia Gemini 3. La respuesta reside en el ecosistema de desarrolladores. Al hacer que Gemma 4 sea la opción más atractiva para el desarrollo local, Google se asegura de que la próxima generación de aplicaciones de IA se construya sobre su arquitectura.
+
+Cuando un desarrollador comienza un proyecto localmente en Gemma, se acostumbra al flujo de trabajo y a las herramientas. Cuando ese proyecto escala y necesita una infraestructura masiva en la nube, el "camino de menor resistencia" conduce directamente a Google Cloud y Vertex AI. Esta estrategia de "parte superior del embudo" asegura que, aunque el modelo sea gratuito, la lealtad al ecosistema que construye es increíblemente valiosa.
+
+[Visita el blog oficial de Google AI](https://blog.google/technology/ai/) para explorar la documentación técnica completa y descargar los pesos del modelo para tus propios proyectos.
+
+## FAQ
+
+**P: ¿Cuál es la diferencia principal en el lanzamiento de gemma 3 vs gemma 4?**
+
+R: Las principales diferencias son el cambio a una licencia Apache 2.0, la introducción de la arquitectura Mixture of Experts (MoE) en el modelo 26B y un rendimiento significativamente mejorado en hardware local con requisitos de RAM reducidos.
+
+**P: ¿Puedo ejecutar Gemma 4 en mi teléfono inteligente?**
+
+R: Sí, el modelo E2B está diseñado para ejecutarse en menos de 1.5 GB de RAM, lo que lo hace compatible con la mayoría de los teléfonos inteligentes modernos lanzados en 2026 e incluso con muchos modelos más antiguos.
+
+**P: ¿Requiere Gemma 4 una conexión a internet?**
+
+R: No. Una vez que hayas descargado los pesos del modelo, Gemma 4 se ejecuta completamente de forma local en tu CPU, GPU y RAM. No se envían datos a los servidores de Google durante el funcionamiento.
+
+**P: ¿Es Gemma 4 mejor que Llama para programar?**
+
+R: En los benchmarks de 2026, los modelos Gemma 4 31B Dense y 26B MoE han mostrado puntuaciones altamente competitivas en LiveCodeBench, superando a menudo a modelos Llama de tamaño similar en tareas específicas de razonamiento y lógica.

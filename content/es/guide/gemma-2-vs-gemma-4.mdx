@@ -1,0 +1,107 @@
+export const metadata = {
+  title: "Gemma 2 vs Gemma 4: Guía definitiva de comparación de modelos de IA 2026",
+  description: "Un desglose exhaustivo de las series Gemma 2 vs Gemma 4 de Google, que cubre benchmarks, eficiencia y rendimiento en el mundo real para desarrolladores y gamers.",
+  category: "Guide",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+2+vs+Gemma+4+Comparison",
+  date: "2026-04-19",
+  author: "Gemma Wiki Team"
+}
+
+El panorama de la inteligencia artificial de código abierto ha cambiado drásticamente con el lanzamiento de la última iteración de modelos ligeros de Google. Al evaluar la progresión de **gemma 2 vs gemma 4**, queda claro que el enfoque ha pasado del mero escalado de parámetros a una "inteligencia por parámetro" extrema. Mientras que Gemma 2 puso el listón muy alto para los LLM locales accesibles, Gemma 4 introduce una sofisticada familia de modelos diseñados específicamente para flujos de trabajo agénticos y razonamiento avanzado de varios pasos. Esta comparación de **gemma 2 vs gemma 4** destaca cómo la nueva arquitectura permite que los modelos más pequeños superen a sus predecesores y competidores de hasta veinte veces su tamaño. En esta guía, analizaremos las especificaciones técnicas, los resultados de los benchmarks y las capacidades de programación en el mundo real que definen a esta nueva generación de IA.
+
+## La evolución del ecosistema Gemma
+
+La transición de Gemma 2 a la serie Gemma 4 representa un cambio fundamental en la forma en que Google aborda los modelos de pesos abiertos. Mientras que la generación anterior se centraba en proporcionar una base sólida para el chat general y el seguimiento de instrucciones, Gemma 4 está diseñado para la acción. Estos modelos se publican bajo la permisiva licencia Apache 2.0, lo que los hace ideales para los desarrolladores que necesitan integrar la IA en aplicaciones locales o dispositivos edge.
+
+La familia Gemma 4 se divide en cuatro niveles distintos, cada uno optimizado para restricciones de hardware y requisitos de rendimiento específicos. A diferencia de las estructuras más rígidas del pasado, el nuevo modelo 26B utiliza una arquitectura altamente eficiente que solo activa aproximadamente 3.800 millones de parámetros durante la inferencia, lo que proporciona un aumento masivo de la velocidad sin sacrificar la profundidad de su base de conocimientos.
+
+| Nivel del modelo | Recuento de parámetros | Caso de uso principal | Característica clave |
+|---|---|---|---|
+| **Gemma 4 2B** | 2 mil millones | Móvil y Ultra-Edge | Eficiencia extrema |
+| **Gemma 4 4B** | 4 mil millones | Edge Multimodal | Visión y razonamiento |
+| **Gemma 4 26B** | 26 mil millones (MoE) | Local de alto rendimiento | 3.8B parámetros activos |
+| **Gemma 4 31B** | 31 mil millones (Denso) | Calidad insignia | Rendimiento cercano al nivel superior |
+
+## Benchmarks de rendimiento: Gemma 2 vs Gemma 4
+
+Al observar los datos brutos, el salto en inteligencia es cuantificable. El modelo insignia 31B ha asegurado una posición entre los tres mejores de todos los modelos de código abierto en la clasificación de LM Arena. En benchmarks especializados como MMLU Pro y Live CodeBench, Gemma 4 demuestra un nivel de competencia que antes estaba reservado para modelos cerrados masivos.
+
+Una de las ventajas más significativas encontradas en la comparación **gemma 2 vs gemma 4** es la eficiencia de los tokens de salida. Mientras que algunos competidores pueden obtener puntuaciones ligeramente superiores en índices de inteligencia específicos, Gemma 4 utiliza aproximadamente 2,5 veces menos tokens para tareas similares. Esto se traduce directamente en tiempos de generación más rápidos y menores costes operativos para los desarrolladores que utilizan estos modelos en la nube o en hardware local.
+
+| Benchmark | Puntuación Gemma 4 31B | Posición en la industria |
+|---|---|---|
+| **MMLU Pro** | **85.2** | Nivel Élite |
+| **Live CodeBench** | **80.0%** | Top 5 modelos abiertos |
+| **GPQA (Matemáticas)** | **Alta** | Razonamiento excepcional |
+| **Ventana de contexto** | **256K** | Grado empresarial |
+
+> **💡 Consejo:** Si ejecutas modelos localmente en hardware de consumo como un Mac Studio M2 Ultra, el modelo 26B puede alcanzar velocidades de hasta 300 tokens por segundo, lo que lo convierte en la mejor opción para aplicaciones en tiempo real.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/KW5SFt3rgKo"
+    title="Gemma 4 Is INCREDIBLE! Google's Open Model IS POWERFUL! (Fully Tested)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Flujos de trabajo agénticos y uso de herramientas
+
+La característica más destacada del lanzamiento de Gemma 4 en 2026 es su capacidad "agéntica". Esto se refiere a la habilidad del modelo no solo para responder preguntas, sino para usar herramientas, generar salidas JSON estructuradas y ejecutar una planificación de varios pasos. En las pruebas, el modelo 31B fue capaz de clonar con éxito entornos de interfaz de usuario complejos, como un escritorio al estilo macOS y una interfaz al estilo Airbnb, con alta fidelidad.
+
+### Capacidades de programación y simulación
+Para los jugadores y desarrolladores, las mejoras en la programación son la parte más impactante de la actualización de **gemma 2 vs gemma 4**. El modelo puede manejar simulaciones físicas complejas y renderizado 3D en código de navegador puro. Aunque puede tener dificultades con juegos muy complejos como clones de Minecraft en este tamaño de parámetros, destaca en:
+*   **Gestión de estados:** Manejo de turnos y puntuaciones en juegos basados en lógica.
+*   **Simulación física:** Creación de sistemas de interacción en tiempo real como simuladores de coches.
+*   **Generación de SVG:** Producción de gráficos vectoriales y animaciones de alta calidad para componentes de interfaz de usuario.
+
+## Despliegue local y requisitos de hardware
+
+Debido a que los pesos de Gemma 4 son abiertos, puedes instalar estos modelos en varios sistemas operativos utilizando herramientas populares. La versatilidad de la serie Gemma 4 permite que se ejecute en cualquier dispositivo, desde un smartphone insignia hasta una estación de trabajo dedicada.
+
+1.  **Ollama:** Ideal para una interacción sencilla por línea de comandos y alojamiento de API local.
+2.  **LM Studio:** Mejor para usuarios que prefieren una interfaz gráfica y un descubrimiento fácil de modelos.
+3.  **Kilo CLI:** Muy recomendado para desarrolladores que buscan aprovechar todas las capacidades agénticas y el uso de herramientas del modelo 31B.
+4.  **Google AI Studio:** Un entorno gratuito basado en la nube para probar los modelos antes de comprometerse con una instalación local.
+
+| Tipo de hardware | Modelo recomendado | Rendimiento esperado |
+|---|---|---|
+| **Móvil/Smartphone** | Gemma 4 2B | Alto (Razonamiento en el dispositivo) |
+| **Portátil (16GB RAM)** | Gemma 4 4B | Fluido (Tareas multimodales) |
+| **Escritorio (32GB+ VRAM)** | Gemma 4 26B | Extremadamente rápido (300+ t/s) |
+| **Estación de trabajo (64GB+ VRAM)**| Gemma 4 31B | Calidad insignia (Programación compleja) |
+
+## Comparación con competidores: El factor Quen
+
+Aunque Gemma 4 es una mejora masiva respecto a Gemma 2, se enfrenta a una dura competencia de la serie Quen 3.6. En batallas directas, los modelos Quen a veces superan a Gemma en razonamiento espacial puro y generaciones "one-shot" de front-end. Sin embargo, la contrapartida es la eficiencia de tokens mencionada anteriormente.
+
+Elegir entre **gemma 2 vs gemma 4** o Quen 3.6 a menudo depende de tus necesidades específicas. Si necesitas la menor latencia posible y el uso de tokens más eficiente para un agente local, Gemma 4 es el claro ganador. Si necesitas la precisión "one-shot" más alta para diseños de interfaz de usuario complejos, Quen sigue siendo una alternativa formidable.
+
+> **⚠️ Advertencia:** Cuando utilices el modelo 31B para tareas de front-end, asegúrate de usar un entorno como Kilo para desbloquear completamente sus capacidades de seguimiento de instrucciones. Las interfaces de chat estándar pueden limitar su capacidad para producir código de nivel de producción.
+
+## Razonamiento multimodal en dispositivos Edge
+
+Una adición única a la familia Gemma 4 es la capacidad multimodal mejorada del modelo 4B. Esto permite al modelo analizar, procesar y sintetizar información a través de múltiples imágenes en lugar de simplemente describirlas. Este es un paso significativo en la línea de tiempo de **gemma 2 vs gemma 4**, ya que permite un razonamiento visual profundo directamente en un teléfono móvil sin requerir una conexión a la nube.
+
+Para obtener más información sobre la implementación oficial, puedes visitar el [sitio de Google AI Developers](https://ai.google.dev/) para acceder a la documentación y las claves de la API.
+
+## FAQ
+
+**P: ¿Cuáles son las principales diferencias entre gemma 2 vs gemma 4?**
+
+R: Gemma 4 ofrece una "inteligencia por parámetro" significativamente mayor, mejor uso de herramientas y flujos de trabajo agénticos superiores en comparación con Gemma 2. También introduce un modelo 26B MoE (Mezcla de Expertos) que es mucho más rápido que los modelos densos anteriores.
+
+**P: ¿Puedo ejecutar Gemma 4 en mi teléfono?**
+
+R: Sí, los modelos Gemma 4 2B y 4B están diseñados específicamente para dispositivos móviles y edge. Pueden realizar razonamientos de varios pasos y tareas multimodales totalmente en el dispositivo sin conexión a Internet.
+
+**P: ¿Es Gemma 4 mejor que Quen 3.6 para programar?**
+
+R: Aunque Quen 3.6 a menudo rinde mejor en generaciones front-end "one-shot", Gemma 4 es más eficiente en el uso de tokens y ofrece un mejor equilibrio entre velocidad e inteligencia para tareas agénticas locales.
+
+**P: ¿Cuál es la ventana de contexto para los nuevos modelos?**
+
+R: Todos los modelos de la serie Gemma 4 admiten una ventana de contexto de hasta 256K tokens, lo que permite el procesamiento de documentos masivos o historiales de conversación a largo plazo.
