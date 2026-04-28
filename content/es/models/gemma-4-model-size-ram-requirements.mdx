@@ -1,0 +1,77 @@
+export const metadata = {
+  title: "Requisitos de RAM según el tamaño del modelo Gemma 4: Guía de IA local 2026",
+  description: "Aprenda todo sobre los requisitos de RAM según el tamaño del modelo Gemma 4 para despliegue local. Optimice su hardware para la última IA de código abierto de Google.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/2563eb/fff?text=Gemma+4+RAM+Requirements",
+  date: "2026-04-29",
+  author: "Gemma Wiki Team"
+}
+
+Ejecutar inteligencia artificial potente directamente en su propio hardware nunca ha sido más accesible, y el último lanzamiento de Google ha cambiado el panorama para los entusiastas. Comprender los **requisitos de RAM según el tamaño del modelo gemma 4** es el primer paso para desplegar con éxito estos modelos en su propia máquina. Ya sea que desee ejecutar las versiones compactas o las variantes masivas de altos parámetros, conocer los límites de su hardware garantiza una experiencia fluida. Al evaluar los **requisitos de RAM según el tamaño del modelo gemma 4** junto con su VRAM y memoria del sistema disponibles, puede determinar qué nivel de cuantización y recuento de parámetros proporcionará el mejor equilibrio entre velocidad e inteligencia para su flujo de trabajo específico.
+
+## Comprendiendo la arquitectura de Gemma 4
+Gemma 4 representa un salto significativo en las capacidades de IA local, construido sobre la base de la tecnología Gemini 3. Estos modelos están diseñados para ser altamente versátiles, admitiendo flujos de trabajo basados en agentes, llamadas a funciones y salida JSON estructurada. Debido a que se publican bajo una licencia permisiva Apache 2.0, los desarrolladores y jugadores por igual tienen la libertad de integrar estos modelos en sus propios proyectos sin depender de una corporación.
+
+La familia incluye varios tamaños, que van desde modelos pequeños y eficientes para portátiles de consumo hasta versiones más grandes y complejas que exigen estaciones de trabajo de escritorio robustas. Al planificar su instalación, considere que el recuento de parámetros efectivo a menudo difiere del recuento de parámetros total, lo que influye en la huella de memoria real.
+
+## Consideraciones de hardware para el despliegue local
+
+Para ejecutar estos modelos de manera efectiva, debe equilibrar la VRAM de su GPU con la RAM de su sistema. Si bien se prefiere la memoria de video dedicada por su velocidad, las herramientas modernas como LM Studio permiten la descarga a la memoria del sistema si se excede la capacidad de su GPU.
+
+### Especificaciones recomendadas del sistema
+| Componente | Mínimo para modelos pequeños | Recomendado para modelos grandes |
+| :--- | :--- | :--- |
+| **RAM** | 16 GB | 64 GB+ |
+| **VRAM** | 8 GB | 16 GB+ |
+| **Procesador** | Hexa-core moderno | Octa-core o superior |
+| **Almacenamiento** | SSD (preferiblemente NVMe) | SSD (NVMe Gen 4) |
+
+> **💡 Nota importante:** El recuento de parámetros "efectivo" de un modelo —como un modelo de 7.5B que solo tiene 4B de parámetros activos— puede mejorar significativamente el rendimiento sin sacrificar la inteligencia del modelo. Siempre verifique el tamaño cuantizado antes de descargar.
+
+## Probando el rendimiento en diferentes hardwares
+En pruebas del mundo real, el rendimiento varía drásticamente según la configuración de su hardware. Por ejemplo, ejecutar una versión más pequeña de Gemma 4 en un sistema con 24 GB de RAM a menudo resulta en velocidades que superan los 30 tokens por segundo, lo que lo hace muy sensible para tareas de codificación o análisis de imágenes. Por el contrario, los modelos más grandes de 26B parámetros en configuraciones de escritorio con 128 GB de RAM y 16 GB de VRAM pueden bajar a alrededor de 12 tokens por segundo, pero ofrecen capacidades de razonamiento significativamente mayores.
+
+### Tabla de comparación de rendimiento
+| Tamaño del modelo | Hardware utilizado | Promedio de tokens/seg | Caso de uso principal |
+| :--- | :--- | :--- | :--- |
+| **Pequeño (4B/7.5B)** | MacBook (24GB RAM) | ~31 | Programación y Chat |
+| **Grande (26B)** | Escritorio (128GB RAM) | ~12 | Lógica compleja |
+
+## Cómo optimizar su configuración
+Para aprovechar al máximo su hardware, considere las siguientes estrategias de optimización:
+
+1. **Selección de cuantización:** Opte siempre por versiones cuantizadas de 8 o 4 bits si su VRAM es limitada. Esto reduce significativamente los **requisitos de RAM según el tamaño del modelo gemma 4** sin una caída masiva en la calidad de salida.
+2. **Gestión de la ventana de contexto:** Aunque Gemma 4 admite hasta 256,000 tokens, cargar la ventana de contexto completa requiere una memoria sustancial. Ajuste la configuración de contexto en su motor de inferencia para que coincida con su RAM disponible.
+3. **Uso de herramientas:** Utilice herramientas de monitoreo como NVTop o HTop para observar cómo su sistema maneja la carga. Si la utilización de su GPU es baja, es posible que el cuello de botella sea la velocidad de la CPU o la RAM.
+
+Para obtener más información sobre los últimos desarrollos en IA, visite la [página oficial de recursos de Google AI](https://ai.google.dev/) para mantenerse actualizado sobre la documentación del modelo.
+
+jsx
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/T6AvsQVSL74"
+    title="Gemma 4 - Lo probé en mi portátil y escritorio"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## FAQ
+
+**P: ¿Requiere Gemma 4 una GPU dedicada para ejecutarse?**
+
+R: Si bien se recomienda una GPU dedicada con mucha VRAM para una generación de tokens más rápida, puede ejecutar estos modelos en su CPU utilizando la RAM del sistema. Sin embargo, espere tiempos de respuesta significativamente más lentos en comparación con las configuraciones aceleradas por GPU.
+
+**P: ¿Puedo ejecutar los modelos más grandes de Gemma 4 en un portátil estándar?**
+
+R: Generalmente, no. Los modelos más grandes requieren un ancho de banda de memoria y VRAM sustanciales. Si tiene un portátil de alta gama con 64 GB de RAM, es posible que pueda ejecutarlos, pero el rendimiento probablemente será limitado para tareas en tiempo real.
+
+**P: ¿Cómo cambian los requisitos de RAM según el tamaño del modelo gemma 4 con la cuantización?**
+
+R: La cuantización reduce la precisión de los pesos del modelo, lo que disminuye directamente la huella de memoria. Un modelo cuantizado de 4 bits requerirá significativamente menos RAM que la versión de precisión completa, lo que a menudo le permite ejecutar modelos más grandes en hardware de consumo.
+
+**P: ¿Cuál es el beneficio de la ventana de contexto de 128k?**
+
+R: Una ventana de contexto más grande permite que el modelo procese cantidades masivas de datos, como bases de código completas o documentos extensos, en una sola instrucción. Sin embargo, tenga en cuenta que una ventana de contexto más grande consume más memoria durante la inferencia.

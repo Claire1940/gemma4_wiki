@@ -1,0 +1,105 @@
+export const metadata = {
+  title: "Parámetros de Tamaños de Modelos Gemma 4: Guía Técnica Completa 2026",
+  description: "Explore los parámetros oficiales de los tamaños de modelos de Gemma 4, incluyendo las versiones 26B MoE y 31B Dense. Conozca los requisitos de hardware y las funciones agénticas.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/1e3a8a/fff?text=Gemma+4+Model+Sizes+Parameters",
+  date: "2026-04-29",
+  author: "Equipo de Wiki de Gemma 4"
+}
+
+El panorama de la inteligencia artificial de código abierto ha experimentado una transformación masiva en 2026 con el lanzamiento de la última familia de modelos de Google. Para desarrolladores e investigadores, comprender los **parámetros de tamaños de modelos gemma 4** es el primer paso hacia el despliegue de una IA local de alto rendimiento. Estos modelos se basan en la misma investigación y tecnología de vanguardia que impulsa a Gemini 3, pero están optimizados específicamente para ejecutarse en hardware de consumo. Ya sea que esté creando un NPC interactivo para un juego o un asistente de codificación complejo, los **parámetros de tamaños de modelos gemma 4** ofrecen una solución escalable que equilibra la inteligencia bruta con la eficiencia computacional.
+
+Al pasar a una licencia de código abierto Apache 2.0, este lanzamiento marca un cambio significativo en la forma en que se distribuye la inteligencia de frontera. La familia Gemma 4 está diseñada para lo que los expertos llaman la "era agéntica", donde los modelos hacen más que simplemente predecir texto; planifican, utilizan herramientas y ejecutan flujos de trabajo de varios pasos. En esta guía, desglosaremos las configuraciones específicas de los modelos 26B, 31B, 4B y 2B para ayudarle a elegir el que mejor se adapte a su caso de uso específico.
+
+## Desglose Detallado de los Parámetros de Tamaños de Modelos Gemma 4
+
+La familia Gemma 4 se categoriza en dos niveles principales: los modelos de alta capacidad para computadoras de escritorio y servidores, y los modelos "Effective" diseñados para dispositivos móviles e IoT. Cada modelo sirve a un propósito distinto, utilizando diferentes enfoques arquitectónicos como la Mezcla de Expertos (MoE) y las configuraciones Densas.
+
+| Nombre del Modelo | Parámetros Totales | Tipo de Arquitectura | Caso de Uso Principal |
+| :--- | :--- | :--- | :--- |
+| **Gemma 4 26B MoE** | 26 Mil Millones | Mezcla de Expertos | Razonamiento local y codificación de alta velocidad |
+| **Gemma 4 31B Dense** | 31 Mil Millones | Denso | Máxima calidad de salida y lógica |
+| **Gemma 4 Effective 4B** | 4 Mil Millones | Denso / Eficiente | Aplicaciones móviles y tareas complejas de IoT |
+| **Gemma 4 Effective 2B** | 2 Mil Millones | Denso / Eficiente | Audio/visión en tiempo real en móviles |
+
+Los **parámetros de tamaños de modelos gemma 4** para la versión 26B son particularmente interesantes. Aunque el modelo tiene 26 mil millones de parámetros totales, solo utiliza 3.8 mil millones de parámetros activados durante cualquier paso de inferencia individual. Esto le permite mantener las capacidades de razonamiento de un modelo mucho más grande mientras opera a las velocidades típicamente asociadas con arquitecturas más pequeñas y ágiles.
+
+> **💡 Consejo:** Si requiere la mayor precisión posible para la escritura creativa o pruebas lógicas complejas, generalmente se prefiere el modelo 31B Dense sobre la versión 26B MoE, a pesar del mayor coste computacional.
+
+## Innovaciones Arquitectónicas en la Era Agéntica
+
+Gemma 4 no es solo una simple iteración de su predecesor. Ha sido rediseñado para manejar "flujos de trabajo agénticos". Esto significa que los modelos están entrenados de forma nativa para usar herramientas, explorar archivos e interactuar con APIs externas. Para los desarrolladores de juegos, esto supone un cambio radical para crear NPCs que realmente puedan "pensar" y "actuar" dentro del mundo del juego basándose en una ventana de contexto de un cuarto de millón de tokens.
+
+### La Ventana de Contexto de 250,000 Tokens
+Una de las características destacadas de los **parámetros de tamaños de modelos gemma 4** más grandes es su masiva ventana de contexto. Con soporte para hasta 250,000 tokens, estos modelos pueden analizar:
+*   Repositorios completos de código fuente para depuración.
+*   Libros de historia extensos para una construcción de mundos coherente en RPGs.
+*   Conversaciones de larga duración y múltiples turnos sin perder el rastro del contexto previo.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="What’s new in Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Uso Nativo de Herramientas y Soporte Multilingüe
+Gemma 4 proporciona soporte nativo para el uso de herramientas, lo que le permite funcionar como un orquestador central para diversas tareas. Además, la familia de modelos admite de forma nativa más de 140 idiomas. Este alcance global garantiza que las aplicaciones creadas con Gemma 4 sean accesibles para una audiencia mundial sin necesidad de capas de traducción adicionales.
+
+## Requisitos de Hardware y Optimización
+
+Ejecutar estos modelos localmente requiere una comprensión clara de la VRAM y la potencia de procesamiento de su hardware. Debido a que los **parámetros de tamaños de modelos gemma 4** están optimizados para la ejecución local, no necesariamente necesita un servidor multi-GPU para obtener un rendimiento de nivel de frontera.
+
+| Nivel de Hardware | Modelo Recomendado | VRAM Mínima | Objetivo de Rendimiento |
+| :--- | :--- | :--- | :--- |
+| **Escritorio de Gama Alta** | 31B Dense | 24GB+ | Razonamiento de alta calidad |
+| **Portátil de Gama Media** | 26B MoE | 12GB - 16GB | Flujos de trabajo agénticos rápidos |
+| **Móvil / Smartphone** | Effective 4B | 4GB - 6GB | Tareas de asistente en tiempo real |
+| **IoT / Baja Potencia** | Effective 2B | 2GB - 3GB | Procesamiento de visión y audio |
+
+El modelo 26B MoE es el "punto ideal" para muchas laptops de gaming de la era 2026. Debido a que solo activa 3.8B de parámetros a la vez, puede proporcionar tiempos de respuesta increíblemente rápidos, lo cual es crítico para aplicaciones en tiempo real como comandos de juego activados por voz o generación de diálogos dinámicos.
+
+## Capacidades Multimodales: Ver y Oír
+
+Los modelos "Effective" 2B y 4B no son solo versiones más pequeñas de los modelos grandes; están diseñados específicamente para la entrada multimodal. Esto significa que pueden procesar datos de audio y visión en tiempo real. En un contexto de juego, esto podría permitir que una IA "vea" lo que el jugador está haciendo en pantalla o "escuche" sus comandos de voz directamente, procesando todo localmente en el dispositivo para garantizar la privacidad y una baja latencia.
+
+> **⚠️ Advertencia:** Al desplegar modelos multimodales en dispositivos móviles, asegúrese de haber optimizado su gestión de memoria, ya que el procesamiento de visión en tiempo real puede consumir rápidamente los recursos disponibles del sistema.
+
+## Seguridad y Preparación Empresarial
+
+Desarrollado por Google DeepMind, Gemma 4 se sometió a los mismos rigurosos protocolos de seguridad que los modelos propietarios de Gemini. Esto convierte a los **parámetros de tamaños de modelos gemma 4** en una base confiable para aplicaciones empresariales donde la privacidad de los datos no es negociable. Dado que los modelos se ejecutan localmente, los datos sensibles nunca necesitan salir de su entorno controlado.
+
+La licencia Apache 2.0 proporciona la flexibilidad legal que las empresas necesitan para integrar estos modelos en productos comerciales sin los restrictivos requisitos de "copyleft" que se encuentran en otras licencias de código abierto. Esto ha llevado a un aumento masivo en el ecosistema Gemma, que ya cuenta con más de 400 millones de descargas y 100,000 variantes.
+
+## Cómo Empezar con Gemma 4
+
+Para comenzar a experimentar con estos modelos, los desarrolladores pueden visitar el [GitHub oficial de Google DeepMind](https://github.com/google/gemma) u otros repositorios importantes de modelos de IA para descargar los pesos.
+
+1.  **Identifique sus limitaciones de hardware:** Determine cuánta VRAM tiene disponible.
+2.  **Seleccione el tamaño del modelo:** Elija entre las versiones 2B, 4B, 26B o 31B basándose en las tablas proporcionadas anteriormente.
+3.  **Descargue los pesos:** Asegúrese de utilizar los archivos oficiales con licencia Apache 2.0.
+4.  **Integre con su stack:** Utilice herramientas estándar como PyTorch, JAX o Hugging Face Transformers.
+
+Los **parámetros de tamaños de modelos gemma 4** representan un nuevo pico en la IA accesible. Al proporcionar una gama de modelos desde 2B hasta 31B, Google ha asegurado que haya una versión de Gemma 4 adecuada para casi cualquier dispositivo, desde el sensor más pequeño hasta el equipo de gaming más potente.
+
+## Preguntas Frecuentes (FAQ)
+
+**P: ¿Cuál es la principal diferencia entre los parámetros de tamaños de modelos gemma 4 26B MoE y 31B Dense?**
+
+R: El modelo 26B MoE (Mezcla de Expertos) está diseñado para la velocidad, activando solo 3.8B de parámetros durante la inferencia para proporcionar respuestas rápidas. El modelo 31B Dense está optimizado para la máxima calidad de salida y un razonamiento complejo, utilizando todos sus parámetros para cada tarea.
+
+**P: ¿Puede Gemma 4 ejecutarse en un smartphone estándar?**
+
+R: Sí, los modelos "Effective" 2B y 4B están diseñados específicamente para dispositivos móviles e IoT. Están optimizados para la eficiencia de memoria y admiten el procesamiento de audio y visión en tiempo real.
+
+**P: ¿Es Gemma 4 completamente de código abierto?**
+
+R: Sí, por primera vez, Google ha lanzado Gemma 4 bajo la licencia Apache 2.0, lo que permite su uso tanto personal como comercial con muy pocas restricciones.
+
+**P: ¿Cuántos idiomas admite Gemma 4?**
+
+R: Gemma 4 admite de forma nativa más de 140 idiomas, lo que lo convierte en una de las familias de modelos abiertos más versátiles para aplicaciones globales en 2026.
