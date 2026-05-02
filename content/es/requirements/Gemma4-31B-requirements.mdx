@@ -1,0 +1,166 @@
+export const metadata = {
+  title: "Requisitos de Gemma4 31B: Guía de hardware local y configuración 2026",
+  description: "Un desglose práctico de los requisitos de Gemma4 31B, incluyendo VRAM, RAM, almacenamiento, longitud de contexto y una lista de verificación paso a paso para despliegue local en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/7c3aed/fff?text=Gemma4+31B+Requirements",
+  date: "2026-05-03",
+  author: "Equipo Wiki de Gemma4"
+}
+
+Si estás planeando ejecutar localmente el modelo abierto Gemma más grande de Google, entender los **requisitos de Gemma4 31B** es la diferencia entre un inicio fluido y un frustrante bucle de fallos. La mayoría de las personas subestiman la sobrecarga de memoria, especialmente cuando crecen la longitud de generación y el uso de la caché KV. En esta guía, obtendrás un desglose práctico y probado en campo de los **requisitos de Gemma4 31B** para inferencia local en 2026, incluyendo objetivos de VRAM, RAM del sistema, almacenamiento y prioridades de ajuste. También verás qué cambia cuando pasas de prompts cortos a cargas de trabajo de contexto largo, además de dónde las tareas multimodales (pipelines de imagen + texto) aumentan la presión de cómputo. Sigue estos pasos para elegir la máquina correcta desde la primera vez, evitar cuellos de botella ocultos y escalar de “funciona” a “funciona de forma confiable”.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/-3DmzBdUVm4"
+    title="Gemma 4 danza hacia el futuro - El modelo abierto 31B más potente de Google instalado localmente"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Requisitos de Gemma4 31B de un vistazo
+
+Para la mayoría de los usuarios, el mensaje principal es simple: el modelo denso 31B puede ejecutarse localmente, pero deberías presupuestar memoria GPU de gama alta si quieres longitudes de salida estables y menos errores de falta de memoria. Una configuración de referencia práctica usa una GPU de clase 80 GB y deja margen para la sobrecarga en tiempo de ejecución.
+
+| Componente | Mínimo para cargar | Objetivo práctico | Por qué importa |
+|---|---|---|---|
+| **VRAM de GPU** | 48 GB (restricciones agresivas) | **80 GB** | Los pesos del modelo + runtime + caché KV pueden dispararse con salidas más largas |
+| **RAM del sistema** | 64 GB | **128 GB** | Evita swapping del lado host durante preprocesamiento y tareas multimodales |
+| **Almacenamiento (archivos del modelo)** | 70 GB libres | **120 GB+ NVMe** | Snapshot del modelo + caché + paquetes del entorno + logs |
+| **CPU** | 8 núcleos | **16+ núcleos modernos** | Tokenización, preparación de frames de imagen/video y carga de datos |
+| **SO** | Distros Linux compatibles | **Ubuntu LTS** | Mejor compatibilidad de herramientas para stacks de IA |
+
+> **⚠️ Advertencia:** Trata “puede cargar una vez” y “puede servir repetidamente” como objetivos distintos. Tu requisito estable de producción suele ser más alto que tu primera ejecución exitosa.
+
+## Niveles de hardware y qué puede hacer realmente cada nivel
+
+Cuando la gente busca **requisitos de Gemma4 31B**, a menudo quiere una sola respuesta. En la práctica, deberías elegir según el patrón de carga de trabajo: chat corto, generación de código, análisis de contexto largo o extracción multimodal.
+
+### Tabla comparativa de niveles
+
+| Nivel | Clase de GPU de ejemplo | Experiencia esperada | Mejor caso de uso |
+|---|---|---|---|
+| **Entusiasta de entrada** | Clase de 48 GB VRAM | Puede cargar con ajustes cuidadosos; margen muy justo | Prompts cortos, pruebas, experimentos básicos |
+| **Local recomendado** | **Clase de 80 GB VRAM** | Estable para salidas más grandes y ejecuciones repetidas | Tareas de código, extracción estructurada, multilingüe |
+| **Workstation+** | 2x GPUs o 80 GB + CPU/RAM potentes | Mejor concurrencia y trabajos en segundo plano | Inferencia frecuente, flujos de automatización |
+
+### Precisión y presión de memoria (planificación práctica)
+
+También deberías considerar el modo de precisión y el comportamiento de caché. Una precisión más baja puede reducir la huella de los pesos, pero los ajustes de generación siguen impulsando el uso de memoria.
+
+| Factor | Ajuste de menor presión | Ajuste de mayor presión | Impacto en los requisitos de Gemma4 31B |
+|---|---|---|---|
+| **Longitud de salida** | 512–2,048 tokens | 8,192–16,384 tokens | Las generaciones largas inflan la caché KV |
+| **Solicitudes concurrentes** | 1 flujo | 2+ flujos | El uso de VRAM sube rápidamente |
+| **Tamaño de contexto** | Ventanas cortas | Ventanas de contexto grandes | Aumentan tanto memoria como latencia |
+| **Entradas multimodales** | Solo texto | Pipelines de frames de imagen/video | Preprocesamiento extra + sobrecarga de memoria |
+
+Muchos usuarios técnicamente pueden empezar con menos, pero si tu carga de trabajo incluye generación de código larga, extracción OCR-a-JSON detallada o ejecuciones multimodales repetidas, tu línea base segura de planificación debería mantenerse cerca del nivel recomendado.
+
+## Lista de verificación paso a paso para configuración local (2026)
+
+Úsala como tu ruta de despliegue si quieres menos problemas de compatibilidad.
+
+1. Prepara un entorno de Python limpio (Conda o venv).
+2. Instala dependencias principales (Transformers, Torch, tokenizers, librerías utilitarias).
+3. Autentícate con tu cuenta del host del modelo.
+4. Descarga los archivos del modelo en un NVMe rápido.
+5. Valida la carga del modelo antes de hacer pruebas de estrés.
+6. Ejecuta un prompt corto, luego uno medio y luego una salida larga.
+7. Monitorea la VRAM y la RAM del host durante todas las fases.
+8. Agrega paquetes opcionales para manejo de entradas multimodales.
+
+| Paso | Qué hacer | Señal de éxito | Falla común |
+|---|---|---|---|
+| **Entorno** | Crear un entorno aislado | Lista de paquetes reproducible | Conflictos de dependencias |
+| **Dependencias** | Instalar stack de ML | Las importaciones funcionan | Incompatibilidad CUDA / wheel |
+| **Auth** | Agregar token de acceso | La descarga del modelo funciona | Permiso denegado |
+| **Descarga** | Bajar snapshot completo | Archivos locales completos | Checkpoint incompleto |
+| **Prueba de inferencia** | Ejecutar prompt corto | Salida de texto correcta | OOM o errores de tokenizer |
+
+> **💡 Consejo:** No hagas benchmark en tu primera ejecución. Los efectos de calentamiento y la inicialización de caché pueden distorsionar las mediciones de latencia y memoria.
+
+Si quieres contexto oficial del lanzamiento y detalles del modelo, revisa los recursos de Gemma de Google en la [página oficial de Google Gemma](https://ai.google.dev/gemma).
+
+## Ajuste de rendimiento para contexto largo y generación pesada
+
+Después de la configuración básica, el siguiente desafío es la estabilidad bajo cargas de trabajo realistas. Aquí es donde muchas discusiones sobre **requisitos de Gemma4 31B** se vuelven demasiado genéricas. Necesitas prioridades de ajuste, no solo números de hardware.
+
+### Prioridades de ajuste que más importan
+
+- Empieza con un máximo más corto de tokens de salida y luego escala gradualmente.
+- Mantén baja la concurrencia hasta verificar el margen de memoria disponible.
+- Usa herramientas de monitoreo para observar la VRAM durante picos de generación.
+- Separa la inferencia de texto del preprocesamiento de imagen/video cuando sea posible.
+- Evita ejecutar trabajos pesados no relacionados en la misma GPU.
+
+### Matriz práctica de ajuste
+
+| Objetivo | Ajuste recomendado | Compensación |
+|---|---|---|
+| **Reducir riesgo de OOM** | Reducir max new tokens | Respuestas más cortas |
+| **Respuesta más rápida** | Ventanas de contexto más pequeñas | Menor profundidad en documentos largos |
+| **Mayor rendimiento** | Hacer batching con cuidado | Puede aumentar la latencia por solicitud |
+| **Más confiabilidad** | Reservar margen de VRAM | Utilización pico ligeramente menor |
+
+En escenarios de prueba reales, generaciones más largas (por ejemplo, 16k tokens de salida) pueden aumentar drásticamente el uso de memoria en tiempo de ejecución. Incluso con suficiente VRAM para los pesos del modelo, el crecimiento de caché puede convertirse en el límite real. Por eso una planificación sólida de **requisitos de Gemma4 31B** incluye memoria tanto estática como dinámica.
+
+## Local vs nube para Gemma4 31B: marco de decisión
+
+No todos deberían comprar hardware primero. Compara costo total, velocidad de iteración y duración del proyecto.
+
+| Factor de decisión | Máquina local | Instancia en la nube |
+|---|---|---|
+| **Costo inicial** | Alto | Bajo a medio |
+| **Costo a largo plazo** | Mejor para uso frecuente | Mejor para uso ocasional |
+| **Control de configuración** | Completo | Medio (límites del proveedor) |
+| **Escalabilidad** | Limitada por tu equipo | Escalado vertical/horizontal más fácil |
+| **Gobernanza de datos** | Fuerte control local | Depende de las políticas del proveedor |
+
+Elige local si:
+- ejecutas el modelo a diario,
+- necesitas entornos persistentes,
+- quieres control total de datos y dependencias.
+
+Elige nube si:
+- estás validando casos de uso,
+- necesitas capacidad de ráfaga a corto plazo,
+- quieres evitar compromiso de hardware en fases tempranas.
+
+Para equipos que validan los **requisitos de Gemma4 31B** en 2026, un enfoque híbrido suele funcionar mejor: prototipar en la nube y luego migrar cargas estables a infraestructura local.
+
+## Lista de verificación de troubleshooting para fallos comunes
+
+La mayoría de los problemas de despliegue vienen de cinco áreas: presión de memoria, incompatibilidad de dependencias, cuellos de botella de almacenamiento, incompatibilidad tokenizer/modelo y brechas en paquetes multimodales.
+
+| Síntoma | Causa probable | Solución rápida |
+|---|---|---|
+| **CUDA OOM durante la generación** | Crecimiento de caché KV | Bajar max tokens, reducir concurrencia |
+| **Primer token lento** | Carga en frío / cuello de botella de IO | Usar NVMe, ejecuciones de calentamiento |
+| **Error de tokenizer o config** | Incompatibilidad de versión | Fijar versiones de paquetes compatibles con el modelo |
+| **Fallos de descarga** | Problema de auth/scope | Actualizar permisos del token |
+| **Se rompe script multimodal** | Faltan librerías de CV | Instalar dependencias de medios requeridas |
+
+> **⚠️ Advertencia:** Si tu ejecución falla solo con prompts grandes, tu problema suele ser el comportamiento de memoria en runtime, no la ausencia de archivos del modelo.
+
+Antes de cambiar diez variables a la vez, prueba un ajuste por vez y registra resultados. Ese único hábito te ahorrará horas.
+
+## FAQ
+
+**P: ¿Cuáles son los requisitos de Gemma4 31B más seguros para uso local estable en 2026?**
+
+R: Un objetivo práctico es una GPU de clase 80 GB, 128 GB de RAM y almacenamiento NVMe rápido con bastante espacio libre. Puedes intentar con especificaciones más bajas, pero la fiabilidad cae rápido cuando crecen la longitud de salida y el contexto.
+
+**P: ¿Puedo ejecutar los requisitos de Gemma4 31B en una GPU de 48 GB?**
+
+R: Puede que logres cargar el modelo con ajustes más estrictos, salidas más cortas y menor concurrencia. Para uso frecuente o similar a producción, el hardware de clase 80 GB es más realista.
+
+**P: ¿Por qué los requisitos de Gemma4 31B parecen más altos durante salidas largas que con prompts cortos?**
+
+R: La caché en runtime (caché KV) se expande a medida que continúa la generación. Así que, incluso cuando los pesos caben, la generación de tokens larga puede activar problemas de falta de memoria a menos que reserves margen adicional.
+
+**P: ¿Es mejor la nube que local para los requisitos de Gemma4 31B?**
+
+R: La nube suele ser mejor para experimentos tempranos y uso en ráfagas. Lo local suele ser mejor para flujos de trabajo pesados y repetidos donde importan el costo a largo plazo y el control de datos.

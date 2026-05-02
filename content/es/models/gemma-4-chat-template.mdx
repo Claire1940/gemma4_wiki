@@ -1,0 +1,181 @@
+export const metadata = {
+  title: "gemma 4 chat template: Configuración de OpenCode, correcciones y guía de flujo de trabajo 2026",
+  description: "Aprende a configurar, depurar y optimizar la gemma 4 chat template para flujos de trabajo de llamadas a herramientas en 2026, incluidos harnesses de estilo OpenCode y Claude Code.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/7c3aed/fff?text=Gemma+4+Chat+Template",
+  date: "2026-05-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+Si estás creando agentes de programación en 2026, la **gemma 4 chat template** puede determinar si tu flujo de trabajo se siente fluido o frustrante. Muchos equipos asumen que la calidad del modelo es la única variable, pero la estructura del prompt, el formato de llamadas a herramientas y las expectativas del parser son igual de importantes. Una **gemma 4 chat template** bien ajustada ayuda a tu modelo a separar el texto de razonamiento de las llamadas a herramientas accionables, especialmente en bucles de varios turnos donde el asistente debe pensar, llamar herramientas, leer resultados y continuar. En implementaciones prácticas, aquí es donde pequeños desajustes de formato crean grandes problemas de fiabilidad. Este tutorial te guía por una configuración orientada a producción: elegir el tamaño correcto de Gemma 4 para tu harness, personalizar el comportamiento de la plantilla, validar la salida turno por turno y prevenir modos de fallo comunes. Sigue estos pasos para reducir el ruido de parseo, mejorar la precisión de herramientas y entregar una configuración en la que tu equipo realmente pueda confiar.
+
+## Por qué la gemma 4 chat template importa en los flujos de trabajo de agentes
+
+Cuando ejecutas Gemma 4 en harnesses de programación, no solo estás enviando prompts simples. Estás coordinando:
+
+- Instrucciones del sistema
+- Contenido del usuario
+- Esquemas de herramientas
+- Resultados de herramientas
+- Formato de razonamiento/salida del asistente
+
+Una **gemma 4 chat template** define cómo esos componentes se serializan en texto listo para el modelo. Si tu harness espera un estilo de llamada a herramientas pero el modelo produce otro, la fiabilidad cae de inmediato.
+
+En 2026, esta brecha es más visible en harnesses avanzados con muchas herramientas y prompts de sistema largos. Las plantillas sólidas reducen la ambigüedad y ayudan al modelo a producir los tokens de inicio correctos y la estructura de llamada adecuada.
+
+| Función de la plantilla | Qué controla | Riesgo si está mal configurada | Nivel de impacto |
+|---|---|---|---|
+| Serialización de roles | Orden de sistema/usuario/asistente | El modelo ignora prioridades | **Alto** |
+| Encapsulado de llamadas a herramientas | Tokens de inicio/fin, estilo JSON/XML | Las llamadas se vuelven no parseables | **Crítico** |
+| Ensamblado multi-turno | Cómo se reintroducen los resultados de herramientas | Bucle de agente roto | **Alto** |
+| Separación del razonamiento | Distinguir pensamiento vs salida final | Respuestas con fugas o ruido | **Medio** |
+
+> **⚠️ Advertencia:** Si tu parser depende de tokens estrictos de llamada a herramientas, evita ejemplos de formato mixto en los prompts de sistema. Los patrones repetidos tipo XML pueden empujar al modelo hacia una sintaxis incorrecta.
+
+Para la documentación oficial del modelo, revisa la página de Gemma de Google: [Gemma model documentation and release details](https://ai.google.dev/gemma).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/rIC5suLjCpI"
+    title="Demostración de Gemma 4 con OpenCode y Claude Code"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Elegir el tamaño de modelo correcto antes de editar tu gemma 4 chat template
+
+Antes de tocar la lógica de la plantilla, elige un modelo que coincida con la complejidad de tu harness. Si tu flujo de trabajo es simple (pocas herramientas, turnos cortos), los modelos más pequeños pueden ser suficientes. Si tu flujo se parece a copilotos de programación completos, las variantes más grandes de Gemma 4 suelen comportarse con más consistencia.
+
+| Caso de uso | Clase de modelo sugerida | Por qué funciona | Limitación común |
+|---|---|---|---|
+| Preguntas y respuestas básicas + 1-2 herramientas | Gemma 4 pequeño/de borde | Rápido y barato | Deriva de sintaxis de herramientas bajo presión |
+| Tareas de programación de tamaño medio | Clase ~20B+ | Mejor retención de instrucciones | Los prompts más largos aún pueden degradar las llamadas |
+| Harness completo de programación agéntica | Clase ~30B | Mayor cumplimiento multi-turno y de herramientas | Mayor costo de VRAM/latencia |
+
+Una regla práctica para 2026: no fuerces un modelo ligero dentro de un harness de agente de nivel empresarial y luego culpes solo a la plantilla. Sí, una **gemma 4 chat template** personalizada ayuda, pero la capacidad del modelo sigue importando para prompts de sistema densos y uso iterativo de herramientas.
+
+> **💡 Consejo:** Primero estabiliza el comportamiento con un modelo más grande y una plantilla limpia. Luego reduce tamaño y mide dónde empieza el fallo.
+
+## Plano de implementación de gemma 4 chat template (paso a paso)
+
+Usa esta secuencia para construir una **gemma 4 chat template** robusta para bucles de agentes estilo OpenCode o estilo Claude Code.
+
+### 1) Normaliza los roles de los mensajes
+
+Asegura un orden y delimitadores consistentes:
+1. Sistema
+2. Usuario
+3. Llamada a herramienta o respuesta del asistente
+4. Resultado de herramienta
+5. Seguimiento del asistente
+
+### 2) Aplica una sola gramática de llamadas a herramientas
+
+Elige un formato canónico (por ejemplo, bloques estrictos de llamadas en JSON) y elimina ejemplos conflictivos de los prompts.
+
+### 3) Añade marcadores conscientes del parser
+
+Si tu runtime espera tokens de inicio, confirma que la plantilla haga que esos tokens sean probables e inequívocos.
+
+### 4) Valida con pruebas de replay
+
+Ejecuta transcripciones fijas y compara la salida con patrones esperados.
+
+| Paso | Acción | Criterio de aprobación | Sugerencia de herramienta |
+|---|---|---|---|
+| 1 | Auditoría de mapeo de roles | Sin inversión de roles en logs | Pruebas de snapshot de prompts |
+| 2 | Bloqueo de gramática de herramientas | 95%+ de llamadas parseables en el conjunto de prueba | Validador de esquema JSON |
+| 3 | Verificaciones de límites de tokens | Marcadores de inicio/fin siempre presentes | Regex + parser estructurado |
+| 4 | Replay multi-turno | Comportamiento estable durante 8-12 turnos | Script de evaluación determinista |
+| 5 | Poda de conflictos | Sin llamadas a herramientas sueltas tipo XML | Revisión de diff del prompt de sistema |
+
+Aquí tienes una lista de validación ligera que puedes entregar a ingeniería:
+
+| Área de validación | Qué probar | Objetivo en 2026 |
+|---|---|---|
+| Llamada de un solo turno | Una herramienta + un resultado | **100% parseable** en pruebas de humo |
+| Secuencia de múltiples herramientas | Dos o más llamadas en cadena | **90%+ parseable** |
+| Estrés de prompts largos | Sistema grande + ejemplos few-shot | Deriva sintáctica mínima |
+| Recuperación de errores | La herramienta devuelve error | El asistente reintenta limpiamente |
+
+## Solución de fallos comunes en llamadas a herramientas de Gemma 4
+
+Incluso con una **gemma 4 chat template** ajustada, puedes ver problemas predecibles. Trátalos como señales de ingeniería, no como comportamiento aleatorio del modelo.
+
+### Patrón de fallo A: Pseudo llamadas tipo Python en lugar de llamadas de la plantilla
+El modelo “describe” una llamada con sintaxis tipo código en lugar de tu formato requerido.
+
+**Solución:** refuerza los ejemplos de llamadas en la plantilla, reduce few-shots contradictorios y endurece el fallback de parseo.
+
+### Patrón de fallo B: Deriva estilo XML causada por artefactos del prompt
+Si el prompt de tu harness repite etiquetas XML, Gemma 4 puede imitar esas etiquetas en lugar de los tokens reales de herramientas.
+
+**Solución:** simplifica las instrucciones de herramientas a texto plano o a la convención de llamadas preferida por el modelo.
+
+### Patrón de fallo C: Afirmaciones de acción completada cuando el archivo ya existe
+En tareas de programación, las respuestas del asistente pueden implicar “hecho” incluso cuando no hubo escritura en el último turno.
+
+**Solución:** impón pasos de verificación de estado: leer-antes-de-escribir, confirmación de diff y resúmenes de acción explícitos.
+
+| Síntoma | Causa probable | Solución rápida | Solución a largo plazo |
+|---|---|---|---|
+| Bloque de herramienta no parseable | Señales de entrenamiento con sintaxis mixta | Quitar ejemplos conflictivos | Reentrenar el paquete de prompts para una sola gramática |
+| Falta token de inicio | Desajuste en los límites de la plantilla | Añadir marcadores más fuertes | Actualizar serializador + parser de forma conjunta |
+| Finalización alucinada | Base débil en resultados de herramientas | Añadir línea de verificación en el prompt | Construir paso de reconciliación post-herramienta |
+| El bucle se estanca tras error de herramienta | Política de reintento deficiente | Añadir una rama de reintento en la plantilla | Introducir taxonomía de errores estructurada |
+
+> **⚠️ Advertencia:** No “arregles” fallos del parser aceptando en silencio todos los bloques mal formados. Puedes aumentar errores ocultos y reducir la observabilidad.
+
+## Endurecer tu pipeline de despliegue en 2026
+
+Una **gemma 4 chat template** de alto rendimiento no es una edición puntual de archivo. Trátala como un artefacto versionado con verificaciones de CI.
+
+Proceso de despliegue recomendado:
+
+1. **Versiona los archivos de plantilla** con etiquetas semánticas (p. ej., `g4-template-v1.3.0`).
+2. **Ejecuta suites de regresión** sobre transcripciones conocidas.
+3. **Compara tasas de parseo** entre tamaños de modelo y cuantizaciones.
+4. **Despliega en canario** a usuarios limitados.
+5. **Rastrea taxonomías de fallos** (deriva de sintaxis, tokens ausentes, finalizaciones falsas).
+
+| Etapa del pipeline | Métrica clave | Umbral de Go/No-Go |
+|---|---|---|
+| Pruebas locales de desarrollo | Tasa de éxito de parseo | **≥95%** |
+| Replay en staging | Éxito de tareas multi-turno | **≥85%** |
+| Canary | Errores de herramientas visibles para usuarios | **&lt;5% de sesiones** |
+| Semana 1 en producción | Delta de regresión vs baseline | **Sin caída crítica** |
+
+Para equipos que mezclan múltiples harnesses, mantén variantes específicas por harness de la **gemma 4 chat template** en lugar de forzar una plantilla universal. Los prompts estilo OpenCode y estilo Claude Code difieren en estructura y expectativas, así que “una talla para todos” puede causar deriva evitable.
+
+## Resumen de buenas prácticas
+
+Si quieres resultados estables rápido, prioriza esto en orden:
+
+1. Ajusta el tamaño del modelo a la complejidad del harness.
+2. Estandariza una sola gramática de llamadas a herramientas.
+3. Elimina artefactos del prompt que entren en conflicto con la salida esperada.
+4. Prueba el comportamiento multi-turno, no solo demos de un turno.
+5. Publica actualizaciones de plantilla mediante puertas de CI y canary.
+
+Una **gemma 4 chat template** pulida hace más que dar formato al texto. Alinea el comportamiento del modelo, los parsers del runtime y los bucles de ejecución de herramientas en un sistema predecible.
+
+## FAQ
+
+**P: ¿Cuál es el mayor error que cometen los equipos con una gemma 4 chat template?**
+
+R: El error más común es asumir que el modelo “resolverá” los desajustes de formato en llamadas a herramientas. En la práctica, las convenciones del parser y del prompt deben alinearse intencionalmente, especialmente en flujos de programación multi-turno.
+
+**P: ¿Puede un modelo pequeño de Gemma 4 funcionar con harnesses de programación avanzados?**
+
+R: Puede funcionar para cargas de trabajo más ligeras, pero la fiabilidad puede caer cuando los prompts se vuelven complejos o las cadenas de herramientas se alargan. Empieza con un modelo más grande para una estabilidad base y luego optimiza hacia abajo.
+
+**P: ¿Con qué frecuencia debo actualizar mi gemma 4 chat template en 2026?**
+
+R: Actualiza siempre que cambies el diseño de prompts del harness, el comportamiento del parser, los esquemas de herramientas o la versión del modelo. Trata los cambios de plantilla como lanzamientos de código con pruebas de regresión.
+
+**P: ¿Debería usar etiquetas XML en mis instrucciones de herramientas?**
+
+R: Solo si tu modelo y parser están ajustados explícitamente para ese estilo. Si ves deriva de sintaxis, simplifica a instrucciones en texto plano y a un formato de llamada estructurado estricto que tu runtime pueda validar.

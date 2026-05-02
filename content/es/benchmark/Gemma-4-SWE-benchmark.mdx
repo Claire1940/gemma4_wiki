@@ -1,0 +1,180 @@
+export const metadata = {
+  title: "Benchmark SWE de Gemma 4: selección de modelos, rendimiento y guía de configuración 2026",
+  description: "Una guía práctica de 2026 para el benchmark SWE de Gemma 4, que incluye niveles de modelos, objetivos de hardware, rendimiento en programación y consejos de configuración local.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4338ca/fff?text=Gemma+4+SWE+Benchmark",
+  date: "2026-05-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+Si este año estás probando modelos locales para programar, la discusión sobre el **benchmark SWE de Gemma 4** importa más que el hype puro. Muchos desarrolladores ejecutan un único tamaño de modelo, ven resultados flojos y asumen que toda la línea tiene poca potencia. En la práctica, el resultado de tu **benchmark SWE de Gemma 4** depende en gran medida de elegir la variante correcta para tu presupuesto de RAM/VRAM, tus necesidades de ventana de contexto y tu estilo de flujo de trabajo. En 2026, Gemma 4 se ha convertido en una opción seria para entornos de programación en laptop y escritorio, especialmente cuando ajustas la elección del modelo a tu máquina en lugar de perseguir por defecto el mayor número de parámetros. Esta guía te ofrece un desglose práctico: qué modelo ejecutar, cómo interpretar señales de benchmark orientadas a programación, dónde ayudan los trucos de velocidad y qué errores de configuración perjudican los resultados.
+
+## Benchmark SWE de Gemma 4 en 2026: qué mide realmente
+
+Cuando la gente busca el **benchmark SWE de Gemma 4**, normalmente quiere una sola respuesta: “¿Este modelo realmente puede ayudarme a entregar código?” La respuesta corta es sí, pero solo dentro del alcance adecuado.
+
+Para una evaluación práctica, trata la pila de programación de Gemma 4 como cuatro niveles:
+
+- **E2B** para tareas ligeras de asistente
+- **E4B** para chat en laptop + preguntas y respuestas de código
+- **modelo intermedio clase 26B** para equilibrio calidad/velocidad
+- **31B insignia** para la mayor calidad local
+
+Una buena evaluación estilo SWE debería puntuar más de una habilidad:
+
+| Enfoque del benchmark | Qué probar | Por qué importa |
+|---|---|---|
+| **Programación de un solo turno** | “Escribe función + pruebas” | Verificación rápida de calidad para prompts diarios |
+| **Corrección de bugs** | Parchear snippet roto con restricciones | Refleja flujos reales de revisión de PR |
+| **Profundidad de razonamiento** | Plan de refactor multiarchivo | Prueba coherencia más allá de una sola respuesta |
+| **Fiabilidad de herramientas** | Llamadas a linters/pruebas/formateadores | Importante para bucles de agentes |
+| **Latencia** | Tiempo hasta el primer token + tokens/seg | Afecta la experiencia real del desarrollador |
+
+En 2026, Gemma 4 destaca porque los modelos grandes obtienen puntuaciones competitivas y aun así funcionan en hardware prosumer. Pero debes evitar leer un único valor de leaderboard como verdad absoluta. Un modelo puede verse fuerte en tareas abstractas de programación y aun así fallar en tu stack exacto (monorepo de TypeScript, herramientas de Unity, scripts de Unreal, pipeline de modding, etc.).
+
+> **⚠️ Advertencia:** No tomes una puntuación pública como tu decisión final de compra. Crea un conjunto privado de 20 prompts a partir de tu propia base de código y compara las salidas directamente.
+
+## Selección de modelo según hardware: donde los resultados cambian rápido
+
+La mayoría de los malos resultados locales provienen de un desajuste entre tamaño de modelo y memoria disponible. Si quieres mejores resultados en el **benchmark SWE de Gemma 4**, empieza aquí.
+
+| Modelo | Tamaño aprox. | Objetivo práctico de memoria | Mejor caso de uso | Límites |
+|---|---|---|---|---|
+| **Gemma 4 E2B** | ~2.3B params | **3–5 GB** | Ayudante en dispositivo, prompts rápidos | No ideal para programación compleja |
+| **Gemma 4 E4B** | ~4.5B params | **5–6 GB** | Chat de programación en laptop, Q&A de documentación | Débil para cadenas profundas de varios pasos |
+| **Gemma 4 clase 26B** | ~25–26B total, ~4B activos | **~24 GB de sistema** | Mejor valor calidad/velocidad | La sobrecompresión daña la calidad |
+| **Gemma 4 31B** | ~30–31B | **20–24 GB VRAM** | Máxima calidad local para programación | Más lento y pesado |
+
+Para flujos de trabajo de desarrollo cercanos al gaming (herramientas de modding, scripts de automatización, asistentes privados de build), esta es una regla útil:
+
+1. **Laptop de 8–16 GB** → primero E4B  
+2. **Entorno de memoria de ~24 GB** → punto óptimo clase 26B  
+3. **Escritorio con 24 GB VRAM / Mac con 32 GB de memoria unificada** → 31B para máxima calidad de salida
+
+Aquí es donde la conversación del **benchmark SWE de Gemma 4** se vuelve práctica: más grande no es automáticamente mejor si te ves forzado a una cuantización agresiva o a reducir el contexto. Un modelo intermedio bien ejecutado puede superar a un insignia mal configurado en tareas diarias de programación.
+
+## Señales de rendimiento en programación: cómo leer afirmaciones de benchmarks con seguridad
+
+En reportes de la comunidad, el modelo insignia de Gemma 4 ha mostrado una posición sólida frente a otros modelos abiertos, con afirmaciones notables en matemáticas y programación. Suena genial, pero para trabajo de ingeniería de software, convierte esas afirmaciones en preguntas operativas:
+
+- ¿Escribe código mantenible?
+- ¿Sigue las convenciones del repositorio?
+- ¿Se recupera de llamadas a herramientas fallidas?
+- ¿Preserva firmas de funciones e interfaces?
+
+Usa esta matriz de decisión al comparar tus ejecuciones del **benchmark SWE de Gemma 4**:
+
+| Señal | Cómo se ve un resultado sólido | Señal de alerta |
+|---|---|---|
+| **Precisión del parche** | Diff mínimo, sin reescrituras no relacionadas | Reescribe todo el archivo para un arreglo pequeño |
+| **Conciencia de pruebas** | Añade/actualiza pruebas con casos límite | Ignora pruebas o las rompe |
+| **Cumplimiento de restricciones** | Mantiene requisitos de lenguaje/versión | Usa libs/características no compatibles |
+| **Seguridad en refactor** | Preserva comportamiento, estructura más clara | Introduce regresiones ocultas |
+| **Recuperación de errores** | Corrige tras feedback del compilador/linter | Repite el mismo enfoque fallido |
+
+Si quieres una comparación limpia de manzanas con manzanas, ejecuta el mismo paquete de prompts entre modelos con:
+
+- La misma temperatura (o valores predeterminados)
+- La misma longitud de contexto
+- Los mismos permisos de herramientas
+- Las mismas secuencias de parada
+
+Ese método te da una base de **benchmark SWE de Gemma 4** significativa en la que puedes confiar para tu propio entorno.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/SLOqlEmuy5U"
+    title="Elige mal Gemma 4 y pensarás que está roto | ¡CUATRO modelos comparados!"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Flujo de configuración para resultados locales fiables
+
+Muchos usuarios diagnostican mal la calidad del modelo cuando el problema real es la configuración. Para estabilizar tu proceso de **benchmark SWE de Gemma 4** en 2026, sigue un pipeline de configuración repetible.
+
+### Stack local recomendado
+
+| Capa | Ruta fácil | Ruta avanzada | Notas |
+|---|---|---|---|
+| Runtime | **Ollama** | llama.cpp / vLLM | Empieza simple, optimiza después |
+| UI | **LM Studio** o terminal | Front-end personalizado | La elección de UI no cambia la calidad central del modelo |
+| Archivos de modelo | Builds parchadas más recientes | Conversiones manuales | Usa builds actuales para evitar bugs antiguos |
+| Evaluación | Hoja de cálculo de prompts | Harness con scripts | Las pruebas con scripts reducen sesgo |
+
+### Checklist paso a paso
+
+1. Instala el runtime (Ollama es lo más rápido para la mayoría de usuarios).
+2. Descarga la build más reciente del modelo Gemma 4.
+3. Mantén primero la configuración predeterminada recomendada.
+4. Ejecuta una prueba rápida de 10 prompts (arreglo de bugs + generación + refactor).
+5. Escala a 50 prompts de tus proyectos reales.
+6. Registra métricas de aprobado/fallido + latencia en una tabla.
+7. Solo entonces ajusta cuantización o tamaño de contexto.
+
+> **💡 Consejo:** Para hacer benchmark, cambia una sola variable por ejecución. Si cambias cuantización, contexto y muestreo a la vez, tus resultados se vuelven difíciles de interpretar.
+
+Para detalles oficiales del modelo y actualizaciones, usa la [página oficial de Google Gemma](https://ai.google.dev/gemma).
+
+## Estrategia avanzada de velocidad: emparejar modelos pequeños + grandes
+
+Una de las técnicas más interesantes de 2026 es emparejar un modelo pequeño de Gemma con el modelo 31B para aumentar el rendimiento de programación. Pruebas de la comunidad han reportado mejoras significativas cuando el modelo pequeño redacta y el grande verifica/refina.
+
+Puedes tratarlo como un pipeline de dos etapas:
+
+- **Etapa A (borrador rápido):** E2B propone código
+- **Etapa B (pasada de calidad):** 31B valida, parchea y finaliza
+
+Este enfoque puede mejorar la velocidad de respuesta de extremo a extremo en escenarios de programación, manteniendo una salida final de mayor calidad.
+
+| Modo de flujo de trabajo | Velocidad | Calidad | Mejor para |
+|---|---|---|---|
+| **Solo 31B** | Media/lenta | Más alta | Refactors críticos, tareas intensivas en diseño |
+| **Solo E4B** | Rápida | Moderada | Scripts utilitarios rápidos |
+| **Par E2B + 31B** | **Rápida-media** | Alta | Programación iterativa + bucles de revisión |
+| **Solo clase 26B** | Media-rápida | Alta | Mejor equilibrio en modelo único |
+
+Este enfoque híbrido puede mejorar materialmente tus números del **benchmark SWE de Gemma 4** en entornos donde la latencia importa (sesiones de live coding, triaje rápido de bugs, generación repetitiva de parches).
+
+## Guía práctica: elegir el Gemma 4 adecuado para tus objetivos de programación
+
+Usa este mapa de decisión rápido si quieres actuar de inmediato:
+
+- Elige **E2B** si necesitas asistencia privada y ligera en hardware limitado.
+- Elige **E4B** si estás en una laptop estándar y quieres Q&A de programación fiable.
+- Elige **clase 26B** si quieres el mejor valor para desarrollo diario serio.
+- Elige **31B** si puedes asumir el coste de memoria y quieres máxima calidad local de salida.
+
+Para equipos que construyen herramientas internas, bots o scripts de soporte para desarrollo de juegos, la mejor estrategia de **benchmark SWE de Gemma 4** es definir el “éxito” en términos operativos:
+
+- Reducir el tiempo de corrección de bugs comunes
+- Menos reescrituras manuales del código generado
+- Mejores sugerencias de cobertura de pruebas
+- Comportamiento estable en 20–50 prompts recurrentes
+
+Si tu modelo actual falla en bucles autónomos de varios pasos, eso no es inusual. En 2026, muchos modelos locales abiertos son más fuertes como **copilotos**, no como agentes de software totalmente independientes para cadenas largas de herramientas.
+
+> **⚠️ Advertencia:** Si las salidas se ven corruptas o el tool calling se comporta de forma extraña, verifica que no estés usando archivos desactualizados o builds antiguas del runtime antes de juzgar la calidad del modelo.
+
+Al basar tus pruebas en tareas reales de programación, los resultados de tu **benchmark SWE de Gemma 4** se vuelven útiles, repetibles y accionables, en lugar de ser solo otra captura de leaderboard.
+
+## FAQ
+
+**P: ¿Cuál es el mejor modelo inicial para probar el benchmark SWE de Gemma 4?**
+
+R: Empieza con el modelo clase 26B si tienes memoria suficiente (alrededor de 24 GB en total en el entorno). Normalmente ofrece el mejor equilibrio calidad/velocidad para una evaluación práctica de programación.
+
+**P: ¿Se requiere el modelo 31B para obtener una puntuación fuerte en el benchmark SWE de Gemma 4?**
+
+R: No es obligatorio. El modelo 31B puede producir resultados de máxima calidad, pero un modelo de gama media bien configurado puede rendir mejor para tu flujo de trabajo si el hardware es limitado o la latencia es prioritaria.
+
+**P: ¿Cuántos prompts debería usar para evaluar el rendimiento en programación?**
+
+R: Usa al menos 20 prompts de tus tareas reales, y luego escala a 50 para tener más confianza. Incluye corrección de bugs, refactors, escritura de pruebas y prompts con muchas restricciones para reflejar el trabajo de desarrollo real.
+
+**P: ¿Puedo ejecutar Gemma 4 para agentes autónomos de programación en 2026?**
+
+R: Puedes experimentar, pero por ahora trata a Gemma 4 principalmente como asistente de programación. Para cadenas largas y complejas de llamadas a herramientas, la fiabilidad puede variar y a menudo requiere un diseño cuidadoso del flujo de trabajo.

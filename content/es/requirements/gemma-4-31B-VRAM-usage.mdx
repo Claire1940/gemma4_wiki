@@ -1,0 +1,121 @@
+export const metadata = {
+  title: "Uso de VRAM de Gemma 4 31B: Guía de Optimización y Hardware 2026",
+  description: "Domina los requisitos de hardware para el modelo Gemma 4 31B de Google. Aprende sobre el uso de VRAM, el impacto de la cuantización y el rendimiento de LLM locales en configuraciones gaming de 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/3b82f6/fff?text=Gemma+4+31B+VRAM+Usage",
+  date: "2026-04-29",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la familia Gemma 4 de Google ha sacudido a la comunidad de LLM locales, ofreciendo un rendimiento de nivel Gemini 3 bajo una licencia Apache 2.0 permisiva. Para los entusiastas que ejecutan IA local en hardware gaming, entender el **gemma 4 31B VRAM usage** es crucial antes de intentar un despliegue. Este modelo de 31 mil millones de parámetros representa el “punto óptimo” de la gama, ya que proporciona razonamiento de alto nivel y una enorme ventana de contexto de 256.000 tokens que compite con rivales significativamente más grandes. Sin embargo, el **gemma 4 31B VRAM usage** puede ser exigente, y a menudo requiere un enfoque estratégico de cuantización y descarga de memoria para mantener una cantidad aceptable de tokens por segundo en GPUs de consumo.
+
+En esta guía, desglosamos los requisitos técnicos para ejecutar Gemma 4 31B, comparamos distintas configuraciones de hardware y ofrecemos consejos de optimización para asegurar que tu entorno local no colapse bajo la carga. Tanto si eres un desarrollador que construye flujos de trabajo agénticos como si eres un usuario avanzado que busca una alternativa privada a los modelos de pago, dominar tu asignación de VRAM es el primer paso hacia una experiencia fluida.
+
+## Entendiendo la arquitectura y la eficiencia de Gemma 4
+
+Gemma 4 está construido sobre la tecnología fundacional de Gemini 3, la IA multimodal insignia de Google. A diferencia de iteraciones anteriores, Gemma 4 está diseñado pensando en flujos de trabajo “basados en agentes”, lo que significa que sobresale en llamadas a funciones, salida JSON estructurada y razonamiento de contexto largo. 
+
+La familia se divide en varios niveles, y la variante 31B actúa como la opción más potente para usuarios de escritorio. Mientras que modelos más pequeños como E2B y E4B pueden ejecutarse en smartphones o portátiles de entrada, el modelo 31B exige un perfil de hardware más robusto.
+
+| Nivel de modelo | Parámetros efectivos | Caso de uso principal | Ventana de contexto |
+|---|---|---|---|
+| **Gemma 4 E2B** | 2 mil millones | Dispositivos móviles/edge | 128.000 tokens |
+| **Gemma 4 7.5B** | 4 mil millones (efectivos) | Chat general/portátiles | 128.000 tokens |
+| **Gemma 4 26B** | 26 mil millones | Programación/lógica avanzada | 256.000 tokens |
+| **Gemma 4 31B** | 31 mil millones | Agentes complejos/creatividad | 256.000 tokens |
+
+> **💡 Consejo:** Aunque el modelo 31B es el más grande, su licencia Apache 2.0 te permite usarlo para productos comerciales sin las restricciones de licencia que se encuentran en otros modelos de alta cantidad de parámetros.
+
+## Análisis del uso de VRAM de Gemma 4 31B por cuantización
+
+El factor más importante para determinar el **gemma 4 31B VRAM usage** es el nivel de cuantización. La cuantización reduce la precisión de los pesos del modelo (p. ej., de 16 bits a 4 bits), lo que disminuye drásticamente los requisitos de memoria a costa de una ligera reducción en la calidad de salida.
+
+Para un modelo 31B, los pesos sin procesar en 16 bits (FP16) requerirían más de 60 GB de VRAM, algo inaccesible para casi todas las GPUs de consumo. La mayoría de usuarios optará por versiones de 4 bits (Q4_K_M) u 8 bits (Q8_0).
+
+### Requisitos estimados de VRAM para Gemma 4 31B
+
+| Nivel de cuantización | VRAM estimada (solo modelo) | VRAM de GPU recomendada | Impacto en rendimiento |
+|---|---|---|---|
+| **4-bit (Q4_K_M)** | ~18.5 GB | 24 GB (RTX 3090/4090) | Mínimo |
+| **6-bit (Q6_K)** | ~25.0 GB | 32 GB (GPU dual/Mac) | Muy bajo |
+| **8-bit (Q8_0)** | ~33.5 GB | 48 GB (RTX 6000/Dual 3090) | Despreciable |
+| **FP16 (Completo)** | ~62.0 GB | 80 GB (H100/A100) | Ninguno (línea base) |
+
+Al calcular el **gemma 4 31B VRAM usage**, también debes tener en cuenta la KV Cache. Con la ventana de contexto de 256k de Gemma 4, llenar el contexto puede consumir varios gigabytes adicionales de VRAM. Si planeas usar la ventana de contexto completa, espera añadir de 4 a 8 GB de sobrecarga a las cifras anteriores.
+
+## Benchmarks de hardware: escritorio vs. portátil
+
+Ejecutar los modelos más grandes de Gemma 4 requiere un equilibrio entre la VRAM de la GPU y la RAM del sistema. En sistemas como el MacBook M4 Pro con memoria unificada, el modelo puede usar todo el pool de RAM del sistema, aunque el rendimiento está limitado por el ancho de banda de memoria. En escritorios Windows/Linux, el modelo normalmente se divide entre la VRAM de la GPU y la RAM DDR5 del sistema.
+
+### Rendimiento en escritorio (RTX 4060 Ti 16GB + 128GB RAM)
+En escenarios de prueba donde el tamaño del modelo supera la VRAM disponible, herramientas como [LM Studio](https://lmstudio.ai/) “descargan” capas a la RAM del sistema. Para las variantes 26B y 31B, una tarjeta de 16GB de VRAM como la RTX 4060 Ti solo puede alojar aproximadamente la mitad de los pesos del modelo.
+
+*   **Velocidad media:** ~10-12 tokens por segundo.
+*   **Cuello de botella:** La velocidad del bus de RAM del sistema (DDR4/DDR5) es significativamente más lenta que la VRAM de la GPU (GDDR6X).
+*   **Experiencia:** Funcional para programación y escritura larga, pero notablemente más lenta que un modelo completamente residente en GPU.
+
+### Rendimiento en MacBook (M4 Pro 24GB de RAM unificada)
+El modelo más pequeño de 7.5B (con 4B de parámetros efectivos) funciona excepcionalmente bien en Apple Silicon.
+*   **Velocidad media:** ~31 tokens por segundo.
+*   **Uso de VRAM:** Aproximadamente 12GB para una versión cuantizada en 8 bits.
+*   **Latencia:** ~4.5 segundos de tiempo de respuesta inicial.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/T6AvsQVSL74"
+    title="Gemma 4 - I Tested it on My Laptop and Desktop"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Optimización del uso de VRAM de Gemma 4 31B para PCs gaming
+
+Si eres gamer y tienes una tarjeta estándar de 8GB o 12GB de VRAM, ejecutar el modelo 31B de forma eficaz requiere configuraciones específicas. Sigue estos pasos para maximizar tu hardware:
+
+1.  **Usa cuantización GGUF:** GGUF es el formato más flexible para dividir modelos entre CPU y GPU.
+2.  **Limita la longitud de contexto:** Si no necesitas los 256k tokens completos, limita el contexto a 8.192 o 16.384 en la configuración de tu cargador. Esto reduce significativamente el **gemma 4 31B VRAM usage** durante conversaciones largas.
+3.  **Activa la descarga a GPU:** En LM Studio u Ollama, asegúrate de asignar a la GPU tantas capas como sea posible (busca el control “GPU Offload”).
+4.  **Cierra apps en segundo plano:** Navegadores modernos y juegos pueden consumir entre 2 y 4GB de VRAM. Ciérralos para liberar espacio para los pesos del modelo.
+
+> **Advertencia:** Intentar cargar un modelo que supere tu VRAM y RAM del sistema combinadas probablemente causará un bloqueo del sistema o una pantalla azul de la muerte (BSOD). Supervisa siempre el uso con herramientas como NVTop o el Administrador de tareas.
+
+## Capacidades multimodales y rendimiento
+
+Gemma 4 31B no es solo un modelo de texto; es multimodal de forma nativa. Puede procesar imágenes y secuencias de video con alta precisión. En tareas de visión, el modelo identifica objetos, describe la iluminación e incluso puede leer texto dentro de las imágenes (OCR).
+
+### Precisión en tareas de visión
+| Tipo de objeto | Éxito de reconocimiento | Notas |
+|---|---|---|
+| **Periféricos comunes** | 100% | Identificó correctamente teclados, ratones y monitores. |
+| **Objetos pequeños** | 75% | Puede pasar por alto elementos diminutos como bolígrafos o clips en escenas desordenadas. |
+| **Texto/etiquetas** | 90% | Excelente para leer títulos de libros y texto en pantalla. |
+| **Conciencia espacial** | 85% | Bueno describiendo relaciones entre objetos (p. ej., “El Kindle está al lado del ratón”). |
+
+El codificador de visión añade una pequeña sobrecarga al **gemma 4 31B VRAM usage**, normalmente alrededor de 500MB a 1GB según la resolución de la imagen. Si estás justo de memoria, considera usar la versión solo de texto del modelo.
+
+## Conclusión: ¿31B es adecuado para ti?
+
+El **gemma 4 31B VRAM usage** lo convierte en un modelo “prosumer”. Si tienes una RTX 3090 o 4090 con 24GB de VRAM, puedes ejecutar una versión cuantizada en 4 bits completamente en tu GPU, obteniendo una experiencia extremadamente rápida. Para quienes tienen tarjetas de 12GB o 16GB, el modelo sigue siendo usable, pero dependerá de la descarga a RAM del sistema, por lo que se adapta mejor a tareas no urgentes como generación de código o resumen de documentos.
+
+Gemma 4 31B representa un enorme salto adelante para la IA de código abierto. Su capacidad para manejar flujos de trabajo agénticos complejos y ventanas de contexto masivas lo convierte en una herramienta formidable para cualquier usuario avanzado en 2026.
+
+## FAQ
+
+**Q: What is the absolute minimum VRAM needed for Gemma 4 31B?**
+
+A: Para ejecutar el modelo, incluso con una fuerte descarga a CPU, necesitas al menos 8GB de VRAM y 32GB de RAM del sistema. Sin embargo, para una experiencia fluida sin retrasos extremos, se recomienda una GPU de 24GB de VRAM para minimizar el **gemma 4 31B VRAM usage** en el bus del sistema.
+
+**Q: Does Gemma 4 31B support audio input?**
+
+A: El soporte nativo de audio (voz a texto y comprensión directa) actualmente es exclusivo de los modelos más pequeños E2B y E4B. El modelo 31B se centra en razonamiento avanzado de texto, imagen y video.
+
+**Q: Can I run Gemma 4 31B on a Mac?**
+
+A: Sí, Gemma 4 31B funciona muy bien en MacBooks con memoria unificada (M2/M3/4 Pro o Max). Deberías tener al menos 36GB de RAM unificada para alojar cómodamente el modelo y la sobrecarga del sistema operativo.
+
+**Q: Is the 31B model better than GPT-4 for coding?**
+
+A: Aunque Gemma 4 31B es muy capaz y supera a muchos modelos más grandes en benchmarks, generalmente se considera un complemento para modelos de pago como GPT-4. Es ideal para tareas donde la privacidad de los datos es fundamental o para tareas de programación menos complejas y repetitivas.

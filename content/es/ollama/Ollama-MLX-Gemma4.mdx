@@ -1,0 +1,197 @@
+export const metadata = {
+  title: "Ollama MLX Gemma4: Guía completa de configuración y ajuste local de IA 2026",
+  description: "Aprende a ejecutar Ollama MLX Gemma4 localmente para flujos de trabajo de gaming, soporte para modding, análisis de imágenes y prompts multimodales rápidos en 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/6d28d9/fff?text=Ollama+MLX+Gemma4+Guide",
+  date: "2026-05-03",
+  author: "Equipo de Ollama Wiki"
+}
+
+Si quieres soporte de IA privado, rápido y flexible para tus sesiones de juego, tu pipeline de modding o tu flujo de trabajo como creador, **Ollama MLX Gemma4** es una de las stacks más prácticas para aprender en 2026. En lugar de depender solo de herramientas de chat en la nube, **Ollama MLX Gemma4** te permite ejecutar modelos multimodales en tu propia máquina (o en una GPU alquilada), con control directo sobre velocidad, calidad y costo. Esto importa cuando estás probando prompts de lore, generando copy de UI para prototipos de juegos, analizando capturas de pantalla o creando asistentes de estrategia. En este tutorial, configurarás la stack, elegirás el tamaño correcto del modelo Gemma 4, ajustarás la configuración de inferencia y evitarás trampas comunes de rendimiento. Úsalo como una guía editorial práctica: pasos de configuración directos, expectativas realistas de hardware y presets útiles para gamers, creadores y equipos indie.
+
+## Por qué Ollama MLX Gemma4 es útil para gaming y flujos de trabajo de creadores
+
+La mayoría de los jugadores piensa en la IA local como “solo chat”, pero el valor real está en acelerar flujos de trabajo. Con la configuración adecuada, Gemma 4 puede ayudarte con:
+
+- Notas de builds y resúmenes de notas de parche
+- OCR de capturas de pantalla (texto de inventario, registros de misiones, etiquetas de UI)
+- Comprensión de miniaturas e imágenes conceptuales
+- Respuestas de estilo función para scripts de automatización
+- Lluvia de ideas de contexto largo para narrativa y diseño de misiones
+
+Los modelos Gemma 4 mejoraron el manejo de contexto y las capacidades multimodales frente a generaciones anteriores de Gemma, lo que hace que esta stack sea especialmente buena para tareas relacionadas con juegos donde se mezclan entradas de texto + imagen.
+
+| Caso de uso | Por qué importa para gamers | Modelo recomendado para empezar |
+|---|---|---|
+| **Análisis de notas de parche** | Resumir cambios de balance rápidamente | **Clase Gemma 4 E4B/8B** |
+| **Planificación de builds** | Redactar equipamientos por rol y consejos de rotación | **Gemma 4 E4B** |
+| **OCR de capturas de pantalla** | Extraer texto de misión o UI de imágenes | **Gemma 4 31B (mejor calidad)** |
+| **Asistente de modding** | Explicar archivos de configuración y fragmentos de scripting | **Gemma 4 E4B o 31B** |
+| **Ideación narrativa** | Redacción de lore extenso y cadenas de misiones | **Gemma 4 31B** |
+
+> **Consejo:** Usa modelos más pequeños para iterar rápido y sube a modelos más grandes solo para salidas finales. Esto mantiene costos y latencia en niveles razonables.
+
+Para la documentación oficial del runtime y los fundamentos de instalación, usa el [sitio web oficial de Ollama](https://ollama.com) como referencia base.
+
+## Selección de modelo en Ollama MLX Gemma4: qué ejecutar primero
+
+Elegir el tamaño del modelo es la primera decisión real de rendimiento. En 2026, muchos usuarios aún se pasan de lo que soporta su hardware y luego culpan al modelo. Empieza con tu tarea objetivo y la VRAM disponible, no con el hype de benchmarks.
+
+### Guía práctica de modelos
+
+| Variante de modelo | Perfil de contexto | Fortaleza | Limitación | Mejor para |
+|---|---|---|---|---|
+| **Clase Gemma 4 2B** | Moderado | Muy rápido, bajo uso de memoria | Menor profundidad de razonamiento | Tareas utilitarias rápidas |
+| **Clase Gemma 4 E4B/8B** | Fuerte | Gran equilibrio velocidad/calidad | Puede perder matices en tareas difíciles | Asistente diario de gaming |
+| **Gemma 4 26B MoE (4B activo)** | Alto | Mejor calidad por cómputo activo | La configuración puede variar según backend | Usuarios avanzados |
+| **Gemma 4 31B denso** | Muy alto | Mejor calidad de salida de esta familia | Requisito alto de VRAM | Flujos serios de creación |
+
+Al planificar **Ollama MLX Gemma4**, trata el modelo 31B como un endpoint premium, no como predeterminado. Si tu máquina sufre, bajar un nivel suele mejorar la productividad general porque los ciclos prompt-respuesta se mantienen rápidos.
+
+### Verificación realista de hardware en 2026
+
+| Nivel de hardware | Objetivo sugerido de Gemma 4 | Experiencia esperada |
+|---|---|---|
+| **Laptop iGPU / Apple Silicon base** | 2B a E4B | Utilizable para tareas centradas en texto |
+| **GPU de gama media (12–16GB VRAM)** | E4B y cuantizaciones superiores selectivas | Buen uso diario |
+| **GPU con 20GB+ VRAM** | Posibles intentos con 31B | Mayor calidad, más presión de memoria |
+| **GPU en la nube (32GB+)** | 31B cómodo | Lo mejor para demos y lotes de producción |
+
+> **Advertencia:** Si tu ventana de contexto es grande y adjuntas imágenes, el uso de memoria puede subir rápido. Monitorea el consumo antes de sesiones largas.
+
+## Configuración paso a paso para Ollama + Open WebUI + flujo compatible con MLX
+
+Esta ruta de configuración es limpia para la mayoría: ejecuta el backend de Ollama, conecta Open WebUI y luego descarga etiquetas de modelo Gemma 4 que encajen con tu hardware. Puedes hacerlo localmente o en GPUs en la nube.
+
+### Checklist de configuración
+
+1. Actualiza los paquetes del sistema.
+2. Instala Ollama y confirma que el servicio inicia.
+3. Instala Open WebUI (o tu frontend preferido).
+4. Exporta correctamente la URL del backend para que la UI pueda comunicarse con Ollama.
+5. Descarga una etiqueta de modelo Gemma 4.
+6. Prueba un prompt de texto y luego uno de imagen.
+
+| Paso | Acción | Señal de éxito |
+|---|---|---|
+| **1** | Instalar dependencias del runtime | Sin errores de conflicto de paquetes |
+| **2** | Iniciar servicio de Ollama | La API responde en el endpoint local |
+| **3** | Lanzar Open WebUI | Panel web accesible en el navegador |
+| **4** | Descargar etiqueta de Gemma 4 | La descarga del modelo se completa |
+| **5** | Ejecutar prompt de prueba | Respuesta estable sin timeout |
+| **6** | Probar entrada de imagen | Se devuelve una descripción de imagen coherente |
+
+Un flujo confiable de **Ollama MLX Gemma4** debería soportar tanto respuestas de texto rápidas como interpretación de imágenes competente. Para muchos flujos gaming, eso significa “explica esta captura”, “lee este texto de UI” y “resume esta lista larga de cambios de parche”.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/c3hba327nJY"
+    title="Gemma 4 is INSANE— Run with (Ollama + Open WebUI)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Ajuste de rendimiento para mejores resultados en 2026
+
+La calidad bruta del modelo importa, pero la configuración de inferencia suele decidir si las salidas se sienten pulidas o genéricas. Para **Ollama MLX Gemma4**, usa presets de muestreo controlado según el tipo de tarea.
+
+### Presets de inferencia recomendados
+
+| Tipo de tarea | Temperature | Top P | Top K | Por qué funciona |
+|---|---|---|---|---|
+| **Resúmenes de estrategia** | **0.7** | **0.9** | **40** | Estructura + creatividad equilibradas |
+| **Extracción de notas de parche** | **0.3** | **0.85** | **30** | Formato factual más limpio |
+| **Ideación de lore** | **1.0** | **0.95** | **64** | Variación estilística más rica |
+| **Explicación de OCR de UI** | **0.2** | **0.8** | **20** | Menor riesgo de alucinación |
+
+Si viste recomendaciones como temperature 1 / top_p 0.95 / top_k 64, suelen funcionar bien para prompts creativos, pero no siempre son ideales para análisis cargados de datos. Mantén perfiles por tarea.
+
+### Consejos de ajuste de latencia y calidad
+
+- Reduce los tokens máximos de salida para iterar rápido.
+- Usa plantillas de prompt estructuradas (“Rol / Entrada / Formato de salida”).
+- Divide tareas gigantes en sub-prompts.
+- Guarda presets que funcionen por tamaño de modelo.
+
+> **Consejo:** Para preparación competitiva en juegos, prioriza la consistencia de respuesta sobre el estilo. Un formato estable y repetible supera a salidas vistosas pero variables.
+
+## Casos de uso avanzados: de soporte en juegos a pipelines de modding
+
+Una vez que tu stack sea estable, puedes ir más allá del chat. Aquí es donde **Ollama MLX Gemma4** se vuelve realmente valioso dentro de un ecosistema gaming.
+
+### 1) Inteligencia de capturas de pantalla para soporte de gameplay
+Introduce pantallas de endgame, páginas de inventario o capturas del mapa. Pide:
+- Extracción de estadísticas clave
+- Mejoras prioritarias
+- Objetivos omitidos
+- Ideas de optimización de ruta
+
+### 2) Asistencia para modding y configuración
+Pega fragmentos de archivos de configuración o scripts y solicita:
+- Explicación en español claro
+- Verificaciones de riesgo antes de cambiar valores
+- Registros de cambios versionados
+
+### 3) Flujo de trabajo para creadores de contenido
+Usa cadenas de prompts multimodales:
+1. Analiza la imagen de miniatura.
+2. Sugiere 5 variantes de título.
+3. Genera una descripción concisa + etiquetas.
+4. Redacta marcas de tiempo por capítulos.
+
+### 4) Planificación de campaña de contexto largo
+Con ventanas de contexto más grandes, puedes mantener:
+- Hojas de personaje
+- Arcos de misiones
+- Comportamiento de facciones
+- Notas de economía
+
+| Flujo avanzado | Tipo de entrada | Tipo de salida | Sugerencia de modelo |
+|---|---|---|---|
+| **Optimizador de builds** | Texto + captura de estadísticas | Recomendaciones por niveles | **E4B o 31B** |
+| **Verificador de riesgo de mods** | Texto de config/script | Checklist de seguridad | **E4B** |
+| **Generador de lore** | Contexto de texto largo | Arcos de misiones estructurados | **31B** |
+| **Revisor de miniaturas** | Imagen + prompt | Ideas de copy enfocadas en CTR | **31B** |
+
+En términos prácticos, **Ollama MLX Gemma4** ofrece a creadores en solitario y equipos pequeños una capa de IA privada con la que pueden iterar todo el día, sin bloqueo de plataforma.
+
+## Errores comunes que debes evitar con Ollama MLX Gemma4
+
+Incluso los usuarios con experiencia pierden tiempo en problemas evitables. Revisa esta lista antes de diagnosticar la capa equivocada.
+
+- Descargar primero el modelo más grande en hardware débil
+- Ignorar la sobrecarga de memoria de la ventana de contexto
+- Usar un único preset de muestreo para todas las tareas
+- Olvidar el mapeo de URL del backend entre la UI y Ollama
+- Evaluar la calidad tras un solo prompt
+
+> **Advertencia:** Si las salidas parecen “malas”, prueba al menos 10 prompts en dos perfiles de configuración antes de juzgar el modelo. La estructura del prompt afecta mucho la calidad.
+
+Un buen método de validación es ejecutar un mini benchmark:
+1. Un prompt de extracción factual  
+2. Un prompt de razonamiento  
+3. Un prompt de interpretación de imagen  
+4. Un prompt de contexto largo  
+
+Puntúa cada uno por claridad, exactitud y velocidad. Esto da una señal mejor que pruebas anecdóticas aisladas.
+
+## FAQ
+
+**Q: Is Ollama MLX Gemma4 good for everyday gaming help, or only for developers?**
+
+A: Funciona para ambos. Los jugadores casuales pueden usarlo para sugerencias de builds, resúmenes de notas de parche y explicaciones de capturas de pantalla, mientras que los usuarios avanzados pueden integrarlo en pipelines de modding y creación de contenido.
+
+**Q: Which model should I start with in an Ollama MLX Gemma4 setup?**
+
+A: Empieza con una opción de clase E4B/8B para un equilibrio entre velocidad y calidad. Pasa a 31B solo si tu presupuesto de VRAM y tu flujo de trabajo realmente se benefician de mayor profundidad de salida.
+
+**Q: Can Ollama MLX Gemma4 replace cloud AI tools completely?**
+
+A: Para muchas tareas privadas y repetitivas, puede cubrir una gran parte del trabajo diario. Algunos usuarios aún mantienen una alternativa en la nube para herramientas de nicho o trabajos extremadamente grandes.
+
+**Q: What’s the fastest way to improve response quality with Ollama MLX Gemma4?**
+
+A: Usa presets específicos por tarea, prompts estructurados y ejecuciones iterativas más pequeñas antes de pedir salidas largas. La mayoría de las mejoras de calidad provienen de la disciplina del flujo de trabajo, no solo de modelos más grandes.

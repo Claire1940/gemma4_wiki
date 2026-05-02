@@ -1,0 +1,99 @@
+export const metadata = {
+  title: "Requisitos del sistema de Gemma 4 E4B: Guía completa de hardware 2026",
+  description: "Conoce los requisitos exactos del sistema de gemma 4 e4b para ejecutar localmente en tu portátil o escritorio el último modelo de IA de código abierto de Google en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/4338ca/fff?text=Gemma+4+E4B+Requirements",
+  date: "2026-04-29",
+  author: "Equipo de Gemma Wiki"
+}
+
+El lanzamiento de la familia Gemma 4 de Google ha sacudido a la comunidad de LLM locales, ofreciendo un rendimiento que rivaliza con modelos propietarios mientras mantiene una licencia Apache 2.0 totalmente abierta. Para gamers y desarrolladores que buscan integrar IA de alto nivel en sus flujos de trabajo locales, comprender los **requisitos del sistema de gemma 4 e4b** es el primer paso hacia una implementación exitosa. Tanto si quieres ejecutar un maestro de mazmorras con IA como un asistente local de programación, los **requisitos del sistema de gemma 4 e4b** son sorprendentemente accesibles, gracias a la arquitectura eficiente del modelo construida sobre la tecnología Gemini 3. En esta guía, desglosaremos el hardware necesario para ejecutar la variante E4B, la compararemos con sus hermanas mayores y ofreceremos consejos de optimización tanto para usuarios de Windows como de macOS.
+
+## Entendiendo la arquitectura de Gemma 4 E4B
+
+Gemma 4 representa un salto significativo en los modelos de lenguaje "pequeños". La variante E4B, en particular, está diseñada para una ejecución local de alta velocidad sin sacrificar las capacidades de "razonamiento" que normalmente se reservan para modelos masivos de centros de datos. Aunque cuenta con 7.500 millones de parámetros totales, utiliza solo 4.000 millones de parámetros efectivos durante la inferencia, lo que le permite rendir muy por encima de su categoría.
+
+Una de las características más impresionantes del modelo E4B es su soporte multimodal nativo. A diferencia de generaciones anteriores que requerían adaptadores de "visión" por separado, Gemma 4 E4B puede procesar de forma nativa imágenes, video e incluso voz de audio directamente. Esto lo convierte en un candidato ideal para configuraciones de juego integradas donde se requieren comandos de voz o análisis de pantalla en tiempo real.
+
+> **💡 Consejo:** El modelo E4B se publica bajo licencia Apache 2.0, lo que significa que puedes usarlo para proyectos comerciales de gaming sin preocuparte por bloqueos corporativos restrictivos o por cuestiones de privacidad de datos.
+
+## Requisitos del sistema de Gemma 4 E4B: mínimo vs. recomendado
+
+Ejecutar un modelo localmente requiere un equilibrio entre VRAM (memoria de video) y memoria del sistema. Debido a que Gemma 4 E4B utiliza una ventana de contexto de 128.000 tokens, el uso de memoria escalará en función de cuánta "memoria" quieras que tenga la IA durante una sola sesión.
+
+| Componente | Requisito mínimo (cuantizado) | Requisito recomendado (8-bit) |
+|---|---|---|
+| **Memoria (RAM/VRAM)** | 12 GB unificada/del sistema | 24 GB+ unificada/del sistema |
+| **Procesador (CPU)** | 6 núcleos (Ryzen 5 / Intel i5) | 8 núcleos+ (M4 Pro / Ryzen 7) |
+| **Gráficos (GPU)** | 8 GB de VRAM (RTX 3060) | 16 GB+ de VRAM (RTX 4060 Ti / M-Series) |
+| **Almacenamiento** | 10 GB de espacio SSD | 20 GB de espacio NVMe SSD |
+| **Sistema operativo** | Windows 11 / Linux / macOS 14+ | Windows 11 / Linux / macOS 15+ |
+
+Aunque los **requisitos del sistema de gemma 4 e4b** sugieren un mínimo de 12 GB de memoria, esto es específicamente para la versión cuantizada de 8 bits. Si pretendes usar los pesos completos sin comprimir o ejecutar tareas multimodales pesadas, 24 GB de RAM (especialmente en Apple Silicon) o 16 GB de VRAM dedicada en PC es el punto ideal para el hardware de 2026.
+
+## Pruebas de rendimiento: portátil vs. escritorio
+
+Probar Gemma 4 E4B en distintas plataformas revela lo bien que Google ha optimizado la base de Gemini 3. En un portátil moderno equipado con un chip M4 Pro y 24 GB de RAM, el modelo E4B suele consumir alrededor de 12 GB de memoria al cargarse.
+
+En pruebas estándar de generación de texto, como escribir funciones complejas en Python o redacción creativa, el modelo alcanza una velocidad media de **31 tokens por segundo**. Esto es lo bastante rápido para la interacción en tiempo real, con una latencia de respuesta de solo 4,5 segundos. En cambio, ejecutar las variantes más grandes de 26B o 31B en un escritorio con una RTX 4060 Ti (16 GB de VRAM) da como resultado una velocidad más lenta de aproximadamente **12 tokens por segundo**, ya que el sistema debe recurrir a la RAM del sistema, más lenta, cuando se supera la memoria de la GPU.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/T6AvsQVSL74"
+    title="Gemma 4 - I Tested it on My Laptop and Desktop"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Capacidades multimodales y uso de herramientas
+
+Una de las razones más destacadas para cumplir con los **requisitos del sistema de gemma 4 e4b** es aprovechar sus funciones multimodales. El modelo E4B es particularmente hábil para "ver" a través de cargas de imágenes. En pruebas, el modelo puede identificar con precisión configuraciones de escritorio complejas, reconociendo teclados, ratones y lectores electrónicos con gran exactitud.
+
+Además, Gemma 4 admite llamada de funciones nativa y salida JSON estructurada. Esto cambia las reglas del juego para los desarrolladores que quieren usar la IA como un "agente" capaz de interactuar con otro software.
+
+### Características multimodales clave:
+*   **Soporte de audio nativo:** Conversión directa de voz a texto y comprensión del habla sin modelos externos.
+*   **Procesamiento de visión:** Capaz de analizar imágenes y fotogramas de video para detección de objetos.
+*   **Ventana de contexto de 128K:** Maneja bases de código masivas o guiones largos de RPG sin perder el hilo de detalles anteriores.
+*   **Soporte de idiomas:** Optimizado para una amplia gama de idiomas internacionales, lo que lo convierte en una opción global para 2026.
+
+> **⚠️ Advertencia:** El uso de contexto elevado (acercándose a 128.000 tokens) aumentará significativamente el consumo de RAM. Si planeas usar la ventana de contexto completa, asegúrate de tener al menos 32 GB de RAM del sistema.
+
+## Guía de implementación: cómo ejecutar Gemma 4 E4B
+
+Para poner en marcha Gemma 4 E4B en tu equipo, el método más fácil de usar en 2026 es utilizar **LM Studio** o motores de inferencia local similares. Estas herramientas te permiten descargar versiones "cuantizadas" del modelo, que están comprimidas para ejecutarse en hardware de consumo manteniendo una calidad de salida casi idéntica.
+
+| Paso | Acción | Descripción |
+|---|---|---|
+| **1** | Descargar LM Studio | Asegúrate de tener la versión más reciente con soporte para Gemma 4. |
+| **2** | Buscar "Gemma 4 E4B" | Busca la versión **cuantizada de 8 bits** para el mejor equilibrio. |
+| **3** | Configurar memoria | Asigna al menos **12 GB de RAM** al modelo en la configuración. |
+| **4** | Establecer ventana de contexto | Define el límite en **128.000** si tu hardware lo permite. |
+| **5** | Habilitar GPU Offload | Si usas una tarjeta NVIDIA, asegúrate de que "GPU Offload" esté al **100%**. |
+
+## Optimización para gaming y desarrollo
+
+Para gamers, Gemma 4 E4B puede actuar como un "Game Master" local o como generador de diálogos para NPC. Como se ejecuta completamente en tu máquina, no hay latencia de servidores externos y tus datos permanecen privados. Para optimizar el rendimiento mientras un juego está en ejecución, considera usar una cuantización menor (como 4-bit o 5-bit) para liberar VRAM para el motor gráfico del juego.
+
+Si eres desarrollador, la capacidad del modelo para producir JSON limpio y admitir flujos de trabajo basados en agentes significa que puedes usarlo para automatizar tareas repetitivas o visualizar datos. En pruebas recientes, Gemma 4 E4B generó con éxito una visualización HTML totalmente funcional para un algoritmo de ordenamiento, completa con una fuente personalizada y deslizadores de velocidad en tiempo real.
+
+## FAQ
+
+**Q: What are the minimum gemma 4 e4b system requirements for a laptop?**
+
+A: Para ejecutar Gemma 4 E4B cómodamente en un portátil, deberías tener al menos 16 GB de RAM (se prefieren 24 GB para versiones de 8 bits) y un procesador moderno como un Apple M2/M3/M4 o un Intel Core i7 con gráficos integrados Iris Xe o superiores.
+
+**Q: Can Gemma 4 E4B run on older GPUs like the GTX 1080?**
+
+A: Aunque puede ejecutarse, el rendimiento se degradará significativamente. Gemma 4 está optimizado para núcleos tensor modernos presentes en la serie RTX o para la arquitectura de memoria unificada de Apple Silicon. Es probable que las tarjetas más antiguas dependan de inferencia por CPU, que es mucho más lenta.
+
+**Q: Does the model require an internet connection?**
+
+A: No. Una vez que hayas descargado los pesos del modelo (aprox. 8–12 GB según la cuantización), Gemma 4 E4B funciona completamente sin conexión, garantizando total privacidad de datos y sin cuotas de suscripción.
+
+**Q: How does the E4B compare to the larger 26B version?**
+
+A: El E4B es significativamente más rápido y requiere mucha menos memoria, lo que lo hace ideal para chat en tiempo real y tareas simples. La versión 26B es mejor para razonamiento complejo y análisis masivo de datos, pero requiere hardware de gama alta con 32 GB+ de VRAM para funcionar a velocidades aceptables.

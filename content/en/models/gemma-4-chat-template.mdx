@@ -1,0 +1,181 @@
+export const metadata = {
+  title: "gemma 4 chat template: OpenCode Setup, Fixes, and Workflow Guide 2026",
+  description: "Learn how to configure, debug, and optimize the gemma 4 chat template for tool-calling workflows in 2026, including OpenCode and Claude Code style harnesses.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/7c3aed/fff?text=Gemma+4+Chat+Template",
+  date: "2026-05-03",
+  author: "Gemma Wiki Team"
+}
+
+If you are building coding agents in 2026, the **gemma 4 chat template** can decide whether your workflow feels smooth or frustrating. Many teams assume model quality is the only variable, but prompt structure, tool-call formatting, and parser expectations are just as important. A well-tuned **gemma 4 chat template** helps your model separate reasoning text from actionable tool calls, especially in multi-turn loops where the assistant must think, call tools, read results, and continue. In practical deployments, this is where small formatting mismatches create major reliability issues. This tutorial walks you through a production-minded setup: choosing the right Gemma 4 size for your harness, customizing template behavior, validating turn-by-turn output, and preventing common failure modes. Follow these steps to reduce parsing noise, improve tool accuracy, and ship a setup your team can actually trust.
+
+## Why the gemma 4 chat template matters in agent workflows
+
+When you run Gemma 4 in coding harnesses, you are not just sending plain prompts. You are coordinating:
+
+- System instructions
+- User content
+- Tool schemas
+- Tool results
+- Assistant reasoning/output formatting
+
+A **gemma 4 chat template** defines how those components are serialized into model-ready text. If your harness expects one tool-call style but the model outputs another, reliability drops immediately.
+
+In 2026, this gap is most visible in advanced harnesses with many tools and long system prompts. Strong templates reduce ambiguity and help the model produce the right start tokens and call structure.
+
+| Template Function | What It Controls | Risk If Misconfigured | Impact Level |
+|---|---|---|---|
+| Role serialization | System/user/assistant ordering | Model ignores priorities | **High** |
+| Tool-call framing | Start/end tokens, JSON/XML style | Calls become unparseable | **Critical** |
+| Multi-turn stitching | How tool results are reintroduced | Broken agent loop | **High** |
+| Reasoning separation | Distinguish thought vs final output | Leaky or noisy replies | **Medium** |
+
+> **⚠️ Warning:** If your parser relies on strict tool-call tokens, avoid mixed formatting examples in system prompts. Repeated XML-like patterns can nudge the model into the wrong syntax.
+
+For official model documentation, review Google’s Gemma page: [Gemma model documentation and release details](https://ai.google.dev/gemma).
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/rIC5suLjCpI"
+    title="Gemma 4 Demo with OpenCode and Claude Code"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Choosing the right model size before editing your gemma 4 chat template
+
+Before touching template logic, pick a model that matches your harness complexity. If your workflow is simple (few tools, short turns), smaller models may be enough. If your workflow resembles full coding copilots, larger Gemma 4 variants usually behave more consistently.
+
+| Use Case | Suggested Model Class | Why It Works | Common Limitation |
+|---|---|---|---|
+| Basic Q&A + 1-2 tools | Small/edge Gemma 4 | Fast and cheap | Tool syntax drift under pressure |
+| Mid-size coding tasks | ~20B+ class | Better instruction retention | Longer prompts can still degrade calls |
+| Full agentic coding harness | ~30B class | Stronger multi-turn and tool compliance | Higher VRAM/latency cost |
+
+A practical rule for 2026: don’t force a lightweight model into an enterprise-grade agent harness and then blame only the template. Yes, a custom **gemma 4 chat template** helps, but model capacity still matters for dense system prompts and iterative tool use.
+
+> **💡 Tip:** First stabilize behavior with a larger model and a clean template. Then downsize and measure where failure begins.
+
+## gemma 4 chat template implementation blueprint (step-by-step)
+
+Use this sequence to build a robust **gemma 4 chat template** for OpenCode-style or Claude Code-style agent loops.
+
+### 1) Normalize message roles
+
+Ensure consistent ordering and delimiters:
+1. System
+2. User
+3. Assistant tool-call or response
+4. Tool result
+5. Assistant follow-up
+
+### 2) Enforce one tool-call grammar
+
+Pick one canonical format (for example, strict JSON call blocks) and remove conflicting examples from prompts.
+
+### 3) Add parser-aware markers
+
+If your runtime expects start tokens, confirm the template makes those tokens likely and unambiguous.
+
+### 4) Validate with replay tests
+
+Run fixed transcripts and compare output against expected patterns.
+
+| Step | Action | Pass Criteria | Tooling Suggestion |
+|---|---|---|---|
+| 1 | Role mapping audit | No role inversion in logs | Prompt snapshot tests |
+| 2 | Tool grammar lock | 95%+ parseable calls in test set | JSON schema validator |
+| 3 | Token boundary checks | Start/end markers always present | Regex + structured parser |
+| 4 | Multi-turn replay | Stable behavior over 8-12 turns | Deterministic eval script |
+| 5 | Conflict pruning | No stray XML-like tool calls | System prompt diff review |
+
+Here is a lean validation checklist you can hand to engineering:
+
+| Validation Area | What to Test | Target in 2026 |
+|---|---|---|
+| Single-turn call | One tool + one result | **100% parseable** in smoke tests |
+| Multi-tool sequence | Two or more calls in chain | **90%+ parseable** |
+| Long prompt stress | Large system + few-shot examples | Minimal syntax drift |
+| Error recovery | Tool returns error | Assistant retries cleanly |
+
+## Troubleshooting common failures in Gemma 4 tool-calling
+
+Even with a tuned **gemma 4 chat template**, you may see predictable issues. Treat them as engineering signals, not random model behavior.
+
+### Failure pattern A: Python-like pseudo calls instead of template calls
+The model “describes” a call in code-ish syntax rather than your required format.
+
+**Fix:** strengthen call examples in the template, reduce contradictory few-shots, and tighten parsing fallback.
+
+### Failure pattern B: XML-style drift caused by prompt artifacts
+If your harness prompt repeats XML tags, Gemma 4 may mimic those tags instead of true tool tokens.
+
+**Fix:** simplify tool instructions to plain text or the model’s preferred call convention.
+
+### Failure pattern C: Claims of action completion when file already exists
+In coding tasks, assistant responses may imply “done” even when no write happened in the latest turn.
+
+**Fix:** enforce state-check steps: read-before-write, diff confirmation, and explicit action summaries.
+
+| Symptom | Likely Cause | Fast Fix | Long-Term Fix |
+|---|---|---|---|
+| Unparseable tool block | Mixed syntax training cues | Strip conflicting examples | Retrain prompt pack for one grammar |
+| Missing start token | Template boundary mismatch | Add stronger markers | Update serializer + parser jointly |
+| Hallucinated completion | Weak tool-result grounding | Add verification prompt line | Build post-tool reconciliation step |
+| Loop stalls after tool error | Poor retry policy | Add one retry template branch | Introduce structured error taxonomy |
+
+> **⚠️ Warning:** Do not “fix” parser failures by silently accepting every malformed block. You may increase hidden errors and reduce observability.
+
+## Hardening your deployment pipeline in 2026
+
+A high-performing **gemma 4 chat template** is not a one-time file edit. Treat it as a versioned artifact with CI checks.
+
+Recommended rollout process:
+
+1. **Version template files** with semantic tags (e.g., `g4-template-v1.3.0`).
+2. **Run regression suites** on known transcripts.
+3. **Compare parse rates** across model sizes and quantizations.
+4. **Canary deploy** to limited users.
+5. **Track failure taxonomies** (syntax drift, token misses, false completions).
+
+| Pipeline Stage | Key Metric | Go/No-Go Threshold |
+|---|---|---|
+| Local dev tests | Parse success rate | **≥95%** |
+| Staging replay | Multi-turn task success | **≥85%** |
+| Canary | User-visible tool errors | **&lt;5% sessions** |
+| Production week 1 | Regression delta vs baseline | **No critical drop** |
+
+For teams mixing multiple harnesses, maintain harness-specific variants of the **gemma 4 chat template** rather than forcing one universal template. OpenCode-style prompts and Claude Code-style prompts differ in structure and expectations, so “one size fits all” can cause avoidable drift.
+
+## Best practices summary
+
+If you want stable results fast, prioritize these in order:
+
+1. Match model size to harness complexity.
+2. Standardize one tool-call grammar.
+3. Remove prompt artifacts that conflict with expected output.
+4. Test multi-turn behavior, not just single-turn demos.
+5. Ship template updates through CI and canary gates.
+
+A polished **gemma 4 chat template** does more than format text. It aligns model behavior, runtime parsers, and tool execution loops into one predictable system.
+
+## FAQ
+
+**Q: What is the biggest mistake teams make with a gemma 4 chat template?**
+
+A: The most common mistake is assuming the model will “figure out” tool-call format mismatches. In practice, parser and prompt conventions must be intentionally aligned, especially in multi-turn coding workflows.
+
+**Q: Can a small Gemma 4 model work with advanced coding harnesses?**
+
+A: It can work for lighter workloads, but reliability may drop when prompts become complex or tool chains get longer. Start with a larger model for baseline stability, then optimize downward.
+
+**Q: How often should I update my gemma 4 chat template in 2026?**
+
+A: Update whenever you change harness prompt design, parser behavior, tool schemas, or model version. Treat template changes like code releases with regression testing.
+
+**Q: Should I use XML tags in my tool instructions?**
+
+A: Only if your model and parser are explicitly tuned for that style. If you see syntax drift, simplify to plain instructions and a strict structured call format your runtime can validate.

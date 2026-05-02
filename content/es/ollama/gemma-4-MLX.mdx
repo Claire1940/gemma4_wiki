@@ -1,0 +1,133 @@
+export const metadata = {
+  title: "Gemma 4 MLX: Guía definitiva para ejecutar IA local en Mac 2026",
+  description: "Aprende a instalar y optimizar Gemma 4 MLX en Apple Silicon. Domina el rendimiento de IA local con 80 tokens por segundo y soporte de visión multimodal.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/2563eb/fff?text=Gemma+4+MLX+Mac+Guide",
+  date: "2026-04-29",
+  author: "Equipo de Gemma Wiki"
+}
+
+El panorama de la inteligencia artificial local ha cambiado drásticamente en 2026, y el lanzamiento de **Gemma 4 MLX** representa un punto culminante para los usuarios de Apple Silicon. Al aprovechar el framework especializado MLX desarrollado por el equipo de investigación en aprendizaje automático de Apple, ahora los usuarios pueden ejecutar modelos con una gran cantidad de parámetros con una eficiencia sin precedentes en hardware de consumo. Tanto si eres un desarrollador que busca integrar IA en su flujo de trabajo local como si eres un entusiasta de los videojuegos que quiere un asistente privado y potente, configurar **Gemma 4 MLX** es la forma más eficaz de aprovechar la Arquitectura de Memoria Unificada de tu Mac. En esta guía completa, te llevaremos paso a paso por el proceso de instalación, las métricas de rendimiento y las funciones multimodales avanzadas que permiten a este modelo "ver" y "razonar" mediante entradas de texto e imagen en cuestión de segundos.
+
+## Entendiendo la sinergia de Gemma 4 MLX
+
+Para apreciar por qué **Gemma 4 MLX** es un avance revolucionario, hay que entender la tecnología subyacente. Gemma 4 es la última iteración de Google de modelos con pesos abiertos, diseñada para ofrecer razonamiento de vanguardia mientras sigue siendo lo bastante compacta como para ejecutarse en dispositivos locales. Cuando se combina con el framework MLX, el modelo obtiene acceso directo a la GPU de Apple Silicon, evitando la sobrecarga que normalmente se encuentra en bibliotecas multiplataforma.
+
+La cuantización de "Onnx lows" desempeña un papel crucial aquí. Al comprimir el modelo en versiones de 4 bits u 8 bits, la huella de memoria se reduce significativamente sin una pérdida proporcional de inteligencia. Esto permite que un MacBook Air o un Mac Mini manejen tareas que antes requerían hardware de servidor de nivel empresarial.
+
+| Componente | Rol en el ecosistema | Beneficio para los usuarios |
+|---|---|---|
+| **Gemma 4** | Modelo de lenguaje principal | Razonamiento de alto nivel y generación creativa |
+| **Framework MLX** | Motor de ML nativo de Apple | Máximo aprovechamiento de la GPU y velocidad |
+| **Onnx Lows** | Proveedor de cuantización | Permite que modelos grandes quepan en la RAM del sistema |
+| **Hugging Face** | Distribución de modelos | Acceso sencillo a pesos y actualizaciones de la comunidad |
+
+> **💡 Consejo:** Asegúrate siempre de que tu macOS esté actualizado a la última versión para aprovechar los shaders de rendimiento metal más recientes que requiere el framework MLX.
+
+## Requisitos del sistema y preparación
+
+Antes de comenzar con la instalación de **Gemma 4 MLX**, verifica que tu hardware cumpla con las especificaciones necesarias. Dado que MLX utiliza Memoria Unificada, la cantidad de RAM que tienes se correlaciona directamente con el tamaño del modelo que puedes ejecutar.
+
+| Característica de hardware | Requisito mínimo | Recomendado para Gemma 4 |
+|---|---|---|
+| **Procesador** | Chip Apple M1 | Apple M3 Pro o Max |
+| **Memoria (RAM)** | 8GB (modelos de 4 bits) | 32GB+ (modelos de 8 bits) |
+| **Almacenamiento** | 10GB de espacio libre | 50GB para múltiples versiones |
+| **Software** | Python 3.10+ | Python 3.12+ con venv |
+
+### Configuración del entorno
+
+Sigue estos pasos para preparar tu entorno de terminal. Se recomienda encarecidamente usar un entorno virtual para evitar conflictos de bibliotecas con la instalación predeterminada de Python de tu sistema.
+
+1.  **Abre Terminal:** Navega al directorio de proyecto que prefieras.
+2.  **Crea un entorno virtual:** Usa el comando `python3 -m venv gemma_env` para mantener tus dependencias aisladas.
+3.  **Activa el entorno:** Ejecuta `source gemma_env/bin/activate`.
+4.  **Instala dependencias:** Necesitarás la biblioteca `mlx-lm`, que actúa como la base para ejecutar el modelo. Usa `pip install mlx-lm` para obtener la versión más reciente.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/j_TcABM2qtY"
+    title="Run Gemma 4 with MLX on Mac in 5 Minutes - Apple silicon Mac/Macbook/Mac Mini"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Benchmarks de rendimiento: velocidad y eficiencia
+
+Uno de los aspectos más impresionantes de **Gemma 4 MLX** es su velocidad de generación. En 2026, los usuarios esperan respuestas casi instantáneas, y la optimización de MLX ofrece exactamente eso. Durante las pruebas en hardware estándar M2 y M3, el modelo alcanzó de forma consistente altas tasas de tokens por segundo (TPS) que rivalizan con soluciones basadas en la nube.
+
+| Métrica | Modelo cuantizado de 4 bits | Modelo cuantizado de 8 bits |
+|---|---|---|
+| **Tiempo hasta el primer token** | < 200ms | < 450ms |
+| **Velocidad de generación** | **80 tokens/seg** | **60 tokens/seg** |
+| **Uso de GPU** | 99% | 99% |
+| **Uso de RAM (inactivo)** | ~4.2 GB | ~7.8 GB |
+
+Como muestran los datos, la versión de 4 bits de **Gemma 4 MLX** es excepcionalmente rápida, lo que la hace ideal para aplicaciones de chat en tiempo real o asistencia para programación. La versión de 8 bits, aunque ligeramente más lenta, ofrece mayor precisión para tareas complejas de razonamiento matemático o lógico.
+
+> **⚠️ Advertencia:** Un alto uso de GPU (99%) es normal durante la generación, pero puede hacer que se activen los ventiladores en modelos MacBook Pro. Asegúrate de que tu dispositivo tenga una ventilación adecuada durante sesiones largas de generación.
+
+## Capacidades multimodales: entrada de imagen y texto
+
+El modelo **Gemma 4 MLX** no se limita a interacciones basadas en texto. Incluye soporte multimodal nativo, lo que te permite arrastrar y soltar imágenes directamente en la terminal o en la interfaz de tu aplicación para su análisis. Esto supone un cambio radical tanto para desarrolladores como para gamers que necesitan extraer datos de capturas de pantalla o analizar mapas de juego.
+
+### Cómo usar la entrada de imagen
+
+Para usar las funciones de visión, debes utilizar los flags específicos de línea de comandos o la API de Python proporcionada por la biblioteca MLX. En un entorno de terminal, normalmente puedes usar el flag `--image` seguido de la ruta del archivo.
+
+*   **Paso 1:** Carga el modelo usando el comando `mlx_lm`.
+*   **Paso 2:** Proporciona la ruta de la imagen (p. ej., `~/Desktop/screenshot.png`).
+*   **Paso 3:** Haz una pregunta específica como "Describe the UI elements in this image" o "Translate the text found in this photo."
+
+El modelo procesa simultáneamente los datos visuales y el prompt de texto, proporcionando una respuesta coherente que conecta ambas entradas. Esto resulta especialmente útil para herramientas de accesibilidad o documentación automatizada.
+
+## Configuración avanzada y personalización
+
+Para quienes quieren llevar **Gemma 4 MLX** más allá, el repositorio de Onnx lows ofrece varias opciones de "dynamic quant". Estas te permiten equilibrar el intercambio entre velocidad e inteligencia según las limitaciones específicas de tu hardware.
+
+### Elegir el tamaño de modelo adecuado
+
+| Nombre del modelo | Mejor para | Recomendación de hardware |
+|---|---|---|
+| **Gemma-4-4bit** | Velocidad, chat general | MacBook Air (8GB/16GB) |
+| **Gemma-4-8bit** | Escritura creativa, lógica | MacBook Pro (32GB+) |
+| **Gemma-4-Full** | Investigación, desarrollo | Mac Studio / Mac Pro |
+
+Si notas que la velocidad de generación cae por debajo de 30 tokens por segundo, considera cambiar a un nivel de cuantización inferior. El framework MLX facilita esto al permitirte cambiar las rutas de modelo en tu comando de ejecución sin necesidad de reinstalar toda la biblioteca.
+
+## Solución de problemas comunes
+
+Aunque la instalación de **Gemma 4 MLX** suele ser sencilla, podrías encontrarte con obstáculos del entorno.
+
+1.  **Permiso denegado:** Asegúrate de tener acceso de lectura/escritura a la carpeta donde estás descargando los pesos del modelo de 6GB.
+2.  **Descarga lenta:** Los pesos del modelo están alojados en Hugging Face. Usa una conexión estable, ya que una descarga parcial hará que el modelo falle durante la fase de carga.
+3.  **Kernel panics:** Si tu Mac se reinicia durante una generación de alta carga, puede que estés superando la memoria swap disponible. Cierra aplicaciones en segundo plano como Chrome o editores de video para liberar Memoria Unificada.
+
+> **💡 Consejo:** Usa el flag `verbose=True` en tus scripts de Python para ver registros detallados de cómo la GPU está procesando las capas del modelo. Esto es invaluable para depurar cuellos de botella de rendimiento.
+
+## El futuro de la IA local en Mac
+
+A medida que avanzamos por 2026, la integración de modelos como **Gemma 4 MLX** en los flujos de trabajo diarios se está convirtiendo en el estándar. La capacidad de ejecutar una IA privada, segura e increíblemente rápida sin conexión a internet ya no es un lujo: es una necesidad para proyectos sensibles a los datos. Con el soporte continuo de la comunidad MLX y proveedores como Onnx lows, la brecha entre el hardware local y los enormes centros de datos sigue reduciéndose.
+
+Para más información sobre las últimas actualizaciones del framework MLX, visita el [repositorio oficial de Apple MLX en GitHub](https://github.com/ml-explore/mlx) para explorar nuevas funciones y modelos aportados por la comunidad.
+
+## FAQ
+
+**Q: Is Gemma 4 MLX free to use?**
+
+A: Sí, los pesos del modelo y el framework MLX son de código abierto y gratuitos para descargar para uso personal y de desarrollo. Sin embargo, revisa siempre los términos de licencia específicos proporcionados por Google para aplicaciones comerciales.
+
+**Q: Can I run this on an Intel-based Mac?**
+
+A: No, el framework MLX está diseñado y optimizado específicamente para Apple Silicon (M1, M2, M3 y chips futuros). Las Mac con Intel no tienen la Arquitectura de Memoria Unificada requerida para este nivel de rendimiento.
+
+**Q: How much disk space do I need for Gemma 4 MLX?**
+
+A: Una versión estándar cuantizada de 4 bits del modelo requiere aproximadamente 6GB de almacenamiento. Si planeas experimentar con múltiples niveles de cuantización (4 bits y 8 bits), recomendamos tener al menos 20GB de espacio libre.
+
+**Q: Does it require an internet connection to work?**
+
+A: Solo para la descarga inicial de los pesos del modelo y la instalación de la biblioteca. Una vez que el modelo **Gemma 4 MLX** esté en tu unidad local, puede ejecutarse completamente sin conexión, garantizando total privacidad para tus datos.

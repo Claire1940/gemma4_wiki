@@ -1,0 +1,173 @@
+export const metadata = {
+  title: "Cuantización de Gemma4: guía de mejores ajustes de rendimiento y calidad 2026",
+  description: "Aprende a ajustar la cuantización de Gemma4 para lograr flujos de trabajo más favorables para FPS, menor uso de VRAM y una sólida calidad de salida en PCs gaming de uso diario en 2026.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/5b21b6/fff?text=Gemma4+Quantization+Guide",
+  date: "2026-05-03",
+  author: "Equipo de la Wiki de Gemma4"
+}
+
+Si ejecutas IA local junto con tus juegos, mods, overlays o herramientas de captura, la **cuantización de Gemma4** es una de las mayores palancas de rendimiento que puedes controlar. El nivel correcto de **cuantización de Gemma4** puede marcar la diferencia entre una multitarea fluida y un sistema con tirones que se queda sin memoria durante sesiones largas. En 2026, jugadores y creadores están usando Gemma4 para planificar builds, tomar notas de misiones, crear borradores de diálogos de NPC e incluso como apoyo ligero para scripting. Pero la calidad bruta del modelo por sí sola no es suficiente: también necesitas ajustes prácticos que se adapten a tu hardware. Esta guía te ofrece un marco probado: por dónde empezar, cómo medir la pérdida de calidad, cómo las opciones de caché KV impactan la memoria y cómo ajustar tu configuración para PCs gaming, laptops y dispositivos compactos.
+
+## Qué cambia realmente la cuantización de Gemma4
+
+La cuantización comprime los pesos del modelo desde mayor precisión (como FP16/FP32) a formatos más pequeños (como Q8, Q6, Q4 o Q2). Los formatos más pequeños usan menos VRAM/RAM y normalmente cargan más rápido, pero pueden reducir la calidad de las respuestas según la complejidad de la tarea.
+
+Para casos de uso gaming, este intercambio suele valer la pena:
+- Liberas memoria para tu juego y las pestañas del navegador.
+- Reduces el estrés térmico en laptops.
+- Puedes ejecutar sesiones de IA más largas con ventanas de contexto más grandes.
+
+Aquí tienes una comparación práctica de calidad/rendimiento para objetivos de **cuantización de Gemma4**.
+
+| Nivel de cuantización | Uso de memoria típico | Tendencia de calidad | Mejor caso de uso | Riesgo |
+|---|---|---|---|---|
+| **Q8** | **Alto** | **Casi precisión completa** | Escritura de lore, documentos de estrategia, prompts tipo código | Mayor demanda de VRAM |
+| **Q6** | Medio-alto | Muy sólido | Cargas de trabajo mixtas, respuestas largas | Ligeramente más lento que Q4 |
+| **Q4_K_M** | **Equilibrado** | **Excelente para la mayoría de jugadores** | Tareas diarias de asistente gaming | Pérdida menor de matices |
+| **Q4_K_S** | Más bajo | Bueno | Equipos económicos, iteración rápida | Mayor deriva en parafraseo |
+| **Q2** | **Muy bajo** | Básico a moderado | Resúmenes rápidos, prompts simples | Aumentan las alucinaciones |
+
+> **Consejo:** Empieza con **Q4_K_M** para la cuantización de Gemma4 en 2026 y sube a Q6/Q8 solo si tus prompts específicos muestran problemas de calidad.
+
+## Presets iniciales recomendados por nivel de hardware
+
+No necesitas “ajustes al máximo” para sacar valor de Gemma4. Tu mejor preset depende de cuánta memoria quede *después* de abrir tu juego, Discord, navegador y software de captura.
+
+| Nivel de hardware | Cuantización de Gemma4 sugerida | Tamaño de contexto | Opción de caché KV | Por qué |
+|---|---|---|---|---|
+| **Laptop con 16 GB de memoria unificada** | **Q4_K_S / Q4_K_M** | 4k–8k | Caché KV Q8 | Mantiene la presión de RAM bajo control |
+| **24–32 GB de memoria del sistema** | **Q4_K_M / Q6** | 8k–16k | Q8 o FP16 | Mejor equilibrio para multitarea |
+| **Desktop de gama alta + GPU potente** | **Q6 / Q8** | 16k–32k | FP16 o probar Q8 | Mayor consistencia en prompts complejos |
+| **Mini PC / setup con dock para portátil de mano** | **Q2 / Q4_K_S** | 2k–8k | Caché KV Q8 | Prioriza una huella de memoria baja |
+
+Al ajustar la **cuantización de Gemma4**, céntrate en tres cosas en este orden:
+1. Estabilidad (sin cuelgues ni swapping)
+2. Latencia (generación rápida de tokens)
+3. Calidad de salida (mínima deriva lógica)
+
+Si inviertes ese orden, podrías elegir un nivel de cuantización que se ve genial en un prompt, pero falla en sesiones reales de juego.
+
+## Cuantización de Gemma4 + contexto: dónde se va realmente la memoria
+
+Muchos usuarios solo optimizan los pesos del modelo y olvidan la memoria de contexto. En flujos de IA local modernos, un contexto largo puede consumir muchísima memoria, especialmente cuando guardas historiales largos de chat para notas de campaña, builds o registros de roleplay.
+
+Un enfoque práctico:
+- Mantén el contexto por defecto para sesiones rápidas.
+- Aumenta el contexto solo cuando tu caso de uso realmente necesite memoria larga.
+- Prueba flash attention y la cuantización de caché KV antes de asumir que necesitas hardware más grande.
+
+| Cambio de ajuste | Impacto esperado | Bueno para | Ten en cuenta |
+|---|---|---|---|
+| **Activar flash attention** | Menores picos de memoria, manejo más rápido de contexto largo | Chats largos y prompts grandes | No hay ganancias idénticas en cada modelo/runtime |
+| **Caché KV FP16** | Mejor fidelidad | Tareas sensibles a la precisión | Mayor uso de memoria |
+| **Caché KV Q8** | Gran ahorro de memoria | Equipos gaming con RAM/VRAM ajustada | Posible cambio sutil en calidad |
+| **Salto máximo de contexto (p. ej., 2k → 32k)** | Enorme aumento de memoria | Memoria persistente de campaña | Puede perjudicar la capacidad de respuesta general del sistema |
+
+> **Advertencia:** Escalar el contexto puede costar más memoria que pasar de Q4 a Q8. Ajusta contexto y cuantización de Gemma4 juntos, no por separado.
+
+Para detalles oficiales sobre runtime y uso de modelos, consulta la [documentación oficial de Ollama](https://ollama.com/library), y luego adapta los ajustes a tu máquina específica.
+
+## Flujo de ajuste paso a paso (rápido y repetible)
+
+Usa este flujo exacto siempre que pruebes una nueva build de Gemma4 o actualices drivers.
+
+### 1) Prueba de línea base
+Ejecuta Gemma4 con una cuantización equilibrada (Q4_K_M), contexto por defecto y tus apps de fondo habituales abiertas.
+
+### 2) Captura tres métricas
+Registra:
+- Uso máximo de memoria
+- Tiempo hasta el primer token
+- Calidad de respuesta en 5 prompts fijos
+
+### 3) Amplía el contexto solo si es necesario
+Si tu caso de uso son comandos cortos, mantén un contexto moderado. Si haces sesiones largas de planificación, aumenta por pasos (2k → 8k → 16k), no todo de golpe.
+
+### 4) Ajusta el nivel de cuantización
+- Si la calidad es débil: pasa de Q4_K_M → Q6 o Q8
+- Si la memoria está justa: pasa de Q4_K_M → Q4_K_S o Q2
+
+### 5) Ajusta la caché KV
+Prueba caché Q8 para lograr grandes ahorros de memoria en contextos largos y luego compara las salidas contra tus prompts base.
+
+| Fase de prueba | Ajuste | Criterio de aprobación | Señal de fallo | Siguiente paso |
+|---|---|---|---|---|
+| **Fase 1** | Q4_K_M, contexto por defecto | Carga fluida + respuestas claras | OOM o inicios lentos | Reduce primero el contexto |
+| **Fase 2** | Aumentar contexto | Mejor memoria de mensajes anteriores | Picos grandes de RAM | Activa flash attention |
+| **Fase 3** | Caché KV Q8 | Menor memoria con salidas similares | Caída notable en razonamiento | Vuelve a caché FP16 |
+| **Fase 4** | Mejora a Q6/Q8 | Mejor precisión en prompts difíciles | Demasiado lento para uso real | Regresa a Q4_K_M |
+
+Este método mantiene las decisiones de cuantización de Gemma4 basadas en datos, en lugar de suposiciones.
+
+## Casos de uso gaming reales para la cuantización de Gemma4
+
+Muchos jugadores asumen que la cuantización es solo para desarrolladores de IA. No lo es. En 2026, estos son flujos de trabajo comunes centrados en gaming:
+
+- Asistente de optimización de build mientras haces raids
+- Ayudante de memoria de cadenas de misiones para campañas RPG largas
+- Notas de modding y redacción de changelogs
+- Prototipado ligero de scripts para automatización de herramientas
+- Resumen de estrategia de equipo durante sesiones competitivas
+
+Para estas tareas, la **cuantización de Gemma4** en Q4_K_M o Q6 suele sentirse mejor. Q2 también puede ser útil para resúmenes rápidos o lluvia de ideas básica cuando la memoria es limitada.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/K75j8MkwgJ0"
+    title="Optimiza tu IA - Cuantización explicada"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Errores comunes y cómo solucionarlos
+
+Los problemas más comunes de Gemma4 son desajustes de configuración, no fallos del modelo.
+
+### Error 1: Perseguir el tamaño de archivo más pequeño
+Una cuantización ultrabaja puede parecer atractiva, pero si tus prompts son complejos, la calidad puede caer más de lo esperado.
+
+### Error 2: Subir el contexto de forma demasiado agresiva
+Saltar al contexto máximo sin ajustar la caché puede crear una presión de memoria enorme.
+
+### Error 3: Probar con un solo prompt
+Necesitas un mini conjunto de benchmark. Incluye:
+- Un prompt de comando corto
+- Un prompt de razonamiento largo
+- Un prompt sensible al estilo
+- Un prompt de recuperación de memoria
+- Un prompt específico de gaming (build, tácticas, pasos de mod)
+
+### Error 4: Ignorar el thermal throttling
+El rendimiento de una laptop puede desplomarse bajo carga sostenida, haciendo que ajustes “buenos” parezcan malos.
+
+| Síntoma | Causa probable | Solución rápida |
+|---|---|---|
+| **Primera respuesta lenta** | Modelo demasiado grande para la memoria disponible | Baja de Q8 a Q4_K_M |
+| **Tirones del sistema durante el juego** | Contexto demasiado grande + apps de fondo | Reduce contexto, cierra overlays |
+| **Inconsistencia en la calidad** | Cuantización demasiado agresiva para la tarea | Pasa de Q2/Q4_K_S → Q4_K_M/Q6 |
+| **Picos de memoria con el tiempo** | Sesiones largas sin reinicio | Reinicia el runtime entre pruebas largas |
+| **Deriva inesperada en la salida** | Cuantización de caché KV demasiado agresiva | Compara caché Q8 vs caché FP16 |
+
+> **Flujo pro:** Mantén dos presets: un perfil “seguro para gaming” (menos memoria) y uno “prioridad calidad” (mayor precisión) para sesiones de escritura o planificación.
+
+## FAQ
+
+**P: ¿Cuál es el mejor punto de partida para la cuantización de Gemma4 en 2026?**
+
+R: Empieza con **Q4_K_M**. Ofrece un equilibrio sólido entre uso de memoria y calidad de salida para la mayoría de tareas relacionadas con gaming, especialmente en PCs y laptops de gama media.
+
+**P: ¿Debería usar Q8 para la cuantización de Gemma4 todo el tiempo?**
+
+R: No necesariamente. Q8 suele mejorar los matices, pero también usa más memoria. Si tu sistema ejecuta juegos e IA a la vez, Q4_K_M o Q6 pueden ofrecer mejor capacidad de respuesta general.
+
+**P: ¿La cuantización de la caché KV importa tanto como la cuantización del modelo?**
+
+R: Para sesiones de contexto largo, sí. Las opciones de caché KV pueden cambiar drásticamente el uso de memoria. Muchos usuarios consiguen grandes ahorros con caché Q8 manteniendo una calidad aceptable, pero deberías probar con tus propios prompts.
+
+**P: ¿La cuantización de Gemma4 puede ayudar en hardware de gama baja?**
+
+R: Absolutamente. Niveles de cuantización más bajos como Q4_K_S o Q2 pueden hacer que Gemma4 sea usable en sistemas limitados. Solo valida la calidad de respuesta frente a tu carga de trabajo real antes de comprometerte con un preset.
