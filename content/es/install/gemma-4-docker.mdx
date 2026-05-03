@@ -1,0 +1,228 @@
+export const metadata = {
+  title: "gemma 4 docker: Guía completa de configuración local, benchmarks y flujo de trabajo 2026",
+  description: "Aprende a ejecutar Gemma 4 en Docker para flujos de trabajo de IA local privados y rápidos. Incluye pasos de configuración, ajuste de rendimiento, solución de problemas y casos de uso prácticos para desarrollo de juegos.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1f2937/fff?text=Gemma+4+Docker+Guide",
+  date: "2026-05-03",
+  author: "Equipo de Gemma Wiki"
+}
+
+Si quieres soporte de IA privado para programación, planificación de contenido e iteración de prototipos de juegos, **gemma 4 docker** es una de las pilas locales más prácticas para aprender en 2026. Una configuración limpia de **gemma 4 docker** te ofrece entornos repetibles, reversiones rápidas y una incorporación de equipo más sencilla en comparación con instalaciones locales improvisadas. Para estudios indie y creadores en solitario, eso importa: menos tiempo peleando con dependencias y más tiempo probando bucles de juego, depurando scripts y redactando materiales de lanzamiento. En esta guía, construirás un flujo de trabajo orientado a producción alrededor de Gemma 4, entenderás dónde rinde bien el modelo y evitarás errores comunes que bloquean el progreso. También verás expectativas realistas para modelos locales pequeños, especialmente cuando necesitas tanto generación como revisión en la misma sesión.
+
+## ¿Por qué usar Gemma 4 en Docker para flujos de trabajo de juegos?
+
+Gemma 4 es útil como asistente para tareas acotadas: creación rápida de estructura de código, triaje de errores, explicación de código y planificación estructurada. Docker añade fiabilidad y portabilidad, lo cual es especialmente útil cuando cambias entre máquinas o compartes archivos de configuración con colaboradores.
+
+| Beneficio | Por qué importa para equipos de juegos | Impacto práctico |
+|---|---|---|
+| **Consistencia del entorno** | Mismo entorno de ejecución en cada máquina | Menos problemas de “en mi PC funciona” |
+| **Aislamiento** | Evita conflictos de paquetes con tu configuración principal de desarrollo | SO más limpio y mantenimiento más fácil |
+| **Despliegue repetible** | Inicia la pila con un solo comando | Incorporación más rápida de nuevos compañeros |
+| **Control de versiones para infraestructura** | Los archivos de Docker Compose se pueden seguir en Git | Cambios auditables y actualizaciones más seguras |
+| **IA local centrada en la privacidad** | Sin uso forzado de APIs en la nube para tareas principales | Mejor control de recursos internos |
+
+En muchas pruebas reales, los modelos de la clase Gemma 4 pueden generar borradores iniciales funcionales rápidamente y luego mejorar sustancialmente cuando proporcionas retroalimentación clara de errores. Ese patrón es perfecto para la iteración de juegos: prototipo, prueba, parche, vuelve a probar.
+
+> **⚠️ Advertencia:** No trates los modelos locales pequeños como motores de “respuesta final” de un solo intento para sistemas complejos. Úsalos como asistentes iterativos y valida todo en tiempo de ejecución.
+
+Para referencias oficiales de herramientas e instalación, usa el [sitio oficial de Ollama](https://ollama.com/) como autoridad base.
+
+## Configuración de gemma 4 docker: pila paso a paso (2026)
+
+Esta sección te da una pila práctica: Docker + Ollama + UI web de chat opcional. Puedes adaptarla para uso local en escritorio o para un nodo de estudio solo en LAN.
+
+### 1) Requisitos previos
+
+| Requisito | Recomendado en 2026 | Notas |
+|---|---|---|
+| SO | Windows 11, macOS o Linux | Linux suele tener el pass-through de GPU más sencillo |
+| RAM | **32 GB** preferidos | 16 GB funciona, pero el multitarea se vuelve justo |
+| GPU | Clase NVIDIA RTX 4070 Ti o superior | Variantes más pequeñas pueden ejecutarse con menos VRAM |
+| Docker | Última versión estable de Docker Desktop/Engine | Activa la virtualización en BIOS si es necesario |
+| Disco | 30+ GB libres | Los archivos del modelo + capas de contenedor se acumulan |
+
+### 2) Flujo principal de instalación
+
+1. Instala Docker y confirma que se ejecuta.
+2. Instala Ollama en el sistema host.
+3. Descarga la variante del modelo Gemma 4 que quieras (ejemplo: variante ligera clase 4B).
+4. Verifica la disponibilidad del modelo.
+5. Conecta una UI en contenedor (opcional) a Ollama para una mejor usabilidad en equipo.
+
+Un flujo simple de verificación rápida es:
+- Descargar el modelo  
+- Iniciar sesión de chat  
+- Enviar un prompt corto  
+- Confirmar latencia y corrección de la respuesta
+
+### 3) Arquitectura sugerida con Docker Compose
+
+Usa Docker Compose para ejecutar:
+- **servicio web-ui** (frontend de chat)
+- **capa opcional de proxy/autenticación**
+- Ollama puede ejecutarse en el host o en contenedor según tu estrategia de GPU
+
+| Arquitectura | Ideal para | Compensación |
+|---|---|---|
+| **Ollama en host + UI en Docker** | Lo más rápido para empezar, menos dolores de cabeza con GPU | Configuración mixta host/contenedor |
+| **Ollama + UI totalmente en contenedores** | Infraestructura-como-código más limpia | La configuración de GPU puede ser más estricta |
+| **Nodo remoto de Ollama + UI local** | Servidor de modelos compartido para equipos pequeños | Gestión de red y permisos |
+
+> **💡 Consejo:** Si eres nuevo en infraestructura de IA local, empieza con Ollama en host + UI en Docker. Pasa a la contenerización completa después de tu primer sprint estable.
+
+### 4) Nombres de modelo y comprobaciones tras descarga
+
+Las etiquetas del modelo pueden variar según el nombre de la versión. Después de descargar, ejecuta siempre un comando de listado de modelos y copia la etiqueta exacta en tu selector de UI/modelo. Esto evita errores silenciosos de desajuste donde tu app de chat llama al modelo incorrecto.
+
+## Benchmarks prácticos para tareas de desarrollo indie
+
+En lugar de puntuaciones sintéticas, prueba tu pila con tareas relevantes para juegos. Una buena línea base es solicitar un juego simple de navegador (por ejemplo, Snake en un solo archivo HTML) y luego dar retroalimentación de depuración.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/qh4LVnoCs-g"
+    title="Probé Gemma 4 localmente… Esto es lo que realmente funciona (y lo que falla)"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Suite de benchmarks recomendada
+
+| Prueba | Tipo de prompt | Criterio de éxito |
+|---|---|---|
+| **Generación de código** | “Construye Snake en un solo archivo HTML” | Se ejecuta sin errores fatales de JS |
+| **Pasada de depuración** | “Las flechas no funcionan, corrige la entrada” | Controles funcionales tras el parche |
+| **Revisión de código** | “Analiza la arquitectura y sugiere mejoras” | Hoja de ruta de mejoras estructurada y útil |
+| **Operaciones de contenido** | “Escribe una secuencia de lanzamiento de 5 emails” | Progresión coherente y CTA claro |
+| **Planificación estratégica** | “Plan semanal de redes para lanzamiento del juego” | Pilares lógicos + cadencia |
+
+En pruebas prácticas, los modelos pequeños estilo Gemma 4 suelen:
+- Generar buena estructura inicial rápidamente
+- Omitir casos límite en el primer intento
+- Mejorar de forma significativa con reportes de bugs explícitos
+- Rendir bien en tareas de resumen estructurado
+
+Eso significa que tu pila de **gemma 4 docker** funciona mejor cuando se combina con un bucle de pruebas claro, no con copiar/pegar a ciegas en producción.
+
+## Ajuste de rendimiento para gemma 4 docker
+
+Una vez que tu pila base funcione, optimiza para capacidad de respuesta y estabilidad.
+
+### Áreas clave de ajuste
+
+| Área | Qué ajustar | Resultado esperado |
+|---|---|---|
+| **Tamaño de contexto** | Mantén enfocado el historial de prompts | Menor latencia, menos respuestas divagantes |
+| **Formato del prompt** | Usa tarea + restricciones + formato de salida | Respuestas más predecibles |
+| **Diseño de sesiones** | Separa chats de programación, planificación y análisis | Mejor consistencia por flujo de trabajo |
+| **Carga de hardware** | Cierra apps pesadas durante la inferencia | Velocidad de generación más fluida |
+| **Elección del tamaño del modelo** | Usa una variante más pequeña para tareas rutinarias | Respuesta más rápida por solicitud |
+
+### Plantilla de prompt para depuración de desarrollo
+
+Usa esta estructura:
+1. Objetivo  
+2. Comportamiento actual  
+3. Evidencia de error/log  
+4. Restricciones (framework, límites de archivos, estilo)  
+5. Formato de salida esperado
+
+Patrón de ejemplo:
+- Objetivo: Corregir entrada de teclado en un juego de canvas HTML  
+- Comportamiento actual: Snake no se mueve  
+- Evidencia: Sin errores en consola JS, no se disparan eventos de teclas  
+- Restricciones: Un solo archivo, sin librerías externas  
+- Salida: Archivo completo corregido + registro de cambios conciso
+
+> **💡 Consejo:** Pide un “resumen mínimo de diff” después de cada corrección. Acelera QA y ayuda a los compañeros a entender exactamente qué cambió.
+
+### Expectativas de latencia en 2026
+
+Para GPUs modernas de gama media, las tareas cortas suelen ser utilizables a velocidad de chat interactivo. Las generaciones de código más largas o planes estructurados pueden tardar más. Planifica en torno al rendimiento total, no solo a la velocidad de un prompt:
+- Agrupa tareas similares
+- Reutiliza prompts de sistema
+- Mantén ordenadas las ventanas de contexto
+
+## Problemas comunes y soluciones rápidas
+
+Incluso con una buena configuración de **gemma 4 docker**, los equipos se topan con problemas recurrentes. Aquí tienes una tabla práctica de solución de problemas.
+
+| Problema | Causa probable | Solución rápida |
+|---|---|---|
+| El modelo no aparece en la UI | Desajuste de etiqueta | Copia el nombre exacto del modelo desde la salida de lista |
+| Respuestas lentas | GPU/CPU sobrecargada o contexto enorme | Reduce contexto, cierra apps pesadas, usa variante más pequeña |
+| Salida de código rota | Prompt ambiguo o faltan restricciones | Proporciona error de runtime y formato de salida estricto |
+| El contenedor no alcanza Ollama | Problema de red/mapeo de host | Verifica la URL del host y el modo de red del contenedor |
+| APIs alucinadas frecuentes | Tarea demasiado amplia | Restringe framework/versión y exige citas/comentarios |
+
+### Lista de verificación de fiabilidad antes de publicar salida
+
+- Ejecuta el código generado localmente
+- Prueba manejo de entrada y estados límite
+- Pide auto-revisión y enfoque alternativo
+- Mantén una puerta de aprobación humana para commits de producción
+
+Para equipos de juegos, este proceso de revisión no es negociable. La IA puede acelerar, pero QA sigue decidiendo qué se publica.
+
+## Mejores casos de uso (y límites) para creadores de juegos
+
+Un flujo de trabajo maduro de **gemma 4 docker** se centra en tareas de alto apalancamiento donde la IA local puede ahorrar tiempo real.
+
+### Donde Gemma 4 más ayuda
+
+| Caso de uso | Por qué funciona | Ejemplo |
+|---|---|---|
+| **Estructuración de prototipos** | Borradores iniciales rápidos | Bucle de jugabilidad pequeño en pseudo-código JS/Unity |
+| **Explicación de bugs** | Buena para interpretar código existente | Explicar bug de temporización del bucle de actualización |
+| **Sugerencias de refactorización** | Razonamiento estructurado sobre fragmentos de código | Dividir script monolítico en componentes |
+| **Redacción de contenido de lanzamiento** | Fuerte generación de estructura | Viñetas de página de tienda, cadencia de emails |
+| **Síntesis de investigación** | Resume salidas de herramientas | Destilar notas de parche o entradas de tendencias |
+
+### Donde debes mantener cautela
+
+- Decisiones complejas de arquitectura en un solo intento
+- Lógica backend sensible a seguridad sin revisión
+- Sistemas críticos de rendimiento donde importan microoptimizaciones
+- Texto legal/político que requiere revisión de cumplimiento precisa
+
+> **⚠️ Advertencia:** Trata la salida del modelo como un colaborador de borradores, no como una autoridad final. La verificación es parte del flujo de trabajo, no un extra opcional.
+
+## Plano de implementación para un estudio pequeño
+
+Si quieres operativizar esto en un sprint, sigue esta ruta de despliegue.
+
+| Fase del sprint | Acciones | Entregable |
+|---|---|---|
+| **Día 1-2** | Levantar Docker + Ollama + UI | Endpoint interno de IA compartido |
+| **Día 3** | Ejecutar suite de benchmarks | Hoja base de calidad y latencia |
+| **Día 4-5** | Construir biblioteca de prompts por tipo de tarea | Plantillas reutilizables para código/contenido |
+| **Día 6** | Definir puertas de QA y aprobación | Política de “commit asistido por IA” |
+| **Día 7** | Capacitación del equipo + retro | Documento de flujo de trabajo actualizado para el siguiente sprint |
+
+Una política mínima que funciona:
+1. Todo bloque de código generado por IA debe ejecutarse antes del merge  
+2. Toda corrección no trivial debe incluir una nota breve de validación escrita por un humano  
+3. Las plantillas de prompts viven en el repo y se versionan
+
+Esto hace que tu uso de **gemma 4 docker** sea medible en lugar de ad hoc, que es exactamente lo que los equipos necesitan para una velocidad estable en 2026.
+
+## FAQ
+
+**P: ¿gemma 4 docker es suficiente por sí solo para el desarrollo completo de juegos?**
+
+R: Funciona mejor como asistente que como constructor en solitario. Úsalo para estructuración, ayuda de depuración, resúmenes de revisión y planificación de contenido, y luego valida con tu proceso normal de desarrollo y QA.
+
+**P: ¿Qué hardware es realista para gemma 4 docker en 2026?**
+
+R: Una GPU moderna de gama media-alta con VRAM sólida, más 32 GB de RAM, ofrece una experiencia más fluida. Especificaciones más bajas también pueden funcionar con variantes de modelo más pequeñas y ventanas de contexto más ajustadas.
+
+**P: ¿Debería ejecutar Ollama dentro de Docker o en el host?**
+
+R: Empieza con Ollama en host más UI en Docker para una configuración más simple. Pasa a la contenerización completa cuando tu equipo necesite mayor reproducibilidad y automatización de infraestructura.
+
+**P: ¿Cuántas veces debo mencionar errores al pedir una corrección?**
+
+R: Incluye el error exacto una vez, luego añade pasos reproducibles y el comportamiento esperado. Los prompts de depuración claros y estructurados suelen superar los mensajes genéricos repetidos de “no funciona”.
