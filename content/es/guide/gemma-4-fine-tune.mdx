@@ -1,0 +1,180 @@
+export const metadata = {
+  title: "gemma 4 fine tune: Tutorial de flujo de trabajo sin código con Unsloth Studio 2026",
+  description: "Aprende un flujo de trabajo práctico de gemma 4 fine tune con Unsloth Studio, desde la configuración de GPU y el mapeo del dataset hasta la exportación y la evaluación en 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/4c1d95/fff?text=Gemma+4+Fine+Tune",
+  date: "2026-05-04",
+  author: "Equipo de Gemma Wiki"
+}
+
+Si quieres respuestas de chatbot más rápidas y más alineadas con tu marca, un **gemma 4 fine tune** es una de las mejoras de mayor impacto que puedes hacer en 2026. Un buen **gemma 4 fine tune** te permite conservar la inteligencia general del modelo base mientras le enseñas tu tono preferido, estructura de respuesta y políticas de soporte. La clave es seguir un flujo de trabajo controlado: elegir el tamaño de modelo correcto, formatear bien tu dataset, ejecutar configuraciones de entrenamiento eficientes y probar contra una línea base antes de lanzar. En este tutorial, seguirás una ruta sin código usando Unsloth Studio para que puedas lanzar rápido sin escribir scripts. También obtendrás rangos de parámetros prácticos, opciones de exportación y controles de calidad que ayudan a prevenir problemas comunes como texto de políticas alucinado, poca consistencia de formato u sobreajuste tras demasiados pasos.
+
+## Gemma 4 Fine Tune: Flujo de trabajo rápido sin código en 2026
+
+Para la mayoría de los equipos, la ruta más rápida es el entrenamiento guiado por UI con adaptadores QLoRA y una GPU en la nube. Este enfoque reduce los requisitos de VRAM y facilita la iteración.
+
+Aquí está el proceso completo que debes seguir:
+
+1. Aprovisiona una instancia de GPU (local o en la nube).
+2. Instala y abre Unsloth Studio.
+3. Carga un checkpoint de Gemma 4 ajustado por instrucciones.
+4. Mapea las columnas del dataset al formato system/user/assistant.
+5. Empieza con parámetros de entrenamiento conservadores.
+6. Entrena, monitorea las tendencias de pérdida y detente cuando las mejoras se aplanen.
+7. Exporta el modelo fusionado (o solo adaptador si lo prefieres).
+8. Compara lado a lado las respuestas de línea base vs ajustadas.
+
+> **⚠️ Advertencia:** No te saltes la comparación con línea base. Sin una revisión antes/después, es fácil confundir “estilo de salida diferente” con “mejor calidad de salida”.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/d9LGtygWEKQ"
+    title="Fine-Tune Gemma 4 in Minutes (No Code!) 🔥 Unsloth Studio Tutorial"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+## Prerrequisitos y configuración del entorno
+
+Antes de comenzar tu **gemma 4 fine tune**, asegúrate de que tu runtime coincida con el tamaño de modelo objetivo y el formato de exportación.
+
+| Requisito | Punto de partida recomendado | Por qué importa |
+|---|---|---|
+| **Modelo base** | **Gemma 4 E4B IT** | Una base ajustada por instrucciones es más fácil de adaptar para tareas de soporte/chat |
+| **Estrategia de VRAM** | **QLoRA 4-bit** | Reduce uso de memoria y costo durante el entrenamiento |
+| **Opción de GPU** | **Nube clase A40 o superior** | Buena relación costo/rendimiento para ejecuciones iterativas |
+| **Ubicación del dataset** | **Repo de dataset en Hugging Face** | Simplifica carga/versionado en la UI |
+| **Token de autenticación** | **Token HF de lectura/escritura** | Necesario si quieres subir el modelo entrenado a tu hub |
+| **Runtime** | **Instalador compatible con Linux/WSL/macOS** | La instalación con un comando simplifica el onboarding |
+
+Un patrón práctico en 2026 es alquilar cómputo en la nube para sesiones cortas, entrenar, exportar y apagar de inmediato. Esto evita cobrar tiempo inactivo y hace los experimentos más baratos.
+
+### Orden de configuración sugerido
+
+| Paso | Acción | Resultado |
+|---|---|---|
+| **1** | Desplegar pod de GPU con puerto de app expuesto | Entorno activo listo |
+| **2** | Ejecutar comando instalador de Unsloth Studio | UI y dependencias instaladas |
+| **3** | Abrir Studio y establecer contraseña | Acceso seguro configurado |
+| **4** | Añadir identificadores de modelo + dataset | Recursos de entrenamiento cargados |
+| **5** | Validar mapeo del dataset con vista previa | Alineación correcta de plantilla de chat |
+
+> **💡 Consejo:** Usa primero ejecuciones pequeñas de “smoke test” (por ejemplo, decenas de pasos), y luego escala a ejecuciones más largas solo después de que las salidas se vean correctas en dirección.
+
+Para detalles oficiales del ecosistema de modelos, revisa la documentación de Gemma de Google en el [sitio oficial de Gemma](https://ai.google.dev/gemma).
+
+## Formateo de dataset que mejora resultados
+
+La mayoría de ejecuciones fallidas ocurren antes de que siquiera empiece el entrenamiento. La calidad de un **gemma 4 fine tune** depende mucho de ejemplos limpios y consistentes por rol.
+
+Tu dataset debe producir un patrón de diálogo claro:
+
+- **System**: marco de comportamiento conciso
+- **User**: instrucción o pregunta
+- **Assistant**: estilo de respuesta ideal
+
+Evita mezclar campos de metadatos no relacionados en el texto de entrenamiento, salvo que realmente ayuden al modelo a responder mejor.
+
+| Elemento del dataset | Mantener o quitar | Mejor práctica |
+|---|---|---|
+| **Texto de instrucción** | **Mantener** | Usarlo como entrada de usuario |
+| **Respuesta ground-truth** | **Mantener** | Usarla como objetivo del assistant |
+| **Etiquetas de categoría/intención** | **Condicional** | Incluir solo si se necesitan en inferencia |
+| **Flags/marcadores internos** | **Normalmente quitar** | No enseñes tokens de control ruidosos o privados |
+| **System prompt** | **Mantener, pero refinar** | Hazlo corto, estable y específico de la tarea |
+
+Un movimiento práctico sin código es usar el mapeo con autoasistencia para generar un system prompt más limpio, y luego editarlo manualmente para claridad de políticas y tono.
+
+### Características de un buen system prompt
+
+- Enfocado en una sola familia de tareas
+- Reglas de formato explícitas (si hacen falta)
+- Sin instrucciones de comportamiento contradictorias
+- Verbosidad mínima
+
+> **⚠️ Advertencia:** Si tu mensaje de sistema es demasiado largo o amplio, el modelo ajustado puede producir respuestas genéricas en lugar del comportamiento de dominio que deseas.
+
+## Parámetros de entrenamiento para un Gemma 4 Fine Tune estable
+
+Una vez mapeados los datos, la selección de parámetros se vuelve la siguiente gran palanca de calidad. Un **gemma 4 fine tune** no necesita ajustes extremos para producir mejoras útiles.
+
+Empieza con valores equilibrados:
+
+| Grupo de parámetros | Rango inicial seguro | Nota práctica |
+|---|---|---|
+| **Pasos máximos** | **100–500** | Aumenta gradualmente después de validar |
+| **Tamaño de batch** | **1–4** | Usa lo que tu VRAM pueda sostener |
+| **Optimizador** | **AdamW 8-bit** | Buena eficiencia para memoria limitada |
+| **Programación de LR** | **Linear** | Estable para experimentos de primera pasada |
+| **Rango LoRA** | **8–32** | Un rango mayor puede capturar más matices de estilo |
+| **Dropout LoRA** | **0.0–0.1** | Añádelo si aparece sobreajuste |
+
+Al monitorear el progreso, observa la dirección de la tendencia, no solo valores puntuales:
+
+- Una pérdida que baja de forma sostenida es buena señal.
+- Inestabilidad repentina puede significar tasa de aprendizaje demasiado alta o muestras ruidosas.
+- Curvas que se aplanan pueden indicar rendimientos decrecientes; considera detener y evaluar.
+
+Para muchos equipos, las ejecuciones iterativas cortas superan una sola ejecución gigante. Obtienes ciclos de retroalimentación más rápidos, mejor alineación de prompts y menos horas de GPU desperdiciadas.
+
+## Exportación, validación y pruebas lado a lado
+
+Después del entrenamiento, la estrategia de exportación importa. Por comodidad de despliegue, muchos usuarios eligen un checkpoint fusionado para poder ejecutar un único artefacto directamente.
+
+| Opción de exportación | Ventajas | Compensaciones |
+|---|---|---|
+| **Modelo fusionado** | Despliegue simple, paquete único | Mayor huella de almacenamiento |
+| **Solo adaptador (LoRA)** | Archivos más pequeños, reutilización flexible | Requiere modelo base en runtime |
+| **Subir al hub** | Compartir/versionar fácilmente | Requiere permisos correctos del token |
+
+Para QA, compara salidas de línea base y ajustadas con prompts idénticos. Aquí es donde confirmas que tu **gemma 4 fine tune** mejoró el comportamiento real de tareas, no solo el estilo de redacción.
+
+### Lista de verificación de evaluación
+
+| Tipo de prueba | Qué buscar | Señal de aprobación |
+|---|---|---|
+| **Consistencia de formato** | Sigue la estructura requerida | Encabezados/bullets/plantillas estables |
+| **Cumplimiento de políticas** | Sin capacidades inventadas | Límites claros, lenguaje de escalamiento correcto |
+| **Precisión de tarea** | Guía procedimental correcta | Menos descargos irrelevantes |
+| **Alineación de tono** | Coincide con la voz de marca | Estilo de ayuda consistente |
+
+Ejecuta al menos 20–50 prompts en tus casos de uso más frecuentes antes de declarar el modelo listo para producción en 2026.
+
+> **💡 Consejo:** Mantén un conjunto fijo de prompts de benchmark. Reutilízalo en cada ejecución de entrenamiento para poder seguir los cambios de calidad objetivamente.
+
+## Errores comunes y cómo evitarlos
+
+Incluso equipos sólidos cometen errores predecibles durante un ciclo de **gemma 4 fine tune**. Usa esta lista rápida de correcciones para evitar retrabajo.
+
+| Error | Síntoma | Solución |
+|---|---|---|
+| **Sobreentrenar al inicio** | Las salidas se vuelven rígidas/repetitivas | Reduce pasos, reevalúa checkpoints más tempranos |
+| **Mapeo de roles desordenado** | Perspectiva de hablante confusa | Reconstruye el mapeo system/user/assistant |
+| **Sin prueba de línea base** | “Se ve mejor” pero sin mejoras probadas | Añade scorecard lado a lado |
+| **Demasiados campos ruidosos** | Metadatos aleatorios se filtran en respuestas | Quita columnas no esenciales |
+| **Mentalidad de ejecución única** | Ciclo de aprendizaje lento | Ejecuta experimentos más pequeños e itera |
+
+Si estás optimizando para soporte al cliente, prioriza la finalización práctica de tareas sobre la longitud vistosa de las respuestas. Las respuestas claras y alineadas con políticas superan a las respuestas verbosas en la mayoría de flujos de producción.
+
+Una recomendación final de proceso: mantén un registro ligero de experimentos con versión de dataset, conjunto de parámetros y notas de evaluación. En 2026, la reproducibilidad es una ventaja competitiva, especialmente cuando varios miembros del equipo ajustan modelos en paralelo.
+
+## FAQ
+
+**Q: How long does a gemma 4 fine tune usually take?**
+
+A: Depende del tamaño del modelo, el número de pasos y la clase de GPU. Las ejecuciones exploratorias pequeñas pueden terminar rápido, mientras que las ejecuciones de validación más grandes tardan más. Empieza con pruebas cortas, evalúa la calidad y luego escala la duración solo si los resultados lo justifican.
+
+**Q: Should I export a merged model or only LoRA adapters?**
+
+A: Si la simplicidad de despliegue es tu prioridad principal, la exportación fusionada suele ser más fácil. Si la flexibilidad de almacenamiento importa y tu runtime ya tiene el modelo base, exportar solo adaptadores puede ser más eficiente.
+
+**Q: What is the most important factor for gemma 4 fine tune quality?**
+
+A: La estructura limpia del dataset suele ser el factor más importante. El mapeo correcto de roles y respuestas objetivo sólidas a menudo mejoran más la calidad de salida que un ajuste agresivo de hiperparámetros.
+
+**Q: Can beginners do this workflow without coding in 2026?**
+
+A: Sí. Un flujo de trabajo de UI sin código es práctico para principiantes, especialmente para las primeras ejecuciones. Aun así, necesitas pensar cuidadosamente en la calidad de datos, los prompts de evaluación y los estándares de despliegue responsable.

@@ -1,0 +1,191 @@
+export const metadata = {
+  title: "Gemma 4 Coding: Guía Completa de Configuración Local en VS Code y Flujo de Trabajo 2026",
+  description: "Aprende a ejecutar Gemma 4 localmente para programar dentro de VS Code con Ollama y Continue. Incluye pasos de configuración, ajuste de permisos, expectativas de rendimiento y solución de problemas para 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1f2937/fff?text=Gemma+4+Coding+Guide",
+  date: "2026-05-04",
+  author: "Equipo de Gemma Wiki"
+}
+
+Si quieres asistencia de IA rápida sin enviar cada archivo a un servicio en la nube, **gemma 4 coding** es una de las configuraciones más prácticas que puedes montar en 2026. La gran ventaja es el control: tú eliges el tamaño del modelo, tus permisos y el flujo de trabajo en el editor. Para desarrolladores que trabajan en Visual Studio Code y prefieren herramientas locales, **gemma 4 coding** puede encargarse de tareas acotadas como creación de archivos, ajustes de UI y pequeños refactors con una calidad sorprendentemente sólida. En este tutorial, configurarás un stack local completo con Ollama + Continue, ajustarás permisos de herramientas para reducir interrupciones y aprenderás dónde destaca este modelo (y dónde las APIs de pago siguen ayudando). Sigue los pasos en orden y terminarás con una configuración repetible que puedes usar para scripts, prototipos web y herramientas ligeras de desarrollo de juegos.
+
+## Por qué la IA local importa para desarrollo y herramientas de juego en 2026
+
+En 2026, los modelos locales ya no son “solo experimentos”. Son asistentes útiles para el día a día cuando tus tareas están claramente delimitadas. Si construyes prototipos de gameplay, herramientas de editor, ayudantes para scripts de misiones o UIs web rápidas para pruebas internas, la inferencia local puede acelerar la iteración mientras mantiene tu árbol de código fuente en tu máquina.
+
+Para los **flujos de trabajo de Gemma 4 coding**, piensa en “asistir, no reemplazar”. Obtienes gran valor en:
+
+- Generar archivos iniciales
+- Editar funciones existentes
+- Añadir lógica de formularios/UI
+- Realizar refactors acotados
+- Explicar bloques de código en contexto
+
+Aun así, deberías usar modelos alojados más potentes para decisiones de arquitectura, orquestación de múltiples servicios o depuración profunda en repositorios grandes.
+
+| Caso de uso | Adecuación de Gemma 4 local | Notas |
+|---|---|---|
+| Ediciones de un solo archivo | **Excelente** | Rápido y predecible con prompts claros |
+| Pequeñas adiciones de funciones | **Muy buena** | Mejor con criterios de aceptación explícitos |
+| Arquitectura completa del proyecto | **Moderada** | Requiere más verificación |
+| Refactor a gran escala | **Moderada a baja** | Divide primero en tareas más pequeñas |
+| Código sensible por privacidad | **Gran ventaja** | Permanece local si está bien configurado |
+
+> **⚠️ Advertencia:** Los modelos locales aún pueden ejecutar ediciones no deseadas si los permisos son demasiado abiertos. Mantén la ejecución en terminal en modo de aprobación, a menos que confíes totalmente en el contexto de la tarea.
+
+## Stack de Gemma 4 Coding: qué instalar y por qué
+
+El stack limpio es simple: VS Code + Ollama + extensión Continue + variante de modelo Gemma 4 que se ajuste a tu hardware.
+
+Para descargas y nombres de modelos, usa la [biblioteca oficial de modelos de Ollama](https://ollama.com/library) como fuente de referencia.
+
+### Base recomendada
+
+| Componente | Recomendación | Por qué importa |
+|---|---|---|
+| Editor | **Visual Studio Code** | Ecosistema de extensiones estable |
+| Runtime local | **Ollama** | Flujo sencillo de pull/run |
+| Extensión de VS Code | **Continue** | Soporte de agente + chat en el editor |
+| Elección de modelo | **Gemma 4 8B** para portátiles | Buen equilibrio calidad/velocidad |
+| SO | macOS/Windows/Linux | Todos compatibles en 2026 |
+
+### Guía de dimensionamiento de hardware
+
+| Variante de Gemma 4 | RAM sugerida | Experiencia típica |
+|---|---|---|
+| **8B** | 16–24 GB | Fluida para tareas de programación |
+| 26B | 32 GB+ | Más pesado; más lento en portátiles |
+| 31B | 48 GB+ | Mejor calidad, mayor latencia |
+
+Si estás en una máquina tipo portátil, empieza con 8B. Puedes escalar después de validar tu flujo de trabajo.
+
+## Configuración paso a paso en VS Code (Ollama + Continue)
+
+Usa esta lista para evitar configuraciones omitidas.
+
+| Paso | Acción | Resultado |
+|---|---|---|
+| 1 | Instalar VS Code | Base limpia del editor |
+| 2 | Instalar Ollama | Runtime local disponible |
+| 3 | Hacer pull del modelo Gemma 4 | Modelo local listo |
+| 4 | Probar en chat de terminal | Validar respuesta del modelo |
+| 5 | Instalar extensión Continue | Panel de IA en el editor habilitado |
+| 6 | Seleccionar proveedor/modelo local | Conectar VS Code con Ollama |
+| 7 | Ajustar permisos | Reducir acciones bloqueadas |
+
+### Flujo de ejecución rápido
+
+1. Instala y abre VS Code.
+2. Instala Ollama.
+3. Haz pull de una variante de Gemma 4 (8B es la opción predeterminada más segura para la mayoría de usuarios).
+4. Ejecuta un prompt de prueba en terminal para confirmar que el modelo responde.
+5. Instala Continue desde el marketplace de extensiones de VS Code.
+6. Selecciona tu modelo local en Continue.
+7. Configura los permisos de herramientas antes de tu primera tarea de programación.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/89bhDV0FBSM"
+    title="Programación en VS Code con Gemma 4 y Ollama"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+> **💡 Consejo:** Antes de ejecutar tareas más grandes, pídele al modelo que primero produzca un plan de ejecución corto. Aprueba el plan y luego deja que aplique las ediciones. Esto reduce cambios aleatorios o parciales.
+
+## ## Ajustes de permisos de Gemma 4 Coding que realmente funcionan
+
+Una razón importante por la que los agentes locales “se atascan” es la fricción de permisos. Necesitas una política equilibrada: automática para operaciones de archivo seguras y manual para acciones de riesgo.
+
+| Capacidad de herramienta | Modo recomendado | Motivo |
+|---|---|---|
+| Leer archivos | **Automático** | Necesario para ensamblar contexto |
+| Leer archivo actual | **Automático** | Acelera ediciones normales |
+| Crear archivos nuevos | **Automático (alcance del repo)** | Requerido para crear estructura de funciones |
+| Editar archivo actual | **Automático** | Flujo iterativo fluido |
+| Buscar y reemplazar | **Automático** | Eficiente para actualizaciones repetitivas |
+| Ejecutar comandos de terminal | **Preguntar cada vez** | Evita ejecución accidental de comandos |
+
+### Política práctica para repos cercanos a game-dev
+
+Si construyes pequeñas utilidades de gameplay, scripts de balance o paneles web para pruebas:
+
+- Mantén las ediciones de código mayormente automáticas.
+- Exige confirmación para comandos de shell.
+- Confirma planes para cambios en múltiples archivos.
+- Haz commit con frecuencia (o usa snapshots locales) antes de cada prompt importante.
+
+Este es el punto óptimo para **gemma 4 coding en VS Code**: interrupción mínima y riesgo controlado.
+
+## Expectativas de rendimiento y estrategia de prompts en 2026
+
+Para tener éxito con IA local, la calidad del prompt importa tanto como el hardware. Los prompts sólidos definen el archivo, el alcance y la condición de finalización.
+
+### Patrones de plantilla de prompts
+
+| Objetivo | Patrón de prompt | Por qué funciona |
+|---|---|---|
+| Crear archivo | “Crea el archivo `X` con estructura `Y` y sin dependencias extra.” | Salida clara y delimitada |
+| Modificar UI | “Actualiza solo `index.html` para añadir el formulario `A`; mantén sin cambios el render de la lista existente.” | Evita sobre-edición |
+| Refactorizar | “Refactoriza la función `foo()` para mejorar legibilidad; no cambies el comportamiento.” | Reduce riesgo |
+| Depurar | “Encuentra la causa probable de `error`; propone una solución en 3 pasos antes de editar.” | Obliga a razonar primero |
+
+### Cómo se ve un “buen rendimiento”
+
+Con 8B en portátiles modernos típicos, puedes esperar:
+
+- Planificación con buena respuesta
+- Ediciones fiables para tareas cortas
+- Latencia aceptable para solicitudes iterativas
+- Mejores resultados cuando los prompts son explícitos
+
+Donde esta configuración puede tener dificultades:
+
+- Ventanas de contexto masivas
+- Monorepos multilenguaje
+- Reescrituras arquitectónicas complejas
+
+Para muchos usuarios, **Gemma 4 coding** es ideal como copiloto local para detalles de implementación, mientras que los modelos premium en la nube siguen siendo útiles para puntos de control de diseño de alto nivel.
+
+## Solución rápida de problemas comunes
+
+Si tu configuración parece rota, normalmente es una de estas causas:
+
+| Síntoma | Causa probable | Solución |
+|---|---|---|
+| El modelo aparece pero no edita archivos | Bloqueo por permisos | Configura acciones seguras de archivo en automático |
+| El agente planifica pero se detiene | Esperando aprobación del plan | Aprueba el plan explícitamente |
+| No aparecen modelos locales | Incompatibilidad de proveedor | Vuelve a seleccionar Ollama/proveedor local |
+| Los popups de UI se ven raros | Conflicto de tema o color personalizado | Cambia de tema, prueba configuración predeterminada |
+| Respuestas lentas | Modelo demasiado grande para el hardware | Cambia a variante 8B |
+
+### Rutina de recuperación rápida
+
+1. Cambia a un tema predeterminado de VS Code.
+2. Verifica que Ollama esté en ejecución y que el modelo aparezca listado.
+3. Reabre el panel de Continue y vuelve a seleccionar el modelo.
+4. Prueba con una tarea mínima: “Crea un archivo HTML hello-world.”
+5. Escala gradualmente hacia tareas reales del repositorio.
+
+> **⚠️ Advertencia:** No diagnostiques primero con un prompt complejo. Empieza con una tarea pequeña y determinista para poder aislar si el problema es el runtime del modelo, los permisos o el estado de la extensión.
+
+## FAQ
+
+**P: ¿gemma 4 coding es suficientemente bueno para desarrollo diario en 2026?**
+
+R: Para tareas pequeñas y medianas, sí—especialmente creación local de archivos, ediciones enfocadas y actualizaciones de UI. Para trabajo profundo de arquitectura o razonamiento grande en múltiples repos, úsalo junto con un modelo alojado más potente.
+
+**P: ¿Qué tamaño de Gemma 4 debería elegir primero?**
+
+R: Empieza con 8B a menos que tengas hardware con mucha memoria. Ofrece la mejor relación entre configuración y resultados para la mayoría de portátiles y estaciones de trabajo de escritorio.
+
+**P: ¿Por qué el agente se detiene después de “pensar”?**
+
+R: Normalmente está esperando aprobación del plan o permiso de escritura. Revisa la configuración de herramientas y confirma el plan antes de esperar cambios en archivos.
+
+**P: ¿Puedo usar este flujo para herramientas de desarrollo indie de videojuegos?**
+
+R: Por supuesto. Esta configuración es útil para paneles de depuración, validadores de datos, ayudantes de scripts y herramientas internas rápidas de UI. Mantén las tareas acotadas y valida los resultados con frecuencia para obtener mejores resultados.

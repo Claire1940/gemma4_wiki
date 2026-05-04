@@ -1,0 +1,191 @@
+export const metadata = {
+  title: "Gemma 4 Coding: Complete Local VS Code Setup and Workflow Guide 2026",
+  description: "Learn how to run Gemma 4 locally for coding inside VS Code with Ollama and Continue. Includes setup steps, permission tuning, performance expectations, and troubleshooting for 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1f2937/fff?text=Gemma+4+Coding+Guide",
+  date: "2026-05-04",
+  author: "Gemma Wiki Team"
+}
+
+If you want fast AI assistance without sending every file to a cloud service, **gemma 4 coding** is one of the most practical setups you can build in 2026. The big advantage is control: you choose your model size, your permissions, and your editor workflow. For developers who work in Visual Studio Code and prefer local tooling, **gemma 4 coding** can handle scoped tasks like file creation, UI tweaks, and small refactors with surprisingly solid quality. In this tutorial, you’ll configure a full local stack with Ollama + Continue, tune tool permissions to reduce interruptions, and learn where this model shines (and where paid APIs still help). Follow the steps in order, and you’ll end with a repeatable setup you can use for scripts, web prototypes, and lightweight game dev tools.
+
+## Why Local AI Matters for Dev and Game Tooling in 2026
+
+In 2026, local models are no longer “just experiments.” They’re useful daily assistants when your tasks are clearly scoped. If you build gameplay prototypes, editor tools, quest scripting helpers, or quick web UIs for internal testing, local inference can speed up iteration while keeping your source tree on your machine.
+
+For **Gemma 4 coding workflows**, think in terms of “assist, not replace.” You get strong value in:
+
+- Generating starter files
+- Editing existing functions
+- Adding form/UI logic
+- Performing contained refactors
+- Explaining code blocks in context
+
+You should still use stronger hosted models for architecture decisions, multi-service orchestration, or deep debugging across large repos.
+
+| Use Case | Local Gemma 4 Fit | Notes |
+|---|---|---|
+| Single-file edits | **Excellent** | Fast and predictable with clear prompts |
+| Small feature additions | **Very good** | Best with explicit acceptance criteria |
+| Full project architecture | **Moderate** | Requires more verification |
+| Large-scale refactor | **Moderate to low** | Split into smaller tasks first |
+| Privacy-sensitive code | **Strong advantage** | Stays local if configured correctly |
+
+> **⚠️ Warning:** Local models can still execute unintended edits if permissions are too open. Keep terminal execution on approval mode unless you fully trust the task context.
+
+## Gemma 4 Coding Stack: What to Install and Why
+
+The clean stack is simple: VS Code + Ollama + Continue extension + Gemma 4 model variant that matches your hardware.
+
+For model downloads and naming, use the [official Ollama model library](https://ollama.com/library) as your source of truth.
+
+### Recommended baseline
+
+| Component | Recommendation | Why it matters |
+|---|---|---|
+| Editor | **Visual Studio Code** | Stable extension ecosystem |
+| Local runtime | **Ollama** | Easy pull/run flow |
+| VS Code extension | **Continue** | Agent + chat support in editor |
+| Model choice | **Gemma 4 8B** for laptops | Good quality/speed balance |
+| OS | macOS/Windows/Linux | All supported in 2026 |
+
+### Hardware sizing guideline
+
+| Gemma 4 Variant | Suggested RAM | Typical Experience |
+|---|---|---|
+| **8B** | 16–24 GB | Smooth for coding tasks |
+| 26B | 32 GB+ | Heavier; slower on laptops |
+| 31B | 48 GB+ | Better quality, higher latency |
+
+If you’re on a laptop-class machine, start with 8B. You can scale up after validating your workflow.
+
+## Step-by-Step Setup in VS Code (Ollama + Continue)
+
+Use this checklist to avoid missed settings.
+
+| Step | Action | Result |
+|---|---|---|
+| 1 | Install VS Code | Clean editor baseline |
+| 2 | Install Ollama | Local runtime available |
+| 3 | Pull Gemma 4 model | Local model ready |
+| 4 | Test in terminal chat | Validate model response |
+| 5 | Install Continue extension | In-editor AI panel enabled |
+| 6 | Select local provider/model | Connect VS Code to Ollama |
+| 7 | Tune permissions | Reduce blocked actions |
+
+### Quick execution flow
+
+1. Install and open VS Code.
+2. Install Ollama.
+3. Pull a Gemma 4 variant (8B is the safest default for most users).
+4. Run a terminal test prompt to confirm the model answers.
+5. Install Continue from the VS Code extensions marketplace.
+6. Select your local model in Continue.
+7. Configure tool permissions before your first coding task.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/89bhDV0FBSM"
+    title="Coding in VS Code with Gemma 4 and Ollama"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+> **💡 Tip:** Before running bigger tasks, ask the model to produce a short execution plan first. Approve the plan, then let it apply edits. This reduces random or partial changes.
+
+## ## Gemma 4 Coding Permission Settings That Actually Work
+
+A major reason local agents “stall” is permission friction. You need a balanced policy: automatic for safe file operations, manual for risky actions.
+
+| Tool Capability | Recommended Mode | Reason |
+|---|---|---|
+| Read files | **Automatic** | Needed for context assembly |
+| Read current file | **Automatic** | Speeds normal edits |
+| Create new files | **Automatic (repo-scoped)** | Required for feature scaffolding |
+| Edit current file | **Automatic** | Smooth iterative flow |
+| Find & replace | **Automatic** | Efficient for repetitive updates |
+| Run terminal commands | **Ask each time** | Prevents accidental command execution |
+
+### Practical policy for game-dev adjacent repos
+
+If you build small gameplay utilities, balancing scripts, or web dashboards for testing:
+
+- Keep code edits mostly automatic.
+- Require confirmation for shell commands.
+- Confirm plans for multi-file changes.
+- Commit frequently (or use local snapshots) before each major prompt.
+
+This is the sweet spot for **gemma 4 coding in VS Code**: minimal interruption, controlled risk.
+
+## Performance Expectations and Prompt Strategy in 2026
+
+For local AI success, prompt quality matters as much as hardware. Strong prompts define the file, scope, and done condition.
+
+### Prompt template patterns
+
+| Goal | Prompt Pattern | Why it works |
+|---|---|---|
+| Create file | “Create `X` file with `Y` structure and no extra dependencies.” | Clear bounded output |
+| Modify UI | “Update only `index.html` to add form `A`; keep existing list render unchanged.” | Prevents over-editing |
+| Refactor | “Refactor function `foo()` for readability; do not change behavior.” | Narrows risk |
+| Debug | “Find likely cause of `error`; propose fix in 3 steps before editing.” | Forces reasoning first |
+
+### What “good performance” looks like
+
+With 8B on typical modern laptops, you can expect:
+
+- Responsive planning
+- Reliable edits for short tasks
+- Acceptable latency for iterative asks
+- Better outcomes when prompts are explicit
+
+Where this setup may struggle:
+
+- Massive context windows
+- Multi-language monorepos
+- Complex architectural rewrites
+
+For many users, **Gemma 4 coding** is ideal as a local co-pilot for implementation details, while premium cloud models remain useful for high-level design checkpoints.
+
+## Troubleshooting Common Issues Fast
+
+If your setup feels broken, it’s usually one of these:
+
+| Symptom | Likely Cause | Fix |
+|---|---|---|
+| Model appears but doesn’t edit files | Permission gate | Set safe file actions to automatic |
+| Agent plans but stops | Awaiting plan approval | Approve plan explicitly |
+| No local models listed | Provider mismatch | Re-select Ollama/local provider |
+| UI popups look odd | Theme or custom color conflict | Switch theme, test default settings |
+| Slow responses | Model too large for hardware | Move to 8B variant |
+
+### Quick recovery routine
+
+1. Switch to a default VS Code theme.
+2. Verify Ollama is running and model is listed.
+3. Reopen Continue panel and re-select model.
+4. Test with a tiny task: “Create a hello-world HTML file.”
+5. Expand gradually to real repo tasks.
+
+> **⚠️ Warning:** Don’t diagnose with a complex prompt first. Start with a tiny deterministic task so you can isolate whether the issue is model runtime, permissions, or extension state.
+
+## FAQ
+
+**Q: Is gemma 4 coding good enough for daily development in 2026?**
+
+A: For small and medium tasks, yes—especially local file creation, focused edits, and UI updates. For deep architecture work or large multi-repo reasoning, use it alongside a stronger hosted model.
+
+**Q: Which Gemma 4 size should I pick first?**
+
+A: Start with 8B unless you have high-memory hardware. It offers the best setup-to-results ratio for most laptops and desktop workstations.
+
+**Q: Why does the agent stop after “thinking”?**
+
+A: Usually it’s waiting for either plan approval or write permission. Check your tool settings and confirm the plan before expecting file changes.
+
+**Q: Can I use this workflow for indie game development tools?**
+
+A: Absolutely. This setup is useful for debug dashboards, data validators, script helpers, and quick in-house UI tooling. Keep tasks scoped and validate outputs frequently for best results.
