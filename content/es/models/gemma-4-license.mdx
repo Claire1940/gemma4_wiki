@@ -1,0 +1,171 @@
+export const metadata = {
+  title: "gemma 4 license: Guía 2026 para creadores, modding y uso comercial",
+  description: "Aprende cómo la gemma 4 license afecta a estudios de videojuegos, modders y creadores de contenido en 2026, con listas de verificación prácticas de cumplimiento y consejos de despliegue.",
+  category: "Guía",
+  image: "https://placehold.co/800x400/7c3aed/fff?text=Gemma+4+License+Guide",
+  date: "2026-05-04",
+  author: "Equipo de Gemma Wiki"
+}
+
+Si estás creando herramientas para juegos, sistemas de diálogo para NPC o asistentes de modding, entender la **gemma 4 license** es tan importante como la calidad del modelo. En 2026, muchos desarrolladores están experimentando con flujos de trabajo de IA local para reducir costes de nube y mantener los datos de los jugadores en el dispositivo, y ahí es donde las preguntas sobre la **gemma 4 license** aparecen rápido: ¿Puedes usarla en un juego publicado? ¿Puedes monetizar los resultados? ¿Qué necesitas revelar a los usuarios? Esta guía te ofrece un marco práctico centrado en gaming para que pases de “prototipo genial” a “proceso de lanzamiento seguro”. También obtendrás una lista de verificación de cumplimiento paso a paso, tablas de planificación de despliegue y errores comunes que debes evitar antes del lanzamiento.
+
+## Por qué la cuestión de la licencia importa para los desarrolladores de juegos
+
+Los equipos de juego suelen centrarse primero en FPS, netcode y pipelines de contenido, y luego tratan la licencia como una revisión legal tardía. Con la integración de IA, ese orden puede crear riesgos evitables. Incluso cuando un modelo es gratuito para ejecutarse localmente, los términos de uso siguen regulando la redistribución, la atribución y la integración comercial.
+
+Para los equipos de gaming, los problemas de licencia suelen aparecer en cuatro lugares:
+
+1. **Funciones de IA dentro del juego** (pistas de misiones, tutoriales adaptativos, resúmenes de lore)
+2. **Herramientas para creadores** (redacción de diálogos, descripciones de objetos, generación de notas de parche)
+3. **Funciones comunitarias** (asistentes de mods, bots de clanes, ayudantes del lado del servidor)
+4. **Contenido de marketing** (copys para tiendas, fragmentos para redes sociales, borradores de localización)
+
+> **⚠️ Advertencia:** “Gratis para descargar” no significa automáticamente “gratis para cualquier patrón de distribución comercial”. Trata la gemma 4 license como parte de tus requisitos de producción, no como limpieza posterior al lanzamiento.
+
+## Aspectos esenciales de la gemma 4 license (enfoque gaming)
+
+Antes de usar Gemma 4 en producción, define *tu patrón exacto de uso*. La mayor parte de la confusión ocurre porque los equipos hacen preguntas legales amplias en lugar de mapear flujos de trabajo concretos.
+
+### Flujo práctico de interpretación
+
+| Pregunta | Por qué importa | Responsable del equipo |
+|---|---|---|
+| ¿La ejecutas localmente, del lado del servidor o en híbrido? | Las obligaciones de distribución y datos pueden variar según la arquitectura | Líder Técnico |
+| ¿La salida es visible para el usuario en el juego o solo interna? | Las funciones públicas pueden requerir divulgación más clara y barreras de protección | Producto + Legal |
+| ¿Estás distribuyendo los pesos con el cliente del juego? | Pueden aplicar términos de empaquetado y redistribución | Build/Release |
+| ¿Los jugadores subirán imágenes/audio? | Aumentan las obligaciones de privacidad y moderación | Seguridad + Trust/Safety |
+| ¿La monetización es directa (juego de pago/DLC) o indirecta (anuncios/suscripciones)? | El contexto comercial afecta la profundidad de la revisión de riesgos | Negocio + Legal |
+
+Una base fiable: revisa la documentación y los términos oficiales de Gemma antes de cerrar tu plan de lanzamiento. Usa la página oficial de Google Gemma como fuente principal para el lenguaje de políticas vigente: [Google’s official Gemma model documentation](https://ai.google.dev/gemma).
+
+### Dimensionamiento de modelos y planificación de despliegue (a partir de patrones de uso reales)
+
+El siguiente dimensionamiento es útil para la planificación inicial al probar Gemma 4 en local:
+
+| Variante de Gemma 4 | Uso típico en flujos de trabajo de juegos | Objetivo práctico de hardware reportado |
+|---|---|---|
+| **E2B** | Prompts ligeros para asistentes de NPC, redacción rápida de metadatos | Dispositivos de clase ~5 GB de RAM |
+| **E4B** | Asistente local equilibrado para herramientas y scripts | Portátiles/escritorios modernos |
+| **26B** | Mejor razonamiento para documentos de diseño y prompts complejos | Sistemas de clase ~16–20 GB de RAM |
+| **31B** | Respuestas locales de mayor calidad para pipelines avanzados | 20+ GB de RAM y/o GPU más potente |
+
+> **💡 Consejo:** Para muchos equipos indie, E4B es el mejor primer punto de control: suficiente calidad para validar el valor para el usuario y una carga lo bastante baja para iterar rápido.
+
+## cumplimiento de gemma 4 license por caso de uso
+
+Aquí tienes una matriz práctica que puedes usar durante la planificación de sprints. No sustituye el asesoramiento legal, pero ayuda a los equipos a hacer las preguntas correctas desde el principio.
+
+| Caso de uso | Ejemplo en gaming | Enfoque de licencia/cumplimiento | Nivel de riesgo |
+|---|---|---|---|
+| **Asistente interno de redacción** | Lluvia de ideas para textos de misiones en herramientas del estudio | Registros de uso solo del equipo y alineación con políticas | **Bajo** |
+| **Asistente offline dentro del juego** | Pistas en el dispositivo para rompecabezas de un jugador | Divulgaciones al usuario final, filtros de seguridad, QA de salidas | **Medio** |
+| **Función en vivo del lado del servidor** | Asistente de moderación multijugador | Retención de datos, flujo de consentimiento del usuario, manejo de abusos | **Medio–Alto** |
+| **Integración en toolkit de modding** | Plugin de la comunidad que genera lore de objetos | Términos de redistribución, política de plugins de terceros | **Alto** |
+| **Generación automatizada de contenido para tiendas** | Descripciones de DLC en distintas regiones | Revisión de marca/legal y puerta de aprobación humana | **Medio** |
+
+### Qué documentar antes del lanzamiento
+
+Crea una “Ficha de Función de IA” de una página por función:
+
+- Modelo/versión usada (p. ej., variante de Gemma 4)
+- Ubicación de ejecución (dispositivo/servidor)
+- Categorías de datos de entrada (texto/imagen/audio)
+- Destinos de salida (UI/chat/log/exportación)
+- Salvaguardas contra abuso y comportamiento de respaldo
+- Reglas de revisión humana para textos públicos
+
+Este único documento reduce drásticamente la confusión entre los equipos de desarrollo, legal y publishing.
+
+## Flujo de implementación para estudios y equipos de modding
+
+Trata la licencia y el despliegue como un solo pipeline, no como corrientes separadas.
+
+| Fase | Acción | Entregable |
+|---|---|---|
+| **Descubrimiento** | Definir el alcance de la función y su impacto en el usuario | Brief de función de IA |
+| **Revisión de términos** | Comprobar los términos actuales de gemma 4 license | Notas de aprobación legal |
+| **Prototipo** | Ejecutar pruebas locales en AI Studio y runtime local | Hoja de benchmark de prompts/resultados |
+| **Revisión de seguridad** | Añadir controles de salidas dañinas y restricciones de contenido | Lista de verificación de seguridad |
+| **Preparación de lanzamiento** | Actualizar EULA/privacidad/notas de parche si hace falta | Divulgaciones de cara al jugador |
+| **Postlanzamiento** | Monitorizar calidad de salidas y reportes de abuso | Informe mensual de cumplimiento |
+
+### Lenguaje de política recomendado para el equipo (interno)
+
+- “No habrá despliegue público sin un registro de modelo/versión.”
+- “No se publicará automáticamente texto de marketing generado por IA sin aprobación humana.”
+- “No habrá funciones con subidas de jugadores sin flujo de moderación.”
+
+> **⚠️ Advertencia:** Si tu ecosistema de mods permite scripts de usuario, asume que los jugadores probarán prompts límite. Las barreras de protección y las herramientas de reporte deben formar parte del alcance de lanzamiento, no de un parche futuro.
+
+## Contexto de configuración local de Gemma 4 para creadores
+
+Si tu prioridad es la privacidad y el control de costes, el despliegue local puede encajar muy bien. Un flujo de trabajo común en 2026 es:
+
+1. Probar el comportamiento en herramientas de estudio basadas en navegador  
+2. Descargar el modelo en local con Ollama  
+3. Validar la calidad de los prompts en tu pipeline real de contenido  
+4. Añadir logs, filtros y manejo de fallos antes del lanzamiento
+
+Este tutorial es útil para ver en acción la configuración local y el flujo de trabajo por tamaño de modelo:
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+### Local vs nube para producción de juegos
+
+| Factor | Enfoque local con Gemma 4 | Enfoque con API en la nube |
+|---|---|---|
+| **Consistencia de latencia** | Buena para funciones offline/de un jugador | Depende de la red y la región |
+| **Postura de privacidad** | Control en dispositivo más sólido | Requiere gobernanza de datos en la nube |
+| **Coste operativo** | Coste de hardware inicial | Coste continuo por solicitud |
+| **Velocidad de parcheo** | Iteración local rápida para herramientas | Actualizaciones centrales rápidas |
+| **Escalado de live ops** | Más difícil a gran escala concurrente | Más fácil de escalar globalmente |
+
+Usa esta tabla junto con tus objetivos de producción y luego vuelve a tu lista de verificación de revisión de la **gemma 4 license**.
+
+## Lista de verificación para lanzamiento: publica más rápido con menos sorpresas legales
+
+Antes de publicar una build, realiza esta revisión de 10 puntos:
+
+1. Confirmar modelo/versión y fuente en la documentación interna  
+2. Volver a comprobar el texto actual de la gemma 4 license (snapshot 2026)  
+3. Validar el método de distribución (empaquetado vs alojado)  
+4. Añadir divulgaciones al usuario donde se muestre salida de IA  
+5. Definir ruta de moderación y escalado de abuso  
+6. Añadir UX de respaldo para generaciones fallidas/bloqueadas  
+7. Validar prompts para coherencia de lore/IP  
+8. Revisar con humanos los contenidos públicos de marketing  
+9. Actualizar páginas de privacidad y términos según sea necesario  
+10. Asignar un responsable para la monitorización postlanzamiento
+
+Si esta semana solo haces una cosa, haz los puntos #1, #2 y #4. Esos tres pasos detectan la mayoría de los problemas de producción evitables.
+
+---
+
+En resumen, Gemma 4 puede ser una opción excelente para creadores de gaming que quieren control local, menores costes recurrentes y herramientas flexibles. Pero el éxito no depende tanto de “¿puede ejecutarse?” sino de “¿puede publicarse de forma responsable?”. Haz que la revisión de la **gemma 4 license** forme parte de tu pipeline de build, y tu equipo avanzará más rápido con menos sorpresas.
+
+## FAQ
+
+**Q: Can I use gemma 4 license workflows for a commercial game release?**
+
+A: Potencialmente sí, pero deberías validar tu patrón exacto de distribución y monetización frente a los términos vigentes. El uso interno, el uso dentro del juego y la redistribución pueden implicar obligaciones diferentes.
+
+**Q: Is local use automatically safer from a compliance standpoint?**
+
+A: El uso local puede mejorar el control de privacidad, pero el cumplimiento sigue incluyendo licencias, divulgaciones, moderación y cómo se usan las salidas en tu producto.
+
+**Q: What is the best Gemma 4 size for indie game teams starting out?**
+
+A: Muchos equipos comienzan con E4B por su equilibrio entre rendimiento y exigencia de hardware, y luego prueban 26B para razonamiento de mayor calidad cuando hace falta.
+
+**Q: How often should we re-check gemma 4 license terms in 2026?**
+
+A: Vuelve a revisarlos en cada hito importante de lanzamiento (prototipo, beta, lanzamiento, parche mayor) y siempre que cambies la arquitectura, la monetización o las funciones con entradas generadas por usuarios.

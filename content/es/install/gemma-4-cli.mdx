@@ -1,0 +1,199 @@
+export const metadata = {
+  title: "gemma 4 cli: Guía 2026 de configuración local de IA y flujo de trabajo para desarrollo de juegos",
+  description: "Aprende a instalar, configurar y optimizar gemma 4 cli para escritura de juegos, programación y flujos de diseño en vivo en 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/1f2937/fff?text=Gemma+4+CLI+Guide",
+  date: "2026-05-04",
+  author: "Equipo de Gemma Wiki"
+}
+
+Si desarrollas juegos, herramientas de modding o contenido de live-ops, **gemma 4 cli** puede convertirse en una de tus herramientas de IA local más prácticas en 2026. En lugar de saltar entre paneles en la nube y documentación, puedes ejecutar **gemma 4 cli** directamente desde tu terminal, mantener locales los archivos sensibles del proyecto e iterar más rápido en scripts, textos de misiones y documentos de diseño. Esto importa tanto para equipos indie como para pipelines de estudio: obtienes ciclos rápidos de prompt-respuesta, amplio soporte multilingüe y opciones de modelo que encajan en distintos presupuestos de hardware. En esta guía, configurarás un flujo de trabajo CLI limpio, elegirás el tamaño de modelo Gemma 4 adecuado y usarás prompts estructurados para tareas reales de gaming como pasadas de diálogo de NPC, redacción de notas de parche y generación de utilidades en Lua/C#. Sigue estos pasos y tendrás un sistema repetible con el que realmente puedes publicar.
+
+## Por qué gemma 4 cli encaja en la producción moderna de videojuegos
+
+El desarrollo de juegos en 2026 ya no trata solo de velocidad de renderizado y netcode. El rendimiento de producción de contenido es ahora un cuello de botella importante: líneas narrativas breves, descripciones de objetos, pistas de onboarding y scripts de eventos necesitan iteración. Un modelo CLI local ayuda porque puedes conectarlo directamente con tus herramientas actuales.
+
+Las fortalezas anunciadas de Gemma 4 (opciones de contexto amplio, soporte para uso de herramientas, variedad de tamaños de modelo y amplia cobertura de idiomas) se ajustan bien a la realidad de los estudios:
+
+- **Contexto amplio** ayuda al analizar juntos documentos de diseño o fragmentos de código.
+- **Variantes pequeñas y eficientes** son útiles en portátiles con poca memoria.
+- **Opciones más rápidas estilo MoE** pueden reducir esperas durante ciclos de iteración.
+- **Opciones densas de mayor calidad** ayudan en pasadas de pulido.
+
+| Necesidad de producción | Problema común | Cómo ayuda gemma 4 cli |
+|---|---|---|
+| Iteración narrativa | Ciclos de revisión lentos | Genera múltiples variantes de tono en una sola sesión de terminal |
+| Soporte de scripting | Fatiga por código repetitivo | Redacta rápidamente funciones de utilidad y bases de pruebas |
+| Preparación de localización | Terminología inconsistente | Produce borradores multilingües estructurados para limpieza por revisores |
+| Cadencia de live-ops | Presión de contenido semanal | Crea plantillas de prompt repetibles para actualizaciones y textos de eventos |
+
+> **⚠️ Advertencia:** Trata la salida del modelo como material de borrador, no como verdad final lista para el juego. Valida la consistencia del lore, la seguridad del código y las restricciones legales antes de publicar.
+
+Para actualizaciones oficiales del ecosistema, consulta los [recursos para desarrolladores de Google Gemma](https://ai.google.dev/gemma).
+
+## Prerrequisitos y configuración del entorno para gemma 4 cli
+
+Antes de instalar cualquier cosa, define tu objetivo de hardware y metas de flujo de trabajo. No empieces con el modelo más grande solo porque suena mejor en papel.
+
+### Matriz de configuración recomendada (2026)
+
+| Caso de uso | Nivel de modelo sugerido | Zona cómoda de RAM/VRAM | Experiencia esperada |
+|---|---|---|---|
+| Pruebas de prompt, textos ligeros | **Effective 2B** | **8–16 GB de RAM del sistema** | Respuestas locales rápidas, ideal para iterar en portátil |
+| Asistencia general de diseño + código | **Effective 4B** | **16–24 GB de RAM** | Mejor calidad con latencia manejable |
+| Enfoque en salida de alta calidad | **31B Dense** | **Estación de trabajo de alta memoria** | Pulido más sólido, carga de cómputo mayor |
+| Tareas avanzadas equilibradas en velocidad | **26B MoE (3.8B active)** | **Se recomienda estación de trabajo** | Buena capacidad de respuesta para flujos más grandes |
+
+### Lista de preparación principal
+
+1. Actualiza tu shell del SO y el gestor de paquetes.
+2. Instala el runtime/backend de tu preferencia para servir modelos localmente.
+3. Crea una carpeta dedicada del proyecto (ejemplo: `/ai/game-tools/gemma4/`).
+4. Añade una biblioteca versionada de prompts (`prompts/`) y registros de salida (`runs/`).
+5. Mantén un flujo de redacción/anonimización para datos privados de jugadores o negocio.
+
+| Carpeta/Archivo | Propósito | Beneficio para el equipo |
+|---|---|---|
+| `prompts/quest/` | Plantillas de prompts para misiones y NPC | Consistencia de estilo reutilizable |
+| `prompts/code/` | Prompts de scripting y refactorización | Traspaso más rápido a ingeniería |
+| `runs/YYYY-MM-DD/` | Registros de trazas de salida | Auditabilidad y rollback |
+| `rules/style.md` | Restricciones de voz/tono | Calidad de escritura estable |
+
+> **💡 Consejo:** Estandariza encabezados de prompt (género, clasificación objetivo, audiencia, restricciones de lore). Esto reduce rondas de revisión más que la mayoría de ajustes de modelo.
+
+## Instalación y ejecución de gemma 4 cli paso a paso
+
+La sintaxis exacta de comandos puede variar según tu stack local de serving, pero el flujo de trabajo de abajo se mantiene estable en configuraciones comunes de 2026.
+
+### Flujo práctico de instalación
+
+| Paso | Acción | Resultado que quieres |
+|---|---|---|
+| 1 | Instalar/actualizar tu runtime local de modelos | El comando CLI devuelve información de versión saludable |
+| 2 | Descargar la variante de pesos de Gemma 4 | El modelo aparece en la lista local de modelos |
+| 3 | Crear configuración para contexto + valores por defecto de generación | Perfil reutilizable para tareas de juego |
+| 4 | Ejecutar un prompt de prueba rápida | Respuesta válida con pocos picos de latencia |
+| 5 | Guardar un par base de prompt/resultado | Referencia para ajustes futuros |
+
+### Ejemplo de patrón de flujo de trabajo en CLI
+
+1. **Elige un perfil de modelo** (prioridad en velocidad o en calidad).
+2. **Configura la ventana de contexto** según el tamaño de la tarea (pequeña para editar diálogos, mayor para analizar documentación).
+3. **Usa ajustes deterministas** para tareas técnicas (temperatura más baja).
+4. **Usa ajustes creativos** para ideación (temperatura moderada).
+5. **Guarda salidas** con etiquetas (`narrative`, `ui`, `patchnotes`, `code`).
+
+```jsx
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/jZVBoFOJK-Q"
+    title="Novedades de Gemma 4"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+```
+
+Cuando ejecutas **gemma 4 cli** en ciclos similares a producción, la mayor ganancia es la consistencia. Mantén estables tus contratos de prompt (formato de entrada + formato de salida esperado) y luego ajusta parámetros del modelo solo después de tener registros base.
+
+## Selección de modelo para tareas de gaming (velocidad vs calidad)
+
+Un error frecuente es probar un modelo una sola vez y luego tomar una decisión permanente. En su lugar, asigna niveles de modelo a categorías de tareas.
+
+### Tabla de enrutamiento tarea-a-modelo
+
+| Tipo de tarea | Mejor opción inicial | Por qué funciona | Escalar cuando |
+|---|---|---|---|
+| Nombres/descripciones de objetos | **Effective 2B/4B** | Ciclos rápidos de ideación | La calidad del tono necesita mayor coherencia |
+| Reescrituras de personalidad de NPC | **Effective 4B** | Mejor consistencia que el nivel más pequeño | El diálogo se vuelve muy cargado de lore |
+| Pulido de notas de parche + changelog | **31B Dense** | Mayor refinamiento de salida | El presupuesto de tiempo permite ejecuciones más lentas |
+| Flujos de agentes con llamadas a herramientas | **26B MoE o perfil mayor** | Mejores patrones de planificación | Aparecen fallos en múltiples pasos |
+
+Para muchos equipos, **gemma 4 cli** rinde mejor como una **pila guiada por enrutamiento**, no como una solución de un único modelo. Usa modelos pequeños para borradores y modelos más grandes para el pulido final.
+
+> **💡 Consejo:** Define una “regla de dos pasadas”: pasada 1 con un modelo rápido para estructura, pasada 2 con un modelo de calidad para voz y claridad.
+
+## Flujos de trabajo reales de gaming que puedes automatizar con gemma 4 cli
+
+Aquí es donde el enfoque CLI compensa: tareas repetibles y automatizables que eliminan trabajo manual rutinario.
+
+### 1) Generación por lotes de diálogos de NPC
+
+- Entrada: ficha del personaje + intención de la escena + frases prohibidas
+- Salida: 10 opciones de diálogo con etiquetas de tono
+- Validación: comprobaciones de lore + filtros de lenguaje ofensivo + banderas de localización
+
+### 2) Redacción de notas de parche para live-ops
+
+- Entrada: resumen de git o viñetas del sprint
+- Salida: notas de parche orientadas al jugador en versiones “corta/estándar/detallada”
+- Validación: eliminar jerga interna e IDs de tickets sin resolver
+
+### 3) Asistente de revisión de lógica de misiones
+
+- Entrada: pseudo-flujo de estados de misión y condiciones de fallo
+- Salida: informe de ambigüedades + checklist de casos límite
+- Validación: aprobación del diseñador sobre la equidad de la progresión
+
+| Flujo de trabajo | Patrón de prompt CLI | Métrica de éxito |
+|---|---|---|
+| Diálogo NPC | “Genera X líneas, cada una etiquetada por emoción + intención” | Menos pasadas de reescritura por misión |
+| Notas de parche | “Transforma notas de desarrollo en texto de lanzamiento seguro para jugadores” | Publicación más rápida |
+| QA de misiones | “Identifica callejones lógicos sin salida en este texto de grafo de estados” | Menos bugs bloqueantes en rama de pruebas |
+| Preparación de localización | “Mantén términos clave fijos; proporciona variantes con conciencia de glosario” | Mayor consistencia entre idiomas |
+
+### Plantilla de prompt que puedes reutilizar
+
+Usa una estructura definida:
+
+- **Rol:** “Eres un editor narrativo senior para un ARPG de ciencia ficción.”
+- **Restricciones:** nivel de lectura, reglas de estilo, términos prohibidos
+- **Bloque de entrada:** lore + datos de funcionalidades
+- **Esquema de salida:** JSON o tabla markdown
+- **Controles de calidad:** consistencia, brevedad, control de spoilers
+
+Este formato hace que **gemma 4 cli** sea mucho más fácil de integrar en scripts de automatización y comprobaciones de contenido en CI.
+
+## Solución de problemas, seguridad y optimización
+
+Incluso los modelos locales sólidos necesitan operaciones disciplinadas. La mayoría de quejas de calidad vienen de problemas de flujo de trabajo, no de limitaciones del modelo.
+
+### Problemas comunes y soluciones
+
+| Problema | Causa probable | Solución |
+|---|---|---|
+| Diálogo repetitivo | Prompt demasiado vago | Añade restricciones de tono, perspectiva y frases prohibidas |
+| Respuestas lentas | Modelo demasiado grande para el hardware | Cambia de nivel o reduce el tamaño del contexto |
+| Desvío del lore | Faltan referencias canónicas | Inyecta tarjetas de lore concisas al inicio del prompt |
+| Sugerencias de código inseguras | Sin guardrails de ejecución | Pruebas en sandbox, linting y compuertas de revisión humana |
+
+### Reglas operativas para equipos
+
+1. **Registra todo**: prompt, configuración, hash de salida, decisión del revisor.
+2. **Separa entornos**: plantillas de ideación vs producción.
+3. **Usa prompts de red-team** para comprobar toxicidad, fugas y corrupción del lore.
+4. **Añade compuertas de aprobación manual** antes de publicar contenido de cara al jugador.
+
+> **⚠️ Advertencia:** Si procesas datos privados de usuarios o datos sensibles de ingresos con gemma 4 cli, aplica primero controles de acceso locales y políticas de retención, y luego automatiza.
+
+A medida que tu pipeline madure, puedes conectar **gemma 4 cli** con rastreadores de issues, herramientas CMS de contenido o scripts de compilación. Empieza en pequeño con un solo carril de contenido (como notas de parche) y luego escala a operaciones de misiones y localización.
+
+## Preguntas frecuentes
+
+**P: ¿gemma 4 cli es bueno para equipos indie con hardware limitado?**
+
+R: Sí. Empieza con los niveles de modelo efectivos más pequeños y prompts de contexto corto. Puedes obtener grandes mejoras de productividad para tareas de escritura y scripting antes de pasar a perfiles más pesados.
+
+**P: ¿Cuántas veces debería usar gemma 4 cli en un flujo de producción?**
+
+R: Úsalo en las etapas de borrador y pulido, pero manteniendo aprobación humana en el circuito. Un flujo de dos pasadas (borrador rápido, pulido de calidad) suele ser más fiable que una única generación larga.
+
+**P: ¿gemma 4 cli puede ayudar con contenido de juego multilingüe?**
+
+R: Puede apoyar el borrador multilingüe y la consistencia terminológica cuando proporcionas un glosario y restricciones de salida. La revisión humana de localización sigue siendo importante para el tono y el ajuste cultural.
+
+**P: ¿Cuál es el mayor error al adoptar gemma 4 cli en 2026?**
+
+R: Tratarlo como una caja negra mágica. Los equipos obtienen mejores resultados cuando definen estándares de prompts, registran salidas, enrutan tareas por tamaño de modelo y aplican compuertas de revisión para el contenido publicado.

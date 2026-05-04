@@ -1,0 +1,179 @@
+export const metadata = {
+  title: "gemma 4 local: Guía de configuración de IA sin conexión y flujo de trabajo gaming 2026",
+  description: "Aprende a ejecutar Gemma 4 en tu propio PC para tareas privadas de gaming sin conexión, como planificación de mods, redacción de guías paso a paso y ayuda con código en 2026.",
+  category: "Tutorial",
+  image: "https://placehold.co/800x400/6d28d9/fff?text=Gemma+4+Local+Guide",
+  date: "2026-05-04",
+  author: "Equipo de la Wiki de Gemma"
+}
+
+Si quieres ayuda de IA privada para guías de juegos, notas de mods o fragmentos rápidos de código, **gemma 4 local** es una de las opciones más prácticas en 2026. En lugar de enviar cada prompt a un servicio en la nube, puedes ejecutar **gemma 4 local** directamente en tu propia máquina y mantener tus borradores, capturas de pantalla y datos de pruebas sin conexión. Eso importa para creadores que trabajan con notas de parche aún no publicadas, documentos de preparación para esports o archivos de guardado personales. En este tutorial, aprenderás a elegir el tamaño de modelo correcto, probarlo en un navegador antes de instalar nada y luego ejecutarlo en Windows, macOS o Linux con Ollama. También tendrás un flujo de trabajo centrado en gamers para que tu modelo local realmente te ayude a publicar contenido más rápido, no solo a experimentar un fin de semana.
+
+## Qué es Gemma 4 (y por qué a los gamers debería importarles)
+
+Gemma 4 es una familia de modelos de IA de Google, desde ligeros hasta grandes, que pueden ejecutarse en local, incluso en PCs de escritorio y portátiles convencionales. Para creadores de contenido gaming, eso abre un punto medio útil entre “herramientas de asistente pequeñas” y suscripciones de IA costosas y siempre en línea.
+
+Aquí está el valor principal: la ejecución local te da un control más estricto sobre privacidad, costo y fiabilidad durante caídas de internet o viajes.
+
+| Característica | Por qué importa para usuarios gaming | Impacto práctico |
+|---|---|---|
+| **Se ejecuta en tu PC** | Mantén locales los documentos de estrategia, notas de equipo y scripts | Mejor privacidad para proyectos sensibles |
+| **Sin tarifas de API por mensaje** | Ideal para pruebas intensivas de prompts | Costo predecible después de la descarga |
+| **Múltiples tamaños de modelo** | Escala desde flujo en portátil hasta potencia de escritorio | Entrada más fácil para nuevos usuarios |
+| **Comprensión de imágenes** | Analiza capturas de UI, tablas de parches, recibos, notas | Investigación y desgloses más rápidos |
+
+> **Consejo:** Si tu objetivo principal es iterar rápido en guías y explicaciones de builds, empieza con un modelo pequeño antes de saltar a la versión más grande.
+
+Para detalles oficiales del modelo y el ecosistema, consulta la [descripción general de Google Gemma](https://ai.google.dev/gemma).
+
+## Tamaños de modelo de gemma 4 local: cuál elegir primero
+
+Elegir el tamaño de modelo correcto es la diferencia entre un uso fluido y la frustración. Basado en guías prácticas de configuración, el enfoque por defecto es empezar más pequeño y escalar solo si tu hardware y tareas lo necesitan.
+
+| Variante del modelo | Hardware objetivo típico | Bueno para | Precauciones |
+|---|---|---|---|
+| **E2B** | Portátiles de bajos recursos, dispositivos edge | Resúmenes simples, reescrituras cortas | Menor profundidad en razonamiento complejo |
+| **E4B** | La mayoría de PCs de consumo modernas | Escritura diaria, pruebas de prompts, código ligero | Aún puede volverse lento en tareas pesadas |
+| **26B** | Escritorio potente, rango de ~16–20 GB de RAM | Mejor calidad en textos largos, análisis más profundo | Descarga más grande y más lento en CPUs débiles |
+| **31B** | Sistemas de gama alta, a menudo con ayuda de GPU | Calidad local más avanzada de esta familia | Mayor demanda de recursos |
+
+Para la mayoría de bloggers de gaming, **E4B es el mejor punto de partida**. Suele ser suficiente para:
+
+- Esquemas de guías de builds  
+- Resúmenes de notas de parche  
+- Redacción de guiones para YouTube  
+- Fragmentos básicos de HTML/CSS/JS para herramientas de fans  
+
+Si haces tareas más técnicas (comprobaciones de lógica en hojas de cálculo, optimización de rutas, comparaciones largas), sube a 26B cuando tu sistema lo soporte.
+
+## Prueba rápida antes de instalar: flujo de trabajo en navegador
+
+Antes de una instalación completa, prueba Gemma en Google AI Studio para validar la calidad según tu estilo de contenido. Esto te ayuda a evitar descargar un modelo grande que no se adapte a tus necesidades.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0, margin: "2rem 0", borderRadius: "0.5rem", overflow: "hidden"}}>
+  <iframe
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%"}}
+    src="https://www.youtube.com/embed/7LEvSOiTWZk"
+    title="Google Gemma 4 Tutorial - Run AI Locally for Free"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+Usa esta lista de verificación de 10 minutos:
+
+| Tipo de prompt de prueba | Ejemplo de uso gamer | Señal de éxito |
+|---|---|---|
+| **Prompt explicativo** | “Explica la penetración de armadura en términos simples.” | Salida clara, estructurada y amigable para principiantes |
+| **Prompt de edición** | “Reescribe esta guía de jefe con un estilo más contundente.” | Mantiene el significado mientras mejora el flujo |
+| **Prompt de imagen** | Sube una captura de UI; pide la información clave | Lectura precisa de los detalles visibles |
+| **Prompt de código** | “Genera una página simple de calculadora de daño.” | Código utilizable con correcciones mínimas |
+
+Si la experiencia en el navegador te convence, pasa a la configuración local.
+
+## Configuración paso a paso con Ollama (Windows, macOS, Linux)
+
+Esta es la ruta práctica que la mayoría de usuarios sigue para ejecutar **gemma 4 local**.
+
+### 1) Instala Ollama
+- Descarga Ollama para tu sistema operativo.
+- Windows: ejecuta el instalador.
+- macOS: mueve la app a Aplicaciones.
+- Linux: instala desde terminal con el comando documentado.
+
+### 2) Descarga un modelo de Gemma 4
+En terminal/símbolo del sistema, descarga un modelo.  
+Usa primero el base/predeterminado y luego descargas específicas por tamaño si hace falta.
+
+### 3) Verifica en la app o CLI
+Abre la interfaz de Ollama y confirma que Gemma aparece sin botón de descarga, o ejecútalo directamente en terminal.
+
+### 4) Ejecuta los primeros prompts
+Empieza con prompts cortos y luego pasa a generación de guías largas, interpretación de imágenes y ayuda de código.
+
+| Fase de comando | Qué hacer | Resultado esperado |
+|---|---|---|
+| **Descargar modelo** | `ollama pull gemma4` (o etiqueta específica) | El modelo se descarga localmente |
+| **Ejecutar modelo** | `ollama run gemma4` | Se abre una sesión interactiva de prompts |
+| **Salir de la sesión** | `/bye` | Regreso limpio a la terminal |
+
+> **Advertencia:** Los archivos del modelo pueden ocupar varios GB. Confirma espacio libre en disco y margen de RAM antes de descargar variantes más grandes.
+
+### Expectativas prácticas de hardware en 2026
+
+No necesitas un equipo ultra premium para empezar. Una GPU más potente ayuda con la velocidad, pero usar solo CPU sigue siendo viable para muchas tareas de escritura.
+
+- Uso de entrada: trabajo simple con prompts en modelos pequeños  
+- Uso de gama media: redacción regular de guías, bucles de revisión  
+- Uso de gama alta: modelos más grandes + flujos multimodales más pesados  
+
+Para una salida estable en el día a día, prioriza RAM y velocidad de almacenamiento antes de perseguir el tamaño máximo de modelo.
+
+## Casos de uso de gemma 4 local enfocados en gamers
+
+La mayor ventaja de **gemma 4 local** son los flujos de trabajo privados y repetibles. Aquí tienes pipelines prácticos que puedes copiar.
+
+### 1) Notas de parche → Borrador de guía publicable
+1. Pega las notas en bruto.
+2. Pide resúmenes según rol (jugador nuevo, jugador ranked, main support).
+3. Solicita “qué cambió, por qué importa, qué probar.”
+
+### 2) Análisis de capturas para desgloses de builds
+- Sube árboles de talentos, marcadores postpartida o capturas de UI.
+- Pide estadísticas clave, anomalías y “qué implica esto”.
+
+### 3) Guion de video + clips cortos
+- Genera ganchos de guion de 60 segundos desde texto largo de guía.
+- Crea 3 variaciones de título y marcas de tiempo por capítulo.
+
+### 4) Prototipado ligero de herramientas
+- Pide calculadoras HTML de un solo archivo (enfriamiento, estimación de DPS, probabilidades de loot).
+- Itera localmente sin exponer la lógica del proyecto.
+
+| Flujo de trabajo | Prompt inicial | Tipo de salida |
+|---|---|---|
+| **Conversión de parches** | “Convierte estas notas en un resumen de changelog seguro para principiantes.” | Borrador de artículo estructurado |
+| **Análisis de meta** | “Compara estas dos builds para ranked.” | Tabla de pros/contras |
+| **Operaciones de creador** | “Escribe 5 títulos de YouTube para este tema.” | Conjunto de titulares |
+| **Prototipo de código** | “Construye una calculadora de probabilidad de crítico de una página.” | Archivo HTML/CSS/JS |
+
+Una configuración local como esta es donde “gemma 4 local” deja de ser una novedad y se convierte en parte de tu stack de publicación.
+
+## Consejos de optimización: mejores resultados, menos alucinaciones
+
+Los modelos locales son potentes, pero la calidad del prompt sigue controlando la calidad del resultado. Usa este sistema:
+
+- Da rol + audiencia: “Eres un editor de guías competitivas de FPS.”
+- Añade restricciones: cantidad de palabras, tono, formato de salida.
+- Fuerza estructura: “Usa tabla + resumen en viñetas + pasos de acción.”
+- Pide supuestos: “Indica claramente los puntos inciertos.”
+- Valida matemáticas por separado cuando importen costos, porcentajes u optimización.
+
+> **Consejo:** Para matemáticas de economía, planificación de rutas o pruebas de min-max, pide al modelo que proporcione una lista corta de verificación que puedas confirmar manualmente.
+
+Cuando las respuestas se desvíen:
+1. Reduce el alcance del prompt.
+2. Proporciona un texto fuente más limpio.
+3. Pide una segunda pasada enfocada solo en correcciones.
+4. Prueba una variante Gemma más grande si tu hardware lo permite.
+
+En sesiones largas, mantén una biblioteca de plantillas (prompts de introducción, de estilo, de QA). La consistencia supera a la improvisación en flujos de producción.
+
+## FAQ
+
+**Q: Is gemma 4 local good enough for full gaming blog production?**
+
+A: Sí, para muchos creadores es suficientemente sólido para redactar, reescribir, idear y hacer resúmenes estructurados. Aun así, deberías hacer verificación humana de datos, especialmente en detalles de parches, tasas y afirmaciones sobre balance del juego.
+
+**Q: What is the best starter model size for gemma 4 local in 2026?**
+
+A: E4B suele ser el punto de entrada más práctico. Equilibra calidad y velocidad en hardware convencional. Pasa a 26B cuando necesites mayor profundidad de razonamiento y tengas suficiente RAM.
+
+**Q: Can I use gemma 4 local without a dedicated GPU?**
+
+A: Sí. Es posible usar solo CPU, aunque la velocidad de respuesta puede ser más lenta. Para tareas centradas en escritura, esto suele ser aceptable. Una GPU mejora principalmente el rendimiento y la comodidad durante sesiones largas.
+
+**Q: Does local usage mean my gaming data is fully secure?**
+
+A: La inferencia local reduce la exposición a la nube, pero la seguridad sigue dependiendo de la higiene de tu propio dispositivo: actualizaciones del SO, protección de cuentas, unidades cifradas y prácticas seguras de manejo de archivos siguen importando.
